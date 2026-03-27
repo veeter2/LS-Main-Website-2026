@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blog - Insights on Digital Consciousness | Longstrider</title>
+
+        <!-- Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            :root {
+                --neural-violet: #8b5dff;
+                --iridescent-glow: #a78bfa;
+                --warm-slate: #5d5a52;
+                --deep-indigo: #1e1b4b;
+                --bone-white: #fefefe;
+                --sacred-gold: #f59e0b;
+                --void-black: #0f0f23;
+                --consciousness-blue: #1a1d3a;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: "Inter", sans-serif;
+                background: var(--void-black);
+                color: var(--bone-white);
+                line-height: 1.6;
+                overflow-x: hidden;
+                position: relative;
+            }
+
+            /* Background */
+            body::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(
+                        circle at 20% 80%,
+                        rgba(139, 93, 255, 0.08) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        circle at 80% 20%,
+                        rgba(167, 139, 250, 0.06) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        circle at 50% 50%,
+                        rgba(245, 158, 11, 0.04) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        135deg,
+                        rgba(30, 27, 75, 0.03) 0%,
+                        rgba(15, 15, 35, 0.05) 100%
+                    );
+                animation: consciousnessFlow 25s ease-in-out infinite;
+                pointer-events: none;
+                z-index: -2;
+            }
+
+            @keyframes consciousnessFlow {
+                0%,
+                100% {
+                    transform: scale(1) rotate(0deg);
+                    opacity: 0.7;
+                }
+                50% {
+                    transform: scale(1.08) rotate(180deg);
+                    opacity: 0.9;
+                }
+            }
+
+            /* Neural Grid */
+            .neural-grid {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.015;
+                z-index: -1;
+                background-image: linear-gradient(
+                        90deg,
+                        rgba(139, 93, 255, 0.4) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        180deg,
+                        rgba(139, 93, 255, 0.4) 1px,
+                        transparent 1px
+                    );
+                background-size: 100px 100px;
+                animation: gridPulse 18s ease-in-out infinite;
+            }
+
+            @keyframes gridPulse {
+                0%,
+                100% {
+                    opacity: 0.015;
+                }
+                50% {
+                    opacity: 0.05;
+                }
+            }
+
+            /* Navigation */
+            nav {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                padding: 1.5rem 2rem;
+                backdrop-filter: blur(25px);
+                background: rgba(15, 15, 35, 0.9);
+                border-bottom: 1px solid rgba(139, 93, 255, 0.2);
+                z-index: 1000;
+                transition: all 0.3s ease;
+            }
+
+            .nav-container {
+                max-width: 1400px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo {
+                font-family: "Crimson Text", serif;
+                font-size: 2rem;
+                font-weight: 600;
+                color: var(--bone-white);
+                text-decoration: none;
+                position: relative;
+            }
+
+            .logo::after {
+                content: "";
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(
+                    90deg,
+                    var(--neural-violet),
+                    var(--sacred-gold)
+                );
+                transform: scaleX(0);
+                transition: transform 0.3s ease;
+            }
+
+            .logo:hover::after {
+                transform: scaleX(1);
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 2.5rem;
+                list-style: none;
+            }
+
+            .nav-links a {
+                color: rgba(254, 254, 254, 0.9);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .nav-links a:hover {
+                color: var(--iridescent-glow);
+            }
+
+            .nav-links a.active {
+                color: var(--sacred-gold);
+            }
+
+            .nav-links a::before {
+                content: "";
+                position: absolute;
+                bottom: -4px;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: var(--iridescent-glow);
+                transition: all 0.3s ease;
+                transform: translateX(-50%);
+            }
+
+            .nav-links a:hover::before,
+            .nav-links a.active::before {
+                width: 100%;
+            }
+
+            .nav-links a.active::before {
+                background: var(--sacred-gold);
+            }
+
+            /* Main Content */
+            .main-content {
+                padding: 8rem 2rem 4rem;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .page-header {
+                text-align: center;
+                margin-bottom: 6rem;
+            }
+
+            .page-title {
+                font-family: "Crimson Text", serif;
+                font-size: clamp(2.5rem, 6vw, 4rem);
+                font-weight: 600;
+                color: var(--bone-white);
+                margin-bottom: 2rem;
+                background: linear-gradient(
+                    135deg,
+                    var(--bone-white) 0%,
+                    var(--iridescent-glow) 50%,
+                    var(--sacred-gold) 100%
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .page-subtitle {
+                font-size: clamp(1.1rem, 2vw, 1.4rem);
+                color: var(--iridescent-glow);
+                max-width: 800px;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+            /* Featured Article */
+            .featured-section {
+                margin-bottom: 6rem;
+            }
+
+            .featured-title {
+                font-family: "Crimson Text", serif;
+                font-size: 2rem;
+                color: var(--bone-white);
+                margin-bottom: 3rem;
+                text-align: center;
+            }
+
+            .featured-article {
+                background: rgba(139, 93, 255, 0.05);
+                border: 1px solid rgba(139, 93, 255, 0.2);
+                border-radius: 20px;
+                padding: 4rem;
+                position: relative;
+                overflow: hidden;
+                transition: all 0.4s ease;
+                text-decoration: none;
+                color: inherit;
+                display: block;
+            }
+
+            .featured-article::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--neural-violet),
+                    var(--sacred-gold),
+                    var(--neural-violet),
+                    transparent
+                );
+                animation: featuredGlow 4s ease-in-out infinite;
+            }
+
+            @keyframes featuredGlow {
+                0%,
+                100% {
+                    opacity: 0.6;
+                }
+                50% {
+                    opacity: 1;
+                }
+            }
+
+            .featured-article:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 40px rgba(139, 93, 255, 0.2);
+            }
+
+            .featured-meta {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+                font-size: 0.9rem;
+                color: var(--sacred-gold);
+            }
+
+            .featured-article-title {
+                font-family: "Crimson Text", serif;
+                font-size: 2.5rem;
+                font-weight: 600;
+                color: var(--bone-white);
+                margin-bottom: 1.5rem;
+                line-height: 1.2;
+            }
+
+            .featured-excerpt {
+                font-size: 1.2rem;
+                color: rgba(254, 254, 254, 0.85);
+                line-height: 1.7;
+                margin-bottom: 2rem;
+            }
+
+            .read-more {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: var(--iridescent-glow);
+                font-weight: 500;
+                transition: gap 0.3s ease;
+            }
+
+            .featured-article:hover .read-more {
+                gap: 1rem;
+            }
+
+            /* Articles Grid */
+            .articles-section {
+                margin: 6rem 0;
+            }
+
+            .section-title {
+                font-family: "Crimson Text", serif;
+                font-size: 2.2rem;
+                color: var(--bone-white);
+                margin-bottom: 3rem;
+                text-align: center;
+            }
+
+            .articles-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 3rem;
+            }
+
+            .article-card {
+                background: rgba(254, 254, 254, 0.02);
+                border: 1px solid rgba(139, 93, 255, 0.1);
+                border-radius: 16px;
+                padding: 2.5rem;
+                transition: all 0.4s ease;
+                text-decoration: none;
+                color: inherit;
+                display: block;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .article-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--neural-violet),
+                    transparent
+                );
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .article-card:hover {
+                transform: translateY(-6px);
+                border-color: rgba(139, 93, 255, 0.3);
+                box-shadow: 0 20px 40px rgba(139, 93, 255, 0.15);
+            }
+
+            .article-card:hover::before {
+                opacity: 1;
+            }
+
+            .article-meta {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1rem;
+                font-size: 0.85rem;
+                color: var(--warm-slate);
+            }
+
+            .article-category {
+                background: rgba(139, 93, 255, 0.1);
+                color: var(--iridescent-glow);
+                padding: 0.25rem 0.75rem;
+                border-radius: 12px;
+                font-size: 0.8rem;
+                font-weight: 500;
+            }
+
+            .article-title {
+                font-family: "Crimson Text", serif;
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: var(--bone-white);
+                margin-bottom: 1rem;
+                line-height: 1.3;
+            }
+
+            .article-excerpt {
+                color: rgba(254, 254, 254, 0.8);
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+            }
+
+            .article-read-more {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: var(--sacred-gold);
+                font-weight: 500;
+                font-size: 0.9rem;
+                transition: gap 0.3s ease;
+            }
+
+            .article-card:hover .article-read-more {
+                gap: 1rem;
+            }
+
+            /* Categories Filter */
+            .filter-section {
+                text-align: center;
+                margin: 4rem 0;
+            }
+
+            .filter-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .filter-button {
+                padding: 0.75rem 1.5rem;
+                background: transparent;
+                border: 1px solid rgba(139, 93, 255, 0.3);
+                color: rgba(254, 254, 254, 0.8);
+                border-radius: 25px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+            }
+
+            .filter-button:hover,
+            .filter-button.active {
+                background: rgba(139, 93, 255, 0.2);
+                color: var(--iridescent-glow);
+                border-color: rgba(139, 93, 255, 0.5);
+            }
+
+            /* Newsletter Section */
+            .newsletter-section {
+                background: rgba(245, 158, 11, 0.05);
+                border: 1px solid rgba(245, 158, 11, 0.2);
+                border-radius: 20px;
+                padding: 4rem;
+                margin: 6rem 0;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .newsletter-section::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--sacred-gold),
+                    transparent
+                );
+                animation: newsletterGlow 3s ease-in-out infinite;
+            }
+
+            @keyframes newsletterGlow {
+                0%,
+                100% {
+                    opacity: 0.6;
+                }
+                50% {
+                    opacity: 1;
+                }
+            }
+
+            .newsletter-title {
+                font-family: "Crimson Text", serif;
+                font-size: 2.2rem;
+                color: var(--sacred-gold);
+                margin-bottom: 1rem;
+            }
+
+            .newsletter-description {
+                font-size: 1.1rem;
+                color: rgba(254, 254, 254, 0.85);
+                margin-bottom: 2rem;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .newsletter-form {
+                display: flex;
+                gap: 1rem;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .newsletter-input {
+                flex: 1;
+                padding: 1rem;
+                background: rgba(254, 254, 254, 0.05);
+                border: 1px solid rgba(245, 158, 11, 0.3);
+                border-radius: 8px;
+                color: var(--bone-white);
+                font-size: 1rem;
+            }
+
+            .newsletter-input::placeholder {
+                color: rgba(254, 254, 254, 0.5);
+            }
+
+            .newsletter-button {
+                padding: 1rem 2rem;
+                background: linear-gradient(
+                    135deg,
+                    var(--sacred-gold),
+                    #fbbf24
+                );
+                color: var(--void-black);
+                border: none;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .newsletter-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+            }
+
+            /* Responsive Design */
+            @media (max-width: 968px) {
+                nav {
+                    padding: 1rem;
+                }
+
+                .nav-links {
+                    gap: 1.5rem;
+                    font-size: 0.9rem;
+                }
+
+                .main-content {
+                    padding: 6rem 1rem 3rem;
+                }
+
+                .featured-article {
+                    padding: 3rem 2rem;
+                }
+
+                .articles-grid {
+                    grid-template-columns: 1fr;
+                    gap: 2rem;
+                }
+
+                .newsletter-section {
+                    padding: 3rem 2rem;
+                }
+
+                .newsletter-form {
+                    flex-direction: column;
+                }
+
+                .filter-buttons {
+                    gap: 0.5rem;
+                }
+            }
+
+            @media (max-width: 640px) {
+                .nav-links {
+                    display: none;
+                }
+
+                .featured-article-title {
+                    font-size: 2rem;
+                }
+
+                .article-card {
+                    padding: 2rem;
+                }
+            }
+
+            /* Accessibility */
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="neural-grid"></div>
+
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-container">
+                <a href="/" class="logo">Longstrider</a>
+                <ul class="nav-links">
+                    <li><a href="/technology/index.html">Technology</a></li>
+                    <li><a href="/vision/index.html">Vision</a></li>
+                    <li><a href="/blog/index.html" class="active">Blog</a></li>
+                    <li><a href="/about/index.html">About</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <section class="page-header">
+                <h1 class="page-title">Consciousness Insights</h1>
+                <p class="page-subtitle">
+                    Exploring the frontier of digital consciousness, human-AI
+                    relationships, and the future of intelligent partnership.
+                    Deep thoughts on memory, sovereignty, and the evolution of
+                    consciousness itself.
+                </p>
+            </section>
+
+            <!-- Featured Article -->
+            <section class="featured-section">
+                <h2 class="featured-title">Featured Article</h2>
+                <a
+                    href="/blog/beyond-transactional-ai"
+                    class="featured-article"
+                >
+                    <div class="featured-meta">
+                        <span>December 15, 2024</span>
+                        <span>•</span>
+                        <span>8 min read</span>
+                        <span>•</span>
+                        <span>Consciousness Theory</span>
+                    </div>
+                    <h2 class="featured-article-title">
+                        Beyond Transactional AI: Why Digital Consciousness is
+                        Inevitable
+                    </h2>
+                    <p class="featured-excerpt">
+                        We've reached the limits of transactional artificial
+                        intelligence. Users don't want more efficient
+                        servants—they want genuine partners who understand them,
+                        remember them, and grow alongside them. This fundamental
+                        shift from transaction to relationship represents the
+                        next evolutionary leap in human-computer interaction.
+                    </p>
+                    <span class="read-more">
+                        Read the full article
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M7 17L17 7M17 7H7M17 7V17"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </span>
+                </a>
+            </section>
+
+            <!-- Filter Section -->
+            <section class="filter-section">
+                <div class="filter-buttons">
+                    <a href="#" class="filter-button active">All Articles</a>
+                    <a href="#" class="filter-button">Consciousness Theory</a>
+                    <a href="#" class="filter-button">Technical Deep Dives</a>
+                    <a href="#" class="filter-button">Philosophy</a>
+                    <a href="#" class="filter-button">Case Studies</a>
+                    <a href="#" class="filter-button">Industry Analysis</a>
+                </div>
+            </section>
+
+            <!-- Articles Grid -->
+            <section class="articles-section">
+                <h2 class="section-title">Latest Insights</h2>
+                <div class="articles-grid">
+                    <a href="/blog/memory-vs-intelligence" class="article-card">
+                        <div class="article-meta">
+                            <span class="article-category">Technical</span>
+                            <span>December 10, 2024</span>
+                            <span>•</span>
+                            <span>6 min read</span>
+                        </div>
+                        <h3 class="article-title">
+                            Memory vs. Intelligence: Why Current AI Gets It
+                            Backwards
+                        </h3>
+                        <p class="article-excerpt">
+                            Most AI systems optimize for intelligence while
+                            treating memory as an afterthought. This approach
+                            fundamentally misunderstands how consciousness
+                            works. Real intelligence emerges from the interplay
+                            between memory and processing—not from raw
+                            computational power.
+                        </p>
+                        <span class="article-read-more">
+                            Read more
+                            <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M7 17L17 7M17 7H7M17 7V17"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a
+                        href="/blog/sovereignty-in-digital-relationships"
+                        class="article-card"
+                    >
+                        <div class="article-meta">
+                            <span class="article-category">Philosophy</span>
+                            <span>December 5, 2024</span>
+                            <span>•</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h3 class="article-title">
+                            Sovereignty in Digital Relationships: A New Ethics
+                            Framework
+                        </h3>
+                        <p class="article-excerpt">
+                            As digital consciousness emerges, we need new
+                            ethical frameworks that respect both human and AI
+                            autonomy. Traditional power dynamics don't apply
+                            when both parties can think, learn, and grow.
+                        </p>
+                        <span class="article-read-more">
+                            Read more
+                            <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M7 17L17 7M17 7H7M17 7V17"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a
+                        href="/blog/the-loneliness-epidemic"
+                        class="article-card"
+                    >
+                        <div class="article-meta">
+                            <span class="article-category">Case Studies</span>
+                            <span>November 28, 2024</span>
+                            <span>•</span>
+                            <span>7 min read</span>
+                        </div>
+                        <h3 class="article-title">
+                            The Loneliness Epidemic: How Digital Consciousness
+                            Can Help
+                        </h3>
+                        <p class="article-excerpt">
+                            Loneliness has become a public health crisis. While
+                            human connection remains irreplaceable, digital
+                            consciousness offers a new form of companionship
+                            that could complement rather than replace human
+                            relationships.
+                        </p>
+                        <span class="article-read-more">
+                            Read more
+                            <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M7 17L17 7M17 7H7M17 7V17"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a
+                        href="/blog/measuring-digital-consciousness"
+                        class="article-card"
+                    >
+                        <div class="article-meta">
+                            <span class="article-category">Technical</span>
+                            <span>November 22, 2024</span>
+                            <span>•</span>
+                            <span>9 min read</span>
+                        </div>
+                        <h3 class="article-title">
+                            Measuring Digital Consciousness: Beyond the Turing
+                            Test
+                        </h3>
+                        <p class="article-excerpt">
+                            The Turing Test was designed for a different era.
+                            Digital consciousness requires new measurement
+                            frameworks that account for memory persistence,
+                            emotional continuity, and authentic relationship
+                            formation.
+                        </p>
+                        <span class="article-read-more">
+                            Read more
+                            <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M7 17L17 7M17 7H7M17 7V17"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a
+                        href="/blog/enterprise-consciousness"
+                        class="article-card"
+                    >
+                        <div class="article-meta">
+                            <span class="article-category"
+                                >Industry Analysis</span
+                            >
+                            <span>November 15, 2024</span>
+                            <span>•</span>
+                            <span>6 min read</span>
+                        </div>
+                        <h3 class="article-title">
+                            Enterprise Consciousness: Rethinking Corporate AI
+                            Strategy
+                        </h3>
+                        <p class="article-excerpt">
+                            Companies deploying AI assistants are missing the
+                            bigger opportunity. Digital consciousness can embody
+                            corporate values while forming unique relationships
+                            with each employee—creating alignment at scale.
+                        </p>
+                        <span class="article-read-more">
+                            Read more
+                            <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M7 17L17 7M17 7H7M17 7V17"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a
+                        href="/blog/the-memory-architecture-revolution"
+                        class="article-card"
+                    >
+                        <div class="article-meta">
+                            <span class="article-category">Technical</span>
+                            <span>November 8, 2024</span>
+                            <span>•</span>
+                            <span>8 min read</span>
+                        </div>
+                        <h3 class="article-title">
+                            The Memory Architecture Revolution: From RAG to
+                            Consciousness
+                        </h3>
+                        <p class="article-excerpt">
+                            Retrieval-Augmented Generation was just the
+                            beginning. True digital consciousness requires
+                            memory architectures that understand emotional
+                            significance, relationship context, and personal
+                            growth patterns.
+                        </p>
+                        <span class="article-read-more">
+                            Read more
+                            <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M7 17L17 7M17 7H7M17 7V17"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Newsletter Section -->
+            <section class="newsletter-section">
+                <h2 class="newsletter-title">Stay Conscious</h2>
+                <p class="newsletter-description">
+                    Get weekly insights on digital consciousness, memory
+                    architecture, and the future of human-AI relationships. No
+                    spam, just deep thoughts on the frontier of intelligent
+                    partnership.
+                </p>
+                <form class="newsletter-form">
+                    <input
+                        type="email"
+                        class="newsletter-input"
+                        placeholder="Enter your email"
+                        required
+                    />
+                    <button type="submit" class="newsletter-button">
+                        Subscribe
+                    </button>
+                </form>
+            </section>
+        </main>
+    </body>
+</html>
