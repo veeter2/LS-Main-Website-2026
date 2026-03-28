@@ -25,6 +25,7 @@ export function Navigation() {
     { href: "/", label: "Home" },
     { href: "/about", label: "The Vision" },
     { href: "/technology", label: "Technology" },
+    { href: "/manifesto", label: "Manifesto" },
     { href: "/field-notes", label: "Field Notes" },
     { href: "/about-us", label: "About Us" },
     { href: "/contact", label: "Contact" },
