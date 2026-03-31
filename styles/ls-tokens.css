@@ -30,7 +30,13 @@
 }
 
 html { background: var(--color-bg); }
-body { -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+body {
+  font-family: var(--font-body);
+  color: rgba(255,255,255,0.88);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
 
 [data-reveal] { opacity:0; transform:translateY(24px); transition: opacity .85s var(--ease-out), transform .85s var(--ease-out); }
 [data-reveal].revealed { opacity:1; transform:translateY(0); }

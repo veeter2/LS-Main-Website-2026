@@ -55,14 +55,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`dark ${lora.variable} ${inter.variable}`} style={{ background: "#080809" }}>
-      <body style={{
-        fontFamily: "var(--font-lora), Georgia, serif",
-        color: "rgba(255,255,255,0.88)",
-        WebkitFontSmoothing: "antialiased",
-        MozOsxFontSmoothing: "grayscale",
-        textRendering: "geometricPrecision",
-      }}>
+    <html lang="en" className={`dark ${lora.variable} ${inter.variable}`}>
+      <body>
         <SiteAmbient />
         <div style={{ position: "relative", zIndex: 1 }}>
         <Navigation />
