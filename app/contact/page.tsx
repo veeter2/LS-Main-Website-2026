@@ -60,75 +60,100 @@ export default function ContactPage() {
         <div style={{ position: 'absolute', top: '35%', left: '35%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(164,195,255,1), transparent 70%)', opacity: 0.014, filter: 'blur(120px)' }} />
       </div>
 
-      {/* ── Two-column layout ── */}
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: '1000px', margin: '0 auto', padding: '112px 48px 100px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'stretch' }}>
-
-        {/* ── LEFT: Editorial ── */}
-        <div style={{ animation: 'cReveal 0.9s var(--ease-out) both', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 3.8vw, 54px)', fontWeight: 300, letterSpacing: '-0.03em', lineHeight: 1.1, color: 'var(--color-text-primary)', marginBottom: '28px' }}>
-            Let us show you what{' '}
-            <em style={{ fontStyle: 'italic', color: GOLD }}>living memory</em>{' '}
-            looks like.
-          </h1>
-
-          <div style={{ width: '40px', height: '1px', background: `linear-gradient(to right, ${GOLD_BORDER}, transparent)`, marginBottom: '32px' }} />
-
-          {/* Four pillars — single row */}
-          <div style={{ marginBottom: '28px' }}>
-            <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: GOLD, marginBottom: '0' }}>
-              Sovereign · Persistent · Compounding · Living Memory
-            </p>
-          </div>
-
-          {/* Section 2 — manifesto bridge */}
-          <div style={{ marginBottom: '0' }}>
-            <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-text-secondary)' }}>
-              LongStrider is the layer that sits above your existing stack — synthesizing what every tool knows,
-              accumulating what actually mattered, compounding it over time.
-              It doesn't replace your tools. It's what makes them worth keeping.
-            </p>
-          </div>
-
-          {/* Assumptive close — the anchor */}
-          <p style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(18px, 1.8vw, 24px)',
-            fontStyle: 'italic',
-            fontWeight: 300,
-            lineHeight: 1.25,
-            color: 'var(--color-text-primary)',
-            borderTop: `1px solid ${GOLD_BORDER}`,
-            paddingTop: '20px',
-            marginTop: 'auto',
-          }}>
-            "You're not buying software. You're buying the head start we spent years building for you."
+      {/* ── SUCCESS STATE — full width, no left column ── */}
+      {status === 'success' && (
+        <div style={{
+          position: 'relative', zIndex: 1,
+          maxWidth: '600px', margin: '0 auto',
+          padding: '140px 48px 100px',
+          textAlign: 'center',
+          animation: 'cReveal 0.9s var(--ease-out) both',
+        }}>
+          <p style={{ fontFamily: 'var(--font-display)', fontSize: '52px', fontWeight: 300, fontStyle: 'italic', color: GOLD, marginBottom: '28px', lineHeight: 1.05 }}>
+            Consider yourself known.
           </p>
+          <p style={{ fontSize: '18px', color: 'var(--color-text-secondary)', lineHeight: 1.75, marginBottom: '16px' }}>
+            You just took the first step toward an intelligence layer that compounds
+            over time, stays in your hands, and gets smarter every day you use it.
+          </p>
+          <p style={{ fontSize: '15px', color: 'var(--color-text-muted)', lineHeight: 1.7, marginBottom: '48px' }}>
+            We'll be in touch within one business day. Adventure is close.
+          </p>
+          <a
+            href="/manifesto"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '10px',
+              fontFamily: 'var(--font-ui)', fontSize: '11px',
+              letterSpacing: '0.18em', textTransform: 'uppercase',
+              color: GOLD_DIM, textDecoration: 'none',
+              border: `1px solid ${GOLD_BORDER}`,
+              borderRadius: '100px',
+              padding: '13px 32px',
+              transition: 'color 0.3s ease, border-color 0.3s ease, background 0.3s ease',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = GOLD; e.currentTarget.style.borderColor = GOLD_DIM; e.currentTarget.style.background = GOLD_GHOST; }}
+            onMouseLeave={e => { e.currentTarget.style.color = GOLD_DIM; e.currentTarget.style.borderColor = GOLD_BORDER; e.currentTarget.style.background = 'transparent'; }}
+          >
+            Explore the Manifesto →
+          </a>
         </div>
+      )}
 
-        {/* ── RIGHT: Form ── */}
-        <div style={{ animation: 'cReveal 1s 150ms var(--ease-out) both' }}>
-          {status === 'success' ? (
-            <div style={{ textAlign: 'center', padding: '60px 0' }}>
-              <p style={{ fontFamily: 'var(--font-display)', fontSize: '36px', fontWeight: 300, fontStyle: 'italic', color: GOLD, marginBottom: '20px' }}>
-                Consider yourself known.
+      {/* ── TWO-COLUMN LAYOUT — form state ── */}
+      {status !== 'success' && (
+        <div style={{
+          position: 'relative', zIndex: 1,
+          maxWidth: '1000px', margin: '0 auto',
+          padding: '112px 48px 100px',
+          display: 'grid', gridTemplateColumns: '1fr 1fr',
+          gap: '80px', alignItems: 'stretch',
+        }}>
+
+          {/* ── LEFT: Editorial ── */}
+          <div style={{ animation: 'cReveal 0.9s var(--ease-out) both', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+
+            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 3.8vw, 54px)', fontWeight: 300, letterSpacing: '-0.03em', lineHeight: 1.1, color: 'var(--color-text-primary)', marginBottom: '28px' }}>
+              Let us show you what{' '}
+              <em style={{ fontStyle: 'italic', color: GOLD }}>living memory</em>{' '}
+              looks like.
+            </h1>
+
+            <div style={{ width: '40px', height: '1px', background: `linear-gradient(to right, ${GOLD_BORDER}, transparent)`, marginBottom: '32px' }} />
+
+            {/* Four pillars */}
+            <div style={{ marginBottom: '28px' }}>
+              <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: GOLD }}>
+                Sovereign · Persistent · Compounding · Living Memory
               </p>
-              <p style={{ fontSize: '16px', color: 'var(--color-text-secondary)', lineHeight: 1.72, marginBottom: '10px' }}>
-                We'll reach out within one business day.
-              </p>
-              <p style={{ fontSize: '13px', color: 'var(--color-text-muted)', marginBottom: '48px' }}>
-                LongStrider remembers the first time you reached out.
-              </p>
-              <a
-                href="/"
-                style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-text-muted)', textDecoration: 'none', transition: 'color 0.25s ease' }}
-                onMouseEnter={e => (e.currentTarget.style.color = GOLD_DIM)}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
-              >
-                ← Back to home
-              </a>
             </div>
-          ) : (
+
+            {/* Manifesto bridge */}
+            <div style={{ marginBottom: '0' }}>
+              <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-text-secondary)' }}>
+                LongStrider is the layer that sits above your existing stack — synthesizing
+                what every tool knows, accumulating what actually mattered, compounding it
+                over time. It doesn't replace your tools. It's what makes them worth keeping.
+              </p>
+            </div>
+
+            {/* Assumptive close */}
+            <p style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(18px, 1.8vw, 24px)',
+              fontStyle: 'italic',
+              fontWeight: 300,
+              lineHeight: 1.25,
+              color: 'var(--color-text-primary)',
+              borderTop: `1px solid ${GOLD_BORDER}`,
+              paddingTop: '20px',
+              marginTop: 'auto',
+            }}>
+              "You're not buying software. You're buying the head start we spent years building for you."
+            </p>
+          </div>
+
+          {/* ── RIGHT: Form ── */}
+          <div style={{ animation: 'cReveal 1s 150ms var(--ease-out) both' }}>
             <form
               onSubmit={handleSubmit}
               style={{
@@ -177,7 +202,6 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* Button — matches Begin/Explore */}
               <button
                 type="submit"
                 disabled={status === 'submitting'}
@@ -208,9 +232,9 @@ export default function ContactPage() {
                 </p>
               )}
             </form>
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
       <style>{`
         @keyframes cReveal {
@@ -218,7 +242,7 @@ export default function ContactPage() {
           to   { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 768px) {
-          main > div { grid-template-columns: 1fr !important; gap: 48px !important; padding: 96px 24px 80px !important; }
+          div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 48px !important; padding: 96px 24px 80px !important; }
         }
       `}</style>
     </main>
