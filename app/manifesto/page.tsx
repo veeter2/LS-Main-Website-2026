@@ -158,7 +158,7 @@ export default function ManifestoPage() {
       <nav className="deck-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
           <Image
-            src="/images/longstrider-logo.png"
+            src="/longstrider-logo.png"
             alt="LongStrider Logo"
             width={38}
             height={38}

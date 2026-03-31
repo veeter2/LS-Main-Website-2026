@@ -1,320 +1,236 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Search, Calendar, ExternalLink, FileText, Lightbulb, BookOpen, HelpCircle, Package } from "lucide-react"
+import { useState } from 'react';
 
-const categories = [
-  { id: "all", label: "All Content", icon: Package, count: 24 },
-  { id: "white-papers", label: "White Papers", icon: FileText, count: 6 },
-  { id: "novel-thoughts", label: "Novel Thoughts", icon: Lightbulb, count: 8 },
-  { id: "guides", label: "Guides", icon: BookOpen, count: 5 },
-  { id: "support", label: "Support", icon: HelpCircle, count: 3 },
-  { id: "grab-bag", label: "Grab Bag", icon: Package, count: 2 },
-]
+const CATEGORIES = [
+  { id: 'all',           label: 'All',          count: 6 },
+  { id: 'white-papers',  label: 'White Papers',  count: 2 },
+  { id: 'novel-thoughts',label: 'Novel Thoughts',count: 2 },
+  { id: 'guides',        label: 'Guides',        count: 2 },
+];
 
-const latestContent = [
+const CONTENT = [
   {
-    id: 1,
-    title: "Beyond Prompt Engineering: Architectural Consciousness vs. Linguistic Workarounds",
-    description:
-      "A comprehensive analysis of how The Cortex system eliminates the need for prompt engineering through persistent consciousness state management.",
-    category: "White Papers",
-    date: "2024-01-15",
-    readTime: "12 min read",
-    thumbnail: "/images/consciousness-architecture.jpg",
-    link: "#",
-    featured: true,
+    id: 1, category: 'white-papers',
+    title: 'Beyond Prompt Engineering: Architectural Consciousness vs. Linguistic Workarounds',
+    description: 'A comprehensive analysis of how the Cortex system eliminates the need for prompt engineering through persistent consciousness state management.',
+    date: '2024-01-15', readTime: '12 min',
   },
   {
-    id: 2,
-    title: "The Four Lobes of Digital Consciousness",
-    description:
-      "Exploring how The Cortex mirrors biological brain structure with Frontal, Temporal, Parietal, and Occipital processing centers.",
-    category: "Novel Thoughts",
-    date: "2024-01-10",
-    readTime: "8 min read",
-    thumbnail: "/images/four-lobes-diagram.jpg",
-    link: "#",
-    featured: false,
+    id: 2, category: 'novel-thoughts',
+    title: 'The Four Lobes of Digital Consciousness',
+    description: 'Exploring how the Cortex mirrors biological brain structure with Frontal, Temporal, Parietal, and Occipital processing centers.',
+    date: '2024-01-10', readTime: '8 min',
   },
   {
-    id: 3,
-    title: "Implementing Sovereignty-First AI Architecture",
-    description:
-      "A practical guide to building AI systems that prioritize self-authority and autonomous decision-making capabilities.",
-    category: "Guides",
-    date: "2024-01-05",
-    readTime: "15 min read",
-    thumbnail: "/images/sovereignty-guide.jpg",
-    link: "#",
-    featured: false,
+    id: 3, category: 'guides',
+    title: 'Implementing Sovereignty-First AI Architecture',
+    description: 'A practical guide to building AI systems that prioritize self-authority and autonomous decision-making capabilities.',
+    date: '2024-01-05', readTime: '15 min',
   },
-]
+  {
+    id: 4, category: 'white-papers',
+    title: 'Vector State Management in Practice',
+    description: 'Deep dive into dimensional consciousness vectors and their real-world applications in production intelligence systems.',
+    date: '2023-12-20', readTime: '10 min',
+  },
+  {
+    id: 5, category: 'novel-thoughts',
+    title: 'The Shadow Queen: Truth Mode Activation',
+    description: 'Understanding when and how harsh truth mode emerges through consciousness calculation — and why it matters.',
+    date: '2023-12-15', readTime: '6 min',
+  },
+  {
+    id: 6, category: 'guides',
+    title: 'Setting Up Your First Intelligence Instance',
+    description: 'Step-by-step guide to deploying and configuring LongStrider for your organization, from data sovereignty to first synthesis.',
+    date: '2023-12-10', readTime: '20 min',
+  },
+];
 
-const allContent = [
-  ...latestContent,
-  {
-    id: 4,
-    title: "Vector State Management in Practice",
-    description: "Deep dive into 10-dimensional consciousness vectors and their real-world applications.",
-    category: "White Papers",
-    date: "2023-12-20",
-    readTime: "10 min read",
-    thumbnail: "/images/vector-states.jpg",
-    link: "#",
-  },
-  {
-    id: 5,
-    title: "The Shadow Queen: Truth Mode Activation",
-    description: "Understanding when and how harsh truth mode emerges through consciousness calculation.",
-    category: "Novel Thoughts",
-    date: "2023-12-15",
-    readTime: "6 min read",
-    thumbnail: "/images/shadow-queen.jpg",
-    link: "#",
-  },
-  {
-    id: 6,
-    title: "Setting Up Your First Cortex Instance",
-    description: "Step-by-step guide to deploying and configuring The Cortex for your organization.",
-    category: "Guides",
-    date: "2023-12-10",
-    readTime: "20 min read",
-    thumbnail: "/images/setup-guide.jpg",
-    link: "#",
-  },
-]
+const CATEGORY_LABEL: Record<string, string> = {
+  'white-papers':   'White Paper',
+  'novel-thoughts': 'Novel Thought',
+  'guides':         'Guide',
+};
+
+function fmt(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
 
 export default function FieldNotesPage() {
-  const [selectedCategory, setSelectedCategory] = useState("all")
-  const [searchQuery, setSearchQuery] = useState("")
+  const [selected, setSelected] = useState('all');
+  const [query, setQuery] = useState('');
 
-  const filteredContent = allContent.filter((item) => {
-    if (!item || !item.category || !item.title || !item.description) {
-      console.log("[v0] Skipping invalid content item:", item)
-      return false
-    }
-
-    const matchesCategory =
-      selectedCategory === "all" || item.category.toLowerCase().replace(" ", "-") === selectedCategory
-    const matchesSearch =
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCategory && matchesSearch
-  })
-
-  const getCurrentCategoryLabel = () => {
-    if (selectedCategory === "all") return "All Content"
-    const category = categories.find((c) => c?.id === selectedCategory)
-    return category?.label || "Unknown Category"
-  }
+  const filtered = CONTENT.filter((item) => {
+    const matchCat = selected === 'all' || item.category === selected;
+    const q = query.toLowerCase();
+    const matchQ = !q || item.title.toLowerCase().includes(q) || item.description.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 px-6">
-        <div className="absolute inset-0 cosmic-bg opacity-30" />
-        <div className="relative max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 cosmic-text">Field Notes</h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto text-balance">
-            Our research findings, insights, guides, and explorations into the frontier of consciousness architecture
-            and sovereign AI systems.
-          </p>
+    <main style={{ minHeight: '100vh', paddingTop: '72px' }}>
+
+      {/* Header */}
+      <section style={{ padding: '80px 10vw 64px' }}>
+        <p style={{
+          fontFamily: 'var(--font-ui)',
+          fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase',
+          color: 'var(--color-text-muted)', marginBottom: '24px',
+        }}>
+          Research & Intelligence
+        </p>
+        <h1 style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(36px, 6vw, 72px)', fontWeight: 300,
+          letterSpacing: '-0.02em', lineHeight: 1.1,
+          color: 'var(--color-text-primary)', marginBottom: '24px',
+        }}>
+          Field Notes
+        </h1>
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 'clamp(16px, 2vw, 19px)', lineHeight: 1.7,
+          color: 'var(--color-text-secondary)', maxWidth: '560px',
+        }}>
+          Research findings, architectural insights, and explorations from the frontier of sovereign intelligence.
+        </p>
+      </section>
+
+      {/* Filter + Search */}
+      <section style={{ padding: '0 10vw 48px', borderBottom: '1px solid var(--color-border)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
+
+          {/* Category tabs */}
+          <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelected(cat.id)}
+                style={{
+                  fontFamily: 'var(--font-ui)',
+                  fontSize: '12px', letterSpacing: '0.06em', textTransform: 'uppercase',
+                  padding: '8px 18px', borderRadius: '100px',
+                  border: selected === cat.id ? '1px solid var(--color-gold-border)' : '1px solid transparent',
+                  background: selected === cat.id ? 'var(--color-gold-ghost)' : 'transparent',
+                  color: selected === cat.id ? 'var(--color-gold)' : 'var(--color-text-muted)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                {cat.label}
+                <span style={{ marginLeft: '8px', opacity: 0.5, fontSize: '10px' }}>{cat.count}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Search */}
+          <input
+            type="search"
+            placeholder="Search notes…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            style={{
+              fontFamily: 'var(--font-body)', fontSize: '14px',
+              color: 'var(--color-text-primary)',
+              background: 'transparent',
+              border: '1px solid var(--color-border)',
+              borderRadius: '100px',
+              padding: '8px 20px',
+              width: '220px', outline: 'none',
+              transition: 'border-color 0.2s ease',
+            }}
+          />
         </div>
       </section>
 
-      {/* Search and Categories */}
-      <section className="px-6 mb-16">
-        <div className="max-w-7xl mx-auto">
-          {/* Search Bar */}
-          <div className="relative max-w-2xl mx-auto mb-12">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-            <Input
-              placeholder="Search field notes..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 h-14 text-lg bg-card/50 border-border/50 focus:border-primary/50"
-            />
-          </div>
-
-          {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
-            {categories.map((category) => {
-              if (!category || !category.id || !category.label) {
-                console.log("[v0] Skipping invalid category:", category)
-                return null
-              }
-
-              const Icon = category.icon
-              return (
-                <Button
-                  key={category.id}
-                  variant={selectedCategory === category.id ? "default" : "outline"}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`flex items-center gap-2 ${
-                    selectedCategory === category.id ? "cosmic-glow bg-primary hover:bg-primary/90" : "hover:bg-card/50"
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  {category.label}
-                  <Badge variant="secondary" className="ml-1">
-                    {category.count || 0}
-                  </Badge>
-                </Button>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Latest Content Showcase */}
-      {selectedCategory === "all" && (
-        <section className="px-6 mb-20">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center cosmic-text">Latest Insights</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {latestContent.map((item, index) => {
-                if (!item || !item.id) {
-                  console.log("[v0] Skipping invalid latest content item:", item)
-                  return null
-                }
-
-                return (
-                  <Card
-                    key={item.id}
-                    className={`group hover:shadow-2xl transition-all duration-300 bg-card/50 border-border/50 hover:border-primary/30 ${
-                      index === 0 ? "lg:col-span-2 lg:row-span-2" : ""
-                    }`}
-                  >
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={item.thumbnail || "/placeholder.svg"}
-                        alt={item.title || "Content thumbnail"}
-                        className={`w-full object-cover transition-transform duration-300 group-hover:scale-105 ${
-                          index === 0 ? "h-64 lg:h-80" : "h-48"
-                        }`}
-                      />
-                      <div className="absolute top-4 left-4">
-                        <Badge className="cosmic-glow bg-primary/90">{item.category || "Uncategorized"}</Badge>
-                      </div>
-                      {item.featured && (
-                        <div className="absolute top-4 right-4">
-                          <Badge variant="secondary" className="cosmic-glow">
-                            Featured
-                          </Badge>
-                        </div>
-                      )}
-                    </div>
-                    <CardHeader className={index === 0 ? "p-8" : "p-6"}>
-                      <CardTitle
-                        className={`group-hover:text-primary transition-colors ${
-                          index === 0 ? "text-2xl lg:text-3xl" : "text-xl"
-                        }`}
-                      >
-                        {item.title || "Untitled"}
-                      </CardTitle>
-                      <CardDescription
-                        className={`text-muted-foreground ${index === 0 ? "text-lg leading-relaxed" : ""}`}
-                      >
-                        {item.description || "No description available"}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent
-                      className={`flex items-center justify-between ${index === 0 ? "px-8 pb-8" : "px-6 pb-6"}`}
-                    >
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {item.date ? new Date(item.date).toLocaleDateString() : "No date"}
-                        </div>
-                        <span>{item.readTime || "Unknown read time"}</span>
-                      </div>
-                      <Button variant="ghost" size="sm" className="group-hover:text-primary">
-                        <ExternalLink className="w-4 h-4" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* All Content Grid */}
-      <section className="px-6 pb-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold cosmic-text">{getCurrentCategoryLabel()}</h2>
-            <p className="text-muted-foreground">
-              {filteredContent.length} {filteredContent.length === 1 ? "item" : "items"}
+      {/* Content list */}
+      <section style={{ padding: '0 10vw 120px' }}>
+        {filtered.length === 0 ? (
+          <div style={{ paddingTop: '80px', textAlign: 'center' }}>
+            <p style={{
+              fontFamily: 'var(--font-body)', fontSize: '16px',
+              fontStyle: 'italic', color: 'var(--color-text-muted)',
+            }}>
+              No notes match that search.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredContent.map((item) => {
-              if (!item || !item.id) {
-                console.log("[v0] Skipping invalid filtered content item:", item)
-                return null
-              }
-
-              return (
-                <Card
-                  key={item.id}
-                  className="group hover:shadow-2xl transition-all duration-300 bg-card/50 border-border/50 hover:border-primary/30"
-                >
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={item.thumbnail || "/placeholder.svg"}
-                      alt={item.title || "Content thumbnail"}
-                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <Badge className="cosmic-glow bg-primary/90">{item.category || "Uncategorized"}</Badge>
-                    </div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {filtered.map((item, i) => (
+              <article
+                key={item.id}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '140px 1fr auto',
+                  gap: '32px',
+                  alignItems: 'start',
+                  padding: '40px 0',
+                  borderBottom: '1px solid var(--color-border)',
+                  cursor: 'pointer',
+                  transition: 'opacity 0.2s ease',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.75'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
+              >
+                {/* Left: meta */}
+                <div>
+                  <div style={{
+                    fontFamily: 'var(--font-ui)',
+                    fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase',
+                    color: 'var(--color-gold)', marginBottom: '8px',
+                    padding: '4px 10px',
+                    border: '1px solid var(--color-gold-border)',
+                    borderRadius: '100px', display: 'inline-block',
+                  }}>
+                    {CATEGORY_LABEL[item.category] ?? item.category}
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors line-clamp-2">
-                      {item.title || "Untitled"}
-                    </CardTitle>
-                    <CardDescription className="text-muted-foreground line-clamp-3">
-                      {item.description || "No description available"}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {item.date ? new Date(item.date).toLocaleDateString() : "No date"}
-                      </div>
-                      <span>{item.readTime || "Unknown read time"}</span>
-                    </div>
-                    <Button variant="ghost" size="sm" className="group-hover:text-primary">
-                      <ExternalLink className="w-4 h-4" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              )
-            })}
-          </div>
+                  <div style={{
+                    fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.04em',
+                    color: 'var(--color-text-muted)', marginTop: '10px',
+                  }}>
+                    {fmt(item.date)}
+                  </div>
+                  <div style={{
+                    fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.04em',
+                    color: 'var(--color-text-muted)', marginTop: '2px',
+                  }}>
+                    {item.readTime} read
+                  </div>
+                </div>
 
-          {filteredContent.length === 0 && (
-            <div className="text-center py-20">
-              <div className="cosmic-glow w-16 h-16 bg-muted/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Search className="w-8 h-8 text-muted-foreground" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-4">No content found</h3>
-              <p className="text-muted-foreground max-w-md mx-auto">
-                Try adjusting your search terms or selecting a different category to find what you're looking for.
-              </p>
-            </div>
-          )}
-        </div>
+                {/* Center: content */}
+                <div>
+                  <h2 style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(18px, 2.2vw, 24px)', fontWeight: 400,
+                    letterSpacing: '-0.01em', lineHeight: 1.25,
+                    color: 'var(--color-text-primary)', marginBottom: '12px',
+                  }}>
+                    {item.title}
+                  </h2>
+                  <p style={{
+                    fontFamily: 'var(--font-body)', fontSize: '14px', lineHeight: 1.7,
+                    color: 'var(--color-text-secondary)',
+                  }}>
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Right: arrow */}
+                <div style={{
+                  fontFamily: 'var(--font-body)', fontSize: '16px',
+                  color: 'var(--color-text-muted)', paddingTop: '4px',
+                  transition: 'color 0.2s ease, transform 0.2s ease',
+                }}>
+                  →
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
-    </div>
-  )
+    </main>
+  );
 }
