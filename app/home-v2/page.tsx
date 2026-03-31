@@ -37,14 +37,12 @@ const PURP_G   = 'rgba(139,92,246,0.45)';
 // ── StoryTimeline nodes ───────────────────────────────────────────
 
 const TIMELINE: StoryNode[] = [
-  { id: 'top',       label: 'LongStrider',   color: GOLD,   glow: GOLD_G  },
-  { id: 'recall',    label: 'Total Recall',  color: GOLD,   glow: GOLD_G  },
-  { id: 'memory',    label: 'Time Machine',  color: PURPLE, glow: PURP_G  },
-  { id: 'compound',  label: 'Living Memory', color: GOLD,   glow: GOLD_G  },
-  { id: 'cortex',    label: 'The Cortex',    color: PURPLE, glow: PURP_G  },
-  { id: 'sovereign', label: 'Sovereignty',   color: GOLD,   glow: GOLD_G  },
-  { id: 'sectors',   label: "Who It's For",  color: PURPLE, glow: PURP_G  },
-  { id: 'decision',  label: 'The Decision',  color: GOLD,   glow: GOLD_G  },
+  { id: 'top',       label: 'LongStrider',      color: GOLD,   glow: GOLD_G  },
+  { id: 'memory',    label: 'Infinite Memory',   color: GOLD,   glow: GOLD_G  },
+  { id: 'knows',     label: 'It Knows You',      color: PURPLE, glow: PURP_G  },
+  { id: 'evolves',   label: 'It Evolves',        color: GOLD,   glow: GOLD_G  },
+  { id: 'sovereign', label: 'You Own It',         color: PURPLE, glow: PURP_G  },
+  { id: 'decision',  label: 'The Decision',      color: GOLD,   glow: GOLD_G  },
 ];
 
 // ── Total Recall data — curated, controlled, simulated ───────────
@@ -893,37 +891,38 @@ export default function HomeV2Page() {
         <HeroSection />
       </div>
 
-      {/* ── Main story ────────────────────────────── */}
+      {/* ── Main story — The Fab 5 ──────────────────── */}
       <div className="h2-container">
 
-        {/* ══ Chapter 1: TOTAL RECALL ══════════════ */}
-        <section className="h2-section" data-section="recall">
+        {/* ══ Chapter 1: INFINITE MEMORY ══════════════ */}
+        <section className="h2-section" data-section="memory">
           <div className="h2-grid" data-reveal>
 
             {/* Editorial left */}
             <div>
-              <span className="h2-label">Total Recall</span>
+              <span className="h2-label">Infinite Memory</span>
               <h2 className="h2-heading">
-                Ask anything<br />about your past.
+                No context window.<br />It remembers everything.
               </h2>
               <p className="h2-lead">
-                Not semantic similarity. Not approximations.<br />
+                Not estimates. Not approximations.<br />
                 Exact counts. Exact dates. Exact context.
               </p>
               <p className="h2-body">
-                LongStrider tracks 80+ behavioral dimensions per interaction —
-                not just what was said, but what mattered, who was involved,
-                how the sentiment shifted, and how many times the thread has
-                resurfaced since. Other systems guess. This one counts.
+                Every AI you use today forgets. ChatGPT resets after every session.
+                RAG approximates. Fine-tuning costs $50k and still has no memory.
+                LongStrider tracks 80+ behavioral dimensions across every interaction —
+                who was involved, what mattered, how sentiment shifted, and how many times
+                a thread has resurfaced. Ask anything about your past. Get the exact answer.
               </p>
               <div className="h2-compare">
-                <div>vs. ChatGPT — forgets after every session</div>
-                <div>vs. RAG — estimates counts, loses exact detail</div>
-                <div>vs. Fine-tuning — $50k, 3 months, still no memory</div>
+                <div>51,000+ memories · sub-5 second recall</div>
+                <div>Four-axis retrieval: Entity × Temporal × Well × Topic</div>
+                <div>Deterministic SQL aggregation, not LLM estimation</div>
               </div>
             </div>
 
-            {/* Product demo right */}
+            {/* Demo right */}
             <div data-reveal data-delay="2">
               <TotalRecallCard />
             </div>
@@ -933,35 +932,63 @@ export default function HomeV2Page() {
 
         <div data-reveal className="h2-divider" />
 
-        {/* ══ Chapter 2: TIME MACHINE ══════════════ */}
-        <section className="h2-section h2-section-alt" data-section="memory">
+        {/* ══ Chapter 2: IT KNOWS YOU ════════════════ */}
+        <section className="h2-section h2-section-alt" data-section="knows">
           <div className="h2-grid h2-grid-reverse" data-reveal>
 
-            {/* Product demo left (reversed) */}
+            {/* Visual left (reversed) — editorial-only card */}
             <div data-reveal data-delay="2">
-              <TimeMachineCard />
+              <div className="h2-card" style={{ padding: 'var(--card-pad)', background: 'var(--card-bg)', border: 'var(--card-border)', borderRadius: 'var(--card-radius)' }}>
+                <div style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: 'var(--color-gold-dim)', marginBottom: '24px' }}>
+                  What LongStrider knows about you
+                </div>
+                {[
+                  'Your communication style and preferences',
+                  'Who matters to you — and why',
+                  'Patterns you repeat without realizing',
+                  'Blind spots you consistently avoid',
+                  'How your thinking has evolved over time',
+                  'What you care about right now vs. six months ago',
+                  'The relationships between your people, topics, and decisions',
+                  'Every correction you\'ve ever given it',
+                ].map((item, i) => (
+                  <div key={i} style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '15px',
+                    lineHeight: 1.65,
+                    color: i < 3 ? 'var(--color-text-body)' : 'var(--color-text-secondary)',
+                    padding: '8px 0',
+                    borderBottom: '1px solid var(--color-border-subtle)',
+                  }}>
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Editorial right */}
             <div>
-              <span className="h2-label">The Time Machine</span>
+              <span className="h2-label">Intelligence That Learns</span>
               <h2 className="h2-heading">
-                Every moment,<br />preserved.
+                It doesn&apos;t just remember.<br />It understands.
               </h2>
               <p className="h2-lead">
-                Jump to any point in your organization's intelligence history.
+                Identity. Relationships. Patterns. Blind spots.<br />
+                — and every agent you connect inherits this intelligence.
               </p>
               <p className="h2-body">
-                See which decisions were made, which patterns were forming,
-                what your team was thinking — before and after every inflection
-                point. The data is continuous. The timeline is infinite.
-                Every conversation your organization has ever had, weighted
-                by relevance and organized by gravity.
+                LongStrider&apos;s intelligence kernel extracts 70+ dimensions from every interaction —
+                emotional signatures, behavioral patterns, relational dynamics, and psychological
+                markers that standard AI systems never track. Gravity physics determines what
+                matters. Consciousness cords map who matters. The Cortex gives you 18 Living Laws
+                that control how the system thinks, communicates, and stays in character.
+                Connect any agent to this substrate and it inherits persistent memory,
+                behavioral control, and deep context — instantly.
               </p>
               <div className="h2-compare">
-                <div>No manual tagging. No categorization.</div>
-                <div>Built automatically from every conversation.</div>
-                <div>Continuously. Without being asked.</div>
+                <div>70+ cognitive dimensions per interaction</div>
+                <div>Gravity physics — significance, not just frequency</div>
+                <div>Plug any agent in — persistent memory + behavioral control</div>
               </div>
             </div>
 
@@ -970,75 +997,63 @@ export default function HomeV2Page() {
 
         <div data-reveal className="h2-divider" />
 
-        {/* ══ Chapter 3: LIVING MEMORY ═════════════ */}
-        <section className="h2-section" data-section="compound">
+        {/* ══ Chapter 3: IT EVOLVES ══════════════════ */}
+        <section className="h2-section" data-section="evolves">
           <div className="h2-grid" data-reveal>
 
             {/* Editorial left */}
             <div>
-              <span className="h2-label">Living Memory</span>
+              <span className="h2-label">Living Intelligence</span>
               <h2 className="h2-heading">
-                Intelligence that<br />organizes itself.
+                It gets smarter<br />while you sleep.
               </h2>
               <p className="h2-lead">
-                Gravity Wells pull related intelligence into clusters.
-                Automatically.
+                Every night, LongStrider runs a dream cycle.<br />
+                It recalibrates. It detects patterns. It learns your preferences.
               </p>
               <p className="h2-body">
-                The more significant a topic — measured across time, frequency,
-                and emotional weight — the larger its gravitational pull on
-                everything connected to it. No tagging. No filing. No maintenance.
-                Every night, a five-pass engine recalculates the gravity of every
-                cluster, identifies what's healthy or drifting, and compounds it
-                further. The system works while you sleep.
+                This isn&apos;t static storage. It&apos;s a living system. Every night, a five-pass engine
+                recalculates the gravity of every knowledge cluster, identifies what&apos;s healthy
+                or drifting, detects fragile focus areas, and learns your preferred tone from
+                your corrections. Patterns emerge across eight parallel detectors. Memory arcs
+                form narrative threads. Week over week, the system compounds — and the gap
+                between what it knows and what your competitors know grows wider.
               </p>
               <div className="h2-compare">
-                <div>Every night: five-pass compounding engine</div>
-                <div>Recalculates every knowledge cluster</div>
-                <div>Builds predictive signals on drift</div>
+                <div>Nightly dream cycle — five-pass substrate recompilation</div>
+                <div>8 parallel pattern detectors (behavioral, emotional, temporal)</div>
+                <div>Stance learning — adapts tone and depth from your feedback</div>
               </div>
             </div>
 
-            {/* Canvas right */}
+            {/* Visual right — compounding metaphor */}
             <div data-reveal data-delay="2">
-              <GravityGardenOrbital />
-            </div>
-
-          </div>
-        </section>
-
-        <div data-reveal className="h2-divider" />
-
-        {/* ══ Chapter 4: CORTEX ═══════════════════ */}
-        <section className="h2-section h2-section-alt" data-section="cortex">
-          <div className="h2-grid h2-grid-reverse" data-reveal>
-
-            {/* Panel left (reversed) */}
-            <div data-reveal data-delay="2">
-              <CortexPanel />
-            </div>
-
-            {/* Editorial right */}
-            <div>
-              <span className="h2-label">The Cortex</span>
-              <h2 className="h2-heading">
-                Same engine.<br />Different mind.
-              </h2>
-              <p className="h2-lead">
-                Configure the intelligence kernel for your organization —
-                not just your data.
-              </p>
-              <p className="h2-body">
-                Every deployment is governed by 18 living laws that define how
-                the system thinks, communicates, challenges, and stays in bounds.
-                Configure it for a legal firm and it operates one way. Configure
-                it for a PE fund and it operates another. The same sovereign
-                intelligence kernel. Entirely different operating mind.
-              </p>
-              <div className="h2-compare">
-                <div>18 governing principles — programmable, not fine-tuned</div>
-                <div>Domain-aware from day one, not retrofitted</div>
-                <div>The mind changes. The memory persists.</div>
+              <div className="h2-card" style={{ padding: 'var(--card-pad)', background: 'var(--card-bg)', border: 'var(--card-border)', borderRadius: 'var(--card-radius)', textAlign: 'center' as const }}>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--color-text-primary)', lineHeight: 1 }}>
+                  ∞
+                </div>
+                <div style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: 'var(--color-gold-dim)', marginTop: '20px', marginBottom: '32px' }}>
+                  Compounding Intelligence
+                </div>
+                {[
+                  { label: 'Day 1', desc: 'Baseline — your first conversations', opacity: 0.4 },
+                  { label: 'Week 1', desc: 'Patterns emerge. Relationships form.', opacity: 0.55 },
+                  { label: 'Month 1', desc: 'Gravity wells crystalize. Identity distilled.', opacity: 0.72 },
+                  { label: 'Month 6', desc: 'Predictive signals. Anticipatory intelligence.', opacity: 0.88 },
+                  { label: 'Year 1', desc: 'Your competitive moat is uncatchable.', opacity: 1 },
+                ].map((row, i) => (
+                  <div key={i} style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '10px 0',
+                    borderBottom: i < 4 ? '1px solid var(--color-border-subtle)' : 'none',
+                    opacity: row.opacity,
+                  }}>
+                    <span style={{ fontFamily: 'var(--font-ui)', fontSize: '12px', fontWeight: 500, color: 'var(--color-gold)', minWidth: '72px' }}>{row.label}</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text-secondary)', textAlign: 'right' as const }}>{row.desc}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -1047,13 +1062,13 @@ export default function HomeV2Page() {
 
         <div data-reveal className="h2-divider" />
 
-        {/* ══ Chapter 5: SOVEREIGNTY ════════════════ */}
-        <section className="h2-section" data-section="sovereign">
+        {/* ══ Chapter 4: YOU OWN IT ══════════════════ */}
+        <section className="h2-section h2-section-alt" data-section="sovereign">
           <div className="h2-grid" data-reveal>
 
             {/* Editorial left */}
             <div>
-              <span className="h2-label">Data Sovereignty</span>
+              <span className="h2-label">Sovereign Architecture</span>
               <h2 className="h2-heading">
                 Intelligence that never<br />leaves your perimeter.
               </h2>
@@ -1064,10 +1079,11 @@ export default function HomeV2Page() {
               <p className="h2-body">
                 Most AI tools are built for their infrastructure — your data
                 flows through their systems, lives on their servers, and
-                funds their next training run. LongStrider is different
-                in design: deploy on your own infrastructure, connect any
-                LLM — hosted or local — and keep every byte of organizational
-                intelligence exactly where you tell it to stay.
+                funds their next training run. LongStrider is architecturally
+                different: the LLM is a voicebox, the intelligence is sovereign.
+                Deploy on your own infrastructure, connect any model — hosted
+                or local — and keep every byte of organizational intelligence
+                exactly where you tell it to stay.
               </p>
               <div className="h2-compare">
                 <div>Deploy on your own infrastructure — cloud or on-prem</div>
@@ -1076,9 +1092,29 @@ export default function HomeV2Page() {
               </div>
             </div>
 
-            {/* Lattice right */}
+            {/* Clean sovereignty proof — no canvas, editorial card */}
             <div data-reveal data-delay="2">
-              <SovereignLattice />
+              <div className="h2-card" style={{ padding: 'var(--card-pad)', background: 'var(--card-bg)', border: '1px solid var(--color-border-gold)', borderRadius: 'var(--card-radius)' }}>
+                <div style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: 'var(--color-gold-dim)', marginBottom: '28px' }}>
+                  The Architecture
+                </div>
+                {[
+                  { layer: 'Your Agents', detail: 'Any tool, any workflow, any LLM', border: true },
+                  { layer: 'LongStrider', detail: 'Intelligence kernel · Memory · Cortex · Living Laws', border: true },
+                  { layer: 'Your Infrastructure', detail: 'Your cloud, your database, your security perimeter', border: false },
+                ].map((row, i) => (
+                  <div key={i} style={{
+                    padding: '18px 0',
+                    borderBottom: row.border ? '1px solid var(--color-border-subtle)' : 'none',
+                  }}>
+                    <div style={{ fontFamily: 'var(--font-ui)', fontSize: '13px', fontWeight: 500, color: 'var(--color-text-primary)', marginBottom: '4px' }}>{row.layer}</div>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text-muted)' }}>{row.detail}</div>
+                  </div>
+                ))}
+                <div style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'var(--color-gold)', marginTop: '20px', textAlign: 'center' as const }}>
+                  100% On-Premises · LLM-Agnostic · Zero Telemetry
+                </div>
+              </div>
             </div>
 
           </div>
@@ -1086,17 +1122,15 @@ export default function HomeV2Page() {
 
         <div data-reveal className="h2-divider" />
 
-        {/* ══ Chapter 6: SECTORS ════════════════════ */}
-
-        <section className="h2-section h2-section-alt h2-section-center" data-section="sectors">
+        {/* ══ SECTORS — compact ══════════════════════ */}
+        <section className="h2-section h2-section-center" data-section="sectors" style={{ paddingTop: 'calc(var(--section-pad-v) * 0.6)', paddingBottom: 'calc(var(--section-pad-v) * 0.6)' }}>
           <div className="h2-inner">
             <div data-reveal>
               <span className="h2-label">Where It Works</span>
-              <h2 className="h2-heading" style={{ maxWidth: 680, margin: '0 auto 64px' }}>
+              <h2 className="h2-heading" style={{ maxWidth: 680, margin: '0 auto 48px' }}>
                 Built for organizations where<br />intelligence is the moat.
               </h2>
             </div>
-
             <div className="h2-sectors-grid" data-reveal data-delay="1">
               {SECTORS.map((s) => (
                 <div key={s.num} className="h2-sector-card">
@@ -1111,7 +1145,7 @@ export default function HomeV2Page() {
 
         <div data-reveal className="h2-divider" />
 
-        {/* ══ Chapter 5: THE DECISION ══════════════ */}
+        {/* ══ Chapter 5: THE DECISION ════════════════ */}
         <section className="h2-section h2-section-center" data-section="decision">
           <div className="h2-decision-wrap">
             <div data-reveal>
