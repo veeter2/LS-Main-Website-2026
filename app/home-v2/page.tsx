@@ -11,6 +11,9 @@
  *
  * Animation (HeroSection lines 10-260) is OFF LIMITS — imported as-is.
  * HeroSection content area (old copy) is acknowledged as temporary; replaced on hot-swap.
+ *
+ * GravityGardenOrbital: adapted from living-memory-v2/orbital-graph.tsx
+ * and living-memory-v3/orbital-graph-physics.tsx — SVG rings + CSS keyframe orbits.
  */
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
@@ -277,145 +280,173 @@ function TimeMachineCard() {
   );
 }
 
-// ── Gravity Garden canvas (adapted from gravity-garden-v2.tsx) ────
+// ── Gravity Garden Orbital (────────────────────────────────────────────────
+// Adapted from living-memory-v2/orbital-graph.tsx +
+// living-memory-v3/orbital-graph-physics.tsx
+// ─ SVG dashed orbit rings
+// ─ Center sun: liquid glass sphere, CSS pulse
+// ─ Planets: 5-layer nested div counter-rotation (keeps label upright)
+// ─ CSS @keyframes orbitCW / orbitCCW
+// ─ No canvas. No physics sim. No Framer Motion dependency.
+// ───────────────────────────────────────────────────────────────
 
-interface GNode { id:string; label:string; gravity:number; connections:string[]; x:number; y:number; vx:number; vy:number; }
-
-const SEED_NODES = [
-  { id:'strategy',   label:'M&A Strategy',      gravity:1.00, connections:['finance','legal']       },
-  { id:'finance',    label:'Capital Allocation', gravity:0.85, connections:['strategy','portfolio']  },
-  { id:'legal',      label:'Regulatory Risk',    gravity:0.75, connections:['strategy','compliance'] },
-  { id:'portfolio',  label:'Portfolio Intel',    gravity:0.72, connections:['finance','exits']       },
-  { id:'exits',      label:'Exit Planning',      gravity:0.65, connections:['portfolio','strategy']  },
-  { id:'compliance', label:'Compliance',         gravity:0.52, connections:['legal']                 },
-  { id:'departures', label:'Key Departures',     gravity:0.61, connections:['strategy','portfolio']  },
-  { id:'signals',    label:'Market Signals',     gravity:0.48, connections:['strategy','exits']      },
+// 3 concentric rings — outer slowest (40s), inner fastest (14s)
+const ORBIT_RINGS = [
+  { radius: 145, duration: 40 }, // outer — slow
+  { radius:  96, duration: 25 }, // middle
+  { radius:  52, duration: 14 }, // inner — fast
 ];
 
-function GravityGardenCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const nodesRef  = useRef<GNode[]>([]);
-  const animRef   = useRef<number>(0);
+// Curated org-intelligence nodes. Gold = high gravity. Purple = mid.
+const ORB_PLANETS = [
+  // Inner ring (2 fast)
+  { id:'pm',  label:'Pattern Matrix',       ring:2, slot:0, slots:2, color: GOLD   },
+  { id:'ti',  label:'Team Intelligence',    ring:2, slot:1, slots:2, color: PURPLE },
+  // Middle ring (3)
+  { id:'cr',  label:'Client Intel',         ring:1, slot:0, slots:3, color: GOLD   },
+  { id:'dh',  label:'Decision History',     ring:1, slot:1, slots:3, color: PURPLE },
+  { id:'rs',  label:'Risk Signals',         ring:1, slot:2, slots:3, color: GOLD   },
+  // Outer ring (3 slow)
+  { id:'rc',  label:'Regulatory Context',   ring:0, slot:0, slots:3, color: PURPLE },
+  { id:'ms',  label:'Market Signals',       ring:0, slot:1, slots:3, color: GOLD   },
+  { id:'ha',  label:'Historical Arc',       ring:0, slot:2, slots:3, color: PURPLE },
+];
 
-  useEffect(() => {
-    nodesRef.current = SEED_NODES.map((n, i) => {
-      const a = (i / SEED_NODES.length) * Math.PI * 2;
-      const d = 110 + (1 - n.gravity) * 155;
-      return { ...n, x: Math.cos(a)*d, y: Math.sin(a)*d, vx:0, vy:0 };
-    });
-
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d')!;
-
-    // DPR-aware resize
-    const resize = () => {
-      const r = window.devicePixelRatio || 1;
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-      canvas.width  = w * r;
-      canvas.height = h * r;
-      ctx.setTransform(1,0,0,1,0,0);
-      ctx.scale(r, r);
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    let t = 0;
-    const tick = () => {
-      const W = canvas.offsetWidth;
-      const H = canvas.offsetHeight;
-      ctx.fillStyle = 'rgba(8,8,9,0.88)';
-      ctx.fillRect(0, 0, W, H);
-
-      ctx.save();
-      ctx.translate(W/2, H/2);
-
-      const ns = nodesRef.current;
-
-      // Physics step
-      ns.forEach((n, i) => {
-        ns.forEach((o, j) => {
-          if (i===j) return;
-          const dx = o.x-n.x, dy = o.y-n.y;
-          const d  = Math.hypot(dx, dy);
-          if (d < 20 || d > 380) return;
-          const conn = n.connections.includes(o.id);
-          const f  = conn
-            ? (o.gravity*n.gravity*42)/(d*d)
-            : (o.gravity*n.gravity*9)/(d*d);
-          n.vx += dx*f*0.01;
-          n.vy += dy*f*0.01;
-        });
-        // Gentle center pull
-        const cd = Math.hypot(n.x, n.y);
-        if (cd > 45) { n.vx += (-n.x)*0.0012; n.vy += (-n.y)*0.0012; }
-        n.x += n.vx; n.y += n.vy;
-        n.vx *= 0.972; n.vy *= 0.972;
-      });
-
-      // Draw connection lines
-      ns.forEach(n => {
-        n.connections.forEach(tid => {
-          const tgt = ns.find(o => o.id===tid);
-          if (!tgt) return;
-          ctx.beginPath();
-          ctx.strokeStyle = 'rgba(200,169,110,0.07)';
-          ctx.lineWidth = 1;
-          ctx.moveTo(n.x, n.y);
-          ctx.lineTo(tgt.x, tgt.y);
-          ctx.stroke();
-        });
-      });
-
-      // Draw nodes
-      ns.forEach(n => {
-        const base  = 7 + n.gravity * 24;
-        const pulse = base + Math.sin(t*2.2 + n.gravity*Math.PI)*2;
-        const isGold = n.gravity > 0.75;
-        const rgb    = isGold ? [200,169,110] : [139,92,246];
-
-        // Glow halo
-        const grad = ctx.createRadialGradient(n.x,n.y,0, n.x,n.y, pulse*2.8);
-        grad.addColorStop(0, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${n.gravity*0.26})`);
-        grad.addColorStop(1, 'transparent');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, pulse*2.8, 0, Math.PI*2);
-        ctx.fill();
-
-        // Core dot
-        ctx.fillStyle = isGold ? GOLD : PURPLE;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, pulse, 0, Math.PI*2);
-        ctx.fill();
-
-        // Label for significant nodes
-        if (n.gravity > 0.60) {
-          ctx.fillStyle   = isGold ? 'rgba(200,169,110,0.80)' : 'rgba(200,200,255,0.52)';
-          ctx.font        = `${9 + n.gravity*3}px "Lora", Georgia, serif`;
-          ctx.textAlign   = 'center';
-          ctx.textBaseline = 'top';
-          ctx.fillText(n.label, n.x, n.y + pulse + 7);
-        }
-      });
-
-      ctx.restore();
-      t += 0.016;
-      animRef.current = requestAnimationFrame(tick);
-    };
-
-    tick();
-    return () => {
-      cancelAnimationFrame(animRef.current);
-      window.removeEventListener('resize', resize);
-    };
-  }, []);
-
+function GravityGardenOrbital() {
   return (
-    <div className="h2-canvas-wrap">
-      <canvas ref={canvasRef} className="h2-canvas" />
-      <span className="h2-canvas-tag">Gravity simulation · live</span>
+    <div className="h2-canvas-wrap" style={{ overflow:'hidden' }}>
+      <style>{`
+        @keyframes h2orbitCW  { from{transform:rotate(0deg)}   to{transform:rotate(360deg)}  }
+        @keyframes h2orbitCCW { from{transform:rotate(0deg)}   to{transform:rotate(-360deg)} }
+        @keyframes h2sunPulse {
+          0%,100%{ box-shadow: 0 0 40px rgba(200,169,110,0.30), 0 0 12px rgba(255,255,255,0.08),
+                               inset 0 -8px 16px rgba(200,169,110,0.18), inset 0 2px 4px rgba(255,255,255,0.22); transform:scale(0.97); }
+          50%    { box-shadow: 0 0 72px rgba(200,169,110,0.52), 0 0 28px rgba(255,255,255,0.18),
+                               inset 0 -8px 16px rgba(200,169,110,0.30), inset 0 2px 4px rgba(255,255,255,0.32); transform:scale(1.05); }
+        }
+      `}</style>
+
+      {/* Deep-space radial background */}
+      <div style={{
+        position:'absolute', inset:0,
+        background: 'radial-gradient(circle at center, rgba(139,92,246,0.05) 0%, rgba(8,8,9,0) 70%)',
+      }} />
+
+      {/* SVG orbit rings — 3 dashed concentric circles */}
+      <svg
+        viewBox="0 0 440 440"
+        style={{ position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none' }}
+        aria-hidden
+      >
+        {ORBIT_RINGS.map((ring, i) => (
+          <circle
+            key={i}
+            cx="220" cy="220"
+            r={ring.radius}
+            fill="none"
+            stroke="rgba(255,255,255,0.05)"
+            strokeWidth="1"
+            strokeDasharray="4 9"
+          />
+        ))}
+      </svg>
+
+      {/* Center sun — liquid glass gold sphere */}
+      <div style={{
+        position:'absolute',
+        left:'50%', top:'50%',
+        width:58, height:58,
+        marginLeft:-29, marginTop:-29,
+        borderRadius:'50%',
+        background: 'radial-gradient(circle at 32% 26%, rgba(255,255,255,0.55) 0%, rgba(200,169,110,0.35) 38%, rgba(200,169,110,0.10) 68%, transparent 100%)',
+        backdropFilter: 'blur(10px) saturate(1.5)',
+        border: '1px solid rgba(255,255,255,0.18)',
+        boxShadow: '0 0 40px rgba(200,169,110,0.30), 0 0 12px rgba(255,255,255,0.08), inset 0 -8px 16px rgba(200,169,110,0.18), inset 0 2px 4px rgba(255,255,255,0.22)',
+        animation: 'h2sunPulse 5s ease-in-out infinite',
+        zIndex: 10,
+        display:'flex', alignItems:'center', justifyContent:'center',
+      }}>
+        <span style={{
+          fontFamily:'var(--font-ui)', fontSize:'8px', letterSpacing:'0.12em',
+          textTransform:'uppercase', color:'rgba(255,255,255,0.9)',
+          textShadow:'0 0 8px rgba(255,255,255,0.5)',
+          textAlign:'center', lineHeight:1.2, padding:'0 4px',
+        }}>
+          Living<br/>Memory
+        </span>
+      </div>
+
+      {/* Orbiting planet nodes */}
+      {ORB_PLANETS.map((p, i) => {
+        const ring       = ORBIT_RINGS[p.ring];
+        const startDeg   = (p.slot / p.slots) * 360;
+        const isGold     = p.color === GOLD;
+        const planetSize = isGold ? 20 : 17;
+        const halfSize   = planetSize / 2;
+        const spinAnim   = i % 2 === 0 ? 'h2orbitCW' : 'h2orbitCCW';
+        const counterAnim = i % 2 === 0 ? 'h2orbitCCW' : 'h2orbitCW';
+
+        return (
+          <div
+            key={p.id}
+            style={{ position:'absolute', left:'50%', top:'50%', width:0, height:0 }}
+          >
+            {/* Layer 1: initial angle offset */}
+            <div style={{ transform:`rotate(${startDeg}deg)` }}>
+              {/* Layer 2: main ring spin */}
+              <div style={{ animation:`${spinAnim} ${ring.duration}s linear infinite` }}>
+                {/* Layer 3: push to ring radius */}
+                <div style={{ transform:`translateX(${ring.radius}px)` }}>
+                  {/* Layer 4: counter-spin (keeps node upright) */}
+                  <div style={{ animation:`${counterAnim} ${ring.duration}s linear infinite` }}>
+                    {/* Layer 5: counter initial angle */}
+                    <div style={{ transform:`rotate(-${startDeg}deg)` }}>
+
+                      {/* The planet */}
+                      <div style={{
+                        position:'absolute',
+                        width:planetSize, height:planetSize,
+                        left:-halfSize, top:-halfSize,
+                        borderRadius:'50%',
+                        background: isGold
+                          ? `radial-gradient(circle at 30% 25%, rgba(255,255,255,0.40) 0%, rgba(200,169,110,0.75) 38%, rgba(200,169,110,0.22) 70%, transparent 100%)`
+                          : `radial-gradient(circle at 30% 25%, rgba(255,255,255,0.30) 0%, rgba(139,92,246,0.75) 38%, rgba(139,92,246,0.22) 70%, transparent 100%)`,
+                        backdropFilter:'blur(6px) saturate(1.3)',
+                        border: isGold ? '1px solid rgba(200,169,110,0.45)' : '1px solid rgba(139,92,246,0.45)',
+                        boxShadow: isGold
+                          ? '0 0 14px rgba(200,169,110,0.35), inset 0 2px 3px rgba(255,255,255,0.22)'
+                          : '0 0 14px rgba(139,92,246,0.35), inset 0 2px 3px rgba(255,255,255,0.18)',
+                        zIndex: 5,
+                      }} />
+
+                      {/* Label — appears below planet */}
+                      <div style={{
+                        position:'absolute',
+                        left: '50%',
+                        top: halfSize + 6,
+                        transform: 'translateX(-50%)',
+                        fontFamily:'var(--font-ui)',
+                        fontSize:'8px',
+                        letterSpacing:'0.08em',
+                        textTransform:'uppercase',
+                        color: isGold ? 'rgba(200,169,110,0.75)' : 'rgba(180,160,255,0.65)',
+                        whiteSpace:'nowrap',
+                        pointerEvents:'none',
+                      }}>
+                        {p.label}
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Corner tag */}
+      <span className="h2-canvas-tag">Living Memory · orbital</span>
     </div>
   );
 }
@@ -596,7 +627,7 @@ export default function HomeV2Page() {
 
             {/* Canvas right */}
             <div data-reveal data-delay="2">
-              <GravityGardenCanvas />
+              <GravityGardenOrbital />
             </div>
 
           </div>
