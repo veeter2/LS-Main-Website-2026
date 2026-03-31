@@ -2,31 +2,19 @@
 
 import { useState } from 'react';
 
-const GOLD       = '#c8a96e';
-const GOLD_LIGHT = '#d4b87c';
+const GOLD        = '#c8a96e';
+const GOLD_DIM    = 'rgba(200,169,110,0.65)';
+const GOLD_BORDER = 'rgba(200,169,110,0.30)';
+const GOLD_GHOST  = 'rgba(200,169,110,0.07)';
 
 const HS_PORTAL_ID = '243871028';
 const HS_FORM_GUID = '6ccbf5d8-fae4-4ee4-8fe5-48f749d33905';
 const HS_ENDPOINT  = `https://forms.hubspot.com/uploads/form/v2/${HS_PORTAL_ID}/${HS_FORM_GUID}`;
 
-const inputStyle = {
-  background: 'rgba(255,255,255,0.06)',
-  border: '1px solid rgba(255,255,255,0.12)',
-  color: 'rgba(255,255,255,0.88)',
-} as const;
-
-const inputFocus = (el: HTMLElement) => {
-  el.style.borderColor = `${GOLD}70`;
-  el.style.boxShadow   = `0 0 0 3px ${GOLD}12, 0 0 20px ${GOLD}14`;
-};
-const inputBlur = (el: HTMLElement) => {
-  el.style.borderColor = 'rgba(255,255,255,0.12)';
-  el.style.boxShadow   = 'none';
-};
-
 export default function ContactPage() {
   const [form, setForm] = useState({ firstname: '', lastname: '', email: '', company: '', broken: '' });
   const [status, setStatus] = useState<'idle'|'submitting'|'success'|'error'>('idle');
+  const [btnHover, setBtnHover] = useState(false);
 
   const set = (k: string, v: string) => setForm(prev => ({ ...prev, [k]: v }));
 
@@ -34,7 +22,6 @@ export default function ContactPage() {
     e.preventDefault();
     if (status === 'submitting') return;
     setStatus('submitting');
-
     try {
       const params = new URLSearchParams();
       params.append('firstname', form.firstname);
@@ -46,18 +33,15 @@ export default function ContactPage() {
         pageUri: 'https://longstrider.ai/contact',
         pageName: 'LongStrider — Start the Conversation',
       }));
-
       const res = await fetch(HS_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString(),
       });
-
       if (res.ok || res.status === 204 || res.status === 302) {
         setStatus('success');
       } else {
-        const errBody = await res.text();
-        console.error('HubSpot error', res.status, errBody);
+        console.error('HubSpot error', res.status, await res.text());
         setStatus('error');
       }
     } catch (err) {
@@ -67,212 +51,204 @@ export default function ContactPage() {
   };
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        background: '#080809',
-        fontFamily: "'Lora', Georgia, serif",
-        paddingTop: '96px',
-        paddingBottom: '80px',
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '520px',
-          margin: '0 auto',
-          padding: '0 24px',
-          animation: 'contactReveal 0.9s cubic-bezier(0.16,1,0.3,1) both',
-        }}
-      >
-        <h1
-          style={{
-            fontSize: 'clamp(32px, 5vw, 48px)',
-            fontWeight: 300,
-            letterSpacing: '-0.025em',
-            lineHeight: 1.15,
-            color: 'rgba(255,255,255,0.97)',
-            textAlign: 'center',
-            marginBottom: '48px',
-          }}
-        >
-          Let us show you what{' '}
-          <span style={{ color: GOLD }}>living memory</span> looks like.
-        </h1>
+    <main style={{ minHeight: '100vh', background: 'var(--color-bg)', fontFamily: 'var(--font-body)', position: 'relative', overflow: 'hidden' }}>
 
-        {status === 'success' ? (
-          <div style={{ textAlign: 'center', padding: '48px 0' }}>
-            <p style={{ fontSize: '28px', fontWeight: 300, color: GOLD, marginBottom: '16px' }}>
-              Consider yourself known.
+      {/* ── Ambient orbs ── */}
+      <div aria-hidden style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        <div style={{ position: 'absolute', top: '-200px', left: '-200px', width: '800px', height: '800px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,1), transparent 70%)', opacity: 0.026, filter: 'blur(130px)' }} />
+        <div style={{ position: 'absolute', bottom: '5%', right: '-150px', width: '650px', height: '650px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,169,110,1), transparent 70%)', opacity: 0.020, filter: 'blur(120px)' }} />
+        <div style={{ position: 'absolute', top: '35%', left: '35%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(164,195,255,1), transparent 70%)', opacity: 0.014, filter: 'blur(120px)' }} />
+      </div>
+
+      {/* ── Two-column layout ── */}
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: '1000px', margin: '0 auto', padding: '112px 48px 100px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'stretch' }}>
+
+        {/* ── LEFT: Editorial ── */}
+        <div style={{ animation: 'cReveal 0.9s var(--ease-out) both', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 3.8vw, 54px)', fontWeight: 300, letterSpacing: '-0.03em', lineHeight: 1.1, color: 'var(--color-text-primary)', marginBottom: '28px' }}>
+            Let us show you what{' '}
+            <em style={{ fontStyle: 'italic', color: GOLD }}>living memory</em>{' '}
+            looks like.
+          </h1>
+
+          <div style={{ width: '40px', height: '1px', background: `linear-gradient(to right, ${GOLD_BORDER}, transparent)`, marginBottom: '32px' }} />
+
+          {/* Four pillars — single row */}
+          <div style={{ marginBottom: '28px' }}>
+            <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: GOLD, marginBottom: '0' }}>
+              Sovereign · Persistent · Compounding · Living Memory
             </p>
-            <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: '8px' }}>
-              We'll reach out within one business day to schedule your walkthrough.
-            </p>
-            <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.3)', marginBottom: '40px' }}>
-              LongStrider remembers the first time you reached out.
-            </p>
-            <a
-              href="/"
-              style={{
-                fontSize: '11px',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.3)',
-                textDecoration: 'none',
-                fontFamily: 'Inter, system-ui, sans-serif',
-                transition: 'color 0.2s ease',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.3)')}
-            >
-              ← Back to home
-            </a>
           </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              background: 'rgba(255,255,255,0.025)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              boxShadow: `0 0 60px rgba(200,169,110,0.05), inset 0 1px 0 rgba(255,255,255,0.05)`,
-              borderRadius: '4px',
-              padding: '40px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '24px',
-            }}
-          >
-            {/* Name row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <Field label="First Name" value={form.firstname} onChange={v => set('firstname', v)} required />
-              <Field label="Last Name"  value={form.lastname}  onChange={v => set('lastname', v)}  required />
+
+          {/* Section 2 — manifesto bridge */}
+          <div style={{ marginBottom: '0' }}>
+            <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-text-secondary)' }}>
+              LongStrider is the layer that sits above your existing stack — synthesizing what every tool knows,
+              accumulating what actually mattered, compounding it over time.
+              It doesn't replace your tools. It's what makes them worth keeping.
+            </p>
+          </div>
+
+          {/* Assumptive close — the anchor */}
+          <p style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(18px, 1.8vw, 24px)',
+            fontStyle: 'italic',
+            fontWeight: 300,
+            lineHeight: 1.25,
+            color: 'var(--color-text-primary)',
+            borderTop: `1px solid ${GOLD_BORDER}`,
+            paddingTop: '20px',
+            marginTop: 'auto',
+          }}>
+            "You're not buying software. You're buying the head start we spent years building for you."
+          </p>
+        </div>
+
+        {/* ── RIGHT: Form ── */}
+        <div style={{ animation: 'cReveal 1s 150ms var(--ease-out) both' }}>
+          {status === 'success' ? (
+            <div style={{ textAlign: 'center', padding: '60px 0' }}>
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: '36px', fontWeight: 300, fontStyle: 'italic', color: GOLD, marginBottom: '20px' }}>
+                Consider yourself known.
+              </p>
+              <p style={{ fontSize: '16px', color: 'var(--color-text-secondary)', lineHeight: 1.72, marginBottom: '10px' }}>
+                We'll reach out within one business day.
+              </p>
+              <p style={{ fontSize: '13px', color: 'var(--color-text-muted)', marginBottom: '48px' }}>
+                LongStrider remembers the first time you reached out.
+              </p>
+              <a
+                href="/"
+                style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-text-muted)', textDecoration: 'none', transition: 'color 0.25s ease' }}
+                onMouseEnter={e => (e.currentTarget.style.color = GOLD_DIM)}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
+              >
+                ← Back to home
+              </a>
             </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                background: 'var(--glass-bg)',
+                backdropFilter: 'var(--glass-blur)',
+                WebkitBackdropFilter: 'var(--glass-blur)',
+                border: '1px solid var(--color-border-gold)',
+                borderRadius: 'var(--card-radius)',
+                padding: '40px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '24px',
+                boxShadow: 'var(--glow-gold), var(--shadow-float)',
+              }}
+            >
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                <Field label="First Name" value={form.firstname} onChange={v => set('firstname', v)} required />
+                <Field label="Last Name"  value={form.lastname}  onChange={v => set('lastname', v)}  required />
+              </div>
 
-            <Field label="Email" type="email" value={form.email} onChange={v => set('email', v)} required />
-            <Field label="Company (optional)" value={form.company} onChange={v => set('company', v)} />
+              <Field label="Work Email" type="email" value={form.email} onChange={v => set('email', v)} required />
+              <Field label="Company (optional)" value={form.company} onChange={v => set('company', v)} />
 
-            {/* The one question */}
-            <div>
-              <label
+              <div>
+                <label style={{ display: 'block', fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '10px' }}>
+                  What's your biggest frustration with AI today?
+                </label>
+                <textarea
+                  rows={4}
+                  value={form.broken}
+                  onChange={e => set('broken', e.target.value)}
+                  placeholder="Be honest. We've heard it all — and we built LongStrider because of it."
+                  style={{
+                    width: '100%', padding: '14px 18px',
+                    borderRadius: 'calc(var(--card-radius) - 4px)',
+                    fontSize: '15px', lineHeight: 1.65, resize: 'none', outline: 'none',
+                    boxSizing: 'border-box',
+                    background: 'var(--card-bg)',
+                    border: '1px solid var(--color-border)',
+                    color: 'var(--color-text-body)',
+                    fontFamily: 'var(--font-body)',
+                    transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+                  }}
+                  onFocus={e => { e.currentTarget.style.borderColor = GOLD_BORDER; e.currentTarget.style.boxShadow = `0 0 0 3px rgba(200,169,110,0.07), 0 0 20px rgba(200,169,110,0.09)`; }}
+                  onBlur={e => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                />
+              </div>
+
+              {/* Button — matches Begin/Explore */}
+              <button
+                type="submit"
+                disabled={status === 'submitting'}
+                onMouseEnter={() => setBtnHover(true)}
+                onMouseLeave={() => setBtnHover(false)}
                 style={{
-                  display: 'block',
-                  fontSize: '10px',
-                  letterSpacing: '0.28em',
-                  textTransform: 'uppercase',
-                  marginBottom: '10px',
-                  fontFamily: 'Inter, system-ui, sans-serif',
-                  color: 'rgba(255,255,255,0.55)',
+                  alignSelf: 'center',
+                  padding: '13px 44px',
+                  fontFamily: 'var(--font-ui)',
+                  fontSize: '12px', fontWeight: 500,
+                  letterSpacing: '0.14em', textTransform: 'uppercase',
+                  color: btnHover ? GOLD : GOLD_DIM,
+                  background: btnHover ? GOLD_GHOST : 'transparent',
+                  border: `1px solid ${btnHover ? GOLD_DIM : GOLD_BORDER}`,
+                  borderRadius: '100px',
+                  cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
+                  opacity: status === 'submitting' ? 0.5 : 1,
+                  transition: 'color 0.3s ease, border-color 0.3s ease, background 0.3s ease',
                 }}
               >
-                What's your biggest frustration with AI today?
-              </label>
-              <textarea
-                rows={4}
-                value={form.broken}
-                onChange={e => set('broken', e.target.value)}
-                placeholder="Be honest. We've heard it all — and we built LongStrider because of it."
-                style={{
-                  ...inputStyle,
-                  width: '100%',
-                  padding: '16px 20px',
-                  borderRadius: '2px',
-                  fontSize: '14px',
-                  lineHeight: 1.65,
-                  resize: 'none',
-                  outline: 'none',
-                  boxSizing: 'border-box',
-                  transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-                }}
-                onFocus={e => inputFocus(e.currentTarget)}
-                onBlur={e => inputBlur(e.currentTarget)}
-              />
-            </div>
+                {status === 'submitting' ? 'One moment…' : 'Start the Conversation'}
+              </button>
 
-            <button
-              type="submit"
-              disabled={status === 'submitting'}
-              style={{
-                width: '100%',
-                padding: '16px',
-                fontSize: '12px',
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                fontFamily: 'Inter, system-ui, sans-serif',
-                fontWeight: 500,
-                backgroundColor: GOLD,
-                color: '#0f172a',
-                border: 'none',
-                borderRadius: '2px',
-                cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
-                opacity: status === 'submitting' ? 0.6 : 1,
-                transition: 'background-color 0.2s ease, transform 0.15s ease, opacity 0.2s ease',
-              }}
-              onMouseEnter={e => { if (status !== 'submitting') e.currentTarget.style.backgroundColor = GOLD_LIGHT; }}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = GOLD)}
-            >
-              {status === 'submitting' ? 'One moment…' : 'Start the Conversation'}
-            </button>
-
-            {status === 'error' && (
-              <p style={{ fontSize: '13px', color: 'rgba(239,68,68,0.7)', textAlign: 'center' }}>
-                Something went wrong — email us at{' '}
-                <a href="mailto:hello@longstrider.ai" style={{ color: GOLD }}>hello@longstrider.ai</a>
-              </p>
-            )}
-          </form>
-        )}
+              {status === 'error' && (
+                <p style={{ fontSize: '13px', color: 'rgba(239,68,68,0.65)', textAlign: 'center', fontFamily: 'var(--font-ui)' }}>
+                  Something went wrong —{' '}
+                  <a href="mailto:hello@longstrider.ai" style={{ color: GOLD }}>hello@longstrider.ai</a>
+                </p>
+              )}
+            </form>
+          )}
+        </div>
       </div>
 
       <style>{`
-        @keyframes contactReveal {
-          from { opacity: 0; transform: translateY(24px); }
+        @keyframes cReveal {
+          from { opacity: 0; transform: translateY(22px); }
           to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+          main > div { grid-template-columns: 1fr !important; gap: 48px !important; padding: 96px 24px 80px !important; }
         }
       `}</style>
     </main>
   );
 }
 
-// ── Field component ─────────────────────────────────────────────────────────
-
 function Field({ label, value, onChange, type = 'text', required = false }: {
   label: string; value: string; onChange: (v: string) => void; type?: string; required?: boolean;
 }) {
-  const GOLD = '#c8a96e';
+  const GOLD_BORDER = 'rgba(200,169,110,0.30)';
   return (
     <div>
-      <label
-        style={{
-          display: 'block',
-          fontSize: '10px',
-          letterSpacing: '0.28em',
-          textTransform: 'uppercase',
-          marginBottom: '10px',
-          fontFamily: 'Inter, system-ui, sans-serif',
-          color: 'rgba(255,255,255,0.55)',
-        }}
-      >
+      <label style={{ display: 'block', fontFamily: 'Inter, system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '9px' }}>
         {label}
       </label>
       <input
-        type={type}
-        required={required}
-        value={value}
+        type={type} required={required} value={value}
         onChange={e => onChange(e.target.value)}
         style={{
-          width: '100%',
-          padding: '14px 20px',
-          borderRadius: '2px',
-          fontSize: '14px',
-          background: 'rgba(255,255,255,0.06)',
-          border: '1px solid rgba(255,255,255,0.12)',
+          width: '100%', padding: '13px 18px',
+          borderRadius: '10px', fontSize: '15px',
+          background: 'rgba(255,255,255,0.03)',
+          border: '1px solid rgba(255,255,255,0.08)',
           color: 'rgba(255,255,255,0.88)',
-          outline: 'none',
-          boxSizing: 'border-box',
+          fontFamily: "'Lora', Georgia, serif",
+          outline: 'none', boxSizing: 'border-box',
           transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
         }}
-        onFocus={e => { e.currentTarget.style.borderColor = `${GOLD}70`; e.currentTarget.style.boxShadow = `0 0 0 3px ${GOLD}12, 0 0 20px ${GOLD}14`; }}
-        onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.boxShadow = 'none'; }}
+        onFocus={e => { e.currentTarget.style.borderColor = GOLD_BORDER; e.currentTarget.style.boxShadow = `0 0 0 3px rgba(200,169,110,0.07), 0 0 20px rgba(200,169,110,0.09)`; }}
+        onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.boxShadow = 'none'; }}
       />
     </div>
   );
