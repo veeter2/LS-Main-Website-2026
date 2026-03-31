@@ -45,7 +45,7 @@ export function StoryTimeline({ nodes, unlockGated = true, showAfter = 300 }: Pr
           }
         });
       },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0 },
+      { rootMargin: '-30% 0px -30% 0px', threshold: 0 },
     );
 
     document.querySelectorAll('[data-section]').forEach((el) =>

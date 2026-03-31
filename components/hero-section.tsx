@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 
-import Link from "next/link"
 
 const brainWaves = [
   { name: "δ", freq: "0.5–4 Hz", label: "Deep Sleep", color: "#1e40af", opacity: 0.15, scale: 1.0, speed: 0.8 },
@@ -47,9 +46,86 @@ export function HeroSection() {
 
   return (
     <section className="relative w-full bg-gradient-to-b from-black via-zinc-950 to-black">
-      {/* Animation Section */}
-      <div className="relative h-[45vh] min-h-[400px] md:h-[50vh] md:min-h-[500px] flex items-center justify-center overflow-hidden">
+      {/* Content — manifesto-aligned, above the fold */}
+      <div
+        className="relative z-10"
+        style={{ padding: '120px 48px 80px' }}
+      >
+        <motion.div
+          className="flex flex-col items-center text-center"
+          style={{ maxWidth: '760px', margin: '0 auto' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 'clamp(52px, 9vw, 96px)',
+            fontWeight: 300,
+            letterSpacing: '-0.035em',
+            lineHeight: 1,
+            color: 'var(--color-text-primary)',
+            marginBottom: '20px',
+          }}>
+            LongStrider
+          </div>
+
+          <h1 style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 'clamp(28px, 4vw, 48px)',
+            fontWeight: 300,
+            letterSpacing: '-0.03em',
+            lineHeight: 1.18,
+            color: 'var(--color-text-primary)',
+            margin: '0 0 40px',
+          }}>
+            The AI layer that knows{' '}
+            <span style={{ color: 'var(--color-gold)' }}>you</span>,
+            {' '}knows your business&nbsp;&mdash; and never forgets.
+          </h1>
+
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: '18px',
+            fontWeight: 400,
+            fontStyle: 'italic',
+            lineHeight: 1.65,
+            color: 'var(--color-text-secondary)',
+            margin: '0 0 20px',
+            maxWidth: '560px',
+          }}>
+            Every dollar your organization spent on AI this year made someone else&apos;s platform smarter.
+          </p>
+
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: '18px',
+            fontWeight: 500,
+            lineHeight: 1.65,
+            color: 'var(--color-text-body)',
+            margin: '0 0 48px',
+            maxWidth: '560px',
+          }}>
+            LongStrider isn&apos;t a tool you subscribe to. It&apos;s an intelligence asset you own.
+          </p>
+
+          <div style={{
+            fontFamily: "var(--font-ui)",
+            fontSize: '12px',
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase' as const,
+            color: 'var(--color-gold-dim)',
+            marginBottom: '52px',
+          }}>
+            Sovereign · Persistent · Compounding · Living Memory
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Animation — visual proof, below the thesis */}
+      <div className="relative h-[40vh] min-h-[360px] md:h-[45vh] md:min-h-[440px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900/50 via-black to-black" />
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-10" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-10" />
 
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
@@ -255,87 +331,6 @@ export function HeroSection() {
               })}
           </div>
         </div>
-      </div>
-
-      {/* Content — manifesto-aligned */}
-      <div
-        className="relative z-10 bg-gradient-to-b from-transparent via-black to-zinc-950"
-        style={{ padding: '0 48px 96px' }}
-      >
-        <motion.div
-          className="flex flex-col items-center text-center"
-          style={{ maxWidth: '760px', margin: '0 auto' }}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{
-            opacity: easedProgress > 0.6 ? 1 : 0,
-            y: easedProgress > 0.6 ? 0 : 24,
-          }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div style={{
-            fontFamily: "var(--font-display)",
-            fontSize: 'clamp(52px, 9vw, 96px)',
-            fontWeight: 300,
-            letterSpacing: '-0.035em',
-            lineHeight: 1,
-            color: 'var(--color-text-primary)',
-            marginBottom: '20px',
-          }}>
-            LongStrider
-          </div>
-
-          <h1 style={{
-            fontFamily: "var(--font-display)",
-            fontSize: 'clamp(28px, 4vw, 48px)',
-            fontWeight: 300,
-            letterSpacing: '-0.03em',
-            lineHeight: 1.18,
-            color: 'var(--color-text-primary)',
-            margin: '0 0 40px',
-          }}>
-            The AI layer that knows your business&nbsp;&mdash; and never forgets.
-          </h1>
-
-          <p style={{
-            fontFamily: "var(--font-body)",
-            fontSize: '18px',
-            fontWeight: 400,
-            fontStyle: 'italic',
-            lineHeight: 1.65,
-            color: 'var(--color-text-secondary)',
-            margin: '0 0 20px',
-            maxWidth: '560px',
-          }}>
-            Every dollar your organization spent on AI this year made someone else&apos;s platform smarter.
-          </p>
-
-          <p style={{
-            fontFamily: "var(--font-body)",
-            fontSize: '18px',
-            fontWeight: 500,
-            lineHeight: 1.65,
-            color: 'var(--color-text-body)',
-            margin: '0 0 48px',
-            maxWidth: '560px',
-          }}>
-            LongStrider isn&apos;t a tool you subscribe to. It&apos;s an intelligence asset you own.
-          </p>
-
-          <div style={{
-            fontFamily: "var(--font-ui)",
-            fontSize: '12px',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase' as const,
-            color: 'var(--color-gold-dim)',
-            marginBottom: '52px',
-          }}>
-            Sovereign · Persistent · Compounding · Living Memory
-          </div>
-
-          <Link href="/pilot" className="h2-cta-pill">
-            Start a Pilot →
-          </Link>
-        </motion.div>
       </div>
     </section>
   )

@@ -37,6 +37,7 @@ const PURP_G   = 'rgba(139,92,246,0.45)';
 // ── StoryTimeline nodes ───────────────────────────────────────────
 
 const TIMELINE: StoryNode[] = [
+  { id: 'top',       label: 'LongStrider',   color: GOLD,   glow: GOLD_G  },
   { id: 'recall',    label: 'Total Recall',  color: GOLD,   glow: GOLD_G  },
   { id: 'memory',    label: 'Time Machine',  color: PURPLE, glow: PURP_G  },
   { id: 'compound',  label: 'Living Memory', color: GOLD,   glow: GOLD_G  },
@@ -885,10 +886,12 @@ export default function HomeV2Page() {
       <div className="h2-aurora-3" />
 
       {/* StoryTimeline — same component the manifesto uses */}
-      <StoryTimeline nodes={TIMELINE} showAfter={500} />
+      <StoryTimeline nodes={TIMELINE} showAfter={50} />
 
-      {/* Hero animation — OFF LIMITS, exactly as built */}
-      <HeroSection />
+      {/* Hero — tracked by timeline */}
+      <div data-section="top">
+        <HeroSection />
+      </div>
 
       {/* ── Main story ────────────────────────────── */}
       <div className="h2-container">
