@@ -19,6 +19,7 @@ const GOLD_BORDER = 'rgba(200,169,110,0.35)';
 // ── Page display names (breadcrumb) ──────────────────────────
 const PAGE_NAMES: Record<string, string> = {
   '/manifesto':    'The Manifesto',
+  '/pilot':        'Start a Pilot',
   '/field-notes':  'Field Notes',
   '/technology':   'Technology',
   '/contact':      'Contact',

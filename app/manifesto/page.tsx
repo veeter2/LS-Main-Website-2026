@@ -429,20 +429,20 @@ export default function ManifestoPage() {
             {/* ── FOOTER ── */}
             <footer className="deck-footer" data-reveal>
               <p className="deck-footer-headline">
-                We&apos;re having three conversations this quarter.
+                Bring us your hardest problem.
               </p>
-              <p className="deck-body" style={{ textAlign: 'center', maxWidth: '560px', margin: '0 auto 32px', color: 'rgba(255,255,255,0.6)', fontSize: '16px', lineHeight: '1.7' }}>
-                A white-label partner. A pilot customer. One investor introduction. If you know someone who belongs in any of those conversations — or if that&apos;s you — forward this and let&apos;s talk.
+              <p className="deck-body" style={{ textAlign: 'center', maxWidth: '520px', margin: '0 auto 32px', color: 'rgba(255,255,255,0.6)', fontSize: '16px', lineHeight: '1.7' }}>
+                If what you read resonates — if you recognize your organization in these pages — start a pilot. That&apos;s the conversation worth having.
               </p>
-              <Link href="/contact" className="deck-footer-button">
-                <span>Start the conversation</span>
+              <Link href="/pilot" className="deck-footer-button">
+                <span>Start a pilot</span>
                 <span style={{ fontSize: '14px', opacity: 0.7 }}>→</span>
               </Link>
-              <p className="deck-footer-contact">
-                <Link href="/contact">Begin a conversation</Link>
-                <span style={{ margin: '0 12px', opacity: 0.3 }}>·</span>
-                <a href="https://longstridersystems.com" target="_blank" rel="noopener noreferrer">longstridersystems.com</a>
-              </p>
+              <Link href="/contact" className="deck-footer-button" style={{ marginTop: '12px' }}>
+                <span>See it in action</span>
+                <span style={{ fontSize: '14px', opacity: 0.7 }}>→</span>
+              </Link>
+
             </footer>
           </>
         )}
