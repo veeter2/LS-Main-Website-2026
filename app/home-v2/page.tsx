@@ -49,28 +49,28 @@ const CONVERSATIONS = [
     ls:       '41 times over 8 months. The tone shifted after the December call — you stopped negotiating and started litigating.',
     context:  'First raised: June 14, 2024 · Last: Yesterday at 3:47pm · Escalation detected Nov 28',
     signals:  ['contract dispute', 'strategy shift', 'liability exposure'],
-    gravity:  '0.91',
+    relevance:  '0.91',
   },
   {
     you:      'Hey — what did I miss?',
     ls:       'It\'s 7:14am. 2 days, 9 hours since we last connected. You have 4 open threads. I\'d close the GTM pricing model first — you said you wanted it done by Friday.',
     context:  'Open: GTM pricing · Brennan liability · Q2 board deck · Supplier audit · GTM deadline: April 4',
     signals:  ['session awareness', 'thread tracking', 'deadline recall'],
-    gravity:  '0.84',
+    relevance:  '0.84',
   },
   {
     you:      'Which supplier relationships are going quiet on us?',
     ls:       '3 accounts have crossed the silence threshold. Pacific Materials hasn\'t responded in 47 days — that\'s new for them.',
     context:  'Pacific Materials · Vertex Supply · GTS Logistics · Engagement declining since October',
     signals:  ['silence threshold', 'engagement drift', 'risk: sourcing'],
-    gravity:  '0.78',
+    relevance:  '0.78',
   },
   {
     you:      'What happened overnight?',
-    ls:       'Dream cycle completed at 3:12am. Your focus on the GTM plan has intensified — 6 sessions in 9 days. I\'ve promoted it to a primary gravity well.',
+    ls:       'Consolidation completed at 3:12am. Your focus on the GTM plan has intensified — 6 sessions in 9 days. I\'ve promoted it to a primary knowledge cluster.',
     context:  'Overnight: 3 patterns recalibrated · 1 new arc detected · Stance adjusted: depth → standard',
-    signals:  ['dream cycle', 'gravity promotion', 'circadian'],
-    gravity:  '0.62',
+    signals:  ['consolidation cycle', 'relevance promotion', 'circadian'],
+    relevance:  '0.62',
   },
 ];
 
@@ -164,13 +164,13 @@ function TotalRecallCard() {
         <p className="h2-recall-detail h2-fadein">{dispContext}</p>
       )}
 
-      {/* Signal chips + gravity */}
+      {/* Signal chips + relevance */}
       {showSignals && (
         <div className="h2-chips h2-fadein">
           {c.signals.map((sig, i) => (
             <span key={i} className="h2-chip">{sig}</span>
           ))}
-          <span className="h2-chip-meta">gravity {c.gravity}</span>
+          <span className="h2-chip-meta">relevance {c.relevance}</span>
         </div>
       )}
 
@@ -282,7 +282,7 @@ export default function HomeV2Page() {
               </p>
               <div className="h2-compare">
                 <div>51,000+ memories · sub-5 second recall</div>
-                <div>Four-axis retrieval: Entity × Temporal × Well × Topic</div>
+                <div>Multi-dimensional retrieval: Entity × Temporal × Relevance × Topic</div>
                 <div>Deterministic SQL aggregation, not LLM estimation</div>
               </div>
             </div>
@@ -313,17 +313,17 @@ export default function HomeV2Page() {
               </p>
               <p className="h2-body">
                 LongStrider&apos;s intelligence kernel extracts 70+ dimensions from every interaction —
-                emotional signatures, behavioral patterns, relational dynamics, and psychological
-                markers that standard AI systems never track. Gravity physics determines what
-                matters. Consciousness cords map who matters. The Cortex gives you 18 Living Laws
+                emotional signatures, cognitive patterns, relational dynamics, and psychological
+                markers that standard AI systems never track. Relevance weighting determines what
+                matters. Relationship intelligence maps who matters. The Cortex gives you 18 Living Laws
                 that control how the system thinks, communicates, and stays in character.
                 Connect any agent to this substrate and it inherits persistent memory,
-                behavioral control, and deep context — instantly.
+                behavioral alignment, and deep context — instantly.
               </p>
               <div className="h2-compare">
                 <div>70+ cognitive dimensions per interaction</div>
-                <div>Gravity physics — significance, not just frequency</div>
-                <div>Plug any agent in — persistent memory + behavioral control</div>
+                <div>Relevance weighting — significance, not just frequency</div>
+                <div>Plug any agent in — persistent memory + behavioral alignment</div>
               </div>
             </div>
 
@@ -373,19 +373,19 @@ export default function HomeV2Page() {
                 It gets smarter<br />while you sleep.
               </h2>
               <p className="h2-lead">
-                Every night, LongStrider runs a dream cycle.<br />
+                Every night, LongStrider runs a consolidation cycle.<br />
                 It recalibrates. It detects patterns. It learns your preferences.
               </p>
               <p className="h2-body">
                 This isn&apos;t static storage. It&apos;s a living system. Every night, a five-pass engine
-                recalculates the gravity of every knowledge cluster, identifies what&apos;s healthy
+                recalculates the relevance of every knowledge cluster, identifies what&apos;s healthy
                 or drifting, detects fragile focus areas, and learns your preferred tone from
                 your corrections. Patterns emerge across eight parallel detectors. Memory arcs
                 form narrative threads. Week over week, the system compounds — and the gap
                 between what it knows and what your competitors know grows wider.
               </p>
               <div className="h2-compare">
-                <div>Nightly dream cycle — five-pass substrate recompilation</div>
+                <div>Nightly consolidation — five-pass intelligence recompilation</div>
                 <div>8 parallel pattern detectors (behavioral, emotional, temporal)</div>
                 <div>Stance learning — adapts tone and depth from your feedback</div>
               </div>
@@ -403,7 +403,7 @@ export default function HomeV2Page() {
                 {[
                   { label: 'Day 1', desc: 'Baseline — your first conversations', opacity: 0.4 },
                   { label: 'Week 1', desc: 'Patterns emerge. Relationships form.', opacity: 0.55 },
-                  { label: 'Month 1', desc: 'Gravity wells crystalize. Identity distilled.', opacity: 0.72 },
+                  { label: 'Month 1', desc: 'Knowledge clusters crystalize. Identity distilled.', opacity: 0.72 },
                   { label: 'Month 6', desc: 'Predictive signals. Anticipatory intelligence.', opacity: 0.88 },
                   { label: 'Year 1', desc: 'Your competitive moat is uncatchable.', opacity: 1 },
                 ].map((row, i) => (
