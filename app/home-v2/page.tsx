@@ -52,10 +52,10 @@ const CONVERSATIONS = [
     gravity:  '0.91',
   },
   {
-    you:      'I keep losing my patience with Kayla lately and I don\'t know why.',
-    ls:       'You\'ve corrected her approach 11 times in 4 weeks. That\'s 3× your usual rate. The pattern started after Josh resurfaced.',
-    context:  'Emotional signature: frustration displaced from relationship context · Recurring since March 8',
-    signals:  ['behavioral loop', 'relational displacement', 'Kayla · Josh'],
+    you:      'Hey — what did I miss?',
+    ls:       'It\'s 7:14am. 2 days, 9 hours since we last connected. You have 4 open threads. I\'d close the GTM pricing model first — you said you wanted it done by Friday.',
+    context:  'Open: GTM pricing · Brennan liability · Q2 board deck · Supplier audit · GTM deadline: April 4',
+    signals:  ['session awareness', 'thread tracking', 'deadline recall'],
     gravity:  '0.84',
   },
   {
