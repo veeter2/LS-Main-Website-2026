@@ -14,7 +14,8 @@ export function LongstriderLogo({ size = 24, style, ...props }: IconProps) {
       width={size}
       height={size}
       viewBox="-1757.50 -91.69 2058.95 2017.21"
-      style={{ filter: "brightness(0) invert(1)", opacity: 0.88, ...style }}
+      style={{ ...style }}
+      shapeRendering="geometricPrecision"
       aria-label="LongStrider"
       fill="none"
       {...props}
@@ -22,20 +23,7 @@ export function LongstriderLogo({ size = 24, style, ...props }: IconProps) {
       <defs>
         <style>
           {`
-            .st0 { fill: #c3c3c3; }
-            .st1 { fill: #606061; }
-            .st2 { fill: #4c4b4a; }
-            .st3 { fill: #9b9c9c; }
-            .st4 { fill: #717070; }
-            .st5 { fill: #969898; }
-            .st6 { fill: #acadac; }
-            .st7 { fill: #393e42; }
-            .st8 { fill: #e5e7e6; }
-            .st9 { fill: #919192; }
-            .st10 { fill: #8c8c8c; }
-            .st11 { fill: #828382; }
-            .st12 { fill: #e6e8e8; }
-            .st13 { fill: #6b6b6b; }
+            .st0,.st1,.st2,.st3,.st4,.st5,.st6,.st7,.st8,.st9,.st10,.st11,.st12,.st13 { fill: #fff; }
           `}
         </style>
       </defs>

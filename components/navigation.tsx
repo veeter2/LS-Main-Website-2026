@@ -293,7 +293,6 @@ export function Navigation() {
   const [menuOpen, setMenuOpen]       = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [beginHover, setBeginHover]   = useState(false);
-  const [logoHover, setLogoHover]     = useState(false);
   const [showNodes, setShowNodes]     = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
@@ -388,26 +387,20 @@ export function Navigation() {
 
         {/* ── Logo lockup ── */}
         <Link href="/" aria-label="LongStrider Home"
-          onMouseEnter={() => setLogoHover(true)}
-          onMouseLeave={() => setLogoHover(false)}
           style={{
             display: 'flex', alignItems: 'center', gap: '16px',
             textDecoration: 'none', overflow: 'visible',
           }}>
-          {/* Logo mark — overflows nav boundary by 10px */}
+          {/* Logo mark — static, inert, full opacity always */}
           <div style={{
             position: 'relative',
             marginBottom: '-10px', paddingBottom: '10px',
             overflow: 'visible', flexShrink: 0,
           }}>
             <LongstriderLogo
-              size={46}
+              size={54}
               style={{
-                filter: logoHover
-                  ? 'brightness(0) invert(1) drop-shadow(0 0 16px rgba(200,169,110,0.30))'
-                  : 'brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.10))',
-                opacity: logoHover ? 1 : 0.88,
-                transition: 'opacity 0.35s ease, filter 0.35s ease',
+                opacity: 1,
                 display: 'block',
               }}
             />
@@ -423,7 +416,6 @@ export function Navigation() {
             }}>
               LongStrider
             </span>
-            {/* Homepage: tagline in gold. Sub-pages: page name — always visible, always readable */}
             <span style={{
               fontFamily: "'Lora', Georgia, serif",
               fontSize: '10px', letterSpacing: '0.15em',
