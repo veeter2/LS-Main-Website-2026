@@ -1,177 +1,256 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import { cn } from "@/lib/utils"
-import Image from "next/image"
+import { LongstriderLogo } from "@/components/longstrider-logo"
+
+const GOLD = "#c8a96e"
+const GOLD_DIM = "rgba(200,169,110,0.6)"
+const GOLD_BORDER = "rgba(200,169,110,0.35)"
 
 export function Navigation() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled]       = useState(false)
+  const [progress, setProgress]       = useState(0)
+  const [entered, setEntered]         = useState(false)
+  const [mobileOpen, setMobileOpen]   = useState(false)
+  const [beginHover, setBeginHover]   = useState(false)
   const pathname = usePathname()
 
+  // Entrance animation
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    const t = setTimeout(() => setEntered(true), 120)
+    return () => clearTimeout(t)
   }, [])
 
-  const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "The Vision" },
-    { href: "/technology", label: "Technology" },
-    { href: "/manifesto", label: "Manifesto" },
-    { href: "/field-notes", label: "Field Notes" },
-    { href: "/about-us", label: "About Us" },
-    { href: "/contact", label: "Contact" },
-  ]
-
-  const consciousnessStates = ["γ", "θ", "β", "χ", "δ"]
+  // Scroll: collapsed state + progress thread
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 60)
+      const docH = document.documentElement.scrollHeight - window.innerHeight
+      setProgress(docH > 0 ? Math.min(1, y / docH) : 0)
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        scrolled
-          ? "bg-background/90 backdrop-blur-xl border-b border-primary/20 shadow-lg shadow-primary/5"
-          : "bg-background/70 backdrop-blur-lg border-b border-border/30",
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-18 md:h-20">
-          {/* Logo with Greek letter accent */}
-          <Link href="/" className="flex items-center gap-3 group relative" aria-label="LongStrider Home">
-            <div className="relative">
-              <Image
-                src="/images/longstrider-logo.png"
-                alt="LongStrider Logo"
-                width={40}
-                height={40}
-                className="w-10 h-10 object-contain transition-all duration-300 group-hover:scale-110 group-hover:brightness-110"
-              />
-              <div className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full animate-pulse" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary/90 to-foreground bg-clip-text text-transparent">
-                LONGSTRIDER
-              </span>
-              <div className="flex gap-1 opacity-40 group-hover:opacity-60 transition-opacity">
-                {consciousnessStates.map((letter, i) => (
-                  <span
-                    key={i}
-                    className="text-[8px] text-primary/70 font-light"
-                    style={{
-                      animation: `pulse 3s ease-in-out ${i * 0.6}s infinite`,
-                    }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Link>
+    <>
+      {/* ── Scroll progress thread ── */}
+      <div style={{
+        position: "fixed",
+        top: 0, left: 0,
+        height: "1px",
+        width: `${progress * 100}%`,
+        background: `linear-gradient(to right, rgba(200,169,110,0.9), rgba(164,195,255,0.7))`,
+        zIndex: 60,
+        transition: "width 0.1s linear",
+        pointerEvents: "none",
+      }} />
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
+      {/* ── Nav ── */}
+      <nav
+        style={{
+          position: "fixed",
+          top: 0, left: 0, right: 0,
+          zIndex: 50,
+          height: "72px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 48px",
+          overflow: "visible",
+          background: "rgba(8,8,9,0.88)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderBottom: scrolled
+            ? "1px solid rgba(255,255,255,0.055)"
+            : "1px solid rgba(255,255,255,0.018)",
+          opacity: entered ? 1 : 0,
+          transform: entered ? "translateY(0)" : "translateY(-12px)",
+          transition: "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1), border-color 0.4s ease",
+        }}
+      >
+        {/* ── Logo lockup — collapses on scroll ── */}
+        <Link
+          href="/"
+          aria-label="LongStrider Home"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "14px",
+            textDecoration: "none",
+            overflow: "visible",
+          }}
+        >
+          {/* Logo mark — overflows nav boundary by 10px */}
+          <div style={{
+            position: "relative",
+            marginBottom: "-10px",
+            paddingBottom: "10px",
+            overflow: "visible",
+            flexShrink: 0,
+          }}>
+            <LongstriderLogo
+              size={48}
+              style={{
+                filter: "brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.10))",
+                opacity: 0.90,
+                transition: "opacity 0.3s ease, transform 0.3s ease",
+                display: "block",
+              }}
+            />
+          </div>
+
+          {/* Wordmark + tagline — fades out when scrolled */}
+          <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "3px",
+            opacity: scrolled ? 0 : 1,
+            transform: scrolled ? "translateX(-8px)" : "translateX(0)",
+            transition: "opacity 0.4s ease, transform 0.4s ease",
+            pointerEvents: scrolled ? "none" : "auto",
+          }}>
+            <span style={{
+              fontFamily: "'Lora', Georgia, serif",
+              fontSize: "15px",
+              fontWeight: 500,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.92)",
+              lineHeight: 1,
+              whiteSpace: "nowrap",
+            }}>
+              LongStrider
+            </span>
+            <span style={{
+              fontFamily: "'Lora', Georgia, serif",
+              fontSize: "10px",
+              letterSpacing: "0.13em",
+              textTransform: "uppercase",
+              color: GOLD_DIM,
+              lineHeight: 1,
+              whiteSpace: "nowrap",
+            }}>
+              Sovereign Intelligence Layer
+            </span>
+          </div>
+        </Link>
+
+        {/* ── Desktop links + CTA ── */}
+        <div
+          className="ls-nav-desktop"
+          style={{ display: "flex", alignItems: "center", gap: "36px" }}
+        >
+          
+
+          {/* "Begin" — aura pill CTA */}
+          <Link
+            href="/contact"
+            onMouseEnter={() => setBeginHover(true)}
+            onMouseLeave={() => setBeginHover(false)}
+            style={{
+              position: "relative",
+              fontFamily: "'Lora', Georgia, serif",
+              fontSize: "13px",
+              fontStyle: "italic",
+              letterSpacing: "0.06em",
+              color: beginHover ? "rgba(200,169,110,0.95)" : GOLD,
+              textDecoration: "none",
+              padding: "8px 24px",
+              border: `1px solid ${beginHover ? "rgba(200,169,110,0.55)" : GOLD_BORDER}`,
+              borderRadius: "100px",
+              background: beginHover ? "rgba(200,169,110,0.07)" : "transparent",
+              boxShadow: beginHover ? "0 0 24px rgba(200,169,110,0.08), inset 0 0 12px rgba(200,169,110,0.03)" : "none",
+              transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
+              overflow: "hidden",
+            }}
+          >
+            {/* Shimmer sweep */}
+            <span style={{
+              position: "absolute",
+              top: 0, left: beginHover ? "110%" : "-110%",
+              width: "100%", height: "100%",
+              background: "linear-gradient(90deg, transparent, rgba(200,169,110,0.12), transparent)",
+              transition: "left 0.55s ease",
+              pointerEvents: "none",
+            }} />
+            Begin
+          </Link>
+        </div>
+
+        {/* ── Mobile toggle ── */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
+          className="ls-nav-mobile-btn"
+          style={{
+            display: "none",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            color: "rgba(255,255,255,0.55)",
+            fontSize: "20px",
+            padding: "8px",
+          }}
+        >
+          {mobileOpen ? "✕" : "☰"}
+        </button>
+
+        {/* ── Mobile drawer ── */}
+        {mobileOpen && (
+          <div style={{
+            position: "absolute",
+            top: "72px", left: 0, right: 0,
+            background: "rgba(8,8,9,0.97)",
+            backdropFilter: "blur(20px)",
+            borderBottom: "1px solid rgba(255,255,255,0.055)",
+            padding: "28px 32px 36px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "28px",
+          }}>
+            {NAV_LINKS.map(item => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={cn(
-                  "relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg group",
-                  pathname === item.href
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-primary/5",
-                )}
-                aria-current={pathname === item.href ? "page" : undefined}
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  fontFamily: "'Lora', Georgia, serif",
+                  fontSize: "20px",
+                  color: "rgba(255,255,255,0.78)",
+                  textDecoration: "none",
+                }}
               >
                 {item.label}
-                {pathname === item.href && (
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full">
-                    <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-75" />
-                  </div>
-                )}
-                <div className="absolute bottom-1 left-4 right-4 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
             ))}
-          </div>
-
-          {/* CTA Button */}
-          <div className="hidden md:flex items-center gap-4">
-            <Button
-              asChild
-              size="sm"
-              className="relative bg-gradient-to-r from-primary/90 to-primary text-primary-foreground hover:from-primary hover:to-primary/90 shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-105"
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              style={{
+                fontFamily: "'Lora', Georgia, serif",
+                fontSize: "15px",
+                fontStyle: "italic",
+                color: GOLD,
+                textDecoration: "none",
+                marginTop: "4px",
+              }}
             >
-              <Link href="/contact">
-                <span className="relative z-10">Schedule a Demo</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity animate-shimmer" />
-              </Link>
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden hover:bg-primary/10"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isOpen}
-          >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden py-6 border-t border-border/50 animate-in slide-in-from-top-2 duration-200">
-            <div className="flex flex-col gap-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "px-4 py-3 text-sm font-medium transition-all rounded-lg",
-                    pathname === item.href
-                      ? "text-foreground bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-primary/5",
-                  )}
-                  onClick={() => setIsOpen(false)}
-                  aria-current={pathname === item.href ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <Button
-                asChild
-                size="sm"
-                className="mt-4 bg-gradient-to-r from-primary/90 to-primary text-primary-foreground shadow-lg shadow-primary/25"
-              >
-                <Link href="/contact" onClick={() => setIsOpen(false)}>
-                  Schedule a Demo
-                </Link>
-              </Button>
-            </div>
+              Begin →
+            </Link>
           </div>
         )}
-      </div>
 
-      <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
+        <style>{`
+          @media (max-width: 768px) {
+            .ls-nav-desktop { display: none !important; }
+            .ls-nav-mobile-btn { display: flex !important; }
           }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-      `}</style>
-    </nav>
+        `}</style>
+      </nav>
+    </>
   )
 }

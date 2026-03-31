@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Sweeping arc -->
+  <path d="M 18 8 C 40 2, 92 8, 86 88" stroke="white" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <!-- Head -->
+  <circle cx="54" cy="36" r="5.5" fill="white"/>
+  <!-- Torso + back leg -->
+  <path d="M 54 42 L 44 68 L 26 86" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Front leg -->
+  <path d="M 50 58 L 66 76" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Arm -->
+  <path d="M 54 50 L 38 56" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>
