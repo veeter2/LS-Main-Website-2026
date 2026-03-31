@@ -274,16 +274,17 @@ export default function HomeV2Page() {
                 Exact counts. Exact dates. Exact context.
               </p>
               <p className="h2-body">
-                Every AI you use today forgets. ChatGPT resets after every session.
-                RAG approximates. Fine-tuning costs $50k and still has no memory.
-                LongStrider tracks 80+ behavioral dimensions across every interaction —
+                Every LLM you use today has a memory problem. Context windows overflow.
+                Summaries lose detail. Ask &quot;how many times did we discuss this?&quot; and
+                you&apos;ll get a guess, or nothing.
+                LongStrider tracks 80+ signals across every interaction —
                 who was involved, what mattered, how sentiment shifted, and how many times
-                a thread has resurfaced. Ask anything about your past. Get the exact answer.
+                a topic has resurfaced. Ask anything about your past. Get the exact answer.
               </p>
               <div className="h2-compare">
-                <div>51,000+ memories · sub-5 second recall</div>
-                <div>5-axis retrieval: Entity × Temporal × Relevance × Topic × Cluster</div>
-                <div>Deterministic SQL aggregation, not LLM estimation</div>
+                <div>51,000+ memories in production · sub-5 second recall</div>
+                <div>5-axis retrieval — who, when, why, what, and how it connects</div>
+                <div>Exact counts, not AI guesses</div>
               </div>
             </div>
 
