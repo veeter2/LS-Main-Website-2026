@@ -84,28 +84,63 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Manifesto',    href: '/manifesto',    sub: 'The argument for sovereign intelligence', live: true,  Icon: LivingMemoryV5,
+  {
+    label: 'Manifesto',
+    href: '/manifesto',
+    sub: 'The argument for sovereign intelligence',
+    live: true,
+    Icon: LivingMemoryV5,
   },
-  { label: 'Field Notes',  href: '/field-notes',  sub: 'Research, intelligence logs & guides',    live: true,  Icon: InsightSparkV2,
-  },
-  { label: 'Technology',   href: '/technology',   sub: 'Architecture & how it works',             live: true,  Icon: GravityWellV3,
+  {
+    label: 'Technology',
+    href: '/technology',
+    sub: 'Architecture & how it works',
+    live: true,
+    Icon: GravityWellV3,
     children: [
-      { label: 'Overview',          href: '/technology',           live: true  },
-      { label: 'The Intelligence Kernel', href: '/technology/kernel',  live: false },
-      { label: 'Neural Topology',   href: '/technology/cortex',    live: false },
-      { label: 'Living Memory',     href: '/technology/memory',    live: false },
+      { label: 'Overview',                href: '/technology',            live: true  },
+      { label: 'The Intelligence Kernel', href: '/technology/kernel',     live: false },
+      { label: 'Neural Topology',         href: '/technology/cortex',     live: false },
+      { label: 'Living Memory',           href: '/technology/memory',     live: false },
     ],
   },
-  { label: 'Contact',      href: '/contact',      sub: 'Start a conversation',                   live: true,  Icon: CognitiveSynthesisV2,
-  },
-  { label: 'Case Studies', href: '/case-studies', sub: 'Proof of compounding in practice',       live: false, Icon: MemoryArcV1,
+  {
+    label: 'Case Studies',
+    href: '/case-studies',
+    sub: 'Proof of compounding in practice',
+    live: false,
+    Icon: MemoryArcV1,
     children: [
-      { label: 'PE Portfolio Intelligence', href: '/case-studies/pe',          live: false },
-      { label: 'Key Departure Protocol',    href: '/case-studies/departure',   live: false },
-      { label: 'Regulated Industry Deploy', href: '/case-studies/regulated',   live: false },
+      { label: 'Legal',        href: '/case-studies/legal',       live: false },
+      { label: 'Energy',       href: '/case-studies/energy',      live: false },
+      { label: 'Power',        href: '/case-studies/power',       live: false },
+      { label: 'Hospitality',  href: '/case-studies/hospitality', live: false },
     ],
   },
-  { label: 'About',        href: '/about',        sub: 'Founding story & team',                  live: false, Icon: ConvergenceV1,
+  {
+    label: 'Field Notes',
+    href: '/field-notes',
+    sub: 'Research, intelligence logs & guides',
+    live: true,
+    Icon: InsightSparkV2,
+    children: [
+      { label: 'White Papers',       href: '/field-notes?category=white-papers',   live: true  },
+      { label: 'Novel Thoughts',     href: '/field-notes?category=novel-thoughts', live: true  },
+      { label: 'Guides',             href: '/field-notes?category=guides',         live: true  },
+      { label: 'Intelligence Briefs',href: '/field-notes/briefs',                  live: false },
+    ],
+  },
+  {
+    label: 'About',
+    href: '/about',
+    sub: 'Founding story & team',
+    live: false,
+    Icon: ConvergenceV1,
+    children: [
+      { label: 'Our Mission',      href: '/about',        live: false },
+      { label: 'The Team',         href: '/about/team',   live: false },
+      { label: 'Vision & Roadmap', href: '/vision',       live: false },
+    ],
   },
 ];
 
@@ -491,6 +526,42 @@ export function Navigation() {
             />
           ))}
         </nav>
+
+        {/* ── Start a Pilot CTA — gold, earned position ── */}
+        <div style={{
+          marginTop: '32px',
+          paddingTop: '24px',
+          borderTop: '1px solid rgba(200,169,110,0.10)',
+          opacity: menuOpen ? 1 : 0,
+          transform: menuOpen ? 'translateY(0)' : 'translateY(8px)',
+          transition: `all 0.5s cubic-bezier(0.16,1,0.3,1) ${80 + NAV_ITEMS.length * 55 + 80}ms`,
+        }}>
+          <Link
+            href="/pilot"
+            onClick={() => { setMenuOpen(false); setExpandedItem(null); }}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '10px',
+              fontFamily: "'Lora', Georgia, serif",
+              fontSize: '15px', fontStyle: 'italic', letterSpacing: '0.04em',
+              color: '#c8a96e', textDecoration: 'none',
+              padding: '12px 28px',
+              border: '1px solid rgba(200,169,110,0.35)',
+              borderRadius: '100px',
+              background: 'rgba(200,169,110,0.05)',
+              transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(200,169,110,0.10)';
+              e.currentTarget.style.borderColor = 'rgba(200,169,110,0.55)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(200,169,110,0.05)';
+              e.currentTarget.style.borderColor = 'rgba(200,169,110,0.35)';
+            }}
+          >
+            Start a Pilot →
+          </Link>
+        </div>
 
         {/* Footer — pinned to overlay bottom */}
         <div style={{ marginTop: 'auto', paddingTop: '24px' }}>
