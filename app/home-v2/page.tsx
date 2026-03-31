@@ -40,8 +40,9 @@ const TIMELINE: StoryNode[] = [
   { id: 'recall',   label: 'Total Recall',  color: GOLD,   glow: GOLD_G  },
   { id: 'memory',   label: 'Time Machine',  color: PURPLE, glow: PURP_G  },
   { id: 'compound', label: 'Living Memory', color: GOLD,   glow: GOLD_G  },
-  { id: 'sectors',  label: "Who It's For",  color: PURPLE, glow: PURP_G  },
-  { id: 'decision', label: 'The Decision',  color: GOLD,   glow: GOLD_G  },
+  { id: 'cortex',   label: 'The Cortex',    color: PURPLE, glow: PURP_G  },
+  { id: 'sectors',  label: "Who It's For",  color: GOLD,   glow: GOLD_G  },
+  { id: 'decision', label: 'The Decision',  color: PURPLE, glow: PURP_G  },
 ];
 
 // ── Total Recall data — curated, controlled, simulated ───────────
@@ -451,7 +452,121 @@ function GravityGardenOrbital() {
   );
 }
 
-// ── Sectors data ──────────────────────────────────────────────────
+// ── Cortex Panel ────────────────────────────────────────────────────────────────
+// Same intelligence kernel. Different operating mind.
+// Cycles through 4 domain configurations showing which living laws
+// are active vs suppressed for each vertical.
+
+const DOMAIN_CONFIGS = [
+  {
+    label: 'Legal Firm',
+    subtitle: 'Privilege-aware · Citation-mandatory',
+    laws: [
+      { name: 'Attorney-Client Privilege Protocol', on: true  },
+      { name: 'Citation & Source Mandate',          on: true  },
+      { name: 'Conflict of Interest Awareness',     on: true  },
+      { name: 'Regulatory Compliance Context',      on: true  },
+      { name: 'Aggressive Advocacy Mode',           on: false },
+    ],
+  },
+  {
+    label: 'PE Fund',
+    subtitle: 'Deal-flow-aware · LP-sensitive',
+    laws: [
+      { name: 'Portfolio Signal Priority',          on: true  },
+      { name: 'LP Communication Protocol',          on: true  },
+      { name: 'Deal Flow Context',                  on: true  },
+      { name: 'Exit Timeline Awareness',            on: true  },
+      { name: 'Attorney-Client Privilege Protocol', on: false },
+    ],
+  },
+  {
+    label: 'Healthcare System',
+    subtitle: 'HIPAA-compliant · Clinical-aware',
+    laws: [
+      { name: 'PHI Boundary Enforcement',           on: true  },
+      { name: 'Clinical Context Priority',          on: true  },
+      { name: 'HIPAA Compliance Layer',             on: true  },
+      { name: 'Patient Relationship Memory',        on: true  },
+      { name: 'Deal Flow Context',                  on: false },
+    ],
+  },
+  {
+    label: 'Professional Services',
+    subtitle: 'Client-relationship-aware',
+    laws: [
+      { name: 'Client Relationship Priority',       on: true  },
+      { name: 'Engagement History Context',         on: true  },
+      { name: 'Methodology Enforcement',            on: true  },
+      { name: 'Billable Context Tracking',          on: true  },
+      { name: 'PHI Boundary Enforcement',           on: false },
+    ],
+  },
+];
+
+function CortexPanel() {
+  const [idx,    setIdx]    = useState(0);
+  const [fading, setFading] = useState(false);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setFading(true);
+      setTimeout(() => {
+        setIdx(c => (c + 1) % DOMAIN_CONFIGS.length);
+        setFading(false);
+      }, 360);
+    }, 3_400);
+    return () => clearInterval(id);
+  }, []);
+
+  const mode = DOMAIN_CONFIGS[idx];
+
+  return (
+    <div className="h2-card" style={{ minHeight: '360px' }}>
+      <div className="h2-card-header">
+        <span className="h2-card-tag">Intelligence Kernel</span>
+        <span className="h2-card-counter">18 living laws</span>
+      </div>
+      <div style={{
+        opacity: fading ? 0 : 1,
+        transform: fading ? 'translateY(5px)' : 'translateY(0)',
+        transition: 'opacity 0.34s var(--ease-out), transform 0.34s var(--ease-out)',
+      }}>
+        <div className="h2-cortex-mode-chip">
+          <div className="h2-cortex-mode-dot" />
+          {mode.label}
+        </div>
+        <p style={{ fontFamily:'var(--font-ui)', fontSize:'10px', color:'var(--color-text-muted)', letterSpacing:'0.06em', marginBottom:'20px' }}>
+          {mode.subtitle}
+        </p>
+        <div className="h2-law-list">
+          {mode.laws.map((law, i) => (
+            <div key={i} className={`h2-law-row ${law.on ? 'h2-law-row-on' : 'h2-law-row-off'}`}>
+              <div
+                className="h2-law-dot"
+                style={{
+                  background: law.on ? 'var(--color-gold)' : 'rgba(255,255,255,0.2)',
+                  boxShadow:  law.on ? '0 0 6px var(--color-gold-dim)' : 'none',
+                }}
+              />
+              <span className="h2-law-name">{law.name}</span>
+              <span className="h2-law-status" style={{ color: law.on ? 'var(--color-gold-dim)' : 'rgba(255,255,255,0.15)' }}>
+                {law.on ? 'ACTIVE' : 'OFF'}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="h2-dots" style={{ marginTop:'24px' }}>
+        {DOMAIN_CONFIGS.map((_, i) => (
+          <div key={i} className={`h2-dot ${i === idx ? 'h2-dot-active' : 'h2-dot-inactive'}`} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Sectors data
 
 const SECTORS = [
   { num:'01', label:'Legal',
@@ -628,6 +743,44 @@ export default function HomeV2Page() {
             {/* Canvas right */}
             <div data-reveal data-delay="2">
               <GravityGardenOrbital />
+            </div>
+
+          </div>
+        </section>
+
+        <div data-reveal className="h2-divider" />
+
+        {/* ══ Chapter 4: CORTEX ═══════════════════ */}
+        <section className="h2-section h2-section-alt" data-section="cortex">
+          <div className="h2-grid h2-grid-reverse" data-reveal>
+
+            {/* Panel left (reversed) */}
+            <div data-reveal data-delay="2">
+              <CortexPanel />
+            </div>
+
+            {/* Editorial right */}
+            <div>
+              <span className="h2-label">The Cortex</span>
+              <h2 className="h2-heading">
+                Same engine.<br />Different mind.
+              </h2>
+              <p className="h2-lead">
+                Configure the intelligence kernel for your organization —
+                not just your data.
+              </p>
+              <p className="h2-body">
+                Every deployment is governed by 18 living laws that define how
+                the system thinks, communicates, challenges, and stays in bounds.
+                Configure it for a legal firm and it operates one way. Configure
+                it for a PE fund and it operates another. The same sovereign
+                intelligence kernel. Entirely different operating mind.
+              </p>
+              <div className="h2-compare">
+                <div>18 governing principles — programmable, not fine-tuned</div>
+                <div>Domain-aware from day one, not retrofitted</div>
+                <div>The mind changes. The memory persists.</div>
+              </div>
             </div>
 
           </div>
