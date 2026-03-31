@@ -425,7 +425,7 @@ export default function HomeV2Page() {
 
         {/* ══ Chapter 4: YOU OWN IT ══════════════════ */}
         <section className="h2-section h2-section-alt" data-section="sovereign">
-          <div className="h2-grid" data-reveal>
+          <div className="h2-grid h2-grid-reverse" data-reveal>
 
             {/* Editorial left */}
             <div>
