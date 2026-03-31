@@ -41,142 +41,146 @@ const TIMELINE: StoryNode[] = [
   { id: 'decision',  label: 'The Decision',      color: GOLD,   glow: GOLD_G  },
 ];
 
-// ── Total Recall data — curated, controlled, simulated ───────────
+// ── Infinite Memory conversations — companion voice, not database ──
 
-const QUERIES = [
+const CONVERSATIONS = [
   {
-    query:    'How many times have we discussed the Brennan matter?',
-    answer:   '41 discussions over 8 months.',
-    detail:   'First raised: June 14, 2024 · Last: Yesterday at 3:47pm',
-    entities: ['contract dispute', 'settlement terms', 'liability exposure'],
+    you:      'How many times have we discussed the Brennan matter?',
+    ls:       '41 times over 8 months. The tone shifted after the December call — you stopped negotiating and started litigating.',
+    context:  'First raised: June 14, 2024 · Last: Yesterday at 3:47pm · Escalation detected Nov 28',
+    signals:  ['contract dispute', 'strategy shift', 'liability exposure'],
     gravity:  '0.91',
   },
   {
-    query:    'What changed in deal flow after the Q3 miss?',
-    answer:   '17 workstreams affected. 6 revised. 3 escalated.',
-    detail:   'Approval-seeking behavior ↑73% · Pattern: budget reallocation active',
-    entities: ['portfolio review', 'GP corrections', 'capital allocation'],
-    gravity:  '0.87',
+    you:      'I keep losing my patience with Kayla lately and I don\'t know why.',
+    ls:       'You\'ve corrected her approach 11 times in 4 weeks. That\'s 3× your usual rate. The pattern started after Josh resurfaced.',
+    context:  'Emotional signature: frustration displaced from relationship context · Recurring since March 8',
+    signals:  ['behavioral loop', 'relational displacement', 'Kayla · Josh'],
+    gravity:  '0.84',
   },
   {
-    query:    'Which supplier relationships are showing drift?',
-    answer:   '3 accounts entering silence threshold.',
-    detail:   'Pacific Materials · Vertex Supply · GTS Logistics · 47-day max silence',
-    entities: ['engagement declining', 'October inflection', 'risk: sourcing'],
+    you:      'Which supplier relationships are going quiet on us?',
+    ls:       '3 accounts have crossed the silence threshold. Pacific Materials hasn\'t responded in 47 days — that\'s new for them.',
+    context:  'Pacific Materials · Vertex Supply · GTS Logistics · Engagement declining since October',
+    signals:  ['silence threshold', 'engagement drift', 'risk: sourcing'],
     gravity:  '0.78',
+  },
+  {
+    you:      'What happened overnight?',
+    ls:       'Dream cycle completed at 3:12am. Your focus on the GTM plan has intensified — 6 sessions in 9 days. I\'ve promoted it to a primary gravity well.',
+    context:  'Overnight: 3 patterns recalibrated · 1 new arc detected · Stance adjusted: depth → standard',
+    signals:  ['dream cycle', 'gravity promotion', 'circadian'],
+    gravity:  '0.62',
   },
 ];
 
-type RecallPhase = 'query' | 'answer' | 'detail' | 'hold' | 'fade';
+type ConvPhase = 'you' | 'ls' | 'context' | 'hold' | 'fade';
 
-interface RecallState {
-  qi:          number;
-  queryChars:  number;
-  answerChars: number;
-  detailChars: number;
-  phase:       RecallPhase;
-  opacity:     number;
+interface ConvState {
+  ci:           number;
+  youChars:     number;
+  lsChars:      number;
+  contextChars: number;
+  phase:        ConvPhase;
+  opacity:      number;
 }
 
-const RECALL_INIT: RecallState = {
-  qi: 0, queryChars: 0, answerChars: 0, detailChars: 0,
-  phase: 'query', opacity: 1,
+const CONV_INIT: ConvState = {
+  ci: 0, youChars: 0, lsChars: 0, contextChars: 0,
+  phase: 'you', opacity: 1,
 };
 
-function nextRecallState(s: RecallState): [RecallState, number] {
-  const q = QUERIES[s.qi];
-  // returns [nextState, delayMs]
-  if (s.phase === 'query') {
-    if (s.queryChars < q.query.length)
-      return [{ ...s, queryChars: s.queryChars + 1 }, 32];
-    return [{ ...s, phase: 'answer' }, 520];
+function nextConvState(s: ConvState): [ConvState, number] {
+  const c = CONVERSATIONS[s.ci];
+  if (s.phase === 'you') {
+    if (s.youChars < c.you.length)
+      return [{ ...s, youChars: s.youChars + 1 }, 42];
+    return [{ ...s, phase: 'ls' }, 650];   // pause — LS is thinking
   }
-  if (s.phase === 'answer') {
-    if (s.answerChars < q.answer.length)
-      return [{ ...s, answerChars: s.answerChars + 1 }, 28];
-    return [{ ...s, phase: 'detail' }, 250];
+  if (s.phase === 'ls') {
+    if (s.lsChars < c.ls.length)
+      return [{ ...s, lsChars: s.lsChars + 1 }, 22];
+    return [{ ...s, phase: 'context' }, 350];
   }
-  if (s.phase === 'detail') {
-    if (s.detailChars < q.detail.length)
-      return [{ ...s, detailChars: s.detailChars + 1 }, 18];
-    return [{ ...s, phase: 'hold' }, 300];
+  if (s.phase === 'context') {
+    if (s.contextChars < c.context.length)
+      return [{ ...s, contextChars: s.contextChars + 1 }, 14];
+    return [{ ...s, phase: 'hold' }, 400];
   }
   if (s.phase === 'hold')
-    return [{ ...s, phase: 'fade', opacity: 0 }, 3_800];
-  // fade → reset atomically — no qi/phase split
+    return [{ ...s, phase: 'fade', opacity: 0 }, 5_200];
   return [{
-    qi:          (s.qi + 1) % QUERIES.length,
-    queryChars:  0,
-    answerChars: 0,
-    detailChars: 0,
-    phase:       'query',
-    opacity:     1,
-  }, 700];
+    ci:           (s.ci + 1) % CONVERSATIONS.length,
+    youChars:     0,
+    lsChars:      0,
+    contextChars: 0,
+    phase:        'you',
+    opacity:      1,
+  }, 800];
 }
 
 function TotalRecallCard() {
-  const [s, setS] = useState<RecallState>(RECALL_INIT);
+  const [s, setS] = useState<ConvState>(CONV_INIT);
 
-  // Single effect — one timeout per tick, always cleaned up
   useEffect(() => {
-    const [next, delay] = nextRecallState(s);
+    const [next, delay] = nextConvState(s);
     const t = setTimeout(() => setS(next), delay);
     return () => clearTimeout(t);
   }, [s]);
 
-  const q           = QUERIES[s.qi];
-  const dispQuery   = q.query.slice(0, s.queryChars);
-  const dispAnswer  = q.answer.slice(0, s.answerChars);
-  const dispDetail  = q.detail.slice(0, s.detailChars);
-  const showCursor  = s.phase === 'query' || (s.phase === 'answer' && !s.answerChars);
-  const showEntities = s.phase === 'hold' || s.phase === 'fade';
+  const c            = CONVERSATIONS[s.ci];
+  const dispYou      = c.you.slice(0, s.youChars);
+  const dispLs       = c.ls.slice(0, s.lsChars);
+  const dispContext  = c.context.slice(0, s.contextChars);
+  const showCursor   = s.phase === 'you' || (s.phase === 'ls' && !s.lsChars);
+  const showSignals  = s.phase === 'hold' || s.phase === 'fade';
 
   return (
     <div
       className="h2-card"
       style={{ opacity: s.opacity, transition: 'opacity 0.65s var(--ease-out)', minHeight: '340px' }}
     >
-      {/* Query line */}
+      {/* User message */}
       <div style={{ marginBottom: '24px' }}>
-        <span className="h2-query-label">Query</span>
+        <span className="h2-query-label">You</span>
         <p className="h2-query-text">
-          {dispQuery}
+          {dispYou}
           {showCursor && <span className="h2-blink" style={{ color: GOLD, marginLeft: '1px' }}>▌</span>}
         </p>
       </div>
 
-      {/* Answer block */}
-      {dispAnswer && (
+      {/* LS response */}
+      {dispLs && (
         <>
           <hr className="h2-card-divider h2-fadein" />
           <div style={{ marginBottom: '14px' }} className="h2-fadein">
-            <span className="h2-recall-label">Recall</span>
-            <p className="h2-recall-answer">{dispAnswer}</p>
+            <span className="h2-recall-label">LongStrider</span>
+            <p className="h2-recall-answer">{dispLs}</p>
           </div>
         </>
       )}
 
-      {dispDetail && (
-        <p className="h2-recall-detail h2-fadein">{dispDetail}</p>
+      {dispContext && (
+        <p className="h2-recall-detail h2-fadein">{dispContext}</p>
       )}
 
-      {/* Entity chips + gravity score */}
-      {showEntities && (
+      {/* Signal chips + gravity */}
+      {showSignals && (
         <div className="h2-chips h2-fadein">
-          {q.entities.map((e, i) => (
-            <span key={i} className="h2-chip">{e}</span>
+          {c.signals.map((sig, i) => (
+            <span key={i} className="h2-chip">{sig}</span>
           ))}
-          <span className="h2-chip-meta">gravity {q.gravity}</span>
+          <span className="h2-chip-meta">gravity {c.gravity}</span>
         </div>
       )}
 
       {/* Progress dots */}
       <div className="h2-dots">
-        {QUERIES.map((_, i) => (
+        {CONVERSATIONS.map((_, i) => (
           <div
             key={i}
-            className={`h2-dot ${i === s.qi ? 'h2-dot-active' : 'h2-dot-inactive'}`}
-            style={{ width: i === s.qi ? 24 : 6 }}
+            className={`h2-dot ${i === s.ci ? 'h2-dot-active' : 'h2-dot-inactive'}`}
+            style={{ width: i === s.ci ? 24 : 6 }}
           />
         ))}
       </div>
