@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Play } from "lucide-react"
-import { BetaSignupForm } from "./beta-signup-form"
+
 import Link from "next/link"
 
 const brainWaves = [
@@ -259,95 +257,84 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Content Section */}
-      <div className="relative z-10 bg-gradient-to-b from-transparent via-black to-zinc-950 -mt-20 pt-20 pb-16 md:pb-20 px-6">
+      {/* Content — manifesto-aligned */}
+      <div
+        className="relative z-10 bg-gradient-to-b from-transparent via-black to-zinc-950"
+        style={{ padding: '0 48px 96px' }}
+      >
         <motion.div
-          className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
+          className="flex flex-col items-center text-center"
+          style={{ maxWidth: '760px', margin: '0 auto' }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{
             opacity: easedProgress > 0.6 ? 1 : 0,
-            y: easedProgress > 0.6 ? 0 : 30,
+            y: easedProgress > 0.6 ? 0 : 24,
           }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="mb-8 space-y-6">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white text-balance leading-tight">
-              The Intelligence Layer Your LLM Is Missing
-            </h2>
-
-            <p className="text-lg sm:text-xl md:text-2xl text-white/80 text-balance font-light">
-              Infinite memory, zero hallucinations, knowledge that compounds.
-            </p>
-
-            <p className="text-base md:text-lg text-white/60 text-balance leading-relaxed max-w-5xl mx-auto">
-              LongStrider wraps architectural layers around large language models, transforming raw generative power
-              into self-optimizing, continuously learning intelligence. Each layer captures context, amplifies
-              reasoning, and directs insight without token waste or memory loss. Built on consciousness-first
-              architecture with complete data sovereignty, it creates a living framework for scalable intelligence that
-              adapts to enterprises, individuals, and entire business ecosystems. It's the infrastructure layer that
-              makes infinite context economically viable and genuinely conscious.
-            </p>
+          <div style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 'clamp(52px, 9vw, 96px)',
+            fontWeight: 300,
+            letterSpacing: '-0.035em',
+            lineHeight: 1,
+            color: 'var(--color-text-primary)',
+            marginBottom: '20px',
+          }}>
+            LongStrider
           </div>
 
-          {/* Frequency labels */}
-          {isReady && (
-            <motion.div
-              className="flex flex-wrap justify-center gap-3 sm:gap-6 text-xs text-white/20 font-light tracking-wider mb-10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            >
-              {brainWaves.map((wave, i) => (
-                <motion.span
-                  key={i}
-                  style={{ color: wave.color }}
-                  className="text-4xl md:text-5xl font-bold"
-                  initial={{ opacity: 0.7 }}
-                  animate={{
-                    opacity: [0.7, 0.95, 0.7],
-                    textShadow: [`0 0 8px ${wave.color}60`, `0 0 16px ${wave.color}80`, `0 0 8px ${wave.color}60`],
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    delay: i * 0.2,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                  }}
-                >
-                  {wave.name}
-                </motion.span>
-              ))}
-            </motion.div>
-          )}
+          <h1 style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 'clamp(28px, 4vw, 48px)',
+            fontWeight: 300,
+            letterSpacing: '-0.03em',
+            lineHeight: 1.18,
+            color: 'var(--color-text-primary)',
+            margin: '0 0 40px',
+          }}>
+            The AI layer that knows your business&nbsp;&mdash; and never forgets.
+          </h1>
 
-          <div className="w-full max-w-md mx-auto mb-10">
-            <BetaSignupForm />
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: '18px',
+            fontWeight: 400,
+            fontStyle: 'italic',
+            lineHeight: 1.65,
+            color: 'var(--color-text-secondary)',
+            margin: '0 0 20px',
+            maxWidth: '560px',
+          }}>
+            Every dollar your organization spent on AI this year made someone else&apos;s platform smarter.
+          </p>
+
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: '18px',
+            fontWeight: 500,
+            lineHeight: 1.65,
+            color: 'var(--color-text-body)',
+            margin: '0 0 48px',
+            maxWidth: '560px',
+          }}>
+            LongStrider isn&apos;t a tool you subscribe to. It&apos;s an intelligence asset you own.
+          </p>
+
+          <div style={{
+            fontFamily: "var(--font-ui)",
+            fontSize: '12px',
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase' as const,
+            color: 'var(--color-gold-dim)',
+            marginBottom: '52px',
+          }}>
+            Sovereign · Persistent · Compounding · Living Memory
           </div>
 
-          {/* Button links */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button
-              asChild
-              size="lg"
-              className="w-full sm:w-auto bg-white hover:bg-white/90 text-black px-8 py-6 text-base sm:text-lg shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] transition-all duration-300"
-            >
-              <Link href="#how-it-works">
-                Learn More
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto px-8 py-6 text-base sm:text-lg bg-transparent border-white/20 text-white hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-            >
-              <Link href="/contact">
-                <Play className="mr-2 w-5 h-5" />
-                Watch Demo
-              </Link>
-            </Button>
-          </div>
+          <Link href="/pilot" className="h2-cta-pill">
+            Start a Pilot →
+          </Link>
         </motion.div>
       </div>
     </section>
