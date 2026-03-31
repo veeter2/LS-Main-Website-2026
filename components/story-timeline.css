@@ -1,0 +1,119 @@
+/* ── StoryTimeline — Universal Chapter Navigation ────────────── */
+/* Used on every page that tells a story.                         */
+/* Tokens: var(--font-ui), var(--color-bg), --node-color/glow     */
+
+.story-timeline {
+  position: fixed;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+
+.story-timeline.st-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Connecting line */
+.story-timeline-line {
+  position: absolute;
+  left: 3px;
+  top: 18px;
+  bottom: 18px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(200, 169, 110, 0.14) 15%,
+    rgba(200, 169, 110, 0.14) 85%,
+    transparent
+  );
+  z-index: -1;
+}
+
+/* Node row */
+.story-timeline-node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.story-timeline-node.st-gated {
+  cursor: default;
+  opacity: 0.18 !important;
+  pointer-events: none;
+}
+
+/* Dot */
+.story-timeline-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--node-color, #c8a96e) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--node-color, #c8a96e) 18%, transparent);
+  flex-shrink: 0;
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Active dot — glows + pulses */
+.story-timeline-node.st-active .story-timeline-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--node-color, #c8a96e);
+  border-color: var(--node-color, #c8a96e);
+  box-shadow: 0 0 10px var(--node-glow, rgba(200, 169, 110, 0.35));
+  animation: st-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes st-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--node-glow, rgba(200,169,110,0.30)); }
+  50%       { box-shadow: 0 0 16px var(--node-glow, rgba(200,169,110,0.55)); }
+}
+
+/* Passed dot */
+.story-timeline-node.st-passed .story-timeline-dot {
+  background: color-mix(in srgb, var(--node-color, #c8a96e) 40%, transparent);
+  border-color: color-mix(in srgb, var(--node-color, #c8a96e) 30%, transparent);
+}
+
+/* Label */
+.story-timeline-label {
+  font-family: var(--font-ui, 'Inter', system-ui, sans-serif);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0);
+  white-space: nowrap;
+  transform: translateX(-6px);
+  transition: color 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Label visible on hover or active */
+.story-timeline-node:hover .story-timeline-label,
+.story-timeline-node.st-active .story-timeline-label {
+  color: rgba(255, 255, 255, 0.50);
+  transform: translateX(0);
+}
+
+.story-timeline-node.st-active .story-timeline-label {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+  .story-timeline { display: none; }
+}

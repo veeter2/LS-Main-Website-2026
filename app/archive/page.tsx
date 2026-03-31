@@ -106,7 +106,7 @@ const STATUS_COLORS: Record<string, string> = {
 
 export default function ArchivePage() {
   return (
-    <div style={{ minHeight: "100vh", background: "#080809", paddingTop: "120px", paddingBottom: "120px" }}>
+    <div style={{ minHeight: "100vh", background: "var(--color-bg)", paddingTop: "120px", paddingBottom: "120px" }}>
 
       {/* Aurora ambient */}
       <div style={{

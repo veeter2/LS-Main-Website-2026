@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
 import './deck.css';
+import { StoryTimeline } from '@/components/story-timeline';
 
 // ── SECTION IDS & TIMELINE CONFIG ─────────────────────────────
 
@@ -14,16 +15,21 @@ interface TimelineNode {
   gated: boolean;
 }
 
+const GOLD   = '#c8a96e';
+const PURPLE = '#8b5cf6';
+const GOLD_G  = 'rgba(200,169,110,0.4)';
+const PURP_G  = 'rgba(139,92,246,0.45)';
+
 const TIMELINE: TimelineNode[] = [
-  { id: 'hero',        label: 'LongStrider',   color: '#c8a96e', glow: 'rgba(200,169,110,0.4)',   gated: false },
-  { id: 'gap',         label: 'The Gap',       color: '#c8a96e', glow: 'rgba(200,169,110,0.4)',   gated: false },
-  { id: 'what',        label: 'What It Is',    color: '#c8a96e', glow: 'rgba(200,169,110,0.4)',   gated: false },
-  { id: 'moat',        label: 'Your Moat',     color: '#8b5cf6', glow: 'rgba(139,92,246,0.45)',   gated: false },
-  { id: 'practice',    label: 'In Practice',   color: '#c8a96e', glow: 'rgba(200,169,110,0.4)',   gated: true },
-  { id: 'who',         label: "Who It's For",  color: '#8b5cf6', glow: 'rgba(139,92,246,0.45)',   gated: true },
-  { id: 'how',         label: 'How It Works',  color: '#c8a96e', glow: 'rgba(200,169,110,0.4)',   gated: true },
-  { id: 'competitive', label: 'Competitive',   color: '#c8a96e', glow: 'rgba(200,169,110,0.4)',   gated: true },
-  { id: 'engage',      label: "What's Next",   color: '#c8a96e', glow: 'rgba(200,169,110,0.4)',   gated: true },
+  { id: 'hero',        label: 'LongStrider',   color: GOLD,   glow: GOLD_G,  gated: false },
+  { id: 'gap',         label: 'The Gap',       color: PURPLE, glow: PURP_G,  gated: false },
+  { id: 'what',        label: 'What It Is',    color: GOLD,   glow: GOLD_G,  gated: false },
+  { id: 'moat',        label: 'Your Moat',     color: PURPLE, glow: PURP_G,  gated: false },
+  { id: 'practice',    label: 'In Practice',   color: GOLD,   glow: GOLD_G,  gated: true  },
+  { id: 'who',         label: "Who It's For",  color: PURPLE, glow: PURP_G,  gated: true  },
+  { id: 'how',         label: 'How It Works',  color: GOLD,   glow: GOLD_G,  gated: true  },
+  { id: 'competitive', label: 'Competitive',   color: PURPLE, glow: PURP_G,  gated: true  },
+  { id: 'engage',      label: "What's Next",   color: GOLD,   glow: GOLD_G,  gated: true  },
 ];
 
 // ── CONTENT DATA ──────────────────────────────────────────────
@@ -72,11 +78,9 @@ const COMPETITORS = [
 export default function ManifestoPage() {
   const [isRevealed, setIsRevealed] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeSection, setActiveSection] = useState('hero');
-  const [showTimeline, setShowTimeline] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const sectionObserverRef = useRef<IntersectionObserver | null>(null);
 
+  // data-reveal fade-in observer (manifesto-specific)
   const setupObserver = useCallback(() => {
     if (observerRef.current) observerRef.current.disconnect();
     observerRef.current = new IntersectionObserver(
@@ -92,60 +96,28 @@ export default function ManifestoPage() {
     });
   }, []);
 
-  const setupSectionObserver = useCallback(() => {
-    if (sectionObserverRef.current) sectionObserverRef.current.disconnect();
-    sectionObserverRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('data-section');
-            if (id) setActiveSection(id);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: '-20% 0px -60% 0px' }
-    );
-    document.querySelectorAll('[data-section]').forEach((el) => {
-      sectionObserverRef.current?.observe(el);
-    });
-  }, []);
+  // Scroll to top on mount
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   useEffect(() => {
     setupObserver();
-    setupSectionObserver();
-    return () => {
-      observerRef.current?.disconnect();
-      sectionObserverRef.current?.disconnect();
-    };
-  }, [setupObserver, setupSectionObserver]);
+    return () => observerRef.current?.disconnect();
+  }, [setupObserver]);
 
   useEffect(() => {
-    if (isRevealed) {
-      setTimeout(() => {
-        setupObserver();
-        setupSectionObserver();
-      }, 60);
-    }
-  }, [isRevealed, setupObserver, setupSectionObserver]);
+    if (isRevealed) setTimeout(() => setupObserver(), 100);
+  }, [isRevealed, setupObserver]);
 
+  // Scroll progress bar
   useEffect(() => {
-    const handleScroll = () => {
+    const onScroll = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0);
-      setShowTimeline(scrollTop > 300);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const scrollToSection = (id: string) => {
-    const el = document.querySelector(`[data-section="${id}"]`);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  const visibleNodes = isRevealed ? TIMELINE : TIMELINE.filter((n) => !n.gated);
-  const activeIdx = visibleNodes.findIndex((n) => n.id === activeSection);
 
   return (
     <div className="deck-page">
@@ -156,29 +128,7 @@ export default function ManifestoPage() {
 
 
 
-      <div className={`deck-timeline${showTimeline ? ' deck-timeline-visible' : ''}`}>
-        <div className="deck-timeline-line" />
-        {visibleNodes.map((node, i) => {
-          const isEarned = i <= activeIdx;
-          return (
-            <div
-              key={node.id}
-              className={`deck-timeline-node${node.id === activeSection ? ' active' : ''}${i < activeIdx ? ' passed' : ''}`}
-              style={{
-                '--node-color': node.color,
-                '--node-glow': node.glow,
-                opacity: isEarned ? 1 : 0.28,
-                cursor: isEarned ? 'pointer' : 'default',
-                pointerEvents: isEarned ? 'auto' : 'none',
-              } as React.CSSProperties}
-              onClick={() => isEarned && scrollToSection(node.id)}
-            >
-              <div className="deck-timeline-dot" />
-              <span className="deck-timeline-label">{node.label}</span>
-            </div>
-          );
-        })}
-      </div>
+      <StoryTimeline key={String(isRevealed)} nodes={TIMELINE} unlockGated={isRevealed} />
 
       <main className="deck-container">
 
@@ -393,7 +343,7 @@ export default function ManifestoPage() {
               </div>
               <div data-reveal data-delay="1">
                 <p className="deck-body">
-                  LongStrider isn&apos;t a SaaS subscription you spin up and forget. It&apos;s institutional intelligence you build, own, and compound — configured for your environment, your regulatory requirements, and your timeline. We work with organizations across four deployment models.
+                  LongStrider isn&apos;t a SaaS subscription you spin up and forget. It&apos;s institutional intelligence you <span style={{ color: '#c8a96e' }}>build</span>, <span style={{ color: '#c8a96e' }}>own</span>, and <span style={{ color: '#c8a96e' }}>compound</span> — configured for your environment, your regulatory requirements, and your timeline. We work with organizations across four deployment models.
                 </p>
               </div>
               <div data-reveal data-delay="2" style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
