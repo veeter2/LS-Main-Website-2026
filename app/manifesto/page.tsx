@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import './deck.css';
 
 // ── SECTION IDS & TIMELINE CONFIG ─────────────────────────────
@@ -155,37 +154,7 @@ export default function ManifestoPage() {
       <div className="deck-aurora-2" />
       <div className="deck-aurora-3" />
 
-      <nav className="deck-nav">
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
-          <Image
-            src="/longstrider-logo.png"
-            alt="LongStrider Logo"
-            width={38}
-            height={38}
-            style={{ opacity: 0.85 }}
-          />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-            <span className="deck-nav-logo">LongStrider</span>
-            <span style={{ fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.4, color: '#c8a96e' }}>The Manifesto</span>
-          </div>
-        </Link>
-        <div className="deck-nav-links">
-          <Link
-            href="/"
-            style={{ fontFamily: "'Lora', Georgia, serif", fontSize: '12px', letterSpacing: '0.05em', opacity: 0.5, color: 'rgba(200,169,110,1)', cursor: 'pointer', textDecoration: 'none', transition: 'opacity 0.2s' }}
-            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
-            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.5'}
-          >
-            Home
-          </Link>
-          <span className="deck-nav-coming" style={{ fontFamily: "'Lora', Georgia, serif", fontSize: '12px', letterSpacing: '0.05em', opacity: 0.25, color: 'rgba(200,169,110,1)', cursor: 'default' }}>
-            Architecture <span style={{ fontSize: '9px', letterSpacing: '0.1em', opacity: 0.7 }}>— coming</span>
-          </span>
-          <span className="deck-nav-coming" style={{ fontFamily: "'Lora', Georgia, serif", fontSize: '12px', letterSpacing: '0.05em', opacity: 0.25, color: 'rgba(200,169,110,1)', cursor: 'default' }}>
-            About <span style={{ fontSize: '9px', letterSpacing: '0.1em', opacity: 0.7 }}>— coming</span>
-          </span>
-        </div>
-      </nav>
+
 
       <div className={`deck-timeline${showTimeline ? ' deck-timeline-visible' : ''}`}>
         <div className="deck-timeline-line" />
@@ -465,12 +434,12 @@ export default function ManifestoPage() {
               <p className="deck-body" style={{ textAlign: 'center', maxWidth: '560px', margin: '0 auto 32px', color: 'rgba(255,255,255,0.6)', fontSize: '16px', lineHeight: '1.7' }}>
                 A white-label partner. A pilot customer. One investor introduction. If you know someone who belongs in any of those conversations — or if that&apos;s you — forward this and let&apos;s talk.
               </p>
-              <a href="/contact" className="deck-footer-button">
+              <Link href="/contact" className="deck-footer-button">
                 <span>Start the conversation</span>
                 <span style={{ fontSize: '14px', opacity: 0.7 }}>→</span>
-              </a>
+              </Link>
               <p className="deck-footer-contact">
-                <a href="/contact">Begin a conversation</a>
+                <Link href="/contact">Begin a conversation</Link>
                 <span style={{ margin: '0 12px', opacity: 0.3 }}>·</span>
                 <a href="https://longstridersystems.com" target="_blank" rel="noopener noreferrer">longstridersystems.com</a>
               </p>

@@ -277,7 +277,6 @@ export function Navigation() {
   }, []);
 
   const isManifesto = pathname === '/manifesto';
-  if (isManifesto) return null;
 
   const activeIdx = sections.findIndex((s) => s.id === activeSection);
 
