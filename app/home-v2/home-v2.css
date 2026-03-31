@@ -513,6 +513,80 @@
 .h2-blink { animation: h2-blink 1s step-end infinite; }
 .h2-fadein { animation: h2-fadein 0.4s var(--ease-out); }
 
+/* ── Sovereign Lattice ────────────────────────────────────────── */
+
+.h2-sovereign-wrap {
+  position: relative;
+  height: 440px;
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  cursor: crosshair;
+  user-select: none;
+}
+.h2-sovereign-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.h2-sovereign-badge {
+  position: absolute;
+  top: 18px; left: 20px;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold-dim);
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.h2-sovereign-badge::before {
+  content: '';
+  display: block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 8px var(--color-gold);
+  animation: h2-blink 2.2s ease-in-out infinite;
+}
+.h2-sovereign-hint {
+  position: absolute;
+  bottom: 44px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-ui);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.09);
+  z-index: 2;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: color 0.5s ease;
+}
+.h2-sovereign-wrap:hover .h2-sovereign-hint {
+  color: rgba(255,255,255,0.20);
+}
+.h2-sovereign-footer {
+  position: absolute;
+  bottom: 16px; left: 20px; right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+}
+.h2-sovereign-footer span {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
 /* ── Cortex Panel ─────────────────────────────────────────────── */
 
 .h2-cortex-mode-chip {

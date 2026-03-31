@@ -37,12 +37,13 @@ const PURP_G   = 'rgba(139,92,246,0.45)';
 // ── StoryTimeline nodes ───────────────────────────────────────────
 
 const TIMELINE: StoryNode[] = [
-  { id: 'recall',   label: 'Total Recall',  color: GOLD,   glow: GOLD_G  },
-  { id: 'memory',   label: 'Time Machine',  color: PURPLE, glow: PURP_G  },
-  { id: 'compound', label: 'Living Memory', color: GOLD,   glow: GOLD_G  },
-  { id: 'cortex',   label: 'The Cortex',    color: PURPLE, glow: PURP_G  },
-  { id: 'sectors',  label: "Who It's For",  color: GOLD,   glow: GOLD_G  },
-  { id: 'decision', label: 'The Decision',  color: PURPLE, glow: PURP_G  },
+  { id: 'recall',    label: 'Total Recall',  color: GOLD,   glow: GOLD_G  },
+  { id: 'memory',    label: 'Time Machine',  color: PURPLE, glow: PURP_G  },
+  { id: 'compound',  label: 'Living Memory', color: GOLD,   glow: GOLD_G  },
+  { id: 'cortex',    label: 'The Cortex',    color: PURPLE, glow: PURP_G  },
+  { id: 'sovereign', label: 'Sovereignty',   color: GOLD,   glow: GOLD_G  },
+  { id: 'sectors',   label: "Who It's For",  color: PURPLE, glow: PURP_G  },
+  { id: 'decision',  label: 'The Decision',  color: GOLD,   glow: GOLD_G  },
 ];
 
 // ── Total Recall data — curated, controlled, simulated ───────────
@@ -575,6 +576,254 @@ function CortexPanel() {
 
 // Sectors data
 
+// ── Sovereign Lattice ────────────────────────────────────────────────────────────
+// Perimeter of ~180 particles with spring physics.
+// Mouse hover = inverse-square repulsion, particles scatter + spring back.
+// Automated probe every ~8s: red dot launches from outside, hits lattice,
+// nearby particles scatter gold, probe bounces back — rejected silently.
+// Data nodes = drifting rectangles inside the perimeter.
+// Canvas fills its own dark background — card shell uses design system tokens.
+
+interface LatP { rx:number; ry:number; px:number; py:number; vx:number; vy:number; glow:number; }
+interface LatN { x:number; y:number; vx:number; vy:number; w:number; h:number; label:string; }
+interface LatProbe { on:boolean; sx:number; sy:number; tx:number; ty:number; t:number; hit:boolean; }
+
+const SOV_NODES = ['Memory','Patterns','Decisions','Relationships','Context','History','Intelligence','Identity'];
+
+function SovereignLattice() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const wrapRef   = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const wrap   = wrapRef.current;
+    if (!canvas || !wrap) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const STEP   = 11;    // lattice spacing px
+    const PAD    = 22;    // lattice inset from canvas edge
+    const KS     = 0.048; // spring constant
+    const DAMP   = 0.79;  // velocity damping
+    const R_RAD  = 78;    // mouse repulsion radius
+    const R_STR  = 15000; // mouse repulsion strength
+    const IN_PAD = 90;    // data node exclusion from edge
+
+    let W = 0, H = 0;
+    let particles: LatP[]  = [];
+    let nodes: LatN[]      = [];
+    let probe: LatProbe    = { on:false, sx:0, sy:0, tx:0, ty:0, t:0, hit:false };
+    let mx = -999, my = -999, mActive = false;
+    let tick = 0, frameId = 0;
+
+    // Rounded rect path helper (avoids TS type issues with ctx.roundRect)
+    const rr = (x:number, y:number, w:number, h:number, r:number) => {
+      ctx.beginPath();
+      ctx.moveTo(x+r, y);
+      ctx.lineTo(x+w-r, y); ctx.arcTo(x+w, y, x+w, y+r, r);
+      ctx.lineTo(x+w, y+h-r); ctx.arcTo(x+w, y+h, x+w-r, y+h, r);
+      ctx.lineTo(x+r, y+h); ctx.arcTo(x, y+h, x, y+h-r, r);
+      ctx.lineTo(x, y+r); ctx.arcTo(x, y, x+r, y, r);
+      ctx.closePath();
+    };
+
+    const buildLattice = () => {
+      const pts: {x:number; y:number}[] = [];
+      for (let x = PAD;         x <= W-PAD; x += STEP) pts.push({x, y:PAD});
+      for (let y = PAD+STEP;    y <= H-PAD; y += STEP) pts.push({x:W-PAD, y});
+      for (let x = W-PAD-STEP;  x >= PAD;   x -= STEP) pts.push({x, y:H-PAD});
+      for (let y = H-PAD-STEP;  y  > PAD;   y -= STEP) pts.push({x:PAD, y});
+      particles = pts.map(p => ({ rx:p.x, ry:p.y, px:p.x, py:p.y, vx:0, vy:0, glow:0 }));
+    };
+
+    const buildNodes = () => {
+      const sw = W - IN_PAD*2, sh = H - IN_PAD*2;
+      const cols = 3, rows = Math.ceil(SOV_NODES.length / cols);
+      nodes = SOV_NODES.map((label, i) => {
+        const nw = label.length * 7 + 18, nh = 24;
+        const col = i % cols, row = Math.floor(i / cols);
+        return {
+          x:  IN_PAD + (col + 0.5) * (sw/cols) - nw/2 + (Math.random()-0.5)*24,
+          y:  IN_PAD + (row + 0.5) * (sh/rows) - nh/2 + (Math.random()-0.5)*18,
+          vx: (Math.random()-0.5)*0.22, vy: (Math.random()-0.5)*0.22,
+          w: nw, h: nh, label,
+        };
+      });
+    };
+
+    const setup = () => {
+      const dpr = window.devicePixelRatio || 1;
+      W = wrap.offsetWidth; H = wrap.offsetHeight;
+      canvas.width  = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = W+'px'; canvas.style.height = H+'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildLattice(); buildNodes();
+    };
+
+    const scatter = (tx:number, ty:number, str:number) => {
+      particles.forEach(p => {
+        const dx = p.px-tx, dy = p.py-ty, d = Math.hypot(dx, dy);
+        if (d < 68 && d > 0) {
+          const f = (68-d)/68 * str;
+          p.vx += dx/d*f; p.vy += dy/d*f;
+          p.glow = Math.max(p.glow, 1 - d/68);
+        }
+      });
+    };
+
+    const launchProbe = () => {
+      const edge = Math.floor(Math.random()*4);
+      let sx=0, sy=0, tx=0, ty=0;
+      if (edge===0) { tx=W*.25+Math.random()*W*.5; ty=PAD;   sx=tx+(Math.random()-.5)*30; sy=-18; }
+      if (edge===1) { ty=H*.25+Math.random()*H*.5; tx=W-PAD; sx=W+18; sy=ty+(Math.random()-.5)*30; }
+      if (edge===2) { tx=W*.25+Math.random()*W*.5; ty=H-PAD; sx=tx+(Math.random()-.5)*30; sy=H+18; }
+      if (edge===3) { ty=H*.25+Math.random()*H*.5; tx=PAD;   sx=-18;  sy=ty+(Math.random()-.5)*30; }
+      probe = { on:true, sx, sy, tx, ty, t:0, hit:false };
+    };
+
+    const loop = () => {
+      tick++;
+      if (!probe.on && tick % 480 === 120) launchProbe();
+
+      // Update probe
+      if (probe.on) {
+        probe.t += 0.022;
+        if (probe.t >= 1 && !probe.hit) { probe.hit = true; scatter(probe.tx, probe.ty, 7.5); }
+        if (probe.t >= 2) probe.on = false;
+      }
+
+      // Update particles
+      particles.forEach(p => {
+        p.vx += (p.rx-p.px)*KS; p.vy += (p.ry-p.py)*KS;
+        if (mActive) {
+          const dx=p.px-mx, dy=p.py-my, d=Math.hypot(dx, dy);
+          if (d < R_RAD && d > 0) {
+            const f = R_STR / (d*d*d);
+            p.vx += dx*f; p.vy += dy*f;
+            p.glow = Math.max(p.glow, (1 - d/R_RAD)*0.85);
+          }
+        }
+        p.vx *= DAMP; p.vy *= DAMP;
+        p.px += p.vx; p.py += p.vy;
+        p.glow *= 0.93;
+      });
+
+      // Update nodes
+      nodes.forEach((n, i) => {
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < IN_PAD)           { n.x = IN_PAD;           n.vx *= -0.8; }
+        if (n.y < IN_PAD)           { n.y = IN_PAD;           n.vy *= -0.8; }
+        if (n.x+n.w > W-IN_PAD)     { n.x = W-IN_PAD-n.w;    n.vx *= -0.8; }
+        if (n.y+n.h > H-IN_PAD)     { n.y = H-IN_PAD-n.h;    n.vy *= -0.8; }
+        // Gentle random nudge
+        if (tick % 200 === i*25 % 200) {
+          n.vx += (Math.random()-.5)*0.08; n.vy += (Math.random()-.5)*0.08;
+          const spd = Math.hypot(n.vx, n.vy);
+          if (spd > 0.35) { n.vx *= 0.35/spd; n.vy *= 0.35/spd; }
+        }
+      });
+
+      // ── Draw ──
+      ctx.clearRect(0, 0, W, H);
+
+      // Dark interior (canvas fills background, card shell keeps token styles)
+      ctx.fillStyle = 'rgba(6,6,8,0.97)';
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle inner gold ambient
+      const ag = ctx.createRadialGradient(W/2,H/2,0, W/2,H/2, Math.min(W,H)*0.42);
+      ag.addColorStop(0, 'rgba(200,169,110,0.035)'); ag.addColorStop(1, 'transparent');
+      ctx.fillStyle = ag; ctx.fillRect(0, 0, W, H);
+
+      // Lattice connections
+      ctx.lineWidth = 0.55;
+      for (let i = 0; i < particles.length; i++) {
+        const a = particles[i], b = particles[(i+1) % particles.length];
+        const d = Math.hypot(a.px-b.px, a.py-b.py);
+        if (d > STEP*3.8) continue;
+        const stress = Math.max(a.glow, b.glow);
+        const alpha  = (1 - d/(STEP*3.8)) * (0.13 + stress*0.32);
+        ctx.strokeStyle = stress > 0.08
+          ? `rgba(200,169,110,${alpha})`
+          : `rgba(255,255,255,${alpha})`;
+        ctx.beginPath(); ctx.moveTo(a.px, a.py); ctx.lineTo(b.px, b.py); ctx.stroke();
+      }
+
+      // Lattice particles
+      particles.forEach(p => {
+        const sz = 1.4 + p.glow*1.6;
+        if (p.glow > 0.06) {
+          const g = ctx.createRadialGradient(p.px,p.py,0, p.px,p.py, sz*5);
+          g.addColorStop(0, `rgba(200,169,110,${p.glow*0.42})`); g.addColorStop(1,'transparent');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(p.px, p.py, sz*5, 0, Math.PI*2); ctx.fill();
+          ctx.fillStyle = `rgba(200,169,110,${0.65+p.glow*0.35})`;
+        } else {
+          ctx.fillStyle = `rgba(255,255,255,${0.26+p.glow*0.18})`;
+        }
+        ctx.beginPath(); ctx.arc(p.px, p.py, sz, 0, Math.PI*2); ctx.fill();
+      });
+
+      // Probe (approach phase only — bounce-back is invisible)
+      if (probe.on && !probe.hit) {
+        const t  = Math.min(probe.t, 1);
+        const px = probe.sx + (probe.tx-probe.sx)*t;
+        const py = probe.sy + (probe.ty-probe.sy)*t;
+        ctx.strokeStyle = 'rgba(220,55,55,0.15)';
+        ctx.lineWidth   = 1;
+        ctx.beginPath(); ctx.moveTo(probe.sx, probe.sy); ctx.lineTo(px, py); ctx.stroke();
+        ctx.fillStyle = 'rgba(240,70,55,0.88)';
+        ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI*2); ctx.fill();
+      }
+
+      // Data nodes (rectangles)
+      ctx.font = '7.5px ui-monospace, "SF Mono", monospace';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      nodes.forEach(n => {
+        rr(n.x, n.y, n.w, n.h, 3);
+        ctx.fillStyle   = 'rgba(200,169,110,0.045)'; ctx.fill();
+        ctx.strokeStyle = 'rgba(200,169,110,0.20)';  ctx.lineWidth = 0.75; ctx.stroke();
+        ctx.fillStyle   = 'rgba(200,169,110,0.60)';
+        ctx.fillText(n.label.toUpperCase(), n.x+n.w/2, n.y+n.h/2);
+      });
+
+      frameId = requestAnimationFrame(loop);
+    };
+
+    setup();
+    frameId = requestAnimationFrame(loop);
+
+    const onMove  = (e: MouseEvent) => {
+      const r = canvas.getBoundingClientRect();
+      mx = e.clientX-r.left; my = e.clientY-r.top; mActive = true;
+    };
+    const onLeave = () => { mActive = false; };
+    wrap.addEventListener('mousemove', onMove);
+    wrap.addEventListener('mouseleave', onLeave);
+    const ro = new ResizeObserver(setup); ro.observe(wrap);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      wrap.removeEventListener('mousemove', onMove);
+      wrap.removeEventListener('mouseleave', onLeave);
+      ro.disconnect();
+    };
+  }, []);
+
+  return (
+    <div ref={wrapRef} className="h2-sovereign-wrap">
+      <canvas ref={canvasRef} className="h2-sovereign-canvas" />
+      <div className="h2-sovereign-badge">Sovereign Architecture</div>
+      <div className="h2-sovereign-hint">hover to probe the perimeter</div>
+      <div className="h2-sovereign-footer">
+        <span>Your data · Your rules · Your infrastructure</span>
+        <span>Model-Agnostic</span>
+      </div>
+    </div>
+  );
+}
+
+
 const SECTORS = [
   { num:'01', label:'Legal',
     body:'Every case. Every client conversation. Privileged, queryable, and never leaving your network.' },
@@ -795,7 +1044,47 @@ export default function HomeV2Page() {
 
         <div data-reveal className="h2-divider" />
 
-        {/* ══ Chapter 4: SECTORS ═══════════════════ */}
+        {/* ══ Chapter 5: SOVEREIGNTY ════════════════ */}
+        <section className="h2-section" data-section="sovereign">
+          <div className="h2-grid" data-reveal>
+
+            {/* Editorial left */}
+            <div>
+              <span className="h2-label">Data Sovereignty</span>
+              <h2 className="h2-heading">
+                Intelligence that never<br />leaves your perimeter.
+              </h2>
+              <p className="h2-lead">
+                Built to run on your infrastructure.<br />
+                Your LLM. Your database. Your rules.
+              </p>
+              <p className="h2-body">
+                Most AI tools are built for their infrastructure — your data
+                flows through their systems, lives on their servers, and
+                funds their next training run. LongStrider is different
+                in design: deploy on your own infrastructure, connect any
+                LLM — hosted or local — and keep every byte of organizational
+                intelligence exactly where you tell it to stay.
+              </p>
+              <div className="h2-compare">
+                <div>Deploy on your own infrastructure — cloud or on-prem</div>
+                <div>Bring any LLM — OpenAI, Ollama, Claude, Llama</div>
+                <div>Your data never trains an external model</div>
+              </div>
+            </div>
+
+            {/* Lattice right */}
+            <div data-reveal data-delay="2">
+              <SovereignLattice />
+            </div>
+
+          </div>
+        </section>
+
+        <div data-reveal className="h2-divider" />
+
+        {/* ══ Chapter 6: SECTORS ════════════════════ */}
+
         <section className="h2-section h2-section-alt h2-section-center" data-section="sectors">
           <div className="h2-inner">
             <div data-reveal>
