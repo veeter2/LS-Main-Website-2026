@@ -68,7 +68,7 @@
 /* ── Section rhythm ───────────────────────────────────────────── */
 
 .h2-section {
-  padding: 140px 10vw;
+  padding: var(--section-pad-v) var(--section-pad-h);
   border-top: 1px solid var(--color-border-subtle);
 }
 .h2-section-alt {
@@ -81,11 +81,11 @@
 /* ── Two-column product grid ──────────────────────────────────── */
 
 .h2-grid {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: var(--grid-columns);
+  gap: var(--grid-gap);
   align-items: center;
 }
 .h2-grid-reverse {
@@ -98,7 +98,7 @@
 /* ── Inner content max-width (solo sections) ──────────────────── */
 
 .h2-inner {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
 }
 
@@ -803,21 +803,24 @@
   50%     { transform: translateY(-4px); }
 }
 
-/* ── Responsive ───────────────────────────────────────────────── */
+/* ── Responsive — token-driven overrides ──────────────────────── */
 
-@media (max-width: 960px) {
-  .h2-section { padding: 100px 6vw; }
-  .h2-grid { grid-template-columns: 1fr; gap: 48px; }
+@media (max-width: 1024px) {
   .h2-grid-reverse { direction: ltr; }
   .h2-sectors-grid { grid-template-columns: repeat(2, 1fr); }
-  .h2-canvas-wrap { height: 320px; }
-  .h2-shield-wrap { height: 320px; }
+  .h2-canvas-wrap { height: var(--canvas-height); }
+  .h2-shield-wrap { height: var(--canvas-height); }
   .h2-tools-row { grid-template-columns: repeat(5, 1fr); gap: 4px; }
 }
 
-@media (max-width: 600px) {
-  .h2-section { padding: 80px 6vw; }
+@media (max-width: 768px) {
   .h2-sectors-grid { grid-template-columns: 1fr; }
   .h2-heading { font-size: clamp(26px, 7vw, 36px); }
+  .h2-card { padding: var(--card-pad); }
 }
 
+@media (max-width: 480px) {
+  .h2-card { padding: var(--card-pad); }
+  .h2-tools-row { grid-template-columns: repeat(3, 1fr); }
+  .h2-cta-pill { padding: 12px 32px; font-size: 14px; }
+}

@@ -49,7 +49,7 @@ export function HeroSection() {
       {/* Content — manifesto-aligned, above the fold */}
       <div
         className="relative z-10"
-        style={{ padding: '120px 48px 80px' }}
+        style={{ padding: 'var(--hero-pad-top) var(--hero-pad-h) 80px' }}
       >
         <motion.div
           className="flex flex-col items-center text-center"

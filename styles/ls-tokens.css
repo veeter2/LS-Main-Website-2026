@@ -1,7 +1,8 @@
-/* LONGSTRIDER DESIGN TOKENS v1.0 */
+/* LONGSTRIDER DESIGN TOKENS v1.1 — responsive */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
 
 :root {
+  /* ── Color ─────────────────────────────────────────────── */
   --color-bg: #080809;
   --color-gold: #c8a96e;
   --color-gold-light: #dcc38a;
@@ -20,9 +21,13 @@
   --color-border: rgba(255,255,255,0.06);
   --color-border-subtle: rgba(255,255,255,0.04);
   --color-border-gold: rgba(200,169,110,0.22);
+
+  /* ── Typography ────────────────────────────────────────── */
   --font-display: 'Cormorant Garamond','Lora',Georgia,serif;
   --font-body: 'Lora',Georgia,serif;
   --font-ui: 'Inter',-apple-system,system-ui,sans-serif;
+
+  /* ── Surface ───────────────────────────────────────────── */
   --glass-bg: rgba(8,8,9,0.85);
   --glass-blur: blur(20px);
   --card-bg: rgba(255,255,255,0.02);
@@ -32,7 +37,56 @@
   --ease-out: cubic-bezier(0.16,1,0.3,1);
   --shadow-float: 0 12px 48px rgba(0,0,0,0.55);
   --glow-gold: 0 0 24px rgba(200,169,110,0.15);
+
+  /* ── Layout — desktop defaults ─────────────────────────── */
+  --section-pad-v: 140px;
+  --section-pad-h: 10vw;
+  --grid-gap: 80px;
+  --grid-columns: 1fr 1fr;
+  --card-pad: 36px;
+  --canvas-height: 440px;
+  --container-max: 1200px;
+  --hero-pad-top: 120px;
+  --hero-pad-h: 48px;
 }
+
+/* ── Responsive layout overrides ─────────────────────────── */
+
+@media (max-width: 1024px) {
+  :root {
+    --section-pad-v: 100px;
+    --section-pad-h: 6vw;
+    --grid-gap: 48px;
+    --grid-columns: 1fr;
+    --canvas-height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-pad-v: 80px;
+    --section-pad-h: 5vw;
+    --grid-gap: 40px;
+    --card-pad: 28px;
+    --canvas-height: 300px;
+    --hero-pad-top: 100px;
+    --hero-pad-h: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-pad-v: 64px;
+    --section-pad-h: 20px;
+    --grid-gap: 32px;
+    --card-pad: 20px;
+    --canvas-height: 260px;
+    --hero-pad-top: 88px;
+    --hero-pad-h: 20px;
+  }
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
 
 html { background: var(--color-bg); }
 body {
