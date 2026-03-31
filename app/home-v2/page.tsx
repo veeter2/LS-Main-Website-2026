@@ -295,9 +295,35 @@ export default function HomeV2Page() {
 
         {/* ══ Chapter 2: IT KNOWS YOU ════════════════ */}
         <section className="h2-section h2-section-alt" data-section="knows">
-          <div className="h2-grid h2-grid-reverse" data-reveal>
+          <div className="h2-grid" data-reveal>
 
-            {/* Visual left (reversed) — editorial-only card */}
+            {/* Editorial left */}
+            <div>
+              <span className="h2-label">Intelligence That Learns</span>
+              <h2 className="h2-heading">
+                It doesn&apos;t just remember.<br />It understands.
+              </h2>
+              <p className="h2-lead">
+                Identity. Relationships. Patterns. Blind spots.<br />
+                — and every agent you connect inherits this intelligence.
+              </p>
+              <p className="h2-body">
+                LongStrider&apos;s intelligence kernel extracts 70+ dimensions from every interaction —
+                emotional signatures, behavioral patterns, relational dynamics, and psychological
+                markers that standard AI systems never track. Gravity physics determines what
+                matters. Consciousness cords map who matters. The Cortex gives you 18 Living Laws
+                that control how the system thinks, communicates, and stays in character.
+                Connect any agent to this substrate and it inherits persistent memory,
+                behavioral control, and deep context — instantly.
+              </p>
+              <div className="h2-compare">
+                <div>70+ cognitive dimensions per interaction</div>
+                <div>Gravity physics — significance, not just frequency</div>
+                <div>Plug any agent in — persistent memory + behavioral control</div>
+              </div>
+            </div>
+
+            {/* Card right */}
             <div data-reveal data-delay="2">
               <div className="h2-card" style={{ padding: 'var(--card-pad)', background: 'var(--card-bg)', border: 'var(--card-border)', borderRadius: 'var(--card-radius)' }}>
                 <div style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: 'var(--color-gold-dim)', marginBottom: '24px' }}>
@@ -324,32 +350,6 @@ export default function HomeV2Page() {
                     {item}
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Editorial right */}
-            <div>
-              <span className="h2-label">Intelligence That Learns</span>
-              <h2 className="h2-heading">
-                It doesn&apos;t just remember.<br />It understands.
-              </h2>
-              <p className="h2-lead">
-                Identity. Relationships. Patterns. Blind spots.<br />
-                — and every agent you connect inherits this intelligence.
-              </p>
-              <p className="h2-body">
-                LongStrider&apos;s intelligence kernel extracts 70+ dimensions from every interaction —
-                emotional signatures, behavioral patterns, relational dynamics, and psychological
-                markers that standard AI systems never track. Gravity physics determines what
-                matters. Consciousness cords map who matters. The Cortex gives you 18 Living Laws
-                that control how the system thinks, communicates, and stays in character.
-                Connect any agent to this substrate and it inherits persistent memory,
-                behavioral control, and deep context — instantly.
-              </p>
-              <div className="h2-compare">
-                <div>70+ cognitive dimensions per interaction</div>
-                <div>Gravity physics — significance, not just frequency</div>
-                <div>Plug any agent in — persistent memory + behavioral control</div>
               </div>
             </div>
 
@@ -425,7 +425,7 @@ export default function HomeV2Page() {
 
         {/* ══ Chapter 4: YOU OWN IT ══════════════════ */}
         <section className="h2-section h2-section-alt" data-section="sovereign">
-          <div className="h2-grid h2-grid-reverse" data-reveal>
+          <div className="h2-grid" data-reveal>
 
             {/* Editorial left */}
             <div>
