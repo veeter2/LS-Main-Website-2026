@@ -73,65 +73,72 @@ const QUERIES = [
 
 type RecallPhase = 'query' | 'answer' | 'detail' | 'hold' | 'fade';
 
+interface RecallState {
+  qi:          number;
+  queryChars:  number;
+  answerChars: number;
+  detailChars: number;
+  phase:       RecallPhase;
+  opacity:     number;
+}
+
+const RECALL_INIT: RecallState = {
+  qi: 0, queryChars: 0, answerChars: 0, detailChars: 0,
+  phase: 'query', opacity: 1,
+};
+
+function nextRecallState(s: RecallState): [RecallState, number] {
+  const q = QUERIES[s.qi];
+  // returns [nextState, delayMs]
+  if (s.phase === 'query') {
+    if (s.queryChars < q.query.length)
+      return [{ ...s, queryChars: s.queryChars + 1 }, 32];
+    return [{ ...s, phase: 'answer' }, 520];
+  }
+  if (s.phase === 'answer') {
+    if (s.answerChars < q.answer.length)
+      return [{ ...s, answerChars: s.answerChars + 1 }, 28];
+    return [{ ...s, phase: 'detail' }, 250];
+  }
+  if (s.phase === 'detail') {
+    if (s.detailChars < q.detail.length)
+      return [{ ...s, detailChars: s.detailChars + 1 }, 18];
+    return [{ ...s, phase: 'hold' }, 300];
+  }
+  if (s.phase === 'hold')
+    return [{ ...s, phase: 'fade', opacity: 0 }, 3_800];
+  // fade → reset atomically — no qi/phase split
+  return [{
+    qi:          (s.qi + 1) % QUERIES.length,
+    queryChars:  0,
+    answerChars: 0,
+    detailChars: 0,
+    phase:       'query',
+    opacity:     1,
+  }, 700];
+}
+
 function TotalRecallCard() {
-  const [qi,           setQi]           = useState(0);
-  const [dispQuery,    setDispQuery]    = useState('');
-  const [dispAnswer,   setDispAnswer]   = useState('');
-  const [dispDetail,   setDispDetail]   = useState('');
-  const [phase,        setPhase]        = useState<RecallPhase>('query');
-  const [panelOpacity, setPanelOpacity] = useState(1);
+  const [s, setS] = useState<RecallState>(RECALL_INIT);
 
+  // Single effect — one timeout per tick, always cleaned up
   useEffect(() => {
-    setDispQuery(''); setDispAnswer(''); setDispDetail('');
-    setPhase('query'); setPanelOpacity(1);
-  }, [qi]);
+    const [next, delay] = nextRecallState(s);
+    const t = setTimeout(() => setS(next), delay);
+    return () => clearTimeout(t);
+  }, [s]);
 
-  useEffect(() => {
-    const q = QUERIES[qi];
-
-    if (phase === 'query') {
-      if (dispQuery.length < q.query.length) {
-        const t = setTimeout(() => setDispQuery(q.query.slice(0, dispQuery.length + 1)), 32);
-        return () => clearTimeout(t);
-      }
-      const t = setTimeout(() => setPhase('answer'), 520);
-      return () => clearTimeout(t);
-    }
-    if (phase === 'answer') {
-      if (dispAnswer.length < q.answer.length) {
-        const t = setTimeout(() => setDispAnswer(q.answer.slice(0, dispAnswer.length + 1)), 28);
-        return () => clearTimeout(t);
-      }
-      const t = setTimeout(() => setPhase('detail'), 250);
-      return () => clearTimeout(t);
-    }
-    if (phase === 'detail') {
-      if (dispDetail.length < q.detail.length) {
-        const t = setTimeout(() => setDispDetail(q.detail.slice(0, dispDetail.length + 1)), 18);
-        return () => clearTimeout(t);
-      }
-      const t = setTimeout(() => setPhase('hold'), 300);
-      return () => clearTimeout(t);
-    }
-    if (phase === 'hold') {
-      const t = setTimeout(() => setPhase('fade'), 3_800);
-      return () => clearTimeout(t);
-    }
-    if (phase === 'fade') {
-      setPanelOpacity(0);
-      const t = setTimeout(() => setQi((c) => (c + 1) % QUERIES.length), 700);
-      return () => clearTimeout(t);
-    }
-  }, [phase, dispQuery, dispAnswer, dispDetail, qi]);
-
-  const q = QUERIES[qi];
-  const showCursor  = phase === 'query' || (phase === 'answer' && !dispAnswer);
-  const showEntities = phase === 'hold' || phase === 'fade';
+  const q           = QUERIES[s.qi];
+  const dispQuery   = q.query.slice(0, s.queryChars);
+  const dispAnswer  = q.answer.slice(0, s.answerChars);
+  const dispDetail  = q.detail.slice(0, s.detailChars);
+  const showCursor  = s.phase === 'query' || (s.phase === 'answer' && !s.answerChars);
+  const showEntities = s.phase === 'hold' || s.phase === 'fade';
 
   return (
     <div
       className="h2-card"
-      style={{ opacity: panelOpacity, transition: 'opacity 0.65s var(--ease-out)', minHeight: '340px' }}
+      style={{ opacity: s.opacity, transition: 'opacity 0.65s var(--ease-out)', minHeight: '340px' }}
     >
       {/* Query line */}
       <div style={{ marginBottom: '24px' }}>
@@ -172,8 +179,8 @@ function TotalRecallCard() {
         {QUERIES.map((_, i) => (
           <div
             key={i}
-            className={`h2-dot ${i === qi ? 'h2-dot-active' : 'h2-dot-inactive'}`}
-            style={{ width: i === qi ? 24 : 6 }}
+            className={`h2-dot ${i === s.qi ? 'h2-dot-active' : 'h2-dot-inactive'}`}
+            style={{ width: i === s.qi ? 24 : 6 }}
           />
         ))}
       </div>
