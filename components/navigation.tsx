@@ -2,6 +2,7 @@
 
 import { useState, useEffect, createContext, useContext } from 'react';
 import Link from 'next/link';
+import { Footer } from '@/components/footer';
 import { usePathname } from 'next/navigation';
 import { LongstriderLogo } from '@/components/longstrider-logo';
 import { LivingMemoryV5 } from '@/components/icons/living-memory';
@@ -67,149 +68,182 @@ export function useSections(nodes: SectionNode[]) {
 }
 
 // ── Nav items ─────────────────────────────────────────────────
+interface SubItem {
+  label: string;
+  href: string;
+  live?: boolean;
+}
+
 interface NavItem {
   label: string;
   href: string;
   sub: string;
   live: boolean;
   Icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>;
+  children?: SubItem[]; // presence = chevron + accordion
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Manifesto',    href: '/manifesto',    sub: 'The argument for sovereign intelligence',    live: true,  Icon: LivingMemoryV5     },
-  { label: 'Field Notes',  href: '/field-notes',  sub: 'Research, intelligence logs & guides',       live: true,  Icon: InsightSparkV2     },
-  { label: 'Technology',   href: '/technology',   sub: 'Architecture & how it works',               live: true,  Icon: GravityWellV3      },
-  { label: 'Contact',      href: '/contact',      sub: 'Start a conversation',                       live: true,  Icon: CognitiveSynthesisV2 },
-  { label: 'Case Studies', href: '/case-studies', sub: 'Proof of compounding in practice',           live: false, Icon: MemoryArcV1        },
-  { label: 'About',        href: '/about',        sub: 'Founding story & team',                      live: false, Icon: ConvergenceV1      },
+  { label: 'Manifesto',    href: '/manifesto',    sub: 'The argument for sovereign intelligence', live: true,  Icon: LivingMemoryV5,
+  },
+  { label: 'Field Notes',  href: '/field-notes',  sub: 'Research, intelligence logs & guides',    live: true,  Icon: InsightSparkV2,
+  },
+  { label: 'Technology',   href: '/technology',   sub: 'Architecture & how it works',             live: true,  Icon: GravityWellV3,
+    children: [
+      { label: 'Overview',          href: '/technology',           live: true  },
+      { label: 'The Intelligence Kernel', href: '/technology/kernel',  live: false },
+      { label: 'Neural Topology',   href: '/technology/cortex',    live: false },
+      { label: 'Living Memory',     href: '/technology/memory',    live: false },
+    ],
+  },
+  { label: 'Contact',      href: '/contact',      sub: 'Start a conversation',                   live: true,  Icon: CognitiveSynthesisV2,
+  },
+  { label: 'Case Studies', href: '/case-studies', sub: 'Proof of compounding in practice',       live: false, Icon: MemoryArcV1,
+    children: [
+      { label: 'PE Portfolio Intelligence', href: '/case-studies/pe',          live: false },
+      { label: 'Key Departure Protocol',    href: '/case-studies/departure',   live: false },
+      { label: 'Regulated Industry Deploy', href: '/case-studies/regulated',   live: false },
+    ],
+  },
+  { label: 'About',        href: '/about',        sub: 'Founding story & team',                  live: false, Icon: ConvergenceV1,
+  },
 ];
 
 
 // ── Overlay nav row ───────────────────────────────────────────
 function OverlayRow({
-  item,
-  isActive,
-  coming,
-  delay,
-  menuOpen,
-  onClose,
-  pathname,
+  item, isActive, coming, delay, menuOpen, onClose, expanded, onToggle,
 }: {
-  item: NavItem;
-  isActive: boolean;
-  coming: boolean;
-  delay: number;
-  menuOpen: boolean;
-  onClose: () => void;
-  pathname: string;
+  item: NavItem; isActive: boolean; coming: boolean; delay: number;
+  menuOpen: boolean; onClose: () => void; expanded: boolean; onToggle: () => void;
 }) {
   const [hovered, setHovered] = useState(false);
   const Icon = item.Icon;
+  const hasChildren = !!item.children?.length;
 
-  const rowColor = coming
-    ? 'rgba(255,255,255,0.22)'
-    : isActive
-      ? GOLD
-      : hovered
-        ? 'rgba(255,255,255,0.95)'
-        : 'rgba(255,255,255,0.68)';
+  const rowColor = coming ? 'rgba(255,255,255,0.22)'
+    : isActive ? GOLD
+    : hovered ? 'rgba(255,255,255,0.95)'
+    : 'rgba(255,255,255,0.68)';
 
-  const iconColor = coming
-    ? 'rgba(255,255,255,0.18)'
-    : isActive || hovered
-      ? GOLD
-      : 'rgba(255,255,255,0.35)';
+  const iconColor = coming ? 'rgba(255,255,255,0.18)'
+    : isActive || hovered ? GOLD
+    : 'rgba(255,255,255,0.35)';
 
   const inner = (
     <div
       onMouseEnter={() => !coming && setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => { if (coming) return; if (hasChildren) onToggle(); }}
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '24px',
-        padding: '24px 0',
+        display: 'flex', alignItems: 'center', gap: '24px',
+        padding: '16px 0',
         cursor: coming ? 'default' : 'pointer',
         transition: 'all 0.3s ease',
       }}
     >
       {/* Icon */}
       <div style={{
-        width: '36px', height: '36px',
+        width: '32px', height: '32px',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        flexShrink: 0,
-        color: iconColor,
-        transition: 'color 0.3s ease',
+        flexShrink: 0, color: iconColor, transition: 'color 0.3s ease',
       }}>
-        <Icon size={26} />
+        <Icon size={22} />
       </div>
 
       {/* Text */}
       <div style={{ flex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '14px' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
           <span style={{
             fontFamily: "'Lora', Georgia, serif",
-            fontSize: 'clamp(20px, 2.8vw, 30px)',
-            fontWeight: 400,
-            letterSpacing: '-0.02em',
-            color: rowColor,
-            transition: 'color 0.3s ease',
+            fontSize: 'clamp(18px, 2.4vw, 26px)',
+            fontWeight: 400, letterSpacing: '-0.02em',
+            color: rowColor, transition: 'color 0.3s ease',
           }}>
             {item.label}
           </span>
           {coming && (
             <span style={{
-              fontFamily: "'Lora', Georgia, serif",
-              fontSize: '10px',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.2)',
-            }}>
-              — coming
-            </span>
+              fontFamily: "'Lora', Georgia, serif", fontSize: '10px',
+              letterSpacing: '0.12em', textTransform: 'uppercase',
+              color: 'rgba(255,255,255,0.18)',
+            }}>— coming</span>
           )}
         </div>
         <p style={{
-          fontFamily: "'Lora', Georgia, serif",
-          fontSize: '13px',
-          color: coming ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.36)',
-          marginTop: '3px',
-          letterSpacing: '0.01em',
-          transition: 'color 0.3s ease',
+          fontFamily: "'Lora', Georgia, serif", fontSize: '12px',
+          color: coming ? 'rgba(255,255,255,0.10)' : 'rgba(255,255,255,0.32)',
+          marginTop: '2px', letterSpacing: '0.01em', transition: 'color 0.3s ease',
         }}>
           {item.sub}
         </p>
       </div>
 
-      {/* Arrow */}
+      {/* Chevron (expandable) or Arrow (destination) */}
       {!coming && (
         <span style={{
-          fontFamily: "'Lora', Georgia, serif",
-          fontSize: '16px',
-          color: isActive || hovered ? GOLD : 'rgba(255,255,255,0.15)',
-          transform: hovered ? 'translateX(4px)' : 'translateX(0)',
-          transition: 'all 0.3s ease',
+          fontSize: hasChildren ? '18px' : '15px',
+          color: isActive || hovered ? GOLD : 'rgba(255,255,255,0.18)',
+          transform: hasChildren
+            ? (expanded ? 'rotate(90deg)' : 'rotate(0deg)')
+            : (hovered ? 'translateX(4px)' : 'translateX(0)'),
+          transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
+          display: 'inline-block',
         }}>
-          →
+          {hasChildren ? '›' : '→'}
         </span>
       )}
     </div>
   );
 
+  // Sub-items accordion
+  const subItems = (
+    <div style={{
+      overflow: 'hidden',
+      maxHeight: expanded ? '300px' : '0',
+      transition: 'max-height 0.4s cubic-bezier(0.16,1,0.3,1)',
+    }}>
+      <div style={{ paddingLeft: '56px', paddingBottom: '12px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+        {item.children?.map((child) => (
+          child.live !== false ? (
+            <Link key={child.href} href={child.href} onClick={onClose} style={{
+              fontFamily: "'Lora', Georgia, serif", fontSize: '13px',
+              color: 'rgba(255,255,255,0.50)', textDecoration: 'none',
+              padding: '6px 0', letterSpacing: '0.01em',
+              transition: 'color 0.2s ease', display: 'block',
+            }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = GOLD)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.50)')}
+            >
+              {child.label} <span style={{ opacity: 0.4, fontSize: '11px' }}>→</span>
+            </Link>
+          ) : (
+            <span key={child.href} style={{
+              fontFamily: "'Lora', Georgia, serif", fontSize: '13px',
+              color: 'rgba(255,255,255,0.18)', padding: '6px 0',
+              letterSpacing: '0.01em', display: 'block',
+            }}>
+              {child.label} <span style={{ fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>— coming</span>
+            </span>
+          )
+        ))}
+      </div>
+    </div>
+  );
+
   return (
-    <div
-      style={{
-        borderBottom: '1px solid rgba(255,255,255,0.04)',
-        opacity: menuOpen ? 1 : 0,
-        transform: menuOpen ? 'translateX(0)' : 'translateX(-16px)',
-        transition: `opacity 0.5s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
-      }}
-    >
-      {coming ? inner : (
+    <div style={{
+      borderBottom: '1px solid rgba(255,255,255,0.04)',
+      opacity: menuOpen ? 1 : 0,
+      transform: menuOpen ? 'translateX(0)' : 'translateX(-16px)',
+      transition: `opacity 0.5s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+    }}>
+      {coming || hasChildren ? inner : (
         <Link href={item.href} onClick={onClose} style={{ textDecoration: 'none', display: 'block' }}>
           {inner}
         </Link>
       )}
+      {hasChildren && subItems}
     </div>
   );
 }
@@ -222,6 +256,7 @@ export function Navigation() {
   const [progress, setProgress]       = useState(0);
   const [entered, setEntered]         = useState(false);
   const [menuOpen, setMenuOpen]       = useState(false);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [beginHover, setBeginHover]   = useState(false);
   const [logoHover, setLogoHover]     = useState(false);
   const [showNodes, setShowNodes]     = useState(false);
@@ -428,8 +463,8 @@ export function Navigation() {
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? 'auto' : 'none',
           transition: 'opacity 0.45s cubic-bezier(0.16,1,0.3,1)',
-          display: 'flex', flexDirection: 'column', justifyContent: 'center',
-          padding: '80px 10vw 60px',
+          display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
+          padding: '96px 10vw 60px', overflowY: 'auto',
         }}
       >
         {/* Ambient orb */}
@@ -440,103 +475,26 @@ export function Navigation() {
           opacity: 0.018, filter: 'blur(120px)', pointerEvents: 'none',
         }} />
 
-        {/* Eyebrow */}
-        <p style={{
-          fontFamily: "'Lora', Georgia, serif",
-          fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase',
-          color: 'rgba(200,169,110,0.4)', marginBottom: '40px',
-          opacity: menuOpen ? 1 : 0,
-          transform: menuOpen ? 'translateY(0)' : 'translateY(10px)',
-          transition: 'all 0.5s cubic-bezier(0.16,1,0.3,1) 80ms',
-        }}>
-          Navigate
-        </p>
-
-        {/* Nav rows */}
-        <nav>
+        {/* Nav rows — justified to top, no eyebrow */}
+        <nav style={{ width: '100%' }}>
           {NAV_ITEMS.map((item, i) => (
             <OverlayRow
               key={item.href}
               item={item}
               isActive={pathname === item.href}
               coming={!item.live}
-              delay={100 + i * 65}
+              delay={80 + i * 55}
               menuOpen={menuOpen}
-              onClose={() => setMenuOpen(false)}
-              pathname={pathname}
+              onClose={() => { setMenuOpen(false); setExpandedItem(null); }}
+              expanded={expandedItem === item.href}
+              onToggle={() => setExpandedItem(expandedItem === item.href ? null : item.href)}
             />
           ))}
         </nav>
 
-        {/* ── Conversion CTA ── */}
-        <div style={{
-          marginTop: '56px',
-          paddingTop: '40px',
-          borderTop: '1px solid rgba(255,255,255,0.06)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '24px',
-          opacity: menuOpen ? 1 : 0,
-          transform: menuOpen ? 'translateY(0)' : 'translateY(8px)',
-          transition: `all 0.5s cubic-bezier(0.16,1,0.3,1) ${100 + NAV_ITEMS.length * 65 + 60}ms`,
-        }}>
-          <div>
-            <p style={{
-              fontFamily: "'Lora', Georgia, serif",
-              fontSize: '13px',
-              color: 'rgba(255,255,255,0.38)',
-              letterSpacing: '0.02em',
-              marginBottom: '4px',
-            }}>
-              Ready to make your intelligence sovereign?
-            </p>
-            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-              {[{ label: 'Privacy', href: '/privacy' }, { label: 'Terms', href: '/terms' }].map((l) => (
-                <Link key={l.href} href={l.href} onClick={() => setMenuOpen(false)} style={{
-                  fontFamily: "'Lora', Georgia, serif",
-                  fontSize: '11px', letterSpacing: '0.06em',
-                  color: 'rgba(255,255,255,0.2)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.2)'; }}
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <Link
-            href="/contact"
-            onClick={() => setMenuOpen(false)}
-            style={{
-              fontFamily: "'Lora', Georgia, serif",
-              fontSize: '14px', fontStyle: 'italic',
-              letterSpacing: '0.06em',
-              color: '#c8a96e',
-              textDecoration: 'none',
-              padding: '12px 32px',
-              border: '1px solid rgba(200,169,110,0.4)',
-              borderRadius: '100px',
-              background: 'rgba(200,169,110,0.06)',
-              transition: 'all 0.35s cubic-bezier(0.16,1,0.3,1)',
-              whiteSpace: 'nowrap',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(200,169,110,0.12)';
-              e.currentTarget.style.borderColor = 'rgba(200,169,110,0.6)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(200,169,110,0.06)';
-              e.currentTarget.style.borderColor = 'rgba(200,169,110,0.4)';
-            }}
-          >
-            Start a conversation →
-          </Link>
+        {/* Footer — pinned to overlay bottom */}
+        <div style={{ marginTop: 'auto', paddingTop: '24px' }}>
+          <Footer />
         </div>
       </div>
 

@@ -3,7 +3,7 @@
 /* Base page */
 .deck-page {
   min-height: 100vh;
-  background: #080809;
+  background: var(--color-bg);
   color: rgba(255, 255, 255, 0.82);
   font-family: 'Lora', Georgia, serif;
   position: relative;
