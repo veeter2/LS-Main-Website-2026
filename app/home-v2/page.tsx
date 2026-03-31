@@ -49,28 +49,28 @@ const CONVERSATIONS = [
     ls:       '41 times over 8 months. The tone shifted after the December call — you stopped negotiating and started litigating.',
     context:  'First raised: June 14, 2024 · Last: Yesterday at 3:47pm · Escalation detected Nov 28',
     signals:  ['contract dispute', 'strategy shift', 'liability exposure'],
-    relevance:  '0.91',
+    gravity:  '0.91',
   },
   {
     you:      'Hey — what did I miss?',
     ls:       'It\'s 7:14am. 2 days, 9 hours since we last connected. You have 4 open threads. I\'d close the GTM pricing model first — you said you wanted it done by Friday.',
     context:  'Open: GTM pricing · Brennan liability · Q2 board deck · Supplier audit · GTM deadline: April 4',
     signals:  ['session awareness', 'thread tracking', 'deadline recall'],
-    relevance:  '0.84',
+    gravity:  '0.84',
   },
   {
     you:      'Which supplier relationships are going quiet on us?',
     ls:       '3 accounts have crossed the silence threshold. Pacific Materials hasn\'t responded in 47 days — that\'s new for them.',
     context:  'Pacific Materials · Vertex Supply · GTS Logistics · Engagement declining since October',
     signals:  ['silence threshold', 'engagement drift', 'risk: sourcing'],
-    relevance:  '0.78',
+    gravity:  '0.78',
   },
   {
     you:      'What happened overnight?',
     ls:       'Consolidation completed at 3:12am. Your focus on the GTM plan has intensified — 6 sessions in 9 days. I\'ve promoted it to a primary knowledge cluster.',
     context:  'Overnight: 3 patterns recalibrated · 1 new arc detected · Stance adjusted: depth → standard',
     signals:  ['consolidation cycle', 'relevance promotion', 'circadian'],
-    relevance:  '0.62',
+    gravity:  '0.62',
   },
 ];
 
@@ -164,13 +164,13 @@ function TotalRecallCard() {
         <p className="h2-recall-detail h2-fadein">{dispContext}</p>
       )}
 
-      {/* Signal chips + relevance */}
+      {/* Signal chips + gravity */}
       {showSignals && (
         <div className="h2-chips h2-fadein">
           {c.signals.map((sig, i) => (
             <span key={i} className="h2-chip">{sig}</span>
           ))}
-          <span className="h2-chip-meta">relevance {c.relevance}</span>
+          <span className="h2-chip-meta">gravity {c.gravity}</span>
         </div>
       )}
 
@@ -282,7 +282,7 @@ export default function HomeV2Page() {
               </p>
               <div className="h2-compare">
                 <div>51,000+ memories · sub-5 second recall</div>
-                <div>Multi-dimensional retrieval: Entity × Temporal × Relevance × Topic</div>
+                <div>5-axis retrieval: Entity × Temporal × Relevance × Topic × Cluster</div>
                 <div>Deterministic SQL aggregation, not LLM estimation</div>
               </div>
             </div>
