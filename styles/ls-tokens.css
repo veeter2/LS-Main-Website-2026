@@ -8,6 +8,11 @@
   --color-gold-dim: rgba(200,169,110,0.65);
   --color-gold-border: rgba(200,169,110,0.35);
   --color-gold-ghost: rgba(200,169,110,0.08);
+  --color-purple: #8b5cf6;
+  --color-purple-dim: rgba(139,92,246,0.50);
+  --color-purple-ghost: rgba(139,92,246,0.08);
+  --color-purple-border: rgba(139,92,246,0.25);
+  --color-purple-glow: rgba(139,92,246,0.45);
   --color-text-primary: rgba(255,255,255,0.97);
   --color-text-body: rgba(255,255,255,0.88);
   --color-text-secondary: rgba(255,255,255,0.68);
