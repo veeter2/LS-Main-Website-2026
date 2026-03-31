@@ -465,12 +465,12 @@ export default function ManifestoPage() {
               <p className="deck-body" style={{ textAlign: 'center', maxWidth: '560px', margin: '0 auto 32px', color: 'rgba(255,255,255,0.6)', fontSize: '16px', lineHeight: '1.7' }}>
                 A white-label partner. A pilot customer. One investor introduction. If you know someone who belongs in any of those conversations — or if that&apos;s you — forward this and let&apos;s talk.
               </p>
-              <a href="mailto:matt@longstridersystems.com" className="deck-footer-button">
+              <a href="/contact" className="deck-footer-button">
                 <span>Start the conversation</span>
                 <span style={{ fontSize: '14px', opacity: 0.7 }}>→</span>
               </a>
               <p className="deck-footer-contact">
-                <a href="mailto:matt@longstridersystems.com">matt@longstridersystems.com</a>
+                <a href="/contact">Begin a conversation</a>
                 <span style={{ margin: '0 12px', opacity: 0.3 }}>·</span>
                 <a href="https://longstridersystems.com" target="_blank" rel="noopener noreferrer">longstridersystems.com</a>
               </p>
