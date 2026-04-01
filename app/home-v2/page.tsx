@@ -306,24 +306,24 @@ export default function HomeV2Page() {
             <div>
               <span className="h2-label">It Knows You</span>
               <h2 className="h2-heading">
-                It doesn&apos;t just remember.<br />It understands.
+                It doesn&apos;t just remember.<br />It acts on what it knows.
               </h2>
               <p className="h2-lead">
                 Identity. Relationships. Patterns. Blind spots.<br />
-                Built from every interaction. Compounding over time.
+                — and it doesn&apos;t wait for you to ask.
               </p>
               <p className="h2-body">
-                LongStrider extracts 70+ signals from every interaction —
-                emotional tone, cognitive patterns, relational dynamics, and behavioral
-                markers no other system tracks. Relevance weighting determines what
-                matters. Relationship intelligence maps who matters. 18 configurable laws
-                control how the system thinks, communicates, and stays in character.
-                Connect any agent and it inherits persistent memory,
-                behavioral alignment, and deep context — instantly.
+                LongStrider extracts 70+ signals from every interaction and uses them.
+                It detects behavioral loops before you see them. It warns you when a
+                relationship is drifting. It surfaces patterns across months of
+                conversations you&apos;ve forgotten. 18 configurable laws control how it
+                thinks, communicates, and stays in character. Connect any agent and it
+                inherits everything — persistent memory, behavioral alignment,
+                and deep context — instantly.
               </p>
               <div className="h2-compare">
                 <div>70+ signals extracted per interaction</div>
-                <div>Relevance weighting — significance, not just frequency</div>
+                <div>Proactive intelligence — it tells you what you haven&apos;t asked</div>
                 <div>Plug any agent in — it inherits memory + alignment instantly</div>
               </div>
             </div>
@@ -332,16 +332,16 @@ export default function HomeV2Page() {
             <div data-reveal data-delay="2">
               <div className="h2-card" style={{ padding: 'var(--card-pad)', background: 'var(--card-bg)', border: 'var(--card-border)', borderRadius: 'var(--card-radius)' }}>
                 <div style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: 'var(--color-gold-dim)', marginBottom: '24px' }}>
-                  What LongStrider knows about you
+                  What it does without being asked
                 </div>
                 {[
-                  'Every correction you\'ve ever given it',
-                  'Who matters to you — and why',
-                  'Patterns you repeat without realizing',
-                  'Blind spots you consistently avoid',
-                  'How your thinking has evolved over time',
-                  'What you care about now vs. six months ago',
-                  'How your people, topics, and decisions connect',
+                  'Detects patterns you repeat — and tells you',
+                  'Warns you when a relationship starts drifting',
+                  'Surfaces insights from months-old conversations',
+                  'Knows your blind spots and works around them',
+                  'Tracks how your priorities shift over time',
+                  'Remembers every correction and never repeats the mistake',
+                  'Anticipates what you need before you ask',
                 ].map((item, i) => (
                   <div key={i} style={{
                     fontFamily: 'var(--font-body)',
