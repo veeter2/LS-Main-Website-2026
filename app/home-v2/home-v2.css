@@ -596,7 +596,7 @@
 
 .h2-knows-window {
   position: relative;
-  height: 270px;   /* exactly 5 items × 54px — clean count, no fractions */
+  height: 378px;   /* 7 items × 54px — balances against Ch2 editorial copy */
   overflow: hidden;
   /* Fade: transparent → visible → visible → transparent
      Creates the emergence/dissolution effect at edges         */
@@ -646,7 +646,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  animation: h2-knows-scroll 34s linear infinite;
+  animation: h2-knows-scroll 52s linear infinite;
   will-change: transform;
 }
 
