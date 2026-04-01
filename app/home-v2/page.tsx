@@ -140,6 +140,102 @@ function nextConvState(s: ConvState): [ConvState, number] {
   }, 800];
 }
 
+function EvolvesCard() {
+  const [count, setCount] = React.useState(0);
+  const [activeDot, setActiveDot] = React.useState(0);
+
+  // Animated counter — cubic ease-out
+  React.useEffect(() => {
+    const target = 247;
+    const duration = 1800;
+    const start = performance.now();
+    function tick(now: number) {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      setCount(Math.round(ease * target));
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }, []);
+
+  // Timeline dot cycles through Month 1 → Month 6 → Year 1
+  React.useEffect(() => {
+    const t = setInterval(() => setActiveDot(p => (p + 1) % 3), 2200);
+    return () => clearInterval(t);
+  }, []);
+
+  const TIMELINE = [
+    { month: 'Month 1', text: 'Learns the shape of your operations',                       bright: false },
+    { month: 'Month 6', text: 'Surfaces insights you never asked for',                     bright: false },
+    { month: 'Year 1',  text: 'Knows things no single person on your team knows',          bright: true  },
+  ];
+
+  return (
+    <div className="h2-card h2-evolves-card">
+
+      {/* Decorative pulse rings — corner glow */}
+      <div className="h2-evolves-ring h2-evolves-ring-1" />
+      <div className="h2-evolves-ring h2-evolves-ring-2" />
+      <div className="h2-evolves-ring h2-evolves-ring-3" />
+
+      {/* Moon icon — LS gold treatment */}
+      <svg className="h2-evolves-moon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 20.5A12 12 0 1 1 15.5 8a9 9 0 0 0 12.5 12.5z"
+              stroke="var(--color-gold-dim)" strokeWidth="0.75" fill="rgba(200,169,110,0.06)" />
+        <circle cx="24" cy="9"  r="1.5"  fill="var(--color-gold-dim)" />
+        <circle cx="29" cy="14" r="1"    fill="var(--color-gold-dim)" />
+        <circle cx="26" cy="17" r="0.75" fill="var(--color-gold-dim)" />
+      </svg>
+
+      {/* Eyebrow + headline */}
+      <div className="h2-evolves-eyebrow">Nightly consolidation</div>
+      <div className="h2-evolves-headline">
+        It gets smarter<br />while you sleep.
+      </div>
+
+      {/* Timeline */}
+      <div className="h2-evolves-timeline">
+        {TIMELINE.map((item, i) => (
+          <div key={i} className="h2-evolves-tl-row">
+            <div className="h2-evolves-tl-left">
+              <div className={`h2-evolves-tl-dot ${activeDot === i ? 'h2-evolves-tl-dot-active' : ''}`} />
+              {i < 2 && <div className="h2-evolves-tl-line" />}
+            </div>
+            <div className="h2-evolves-tl-content">
+              <div className="h2-evolves-tl-month">{item.month}</div>
+              <div className={`h2-evolves-tl-text ${item.bright ? 'h2-evolves-tl-text-bright' : ''}`}>
+                {item.text}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Divider */}
+      <hr className="h2-evolves-hr" />
+
+      {/* Stat pair */}
+      <div className="h2-evolves-stats">
+        <div className="h2-evolves-stat">
+          <div className="h2-evolves-stat-num">{count}</div>
+          <div className="h2-evolves-stat-label">consolidation cycles<br />since onboarding</div>
+        </div>
+        <div className="h2-evolves-stat">
+          <div className="h2-evolves-stat-num h2-evolves-stat-zero">0</div>
+          <div className="h2-evolves-stat-label">configuration<br />required</div>
+        </div>
+      </div>
+
+      {/* Running tonight badge */}
+      <div className="h2-evolves-badge">
+        <span className="h2-evolves-badge-dot" />
+        running tonight
+      </div>
+
+    </div>
+  );
+}
+
 function KnowsCard() {
   const doubled = [...KNOWS_ITEMS, ...KNOWS_ITEMS];
   return (
@@ -402,58 +498,35 @@ export default function HomeV2Page() {
 
             {/* Editorial left */}
             <div>
-              <span className="h2-label">Living Intelligence</span>
+              <span className="h2-label">It Evolves</span>
               <h2 className="h2-heading">
                 It gets smarter<br />while you sleep.
               </h2>
               <p className="h2-lead">
-                Every night, LongStrider runs a consolidation cycle.<br />
-                It recalibrates. It detects patterns. It learns your preferences.
+                No maintenance windows. No manual retraining.<br />
+                Every night, while you&apos;re not watching, it consolidates.
               </p>
               <p className="h2-body">
-                This isn&apos;t static storage. It&apos;s a living system. Every night, a five-pass engine
-                recalculates the relevance of every knowledge cluster, identifies what&apos;s healthy
-                or drifting, detects fragile focus areas, and learns your preferred tone from
-                your corrections. Patterns emerge across eight parallel detectors. Memory arcs
-                form narrative threads. Week over week, the system compounds — and the gap
-                between what it knows and what your competitors know grows wider.
+                A background consolidation cycle runs automatically — recalculating every
+                knowledge cluster, surfacing patterns only visible across months of accumulated
+                data, generating predictive signals about where your business is heading.
+                Nobody schedules it. Nobody configures it. Year one, it knows things about
+                your business that no single person on your team knows.
               </p>
               <div className="h2-compare">
-                <div>Nightly consolidation — five-pass intelligence recompilation</div>
-                <div>8 parallel pattern detectors (behavioral, emotional, temporal)</div>
-                <div>Stance learning — adapts tone and depth from your feedback</div>
+                <div>Automatic nightly consolidation — zero configuration required</div>
+                <div>Surfaces patterns only visible across months of accumulated data</div>
+                <div>Predictive signals: where your business is heading before you ask</div>
               </div>
+              <p className="h2-body" style={{ marginTop: '20px', fontStyle: 'italic', color: 'var(--color-text-secondary)' }}>
+                The system compounds without anyone maintaining it.<br />
+                That&apos;s the architecture — not a feature.
+              </p>
             </div>
 
-            {/* Visual right — compounding metaphor */}
+            {/* Visual right — EvolvesCard */}
             <div data-reveal data-delay="2">
-              <div className="h2-card" style={{ padding: 'var(--card-pad)', background: 'var(--card-bg)', border: 'var(--card-border)', borderRadius: 'var(--card-radius)', textAlign: 'center' as const }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--color-text-primary)', lineHeight: 1 }}>
-                  ∞
-                </div>
-                <div style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: 'var(--color-gold-dim)', marginTop: '20px', marginBottom: '32px' }}>
-                  Compounding Intelligence
-                </div>
-                {[
-                  { label: 'Day 1', desc: 'Baseline — your first conversations', opacity: 0.4 },
-                  { label: 'Week 1', desc: 'Patterns emerge. Relationships form.', opacity: 0.55 },
-                  { label: 'Month 1', desc: 'Knowledge clusters crystalize. Identity distilled.', opacity: 0.72 },
-                  { label: 'Month 6', desc: 'Predictive signals. Anticipatory intelligence.', opacity: 0.88 },
-                  { label: 'Year 1', desc: 'Your competitive moat is uncatchable.', opacity: 1 },
-                ].map((row, i) => (
-                  <div key={i} style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '10px 0',
-                    borderBottom: i < 4 ? '1px solid var(--color-border-subtle)' : 'none',
-                    opacity: row.opacity,
-                  }}>
-                    <span style={{ fontFamily: 'var(--font-ui)', fontSize: '12px', fontWeight: 500, color: 'var(--color-gold)', minWidth: '72px' }}>{row.label}</span>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-text-secondary)', textAlign: 'right' as const }}>{row.desc}</span>
-                  </div>
-                ))}
-              </div>
+              <EvolvesCard />
             </div>
 
           </div>

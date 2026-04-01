@@ -756,3 +756,469 @@
   .h2-knows-item { padding-left: var(--card-pad); padding-right: var(--card-pad); }
   .h2-knows-text { font-size: 12px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Evolves Card — Nightly Consolidation (Chapter 3)
+   Moon · Timeline · Stats · Running badge. Token-aligned.
+   ═══════════════════════════════════════════════════════════════ */
+
+.h2-evolves-card {
+  position: relative;
+  overflow: hidden;
+  padding: var(--card-pad);
+  padding-bottom: 56px;        /* room for the absolutely-positioned badge */
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  transition: border-color 0.6s ease, box-shadow 0.6s ease;
+}
+.h2-evolves-card:hover {
+  border-color: rgba(200,169,110,0.18);
+  box-shadow: 0 0 48px rgba(200,169,110,0.05), var(--shadow-float);
+}
+
+/* ── Decorative pulse rings ─────────────────────────────────── */
+
+.h2-evolves-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 0.5px solid rgba(200,169,110,0.14);
+  pointer-events: none;
+  animation: h2-evolves-pulse 4s ease-in-out infinite;
+}
+.h2-evolves-ring-1 { width: 200px; height: 200px; top: -60px;  right: -60px;  animation-delay: 0s;   }
+.h2-evolves-ring-2 { width: 280px; height: 280px; top: -100px; right: -100px; animation-delay: 1.3s; }
+.h2-evolves-ring-3 { width: 360px; height: 360px; top: -140px; right: -140px; animation-delay: 2.6s; }
+
+@keyframes h2-evolves-pulse {
+  0%, 100% { opacity: 0.6;  transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.03); }
+}
+
+/* ── Moon icon ──────────────────────────────────────────────── */
+
+.h2-evolves-moon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+/* ── Eyebrow + headline ─────────────────────────────────────── */
+
+.h2-evolves-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.h2-evolves-headline {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Timeline ───────────────────────────────────────────────── */
+
+.h2-evolves-timeline {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.h2-evolves-tl-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.h2-evolves-tl-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.h2-evolves-tl-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  margin-top: 4px;
+  flex-shrink: 0;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.h2-evolves-tl-dot-active {
+  background: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(200,169,110,0.12), 0 0 8px rgba(200,169,110,0.4);
+}
+
+.h2-evolves-tl-line {
+  width: 0.5px;
+  flex: 1;
+  min-height: 16px;
+  background: var(--color-border);
+  margin: 4px 0;
+}
+
+.h2-evolves-tl-content {
+  padding-bottom: 18px;
+  flex: 1;
+}
+
+.h2-evolves-tl-month {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+.h2-evolves-tl-text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.h2-evolves-tl-text-bright {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+/* ── Divider ────────────────────────────────────────────────── */
+
+.h2-evolves-hr {
+  border: none;
+  border-top: 0.5px solid var(--color-border);
+  margin-bottom: 18px;
+}
+
+/* ── Stat pair ──────────────────────────────────────────────── */
+
+.h2-evolves-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.h2-evolves-stat {
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.h2-evolves-stat-num {
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.h2-evolves-stat-zero {
+  color: var(--color-gold);
+}
+
+.h2-evolves-stat-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+/* ── Running tonight badge ──────────────────────────────────── */
+
+.h2-evolves-badge {
+  position: absolute;
+  bottom: 20px;
+  right: var(--card-pad);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  z-index: 1;
+}
+
+.h2-evolves-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 6px rgba(200,169,110,0.6);
+  animation: h2-evolves-blink 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes h2-evolves-blink {
+  0%, 100% { opacity: 0.3; box-shadow: 0 0 4px rgba(200,169,110,0.3); }
+  50%       { opacity: 1;   box-shadow: 0 0 8px rgba(200,169,110,0.7); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .h2-evolves-headline { font-size: 19px; }
+  .h2-evolves-stat-num { font-size: 20px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Evolves Card — Nightly Consolidation (Chapter 3)
+   Moon · Timeline · Stats · Running badge. Token-aligned.
+   ═══════════════════════════════════════════════════════════════ */
+
+.h2-evolves-card {
+  position: relative;
+  overflow: hidden;
+  padding: var(--card-pad);
+  padding-bottom: 56px;        /* room for the absolutely-positioned badge */
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  transition: border-color 0.6s ease, box-shadow 0.6s ease;
+}
+.h2-evolves-card:hover {
+  border-color: rgba(200,169,110,0.18);
+  box-shadow: 0 0 48px rgba(200,169,110,0.05), var(--shadow-float);
+}
+
+/* ── Decorative pulse rings ─────────────────────────────────── */
+
+.h2-evolves-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 0.5px solid rgba(200,169,110,0.14);
+  pointer-events: none;
+  animation: h2-evolves-pulse 4s ease-in-out infinite;
+}
+.h2-evolves-ring-1 { width: 200px; height: 200px; top: -60px;  right: -60px;  animation-delay: 0s;   }
+.h2-evolves-ring-2 { width: 280px; height: 280px; top: -100px; right: -100px; animation-delay: 1.3s; }
+.h2-evolves-ring-3 { width: 360px; height: 360px; top: -140px; right: -140px; animation-delay: 2.6s; }
+
+@keyframes h2-evolves-pulse {
+  0%, 100% { opacity: 0.6;  transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.03); }
+}
+
+/* ── Moon icon ──────────────────────────────────────────────── */
+
+.h2-evolves-moon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+/* ── Eyebrow + headline ─────────────────────────────────────── */
+
+.h2-evolves-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.h2-evolves-headline {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Timeline ───────────────────────────────────────────────── */
+
+.h2-evolves-timeline {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.h2-evolves-tl-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.h2-evolves-tl-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.h2-evolves-tl-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  margin-top: 4px;
+  flex-shrink: 0;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.h2-evolves-tl-dot-active {
+  background: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(200,169,110,0.12), 0 0 8px rgba(200,169,110,0.4);
+}
+
+.h2-evolves-tl-line {
+  width: 0.5px;
+  flex: 1;
+  min-height: 16px;
+  background: var(--color-border);
+  margin: 4px 0;
+}
+
+.h2-evolves-tl-content {
+  padding-bottom: 18px;
+  flex: 1;
+}
+
+.h2-evolves-tl-month {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+.h2-evolves-tl-text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.h2-evolves-tl-text-bright {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+/* ── Divider ────────────────────────────────────────────────── */
+
+.h2-evolves-hr {
+  border: none;
+  border-top: 0.5px solid var(--color-border);
+  margin-bottom: 18px;
+}
+
+/* ── Stat pair ──────────────────────────────────────────────── */
+
+.h2-evolves-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.h2-evolves-stat {
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.h2-evolves-stat-num {
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.h2-evolves-stat-zero {
+  color: var(--color-gold);
+}
+
+.h2-evolves-stat-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+/* ── Running tonight badge ──────────────────────────────────── */
+
+.h2-evolves-badge {
+  position: absolute;
+  bottom: 20px;
+  right: var(--card-pad);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  z-index: 1;
+}
+
+.h2-evolves-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 6px rgba(200,169,110,0.6);
+  animation: h2-evolves-blink 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes h2-evolves-blink {
+  0%, 100% { opacity: 0.3; box-shadow: 0 0 4px rgba(200,169,110,0.3); }
+  50%       { opacity: 1;   box-shadow: 0 0 8px rgba(200,169,110,0.7); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .h2-evolves-headline { font-size: 19px; }
+  .h2-evolves-stat-num { font-size: 20px; }
+}
