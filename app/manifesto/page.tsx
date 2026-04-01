@@ -156,7 +156,7 @@ export default function ManifestoPage() {
               LongStrider isn&apos;t a tool you subscribe to. It&apos;s an intelligence asset you own — one that sits above your existing stack, makes sense of everything your tools know, and gets smarter every day without anyone maintaining it.
             </p>
             <p className="deck-body" style={{ fontWeight: 500, color: 'rgba(255,255,255,0.90)' }}>
-              Permanently. Sovereignly. In your environment.
+              Permanently. Sovereign. Yours.
             </p>
             <div className="deck-cta-moment">
               <span className="deck-cta-text">The gap between what your AI stack knows and what your organization knows — that&apos;s what LongStrider closes.</span>
