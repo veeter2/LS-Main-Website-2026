@@ -112,9 +112,10 @@ export function HeroSection() {
           <div style={{
             fontFamily: "var(--font-ui)",
             fontSize: '12px',
-            letterSpacing: '0.22em',
+            letterSpacing: '0.26em',
             textTransform: 'uppercase' as const,
-            color: 'var(--color-gold-dim)',
+            color: 'var(--color-gold)',
+            textShadow: '0 0 20px rgba(200,169,110,0.45), 0 0 8px rgba(200,169,110,0.25)',
             marginBottom: '52px',
           }}>
             Sovereign · Persistent · Compounding · Living Memory
