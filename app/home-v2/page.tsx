@@ -74,6 +74,27 @@ const CONVERSATIONS = [
   },
 ];
 
+
+// ── Knows Card — rolling intelligence reel ───────────────────────
+// Business + Personal interleaved. Duplicated for seamless CSS loop.
+const KNOWS_ITEMS = [
+  { text: "Which customer relationships are starting to drift",                          cat: "Business"  },
+  { text: "The pattern you've been repeating for six months",                            cat: "Personal"  },
+  { text: "Where your pipeline keeps stalling — and why",                                cat: "Business"  },
+  { text: "What your energy actually looks like across the week",                        cat: "Personal"  },
+  { text: "What your team's tribal knowledge actually is",                               cat: "Business"  },
+  { text: "The conversation you keep having with yourself",                              cat: "Personal"  },
+  { text: "Which decisions have a proven track record — and which don't",                cat: "Business"  },
+  { text: "Where you're growing — and where you're looping",                            cat: "Personal"  },
+  { text: "What leaves when your best people leave",                                    cat: "Business"  },
+  { text: "What you said you'd change — but haven't",                                  cat: "Personal"  },
+  { text: "Which interactions are signalling risk before it's visible",                  cat: "Business"  },
+  { text: "The version of yourself that's quietly emerging right now",                   cat: "Personal"  },
+  { text: "Where your last three decisions lost their momentum",                         cat: "Business"  },
+  { text: "The relationship that's been shifting without either of you noticing",        cat: "Personal"  },
+];
+
+
 type ConvPhase = 'you' | 'ls' | 'context' | 'hold' | 'fade';
 
 interface ConvState {
@@ -117,6 +138,40 @@ function nextConvState(s: ConvState): [ConvState, number] {
     phase:        'you',
     opacity:      1,
   }, 800];
+}
+
+function KnowsCard() {
+  const doubled = [...KNOWS_ITEMS, ...KNOWS_ITEMS];
+  return (
+    <div className="h2-card h2-knows-card">
+
+      {/* ── Header ── */}
+      <div className="h2-knows-header">
+        <span className="h2-knows-live-dot" />
+        <span className="h2-knows-header-label">Active intelligence</span>
+        <span className="h2-knows-counter">51,847 signals</span>
+      </div>
+
+      {/* ── Scroll window with mask + focus strip ── */}
+      <div className="h2-knows-window">
+        <div className="h2-knows-focus-strip" />
+        <ul className="h2-knows-reel">
+          {doubled.map((item, i) => (
+            <li key={i} className="h2-knows-item">
+              <span className={`h2-knows-dot ${item.cat === 'Business' ? 'h2-knows-dot-biz' : 'h2-knows-dot-personal'}`} />
+              <span className="h2-knows-text">{item.text}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* ── Footer ── */}
+      <div className="h2-knows-footer">
+        <span className="h2-knows-footer-label">The longer it runs, the sharper it gets.</span>
+      </div>
+
+    </div>
+  );
 }
 
 function TotalRecallCard() {
@@ -306,55 +361,34 @@ export default function HomeV2Page() {
             <div>
               <span className="h2-label">It Knows You</span>
               <h2 className="h2-heading">
-                It doesn&apos;t just remember.<br />It acts on what it knows.
+                It builds institutional intelligence.<br />Not a database. Not a dashboard.
               </h2>
               <p className="h2-lead">
-                Identity. Relationships. Patterns. Blind spots.<br />
-                — and it doesn&apos;t wait for you to ask.
+                Every customer interaction. Every decision. Every outcome.<br />
+                Accumulated, connected, and ready to surface what matters — before you ask.
               </p>
               <p className="h2-body">
-                LongStrider extracts 70+ signals from every interaction and uses them.
-                It detects behavioral loops before you see them. It warns you when a
-                relationship is drifting. It surfaces patterns across months of
-                conversations you&apos;ve forgotten. 18 configurable laws control how it
-                thinks, communicates, and stays in character. Connect any agent and it
-                inherits everything — persistent memory, behavioral alignment,
-                and deep context — instantly.
+                LongStrider builds a living model of your business: your customer relationships
+                and their risk signals, your operational patterns, your team&apos;s accumulated
+                expertise, the decisions that worked and the ones that didn&apos;t. Every
+                interaction deepens it. Every night, it consolidates. After a year, it knows
+                your business better than any new hire ever will — and it gets smarter every
+                day you run it.
               </p>
               <div className="h2-compare">
-                <div>70+ signals extracted per interaction</div>
-                <div>Proactive intelligence — it tells you what you haven&apos;t asked</div>
-                <div>Plug any agent in — it inherits memory + alignment instantly</div>
+                <div>Maps customer relationships — depth, history, risk signals</div>
+                <div>Preserves expertise that would otherwise walk out the door</div>
+                <div>Any agent you connect inherits the full context instantly</div>
               </div>
+              <p className="h2-body" style={{ marginTop: '20px', fontStyle: 'italic', color: 'var(--color-text-secondary)' }}>
+                After two years, you&apos;re not leaving a software vendor.<br />
+                You&apos;re leaving your institutional memory.
+              </p>
             </div>
 
-            {/* Card right */}
+            {/* Card right — rolling intelligence reel */}
             <div data-reveal data-delay="2">
-              <div className="h2-card" style={{ padding: 'var(--card-pad)', background: 'var(--card-bg)', border: 'var(--card-border)', borderRadius: 'var(--card-radius)' }}>
-                <div style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: 'var(--color-gold-dim)', marginBottom: '24px' }}>
-                  What it does without being asked
-                </div>
-                {[
-                  'Detects patterns you repeat — and tells you',
-                  'Warns you when a relationship starts drifting',
-                  'Surfaces insights from months-old conversations',
-                  'Knows your blind spots and works around them',
-                  'Tracks how your priorities shift over time',
-                  'Remembers every correction and never repeats the mistake',
-                  'Anticipates what you need before you ask',
-                ].map((item, i) => (
-                  <div key={i} style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '15px',
-                    lineHeight: 1.65,
-                    color: i < 3 ? 'var(--color-text-body)' : 'var(--color-text-secondary)',
-                    padding: '8px 0',
-                    borderBottom: i < 6 ? '1px solid var(--color-border-subtle)' : 'none',
-                  }}>
-                    {item}
-                  </div>
-                ))}
-              </div>
+              <KnowsCard />
             </div>
 
           </div>

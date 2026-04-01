@@ -531,3 +531,228 @@
   .h2-card { padding: var(--card-pad); }
   .h2-cta-pill { padding: 12px 32px; font-size: 14px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Knows Card — Rolling Intelligence Reel (Chapter 2)
+   $10k card. Every detail intentional.
+   ═══════════════════════════════════════════════════════════════ */
+
+.h2-knows-card {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* Height driven by content — window sets the proportion */
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  transition: border-color 0.6s ease, box-shadow 0.6s ease;
+}
+.h2-knows-card:hover {
+  border-color: rgba(200,169,110,0.18);
+  box-shadow: 0 0 48px rgba(200,169,110,0.05), var(--shadow-float);
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+
+.h2-knows-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 22px var(--card-pad) 18px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+/* Live pulse dot — signals the system is actively running */
+.h2-knows-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 8px rgba(200,169,110,0.8), 0 0 16px rgba(200,169,110,0.3);
+  animation: h2-knows-pulse 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.h2-knows-header-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold-dim);
+  flex: 1;
+}
+
+.h2-knows-counter {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── Scroll window ───────────────────────────────────────────── */
+
+.h2-knows-window {
+  position: relative;
+  height: 270px;   /* exactly 5 items × 54px — clean count, no fractions */
+  overflow: hidden;
+  /* Fade: transparent → visible → visible → transparent
+     Creates the emergence/dissolution effect at edges         */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,0.5) 10%,
+    rgba(0,0,0,1) 24%,
+    rgba(0,0,0,1) 76%,
+    rgba(0,0,0,0.5) 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,0.5) 10%,
+    rgba(0,0,0,1) 24%,
+    rgba(0,0,0,1) 76%,
+    rgba(0,0,0,0.5) 90%,
+    transparent 100%
+  );
+}
+
+/* Center highlight strip — the "lens" the reel passes through */
+.h2-knows-focus-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 54px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(200,169,110,0.035) 15%,
+    rgba(200,169,110,0.035) 85%,
+    transparent 100%
+  );
+  border-top: 1px solid rgba(200,169,110,0.10);
+  border-bottom: 1px solid rgba(200,169,110,0.10);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* The scrolling reel — pure CSS infinite scroll */
+.h2-knows-reel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: h2-knows-scroll 34s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover — lets the reader inspect what they see */
+.h2-knows-card:hover .h2-knows-reel {
+  animation-play-state: paused;
+}
+
+/* Each row */
+.h2-knows-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 var(--card-pad);
+  height: 54px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: background 0.2s ease;
+}
+.h2-knows-item:last-child {
+  border-bottom: none;
+}
+
+/* Category dots — gold = Business, purple = Personal */
+.h2-knows-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.h2-knows-dot-biz {
+  background: var(--color-gold);
+  box-shadow: 0 0 5px rgba(200,169,110,0.55);
+}
+
+.h2-knows-dot-personal {
+  background: var(--color-purple);
+  box-shadow: 0 0 5px rgba(139,92,246,0.55);
+}
+
+/* Item text */
+.h2-knows-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-body);
+  /* Prevent wrapping — items must be single line at this size */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+
+.h2-knows-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px var(--card-pad) 18px;
+  border-top: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+.h2-knows-footer-label {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 11px;
+  color: var(--color-gold);
+  opacity: 0.88;
+}
+
+.h2-knows-footer-meta {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────── */
+
+/* Live dot breathes */
+@keyframes h2-knows-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(200,169,110,0.8), 0 0 16px rgba(200,169,110,0.3); }
+  50%       { opacity: 0.35; box-shadow: 0 0 4px rgba(200,169,110,0.3); }
+}
+
+/* Reel scrolls up continuously.
+   -50% = exactly one set of items (we duplicated the list).
+   34s = slow and deliberate — this isn't a ticker, it's a reel. */
+@keyframes h2-knows-scroll {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* card height is content-driven */
+  .h2-knows-text { font-size: 13px; }
+  .h2-knows-item { height: 50px; }
+}
+
+@media (max-width: 480px) {
+  .h2-knows-header,
+  .h2-knows-footer,
+  .h2-knows-item { padding-left: var(--card-pad); padding-right: var(--card-pad); }
+  .h2-knows-text { font-size: 12px; }
+}
