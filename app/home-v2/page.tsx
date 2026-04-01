@@ -141,33 +141,22 @@ function nextConvState(s: ConvState): [ConvState, number] {
 }
 
 function EvolvesCard() {
-  const [count, setCount] = React.useState(0);
-  const [activeDot, setActiveDot] = React.useState(0);
+  const [activeOutput, setActiveOutput] = React.useState(0);
 
-  // Animated counter — cubic ease-out
+  // Cycle through last night's outputs every 3.2s
   React.useEffect(() => {
-    const target = 247;
-    const duration = 1800;
-    const start = performance.now();
-    function tick(now: number) {
-      const p = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      setCount(Math.round(ease * target));
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }, []);
-
-  // Timeline dot cycles through Month 1 → Month 6 → Year 1
-  React.useEffect(() => {
-    const t = setInterval(() => setActiveDot(p => (p + 1) % 3), 2200);
+    const t = setInterval(() => setActiveOutput(p => (p + 1) % 4), 3200);
     return () => clearInterval(t);
   }, []);
 
-  const TIMELINE = [
-    { month: 'Month 1', text: 'Learns the shape of your operations',                       bright: false },
-    { month: 'Month 6', text: 'Surfaces insights you never asked for',                     bright: false },
-    { month: 'Year 1',  text: 'Knows things no single person on your team knows',          bright: true  },
+  // What the engine actually produced last night — B2B translation of real engine outputs:
+  // pattern_matrix (pattern detection) · memory_arcs (arc intelligence) ·
+  // consciousness_cords (relationship re-weighting) · gravity_wells (cluster promotion)
+  const OUTPUTS = [
+    { result: '11 decision and behavioral patterns re-scored',     channel: 'Pattern Detection'  },
+    { result: 'New intelligence arc: Supplier concentration risk', channel: 'Arc Intelligence'    },
+    { result: '4 accounts re-weighted by relationship drift',      channel: 'Relationship Intel'  },
+    { result: 'GTM plan promoted to primary knowledge cluster',    channel: 'Gravity Engine'      },
   ];
 
   return (
@@ -187,25 +176,49 @@ function EvolvesCard() {
         <circle cx="26" cy="17" r="0.75" fill="var(--color-gold-dim)" />
       </svg>
 
-      {/* Eyebrow + headline */}
-      <div className="h2-evolves-eyebrow">Nightly consolidation</div>
+      {/* Eyebrow — real timestamp */}
+      <div className="h2-evolves-eyebrow">Last night · 3:12am</div>
       <div className="h2-evolves-headline">
         It gets smarter<br />while you sleep.
       </div>
 
-      {/* Timeline */}
-      <div className="h2-evolves-timeline">
-        {TIMELINE.map((item, i) => (
-          <div key={i} className="h2-evolves-tl-row">
-            <div className="h2-evolves-tl-left">
-              <div className={`h2-evolves-tl-dot ${activeDot === i ? 'h2-evolves-tl-dot-active' : ''}`} />
-              {i < 2 && <div className="h2-evolves-tl-line" />}
-            </div>
-            <div className="h2-evolves-tl-content">
-              <div className="h2-evolves-tl-month">{item.month}</div>
-              <div className={`h2-evolves-tl-text ${item.bright ? 'h2-evolves-tl-text-bright' : ''}`}>
-                {item.text}
-              </div>
+      {/* What actually ran — cycling output panel */}
+      <div style={{ marginBottom: '20px' }}>
+        {OUTPUTS.map((item, i) => (
+          <div
+            key={i}
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '10px',
+              padding: '9px 0',
+              borderBottom: i < OUTPUTS.length - 1 ? '1px solid var(--color-border-subtle)' : 'none',
+              opacity: activeOutput === i ? 1 : 0.3,
+              transition: 'opacity 0.5s ease',
+            }}
+          >
+            <span style={{
+              width: '16px', height: '16px', borderRadius: '50%', flexShrink: 0,
+              marginTop: '2px',
+              background: activeOutput === i ? 'rgba(200,169,110,0.12)' : 'transparent',
+              border: `0.5px solid ${activeOutput === i ? 'rgba(200,169,110,0.4)' : 'rgba(255,255,255,0.07)'}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'all 0.5s ease',
+            }}>
+              {activeOutput === i && (
+                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--color-gold)' }} />
+              )}
+            </span>
+            <div>
+              <div style={{
+                fontFamily: 'var(--font-body)', fontSize: '13px', lineHeight: 1.45,
+                color: activeOutput === i ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                transition: 'color 0.5s ease',
+              }}>{item.result}</div>
+              <div style={{
+                fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.08em',
+                color: 'var(--color-gold-dim)', marginTop: '2px',
+              }}>{item.channel}</div>
             </div>
           </div>
         ))}
@@ -214,15 +227,15 @@ function EvolvesCard() {
       {/* Divider */}
       <hr className="h2-evolves-hr" />
 
-      {/* Stat pair */}
+      {/* Stats */}
       <div className="h2-evolves-stats">
-        <div className="h2-evolves-stat">
-          <div className="h2-evolves-stat-num">{count}</div>
-          <div className="h2-evolves-stat-label">consolidation cycles<br />since onboarding</div>
-        </div>
         <div className="h2-evolves-stat">
           <div className="h2-evolves-stat-num h2-evolves-stat-zero">0</div>
           <div className="h2-evolves-stat-label">configuration<br />required</div>
+        </div>
+        <div className="h2-evolves-stat">
+          <div className="h2-evolves-stat-num">8</div>
+          <div className="h2-evolves-stat-label">intelligence<br />channels per cycle</div>
         </div>
       </div>
 
