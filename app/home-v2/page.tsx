@@ -304,27 +304,27 @@ export default function HomeV2Page() {
 
             {/* Editorial left */}
             <div>
-              <span className="h2-label">Intelligence That Learns</span>
+              <span className="h2-label">It Knows You</span>
               <h2 className="h2-heading">
                 It doesn&apos;t just remember.<br />It understands.
               </h2>
               <p className="h2-lead">
                 Identity. Relationships. Patterns. Blind spots.<br />
-                — and every agent you connect inherits this intelligence.
+                Built from every interaction. Compounding over time.
               </p>
               <p className="h2-body">
-                LongStrider&apos;s intelligence kernel extracts 70+ dimensions from every interaction —
-                emotional signatures, cognitive patterns, relational dynamics, and psychological
-                markers that standard AI systems never track. Relevance weighting determines what
-                matters. Relationship intelligence maps who matters. The Cortex gives you 18 Living Laws
-                that control how the system thinks, communicates, and stays in character.
-                Connect any agent to this substrate and it inherits persistent memory,
+                LongStrider extracts 70+ signals from every interaction —
+                emotional tone, cognitive patterns, relational dynamics, and behavioral
+                markers no other system tracks. Relevance weighting determines what
+                matters. Relationship intelligence maps who matters. 18 configurable laws
+                control how the system thinks, communicates, and stays in character.
+                Connect any agent and it inherits persistent memory,
                 behavioral alignment, and deep context — instantly.
               </p>
               <div className="h2-compare">
-                <div>70+ cognitive dimensions per interaction</div>
+                <div>70+ signals extracted per interaction</div>
                 <div>Relevance weighting — significance, not just frequency</div>
-                <div>Plug any agent in — persistent memory + behavioral alignment</div>
+                <div>Plug any agent in — it inherits memory + alignment instantly</div>
               </div>
             </div>
 
@@ -335,14 +335,13 @@ export default function HomeV2Page() {
                   What LongStrider knows about you
                 </div>
                 {[
-                  'Your communication style and preferences',
+                  'Every correction you\'ve ever given it',
                   'Who matters to you — and why',
                   'Patterns you repeat without realizing',
                   'Blind spots you consistently avoid',
                   'How your thinking has evolved over time',
-                  'What you care about right now vs. six months ago',
-                  'The relationships between your people, topics, and decisions',
-                  'Every correction you\'ve ever given it',
+                  'What you care about now vs. six months ago',
+                  'How your people, topics, and decisions connect',
                 ].map((item, i) => (
                   <div key={i} style={{
                     fontFamily: 'var(--font-body)',
@@ -350,7 +349,7 @@ export default function HomeV2Page() {
                     lineHeight: 1.65,
                     color: i < 3 ? 'var(--color-text-body)' : 'var(--color-text-secondary)',
                     padding: '8px 0',
-                    borderBottom: i < 7 ? '1px solid var(--color-border-subtle)' : 'none',
+                    borderBottom: i < 6 ? '1px solid var(--color-border-subtle)' : 'none',
                   }}>
                     {item}
                   </div>
