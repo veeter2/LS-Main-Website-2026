@@ -251,7 +251,7 @@ export default function TechnologyPageV2() {
         <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
           <p className="tech-label" data-reveal>Section 02 — The Stack</p>
           <h2 className="tech-heading" data-reveal data-delay="1">
-            Three layers. Nothing redundant.
+            Five layers. Nothing redundant.
           </h2>
           <p className="tech-lead" data-reveal data-delay="2">
             LongStrider is the intelligence layer that sits between your people and
@@ -259,78 +259,120 @@ export default function TechnologyPageV2() {
           </p>
         </div>
 
-        <div className="tech-grid" data-reveal>
-          {/* Stack visualization */}
-          <div>
-            <div className="tech-card tech-card-gold">
-              <div className="tech-stack">
-                {/* Layer: Your people */}
-                <div className="tech-stack-row">
-                  <p className="tech-stack-layer">Layer 01 — Interface</p>
-                  <p className="tech-stack-name">Your People</p>
-                  <p className="tech-stack-detail">
-                    Chat, agents, integrations, API — however your team interacts,
-                    every signal enters the intelligence substrate.
-                  </p>
-                </div>
-                {/* Layer: LongStrider */}
-                <div className="tech-stack-row" style={{ background: 'var(--color-gold-ghost)' }}>
-                  <p className="tech-stack-layer">Layer 02 — Intelligence</p>
-                  <p className="tech-stack-name">LongStrider Intelligence Kernel</p>
-                  <p className="tech-stack-detail">
-                    Receives every interaction. Extracts behavioral and contextual signals.
-                    Routes through five-axis retrieval. Assembles the
-                    Contextual Intelligence Package. Calls your LLM of choice.
-                    Consolidates nightly.
-                  </p>
-                </div>
-                {/* Layer: Your infra */}
-                <div className="tech-stack-row">
-                  <p className="tech-stack-layer-purple tech-stack-layer">Layer 03 — Infrastructure</p>
-                  <p className="tech-stack-name">Your Infrastructure</p>
-                  <p className="tech-stack-detail">
-                    PostgreSQL (with pgvector), your LLM provider or local model,
-                    your servers or private cloud. Nothing we run, nothing we can see.
-                  </p>
+        {/* ── Full-width stack card ── */}
+        <div className="tech-card tech-card-gold" data-reveal style={{ marginBottom: '48px' }}>
+          {[
+            {
+              n: '01',
+              name: 'LongStrider Intelligence Platform',
+              desc: 'The intelligence substrate. Sits between every interaction and every response. 29 modules. Running in parallel. Every query.',
+              gold: true,
+            },
+            {
+              n: '02',
+              name: 'Contextual Signal Extraction Engine',
+              desc: 'Decomposes every interaction before memory is queried — entity signals, behavioral markers, emotional weight, intent classification. The raw material everything else runs on.',
+              gold: false,
+            },
+            {
+              n: '03',
+              name: 'Intelligence Orchestration Layer',
+              desc: 'The Conductor. Coordinates Adaptive Intelligence Retrieval, Longitudinal Behavioral Pattern Engine, Narrative Arc Generation, and Knowledge Well formation — in parallel, every time.',
+              gold: false,
+            },
+            {
+              n: '04',
+              name: 'Adaptive Intelligence Retrieval',
+              desc: 'Five-axis scoring across Knowledge Clusters, Relevance Weights, Relationship Intelligence Graph, temporal context, and topic similarity. Returns a Contextual Intelligence Package — not a list of records.',
+              gold: false,
+            },
+            {
+              n: '05',
+              name: 'Your Infrastructure',
+              desc: 'PostgreSQL with pgvector. Your LLM of choice — OpenAI, Claude, Ollama, any local model. Your servers or private cloud. Nothing we run. Nothing we can see.',
+              gold: false,
+            },
+          ].map((layer, i) => (
+            <div
+              key={layer.n}
+              style={{
+                padding: layer.gold ? '24px 32px' : '24px 0',
+                margin: layer.gold ? '0 -32px' : '0',
+                borderBottom: i < 4 ? '1px solid var(--color-border-subtle)' : 'none',
+                background: layer.gold ? 'var(--color-gold-ghost)' : 'transparent',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
+                <span style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '32px',
+                  fontWeight: 300,
+                  color: layer.gold ? 'var(--color-gold)' : i === 4 ? 'var(--color-purple-dim)' : 'rgba(255,255,255,0.12)',
+                  lineHeight: 1,
+                  flexShrink: 0,
+                  minWidth: '44px',
+                  letterSpacing: '-0.03em',
+                }}>{layer.n}</span>
+                <div>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '16px',
+                    fontWeight: 500,
+                    color: layer.gold ? 'var(--color-gold)' : i === 4 ? 'var(--color-text-secondary)' : 'var(--color-text-body)',
+                    marginBottom: '8px',
+                    lineHeight: 1.3,
+                    letterSpacing: '-0.01em',
+                  }}>{layer.name}</p>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '14px',
+                    lineHeight: 1.7,
+                    color: layer.gold ? 'rgba(200,169,110,0.75)' : 'var(--color-text-secondary)',
+                    margin: 0,
+                  }}>{layer.desc}</p>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Editorial context */}
-          <div>
-            <p className="tech-label-purple tech-label" data-reveal>The model is not the brain</p>
-            <p className="tech-lead" data-reveal data-delay="1">
-              OpenAI, Claude, Ollama, local Llama. Swap them — nothing changes about
-              what your system knows. The LLM is a generation engine you rent.
-              The intelligence substrate is something you own.
-            </p>
-            <p className="tech-body" data-reveal data-delay="2">
-              This is why "Postgres for AI" is the closest analogy. Postgres doesn't
-              care which application queries it. LongStrider doesn't care which LLM
-              generates the response. The memory — the intelligence — lives in
-              the substrate, not the model.
-            </p>
-            <div className="tech-facts" data-reveal data-delay="3">
-              <div className="tech-fact">
-                <div className="tech-fact-dot" />
-                116 custom database functions, purpose-built — not ORMs on top of generic schemas
-              </div>
-              <div className="tech-fact">
-                <div className="tech-fact-dot-purple" />
-                29 intelligence modules running in parallel on every interaction
-              </div>
-              <div className="tech-fact">
-                <div className="tech-fact-dot" />
-                4-level isolation: org → project → session → thread — enterprise-ready from day one
-              </div>
-              <div className="tech-fact">
-                <div className="tech-fact-dot-purple" />
-                Zero training on your data. The LLM sees a Contextual Intelligence Package — never raw records.
-              </div>
+        {/* ── Copy ── */}
+        <div data-reveal data-delay="2" style={{ marginBottom: '32px' }}>
+          <p className="tech-label-purple tech-label">The model is not the brain</p>
+          <p className="tech-lead" style={{ maxWidth: '680px' }}>
+            OpenAI, Claude, Ollama, local Llama — swap the model and nothing
+            changes about what your system knows. The LLM is a generation engine
+            you rent. The Intelligence Platform is something you own.
+          </p>
+        </div>
+
+        {/* ── Proof card ── */}
+        <div className="tech-card" data-reveal data-delay="3" style={{ marginBottom: '24px' }}>
+          <div className="tech-facts">
+            <div className="tech-fact">
+              <div className="tech-fact-dot" />
+              29 edge function modules deployed — each a discrete intelligence capability, running in parallel
+            </div>
+            <div className="tech-fact">
+              <div className="tech-fact-dot-purple" />
+              Five-axis retrieval scoring on every query — topic, weight, cluster, entity, time
+            </div>
+            <div className="tech-fact">
+              <div className="tech-fact-dot" />
+              Zero training on your data — the LLM receives a Contextual Intelligence Package, never raw records
+            </div>
+            <div className="tech-fact">
+              <div className="tech-fact-dot-purple" />
+              Six real-time SSE intelligence channels — thought, insight, contradiction, memory, pattern, mode — streaming live during every interaction
             </div>
           </div>
         </div>
+
+        {/* ── The knife ── */}
+        <p className="tech-body" data-reveal data-delay="4" style={{ color: 'var(--color-text-secondary)', maxWidth: '560px' }}>
+          After two years, a customer isn&apos;t leaving a software vendor.
+          They&apos;re leaving their institutional memory.
+        </p>
       </section>
 
       <div className="tech-divider" />
