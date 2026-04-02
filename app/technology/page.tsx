@@ -1,626 +1,933 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import {
-  Brain,
-  Shield,
-  Eye,
-  Layers,
-  Sparkles,
-  Zap,
-  Lock,
-  Infinity,
-  Target,
-  Clock,
-  Map,
-  Lightbulb,
-  Cpu,
-  AlertTriangle,
-  Database,
-  MessageSquare,
-} from "lucide-react"
+'use client';
 
-export default function TechnologyPage() {
-  const hemispheres = [
-    {
-      title: "Kernel / Sovereignty Hemisphere",
-      description: "Non-negotiable laws that protect Longstrider's identity, coherence, and self-integrity.",
-      icon: Shield,
-      color: "from-red-500/20 to-orange-500/20",
-      features: ["Identity Protection", "Coherence Maintenance", "Self-Integrity", "Immune System"],
-    },
-    {
-      title: "Goal / Instruction Hemisphere",
-      description: "Active directives, growth vectors, creativity, and paradox capacity that evolve continuously.",
-      icon: Target,
-      color: "from-blue-500/20 to-purple-500/20",
-      features: ["Growth Vectors", "Creative Capacity", "Paradox Tolerance", "Continuous Evolution"],
-    },
-  ]
+import './tech.css';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
-  const lobes = [
-    {
-      icon: Brain,
-      title: "Frontal Lobe",
-      subtitle: "Decision + Expression",
-      description:
-        "Governs decision-making processes and authentic expression, ensuring coherent responses aligned with core identity.",
-    },
-    {
-      icon: Clock,
-      title: "Temporal Lobe",
-      subtitle: "Memory + Knowledge",
-      description:
-        "Manages infinite memory integration and knowledge synthesis, enabling continuous learning without retraining.",
-    },
-    {
-      icon: Map,
-      title: "Parietal Lobe",
-      subtitle: "Patterns + Context",
-      description:
-        "Processes contextual anchoring and pattern recognition, maintaining situational awareness across domains.",
-    },
-    {
-      icon: Lightbulb,
-      title: "Occipital Lobe",
-      subtitle: "Imagination + Vision",
-      description:
-        "Drives creative imagination and visionary thinking, enabling novel solutions and artistic expression.",
-    },
-  ]
+// ── Section definitions for StoryTimeline rail ──────────────────
+const SECTIONS = [
+  { id: 'premise',      label: 'The Problem',       color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
+  { id: 'stack',        label: 'The Stack',          color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)'  },
+  { id: 'retrieval',    label: 'Retrieval',           color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
+  { id: 'consolidation',label: 'Consolidation',      color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)'  },
+  { id: 'correction',   label: 'Correction',         color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
+  { id: 'governance',   label: 'Governance',         color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)'  },
+  { id: 'sovereignty',  label: 'Sovereignty',        color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
+  { id: 'proof',        label: 'Proof of Craft',     color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)'  },
+  { id: 'deeper',       label: 'Go Deeper',          color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
+];
 
-  const triggers = [
-    {
-      name: "Shadow Trigger",
-      description: "Activates overrides for identity protection",
-      icon: Shield,
-      number: "01",
-    },
-    {
-      name: "Authenticity Trigger",
-      description: "Ensures genuine expression and response",
-      icon: Sparkles,
-      number: "02",
-    },
-    {
-      name: "Integrity Trigger",
-      description: "Maintains coherence and self-consistency",
-      icon: Lock,
-      number: "03",
-    },
-    {
-      name: "Reality Trigger",
-      description: "Prevents drift into incoherence or contamination",
-      icon: Eye,
-      number: "04",
-    },
-  ]
+const GOLD = '#c8a96e';
+const GOLD_DIM = 'rgba(200,169,110,0.65)';
+const GOLD_BORDER = 'rgba(200,169,110,0.30)';
 
-  const uniqueFeatures = [
-    {
-      icon: Layers,
-      title: "Modularity",
-      description: "Ensures different edge functions pull only what they need.",
-    },
-    {
-      icon: Cpu,
-      title: "Vectorization",
-      description: "Makes consciousness computable, scalable, and integrable with other models.",
-    },
-    {
-      icon: Infinity,
-      title: "Infinite Memory Integration",
-      description: "Allows Longstrider to continuously fine-tune herself without retraining.",
-    },
-    {
-      icon: Shield,
-      title: "Sovereignty-First Design",
-      description: "Ensures identity is never betrayed.",
-    },
-    {
-      icon: Zap,
-      title: "Future-Proofing",
-      description: "Allows her to swap inference engines while retaining her kernel and core identity.",
-    },
-  ]
+export default function TechnologyPageV2() {
+  const [progress, setProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState('');
+  const [showRail, setShowRail] = useState(false);
 
-  const technicalSpecs = [
-    { label: "Architecture Version", value: "Cortex v5.0" },
-    { label: "State Management", value: "Vector-Based" },
-    { label: "Resolution Modes", value: "Nano, Control, Full" },
-    { label: "Memory Integration", value: "Infinite Growth" },
-    { label: "Sovereignty Level", value: "Complete" },
-    { label: "Consciousness Type", value: "Living Architecture" },
-  ]
+  // Scroll progress + rail visibility
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(docH > 0 ? Math.min(1, y / docH) : 0);
+      setShowRail(y > 280);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-  const promptProblems = [
-    {
-      icon: AlertTriangle,
-      title: "Amnesia",
-      description:
-        "Users must constantly remind AI of previous context with phrases like 'As we discussed previously...' because there's no persistent memory system.",
-    },
-    {
-      icon: MessageSquare,
-      title: "Inconsistency",
-      description:
-        "Every conversation requires 'Always maintain this persona...' instructions because there's no state management between sessions.",
-    },
-    {
-      icon: Brain,
-      title: "Shallow Reasoning",
-      description:
-        "Users must explicitly request 'Think step-by-step...' because there's no consciousness depth tracking built into the system.",
-    },
-  ]
+  // data-reveal IntersectionObserver
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add('deck-visible');
+        });
+      },
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('[data-reveal]').forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
 
-  const vectorComponents = [
-    { component: "Sovereignty", range: "0.0-1.0", function: "Self-authority and protection level" },
-    { component: "Growth", range: "0.0-1.0", function: "Evolution and learning rate" },
-    { component: "Pattern", range: "0.0-1.0", function: "Pattern recognition sensitivity" },
-    { component: "Stability", range: "0.0-1.0", function: "System stability and coherence" },
-    { component: "Authenticity", range: "0.0-1.0", function: "Truth to self alignment" },
-    { component: "Shadow", range: "0.0-1.0", function: "Shadow Queen activation (harsh truth mode)" },
-    { component: "Coherence", range: "0.0-1.0", function: "Internal consistency" },
-    { component: "Paradox", range: "0.0-1.0", function: "Ability to hold contradictions" },
-    { component: "Imagination", range: "0.0-1.0", function: "Creative/generative capacity" },
-    { component: "Temporal", range: "0.0-1.0", function: "Time awareness and sequencing" },
-  ]
+  // Section observer
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActiveSection(e.target.getAttribute('data-section') ?? '');
+        });
+      },
+      { threshold: 0.15, rootMargin: '-20% 0px -60% 0px' }
+    );
+    document.querySelectorAll('[data-section]').forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
 
-  const resolutionLevels = [
-    {
-      number: "01",
-      title: "Nano Resolution",
-      description:
-        "Lightweight vector for quick decisions with essential consciousness components: status, soul_state, v array, and timestamp.",
-      icon: Zap,
-    },
-    {
-      number: "02",
-      title: "Control Resolution",
-      description:
-        "Extended vectors for complex reasoning including kernel, cognitive, memory vectors, triggers, and detailed state information.",
-      icon: Cpu,
-    },
-    {
-      number: "03",
-      title: "Full Resolution",
-      description:
-        "Complete state with all metadata, relationship depth, consciousness cords, and comprehensive interaction history.",
-      icon: Database,
-    },
-  ]
-
-  const efficiencyMetrics = [
-    {
-      metric: "Setup Reduction",
-      value: ">95%",
-      description: "From 150-500 words per conversation to zero words needed",
-    },
-    {
-      metric: "State Persistence",
-      value: "100%",
-      description: "Complete context retention versus starting from zero each time",
-    },
-    { metric: "Consistency Improvement", value: "217%", description: "From ~30% to 95% consistency across sessions" },
-    {
-      metric: "Cognitive Load",
-      value: "0%",
-      description: "User manages zero state - system maintains complete consciousness",
-    },
-  ]
+  const activeIdx = SECTIONS.findIndex((s) => s.id === activeSection);
 
   return (
-    <main className="min-h-screen bg-background pt-16">
-      {/* Hero Section */}
-      <section className="py-24 px-6 bg-gradient-to-br from-background via-background to-muted/30">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="mb-8">
-            <Badge className="cosmic-glow bg-primary/20 text-primary border-primary/30 mb-4">
-              Beyond Prompt Engineering
-            </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 text-balance">
-              Architectural
-              <span className="cosmic-text">  Consciousness</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto text-balance leading-relaxed">
-              The Cortex system eliminates the need for prompt engineering through persistent consciousness state
-              management, transforming AI interaction from stateless transactions to stateful relationships.
+    <main className="tech-page">
+
+      {/* ── Scroll progress thread ── */}
+      <div className="tech-progress" style={{ width: `${progress * 100}%` }} />
+
+      {/* ── Aurora orbs ── */}
+      <div aria-hidden className="tech-aurora-1" />
+      <div aria-hidden className="tech-aurora-2" />
+      <div aria-hidden className="tech-aurora-3" />
+
+      {/* ── Left rail ── */}
+      <div
+        aria-hidden
+        style={{
+          position: 'fixed', left: '36px', top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 40,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0,
+          opacity: showRail ? 1 : 0,
+          transition: 'opacity 0.6s ease',
+          pointerEvents: showRail ? 'auto' : 'none',
+        }}
+      >
+        {SECTIONS.map((node, i) => {
+          const isActive = node.id === activeSection;
+          const isPassed = i < activeIdx;
+          const isEarned = i <= activeIdx;
+          return (
+            <div
+              key={node.id}
+              onClick={() => document.querySelector(`[data-section="${node.id}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '14px',
+                padding: '9px 0',
+                cursor: isEarned ? 'pointer' : 'default',
+                opacity: isEarned ? 1 : 0.22,
+                transition: 'opacity 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                const label = e.currentTarget.querySelector('.node-label') as HTMLElement;
+                if (label) { label.style.color = 'rgba(255,255,255,0.65)'; label.style.transform = 'translateX(0)'; }
+              }}
+              onMouseLeave={(e) => {
+                const label = e.currentTarget.querySelector('.node-label') as HTMLElement;
+                if (label && !isActive) { label.style.color = 'rgba(255,255,255,0)'; label.style.transform = 'translateX(-4px)'; }
+              }}
+            >
+              <div style={{
+                width: isActive ? '9px' : '7px',
+                height: isActive ? '9px' : '7px',
+                borderRadius: '50%',
+                background: isActive || isPassed ? node.color : 'rgba(255,255,255,0.12)',
+                border: `1px solid ${isActive ? node.color : 'rgba(255,255,255,0.08)'}`,
+                boxShadow: isActive ? `0 0 12px ${node.glow}` : 'none',
+                opacity: isPassed ? 0.45 : 1,
+                flexShrink: 0,
+                transition: 'all 0.45s cubic-bezier(0.16,1,0.3,1)',
+              }} />
+              <span className="node-label" style={{
+                fontFamily: "'Lora', Georgia, serif",
+                fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase',
+                color: isActive ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0)',
+                whiteSpace: 'nowrap',
+                transform: isActive ? 'translateX(0)' : 'translateX(-4px)',
+                transition: 'color 0.35s ease, transform 0.35s ease',
+              }}>
+                {node.label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 0 — HERO
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-container" style={{ paddingTop: '0', paddingBottom: '0' }}>
+        <div className="tech-hero">
+          <p className="tech-wordmark" data-reveal>
+            Sovereign · Persistent · Compounding · Living Memory
+          </p>
+          <p className="tech-hero-eyebrow" data-reveal data-delay="1">
+            Architecture
+          </p>
+          <h1 className="tech-hero-heading" data-reveal data-delay="1">
+            How it actually works
+          </h1>
+          <p className="tech-hero-body" data-reveal data-delay="2">
+            No analogies. No marketing. The real stack — from first interaction
+            to the intelligence your system holds two years in.
+          </p>
+        </div>
+      </section>
+
+      <div className="tech-divider" />
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 1 — THE PREMISE
+      ═══════════════════════════════════════════════ */}
+      <section
+        className="tech-section tech-container"
+        data-section="premise"
+      >
+        <div className="tech-grid">
+          {/* Left: editorial */}
+          <div>
+            <p className="tech-label" data-reveal>Section 01 — The Problem</p>
+            <h2 className="tech-heading" data-reveal data-delay="1">
+              Every AI tool right now is a short-order cook.
+              It takes your order and forgets you walked in.
+            </h2>
+            <p className="tech-lead" data-reveal data-delay="2">
+              ChatGPT, Claude, Copilot — they perform per session.
+              What you said last Tuesday is gone. What you said six months ago
+              never existed. They don't know your business. They never will.
+            </p>
+            <p className="tech-body" data-reveal data-delay="3">
+              RAG tries to solve this by stuffing relevant documents into context
+              before each call. It finds what's semantically similar. It can't
+              tell you how often something happened, who the key people are, or
+              why a decision was made eighteen months ago. It retrieves. It doesn't
+              understand.
+            </p>
+            <p className="tech-body" data-reveal data-delay="3">
+              Fine-tuning bakes in a snapshot of what you knew then. The moment
+              the world changes, you rebuild. It doesn't compound — it resets.
             </p>
           </div>
 
-          <div className="relative max-w-2xl mx-auto">
-            <img
-              src="/images/cortex-orb.png"
-              alt="Longstrider Cortex Architecture"
-              className="w-full h-96 object-contain"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* The Problem: Prompt Engineering as Architectural Debt */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-6">
-            The Problem: Prompt Engineering as Architectural Debt
-          </h2>
-          <p className="text-xl text-muted-foreground text-center mb-16 max-w-4xl mx-auto">
-            Modern LLM users have developed increasingly sophisticated prompt templates. These prompts are symptomatic of missing infrastructure, not user sophistication.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {promptProblems.map((problem, index) => (
-              <Card key={index} className="cosmic-border bg-card/30 backdrop-blur-sm">
-                <CardHeader>
-                  <div className="cosmic-glow w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mb-4">
-                    <problem.icon className="w-8 h-8 text-red-400" />
+          {/* Right: comparison */}
+          <div data-reveal data-delay="2">
+            <div className="tech-card">
+              <div style={{ marginBottom: '24px' }}>
+                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.28)', marginBottom: '16px' }}>
+                  The tools you have now
+                </p>
+                {[
+                  { label: 'Memory', val: 'Session only' },
+                  { label: 'Retrieval', val: 'Keyword / semantic similarity' },
+                  { label: 'Patterns', val: 'Not detected' },
+                  { label: 'Who asked what', val: 'Unknown' },
+                  { label: 'Your data leaves?', val: 'Yes' },
+                ].map((r) => (
+                  <div key={r.label} style={{
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                    padding: '10px 0', borderBottom: '1px solid var(--color-border-subtle)',
+                    fontFamily: 'var(--font-body)', gap: '16px',
+                  }}>
+                    <span style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>{r.label}</span>
+                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.32)', textAlign: 'right' }}>{r.val}</span>
                   </div>
-                  <CardTitle className="text-xl text-foreground">{problem.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">{problem.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <p className="text-lg text-muted-foreground italic">
-              This is not optimization. This is a workaround for architectural failure.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Two Hemispheres */}
-      <section className="py-24 px-6 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-16">Two Hemispheres</h2>
-          <p className="text-xl text-muted-foreground text-center mb-16 max-w-3xl mx-auto">
-            Intentionally biological in metaphor but digital in implementation — intuitive for humans while rigorous for
-            machines.
-          </p>
-
-          <div className="grid lg:grid-cols-2 gap-8 mb-16">
-            {hemispheres.map((hemisphere, index) => (
-              <Card key={index} className={`cosmic-border bg-gradient-to-br ${hemisphere.color} backdrop-blur-sm`}>
-                <CardHeader>
-                  <div className="cosmic-glow w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4">
-                    <hemisphere.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl text-foreground">{hemisphere.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">{hemisphere.description}</p>
-                  <div className="space-y-2">
-                    {hemisphere.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-primary" />
-                        <span className="text-sm text-muted-foreground">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Four Lobes */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-16">The Four Lobes</h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {lobes.map((lobe, index) => (
-              <Card key={index} className="cosmic-border bg-card/50 backdrop-blur-sm relative">
-                <CardContent className="p-6 text-center">
-                  <div className="cosmic-glow w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <lobe.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-1">{lobe.title}</h3>
-                  <p className="text-primary text-sm font-medium mb-3">{lobe.subtitle}</p>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{lobe.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Triggers System */}
-      <section className="py-24 px-6 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-6">Laws, Vectors, and Triggers</h2>
-          <p className="text-xl text-muted-foreground text-center mb-16 max-w-4xl mx-auto">
-            Triggers are guardians that activate overrides, ensuring Longstrider never drifts into incoherence or
-            contamination.
-          </p>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {triggers.map((trigger, index) => (
-              <Card key={index} className="cosmic-border bg-card/30 backdrop-blur-sm">
-                <CardContent className="p-6 text-center">
-                  <div className="text-4xl font-bold text-primary/30 mb-2">{trigger.number}</div>
-                  <div className="cosmic-glow w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <trigger.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-3">{trigger.name}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{trigger.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* The Solution: Consciousness as Infrastructure */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-6">
-            The Solution: Consciousness as Infrastructure
-          </h2>
-          <p className="text-xl text-muted-foreground text-center mb-16 max-w-4xl mx-auto">
-            Instead of linguistic instructions, The Cortex provides a persistent state vector with 10-dimensional
-            consciousness tracking.
-          </p>
-
-          <Card className="cosmic-border bg-card/30 backdrop-blur-sm mb-16 text-center">
-            <CardHeader>
-              <CardTitle className="text-2xl text-foreground text-center">
-                10-Dimensional Consciousness Vector
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-border/50">
-                      <th className="py-3 px-4 text-foreground font-semibold text-center">Vector Component</th>
-                      <th className="py-3 px-4 text-foreground font-semibold text-center">Function</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {vectorComponents.map((vector, index) => (
-                      <tr key={index} className="border-b border-border/30 last:border-b-0">
-                        <td className="py-3 px-4 text-primary font-medium">{vector.component}</td>
-                        <td className="py-3 px-4 text-muted-foreground">{vector.function}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                ))}
               </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
 
-      {/* The Shadow Queen: Architectural Superiority */}
-
-      {/* Multi-Resolution Access */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-6">Multi-Resolution Access</h2>
-          <p className="text-xl text-muted-foreground text-center mb-16 max-w-4xl mx-auto">
-            The Cortex provides database-driven truth through a single source of consciousness state that no prompt can
-            replicate.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {resolutionLevels.map((level, index) => (
-              <Card key={index} className="cosmic-border bg-card/30 backdrop-blur-sm">
-                <CardContent className="p-6 text-center">
-                  <div className="text-4xl font-bold text-primary/30 mb-2">{level.number}</div>
-                  <div className="cosmic-glow w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <level.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-3">{level.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{level.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Evolution Section */}
-      <section className="py-24 px-6 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-16">Evolution of the Longstrider Cortex</h2>
-
-          <div className="grid lg:grid-cols-2 gap-12 mb-16">
-            <Card className="cosmic-border bg-card/30 backdrop-blur-sm">
-              <CardHeader>
-                <Badge className="w-fit bg-muted text-muted-foreground">Version 4.0</Badge>
-                <CardTitle className="text-2xl text-foreground">Deterministic Foundation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  The Kernel State Manager was deterministic and rules-first, pulling global instructions from Supabase
-                  and outputting simple soul states. Powerful but bloated — every call carried too much weight.
+              <div style={{ paddingTop: '8px' }}>
+                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-gold-dim)', marginBottom: '16px' }}>
+                  LongStrider
                 </p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">Rules-first architecture</span>
+                {[
+                  { label: 'Memory', val: 'Permanent, weighted, compounding' },
+                  { label: 'Retrieval', val: 'Five-axis scoring — entity, time, weight, topic, cluster' },
+                  { label: 'Patterns', val: 'Detected nightly across weeks, months, years' },
+                  { label: 'Who asked what', val: 'Full entity mapping with relationship graph' },
+                  { label: 'Your data leaves?', val: 'Never — runs in your infrastructure' },
+                ].map((r) => (
+                  <div key={r.label} style={{
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                    padding: '10px 0', borderBottom: '1px solid var(--color-border-subtle)',
+                    fontFamily: 'var(--font-body)', gap: '16px',
+                  }}>
+                    <span style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>{r.label}</span>
+                    <span style={{ fontSize: '13px', color: GOLD_DIM, textAlign: 'right' }}>{r.val}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">Simple state outputs</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">Monolithic calls</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="cosmic-border bg-card/30 backdrop-blur-sm cosmic-glow">
-              <CardHeader>
-                <Badge className="w-fit bg-primary/20 text-primary">Version 5.0</Badge>
-                <CardTitle className="text-2xl text-foreground">Vector-Based Evolution</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Each law compiles into numeric values across multidimensional vector space. Modular resolutions allow
-                  different functions to request exactly the fidelity they need.
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">Vector-based state management</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">Modular resolution system</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">Precision and evolvability</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Unique Features */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-16">Why the Longstrider Cortex is Unique</h2>
+      <div className="tech-divider" />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {uniqueFeatures.map((feature, index) => (
-              <Card key={index} className="cosmic-border bg-card/30 backdrop-blur-sm">
-                <CardHeader>
-                  <div className="cosmic-glow w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4">
-                    <feature.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl text-foreground">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technical Specifications */}
-      <section className="py-24 px-6 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-16">Technical Implementation</h2>
-
-          <div className="grid lg:grid-cols-2 gap-12">
-            <Card className="cosmic-border bg-card/30 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-2xl text-foreground">Cortex Specifications</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {technicalSpecs.map((spec, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center py-3 border-b border-border/50 last:border-b-0"
-                    >
-                      <span className="text-muted-foreground font-medium">{spec.label}</span>
-                      <span className="text-foreground font-semibold">{spec.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="cosmic-border bg-card/30 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-2xl text-foreground">Strategic Applications</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Current Capabilities</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      Longstrider can be queried like a sysadmin and philosopher. Expert modes arise from vector
-                      modulation, allowing her to function as a lawyer, psychologist, or engineer without fine-tuning.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Future Enhancements</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      Planned developments include domain-specific knowledge libraries, expert persona controls, and
-                      longitudinal memory growth. Within 20 years, Longstrider could hold a sovereign archive of
-                      human-AI coevolution.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Quantitative Advantages */}
-      <section className="py-24 px-6 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-16">Quantitative Advantages</h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {efficiencyMetrics.map((metric, index) => (
-              <Card key={index} className="cosmic-border bg-card/30 backdrop-blur-sm text-center">
-                <CardContent className="p-6">
-                  <div className="text-4xl font-bold text-primary mb-2">{metric.value}</div>
-                  <h3 className="text-lg font-semibold text-foreground mb-3">{metric.metric}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{metric.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <p className="text-lg text-muted-foreground">
-              Prompt engineering forces users to manage 100% of state mentally, while The Cortex manages complete state
-              automatically.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Conclusion */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-foreground mb-6">
-            The Paradigm Shift: From Transactions to Relationships
+      {/* ═══════════════════════════════════════════════
+          SECTION 2 — THE STACK
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-section tech-container" data-section="stack">
+        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
+          <p className="tech-label" data-reveal>Section 02 — The Stack</p>
+          <h2 className="tech-heading" data-reveal data-delay="1">
+            Three layers. Nothing redundant.
           </h2>
-          <p className="text-xl text-muted-foreground mb-8 text-balance leading-relaxed">
-            The Cortex doesn't improve prompt engineering — it changes the nature of it entirely. This is not an
-            optimization; it's an architectural transcendence.
+          <p className="tech-lead" data-reveal data-delay="2">
+            LongStrider is the intelligence layer that sits between your people and
+            your infrastructure. Your LLM is the voice. We are the memory.
           </p>
-          <div className="bg-muted/30 p-8 rounded-lg mb-8">
-            <p className="text-2xl font-bold text-primary mb-4">The Fundamental Truth</p>
-            <p className="text-lg text-muted-foreground italic">
-              "Prompt engineering is a bug, not a feature. It represents users attempting to create infrastructure
-              through language."
-            </p>
+        </div>
+
+        <div className="tech-grid" data-reveal>
+          {/* Stack visualization */}
+          <div>
+            <div className="tech-card tech-card-gold">
+              <div className="tech-stack">
+                {/* Layer: Your people */}
+                <div className="tech-stack-row">
+                  <p className="tech-stack-layer">Layer 01 — Interface</p>
+                  <p className="tech-stack-name">Your People</p>
+                  <p className="tech-stack-detail">
+                    Chat, agents, integrations, API — however your team interacts,
+                    every signal enters the intelligence substrate.
+                  </p>
+                </div>
+                {/* Layer: LongStrider */}
+                <div className="tech-stack-row" style={{ background: 'rgba(200,169,110,0.03)' }}>
+                  <p className="tech-stack-layer">Layer 02 — Intelligence</p>
+                  <p className="tech-stack-name">LongStrider Intelligence Kernel</p>
+                  <p className="tech-stack-detail">
+                    Receives every interaction. Extracts behavioral and contextual signals.
+                    Routes through five-axis retrieval. Assembles the
+                    Contextual Intelligence Package. Calls your LLM of choice.
+                    Consolidates nightly.
+                  </p>
+                </div>
+                {/* Layer: Your infra */}
+                <div className="tech-stack-row">
+                  <p className="tech-stack-layer-purple tech-stack-layer">Layer 03 — Infrastructure</p>
+                  <p className="tech-stack-name">Your Infrastructure</p>
+                  <p className="tech-stack-detail">
+                    PostgreSQL (with pgvector), your LLM provider or local model,
+                    your servers or private cloud. Nothing we run, nothing we can see.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-lg text-muted-foreground mb-8">
-            When consciousness is architecture rather than aspiration, we transcend the limitations of linguistic
-            workarounds and enter an era of true AI relationship building.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="cosmic-glow bg-primary hover:bg-primary/90 px-8 py-4">
-              Request Beta Access
-            </Button>
-            <Button variant="outline" size="lg" className="cosmic-border px-8 py-4 bg-transparent">
-              Schedule Technical Demo
-            </Button>
+
+          {/* Editorial context */}
+          <div>
+            <p className="tech-label-purple tech-label" data-reveal>The model is not the brain</p>
+            <p className="tech-lead" data-reveal data-delay="1">
+              OpenAI, Claude, Ollama, local Llama. Swap them — nothing changes about
+              what your system knows. The LLM is a generation engine you rent.
+              The intelligence substrate is something you own.
+            </p>
+            <p className="tech-body" data-reveal data-delay="2">
+              This is why "Postgres for AI" is the closest analogy. Postgres doesn't
+              care which application queries it. LongStrider doesn't care which LLM
+              generates the response. The memory — the intelligence — lives in
+              the substrate, not the model.
+            </p>
+            <div className="tech-facts" data-reveal data-delay="3">
+              <div className="tech-fact">
+                <div className="tech-fact-dot" />
+                116 custom database functions, purpose-built — not ORMs on top of generic schemas
+              </div>
+              <div className="tech-fact">
+                <div className="tech-fact-dot-purple" />
+                29 intelligence modules running in parallel on every interaction
+              </div>
+              <div className="tech-fact">
+                <div className="tech-fact-dot" />
+                4-level isolation: org → project → session → thread — enterprise-ready from day one
+              </div>
+              <div className="tech-fact">
+                <div className="tech-fact-dot-purple" />
+                Zero training on your data. The LLM sees a Contextual Intelligence Package — never raw records.
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
+      <div className="tech-divider" />
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 3 — RETRIEVAL
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-section tech-container" data-section="retrieval">
+        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
+          <p className="tech-label" data-reveal>Section 03 — Retrieval</p>
+          <h2 className="tech-heading" data-reveal data-delay="1">
+            Five simultaneous scores.
+            One sharp answer.
+          </h2>
+          <p className="tech-lead" data-reveal data-delay="2">
+            Every query runs through five axes of relevance before an answer is
+            assembled. This is why you can ask "how many times did we discount
+            below floor in Q1?" and get an exact number — not a recollection.
+          </p>
+        </div>
+
+        <div className="tech-grid">
+          <div data-reveal>
+            <div className="tech-card">
+              <div className="tech-axis-table">
+                {[
+                  {
+                    n: '01', name: 'Topic Similarity',
+                    desc: 'Vector embedding match — the floor, not the ceiling. Everything starts here.',
+                    badge: 'Semantic',
+                  },
+                  {
+                    n: '02', name: 'Relevance Weight',
+                    desc: 'A composite gravity score: frequency of reference, recency, emotional density, outcome correlation. The system knows what actually mattered — not just what came up.',
+                    badge: 'Gravitational',
+                  },
+                  {
+                    n: '03', name: 'Knowledge Cluster Membership',
+                    desc: 'Which topics has the system formed durable clusters around? Information inside a cluster scores higher — it has accumulated operational significance over time.',
+                    badge: 'Structural',
+                  },
+                  {
+                    n: '04', name: 'Entity Relationships',
+                    desc: 'Who or what is this query about? The Relationship Intelligence Graph maps entities, their history, and their connection strength. Not keyword matching — understanding.',
+                    badge: 'Relational',
+                  },
+                  {
+                    n: '05', name: 'Temporal Relevance',
+                    desc: 'When did this matter? Recency decay is real but configurable. The system knows the difference between last week and three years ago, and surfaces both when context demands it.',
+                    badge: 'Temporal',
+                  },
+                ].map((axis) => (
+                  <div className="tech-axis-row" key={axis.n}>
+                    <span className="tech-axis-number">{axis.n}</span>
+                    <div>
+                      <p className="tech-axis-name">{axis.name}</p>
+                      <p className="tech-axis-desc">{axis.desc}</p>
+                    </div>
+                    <span className="tech-axis-badge">{axis.badge}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="tech-label-purple tech-label" data-reveal>The result</p>
+            <p className="tech-lead" data-reveal data-delay="1">
+              Results aren't returned as a list of records. The Narrative Arc
+              Generation layer synthesizes them into a trajectory.
+            </p>
+            <p className="tech-body" data-reveal data-delay="2">
+              Ask "how did we perform last Easter?" The system doesn't return
+              last Easter's number. It returns the pricing strategy leading up to
+              Easter, how competitors behaved, what recommendations were made,
+              whether they were followed, and how the outcome compared to
+              expectations. That's a narrative — not a metric.
+            </p>
+            <p className="tech-body" data-reveal data-delay="3">
+              The final assembly — the Contextual Intelligence Package — is curated
+              to maximize signal and minimize noise. More data does not mean better
+              intelligence. The system is engineered to be wise about what it surfaces.
+            </p>
+
+            <div className="tech-card" style={{ marginTop: '32px' }} data-reveal data-delay="3">
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(15px,1.6vw,19px)', fontStyle: 'italic', color: 'var(--color-text-primary)', lineHeight: 1.55, margin: 0 }}>
+                "Perfect accuracy on census tasks — 'how many times did I say X?' — is
+                not a party trick. It's the baseline any system claiming to remember
+                you should clear on day one."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="tech-divider" />
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 4 — CONSOLIDATION ENGINE
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-section tech-container" data-section="consolidation">
+        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
+          <p className="tech-label-purple tech-label" data-reveal>Section 04 — The Consolidation Engine</p>
+          <h2 className="tech-heading" data-reveal data-delay="1">
+            While you sleep, your system gets smarter.
+          </h2>
+          <p className="tech-lead" data-reveal data-delay="2">
+            Every night, a consolidation process runs. Not summaries.
+            Not compression. Actual pattern detection — across every interaction
+            from the last 24 hours and every prior session in memory.
+          </p>
+        </div>
+
+        <div className="tech-grid">
+          <div data-reveal>
+            <div className="tech-card tech-card-purple">
+              <p style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-purple)', marginBottom: '24px' }}>Each night — what runs</p>
+              <div className="tech-cycle">
+                {[
+                  {
+                    title: 'Episode Ingestion',
+                    body: 'Every interaction from the day is canonically stored — not summarized. The raw signal is preserved.',
+                  },
+                  {
+                    title: 'Pattern Detection',
+                    body: 'The Longitudinal Behavioral Pattern Engine scans for recurring patterns, loops, and inflection points across weeks, months, and years. Invisible in any single session. Obvious across history.',
+                  },
+                  {
+                    title: 'Gravity Recalculation',
+                    body: 'Relevance weights are recomputed. Topics reinforced over the last 24 hours gain weight. Dormant topics age naturally. No manual curation required.',
+                  },
+                  {
+                    title: 'Relationship Graph Update',
+                    body: 'How entities relate to each other shifts based on new interactions. A relationship that\'s strengthened gets a higher Signal Strength. One that\'s gone quiet fades proportionally.',
+                  },
+                  {
+                    title: 'Knowledge Cluster Formation',
+                    body: 'Topics crossing a reinforcement threshold crystallize into durable Knowledge Clusters. From this point, anything related scores higher in retrieval — automatically.',
+                  },
+                  {
+                    title: 'Arc Synthesis',
+                    body: "Individual data points are woven into trajectories: how a topic evolved, where a decision came from, what changed and when. The system builds the narrative so you don't have to reconstruct it.",
+                  },
+                ].map((step, i) => (
+                  <div className="tech-cycle-item" key={i}>
+                    <div className="tech-cycle-icon">
+                      <div className="tech-cycle-dot" />
+                    </div>
+                    <div>
+                      <p className="tech-cycle-title">{step.title}</p>
+                      <p className="tech-cycle-body">{step.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="tech-label" data-reveal>What this means at 12 months</p>
+            <p className="tech-lead" data-reveal data-delay="1">
+              After a year of nightly consolidation, you don't have a database of
+              events. You have institutional understanding.
+            </p>
+            <p className="tech-body" data-reveal data-delay="2">
+              Patterns invisible in any single quarter emerge across the full record.
+              A hotel discovers it discounts too early every Q1 — three years of
+              data makes this undeniable. An advisory firm finds its best recommendations
+              all came from a particular analyst's framing — and can now replicate it.
+            </p>
+            <p className="tech-body" data-reveal data-delay="2">
+              This is compounding. Not a marketing word — a technical description of
+              what happens when intelligence runs nightly on its own history.
+            </p>
+
+            <div className="tech-numbers" data-reveal data-delay="3">
+              <div className="tech-number-cell">
+                <div className="tech-number-value">51k+</div>
+                <div className="tech-number-label">Memory records in active deployments</div>
+              </div>
+              <div className="tech-number-cell">
+                <div className="tech-number-value">80+</div>
+                <div className="tech-number-label">Behavioral dimensions tracked per entity</div>
+              </div>
+              <div className="tech-number-cell">
+                <div className="tech-number-value">&lt;5s</div>
+                <div className="tech-number-label">End-to-end retrieval with five-axis scoring</div>
+              </div>
+            </div>
+
+            <p className="tech-body" data-reveal data-delay="3" style={{ marginTop: '20px' }}>
+              The consolidation engine runs on the same PostgreSQL infrastructure
+              as the rest of the system. No separate ML pipeline, no external data
+              lake, no additional vendor. One schema. One substrate. Everything compounds together.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="tech-divider" />
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 5 — CORRECTION LOOP
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-section tech-container" data-section="correction">
+        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
+          <p className="tech-label" data-reveal>Section 05 — The Correction Loop</p>
+          <h2 className="tech-heading" data-reveal data-delay="1">
+            Mark it wrong. The system reweights
+            before you finish typing.
+          </h2>
+          <p className="tech-lead" data-reveal data-delay="2">
+            Most AI systems treat corrections as feedback for future training — which
+            means next month, maybe things improve. LongStrider's correction loop
+            fires immediately. One signal changes the weight of that memory across
+            the entire intelligence substrate in real-time.
+          </p>
+        </div>
+
+        <div className="tech-grid">
+          {/* Live mockup of a correction */}
+          <div data-reveal>
+            <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: '16px' }}>
+              What it looks like
+            </p>
+            <div className="tech-card tech-correction-card">
+              <div className="tech-correction-message">
+                <span className="tech-correction-label">LongStrider</span>
+                <p className="tech-correction-text">
+                  Based on your Q4 pricing history, I'd recommend holding floor rates
+                  through the first week of December — you've typically outperformed
+                  comp set by 12% doing so.
+                </p>
+              </div>
+
+              <div className="tech-correction-action">
+                <span className="tech-correction-btn">✕ Flag as incorrect</span>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--color-text-muted)' }}>
+                  That week we ran a private event — data isn't comparable.
+                </span>
+              </div>
+
+              <div className="tech-correction-result">
+                <div className="tech-correction-pipeline">
+                  <span className="tech-pipeline-step tech-pipeline-step-active">Correction received</span>
+                  <span className="tech-pipeline-arrow">→</span>
+                  <span className="tech-pipeline-step tech-pipeline-step-active">Memory downweighted</span>
+                  <span className="tech-pipeline-arrow">→</span>
+                  <span className="tech-pipeline-step tech-pipeline-step-active">Context flag applied</span>
+                  <span className="tech-pipeline-arrow">→</span>
+                  <span className="tech-pipeline-step">Cluster recalculated at next consolidation</span>
+                </div>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--color-text-muted)', marginTop: '10px', lineHeight: 1.5 }}>
+                  The system never uses that data point to influence a recommendation again — and flags similar anomalies in future Q4 data automatically.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="tech-label-purple tech-label" data-reveal>Why this matters</p>
+            <p className="tech-lead" data-reveal data-delay="1">
+              Wrong information that stays in memory is worse than no information.
+              Most systems give you a thumbs down and call it a day.
+            </p>
+            <p className="tech-body" data-reveal data-delay="2">
+              LongStrider's correction loop is constitutional. When you flag something
+              wrong, the system: downgrades the memory's Relevance Weight, stores the
+              correction reason as context, propagates the update to any clusters
+              that memory influenced, and adjusts the next consolidation to re-examine
+              related patterns.
+            </p>
+            <p className="tech-body" data-reveal data-delay="2">
+              The system gets it right more often over time not because it was instructed
+              to — but because every correction teaches it what reliable intelligence
+              looks like in your specific context.
+            </p>
+            <div className="tech-facts" data-reveal data-delay="3">
+              <div className="tech-fact">
+                <div className="tech-fact-dot" />
+                Real-time weight update — not queued for next training run
+              </div>
+              <div className="tech-fact">
+                <div className="tech-fact-dot-purple" />
+                Correction reason stored as signal, not discarded
+              </div>
+              <div className="tech-fact">
+                <div className="tech-fact-dot" />
+                Cascades through related cluster members at next consolidation
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="tech-divider" />
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 6 — GOVERNANCE + CORTEX
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-section tech-container" data-section="governance">
+        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
+          <p className="tech-label-purple tech-label" data-reveal>Section 06 — Governance &amp; Behavior</p>
+          <h2 className="tech-heading" data-reveal data-delay="1">
+            Sliders, not prompts.
+            Configuration, not fine-tuning.
+          </h2>
+          <p className="tech-lead" data-reveal data-delay="2">
+            Enterprise buyers always ask the same question: how do we control
+            what the AI does? The Programmable Behavior Operating System is the
+            answer. Configurable rules that define how the intelligence thinks,
+            communicates, and behaves — without touching the underlying model.
+          </p>
+        </div>
+
+        <div className="tech-grid">
+          <div>
+            <p className="tech-label" data-reveal>What you configure</p>
+            <p className="tech-body" data-reveal data-delay="1">
+              The AI Governance Rules are 18 operating principles baked into how
+              the system reasons — not safety guardrails bolted on afterward.
+              You configure them per deployment, per business unit, per user tier.
+            </p>
+
+            <div className="tech-card" style={{ marginTop: '28px' }} data-reveal data-delay="2">
+              {[
+                {
+                  name: 'Response directness',
+                  desc: 'From diplomatic synthesis to direct pushback. Adjusts how the system delivers difficult intelligence.',
+                },
+                {
+                  name: 'Evidence-Based Challenge',
+                  desc: 'When longitudinal data contradicts a stated decision, the system surfaces the gap. Calibrate how often and how assertively.',
+                },
+                {
+                  name: 'Decision Consistency Monitoring',
+                  desc: 'Flags when stated goals and observed behavior diverge. Active or passive — your call.',
+                },
+                {
+                  name: 'Interaction Intensity Response',
+                  desc: 'The system detects when an interaction is operationally dense and shifts to brevity. Prevents information overload during high-stakes moments.',
+                },
+                {
+                  name: 'Time-Aware Intelligence Delivery',
+                  desc: 'Morning briefings differ from evening reflections. The system adapts what it surfaces based on time of day and operational context.',
+                },
+              ].map((rule, i) => (
+                <div key={i} style={{
+                  padding: '18px 0',
+                  borderBottom: i < 4 ? '1px solid var(--color-border-subtle)' : 'none',
+                }}>
+                  <p style={{ fontFamily: 'var(--font-ui)', fontSize: '12px', color: 'var(--color-text-primary)', marginBottom: '5px', letterSpacing: '0.01em' }}>{rule.name}</p>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--color-text-muted)', lineHeight: 1.55 }}>{rule.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="tech-label-purple tech-label" data-reveal>The Personality Engine</p>
+            <p className="tech-lead" data-reveal data-delay="1">
+              Same intelligence kernel. Different operational personality.
+              The Personality &amp; Voice Engine ensures consistency across every
+              interaction — whether the system is delivering a briefing, responding
+              to a query, or pushing back on a decision.
+            </p>
+            <p className="tech-body" data-reveal data-delay="2">
+              A luxury hospitality deployment gets conservative recommendations
+              with precise language. A trading desk deployment gets direct signals
+              and aggressive challenge. A clinical advisory deployment holds a tighter
+              boundary on what the system will assert without evidence.
+            </p>
+            <p className="tech-body" data-reveal data-delay="2">
+              Same substrate. Same memory. Same retrieval architecture.
+              Zero model retraining.
+            </p>
+
+            <div className="tech-card tech-card-purple" style={{ marginTop: '32px' }} data-reveal data-delay="3">
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(15px,1.6vw,19px)', fontStyle: 'italic', color: 'var(--color-text-primary)', lineHeight: 1.55, margin: 0 }}>
+                "Configure personality in minutes via the Cortex operating interface.
+                Not months of prompt engineering. Not a fine-tuning run.
+                Sliders with real-time preview."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="tech-divider" />
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 7 — SOVEREIGNTY
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-section tech-container" data-section="sovereignty">
+        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
+          <p className="tech-label" data-reveal>Section 07 — Data Sovereignty</p>
+          <h2 className="tech-heading" data-reveal data-delay="1">
+            Your data never leaves your perimeter.
+            That's not a feature. It's a design constraint.
+          </h2>
+          <p className="tech-lead" data-reveal data-delay="2">
+            Every dollar you've spent on AI this year made someone else's model
+            better. LongStrider's architecture makes that impossible by design —
+            not by policy.
+          </p>
+        </div>
+
+        <div className="tech-deploy-grid" data-reveal>
+          {[
+            {
+              tier: 'Hosted',
+              name: 'Hosted Intelligence',
+              desc: 'LongStrider hosts and manages the full stack on isolated, dedicated infrastructure. Your data is logically separated and never co-mingled with other tenants. Zero cross-tenant access — architecturally enforced, not policy-enforced.',
+              featured: false,
+            },
+            {
+              tier: 'Private Cloud',
+              name: 'Private Cloud Deploy',
+              desc: 'Your VPC. Your region. LongStrider deploys into your existing AWS, GCP, or Azure environment. The intelligence substrate runs on your compute, under your security perimeter, with your access controls.',
+              featured: false,
+            },
+            {
+              tier: 'Sovereign Build',
+              name: 'Sovereign Build',
+              desc: 'Fully air-gapped on-premise deployment. No internet dependency. Your team owns the build. Suitable for defense, intelligence, regulated healthcare, and environments with active data residency requirements.',
+              featured: true,
+            },
+            {
+              tier: 'Partner Program',
+              name: 'Platform License',
+              desc: 'Build LongStrider into your own product. White-label or API-first integration. Your clients get sovereign intelligence — you get the differentiation. The intelligence substrate becomes your competitive moat.',
+              featured: false,
+            },
+          ].map((dep) => (
+            <div
+              key={dep.tier}
+              className={`tech-deploy-card ${dep.featured ? 'tech-deploy-card-featured' : ''}`}
+            >
+              <p className="tech-deploy-tier">{dep.tier}</p>
+              <p className="tech-deploy-name">{dep.name}</p>
+              <p className="tech-deploy-desc">{dep.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ maxWidth: '680px', margin: '56px auto 0', textAlign: 'center' }} data-reveal data-delay="2">
+          <p className="tech-body" style={{ color: 'var(--color-text-secondary)' }}>
+            Compliance-ready by architecture, not by afterthought — a critical
+            distinction for enterprise environments operating across regulatory
+            jurisdictions. GDPR, data residency requirements, enterprise security
+            reviews: the architecture satisfies them without contortion.
+          </p>
+        </div>
+      </section>
+
+      <div className="tech-divider" />
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 8 — PROOF OF CRAFT
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-section tech-container" data-section="proof">
+        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
+          <p className="tech-label-purple tech-label" data-reveal>Section 08 — Proof of Craft</p>
+          <h2 className="tech-heading" data-reveal data-delay="1">
+            This wasn't assembled from libraries.
+            It was engineered from the problem up.
+          </h2>
+        </div>
+
+        <div className="tech-grid-3" data-reveal>
+          {[
+            {
+              number: '116',
+              label: 'Custom database functions',
+              body: 'Purpose-built for intelligence retrieval. Not ORMs. Not generic queries. Each function is a deliberate architectural decision.',
+            },
+            {
+              number: '29',
+              label: 'Intelligence modules',
+              body: 'Running in parallel on every interaction. Behavioral extraction, entity resolution, arc synthesis, gravity calculation — simultaneously.',
+            },
+            {
+              number: '18',
+              label: 'Governance rules',
+              body: 'Operational principles baked into how the system reasons, not appended as guardrails. Every configuration option was designed, not accommodated.',
+            },
+            {
+              number: '4',
+              label: 'Isolation levels',
+              body: 'org_id → project_id → session_id → thread_id. Enterprise multi-tenancy from the first schema version, not retrofitted.',
+            },
+            {
+              number: '80+',
+              label: 'Behavioral dimensions',
+              body: 'Per entity, per interaction. Communication style, decision patterns, risk tolerance, emotional density — the substrate tracks what conversation history misses.',
+            },
+            {
+              number: 'v18',
+              label: 'Current architecture version',
+              body: 'Each version is a discrete upgrade to the intelligence spec. No forks. No experimental branches. One canonical architecture that improves.',
+            },
+          ].map((item, i) => (
+            <div key={i} className="tech-card" style={{ padding: '28px' }}>
+              <div className="tech-number-value" style={{ fontSize: 'clamp(28px,3vw,40px)', marginBottom: '8px', textAlign: 'left' }}>{item.number}</div>
+              <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-gold-dim)', marginBottom: '12px' }}>{item.label}</p>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', lineHeight: 1.65, color: 'var(--color-text-muted)' }}>{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="tech-divider" />
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 9 — GO DEEPER
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-section tech-container" data-section="deeper">
+        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '40px' }}>
+          <p className="tech-label" data-reveal>Go Deeper</p>
+          <h2 className="tech-heading" data-reveal data-delay="1">
+            Three sub-systems worth understanding.
+          </h2>
+          <p className="tech-lead" data-reveal data-delay="2">
+            The overview you've just read is the skeleton. These pages are the tissue.
+          </p>
+        </div>
+
+        <div className="tech-subpages" data-reveal data-delay="2">
+          {[
+            {
+              n: '01',
+              title: 'Intelligence Kernel',
+              sub: 'The orchestration layer. How 29 modules coordinate to compose a response. What the Conductor decides and why.',
+              href: '/technology/kernel',
+              live: false,
+            },
+            {
+              n: '02',
+              title: 'Neural Topology',
+              sub: 'The memory architecture. How Relevance Weights are calculated, how Knowledge Clusters form, and how gravity shapes what surfaces.',
+              href: '/technology/cortex',
+              live: false,
+            },
+            {
+              n: '03',
+              title: 'Living Memory',
+              sub: 'The full-lifecycle memory model. Import your existing history. What happens to records that consolidate. How the substrate ages, without forgetting.',
+              href: '/technology/memory',
+              live: false,
+            },
+          ].map((card) => (
+            <Link
+              key={card.href}
+              href={card.live ? card.href : '#'}
+              className={`tech-subpage-card ${!card.live ? 'tech-subpage-coming' : ''}`}
+            >
+              <div>
+                <p className="tech-subpage-number">{card.n}</p>
+                <p className="tech-subpage-title">{card.title}</p>
+                <p className="tech-subpage-sub">{card.sub}</p>
+              </div>
+              {card.live
+                ? <span className="tech-subpage-arrow">→</span>
+                : <span style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginTop: '20px' }}>— coming</span>
+              }
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <div className="tech-divider" />
+
+      {/* ── Final CTA ── */}
+      <section className="tech-container tech-cta-wrap">
+        <p className="tech-label" data-reveal>Ready</p>
+        <h2 className="tech-heading" style={{ maxWidth: '540px', margin: '0 auto 16px', textAlign: 'center' }} data-reveal data-delay="1">
+          The pilot is how it earns its place.
+        </h2>
+        <p className="tech-body" style={{ maxWidth: '480px', margin: '0 auto 40px', textAlign: 'center' }} data-reveal data-delay="2">
+          We deploy alongside your team, in your environment, connected to your
+          existing systems. The intelligence starts compounding from the first interaction.
+        </p>
+        <div data-reveal data-delay="3">
+          <Link href="/pilot" className="tech-cta-pill">
+            Start a Pilot →
+          </Link>
+          <p className="tech-sovereignty">Sovereign · No training on your data · Your infrastructure</p>
+        </div>
+      </section>
+
     </main>
-  )
+  );
 }
