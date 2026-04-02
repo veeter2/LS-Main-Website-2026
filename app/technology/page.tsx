@@ -418,7 +418,7 @@ export default function TechnologyPageV2() {
             {
               n: '02',
               name: 'Historical Import',
-              desc: 'ChatGPT and Claude conversation exports parsed and run through the same CFE pipeline. Your prior intelligence, recovered and gravity-scored from day one.',
+              desc: 'ChatGPT and Claude conversation exports parsed and run through the same CFE pipeline. Your prior intelligence, recovered and Relevance-weighted from day one.',
               gold: false,
             },
             {
@@ -430,7 +430,7 @@ export default function TechnologyPageV2() {
             {
               n: '04',
               name: 'Document Ingestion',
-              desc: 'Technical documents, SOPs, institutional records — ingested as high-gravity memories with full behavioral and entity analysis applied.',
+              desc: 'Technical documents, SOPs, institutional records — ingested as high-relevance memories with full behavioral and entity analysis applied.',
               gold: false,
             },
             {
@@ -457,7 +457,7 @@ export default function TechnologyPageV2() {
               desc: 'User corrections propagate through the graph in real-time. Relevance Weights adjusted immediately. Related clusters re-examined at the next consolidation cycle.',
               gold: false,
             },
-          ].map((ch, i) => (
+          ].map((ch) => (
             <div
               key={ch.n}
               style={{
