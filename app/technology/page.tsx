@@ -274,7 +274,7 @@ export default function TechnologyPageV2() {
                   </p>
                 </div>
                 {/* Layer: LongStrider */}
-                <div className="tech-stack-row" style={{ background: 'rgba(200,169,110,0.03)' }}>
+                <div className="tech-stack-row" style={{ background: 'var(--color-gold-ghost)' }}>
                   <p className="tech-stack-layer">Layer 02 — Intelligence</p>
                   <p className="tech-stack-name">LongStrider Intelligence Kernel</p>
                   <p className="tech-stack-detail">
@@ -416,7 +416,7 @@ export default function TechnologyPageV2() {
             </p>
 
             <div className="tech-card" style={{ marginTop: '32px' }} data-reveal data-delay="3">
-              <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(15px,1.6vw,19px)', fontStyle: 'italic', color: 'var(--color-text-primary)', lineHeight: 1.55, margin: 0 }}>
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(17px,1.8vw,21px)', fontStyle: 'italic', color: 'var(--color-text-body)', lineHeight: 1.55, margin: 0 }}>
                 "Perfect accuracy on census tasks — 'how many times did I say X?' — is
                 not a party trick. It's the baseline any system claiming to remember
                 you should clear on day one."
@@ -645,8 +645,8 @@ export default function TechnologyPageV2() {
             </p>
 
             <div data-reveal data-delay="2">
-              <div style={{ padding: '28px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', fontWeight: 500, color: 'rgba(255,255,255,0.88)', marginBottom: '12px', lineHeight: 1.35 }}>
+              <div style={{ padding: '28px 0', borderBottom: '1px solid var(--color-border-subtle)' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', fontWeight: 500, color: 'var(--color-text-body)', marginBottom: '12px', lineHeight: 1.35 }}>
                   Evidence-Based Challenge
                 </p>
                 <p className="tech-body" style={{ margin: 0 }}>
@@ -658,7 +658,7 @@ export default function TechnologyPageV2() {
               </div>
 
               <div style={{ padding: '28px 0' }}>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', fontWeight: 500, color: 'rgba(255,255,255,0.88)', marginBottom: '12px', lineHeight: 1.35 }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', fontWeight: 500, color: 'var(--color-text-body)', marginBottom: '12px', lineHeight: 1.35 }}>
                   Decision Consistency Monitoring
                 </p>
                 <p className="tech-body" style={{ margin: 0 }}>
@@ -690,7 +690,7 @@ export default function TechnologyPageV2() {
             </p>
 
             <div className="tech-card tech-card-purple" style={{ marginTop: '32px' }} data-reveal data-delay="3">
-              <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(15px,1.6vw,19px)', fontStyle: 'italic', color: 'var(--color-text-primary)', lineHeight: 1.55, margin: 0 }}>
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(17px,1.8vw,21px)', fontStyle: 'italic', color: 'var(--color-text-body)', lineHeight: 1.55, margin: 0 }}>
                 "Configure personality in minutes via the Cortex operating interface.
                 Not months of prompt engineering. Not a fine-tuning run.
                 Sliders with real-time preview."
@@ -817,7 +817,7 @@ export default function TechnologyPageV2() {
             <div key={i} className="tech-card" style={{ padding: '28px' }}>
               <div className="tech-number-value" style={{ fontSize: 'clamp(28px,3vw,40px)', marginBottom: '8px', textAlign: 'left' }}>{item.number}</div>
               <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-gold-dim)', marginBottom: '12px' }}>{item.label}</p>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', lineHeight: 1.65, color: 'var(--color-text-muted)' }}>{item.body}</p>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', lineHeight: 1.65, color: 'var(--color-text-secondary)' }}>{item.body}</p>
             </div>
           ))}
         </div>
