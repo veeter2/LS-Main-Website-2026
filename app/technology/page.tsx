@@ -378,6 +378,141 @@ export default function TechnologyPageV2() {
       <div className="tech-divider" />
 
       {/* ═══════════════════════════════════════════════
+          SECTION — THE COMPOUNDING GRAPH
+      ═══════════════════════════════════════════════ */}
+      <section className="tech-section tech-container" data-section="graph">
+        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
+          <p className="tech-label-purple tech-label" data-reveal>How the intelligence compounds</p>
+          <h2 className="tech-heading" data-reveal data-delay="1">
+            Eight channels.<br />One substrate.
+          </h2>
+          <p className="tech-lead" data-reveal data-delay="2">
+            Every LLM has a context window. LongStrider has something different —
+            eight distinct input channels, all writing to a single unified schema,
+            compounding on top of each other without limit. The LLM sees what&apos;s
+            relevant. The substrate remembers everything.
+          </p>
+        </div>
+
+        <div
+          data-reveal
+          data-delay="2"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1px',
+            background: 'var(--color-border-subtle)',
+            border: '1px solid var(--color-border)',
+            borderRadius: '4px',
+            overflow: 'hidden',
+            marginBottom: '48px',
+          }}
+        >
+          {[
+            {
+              n: '01',
+              name: 'Real-Time Chat Signal',
+              desc: 'Every live interaction processed through Contextual Signal Extraction — entity-resolved, emotionally scored, embedded, and stored in the substrate the moment it occurs.',
+              gold: true,
+            },
+            {
+              n: '02',
+              name: 'Historical Import',
+              desc: 'ChatGPT and Claude conversation exports parsed and run through the same CFE pipeline. Your prior intelligence, recovered and gravity-scored from day one.',
+              gold: false,
+            },
+            {
+              n: '03',
+              name: 'Agent Knowledge',
+              desc: 'Orbital Task agents surface findings and write them back into the substrate. The system learns from what it does on your behalf — not just from what you say.',
+              gold: false,
+            },
+            {
+              n: '04',
+              name: 'Document Ingestion',
+              desc: 'Technical documents, SOPs, institutional records — ingested as high-gravity memories with full behavioral and entity analysis applied.',
+              gold: false,
+            },
+            {
+              n: '05',
+              name: 'Continuous Intelligence Consolidation',
+              desc: 'The 7-pass nightly cycle. Gravity recalculation, Knowledge Cluster health, canonical summary generation, edge topology, goal tracking, and cognitive conflict detection — every night, automatically.',
+              gold: true,
+            },
+            {
+              n: '06',
+              name: 'Narrative Arc Generation',
+              desc: 'Longitudinal story arcs built from the memory record. Evolution stages: forming → mature → stabilizing. The system tracks where topics started, how they shifted, where they are now.',
+              gold: false,
+            },
+            {
+              n: '07',
+              name: 'Relationship Intelligence Graph',
+              desc: 'Knowledge Clusters mapped to each other with binding strength computed nightly. The topology of what relates to what — and how strongly.',
+              gold: false,
+            },
+            {
+              n: '08',
+              name: 'Correction Loop',
+              desc: 'User corrections propagate through the graph in real-time. Relevance Weights adjusted immediately. Related clusters re-examined at the next consolidation cycle.',
+              gold: false,
+            },
+          ].map((ch, i) => (
+            <div
+              key={ch.n}
+              style={{
+                background: ch.gold ? 'var(--color-gold-ghost)' : 'var(--color-bg)',
+                padding: '28px 24px',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                <span style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '24px',
+                  fontWeight: 300,
+                  color: ch.gold ? 'var(--color-gold)' : 'rgba(255,255,255,0.10)',
+                  lineHeight: 1,
+                  flexShrink: 0,
+                  letterSpacing: '-0.03em',
+                }}>{ch.n}</span>
+                <div>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    color: ch.gold ? 'var(--color-gold)' : 'var(--color-text-body)',
+                    marginBottom: '8px',
+                    lineHeight: 1.3,
+                  }}>{ch.name}</p>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '13px',
+                    lineHeight: 1.7,
+                    color: 'var(--color-text-secondary)',
+                    margin: 0,
+                  }}>{ch.desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Closing truth */}
+        <p
+          className="tech-body"
+          data-reveal
+          data-delay="4"
+          style={{ color: 'var(--color-text-secondary)', maxWidth: '600px' }}
+        >
+          All eight channels write to one schema. One <code style={{ fontFamily: 'var(--font-ui)', fontSize: '12px', color: 'var(--color-gold-dim)', background: 'var(--color-gold-ghost)', padding: '1px 6px', borderRadius: '3px' }}>gravity_map</code> table.
+          No separate vector database. No external ML pipeline. No additional vendor.
+          The intelligence compounds in one place — and it&apos;s yours.
+        </p>
+      </section>
+
+      <div className="tech-divider" />
+
+      {/* ═══════════════════════════════════════════════
           SECTION 3 — RETRIEVAL
       ═══════════════════════════════════════════════ */}
       <section className="tech-section tech-container" data-section="retrieval">
