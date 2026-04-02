@@ -145,6 +145,8 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 
+
+
 // ── Overlay nav row ───────────────────────────────────────────
 function OverlayRow({
   item, isActive, coming, delay, menuOpen, onClose, expanded, onToggle,
@@ -171,63 +173,68 @@ function OverlayRow({
       onMouseLeave={() => setHovered(false)}
       onClick={() => { if (coming) return; if (hasChildren) onToggle(); }}
       style={{
-        display: 'flex', alignItems: 'center', gap: '24px',
-        padding: '16px 0',
+        display: 'flex', alignItems: 'flex-start', gap: '20px',
+        padding: '20px 0',
         cursor: coming ? 'default' : 'pointer',
         transition: 'all 0.3s ease',
       }}
     >
-      {/* Icon */}
+      {/* Icon — vertically centered to the label line */}
       <div style={{
-        width: '32px', height: '32px',
+        width: '26px', height: '26px',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         flexShrink: 0, color: iconColor, transition: 'color 0.3s ease',
+        marginTop: '4px',
       }}>
-        <Icon size={22} />
+        <Icon size={19} />
       </div>
 
-      {/* Text */}
-      <div style={{ flex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
+      {/* Text — no flex:1, hugs the content */}
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
           <span style={{
             fontFamily: "'Lora', Georgia, serif",
-            fontSize: 'clamp(18px, 2.4vw, 26px)',
+            fontSize: 'clamp(20px, 2.6vw, 28px)',
             fontWeight: 400, letterSpacing: '-0.02em',
             color: rowColor, transition: 'color 0.3s ease',
+            lineHeight: 1.15,
           }}>
             {item.label}
           </span>
+
+          {/* Inline arrow/chevron — sits right after the label */}
+          {!coming && (
+            <span style={{
+              fontSize: hasChildren ? '19px' : '15px',
+              color: isActive || hovered ? GOLD : 'rgba(255,255,255,0.20)',
+              transform: hasChildren
+                ? (expanded ? 'rotate(90deg)' : 'rotate(0deg)')
+                : (hovered ? 'translateX(4px)' : 'translateX(0)'),
+              transition: 'all 0.35s cubic-bezier(0.16,1,0.3,1)',
+              display: 'inline-block',
+              lineHeight: 1,
+            }}>
+              {hasChildren ? '›' : '→'}
+            </span>
+          )}
+
           {coming && (
             <span style={{
-              fontFamily: "'Lora', Georgia, serif", fontSize: '10px',
-              letterSpacing: '0.12em', textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.18)',
+              fontFamily: "'Lora', Georgia, serif", fontSize: '9px',
+              letterSpacing: '0.14em', textTransform: 'uppercase' as const,
+              color: 'rgba(255,255,255,0.16)',
             }}>— coming</span>
           )}
         </div>
         <p style={{
           fontFamily: "'Lora', Georgia, serif", fontSize: '12px',
-          color: coming ? 'rgba(255,255,255,0.10)' : 'rgba(255,255,255,0.32)',
-          marginTop: '2px', letterSpacing: '0.01em', transition: 'color 0.3s ease',
+          color: coming ? 'rgba(255,255,255,0.10)' : 'rgba(255,255,255,0.28)',
+          marginTop: '4px', letterSpacing: '0.01em',
+          transition: 'color 0.3s ease',
         }}>
           {item.sub}
         </p>
       </div>
-
-      {/* Chevron (expandable) or Arrow (destination) */}
-      {!coming && (
-        <span style={{
-          fontSize: hasChildren ? '18px' : '15px',
-          color: isActive || hovered ? GOLD : 'rgba(255,255,255,0.18)',
-          transform: hasChildren
-            ? (expanded ? 'rotate(90deg)' : 'rotate(0deg)')
-            : (hovered ? 'translateX(4px)' : 'translateX(0)'),
-          transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-          display: 'inline-block',
-        }}>
-          {hasChildren ? '›' : '→'}
-        </span>
-      )}
     </div>
   );
 
@@ -238,27 +245,42 @@ function OverlayRow({
       maxHeight: expanded ? '300px' : '0',
       transition: 'max-height 0.4s cubic-bezier(0.16,1,0.3,1)',
     }}>
-      <div style={{ paddingLeft: '56px', paddingBottom: '12px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+      <div style={{
+        paddingLeft: '46px', paddingBottom: '14px',
+        display: 'flex', flexDirection: 'column', gap: '2px',
+        position: 'relative',
+      }}>
+        {/* Purple connector thread — runs at icon-center column, fades out */}
+        <div style={{
+          position: 'absolute',
+          left: '13px',
+          top: 0,
+          bottom: '14px',
+          width: '1px',
+          background: 'linear-gradient(to bottom, rgba(139,92,246,0.38), rgba(139,92,246,0.0))',
+          pointerEvents: 'none',
+        }} />
+
         {item.children?.map((child) => (
           child.live !== false ? (
             <Link key={child.href} href={child.href} onClick={onClose} style={{
               fontFamily: "'Lora', Georgia, serif", fontSize: '13px',
-              color: 'rgba(255,255,255,0.50)', textDecoration: 'none',
+              color: 'rgba(255,255,255,0.45)', textDecoration: 'none',
               padding: '6px 0', letterSpacing: '0.01em',
-              transition: 'color 0.2s ease', display: 'block',
+              transition: 'color 0.2s ease', display: 'flex', alignItems: 'center', gap: '7px',
             }}
               onMouseEnter={(e) => (e.currentTarget.style.color = GOLD)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.50)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
             >
-              {child.label} <span style={{ opacity: 0.4, fontSize: '11px' }}>→</span>
+              {child.label} <span style={{ opacity: 0.35, fontSize: '11px' }}>→</span>
             </Link>
           ) : (
             <span key={child.href} style={{
               fontFamily: "'Lora', Georgia, serif", fontSize: '13px',
-              color: 'rgba(255,255,255,0.18)', padding: '6px 0',
-              letterSpacing: '0.01em', display: 'block',
+              color: 'rgba(255,255,255,0.15)', padding: '6px 0',
+              letterSpacing: '0.01em', display: 'flex', alignItems: 'center', gap: '8px',
             }}>
-              {child.label} <span style={{ fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>— coming</span>
+              {child.label} <span style={{ fontSize: '8px', letterSpacing: '0.12em', textTransform: 'uppercase' as const }}>— coming</span>
             </span>
           )
         ))}
