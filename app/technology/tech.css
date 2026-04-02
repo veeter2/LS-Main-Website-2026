@@ -37,27 +37,28 @@
 }
 
 .tech-aurora-1 {
-  top: -320px; left: -200px;
-  width: 900px; height: 900px;
+  top: -200px; right: -150px;
+  width: 700px; height: 700px;
   background: radial-gradient(circle, rgba(139,92,246,1), transparent 70%);
-  opacity: 0.022;
-  filter: blur(140px);
+  opacity: 0.025;
+  filter: blur(120px);
 }
 
 .tech-aurora-2 {
-  top: 30%; right: -280px;
-  width: 700px; height: 700px;
+  bottom: 10%; left: -200px;
+  width: 600px; height: 600px;
   background: radial-gradient(circle, rgba(200,169,110,1), transparent 70%);
-  opacity: 0.018;
-  filter: blur(130px);
+  opacity: 0.022;
+  filter: blur(120px);
 }
 
 .tech-aurora-3 {
-  bottom: 10%; left: 15%;
-  width: 600px; height: 600px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
   background: radial-gradient(circle, rgba(164,195,255,1), transparent 70%);
   opacity: 0.012;
-  filter: blur(130px);
+  filter: blur(120px);
 }
 
 /* ── Container + inner ───────────────────────────────────────── */
@@ -79,29 +80,28 @@
 /* ── Section base ────────────────────────────────────────────── */
 
 .tech-section {
-  padding: var(--section-pad-v) 0;
-  border-bottom: 1px solid var(--color-border-subtle);
+  padding: 80px 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
 }
 
 .tech-section:last-of-type {
-  border-bottom: none;
+  border-top: 1px solid rgba(255,255,255,0.04);
 }
 
 /* ── Hero section ────────────────────────────────────────────── */
 
 .tech-hero {
-  padding: clamp(140px, 16vh, 200px) 0 clamp(80px, 10vh, 120px);
+  padding: clamp(120px, 14vh, 180px) 0 clamp(72px, 9vh, 100px);
   text-align: center;
 }
 
 .tech-wordmark {
-  font-family: var(--font-ui);
-  font-size: 10px;
-  letter-spacing: 0.26em;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-gold);
-  text-shadow: 0 0 20px rgba(200,169,110,0.4);
-  margin-bottom: 28px;
+  color: rgba(200,169,110,0.60);
+  margin-bottom: 24px;
 }
 
 .tech-hero-eyebrow {
@@ -137,7 +137,7 @@
 
 .tech-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent);
+  background: linear-gradient(to right, transparent, rgba(200,169,110,0.22), transparent);
   margin: 0;
 }
 
@@ -145,45 +145,46 @@
 
 .tech-label {
   display: inline-block;
-  font-family: var(--font-ui);
+  font-family: var(--font-body);
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-gold-dim);
-  margin-bottom: 20px;
+  color: rgba(200,169,110,0.55);
+  margin-bottom: 18px;
 }
 
 .tech-label-purple {
-  color: var(--color-purple-dim);
+  color: rgba(139,92,246,0.55);
 }
 
 /* ── Headings within sections ───────────────────────────────── */
 
 .tech-heading {
   font-family: var(--font-display);
-  font-size: clamp(28px, 3.8vw, 52px);
-  font-weight: 300;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 400;
   letter-spacing: -0.025em;
-  line-height: 1.12;
-  color: var(--color-text-primary);
-  margin: 0 0 24px;
+  line-height: 1.15;
+  color: rgba(255,255,255,0.95);
+  margin: 0 0 40px;
 }
 
 .tech-lead {
   font-family: var(--font-body);
-  font-size: clamp(17px, 1.8vw, 21px);
-  font-weight: 400;
-  line-height: 1.65;
-  color: var(--color-text-secondary);
-  margin: 0 0 20px;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.88);
+  margin: 0 0 32px;
+  letter-spacing: -0.01em;
 }
 
 .tech-body {
   font-family: var(--font-body);
-  font-size: clamp(15px, 1.4vw, 17px);
-  line-height: 1.8;
-  color: rgba(255,255,255,0.60);
-  margin: 0 0 16px;
+  font-size: 18px;
+  line-height: 1.78;
+  color: rgba(255,255,255,0.68);
+  margin: 0 0 24px;
 }
 
 /* ── Two-column grid ─────────────────────────────────────────── */
@@ -192,7 +193,7 @@
   display: grid;
   grid-template-columns: var(--grid-columns);
   gap: var(--grid-gap);
-  align-items: start;
+  align-items: center;
 }
 
 /* ── Three-column grid ───────────────────────────────────────── */
@@ -246,20 +247,20 @@
 /* ── Glass card ─────────────────────────────────────────────── */
 
 .tech-card {
-  background: var(--card-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--card-radius);
-  padding: var(--card-pad);
+  background: rgba(255,255,255,0.018);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 4px;
+  padding: 32px;
 }
 
 .tech-card-gold {
-  border-color: var(--color-border-gold);
-  box-shadow: var(--glow-gold), var(--shadow-float);
+  border-color: rgba(200,169,110,0.20);
+  background: rgba(200,169,110,0.04);
 }
 
 .tech-card-purple {
-  border-color: var(--color-purple-border);
-  box-shadow: 0 0 28px rgba(139,92,246,0.08), var(--shadow-float);
+  border-color: rgba(139,92,246,0.18);
+  background: rgba(139,92,246,0.03);
 }
 
 /* ── Architecture stack card ─────────────────────────────────── */
@@ -528,21 +529,21 @@
 }
 
 .tech-deploy-card {
-  padding: 24px 28px;
-  border-radius: var(--card-radius);
-  border: 1px solid var(--color-border);
-  background: var(--card-bg);
+  padding: 28px 32px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.018);
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 
 .tech-deploy-card:hover {
-  background: var(--card-bg-hover);
+  background: rgba(255,255,255,0.03);
   border-color: rgba(200,169,110,0.18);
 }
 
 .tech-deploy-card-featured {
-  border-color: var(--color-border-gold);
-  background: rgba(200,169,110,0.025);
+  border-color: rgba(200,169,110,0.20);
+  background: rgba(200,169,110,0.04);
 }
 
 .tech-deploy-tier {
@@ -701,7 +702,8 @@
 
 .tech-cta-wrap {
   text-align: center;
-  padding: var(--section-pad-v) 0 calc(var(--section-pad-v) * 1.1);
+  padding: 80px 0 100px;
+  border-top: 1px solid rgba(255,255,255,0.04);
 }
 
 .tech-cta-pill {
@@ -759,10 +761,13 @@
 
 @media (max-width: 1024px) {
   .tech-grid { grid-template-columns: 1fr; }
-  .tech-numbers { grid-template-columns: 1fr; gap: 0; }
+  .tech-numbers { grid-template-columns: repeat(3, 1fr); }
+  .tech-grid-3 { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
   .tech-deploy-grid { grid-template-columns: 1fr; }
   .tech-subpages { grid-template-columns: 1fr; }
+  .tech-numbers { grid-template-columns: 1fr; }
+  .tech-grid-3 { grid-template-columns: 1fr; }
 }

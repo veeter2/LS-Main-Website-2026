@@ -147,19 +147,12 @@ export default function TechnologyPageV2() {
       ═══════════════════════════════════════════════ */}
       <section className="tech-container" style={{ paddingTop: '0', paddingBottom: '0' }}>
         <div className="tech-hero">
-          <p className="tech-wordmark" data-reveal>
-            Sovereign · Persistent · Compounding · Living Memory
-          </p>
-          <p className="tech-hero-eyebrow" data-reveal data-delay="1">
+          <p className="tech-hero-eyebrow" data-reveal>
             Architecture
           </p>
           <h1 className="tech-hero-heading" data-reveal data-delay="1">
             How it actually works
           </h1>
-          <p className="tech-hero-body" data-reveal data-delay="2">
-            No analogies. No marketing. The real stack — from first interaction
-            to the intelligence your system holds two years in.
-          </p>
         </div>
       </section>
 
@@ -202,8 +195,8 @@ export default function TechnologyPageV2() {
           <div data-reveal data-delay="2">
             <div className="tech-card">
               <div style={{ marginBottom: '24px' }}>
-                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.28)', marginBottom: '16px' }}>
-                  The tools you have now
+                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '16px' }}>
+                  The status quo
                 </p>
                 {[
                   { label: 'Memory', val: 'Session only' },
@@ -217,14 +210,14 @@ export default function TechnologyPageV2() {
                     padding: '10px 0', borderBottom: '1px solid var(--color-border-subtle)',
                     fontFamily: 'var(--font-body)', gap: '16px',
                   }}>
-                    <span style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>{r.label}</span>
-                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.32)', textAlign: 'right' }}>{r.val}</span>
+                    <span style={{ fontSize: '14px', color: 'var(--color-text-body)' }}>{r.label}</span>
+                    <span style={{ fontSize: '13px', color: 'var(--color-text-secondary)', textAlign: 'right' }}>{r.val}</span>
                   </div>
                 ))}
               </div>
 
               <div style={{ paddingTop: '8px' }}>
-                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-gold-dim)', marginBottom: '16px' }}>
+                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-gold-dim)', marginBottom: '16px' }}>
                   LongStrider
                 </p>
                 {[
@@ -239,8 +232,8 @@ export default function TechnologyPageV2() {
                     padding: '10px 0', borderBottom: '1px solid var(--color-border-subtle)',
                     fontFamily: 'var(--font-body)', gap: '16px',
                   }}>
-                    <span style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>{r.label}</span>
-                    <span style={{ fontSize: '13px', color: GOLD_DIM, textAlign: 'right' }}>{r.val}</span>
+                    <span style={{ fontSize: '14px', color: 'var(--color-text-body)' }}>{r.label}</span>
+                    <span style={{ fontSize: '13px', color: 'var(--color-gold)', textAlign: 'right' }}>{r.val}</span>
                   </div>
                 ))}
               </div>
@@ -458,28 +451,16 @@ export default function TechnologyPageV2() {
               <div className="tech-cycle">
                 {[
                   {
-                    title: 'Episode Ingestion',
-                    body: 'Every interaction from the day is canonically stored — not summarized. The raw signal is preserved.',
-                  },
-                  {
                     title: 'Pattern Detection',
                     body: 'The Longitudinal Behavioral Pattern Engine scans for recurring patterns, loops, and inflection points across weeks, months, and years. Invisible in any single session. Obvious across history.',
                   },
                   {
                     title: 'Gravity Recalculation',
-                    body: 'Relevance weights are recomputed. Topics reinforced over the last 24 hours gain weight. Dormant topics age naturally. No manual curation required.',
-                  },
-                  {
-                    title: 'Relationship Graph Update',
-                    body: 'How entities relate to each other shifts based on new interactions. A relationship that\'s strengthened gets a higher Signal Strength. One that\'s gone quiet fades proportionally.',
-                  },
-                  {
-                    title: 'Knowledge Cluster Formation',
-                    body: 'Topics crossing a reinforcement threshold crystallize into durable Knowledge Clusters. From this point, anything related scores higher in retrieval — automatically.',
+                    body: 'Relevance weights are recomputed. Topics reinforced over the last 24 hours gain weight. Dormant topics age naturally. No manual curation required — ever.',
                   },
                   {
                     title: 'Arc Synthesis',
-                    body: "Individual data points are woven into trajectories: how a topic evolved, where a decision came from, what changed and when. The system builds the narrative so you don't have to reconstruct it.",
+                    body: "Individual data points are woven into trajectories: where a topic started, how it shifted, where it is now. The system builds the narrative so you don't have to reconstruct it.",
                   },
                 ].map((step, i) => (
                   <div className="tech-cycle-item" key={i}>
@@ -657,42 +638,35 @@ export default function TechnologyPageV2() {
           <div>
             <p className="tech-label" data-reveal>What you configure</p>
             <p className="tech-body" data-reveal data-delay="1">
-              The AI Governance Rules are 18 operating principles baked into how
-              the system reasons — not safety guardrails bolted on afterward.
-              You configure them per deployment, per business unit, per user tier.
+              Eighteen operating principles baked into how the system reasons —
+              not safety guardrails bolted on afterward. Configure per deployment,
+              per business unit, per user tier. Two of them will make your
+              legal team uncomfortable. That's the point.
             </p>
 
-            <div className="tech-card" style={{ marginTop: '28px' }} data-reveal data-delay="2">
-              {[
-                {
-                  name: 'Response directness',
-                  desc: 'From diplomatic synthesis to direct pushback. Adjusts how the system delivers difficult intelligence.',
-                },
-                {
-                  name: 'Evidence-Based Challenge',
-                  desc: 'When longitudinal data contradicts a stated decision, the system surfaces the gap. Calibrate how often and how assertively.',
-                },
-                {
-                  name: 'Decision Consistency Monitoring',
-                  desc: 'Flags when stated goals and observed behavior diverge. Active or passive — your call.',
-                },
-                {
-                  name: 'Interaction Intensity Response',
-                  desc: 'The system detects when an interaction is operationally dense and shifts to brevity. Prevents information overload during high-stakes moments.',
-                },
-                {
-                  name: 'Time-Aware Intelligence Delivery',
-                  desc: 'Morning briefings differ from evening reflections. The system adapts what it surfaces based on time of day and operational context.',
-                },
-              ].map((rule, i) => (
-                <div key={i} style={{
-                  padding: '18px 0',
-                  borderBottom: i < 4 ? '1px solid var(--color-border-subtle)' : 'none',
-                }}>
-                  <p style={{ fontFamily: 'var(--font-ui)', fontSize: '12px', color: 'var(--color-text-primary)', marginBottom: '5px', letterSpacing: '0.01em' }}>{rule.name}</p>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--color-text-muted)', lineHeight: 1.55 }}>{rule.desc}</p>
-                </div>
-              ))}
+            <div data-reveal data-delay="2">
+              <div style={{ padding: '28px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', fontWeight: 500, color: 'rgba(255,255,255,0.88)', marginBottom: '12px', lineHeight: 1.35 }}>
+                  Evidence-Based Challenge
+                </p>
+                <p className="tech-body" style={{ margin: 0 }}>
+                  When longitudinal data contradicts a stated decision, the system
+                  surfaces the gap — assertively. Not a suggestion. An observation
+                  grounded in everything the system has seen. You calibrate how
+                  often and how hard it pushes. The architecture enforces it.
+                </p>
+              </div>
+
+              <div style={{ padding: '28px 0' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', fontWeight: 500, color: 'rgba(255,255,255,0.88)', marginBottom: '12px', lineHeight: 1.35 }}>
+                  Decision Consistency Monitoring
+                </p>
+                <p className="tech-body" style={{ margin: 0 }}>
+                  Flags when stated goals and observed behavior diverge.
+                  Not as judgment — as data. The system has been watching long
+                  enough to notice the pattern. It will tell you, without being asked.
+                </p>
+              </div>
             </div>
           </div>
 
