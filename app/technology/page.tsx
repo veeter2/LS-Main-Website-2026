@@ -6,15 +6,20 @@ import { useEffect, useRef, useState } from 'react';
 
 // ── Section definitions for StoryTimeline rail ──────────────────
 const SECTIONS = [
-  { id: 'premise',      label: 'The Problem',       color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
-  { id: 'stack',        label: 'The Stack',          color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)'  },
-  { id: 'retrieval',    label: 'Retrieval',           color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
-  { id: 'consolidation',label: 'Consolidation',      color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)'  },
-  { id: 'correction',   label: 'Correction',         color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
-  { id: 'governance',   label: 'Governance',         color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)'  },
-  { id: 'sovereignty',  label: 'Sovereignty',        color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
-  { id: 'proof',        label: 'Proof of Craft',     color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)'  },
-  { id: 'deeper',       label: 'Go Deeper',          color: '#c8a96e', glow: 'rgba(200,169,110,0.4)' },
+  // Chapter I — The Machine (always visible in rail)
+  { id: 'premise',       label: 'The Problem',      color: '#c8a96e', glow: 'rgba(200,169,110,0.4)', gated: false },
+  { id: 'stack',         label: 'The Stack',         color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)',  gated: false },
+  { id: 'graph',         label: 'Compounding Graph', color: '#c8a96e', glow: 'rgba(200,169,110,0.4)', gated: false },
+  // Chapter II — The Intelligence (gated until scroll)
+  { id: 'retrieval',     label: 'Retrieval',         color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)',  gated: true  },
+  { id: 'consolidation', label: 'Consolidation',     color: '#c8a96e', glow: 'rgba(200,169,110,0.4)', gated: true  },
+  { id: 'correction',    label: 'Correction',        color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)',  gated: true  },
+  // Chapter III — Your Control (gated until scroll)
+  { id: 'governance',    label: 'Governance',        color: '#c8a96e', glow: 'rgba(200,169,110,0.4)', gated: true  },
+  { id: 'sovereignty',   label: 'Sovereignty',       color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)',  gated: true  },
+  // Proof + Next
+  { id: 'proof',         label: 'Proof of Craft',    color: '#c8a96e', glow: 'rgba(200,169,110,0.4)', gated: true  },
+  { id: 'deeper',        label: 'Go Deeper',         color: '#8b5cf6', glow: 'rgba(139,92,246,0.4)',  gated: true  },
 ];
 
 const GOLD = '#c8a96e';
@@ -25,6 +30,7 @@ export default function TechnologyPageV2() {
   const [progress, setProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('');
   const [showRail, setShowRail] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
 
   // Scroll progress + rail visibility
   useEffect(() => {
@@ -66,7 +72,20 @@ export default function TechnologyPageV2() {
     return () => obs.disconnect();
   }, []);
 
-  const activeIdx = SECTIONS.findIndex((s) => s.id === activeSection);
+  // Chapter unlock — when Chapter II break scrolls into view, reveal all gated rail nodes
+  useEffect(() => {
+    const trigger = document.querySelector('[data-chapter="2"]');
+    if (!trigger) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsRevealed(true); },
+      { threshold: 0.1 }
+    );
+    obs.observe(trigger);
+    return () => obs.disconnect();
+  }, []);
+
+  const visibleNodes = SECTIONS.filter((n) => isRevealed || !n.gated);
+  const activeIdx = visibleNodes.findIndex((s) => s.id === activeSection);
 
   return (
     <main className="tech-page">
@@ -92,7 +111,7 @@ export default function TechnologyPageV2() {
           pointerEvents: showRail ? 'auto' : 'none',
         }}
       >
-        {SECTIONS.map((node, i) => {
+        {visibleNodes.map((node, i) => {
           const isActive = node.id === activeSection;
           const isPassed = i < activeIdx;
           const isEarned = i <= activeIdx;
@@ -244,6 +263,17 @@ export default function TechnologyPageV2() {
 
       <div className="tech-divider" />
 
+      {/* ── Chapter I — The Machine ── */}
+      <div className="tech-chapter-break">
+        <div className="tech-chapter-line" />
+        <div className="tech-chapter-content">
+          <span className="tech-chapter-eyebrow">Chapter I</span>
+          <p className="tech-chapter-title">The Machine</p>
+          <span className="tech-chapter-sub">Five layers of architecture. Eight channels of compounding intelligence.</span>
+        </div>
+        <div className="tech-chapter-line" />
+      </div>
+
       {/* ═══════════════════════════════════════════════
           SECTION 2 — THE STACK
       ═══════════════════════════════════════════════ */}
@@ -382,7 +412,7 @@ export default function TechnologyPageV2() {
       ═══════════════════════════════════════════════ */}
       <section className="tech-section tech-container" data-section="graph">
         <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
-          <p className="tech-label-purple tech-label" data-reveal>How the intelligence compounds</p>
+          <p className="tech-label" data-reveal>Section 02.1 — The Compounding Graph</p>
           <h2 className="tech-heading" data-reveal data-delay="1">
             Eight channels.<br />One substrate.
           </h2>
@@ -512,6 +542,17 @@ export default function TechnologyPageV2() {
 
       <div className="tech-divider" />
 
+      {/* ── Chapter II — The Intelligence ── */}
+      <div className="tech-chapter-break" data-chapter="2">
+        <div className="tech-chapter-line" />
+        <div className="tech-chapter-content">
+          <span className="tech-chapter-eyebrow">Chapter II</span>
+          <p className="tech-chapter-title">The Intelligence</p>
+          <span className="tech-chapter-sub">How the system retrieves, evolves, and self-corrects.</span>
+        </div>
+        <div className="tech-chapter-line" />
+      </div>
+
       {/* ═══════════════════════════════════════════════
           SECTION 3 — RETRIEVAL
       ═══════════════════════════════════════════════ */}
@@ -639,7 +680,7 @@ export default function TechnologyPageV2() {
       ═══════════════════════════════════════════════ */}
       <section className="tech-section tech-container" data-section="consolidation">
         <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
-          <p className="tech-label-purple tech-label" data-reveal>Section 04 — The Consolidation Engine</p>
+          <p className="tech-label" data-reveal>Section 04 — The Consolidation Engine</p>
           <h2 className="tech-heading" data-reveal data-delay="1">
             While you sleep, your system gets smarter.
           </h2>
@@ -822,12 +863,23 @@ export default function TechnologyPageV2() {
 
       <div className="tech-divider" />
 
+      {/* ── Chapter III — Your Control ── */}
+      <div className="tech-chapter-break">
+        <div className="tech-chapter-line" />
+        <div className="tech-chapter-content">
+          <span className="tech-chapter-eyebrow">Chapter III</span>
+          <p className="tech-chapter-title">Your Control</p>
+          <span className="tech-chapter-sub">Behavioral governance and data sovereignty.</span>
+        </div>
+        <div className="tech-chapter-line" />
+      </div>
+
       {/* ═══════════════════════════════════════════════
           SECTION 6 — GOVERNANCE + CORTEX
       ═══════════════════════════════════════════════ */}
       <section className="tech-section tech-container" data-section="governance">
         <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
-          <p className="tech-label-purple tech-label" data-reveal>Section 06 — Governance &amp; Behavior</p>
+          <p className="tech-label" data-reveal>Section 06 — Governance &amp; Behavior</p>
           <h2 className="tech-heading" data-reveal data-delay="1">
             Sliders, not prompts.
             Configuration, not fine-tuning.
@@ -980,7 +1032,7 @@ export default function TechnologyPageV2() {
       ═══════════════════════════════════════════════ */}
       <section className="tech-section tech-container" data-section="proof">
         <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
-          <p className="tech-label-purple tech-label" data-reveal>Section 08 — Proof of Craft</p>
+          <p className="tech-label" data-reveal>Section 08 — Proof of Craft</p>
           <h2 className="tech-heading" data-reveal data-delay="1">
             This wasn't assembled from libraries.
             It was engineered from the problem up.
