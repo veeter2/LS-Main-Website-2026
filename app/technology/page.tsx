@@ -519,44 +519,78 @@ export default function TechnologyPageV2() {
         <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', marginBottom: '64px' }}>
           <p className="tech-label" data-reveal>Section 03 — Retrieval</p>
           <h2 className="tech-heading" data-reveal data-delay="1">
-            Five simultaneous scores.
-            One sharp answer.
+            Intent classified first.
+            Five axes after.
           </h2>
           <p className="tech-lead" data-reveal data-delay="2">
-            Every query runs through five axes of relevance before an answer is
-            assembled. This is why you can ask "how many times did we discount
-            below floor in Q1?" and get an exact number — not a recollection.
+            Before scoring runs, the system classifies what you&apos;re asking.
+            Count queries hit the Relationship Intelligence Graph for a pre-computed
+            exact total. Pattern queries route to the Longitudinal Behavioral Pattern Engine.
+            Everything else runs the full five-axis pipeline — simultaneously.
           </p>
         </div>
 
         <div className="tech-grid">
           <div data-reveal>
             <div className="tech-card">
+              {/* Pre-scoring classification layer */}
+              <div style={{
+                padding: '16px 0 20px',
+                marginBottom: '16px',
+                borderBottom: '1px solid var(--color-border-subtle)',
+              }}>
+                <p style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '11px',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-text-muted)',
+                  marginBottom: '10px',
+                }}>Pre-score — Query Intent Classification</p>
+                <p style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '13px',
+                  lineHeight: 1.65,
+                  color: 'var(--color-text-secondary)',
+                  margin: 0,
+                }}>
+                  Every query is classified before scoring begins —
+                  <span style={{ color: 'var(--color-gold)', fontWeight: 500 }}> count</span>,
+                  <span style={{ color: 'var(--color-text-body)' }}> entity</span>,
+                  <span style={{ color: 'var(--color-text-body)' }}> pattern</span>,
+                  <span style={{ color: 'var(--color-text-body)' }}> temporal</span>, or
+                  <span style={{ color: 'var(--color-text-body)' }}> complex</span> —
+                  and routed to the appropriate pipeline. Complexity is scaled:
+                  Simple, Moderate, Complex, or Transcendent.
+                </p>
+              </div>
+
+              {/* Five scoring axes */}
               <div className="tech-axis-table">
                 {[
                   {
                     n: '01', name: 'Topic Similarity',
-                    desc: 'Vector embedding match — the floor, not the ceiling. Everything starts here.',
+                    desc: 'Vector embedding match — the floor, not the ceiling. Every query starts here.',
                     badge: 'Semantic',
                   },
                   {
                     n: '02', name: 'Relevance Weight',
-                    desc: 'A composite gravity score: frequency of reference, recency, emotional density, outcome correlation. The system knows what actually mattered — not just what came up.',
+                    desc: 'Composite score: frequency of reference, recency, emotional density, outcome correlation. What actually mattered — not just what came up.',
                     badge: 'Gravitational',
                   },
                   {
                     n: '03', name: 'Knowledge Cluster Membership',
-                    desc: 'Which topics has the system formed durable clusters around? Information inside a cluster scores higher — it has accumulated operational significance over time.',
+                    desc: 'Information inside a cluster scores higher — it has accumulated operational significance over time. Clusters compound; raw memories don\'t.',
                     badge: 'Structural',
                   },
                   {
                     n: '04', name: 'Entity Relationships',
-                    desc: 'Who or what is this query about? The Relationship Intelligence Graph maps entities, their history, and their connection strength. Not keyword matching — understanding.',
+                    desc: 'The Relationship Intelligence Graph maps entities, their history, and connection strength. Not keyword matching — entity resolution with co-occurrence inference.',
                     badge: 'Relational',
                   },
                   {
                     n: '05', name: 'Temporal Relevance',
-                    desc: 'When did this matter? Recency decay is real but configurable. The system knows the difference between last week and three years ago, and surfaces both when context demands it.',
+                    desc: 'Recency decay is real but configurable. The system knows the difference between last week and three years ago, and surfaces both when context demands.',
                     badge: 'Temporal',
                   },
                 ].map((axis) => (
@@ -576,27 +610,22 @@ export default function TechnologyPageV2() {
           <div>
             <p className="tech-label-purple tech-label" data-reveal>The result</p>
             <p className="tech-lead" data-reveal data-delay="1">
-              Results aren't returned as a list of records. The Narrative Arc
-              Generation layer synthesizes them into a trajectory.
+              Results aren&apos;t returned as a list of records. The Narrative Arc
+              Generation layer synthesizes them into a trajectory — where things
+              started, how they shifted, where they are now.
             </p>
             <p className="tech-body" data-reveal data-delay="2">
-              Ask "how did we perform last Easter?" The system doesn't return
-              last Easter's number. It returns the pricing strategy leading up to
-              Easter, how competitors behaved, what recommendations were made,
-              whether they were followed, and how the outcome compared to
-              expectations. That's a narrative — not a metric.
-            </p>
-            <p className="tech-body" data-reveal data-delay="3">
               The final assembly — the Contextual Intelligence Package — is curated
               to maximize signal and minimize noise. More data does not mean better
-              intelligence. The system is engineered to be wise about what it surfaces.
+              intelligence. The system is engineered to be precise about what it surfaces,
+              not comprehensive.
             </p>
 
             <div className="tech-card" style={{ marginTop: '32px' }} data-reveal data-delay="3">
               <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(17px,1.8vw,21px)', fontStyle: 'italic', color: 'var(--color-text-body)', lineHeight: 1.55, margin: 0 }}>
-                "Perfect accuracy on census tasks — 'how many times did I say X?' — is
-                not a party trick. It's the baseline any system claiming to remember
-                you should clear on day one."
+                &ldquo;Perfect accuracy on census tasks — &lsquo;how many times did I mention X?&rsquo; —
+                is not a party trick. It&apos;s the baseline any system claiming to
+                remember you should clear on day one.&rdquo;
               </p>
             </div>
           </div>
