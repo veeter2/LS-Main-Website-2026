@@ -82,107 +82,117 @@ const PROOF_CARDS = [
   { number: 'v18', label: 'Architecture version',        body: 'Each version is a discrete upgrade to the intelligence spec. One canonical architecture that improves.' },
 ];
 
-// ── Architecture Stack Diagram ────────────────────────────────
+// ── Command Center Diagram — LS on top, commanding everything ──
 function CommandCenterDiagram() {
   return (
-    <div className="arch-diagram" aria-hidden>
+    <div className="cc-diagram" aria-label="LongStrider Intelligence Architecture">
 
-      {/* Row 1 — Your Team (who talks to LS) */}
-      <div className="arch-row-single">
-        <div className="arch-chip arch-chip-dim">
-          <p className="arch-chip-rel">Interacts With</p>
-          <p className="arch-chip-name">Your Team</p>
-          <p className="arch-chip-desc">Every interaction compounds</p>
+      {/* LS — the dominant commanding layer */}
+      <div className="cc-hub">
+        <div className="cc-hub-ring" />
+        <div className="cc-hub-ring cc-hub-ring-outer" />
+        <div className="cc-hub-content">
+          <span className="cc-hub-eyebrow">LongStrider</span>
+          <span className="cc-hub-name">Intelligence OS</span>
+          <div className="cc-hub-stats">
+            <span className="cc-hub-stat">29 modules</span>
+            <span className="cc-hub-stat-sep">{'\u00b7'}</span>
+            <span className="cc-hub-stat">Sovereign</span>
+            <span className="cc-hub-stat-sep">{'\u00b7'}</span>
+            <span className="cc-hub-stat">Model-agnostic</span>
+          </div>
+          <div className="cc-hub-live">
+            <span className="cc-live-dot" />
+            <span className="cc-hub-live-text">live</span>
+          </div>
         </div>
       </div>
 
-      {/* Connector: Team → LS */}
-      <div className="arch-connector-center" />
+      {/* Connector lines from hub down */}
+      <div className="cc-connectors">
+        <div className="cc-line" />
+        <div className="cc-line" />
+        <div className="cc-line" />
+        <div className="cc-line" />
+      </div>
 
-      {/* Row 2 — LongStrider: THE commanding layer */}
-      <div className="arch-ls-bar">
-        <div className="arch-ls-bar-ring" />
-        <div className="arch-ls-left">
-          <p className="arch-ls-eyebrow">LongStrider</p>
-          <p className="arch-ls-name">Intelligence OS</p>
+      {/* Four satellites — what LS commands */}
+      <div className="cc-satellites">
+        <div className="cc-sat cc-sat-gold">
+          <span className="cc-sat-rel">Directs</span>
+          <span className="cc-sat-name">Your Models</span>
+          <span className="cc-sat-detail">OpenAI {'\u00b7'} Claude {'\u00b7'} Ollama {'\u00b7'} Any</span>
         </div>
-        <div className="arch-ls-tags">
-          <span className="arch-ls-tag">Memory</span>
-          <span className="arch-ls-tag">Retrieval</span>
-          <span className="arch-ls-tag">Consolidation</span>
-          <span className="arch-ls-tag">Governance</span>
+        <div className="cc-sat">
+          <span className="cc-sat-rel">Sources</span>
+          <span className="cc-sat-name">Your Tools</span>
+          <span className="cc-sat-detail">CRM {'\u00b7'} Docs {'\u00b7'} APIs {'\u00b7'} Email</span>
         </div>
-        <div className="arch-ls-status">
-          <span className="arch-live-dot" />
-          <span>29 modules · live</span>
+        <div className="cc-sat cc-sat-purple">
+          <span className="cc-sat-rel">Deploys</span>
+          <span className="cc-sat-name">Your Agents</span>
+          <span className="cc-sat-detail">Scheduled tasks {'\u00b7'} Pattern monitoring</span>
+        </div>
+        <div className="cc-sat">
+          <span className="cc-sat-rel">Runs On</span>
+          <span className="cc-sat-name">Your Infrastructure</span>
+          <span className="cc-sat-detail">PostgreSQL {'\u00b7'} VPC {'\u00b7'} On-prem {'\u00b7'} Air-gapped</span>
         </div>
       </div>
 
-      {/* Connectors: LS → 3 chips */}
-      <div className="arch-connector-triple">
-        <div className="arch-connector-v" />
-        <div className="arch-connector-v" />
-        <div className="arch-connector-v" />
+      {/* Compounding — the thing nobody else does */}
+      <div className="cc-compound">
+        <div className="cc-compound-line" />
+        <div className="cc-compound-node">
+          <span className="cc-compound-pulse" />
+          <span className="cc-compound-label">Compounds nightly</span>
+        </div>
+        <div className="cc-compound-line" />
       </div>
 
-      {/* Row 3 — What LS directs */}
-      <div className="arch-row-triple">
-        <div className="arch-chip arch-chip-gold">
-          <p className="arch-chip-rel arch-chip-rel-gold">Directs</p>
-          <p className="arch-chip-name">Your Models</p>
-          <p className="arch-chip-desc">OpenAI · Claude · Ollama · Any</p>
-        </div>
-        <div className="arch-chip">
-          <p className="arch-chip-rel">Ingests From</p>
-          <p className="arch-chip-name">Your Tools</p>
-          <p className="arch-chip-desc">CRM · Docs · APIs · Email</p>
-        </div>
-        <div className="arch-chip arch-chip-purple">
-          <p className="arch-chip-rel arch-chip-rel-purple">Deploys</p>
-          <p className="arch-chip-name">Your Agents</p>
-          <p className="arch-chip-desc">Orbital intelligence · Background tasks</p>
-        </div>
-      </div>
-
-      {/* Connector: chips → infra */}
-      <div className="arch-connector-center" />
-
-      {/* Row 4 — Foundation */}
-      <div className="arch-infra-bar">
-        <p className="arch-chip-rel">Runs On</p>
-        <p className="arch-infra-name">Your Infrastructure</p>
-        <p className="arch-infra-desc">PostgreSQL · VPC · On-premise · Air-gapped sovereign builds</p>
-      </div>
-
-      {/* Connector: infra → IP (gold — this is the accumulation direction) */}
-      <div className="arch-connector-center arch-connector-gold" />
-
-      {/* Row 5 — Your IP (the asset that compounds) */}
-      <div className="arch-row-single">
-        <div className="arch-chip arch-chip-gold">
-          <p className="arch-chip-rel arch-chip-rel-gold">Builds</p>
-          <p className="arch-chip-name">Your IP</p>
-          <p className="arch-chip-desc">Knowledge graph · Compounds daily · Permanently yours</p>
-        </div>
+      {/* Your IP — the asset */}
+      <div className="cc-ip">
+        <span className="cc-ip-glow" />
+        <span className="cc-ip-name">Your IP</span>
+        <span className="cc-ip-sub">Permanent IP. Compounding daily.</span>
       </div>
 
     </div>
   );
 }
 
-// Mobile fallback
+// Mobile
 function CommandCenterMobile() {
   return (
-    <div className="hub-diagram-mobile">
-      {SPOKES.map((s) => (
-        <div key={s.cls} className="hub-mobile-spoke">
-          <span className="hub-mobile-rel">{s.rel}</span>
-          <span className="hub-mobile-name">{s.name}</span>
+    <div className="cc-mobile">
+      <div className="cc-mobile-hub">
+        <span className="cc-mobile-hub-eyebrow">LongStrider</span>
+        <span className="cc-mobile-hub-name">Intelligence Architecture</span>
+        <span className="cc-mobile-hub-stats">29 modules {'\u00b7'} 5-axis scoring {'\u00b7'} 18 governance rules</span>
+      </div>
+      {[
+        { rel: 'Directs', name: 'Your Models' },
+        { rel: 'Ingests From', name: 'Your Tools' },
+        { rel: 'Deploys', name: 'Your Agents' },
+        { rel: 'Runs On', name: 'Your Infrastructure' },
+      ].map((s) => (
+        <div key={s.name} className="cc-mobile-sat">
+          <span className="cc-mobile-rel">{s.rel}</span>
+          <span className="cc-mobile-name">{s.name}</span>
         </div>
       ))}
+      <div className="cc-mobile-ip">
+        <span className="cc-mobile-ip-text">Your IP {'\u00b7'} Compounds daily {'\u00b7'} Permanently yours</span>
+      </div>
     </div>
   );
 }
+
+
+
+
+
+
 
 
 // ── Page ──────────────────────────────────────────────────────
@@ -227,7 +237,7 @@ export default function TechnologyPage() {
       ══════════════════════════════════════════════ */}
       <section className="tech-container">
         <div className="tech-hero-v2">
-          <span className="tech-hero-v2-eyebrow" data-reveal>Technology — How It Works</span>
+          <span className="tech-hero-v2-eyebrow" data-reveal>Technology — Architecture</span>
           <h1 className="tech-hero-v2-h1" data-reveal data-delay="1">
             The command center for your entire AI stack.
           </h1>
@@ -238,7 +248,7 @@ export default function TechnologyPage() {
             tool can build on its own.
           </p>
 
-          {/* Hub diagram */}
+          {/* Architecture diagram */}
           <div data-reveal data-delay="3">
             <CommandCenterDiagram />
             <CommandCenterMobile />
@@ -265,7 +275,7 @@ export default function TechnologyPage() {
             <div className="tech-knife-card">
               <span className="tech-knife-horizon">Forever</span>
               <p className="tech-knife-statement">
-                <strong>The models will change. Your IP won&apos;t.</strong>{' '}
+                <strong>The models will change. Your institutional intelligence won&apos;t.</strong>{' '}
                 Swap providers anytime. The intelligence you&apos;ve accumulated belongs to your organization. Permanently.
               </p>
             </div>
