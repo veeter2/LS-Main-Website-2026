@@ -86,20 +86,20 @@ const PROOF_CARDS = [
 function CommandCenterDiagram() {
   return (
     <div className="hub-diagram" aria-hidden>
-      {/* SVG connecting lines — gold to models/IP, dim for infra/agents */}
-      <svg className="hub-svg" viewBox="0 0 920 480" preserveAspectRatio="none">
+      {/* SVG connecting lines — coordinates calibrated to 340px card height */}
+      <svg className="hub-svg" viewBox="0 0 920 340" preserveAspectRatio="none">
         {/* Hub→Models (straight up, gold) */}
-        <line className="hub-line" x1="460" y1="158" x2="460" y2="68" stroke="rgba(200,169,110,0.30)" />
+        <line className="hub-line" x1="460" y1="118" x2="460" y2="46" stroke="rgba(200,169,110,0.30)" />
         {/* Hub→Tools (left) */}
-        <line className="hub-line" x1="357" y1="190" x2="190" y2="178" stroke="rgba(255,255,255,0.12)" />
+        <line className="hub-line" x1="357" y1="136" x2="190" y2="128" stroke="rgba(255,255,255,0.12)" />
         {/* Hub→Team (right) */}
-        <line className="hub-line" x1="563" y1="190" x2="730" y2="178" stroke="rgba(255,255,255,0.12)" />
+        <line className="hub-line" x1="563" y1="136" x2="730" y2="128" stroke="rgba(255,255,255,0.12)" />
         {/* Hub→Agents (bottom-left diagonal, purple) */}
-        <line className="hub-line" x1="440" y1="222" x2="190" y2="390" stroke="rgba(139,92,246,0.20)" />
+        <line className="hub-line" x1="440" y1="162" x2="185" y2="290" stroke="rgba(139,92,246,0.20)" />
         {/* Hub→Infra (straight down) */}
-        <line className="hub-line" x1="460" y1="228" x2="460" y2="392" stroke="rgba(255,255,255,0.09)" />
+        <line className="hub-line" x1="460" y1="168" x2="460" y2="292" stroke="rgba(255,255,255,0.09)" />
         {/* Hub→IP (bottom-right diagonal, gold) */}
-        <line className="hub-line" x1="480" y1="222" x2="730" y2="390" stroke="rgba(200,169,110,0.22)" />
+        <line className="hub-line" x1="480" y1="162" x2="735" y2="290" stroke="rgba(200,169,110,0.22)" />
       </svg>
 
       {/* Hub center */}
@@ -186,14 +186,13 @@ export default function TechnologyPage() {
         <div className="tech-hero-v2">
           <span className="tech-hero-v2-eyebrow" data-reveal>Technology — How It Works</span>
           <h1 className="tech-hero-v2-h1" data-reveal data-delay="1">
-            You&apos;re not adding another AI tool.<br />
-            You&apos;re installing the command center<br />
-            that controls all of them.
+            The command center for your entire AI stack.
           </h1>
           <p className="tech-hero-v2-sub" data-reveal data-delay="2">
-            LongStrider deploys inside your ecosystem — ingesting from your tools,
-            dominating your model choice, deploying your agents, and building a
-            knowledge graph that belongs <em>entirely to you</em>.
+            Every AI tool your organization runs today is an island.
+            LongStrider is the Intelligence layer that connects them —
+            compounding organizational intelligence that no individual
+            tool can build on its own.
           </p>
 
           {/* Hub diagram */}
