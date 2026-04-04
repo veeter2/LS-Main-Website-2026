@@ -1189,17 +1189,243 @@
    Pure CSS + inline SVG — no images, no external assets
    ═══════════════════════════════════════════════════════════════ */
 
-.hub-diagram {
-  position: relative;
+/* ═══════════════════════════════════════════════════════════════
+   ARCHITECTURE STACK DIAGRAM
+   Vertical layered layout — LongStrider as the commanding layer
+   ═══════════════════════════════════════════════════════════════ */
+
+.arch-diagram {
   width: 100%;
-  height: 340px;
   max-width: var(--container-max);
   margin: 0 auto 48px;
   background: var(--card-bg);
   border: var(--card-border);
   border-radius: var(--card-radius);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Single-item rows (Team, IP) — centered chips ── */
+
+.arch-row-single {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Triple chip row ── */
+
+.arch-row-triple {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* ── LongStrider bar — THE commanding layer ── */
+
+.arch-ls-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 16px 22px;
+  background: rgba(200,169,110,0.07);
+  border: 1px solid rgba(200,169,110,0.38);
+  border-radius: 6px;
   overflow: hidden;
 }
+
+.arch-ls-bar-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 10px;
+  border: 1px solid rgba(200,169,110,0.10);
+  pointer-events: none;
+  animation: hubRingPulse 3.5s ease-in-out infinite;
+}
+
+.arch-ls-left {
+  flex-shrink: 0;
+  margin-right: 28px;
+}
+
+.arch-ls-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 7px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-gold-dim);
+  margin-bottom: 3px;
+}
+
+.arch-ls-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.arch-ls-tags {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.arch-ls-tag {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(200,169,110,0.55);
+  padding: 3px 10px;
+  border: 1px solid rgba(200,169,110,0.18);
+  border-radius: 100px;
+  background: rgba(200,169,110,0.04);
+}
+
+.arch-ls-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.10em;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.arch-live-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 6px rgba(200,169,110,0.7);
+  animation: liveDotPulse 2s ease-in-out infinite;
+}
+
+/* ── Infrastructure bar — foundation ── */
+
+.arch-infra-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 5px;
+  background: rgba(255,255,255,0.012);
+}
+
+.arch-infra-name {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-body);
+  margin: 0;
+}
+
+.arch-infra-desc {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  margin: 0;
+  margin-left: auto;
+}
+
+/* ── Chips ── */
+
+.arch-chip {
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.018);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-radius: 5px;
+}
+
+.arch-chip-gold {
+  border-color: rgba(200,169,110,0.22);
+  background: rgba(200,169,110,0.038);
+}
+
+.arch-chip-purple {
+  border-color: rgba(139,92,246,0.18);
+  background: rgba(139,92,246,0.025);
+}
+
+.arch-chip-dim {
+  border-color: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.010);
+}
+
+.arch-chip-rel {
+  font-family: var(--font-ui);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+  margin-bottom: 3px;
+}
+
+.arch-chip-rel-gold   { color: rgba(200,169,110,0.55); }
+.arch-chip-rel-purple { color: rgba(139,92,246,0.55); }
+
+.arch-chip-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-body);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.arch-chip-desc {
+  font-family: var(--font-ui);
+  font-size: 8px;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* ── Connectors ── */
+
+.arch-connector-center {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.10);
+  margin: 0 auto;
+}
+
+.arch-connector-gold {
+  background: rgba(200,169,110,0.30);
+}
+
+.arch-connector-triple {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 18px;
+}
+
+.arch-connector-v {
+  width: 1px;
+  height: 100%;
+  background: rgba(255,255,255,0.10);
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .arch-row-triple  { grid-template-columns: 1fr; }
+  .arch-connector-triple { display: none; }
+  .arch-ls-tags     { display: none; }
+  .arch-infra-desc  { display: none; }
+  .arch-diagram     { padding: 18px 16px; }
+}
+
 
 .hub-svg {
   position: absolute;
