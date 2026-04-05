@@ -67,8 +67,7 @@
   .mem-cluster-grid { grid-template-columns: 1fr; }
   .mem-signal-flow  { flex-direction: column; align-items: flex-start; }
 
-  /* ── StoryTimeline — reduce opacity on tablet ── */
-  .story-timeline { opacity: 0.5; }
+  /* ── StoryTimeline — handled by components/story-timeline.css ── */
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -99,8 +98,7 @@
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @media (max-width: 768px) {
 
-  /* ── StoryTimeline — hide entirely on mobile ── */
-  .story-timeline { display: none !important; }
+  /* ── StoryTimeline — handled by components/story-timeline.css ── */
 
   /* ── Homepage ── */
   .h2-sectors-grid   { grid-template-columns: 1fr; }
