@@ -2,16 +2,17 @@
 
 import Link from 'next/link';
 import { LongstriderLogo } from '@/components/longstrider-logo';
-
-const GOLD_DIM    = 'rgba(200,169,110,0.45)';
 const GOLD_BORDER = 'rgba(200,169,110,0.10)';
 const MUTED       = 'rgba(255,255,255,0.22)';
 const MUTED_HOVER = 'rgba(255,255,255,0.45)';
 
+
 const NAV_LINKS = [
-  { label: 'Manifesto',  href: '/manifesto'  },
-  { label: 'Technology', href: '/technology' },
-  { label: 'About',      href: '/about'      },
+  { label: 'Manifesto',       href: '/manifesto'  },
+  { label: 'Technology',     href: '/technology' },
+  { label: 'Industry Briefs', href: '/briefs'     },
+  { label: 'Field Notes',    href: '/field-notes' },
+  { label: 'About',          href: '/about'      },
 ];
 
 const LEGAL_LINKS = [
@@ -73,7 +74,7 @@ export function Footer() {
 
         {/* Copyright — hard right */}
         <p style={{ fontSize: '11px', color: MUTED, letterSpacing: '0.04em', whiteSpace: 'nowrap', textAlign: 'right' }}>
-          © 2025 Longstrider, LLC
+          © 2026 Longstrider, LLC
         </p>
 
       </div>

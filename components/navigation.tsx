@@ -137,10 +137,9 @@ const NAV_ITEMS: NavItem[] = [
     live: true,
     Icon: InsightSparkV2,
     children: [
-      { label: 'White Papers',       href: '/field-notes?category=white-papers',   live: true  },
-      { label: 'Novel Thoughts',     href: '/field-notes?category=novel-thoughts', live: true  },
-      { label: 'Guides',             href: '/field-notes?category=guides',         live: true  },
-      { label: 'Intelligence Briefs',href: '/field-notes/briefs',                  live: false },
+      { label: 'White Papers',   href: '/field-notes?category=white-papers',   live: true },
+      { label: 'Novel Thoughts', href: '/field-notes?category=novel-thoughts', live: true },
+      { label: 'Guides',         href: '/field-notes?category=guides',         live: true },
     ],
   },
   {
