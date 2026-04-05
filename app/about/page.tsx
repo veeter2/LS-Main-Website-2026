@@ -40,21 +40,21 @@ const TEAM = [
   {
     initials: 'MV',
     name: 'Matt Veitch',
-    title: 'Founder & Architect',
+    title: 'Founder & Principal Architect',
     identity: 'gold' as const,
     bio: '30-year technology veteran. Serial founder. Built LongStrider solo — every edge function, every table, every design decision. He and an AI. 18 months.',
   },
   {
     initials: 'MB',
     name: 'Marc Boudria',
-    title: 'Co-Founder, Enterprise Strategy',
+    title: 'Co-Founder & Principal of Enterprise',
     identity: 'purple' as const,
     bio: 'Enterprise AI expert. Brought the sovereignty framing, named the Kernel, made the introductions that opened enterprise doors. Decades of domain depth.',
   },
   {
     initials: 'IB',
     name: 'Isabella Buzziard',
-    title: 'Co-Founder, Revenue Operations',
+    title: 'Co-Founder & Principal of Growth',
     identity: 'neutral' as const,
     bio: 'The operational backbone. Revenue architecture, partner relationships, and the person who kept the mission grounded every step of the way.',
   },
@@ -158,7 +158,7 @@ export default function AboutPage() {
                   &ldquo;AI without persistent, sovereign, compounding memory isn&apos;t
                   intelligent — it&apos;s a very fast amnesiac.&rdquo;
                 </p>
-                <span className="ab-callout-attr">Matt Veitch — Founder & Architect</span>
+                <span className="ab-callout-attr">Matt Veitch — Founder &amp; Principal Architect</span>
               </div>
               <div className="ab-callout" style={{ marginTop: '16px' }}>
                 <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: '16px' }}>
