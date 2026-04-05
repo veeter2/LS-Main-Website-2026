@@ -1,0 +1,68 @@
+/* ══════════════════════════════════════════════════════════════
+   SIMULATION — Shared conversation block style
+   Used across all industry briefs that include a simulation.
+   Import this in brief-specific CSS files.
+══════════════════════════════════════════════════════════════ */
+
+.auto-simulation {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--color-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.auto-sim-context {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: rgba(255,255,255,0.015);
+}
+
+.auto-sim-turn {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auto-sim-turn:last-child {
+  border-bottom: none;
+}
+
+.auto-sim-turn--user {
+  background: transparent;
+}
+
+.auto-sim-turn--ls {
+  background: rgba(200,169,110,0.04);
+  border-left: 2px solid var(--color-gold);
+}
+
+.auto-sim-speaker {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.auto-sim-turn--ls .auto-sim-speaker {
+  color: var(--color-gold-dim);
+}
+
+.auto-sim-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.auto-sim-turn--ls .auto-sim-text {
+  color: var(--color-text-body);
+}

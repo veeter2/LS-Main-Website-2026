@@ -1,8 +1,41 @@
 'use client';
 
 import '../cs-detail.css';
+import '../simulation.css';
 import Link from 'next/link';
 import { useEffect, useCallback, useRef } from 'react';
+
+const SIMULATION = [
+  {
+    speaker: 'Chief Claims Officer',
+    text: 'We have a large-loss file from 18 months ago — a complex aggregation dispute in commercial property. A similar situation just came in. What did we decide last time and why?',
+    role: 'user',
+  },
+  {
+    speaker: 'LongStrider',
+    text: 'The aggregation dispute from March last year was resolved in favor of the insured after internal escalation reached the senior claims panel. The deciding factor was a clause interpretation specific to the endorsement language in that policy form — a position that had been applied once before in 2021 on a similar manufacturing risk. The reserve was set at $4.2M and the final settlement came in at $3.8M. The adjuster who handled it noted that the opposing counsel\'s initial framing was identical to the current submission.',
+    role: 'ls',
+  },
+  {
+    speaker: 'Chief Claims Officer',
+    text: 'That adjuster retired last quarter. Who on the current team has handled anything close to this?',
+    role: 'user',
+  },
+  {
+    speaker: 'LongStrider',
+    text: 'Two active adjusters have touched files with aggregation disputes in the last three years. One handled the 2021 precedent directly. I can brief both of them with the full decision history, the clause interpretation thread, and the reserve logic from the prior files — so the institutional position doesn\'t need to be reconstructed from scratch.',
+    role: 'ls',
+  },
+];
+
+const ADDITIONAL_USE_CASES = [
+  { title: 'Prior authorization intelligence', desc: 'Accumulate how the organization interprets coverage edges, pre-auth patterns, and denial history — so decisions are consistent and defensible across the desk.' },
+  { title: 'Renewal memory', desc: 'Preserve the reasoning behind prior-year pricing decisions, account-specific sensitivity history, and loss patterns that affect renewal logic.' },
+  { title: 'Brokerage relationship intelligence', desc: 'Retain submission history, broker communication patterns, and relationship context that doesn\'t fit in a CRM but drives how business gets handled.' },
+  { title: 'Compliance and regulatory continuity', desc: 'Keep jurisdiction-specific interpretation history and regulatory guidance current — so the desk always refers to how the organization has actually applied the rules.' },
+  { title: 'New adjuster onboarding acceleration', desc: 'Surface the accumulated institutional judgment to new team members from day one — not through documentation, but through access to every prior decision in context.' },
+  { title: 'Audit trail for dispute resolution', desc: 'Every decision, weight, and correction is on record — so any claim handling challenge starts with a complete, auditable response.' },
+];
 
 export default function InsuranceBriefPage() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -257,6 +290,24 @@ export default function InsuranceBriefPage() {
               </div>
             ))}
           </div>
+
+          {/* Simulation */}
+          <div style={{ marginTop: '48px' }} data-reveal data-delay="2">
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.20em', textTransform: 'uppercase', color: 'var(--color-text-muted)', display: 'block', marginBottom: '20px' }}>
+              Institutional memory — in practice
+            </span>
+            <div className="auto-simulation">
+              <div className="auto-sim-context">
+                Context: A complex large-loss file just came in that mirrors a prior dispute from 18 months ago. The adjuster who handled the original case retired last quarter. The institutional position needs to be recovered before the response deadline.
+              </div>
+              {SIMULATION.map((turn, i) => (
+                <div key={i} className={`auto-sim-turn auto-sim-turn--${turn.role}`}>
+                  <div className="auto-sim-speaker">{turn.speaker}</div>
+                  <p className="auto-sim-text">{turn.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* ══ 05 — WHAT THEY OWN ════════════════════════════════════ */}
@@ -292,6 +343,21 @@ export default function InsuranceBriefPage() {
                 <li key={i} className="bd-owns-item">{item}</li>
               ))}
             </ul>
+          </div>
+
+          {/* Additional use cases */}
+          <div style={{ marginTop: '40px' }} data-reveal data-delay="2">
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.20em', textTransform: 'uppercase', color: 'var(--color-text-muted)', display: 'block', marginBottom: '20px' }}>
+              Additional deployment areas
+            </span>
+            <div className="bd-outcomes">
+              {ADDITIONAL_USE_CASES.map((uc, i) => (
+                <div key={i} className="bd-outcome-card">
+                  <span className="bd-outcome-title">{uc.title}</span>
+                  <p className="bd-outcome-body">{uc.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

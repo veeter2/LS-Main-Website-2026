@@ -1,6 +1,7 @@
 'use client';
 
 import '../cs-detail.css';
+import '../simulation.css';
 import Link from 'next/link';
 import { useEffect, useCallback, useRef } from 'react';
 
@@ -91,6 +92,42 @@ const OUTCOMES = [
     outcome: 'Better leverage',
     measure: 'Junior attorney ramp speed, knowledge operations efficiency, matter support throughput',
   },
+];
+
+// ── Simulation ───────────────────────────────────────────────────
+
+const SIMULATION = [
+  {
+    speaker: 'Managing Partner',
+    text: 'We have a new matter coming in — a significant data licensing dispute. Pull everything we have on how we\'ve handled IP licensing positions for tech clients in the last three years.',
+    role: 'user',
+  },
+  {
+    speaker: 'LongStrider',
+    text: 'I found 14 matters involving IP licensing or data rights disputes across the tech practice since 2022. The firm\'s approved position on data licensing indemnities has shifted twice — most recently in Q3 last year when the partnership approved a narrower indemnity scope following an adverse arbitration outcome. That updated posture is reflected in 6 of the 14 matters. The other 8 predate the change. I can surface the current approved fallback language and flag the two matters where similar opposing counsel patterns appeared.',
+    role: 'ls',
+  },
+  {
+    speaker: 'Managing Partner',
+    text: 'The partner who handled the arbitration matter is on leave. Who else knows this file well enough to brief the team?',
+    role: 'user',
+  },
+  {
+    speaker: 'LongStrider',
+    text: 'Two senior associates worked directly on that matter. One has since moved to the corporate group but is still with the firm. The full strategic arc of the arbitration — prior drafts, the positions that were conceded, partner instructions through each stage, and the final reasoning behind the indemnity revision — is retained and available to brief the incoming team without requiring anyone to reconstruct it from archived files.',
+    role: 'ls',
+  },
+];
+
+// ── Additional use cases ──────────────────────────────────────────
+
+const ADDITIONAL_USE_CASES = [
+  { title: 'Lateral onboarding acceleration', desc: 'Surface the firm\'s preferred positions, approved clause language, and client relationship history to lateral hires from their first matter — not after months of informal knowledge transfer.' },
+  { title: 'Knowledge operations governance', desc: 'Promote approved language, retire deprecated playbooks, and track which guidance is actively being used versus ignored — with full version history.' },
+  { title: 'Client relationship continuity', desc: 'Preserve the strategic context of each client relationship — what the client has approved, what they\'ve pushed back on, and how the relationship has evolved across matters and years.' },
+  { title: 'Practice group intelligence', desc: 'Build a shared understanding of how the group approaches recurring issue types — reducing variation across practitioners and making consistent advice structural rather than accidental.' },
+  { title: 'Competitive intelligence retention', desc: 'Remember how opposing counsel has argued and what strategies have succeeded or failed against specific adversaries across prior matters.' },
+  { title: 'Due diligence and deal memory', desc: 'Retain the institutional reasoning behind key deal terms, risk positions, and approval decisions — so the next similar transaction starts from accumulated knowledge, not from scratch.' },
 ];
 
 // ── Page ──────────────────────────────────────────────────────────
@@ -447,6 +484,24 @@ export default function LegalBriefPage() {
               </table>
             </div>
           </div>
+
+          {/* Simulation */}
+          <div style={{ marginTop: '48px' }} data-reveal data-delay="2">
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.20em', textTransform: 'uppercase', color: 'var(--color-text-muted)', display: 'block', marginBottom: '20px' }}>
+              Institutional memory — in practice
+            </span>
+            <div className="auto-simulation">
+              <div className="auto-sim-context">
+                Context: A significant data licensing dispute just came in. The partner who handled the most relevant prior matter is on leave. The institutional position — and the reasoning behind a posture change made 18 months ago — needs to be recovered before the client brief.
+              </div>
+              {SIMULATION.map((turn, i) => (
+                <div key={i} className={`auto-sim-turn auto-sim-turn--${turn.role}`}>
+                  <div className="auto-sim-speaker">{turn.speaker}</div>
+                  <p className="auto-sim-text">{turn.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* ══ 05 — WHAT THEY OWN ════════════════════════════════════ */}
@@ -490,6 +545,21 @@ export default function LegalBriefPage() {
                 <li key={i} className="bd-owns-item">{item}</li>
               ))}
             </ul>
+          </div>
+
+          {/* Additional use cases */}
+          <div style={{ marginTop: '40px' }} data-reveal data-delay="2">
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.20em', textTransform: 'uppercase', color: 'var(--color-text-muted)', display: 'block', marginBottom: '20px' }}>
+              Additional deployment areas
+            </span>
+            <div className="bd-outcomes">
+              {ADDITIONAL_USE_CASES.map((uc, i) => (
+                <div key={i} className="bd-outcome-card">
+                  <span className="bd-outcome-title">{uc.title}</span>
+                  <p className="bd-outcome-body">{uc.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

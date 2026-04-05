@@ -127,6 +127,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'Legal',              href: '/briefs/legal',              live: true  },
       { label: 'Energy & Utilities', href: '/briefs/energy',             live: false },
       { label: 'Manufacturing',      href: '/briefs/manufacturing',      live: false },
+      { label: 'Automotive',         href: '/briefs/automotive',         live: true  },
     ],
   },
   {

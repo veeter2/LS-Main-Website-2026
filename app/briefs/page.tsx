@@ -68,10 +68,10 @@ const BRIEFS = [
   {
     slug: 'automotive',
     industry: 'Automotive',
-    title: 'Dealer Network & Service Intelligence',
-    problem: 'Service history patterns, dealer relationship context, and regional operational intelligence are trapped in regional managers and service advisors.',
-    keyInsight: 'The network knows the customer. The system doesn\'t.',
-    live: false,
+    title: 'Dealer Network & Initiative Intelligence',
+    problem: 'Critical guidance lives in portals, inboxes, PDFs, and LMS systems. Distribution doesn\'t guarantee absorption — and leadership can\'t see which stores are truly acting on what was pushed into the field.',
+    keyInsight: 'Distribution does not guarantee absorption.',
+    live: true,
   },
 ] as const;
 
