@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { LongstriderLogo } from '@/components/longstrider-logo';
-const GOLD_BORDER = 'rgba(200,169,110,0.10)';
-const MUTED       = 'rgba(255,255,255,0.22)';
-const MUTED_HOVER = 'rgba(255,255,255,0.45)';
+const GOLD_BORDER = 'var(--color-border-gold)';
+const MUTED       = 'var(--color-text-muted)';
+const MUTED_HOVER = 'var(--color-text-secondary)';
 
 
 const NAV_LINKS = [

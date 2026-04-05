@@ -13,9 +13,10 @@ import { MemoryArcV1 } from '@/components/icons/memory-arc';
 import { ConvergenceV1 } from '@/components/icons/convergence';
 
 // ── Design tokens ─────────────────────────────────────────────
-const GOLD        = '#c8a96e';
-const GOLD_DIM    = 'rgba(200,169,110,0.6)';
-const GOLD_BORDER = 'rgba(200,169,110,0.35)';
+const GOLD        = 'var(--color-gold)';
+const GOLD_DIM    = 'var(--color-gold-dim)';
+const GOLD_BORDER = 'var(--color-gold-border)';
+
 
 // ── Page display names (breadcrumb) ──────────────────────────
 const PAGE_NAMES: Record<string, string> = {
