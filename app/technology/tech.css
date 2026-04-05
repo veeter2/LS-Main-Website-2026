@@ -1741,3 +1741,308 @@
   margin: 0;
 }
 
+
+/* ═══════════════════════════════════════════════════════════════
+   CHAPTER IV — THE FLEET
+   Agent grid, dream loop, fleet sim, fleet MCP statement
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Agent constellation grid ──────────────────────────────── */
+
+.tech-agent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--grid-gap);
+  margin-top: 48px;
+}
+
+.tech-agent-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-pad);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-agent-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-purple-glow), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.tech-agent-card:hover {
+  border-color: var(--color-purple);
+  background: rgba(139, 92, 246, 0.04);
+  transform: translateY(-2px);
+}
+
+.tech-agent-card:hover::before {
+  opacity: 1;
+}
+
+.tech-agent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tech-agent-n {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--color-purple);
+  opacity: 0.7;
+}
+
+.tech-agent-badge {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-purple);
+  background: rgba(139, 92, 246, 0.10);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+.tech-agent-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.tech-agent-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ── Dream Engine loop diagram ──────────────────────────────── */
+
+.tech-dream-loop {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 8px 0;
+}
+
+.tech-dream-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.tech-dream-step-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 40px;
+}
+
+.tech-dream-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--color-purple);
+  background: rgba(139, 92, 246, 0.07);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  animation: dreamPulse 3s ease-in-out infinite;
+}
+
+@keyframes dreamPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+  50%       { box-shadow: 0 0 0 6px rgba(139, 92, 246, 0.08); }
+}
+
+.tech-dream-connector {
+  width: 1px;
+  flex: 1;
+  min-height: 28px;
+  background: linear-gradient(to bottom, rgba(139, 92, 246, 0.25), rgba(139, 92, 246, 0.06));
+  margin: 4px 0;
+}
+
+.tech-dream-step-content {
+  padding: 8px 0 28px;
+}
+
+.tech-dream-phase {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-purple);
+  opacity: 0.65;
+  margin-bottom: 4px;
+}
+
+.tech-dream-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0 0 6px;
+}
+
+.tech-dream-body {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ── Fleet simulation dialogue ──────────────────────────────── */
+
+.tech-fleet-sim {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tech-fleet-sim-context {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  line-height: 1.6;
+}
+
+.tech-fleet-sim-turn {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: background 0.2s ease;
+}
+
+.tech-fleet-sim-turn:last-child {
+  border-bottom: none;
+}
+
+.tech-fleet-sim-turn--agent {
+  border-left: 2px solid rgba(139, 92, 246, 0.35);
+  background: rgba(139, 92, 246, 0.02);
+}
+
+.tech-fleet-sim-turn--system {
+  border-left: 2px solid rgba(200, 169, 110, 0.20);
+  background: rgba(200, 169, 110, 0.015);
+}
+
+.tech-fleet-sim-turn--user {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.tech-fleet-sim-turn--ls {
+  border-left: 2px solid var(--color-gold-border);
+  background: var(--color-gold-ghost);
+}
+
+.tech-fleet-sim-speaker {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.tech-fleet-sim-turn--agent .tech-fleet-sim-speaker { color: rgba(139, 92, 246, 0.6); }
+.tech-fleet-sim-turn--system .tech-fleet-sim-speaker { color: var(--color-gold-dim); }
+.tech-fleet-sim-turn--ls .tech-fleet-sim-speaker { color: var(--color-gold-dim); }
+
+.tech-fleet-sim-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.tech-fleet-sim-turn--ls .tech-fleet-sim-text {
+  color: var(--color-text-primary);
+}
+
+/* ── Fleet MCP statement ────────────────────────────────────── */
+
+.tech-fleet-mcp {
+  margin-top: 48px;
+  padding: 36px 40px;
+  background: rgba(139, 92, 246, 0.04);
+  border: 1px solid rgba(139, 92, 246, 0.14);
+  border-radius: var(--card-radius);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-fleet-mcp::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.4), transparent);
+}
+
+.tech-fleet-mcp-eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(139, 92, 246, 0.55);
+  margin-bottom: 16px;
+}
+
+.tech-fleet-mcp-statement {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--color-text-primary);
+  margin: 0;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── Responsive — fleet grid ────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .tech-agent-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-fleet-sim-context,
+  .tech-fleet-sim-turn {
+    padding: 16px 18px;
+  }
+
+  .tech-fleet-mcp {
+    padding: 28px 20px;
+  }
+}

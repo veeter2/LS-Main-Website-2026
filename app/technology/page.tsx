@@ -6,12 +6,42 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { StoryTimeline } from '@/components/story-timeline';
 
 // ── Design tokens ─────────────────────────────────────────────
-const GOLD   = '#c8a96e';
-const PURPLE = '#8b5cf6';
-const GOLD_G = 'rgba(200,169,110,0.40)';
-const PURP_G = 'rgba(139,92,246,0.45)';
+const GOLD   = 'var(--color-gold)';
+const PURPLE = 'var(--color-purple)';
+const GOLD_G = 'var(--color-gold-dim)';
+const PURP_G = 'var(--color-purple-glow)';
 
-// ── Timeline — 9 nodes, 4 free / 5 gated ─────────────────────
+// ── Agent Constellation ───────────────────────────────────────
+const AGENTS = [
+  { n: '01', name: 'R&D Oracle',               badge: 'Research',     desc: 'Monitors GitHub commits and arXiv papers on cognitive architectures. Flags capability gaps between LongStrider and the field — and creates an orbital task for every delta discovered.' },
+  { n: '02', name: 'Marketing Intelligence',   badge: 'Intelligence', desc: 'Monitors competitor releases, industry sentiment, and content performance. After 60 days, generates article briefs from 60 days of accumulated signal — not a one-time research pull.' },
+  { n: '03', name: 'Knowledge Graph Builder',  badge: 'Structure',    desc: 'Connects CRM, Slack, docs, and APIs. Translates structured data into substrate entries. Fills the knowledge_graph table — turning your stack into a living intelligence graph.' },
+  { n: '04', name: 'Autonomous Insight',       badge: 'Cognition',    desc: 'Runs inside the Dream cycle. Reviews behavioral telemetry across 30 days. Surfaces patterns no individual session would reveal — sustained avoidance, decision shifts, goal momentum scores.' },
+  { n: '05', name: 'Source Monitor',           badge: 'Signal',       desc: 'Ingests RSS feeds, news APIs, and data streams through the full CFE pipeline. Headlines become entity-resolved intelligence, cross-referenced against your existing relationship graph.' },
+  { n: '06', name: 'Relationship Intelligence',badge: 'Relational',   desc: 'Monitors all data sources for entity co-occurrences and relationship signals. Updates consciousness cords with cord_strength, trust_score, and tension_level. The emotional CRM no other system builds.' },
+  { n: '07', name: 'Pattern Consolidation',    badge: 'Memory',       desc: 'Strengthens or weakens patterns based on cross-session evidence. Validated patterns become high-confidence beliefs. Contradicted patterns are downweighted. Epistemic memory, not just storage.' },
+  { n: '08', name: 'Fleet Coordinator',        badge: 'Control',      desc: 'Monitors orbital task queue health. Detects agents producing low-gravity signal. Routes tasks to appropriate types. Checks every 15 minutes. Command-and-control that keeps the fleet coherent.' },
+  { n: '09', name: 'Document Intelligence',    badge: 'Sovereign',    desc: 'Processes SOPs, contracts, transcripts, and legal documents through the ingest pipeline. Every document stays on your infrastructure. Employee departure cannot remove this intelligence.' },
+  { n: '10', name: 'Competitive Intelligence', badge: 'Strategy',     desc: 'Monitors competitor product changes, pricing, hiring patterns, and reviews. After 90 days, competitive questions draw from 90 days of accumulated telemetry — not marketing copy.' },
+  { n: '11', name: 'Belief Evolution',         badge: 'Longitudinal', desc: 'Tracks how your organization\u2019s understanding of key topics has shifted over time. Reads self-contradictions and active intentions. Writes longitudinal belief trajectory records.' },
+  { n: '12', name: 'Integration Mesh',         badge: 'Integration',  desc: 'Acts as the integration layer for your entire stack. Slack \u2192 gravity_map. Notion \u2192 knowledge_graph. Salesforce \u2192 consciousness_cords. Everything into the substrate through CFE.' },
+  { n: '13', name: 'Dream Compiler',           badge: 'Evolution',    desc: 'Runs at 4am as an extension of the nightly engine. Reads all agent-sourced memories from the last 24 hours. Synthesizes what the fleet learned. Writes the RuntimePolicy that shapes how tomorrow starts.' },
+];
+
+const FLEET_TIERS = [
+  { tier: 'Tier 1', name: 'Hosted Fleet',      desc: 'LongStrider runs and manages the agents. Agent finds stored in your isolated substrate. Configure, monitor, and direct via Command Center. Zero infrastructure overhead.',                                                featured: false },
+  { tier: 'Tier 2', name: 'Self-Hosted Fleet', desc: 'Your infrastructure. Your cron jobs. Your compute. Agents write to your Supabase instance via the ingest endpoint. Full sovereignty on agent intelligence and outputs.',                                             featured: false },
+  { tier: 'Tier 3', name: 'Sovereign Air-Gap', desc: 'No external API calls from agents. All models running locally. Agent intelligence never leaves your network perimeter. For defense, regulated healthcare, and classified research environments.',                     featured: true  },
+];
+
+const FLEET_SIM = [
+  { speaker: 'R&D Oracle Agent \u2014 11:42 PM', role: 'agent', text: 'Research finding filed. OpenAI shipped memory persistence to API tier. Capability delta detected: LS has continuous compilation via nightly engine \u2014 OpenAI memory is session-scoped with no nightly aggregation pass. Writing to gravity_map. Orbital task created: evaluate messaging delta for Q2 positioning.' },
+  { speaker: 'Dream Compiler \u2014 4:01 AM',   role: 'system', text: 'Nightly synthesis complete. Fleet processed 47 research episodes. Competitive intelligence cluster grew by 9 entries \u2014 OpenAI memory release is the dominant signal. Belief trajectory updated: understanding of sovereign memory advantage has strengthened (0.61 \u2192 0.74). RuntimePolicy updated: elevate compounding narrative in all responses for next 24h.' },
+  { speaker: 'You \u2014 9:08 AM',               role: 'user',   text: 'What should I know about the competitive landscape before my enterprise call this afternoon?' },
+  { speaker: 'LongStrider',                     role: 'ls',     text: 'OpenAI shipped memory persistence to their API tier yesterday evening. The core differentiator is still architectural: their memory is session-scoped with no nightly aggregation. Yours compiles nightly across all agent and human input, builds Knowledge Cluster summaries, and writes a RuntimePolicy that shapes how the system reasons tomorrow. The prospect you\u2019re meeting built their current stack on ChatGPT Enterprise. The compounding question \u2014 \u201cwhat does your AI know about your business that it didn\u2019t know 90 days ago?\u201d \u2014 is the right frame for this afternoon.' },
+];
+
+// ── Timeline — 10 nodes, 4 free / 6 gated ────────────────────
 const TIMELINE = [
   { id: 'ingest',      label: 'Signal Extraction', color: GOLD,   glow: GOLD_G, gated: false },
   { id: 'channels',    label: 'Eight Channels',     color: PURPLE, glow: PURP_G, gated: false },
@@ -22,7 +52,9 @@ const TIMELINE = [
   { id: 'assembly',    label: 'CIP Assembly',       color: GOLD,   glow: GOLD_G, gated: true  },
   { id: 'governance',  label: 'Behavior OS',        color: PURPLE, glow: PURP_G, gated: true  },
   { id: 'deployment',  label: 'Deployment Tiers',   color: GOLD,   glow: GOLD_G, gated: true  },
+  { id: 'fleet',       label: 'The Fleet',          color: PURPLE, glow: PURP_G, gated: true  },
 ];
+
 
 // ── Hub diagram spokes ────────────────────────────────────────
 const SPOKES = [
@@ -593,13 +625,13 @@ export default function TechnologyPage() {
       {!isRevealed && (
         <div className="tech-tease">
           <p className="tech-tease-chapter-intro">
-            Chapters II and III cover retrieval intelligence, behavioral governance, and how data sovereignty is enforced architecturally — not by policy.
+            Chapters II, III, and IV cover retrieval intelligence, behavioral governance, data sovereignty, and the agent fleet — including how 13 orbital agents compound intelligence while you sleep.
           </p>
           <button id="tech-reveal-btn" className="tech-tease-button" onClick={() => setIsRevealed(true)}>
             Continue Reading
           </button>
           <p className="tech-tease-hint">
-            How a query becomes intelligence. How you configure what it knows. How your data never leaves.
+            How a query becomes intelligence. How you configure what it knows. How the fleet thinks overnight.
           </p>
         </div>
       )}
@@ -891,6 +923,185 @@ export default function TechnologyPage() {
               ))}
             </div>
           </section>
+
+          {/* ══════════════════════════════════════════════
+              CHAPTER IV — THE FLEET
+          ══════════════════════════════════════════════ */}
+
+          {/* Chapter IV marker */}
+          <div className="tech-container">
+            <div className="tech-chapter-marker" style={{ margin: '40px 0 0' }}>
+              <div className="tech-chapter-marker-line" />
+              <div className="tech-chapter-marker-text">
+                <span className="tech-chapter-eyebrow">Chapter IV</span>
+                <span className="tech-chapter-title">The Fleet</span>
+              </div>
+              <div className="tech-chapter-marker-line" />
+            </div>
+          </div>
+
+          {/* Chapter IV intro */}
+          <div className="tech-container">
+            <div className="tech-chapter-intro" style={{ marginTop: '56px' }} data-reveal>
+              <span className="tech-chapter-intro-number">The cognitive substrate agents run on</span>
+              <p className="tech-chapter-intro-title">
+                LongStrider is not an agent framework.<br />It is what agent intelligence compounds into.
+              </p>
+              <p className="tech-chapter-intro-body">
+                When you deploy an agent fleet on LangChain or CrewAI, they share nothing. Each agent
+                has no memory of what others found — and when the process ends, the intelligence
+                evaporates. When you deploy agents on LongStrider, every find, every pattern, every
+                graph node built writes to the same gravity substrate that powers your primary AI.
+                The fleet compounds. Nothing evaporates. What agents discover tonight shapes how
+                the system reasons tomorrow.
+              </p>
+            </div>
+          </div>
+
+          <div className="tech-divider" />
+
+          {/* 10 — The Agent Constellation */}
+          <section className="tech-section tech-container" data-section="fleet">
+            <div className="tech-section-header">
+              <p className="tech-label tech-label-purple" data-reveal>10 &mdash; The Agent Constellation</p>
+              <h2 className="tech-heading" data-reveal data-delay="1">
+                13 agents. One substrate.<br />Everything compounds.
+              </h2>
+              <p className="tech-lead tech-lead-centered" data-reveal data-delay="2">
+                Each agent type is architecturally distinct. All of them write to the same
+                gravity substrate — and the Dream Engine synthesizes what they find every night.
+                The fleet doesn&apos;t just run tasks. It builds institutional memory.
+              </p>
+            </div>
+            <div className="tech-agent-grid" data-reveal data-delay="2">
+              {AGENTS.map((agent) => (
+                <div key={agent.n} className="tech-agent-card">
+                  <div className="tech-agent-header">
+                    <span className="tech-agent-n">{agent.n}</span>
+                    <span className="tech-agent-badge">{agent.badge}</span>
+                  </div>
+                  <p className="tech-agent-name">{agent.name}</p>
+                  <p className="tech-agent-desc">{agent.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <div className="tech-divider" />
+
+          {/* Dream Engine self-evolution loop */}
+          <section className="tech-section tech-container">
+            <div className="tech-grid">
+              <div>
+                <p className="tech-label" data-reveal>The Self-Evolution Mechanism</p>
+                <h2 className="tech-heading" data-reveal data-delay="1">
+                  The agents learn during the day.<br />The Dream Engine synthesizes overnight.
+                </h2>
+                <p className="tech-lead" data-reveal data-delay="2">
+                  Every night at 4am, the Dream Compiler runs as an extension of the nightly engine.
+                  It reads every agent-sourced memory from the last 24 hours, generates a structured
+                  synthesis, and writes a RuntimePolicy that shapes how tomorrow begins.
+                </p>
+                <p className="tech-body" data-reveal data-delay="2">
+                  This is not a planned feature. The machinery exists in production today.
+                  Wire agents into it and you have a system that improves without retraining,
+                  without fine-tuning, without a single human prompt about what to do differently.
+                </p>
+                <p className="tech-body" data-reveal data-delay="3">
+                  Run a LangChain research agent tonight. Tomorrow you have a document. Six months
+                  from now, you have a folder. Run a LongStrider orbital agent tonight. Tomorrow
+                  you have a gravity cluster. Six months from now: a substrate compiled,
+                  cross-referenced, and refined 180 times by the Dream Engine. The intelligence
+                  does not age. It crystallizes.
+                </p>
+              </div>
+              <div data-reveal data-delay="2">
+                <div className="tech-dream-loop">
+                  {[
+                    { phase: 'Daytime', icon: '◌', title: 'Agents Work', body: '13 agent types surface findings, monitor signals, and build graph nodes — all writing to the gravity substrate in real time via Channel 03.' },
+                    { phase: 'Midnight', icon: '◐', title: 'Substrate Accumulates', body: 'Every agent find is CFE-processed: entity-extracted, embedded, gravity-scored, and written with an import hygiene weight. In the substrate. Immediately.' },
+                    { phase: '4:00 AM', icon: '●', title: 'Dream Engine Runs', body: 'Four passes. Gravity recalculation. Cluster synthesis. Belief trajectory updates. RuntimePolicy written. The fleet’s discoveries become tomorrow’s intelligence baseline.' },
+                    { phase: 'Morning', icon: '◑', title: 'Session Begins Smarter', body: 'The system starts with a RuntimePolicy shaped by what the fleet discovered overnight. No briefing required. The substrate already knows.' },
+                  ].map((step, i) => (
+                    <div key={i} className="tech-dream-step">
+                      <div className="tech-dream-step-left">
+                        <div className="tech-dream-icon">{step.icon}</div>
+                        {i < 3 && <div className="tech-dream-connector" />}
+                      </div>
+                      <div className="tech-dream-step-content">
+                        <div className="tech-dream-phase">{step.phase}</div>
+                        <p className="tech-dream-title">{step.title}</p>
+                        <p className="tech-dream-body">{step.body}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div className="tech-divider" />
+
+          {/* Fleet simulation dialogue */}
+          <section className="tech-section tech-container">
+            <div className="tech-section-header" style={{ marginBottom: '40px' }}>
+              <p className="tech-label" data-reveal>The Compound Effect &mdash; In Practice</p>
+              <h2 className="tech-heading" data-reveal data-delay="1">
+                A competitive signal at 11pm.<br />Institutional position by 9am.
+              </h2>
+              <p className="tech-lead tech-lead-centered" data-reveal data-delay="2">
+                A single agent find — processed by the Dream Engine — surfaces the next
+                morning as a fully contextualized strategic position. This is what compounding looks like.
+              </p>
+            </div>
+            <div className="tech-fleet-sim" data-reveal data-delay="2">
+              <div className="tech-fleet-sim-context">
+                Context: The R&D Oracle agent detects a competitor announcement late at night. The Dream Compiler synthesizes it at 4am. The next morning, before the founder has opened a browser tab, the substrate already knows what matters and why it matters to this specific organization.
+              </div>
+              {FLEET_SIM.map((turn, i) => (
+                <div key={i} className={`tech-fleet-sim-turn tech-fleet-sim-turn--${turn.role}`}>
+                  <div className="tech-fleet-sim-speaker">{turn.speaker}</div>
+                  <p className="tech-fleet-sim-text">{turn.text}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <div className="tech-divider" />
+
+          {/* Fleet deployment tiers */}
+          <section className="tech-section tech-container">
+            <div className="tech-section-header">
+              <p className="tech-label" data-reveal>Fleet Deployment</p>
+              <h2 className="tech-heading" data-reveal data-delay="1">
+                Three fleet models.<br />One compounding substrate.
+              </h2>
+              <p className="tech-lead tech-lead-centered" data-reveal data-delay="2">
+                The fleet tier is infrastructure. The intelligence it builds is yours regardless —
+                stored in your substrate, compiled by the Dream Engine, permanently under your control.
+              </p>
+            </div>
+            <div className="tech-deploy-grid" data-reveal data-delay="2">
+              {FLEET_TIERS.map((dep) => (
+                <div key={dep.tier} className={`tech-deploy-card${dep.featured ? ' tech-deploy-card-featured' : ''}`}>
+                  <p className="tech-deploy-tier">{dep.tier}</p>
+                  <p className="tech-deploy-name">{dep.name}</p>
+                  <p className="tech-deploy-desc">{dep.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div className="tech-fleet-mcp" data-reveal data-delay="3">
+              <span className="tech-fleet-mcp-eyebrow">The 2028 Position</span>
+              <p className="tech-fleet-mcp-statement">
+                &ldquo;LongStrider is the intelligence MCP server that every agent in your
+                fleet connects to. Agents are producers. LongStrider is the brain that
+                synthesizes what they find. You don&apos;t build on agent frameworks.
+                You build the substrate they write to.&rdquo;
+              </p>
+            </div>
+          </section>
+
+          <div className="tech-divider" />
 
           {/* ── Final quote ── */}
           <div className="tech-container">
