@@ -43,6 +43,12 @@
   .h2-grid-reverse  { direction: ltr; }
   .h2-sectors-grid  { grid-template-columns: repeat(2, 1fr); }
 
+  /* ── About ── */
+  .ab-grid      { grid-template-columns: 1fr; }
+  .ab-team-grid { grid-template-columns: 1fr 1fr; }
+  .ab-atx-section { flex-direction: column; gap: 16px; }
+  .ab-atx-mark  { font-size: clamp(48px, 10vw, 72px); }
+
   /* ── Technology overview ── */
   .tech-grid           { grid-template-columns: 1fr; }
   .tech-grid-3         { grid-template-columns: 1fr 1fr; }
@@ -99,6 +105,9 @@
 @media (max-width: 768px) {
 
   /* ── StoryTimeline — handled by components/story-timeline.css ── */
+
+  /* ── About ── */
+  .ab-team-grid { grid-template-columns: 1fr; }
 
   /* ── Homepage ── */
   .h2-sectors-grid   { grid-template-columns: 1fr; }
