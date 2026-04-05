@@ -487,7 +487,8 @@ export default function HomeV2Page() {
               <div className="h2-compare">
                 <div>Maps customer relationships — depth, history, risk signals</div>
                 <div>Preserves expertise that would otherwise walk out the door</div>
-                <div>Any agent you connect inherits the full context instantly</div>
+                <div>Every agent you deploy inherits full context — and you control exactly what it can see and do</div>
+                <div>Full audit trail: every decision, every action, every correction — owned by you</div>
               </div>
               <p className="h2-body" style={{ marginTop: '20px', fontStyle: 'italic', color: 'var(--color-text-secondary)' }}>
                 After two years, you&apos;re not leaving a software vendor.<br />

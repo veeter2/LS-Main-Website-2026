@@ -826,6 +826,14 @@ export default function TechnologyPage() {
                     Sliders with real-time preview. Not a fine-tuning run.&rdquo;
                   </p>
                 </div>
+                <div data-reveal data-delay="4" style={{ marginTop: '28px', paddingTop: '24px', borderTop: '1px solid var(--color-border-subtle)' }}>
+                  <p className="tech-label" style={{ color: 'var(--color-text-muted)', marginBottom: '10px' }}>Full Observability</p>
+                  <p className="tech-body" style={{ margin: 0 }}>
+                    Every agent action, every decision trail, every correction — recorded, weighted,
+                    auditable. Not a log file. A living record that improves the system every time
+                    it&apos;s read. Enterprise governance without the compliance theater.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
