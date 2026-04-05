@@ -194,6 +194,12 @@ export default function ManifestoPage() {
               The question your organization hasn&apos;t answered yet: what happens to everything you learn between now and when you switch again? Where does that go? Who owns it?
             </p>
             <p className="deck-body">
+              The subscription model isn&apos;t the problem. Renting your own intelligence back is.
+              What your organization learns — every decision, every client relationship, every
+              hard-won pattern — should compound for you. Permanently. Not stay on someone
+              else&apos;s servers when you decide to change tools.
+            </p>
+            <p className="deck-body">
               That layer wasn&apos;t built. LongStrider builds it.
             </p>
           </div>
