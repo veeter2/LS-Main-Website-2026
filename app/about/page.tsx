@@ -189,6 +189,53 @@ export default function AboutPage() {
 
         <hr className="ab-divider" />
 
+        {/* ══ FOUNDING PRINCIPLE ════════════════════════════════════ */}
+        <section className="ab-section ab-principle-section">
+          <div data-reveal>
+            <span className="ab-label">Founding Principle</span>
+          </div>
+          <div className="ab-principle-wrap" data-reveal data-delay="1">
+            <p className="ab-principle-line">
+              You pay for the software.{' '}
+              <span className="ab-principle-gold">You own it.</span>
+            </p>
+            <p className="ab-principle-line">
+              Your data stays on your infrastructure.{' '}
+              <span className="ab-principle-gold">Not theirs.</span>
+            </p>
+            <p className="ab-principle-line">
+              The intelligence your business builds{' '}
+              <span className="ab-principle-gold">compounds for you.</span>
+            </p>
+          </div>
+          <div className="ab-principle-body" data-reveal data-delay="2">
+            <p>
+              For thirty years, the enterprise software industry ran the same play:
+              charge for access, keep the intelligence, and make the exit painful.
+              Your data lives on their servers. Your workflows depend on their APIs.
+              Your institutional knowledge compounds — for them.
+            </p>
+            <p>
+              SaaS didn&apos;t democratize software. It rented it back to you at a markup.
+              Small and mid-sized companies have been overcharged and locked in for
+              too long — forced to rebuild from scratch every time they switch tools,
+              every time a vendor changes pricing, every time a model provider decides
+              your data is their training set.
+            </p>
+            <p>
+              LongStrider is built on a different premise: the intelligence your
+              organization generates belongs to your organization. Permanently.
+              Not licensed. Not hosted somewhere you can&apos;t control.
+              Portable. Auditable. Yours.
+            </p>
+            <p className="ab-principle-kicker">
+              That&apos;s not a feature. That&apos;s the whole point.
+            </p>
+          </div>
+        </section>
+
+        <hr className="ab-divider" />
+
         {/* ══ THE FRONTIER PATTERN ═══════════════════════════════════ */}
         <section className="ab-section">
           <div className="ab-grid">
