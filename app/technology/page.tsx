@@ -963,14 +963,15 @@ export default function TechnologyPage() {
           {/* 10 — The Agent Constellation */}
           <section className="tech-section tech-container" data-section="fleet">
             <div className="tech-section-header">
-              <p className="tech-label tech-label-purple" data-reveal>10 &mdash; The Agent Constellation</p>
+              <p className="tech-label tech-label-purple" data-reveal>10 &mdash; The Agent Substrate</p>
               <h2 className="tech-heading" data-reveal data-delay="1">
-                13 agents. One substrate.<br />Everything compounds.
+                One substrate. Any agent.<br />Everything compounds.
               </h2>
               <p className="tech-lead tech-lead-centered" data-reveal data-delay="2">
-                Each agent type is architecturally distinct. All of them write to the same
-                gravity substrate — and the Dream Engine synthesizes what they find every night.
-                The fleet doesn&apos;t just run tasks. It builds institutional memory.
+                LongStrider doesn&apos;t ship agents. It is the substrate that makes any agent&apos;s
+                intelligence permanent. Bring Claude Code, LangChain, CrewAI, a Python cron job —
+                anything that can POST to an endpoint. What they find stops evaporating
+                and starts compounding. Below are examples of what organizations build.
               </p>
             </div>
             <div className="tech-agent-grid" data-reveal data-delay="2">
@@ -985,7 +986,14 @@ export default function TechnologyPage() {
                 </div>
               ))}
             </div>
+            {/* Ownership anchor */}
+            <p className="tech-agent-ownership" data-reveal data-delay="3">
+              These are examples — not a menu. Your agents. Your task types. Your intelligence.
+              Every find writes to your substrate. The Dream Engine synthesizes it overnight.
+              The knowledge belongs to your organization permanently.
+            </p>
           </section>
+
 
           <div className="tech-divider" />
 
