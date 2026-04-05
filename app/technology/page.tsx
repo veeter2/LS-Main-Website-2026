@@ -721,7 +721,7 @@ export default function TechnologyPage() {
                 <p className="tech-lead" data-reveal data-delay="2">
                   The output of the retrieval pipeline is not records. It&apos;s a
                   curated intelligence package — narrative arc included — assembled
-                  by 19 parallel SQL queries running via Promise.allSettled.
+                  from 19 parallel queries, designed for graceful degradation at every layer.
                 </p>
                 <p className="tech-body" data-reveal data-delay="2">
                   The Narrative Arc Generation layer synthesizes results into a trajectory:

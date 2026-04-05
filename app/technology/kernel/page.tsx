@@ -25,7 +25,7 @@ const TIMELINE = [
 const PIPELINE = [
   { label: 'Query Arrives',       sub: 'Any model · Any format',              variant: 'neutral', symbol: '{ }' },
   { label: 'Intent Router',       sub: 'Classifies · Selects strategy',       variant: 'gold',    symbol: '⤳'   },
-  { label: '19 Parallel Queries', sub: 'Promise.allSettled',                  variant: 'purple',  symbol: '⊕'   },
+  { label: '19 Parallel Queries', sub: 'Parallel · Fault-tolerant',             variant: 'purple',  symbol: '⊕'   },
   { label: 'Five-Axis Scoring',   sub: 'Ranked by compound weight',           variant: 'gold',    symbol: '◈'   },
   { label: 'CIP Assembly',        sub: 'Structured intelligence package',     variant: 'purple',  symbol: '▣'   },
   { label: 'Governed Response',   sub: 'Sovereign · Behavioral · Precise',   variant: 'neutral', symbol: '✦'   },
@@ -302,13 +302,11 @@ export default function KernelPage() {
             19 queries. Parallel.<br />One structured package.
           </h2>
           <p className="kn-section-body" data-reveal data-delay="2">
-            The Contextual Intelligence Package is assembled by 19 parallel SQL queries running via{' '}
-            <code style={{ fontFamily: 'var(--font-ui)', fontSize: '13px', color: 'var(--color-gold-dim)', background: 'var(--color-gold-ghost)', padding: '1px 6px', borderRadius: '3px' }}>
-              Promise.allSettled
-            </code>
-            {' '}— designed for graceful degradation, not silent failure. Every query contributes a different
-            layer of intelligence to the final package that gets handed to the LLM.
-          </p>
+              The Contextual Intelligence Package is assembled from 19 parallel queries —
+              each contributing a distinct layer of intelligence. The architecture is designed
+              for graceful degradation: every layer contributes independently, so no single
+              slow source blocks the response.
+            </p>
         </div>
         <div className="kn-cip-wrap" data-reveal data-delay="2">
           <div>
