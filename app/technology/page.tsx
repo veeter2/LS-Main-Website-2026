@@ -64,6 +64,10 @@ const AXES = [
 const GOVERNANCE_PRINCIPLES = [
   { title: 'Evidence-Based Challenge',        body: "When longitudinal data contradicts a stated decision, the system surfaces the gap — assertively. Not a suggestion. An observation grounded in everything the system has seen. You configure how often and how hard it pushes. The architecture enforces it." },
   { title: 'Decision Consistency Monitoring', body: "Flags when stated goals and observed behavior diverge. Not as judgment — as data. The system has been watching long enough to notice the pattern. It will tell you, without being asked." },
+  { title: 'Claim Precision Threshold',       body: "When the system makes a factual assertion, it requires observed supporting evidence — not inference from context. The confidence boundary is configurable. Below it, the system hedges explicitly. Above it, it asserts." },
+  { title: 'Behavioral Pattern Surfacing',    body: "When the system detects a repeated pattern across time — decision cadence, risk posture, communication shift — it surfaces the observation proactively. Not on request. On observation. The detection threshold is yours to configure." },
+  { title: 'Temporal Horizon Bias Correction', body: "The system tracks when reasoning is anchored to recent events at the expense of longitudinal data. When recency bias is detected in a decision context, the longer pattern is surfaced without being asked." },
+  { title: 'Communication Calibration',      body: "Depth, directness, and formality adapt to the entity and context — independently of the underlying model. Consistent operational voice regardless of which provider renders the response." },
 ];
 
 const DEPLOY_TIERS = [
@@ -73,13 +77,13 @@ const DEPLOY_TIERS = [
   { tier: 'Platform License',name: 'Platform License',   desc: 'Build LongStrider into your product. White-label or API-first. Your clients get sovereign intelligence. You get the moat.', featured: false },
 ];
 
-const PROOF_CARDS = [
-  { number: '116', label: 'Custom database functions',   body: 'Purpose-built for intelligence retrieval. Not ORMs. Not generic queries. Each function is a deliberate architectural decision.' },
-  { number: '29',  label: 'Intelligence modules',        body: 'Running in parallel on every interaction. Behavioral extraction, entity resolution, arc synthesis, gravity calculation — simultaneously.' },
-  { number: '18',  label: 'Governance rules',            body: 'Operational principles baked into how the system reasons — not safety guardrails bolted on afterward.' },
-  { number: '4',   label: 'Isolation levels',            body: 'org_id → project_id → session_id → thread_id. Enterprise multi-tenancy from schema version one — not retrofitted.' },
-  { number: '80+', label: 'Behavioral dimensions',       body: 'Per entity, per interaction. Communication style, decision patterns, risk tolerance, emotional density.' },
-  { number: 'v18', label: 'Architecture version',        body: 'Each version is a discrete upgrade to the intelligence spec. One canonical architecture that improves.' },
+const SETUP_STEPS = [
+  { n: '01', badge: 'Infrastructure', name: 'Postgres Native',         body: 'Your database, your schema. Deploy to any PostgreSQL instance — AWS RDS, GCP Cloud SQL, Azure Database, or on-prem bare metal. No proprietary storage layer. No data lake to manage.' },
+  { n: '02', badge: 'Model-Agnostic', name: 'Point Your API',          body: 'Register your provider credentials. OpenAI, Anthropic, Ollama, any endpoint that accepts standard requests. Swap providers at any time — the intelligence layer is completely independent of the model.' },
+  { n: '03', badge: 'Migration',      name: 'Import Your Knowledge',   body: 'ChatGPT and Claude export files parse through the same extraction pipeline as live chat. Prior intelligence recovered, gravity-weighted, and embedded from day one. You do not start from zero.' },
+  { n: '04', badge: 'Control',        name: 'Configure Your Environment', body: 'Set governance principles, behavioral parameters, and challenge thresholds via the Cortex interface. Not prompt engineering. Operational configuration that persists across every session and every model.' },
+  { n: '05', badge: 'Agency',         name: 'Deploy Your Agents',      body: 'Launch orbital intelligence agents — scheduled tasks, pattern monitors, async research threads. They surface findings and write them back to the substrate. The system learns from what it does on your behalf.' },
+  { n: '06', badge: 'Sovereignty',    name: 'Own It Permanently',      body: 'The intelligence substrate you build belongs to your organization. Export it, mirror it, air-gap it. Change providers anytime. The accumulated knowledge travels with you — not with your vendor.' },
 ];
 
 // ── Command Center Diagram — LS on top, commanding everything ──
@@ -95,15 +99,11 @@ function CommandCenterDiagram() {
           <span className="cc-hub-eyebrow">LongStrider</span>
           <span className="cc-hub-name">Intelligence OS</span>
           <div className="cc-hub-stats">
-            <span className="cc-hub-stat">29 modules</span>
-            <span className="cc-hub-stat-sep">{'\u00b7'}</span>
             <span className="cc-hub-stat">Sovereign</span>
             <span className="cc-hub-stat-sep">{'\u00b7'}</span>
             <span className="cc-hub-stat">Model-agnostic</span>
-          </div>
-          <div className="cc-hub-live">
-            <span className="cc-live-dot" />
-            <span className="cc-hub-live-text">live</span>
+            <span className="cc-hub-stat-sep">{'\u00b7'}</span>
+            <span className="cc-hub-stat">Compounding</span>
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@ function CommandCenterMobile() {
       <div className="cc-mobile-hub">
         <span className="cc-mobile-hub-eyebrow">LongStrider</span>
         <span className="cc-mobile-hub-name">Intelligence Architecture</span>
-        <span className="cc-mobile-hub-stats">29 modules {'\u00b7'} 5-axis scoring {'\u00b7'} 18 governance rules</span>
+        <span className="cc-mobile-hub-stats">Five-axis scoring {'\u00b7'} sovereign by design {'\u00b7'} model-agnostic</span>
       </div>
       {[
         { rel: 'Directs', name: 'Your Models' },
@@ -239,7 +239,7 @@ export default function TechnologyPage() {
         <div className="tech-hero-v2">
           <span className="tech-hero-v2-eyebrow" data-reveal>Technology — Architecture</span>
           <h1 className="tech-hero-v2-h1" data-reveal data-delay="1">
-            The command center for your entire AI stack.
+            The AI layer your organization builds once — and compounds forever.
           </h1>
           <p className="tech-hero-v2-sub" data-reveal data-delay="2">
             Every AI tool your organization runs today is an island.
@@ -268,7 +268,7 @@ export default function TechnologyPage() {
               <span className="tech-knife-horizon">Year Two</span>
               <p className="tech-knife-statement">
                 <strong>Not a subscription. A compounding intelligence asset.</strong>{' '}
-                Every interaction deepens it. Worth more on your term sheet than your entire tool spend.
+                Every interaction deepens it. An intelligence asset that accrues — not a vendor dependency that expires.
               </p>
             </div>
             <div className="tech-knife-divider" />
@@ -305,9 +305,52 @@ export default function TechnologyPage() {
             What happens from the moment data enters to the moment it becomes intelligence you can act on.
           </p>
           <p className="tech-chapter-intro-body">
-            LongStrider sits between your team and your LLM. Every signal that flows through it gets extracted,
-            weighted, and written to a substrate that compounds. Here is exactly what runs.
+            The field is converging on one insight: intelligence should compound — not just retrieve.
+            The right architecture ingests signals, compiles them into structured knowledge,
+            and writes intelligence back to itself. LongStrider has been the production implementation
+            of that architecture since day one. Here is exactly what runs.
           </p>
+        </div>
+      </div>
+
+      {/* ── Architecture pattern comparison ── */}
+      <div className="tech-container">
+        <div className="tech-pattern-block" data-reveal>
+          <p className="tech-pattern-eyebrow">The Pattern — Right Idea. Enterprise Scale.</p>
+          <div className="tech-pattern-grid">
+            <div className="tech-pattern-col tech-pattern-col-concept">
+              <p className="tech-pattern-col-header">The Concept</p>
+              {[
+                { idea: 'Ingest raw signals',                   ls: 'Eight channels — all writing to one schema' },
+                { idea: 'Compile into structured knowledge',    ls: 'Nightly engine — four passes, every night' },
+                { idea: 'Synthesize at query time',             ls: 'Five-axis scoring + CIP Assembly' },
+                { idea: 'Write intelligence back to itself',    ls: 'Channel 05 — intelligence writes intelligence' },
+                { idea: 'Compounds over time',                  ls: 'Enterprise-scale · Postgres · Sovereign' },
+              ].map((row) => (
+                <div key={row.idea} className="tech-pattern-row">
+                  <span className="tech-pattern-check">✓</span>
+                  <span className="tech-pattern-idea">{row.idea}</span>
+                </div>
+              ))}
+            </div>
+            <div className="tech-pattern-arrow-col">
+              {[0,1,2,3,4].map((i) => <div key={i} className="tech-pattern-arrow">→</div>)}
+            </div>
+            <div className="tech-pattern-col tech-pattern-col-ls">
+              <p className="tech-pattern-col-header">LongStrider — Production Implementation</p>
+              {[
+                { idea: 'Ingest raw signals',                   ls: 'Eight channels — all writing to one schema' },
+                { idea: 'Compile into structured knowledge',    ls: 'Nightly engine — four passes, every night' },
+                { idea: 'Synthesize at query time',             ls: 'Five-axis scoring + CIP Assembly' },
+                { idea: 'Write intelligence back to itself',    ls: 'Channel 05 — intelligence writes intelligence' },
+                { idea: 'Compounds over time',                  ls: 'Enterprise-scale · Postgres · Sovereign' },
+              ].map((row) => (
+                <div key={row.ls} className="tech-pattern-row">
+                  <span className="tech-pattern-ls">{row.ls}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -371,7 +414,7 @@ export default function TechnologyPage() {
       ══════════════════════════════════════════════ */}
       <section className="tech-section tech-container" data-section="channels">
         <div className="tech-section-header">
-          <p className="tech-label" data-reveal>02 — Eight Input Channels</p>
+          <p className="tech-label" data-reveal>02 — Eight Channels</p>
           <h2 className="tech-heading" data-reveal data-delay="1">
             Most systems have one input.<br />LongStrider has eight.
           </h2>
@@ -406,8 +449,7 @@ export default function TechnologyPage() {
               While you sleep,<br />four passes run.
             </h2>
             <p className="tech-lead" data-reveal data-delay="2">
-              Every night, <code style={{ fontFamily: 'var(--font-ui)', fontSize: '14px', color: 'var(--color-gold-dim)', background: 'var(--color-gold-ghost)', padding: '1px 7px', borderRadius: '3px' }}>cortex-dreaming</code>{' '}
-              runs against the full memory substrate. Not summaries. Not compression.
+              Every night, the Intelligence Engine runs against the full memory substrate. Not summaries. Not compression.
               Actual intelligence computation — four sequential passes per user, every 24 hours.
             </p>
             <p className="tech-body" data-reveal data-delay="2">
@@ -415,6 +457,8 @@ export default function TechnologyPage() {
               A database stores. The nightly engine <em>understands</em> — recalculating
               what matters, detecting patterns across months, writing a RuntimePolicy that
               shapes how the system behaves tomorrow.
+              What the field describes as a proof-of-concept, LongStrider runs as infrastructure —
+              automated, multi-tenant, and sovereign.
             </p>
             <div className="tech-card" style={{ marginTop: '28px' }} data-reveal data-delay="3">
               <div className="tech-facts">
@@ -450,12 +494,12 @@ export default function TechnologyPage() {
             </div>
             <div className="tech-numbers" style={{ marginTop: '24px' }} data-reveal data-delay="3">
               <div className="tech-number-cell">
-                <div className="tech-number-value">51k+</div>
-                <div className="tech-number-label">Memory records in active deployments</div>
+                <div className="tech-number-value">8</div>
+                <div className="tech-number-label">Input channels — all writing to one schema</div>
               </div>
               <div className="tech-number-cell">
-                <div className="tech-number-value">80+</div>
-                <div className="tech-number-label">Behavioral dimensions per entity</div>
+                <div className="tech-number-value">5</div>
+                <div className="tech-number-label">Simultaneous scoring axes — every query</div>
               </div>
               <div className="tech-number-cell">
                 <div className="tech-number-value">4</div>
@@ -475,7 +519,9 @@ export default function TechnologyPage() {
         <div className="tech-grid">
           <div data-reveal>
             <p className="tech-label">04 — The Correction Loop</p>
-            <div className="tech-card tech-correction-card">
+
+            {/* ── Message card ── */}
+            <div className="tech-correction-card">
               <div className="tech-correction-message">
                 <span className="tech-correction-sender">LongStrider</span>
                 <p className="tech-correction-text">
@@ -486,23 +532,38 @@ export default function TechnologyPage() {
               </div>
               <div className="tech-correction-action">
                 <span className="tech-correction-btn">✕ Flag as incorrect</span>
-                <span className="tech-correction-context">That week we ran a private event — data isn&apos;t comparable.</span>
+                <span className="tech-correction-context">
+                  That week we ran a private event — data isn&apos;t comparable.
+                </span>
               </div>
-              <div className="tech-correction-result">
-                <div className="tech-pipeline">
-                  {['Correction received', 'Memory downweighted', 'Context flag applied', 'Cluster recalculated'].map((step, i, arr) => (
-                    <span key={step} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span className={`tech-pipeline-step${i < 3 ? ' tech-pipeline-step-done' : ''}`}>{step}</span>
-                      {i < arr.length - 1 && <span className="tech-pipeline-arrow">→</span>}
-                    </span>
-                  ))}
+            </div>
+
+            {/* ── Propagation steps ── */}
+            <div className="tech-propagation">
+              {[
+                { n: '01', label: 'Correction received',   sub: 'Flag + context written to substrate',         status: 'complete', timing: '0ms'   },
+                { n: '02', label: 'Gravity downweighted',  sub: 'total_gravity reduced immediately',            status: 'complete', timing: '< 1ms' },
+                { n: '03', label: 'Context flag applied',  sub: 'Override marker — blocks future surface',     status: 'complete', timing: '< 1ms' },
+                { n: '04', label: 'Cluster flagged',       sub: 'Affected clusters queued for recalculation',  status: 'active',   timing: 'Next cycle' },
+                { n: '05', label: 'Propagation complete',  sub: 'Data point removed from all future retrieval',status: 'pending',  timing: '02:00'  },
+              ].map((step) => (
+                <div key={step.n} className={`tech-prop-row tech-prop-${step.status}`}>
+                  <div className="tech-prop-indicator">
+                    <div className="tech-prop-dot" />
+                    {step.n !== '05' && <div className="tech-prop-line" />}
+                  </div>
+                  <div className="tech-prop-content">
+                    <div className="tech-prop-header">
+                      <span className="tech-prop-label">{step.label}</span>
+                      <span className="tech-prop-timing">{step.timing}</span>
+                    </div>
+                    <span className="tech-prop-sub">{step.sub}</span>
+                  </div>
                 </div>
-                <p className="tech-correction-note">The system never uses that data point to influence a recommendation again.</p>
-              </div>
+              ))}
             </div>
           </div>
           <div>
-            <p className="tech-label" data-reveal>04 — Correction Loop</p>
             <h2 className="tech-heading" data-reveal data-delay="1">
               One flag. Immediate propagation. Constitutional by design.
             </h2>
@@ -531,6 +592,9 @@ export default function TechnologyPage() {
       ══════════════════════════════════════════════ */}
       {!isRevealed && (
         <div className="tech-tease">
+          <p className="tech-tease-chapter-intro">
+            Chapters II and III cover retrieval intelligence, behavioral governance, and how data sovereignty is enforced architecturally — not by policy.
+          </p>
           <button id="tech-reveal-btn" className="tech-tease-button" onClick={() => setIsRevealed(true)}>
             Continue Reading
           </button>
@@ -794,20 +858,27 @@ export default function TechnologyPage() {
 
           <div className="tech-divider" />
 
-          {/* ═════════ PROOF OF CRAFT ═════════ */}
+          {/* ═════════ SETUP — Built to Deploy ═════════ */}
           <section className="tech-section tech-container">
             <div className="tech-section-header">
-              <p className="tech-label" data-reveal>Proof of Craft</p>
+              <p className="tech-label" data-reveal>Setup</p>
               <h2 className="tech-heading" data-reveal data-delay="1">
-                This wasn&apos;t assembled from libraries.<br />It was engineered from the problem up.
+                Postgres. Point your API.<br />Import, configure, deploy.
               </h2>
+              <p className="tech-lead tech-lead-centered" data-reveal data-delay="2">
+                No proprietary storage layer. No months-long professional services engagement.
+                The intelligence substrate runs on infrastructure you already own — and so does everything it builds.
+              </p>
             </div>
-            <div className="tech-proof-grid" data-reveal data-delay="1">
-              {PROOF_CARDS.map((item, i) => (
-                <div key={i} className="tech-proof-card">
-                  <div className="tech-proof-number">{item.number}</div>
-                  <p className="tech-proof-label">{item.label}</p>
-                  <p className="tech-proof-body">{item.body}</p>
+            <div className="tech-proof-grid" data-reveal data-delay="2">
+              {SETUP_STEPS.map((step) => (
+                <div key={step.n} className="tech-proof-card">
+                  <div className="tech-setup-row">
+                    <div className="tech-proof-number">{step.n}</div>
+                    <span className="tech-axis-badge">{step.badge}</span>
+                  </div>
+                  <p className="tech-proof-label">{step.name}</p>
+                  <p className="tech-proof-body">{step.body}</p>
                 </div>
               ))}
             </div>
@@ -816,8 +887,8 @@ export default function TechnologyPage() {
           {/* ── Final quote ── */}
           <div className="tech-container">
             <p className="tech-final-quote" data-reveal>
-              Six months from now, you won&apos;t have a software vendor relationship.
-              You&apos;ll have organizational intelligence that compounds every night — and belongs to you. Permanently.
+              In a year, you won&apos;t be renewing a subscription.
+              You&apos;ll be sitting on an intelligence asset that knows your organization better than any single person on your team — and it belongs to you. Permanently.
             </p>
           </div>
 
@@ -828,8 +899,8 @@ export default function TechnologyPage() {
               The pilot is how it earns its place.
             </h2>
             <p className="tech-body" style={{ maxWidth: '440px', margin: '0 auto 40px', textAlign: 'center' }} data-reveal data-delay="2">
-              We deploy alongside your team, in your environment. The intelligence starts compounding
-              from the first interaction.
+              Deploy in your environment. Your team owns it from day one.
+              The pilot runs in your stack — not ours.
             </p>
             <div data-reveal data-delay="3">
               <Link href="/pilot" className="tech-cta-pill">Start a Pilot →</Link>

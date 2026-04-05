@@ -104,50 +104,23 @@
   z-index: 1;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   HERO
-   ═══════════════════════════════════════════════════════════════ */
+/* ── Scroll progress thread (shared across all tech sub-pages) ── */
 
-.tech-hero {
-  padding: clamp(140px, 16vh, 200px) 0 clamp(80px, 10vh, 120px);
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-.tech-hero-eyebrow {
-  font-family: var(--font-body);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(200,169,110,0.60);
-  margin-bottom: 28px;
-  display: block;
-}
-
-.tech-hero-wordmark {
-  font-family: var(--font-display);
-  font-size: clamp(52px, 8vw, 96px);
-  font-weight: 300;
-  letter-spacing: -0.03em;
-  line-height: 1.0;
-  color: var(--color-text-primary);
-  margin: 0 auto 32px;
-  max-width: 960px;
-}
-
-.tech-hero-tagline-row {
-  font-family: var(--font-body);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  margin-bottom: 0;
+.tech-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(to right, rgba(200,169,110,0.85), rgba(164,195,255,0.65));
+  z-index: 60;
+  transition: width 0.12s linear;
+  pointer-events: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════
    TYPOGRAPHY — matching deck.css exactly
    ═══════════════════════════════════════════════════════════════ */
+
 
 .tech-label {
   display: inline-block;
@@ -304,67 +277,8 @@
   color: var(--color-gold);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 02 — THE STACK
-   Five-layer stack diagram
-   ═══════════════════════════════════════════════════════════════ */
-
-.tech-stack-layer {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 24px 28px;
-  border-bottom: 1px solid var(--color-border-subtle);
-}
-
-.tech-stack-layer:last-child {
-  border-bottom: none;
-}
-
-.tech-stack-layer-highlight {
-  margin: 0 -28px;
-  padding: 24px 28px;
-  background: var(--color-gold-ghost);
-}
-
-.tech-stack-number {
-  font-family: var(--font-display);
-  font-size: 30px;
-  font-weight: 300;
-  line-height: 1;
-  flex-shrink: 0;
-  min-width: 44px;
-  letter-spacing: -0.03em;
-}
-
-.tech-stack-number-gold  { color: var(--color-gold); }
-.tech-stack-number-dim   { color: var(--color-text-muted); }
-.tech-stack-number-infra { color: var(--color-purple-dim); }
-
-.tech-stack-name {
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 6px;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-}
-
-.tech-stack-name-gold     { color: var(--color-gold); }
-.tech-stack-name-default  { color: var(--color-text-body); }
-.tech-stack-name-infra    { color: var(--color-text-secondary); }
-
-.tech-stack-desc {
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.68;
-  color: var(--color-text-secondary);
-  margin: 0;
-}
-
-.tech-stack-desc-gold { color: var(--color-gold-dim); }
-
 /* ── Fact row ── */
+
 
 .tech-facts {
   display: flex;
@@ -503,6 +417,16 @@
   transform: translateY(-2px);
 }
 
+.tech-tease-chapter-intro {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  margin: 0 auto 28px;
+  letter-spacing: 0.01em;
+}
+
 .tech-tease-hint {
   font-family: var(--font-body);
   font-size: 13px;
@@ -568,28 +492,11 @@
   margin-top: 3px;
 }
 
-/* Retrieval notable quote callout */
-.tech-retrieval-quote {
-  padding: 32px;
-  border: 1px solid var(--color-border-gold);
-  border-radius: 6px;
-  background: var(--color-gold-ghost);
-  margin-bottom: 56px;
-}
-
-.tech-retrieval-quote p {
-  font-family: var(--font-display);
-  font-size: clamp(18px, 2vw, 23px);
-  font-style: italic;
-  color: var(--color-text-body);
-  line-height: 1.5;
-  margin: 0;
-}
-
 /* ═══════════════════════════════════════════════════════════════
    SECTION 04 — CONSOLIDATION ENGINE
    Nightly cycle card
    ═══════════════════════════════════════════════════════════════ */
+
 
 .tech-cycle {
   display: flex;
@@ -679,34 +586,38 @@
 
 /* ═══════════════════════════════════════════════════════════════
    SECTION 05 — CORRECTION LOOP
-   Live interface mockup card
+   Propagation event log design
    ═══════════════════════════════════════════════════════════════ */
 
+/* Message card — clean glass, no extra tech-card wrapper */
 .tech-correction-card {
-  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  overflow: hidden;
+  margin-bottom: 2px;
 }
 
 .tech-correction-message {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 16px 0 18px;
+  padding: 18px 20px 16px;
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .tech-correction-sender {
+  display: block;
   font-family: var(--font-ui);
   font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-text-muted);
+  margin-bottom: 8px;
 }
 
 .tech-correction-text {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--color-text-primary);
-  line-height: 1.55;
+  line-height: 1.58;
   margin: 0;
 }
 
@@ -714,9 +625,9 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--color-border-subtle);
+  padding: 12px 20px;
   flex-wrap: wrap;
+  background: rgba(239,68,68,0.025);
 }
 
 .tech-correction-btn {
@@ -724,58 +635,138 @@
   font-size: 9px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 6px 14px;
+  padding: 5px 13px;
   border-radius: 100px;
   border: 1px solid rgba(239,68,68,0.35);
-  color: rgba(239,68,68,0.70);
-  background: rgba(239,68,68,0.05);
+  color: rgba(239,68,68,0.72);
+  background: rgba(239,68,68,0.06);
   cursor: default;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tech-correction-context {
   font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--color-text-muted);
-  font-style: italic;
-}
-
-.tech-correction-result {
-  padding: 16px 0 4px;
-}
-
-.tech-pipeline {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 6px;
-}
-
-.tech-pipeline-step {
-  font-family: var(--font-ui);
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.tech-pipeline-step-done {
-  color: var(--color-gold-dim);
-}
-
-.tech-pipeline-arrow {
-  color: rgba(255,255,255,0.12);
-  font-size: 10px;
-}
-
-.tech-correction-note {
-  font-family: var(--font-body);
   font-size: 12px;
   color: var(--color-text-muted);
-  margin-top: 10px;
-  line-height: 1.55;
+  font-style: italic;
+  line-height: 1.4;
 }
+
+/* ── Propagation event log ───────────────────────────────────── */
+
+.tech-propagation {
+  margin-top: 16px;
+  padding: 4px 0;
+}
+
+.tech-prop-row {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  position: relative;
+}
+
+/* Indicator column — dot + vertical line */
+.tech-prop-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.tech-prop-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+  transition: all 0.4s ease;
+}
+
+.tech-prop-line {
+  width: 1px;
+  flex: 1;
+  min-height: 20px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+}
+
+/* Status variants */
+.tech-prop-complete .tech-prop-dot {
+  background: var(--color-gold-dim);
+  box-shadow: 0 0 8px rgba(200,169,110,0.40);
+  border: 1px solid rgba(200,169,110,0.45);
+}
+.tech-prop-complete .tech-prop-line {
+  background: linear-gradient(to bottom, rgba(200,169,110,0.25), rgba(200,169,110,0.04));
+}
+
+.tech-prop-active .tech-prop-dot {
+  background: var(--color-purple);
+  box-shadow: 0 0 10px rgba(139,92,246,0.55);
+  border: 1px solid rgba(139,92,246,0.6);
+  animation: prop-pulse 1.8s ease-in-out infinite;
+}
+.tech-prop-active .tech-prop-line {
+  background: linear-gradient(to bottom, rgba(139,92,246,0.20), rgba(255,255,255,0.02));
+}
+
+.tech-prop-pending .tech-prop-dot {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+@keyframes prop-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(139,92,246,0.4); }
+  50%       { box-shadow: 0 0 18px rgba(139,92,246,0.75); }
+}
+
+/* Content column */
+.tech-prop-content {
+  flex: 1;
+  padding-bottom: 18px;
+}
+
+.tech-prop-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.tech-prop-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.tech-prop-complete .tech-prop-label { color: var(--color-text-primary); }
+.tech-prop-active   .tech-prop-label { color: var(--color-purple); }
+.tech-prop-pending  .tech-prop-label { color: var(--color-text-muted); }
+
+.tech-prop-timing {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.10em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tech-prop-complete .tech-prop-timing { color: var(--color-gold-dim); }
+.tech-prop-active   .tech-prop-timing { color: rgba(139,92,246,0.70); }
+.tech-prop-pending  .tech-prop-timing { color: var(--color-text-muted); }
+
+.tech-prop-sub {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
 
 /* ═══════════════════════════════════════════════════════════════
    SECTION 06 — GOVERNANCE
@@ -916,81 +907,17 @@
   margin: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 09 — GO DEEPER
-   Sub-system teasers
-   ═══════════════════════════════════════════════════════════════ */
-
-.tech-subpages {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
-}
-
-.tech-subpage-card {
+.tech-setup-row {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  padding: 28px 28px 22px;
-  border-radius: 6px;
-  border: var(--card-border);
-  background: var(--card-bg);
-  text-decoration: none;
-  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
-  min-height: 190px;
-}
-
-.tech-subpage-card:hover {
-  background: var(--card-bg-hover);
-  border-color: var(--color-border-gold);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-}
-
-.tech-subpage-coming {
-  pointer-events: none;
-  opacity: 0.35;
-}
-
-.tech-subpage-number {
-  font-family: var(--font-ui);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: var(--color-text-muted);
-  margin-bottom: 14px;
-}
-
-.tech-subpage-title {
-  font-family: var(--font-body);
-  font-size: 18px;
-  color: var(--color-text-primary);
-  margin-bottom: 10px;
-  line-height: 1.25;
-}
-
-.tech-subpage-sub {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--color-text-muted);
-  line-height: 1.55;
-  flex: 1;
-  margin-bottom: 20px;
-}
-
-.tech-subpage-arrow {
-  font-size: 14px;
-  color: var(--color-text-muted);
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.tech-subpage-card:hover .tech-subpage-arrow {
-  color: var(--color-gold-dim);
-  transform: translateX(4px);
+  margin-bottom: 8px;
 }
 
 /* ═══════════════════════════════════════════════════════════════
    FINAL CTA
    ═══════════════════════════════════════════════════════════════ */
+
 
 .tech-cta-wrap {
   text-align: center;
@@ -1031,6 +958,105 @@
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   ARCHITECTURE PATTERN COMPARISON BLOCK
+   "Right Idea. Enterprise Scale."
+   ═══════════════════════════════════════════════════════════════ */
+
+.tech-pattern-block {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  padding: 32px;
+  margin: 0 0 56px;
+}
+
+.tech-pattern-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+}
+
+.tech-pattern-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+.tech-pattern-col-header {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold-dim);
+  margin-bottom: 14px;
+}
+
+.tech-pattern-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.tech-pattern-row:last-child {
+  border-bottom: none;
+}
+
+.tech-pattern-check {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--color-gold-dim);
+  flex-shrink: 0;
+  width: 16px;
+}
+
+.tech-pattern-idea {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.tech-pattern-arrow-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  padding-top: 36px;
+}
+
+.tech-pattern-arrow {
+  font-size: 13px;
+  color: rgba(200,169,110,0.25);
+  height: 41px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+}
+
+.tech-pattern-arrow:last-child {
+  border-bottom: none;
+}
+
+.tech-pattern-ls {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-gold-dim);
+  line-height: 1.4;
+}
+
+.tech-pattern-col-ls .tech-pattern-row {
+  justify-content: flex-start;
+}
+
+
 
 /* ═══════════════════════════════════════════════════════════════
    CHAPTER EYEBROW MARKERS (inline, no divider)
@@ -1115,29 +1141,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — handled by styles/responsive.css (imported in layout.tsx)
+   Page-specific canvas/animation overrides only below.
    ═══════════════════════════════════════════════════════════════ */
-
-@media (max-width: 1024px) {
-  .tech-grid          { grid-template-columns: 1fr; }
-  .tech-grid-3        { grid-template-columns: 1fr 1fr; }
-  .tech-proof-grid    { grid-template-columns: 1fr 1fr; }
-  .tech-numbers       { grid-template-columns: repeat(3, 1fr); }
-  .tech-channel-grid  { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
-  .tech-deploy-grid   { grid-template-columns: 1fr; }
-  .tech-subpages      { grid-template-columns: 1fr; }
-  .tech-numbers       { grid-template-columns: 1fr; }
-  .tech-grid-3        { grid-template-columns: 1fr; }
-  .tech-proof-grid    { grid-template-columns: 1fr 1fr; }
-  .tech-channel-grid  { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 540px) {
-  .tech-proof-grid    { grid-template-columns: 1fr; }
-}
 
 /* ═══════════════════════════════════════════════════════════════
    HERO v2 — COMMAND CENTER
@@ -1626,12 +1632,7 @@
   color: var(--color-gold-dim);
 }
 
-/* ── Responsive ── */
-
-@media (max-width: 768px) {
-  .cc-diagram { display: none; }
-  .cc-mobile  { display: flex; }
-}
+/* Command Centre responsive — see styles/responsive.css */
 
 @media (min-width: 769px) {
   .cc-mobile { display: none; }
@@ -1701,16 +1702,7 @@
   font-weight: 500;
 }
 
-@media (max-width: 768px) {
-  .tech-knife {
-    grid-template-columns: 1fr;
-    gap: 1px;
-    background: var(--color-border);
-  }
-  .tech-knife-divider { display: none; }
-  .tech-knife-card:first-child  { border-radius: 6px 6px 0 0; }
-  .tech-knife-card:last-child   { border-radius: 0 0 6px 6px; border-left: var(--card-border); }
-}
+/* Knife responsive — see styles/responsive.css */
 
 /* ═══════════════════════════════════════════════════════════════
    CHAPTER INTRO BLOCK — used at top of each chapter

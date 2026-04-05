@@ -514,23 +514,7 @@
 .h2-blink { animation: h2-blink 1s step-end infinite; }
 .h2-fadein { animation: h2-fadein 0.4s var(--ease-out); }
 
-/* ── Responsive — token-driven overrides ──────────────────────── */
-
-@media (max-width: 1024px) {
-  .h2-grid-reverse { direction: ltr; }
-  .h2-sectors-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
-  .h2-sectors-grid { grid-template-columns: 1fr; }
-  .h2-heading { font-size: clamp(26px, 7vw, 36px); }
-  .h2-card { padding: var(--card-pad); }
-}
-
-@media (max-width: 480px) {
-  .h2-card { padding: var(--card-pad); }
-  .h2-cta-pill { padding: 12px 32px; font-size: 14px; }
-}
+/* Responsive — grid collapse and font scaling handled by styles/responsive.css */
 
 /* ═══════════════════════════════════════════════════════════════
    Knows Card — Rolling Intelligence Reel (Chapter 2)
@@ -742,20 +726,7 @@
   100% { transform: translateY(-50%); }
 }
 
-/* ── Responsive ─────────────────────────────────────────────── */
-
-@media (max-width: 768px) {
-  /* card height is content-driven */
-  .h2-knows-text { font-size: 13px; }
-  .h2-knows-item { height: 50px; }
-}
-
-@media (max-width: 480px) {
-  .h2-knows-header,
-  .h2-knows-footer,
-  .h2-knows-item { padding-left: var(--card-pad); padding-right: var(--card-pad); }
-  .h2-knows-text { font-size: 12px; }
-}
+/* Responsive — knows card font sizing handled by styles/responsive.css */
 
 /* ═══════════════════════════════════════════════════════════════
    Evolves Card — Nightly Consolidation (Chapter 3)

@@ -68,9 +68,8 @@ export function StoryTimeline({ nodes, unlockGated = true, showAfter = 300 }: Pr
       ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const visibleNodes = unlockGated
-    ? nodes
-    : nodes.filter((n) => !n.gated);
+  const visibleNodes = nodes; // all nodes always visible; gated ones appear locked via .st-gated until unlocked
+
 
   const activeIdx = visibleNodes.findIndex((n) => n.id === activeSection);
 

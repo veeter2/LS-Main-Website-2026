@@ -1,0 +1,201 @@
+/* ══════════════════════════════════════════════════════════════
+   LONGSTRIDER — SITE-WIDE RESPONSIVE SYSTEM
+   styles/responsive.css
+
+   Imported ONCE in app/layout.tsx.
+   Applies to every page automatically.
+
+   ► Spacing/padding tokens are handled by ls-tokens.css — don't repeat here.
+   ► Only layout rules (grid collapse, visibility, reflow) live here.
+   ► Page-specific overrides (canvas sizing, animations) stay in page CSS.
+
+   Breakpoints:
+     1200px — Wide tablet / small laptop
+     1024px — Tablet landscape
+      900px — Tablet portrait
+      768px — Mobile landscape / large phone
+      540px — Small phone
+      380px — Extra small
+══════════════════════════════════════════════════════════════ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   1200px — Wide Tablet
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 1200px) {
+
+  /* ── Homepage ── */
+  .h2-sections-grid { gap: 48px; }
+
+  /* ── Technology ── */
+  .tech-container  { padding: 0 40px; }
+  .tech-setup-row  { gap: 24px; }
+  .kn-hero-grid    { gap: 48px; }
+  .kn-cip-wrap     { gap: 24px; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   1024px — Tablet Landscape
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 1024px) {
+
+  /* ── Homepage ── */
+  .h2-grid          { grid-template-columns: 1fr; }
+  .h2-grid-reverse  { direction: ltr; }
+  .h2-sectors-grid  { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Technology overview ── */
+  .tech-grid           { grid-template-columns: 1fr; }
+  .tech-grid-3         { grid-template-columns: 1fr 1fr; }
+  .tech-proof-grid     { grid-template-columns: 1fr 1fr; }
+  .tech-numbers        { grid-template-columns: repeat(3, 1fr); }
+  .tech-channel-grid   { grid-template-columns: repeat(2, 1fr); }
+  .tech-axis-table     { grid-template-columns: 1fr; gap: 0; }
+  .tech-axis-row       { grid-template-columns: 40px 1fr; padding: 18px 0; }
+  .tech-pattern-grid   { grid-template-columns: 1fr; }
+  .tech-pattern-arrow-col { display: none; }
+
+  /* ── Kernel ── */
+  .kn-hero-grid    { grid-template-columns: 1fr; }
+  .kn-control-grid { grid-template-columns: 1fr; }
+  .kn-radar-section{ grid-template-columns: 1fr; }
+  .kn-cip-wrap     { grid-template-columns: 1fr; }
+  .kn-cip-arrow    { display: none; }
+  .kn-agent-grid   { grid-template-columns: 1fr 1fr; }
+
+  /* ── Memory ── */
+  .mem-four-axis    { grid-template-columns: 1fr; }
+  .mem-cluster-grid { grid-template-columns: 1fr; }
+  .mem-signal-flow  { flex-direction: column; align-items: flex-start; }
+
+  /* ── StoryTimeline — reduce opacity on tablet ── */
+  .story-timeline { opacity: 0.5; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   900px — Tablet Portrait
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 900px) {
+
+  /* ── Technology overview ── */
+  .tech-container       { padding: 0 28px; }
+  .tech-numbers         { grid-template-columns: 1fr 1fr; }
+  .tech-channel-grid    { grid-template-columns: 1fr 1fr; }
+  .tech-deploy-grid     { grid-template-columns: 1fr; }
+  .tech-hero-v2         { padding: 96px 0 40px; }
+
+  /* ── Kernel ── */
+  .kn-pipeline-wrap { max-width: 400px; margin: 0 auto; }
+  .kn-radar         { width: 260px; height: 260px; margin: 0 auto 32px; }
+  .kn-queries-grid  { grid-template-columns: repeat(3, 1fr); }
+  .kn-agent-grid    { grid-template-columns: 1fr; }
+
+  /* ── Memory ── */
+  .mem-hero         { min-height: 90vh; }
+  .mem-hero-content { padding: 100px 0 60px; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   768px — Mobile Landscape / Large Phone
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 768px) {
+
+  /* ── StoryTimeline — hide entirely on mobile ── */
+  .story-timeline { display: none !important; }
+
+  /* ── Homepage ── */
+  .h2-sectors-grid   { grid-template-columns: 1fr; }
+  .h2-heading        { font-size: clamp(26px, 7vw, 36px); }
+  .h2-card           { padding: var(--card-pad); }
+  .h2-cta-pill       { padding: 12px 32px; font-size: 14px; }
+  .h2-knows-text     { font-size: 13px; }
+  .h2-knows-item     { height: 50px; }
+
+  /* ── Manifesto ── */
+  .deck-container    { padding: 100px 28px 80px; }
+  .deck-nav          { padding: 0 24px; }
+  .deck-timeline     { display: none; }
+  .deck-capability   { flex-direction: column; gap: 16px; }
+  .deck-capability-number { font-size: 36px; }
+
+  /* ── Technology overview ── */
+  .tech-container       { padding: 0 20px; }
+  .tech-section         { padding: 64px 0; }
+  .tech-numbers         { grid-template-columns: 1fr; }
+  .tech-channel-grid    { grid-template-columns: 1fr; }
+  .tech-proof-grid      { grid-template-columns: 1fr 1fr; }
+  .tech-grid-3          { grid-template-columns: 1fr; }
+  .tech-deploy-grid     { grid-template-columns: 1fr; }
+  .tech-subpages        { grid-template-columns: 1fr; }
+  .tech-pattern-grid    { gap: 0; }
+  .tech-pattern-col-ls  { margin-top: 0; }
+  .tech-hero-v2         { padding: 88px 0 32px; }
+
+  /* Command Centre — swap to mobile version */
+  .cc-diagram           { display: none; }
+  .cc-mobile            { display: flex; }
+
+  /* Knife — stack vertically */
+  .tech-knife           { grid-template-columns: 1fr; gap: 1px; background: var(--color-border); }
+  .tech-knife-divider   { display: none; }
+  .tech-knife-card:first-child { border-radius: 6px 6px 0 0; }
+  .tech-knife-card:last-child  { border-radius: 0 0 6px 6px; }
+
+  /* ── Kernel sub-page ── */
+  .kn-section       { padding: 64px 0; }
+  .kn-policy-card   { padding: 24px 20px; }
+  .kn-policy-key    { min-width: 120px; font-size: 9px; }
+  .kn-queries-grid  { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Memory sub-page ── */
+  .mem-section            { padding: 64px 0; }
+  .mem-four-axis          { grid-template-columns: 1fr; }
+  .mem-cluster-visual     { height: 240px; }
+  .mem-correction-chain   { flex-direction: column; align-items: flex-start; gap: 0; }
+  .mem-correction-pipe    { transform: rotate(90deg); margin: 4px 20px; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   540px — Small Phone
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 540px) {
+
+  /* ── Shared ── */
+  .tech-container { padding: 0 16px; }
+
+  /* ── Homepage ── */
+  .h2-knows-header,
+  .h2-knows-footer,
+  .h2-knows-item   { padding-left: var(--card-pad); padding-right: var(--card-pad); }
+  .h2-knows-text   { font-size: 12px; }
+
+  /* ── Technology overview ── */
+  .tech-proof-grid { grid-template-columns: 1fr; }
+  .tech-hero-v2-h1 { font-size: clamp(22px, 7vw, 32px); }
+
+  /* ── Kernel ── */
+  .kn-pipeline-wrap { max-width: 100%; }
+  .kn-pipe-stage    { padding: 12px 14px; }
+  .kn-cta-links     { flex-direction: column; align-items: center; }
+  .kn-cta-primary,
+  .kn-cta-secondary { width: 100%; justify-content: center; max-width: 320px; }
+
+  /* ── Memory ── */
+  .mem-hero-content { padding: 88px 0 48px; }
+  .mem-legend       { gap: 14px; }
+  .mem-cta-links    { flex-direction: column; align-items: center; }
+  .mem-cta-primary,
+  .mem-cta-secondary{ width: 100%; justify-content: center; max-width: 320px; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   380px — Extra Small
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 380px) {
+
+  .tech-container  { padding: 0 12px; }
+  .kn-control-grid { gap: 10px; }
+  .kn-queries-grid { grid-template-columns: repeat(2, 1fr); }
+  .mem-four-axis   { gap: 10px; }
+  .h2-sectors-grid { gap: 12px; }
+  .deck-container  { padding: 88px 16px 64px; }
+}
