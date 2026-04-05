@@ -155,6 +155,15 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'Vision & Roadmap', href: '/vision',       live: false },
     ],
   },
+  {
+    label: 'Partners',
+    href: '/partners',
+    sub: 'Deploy, wrap & build recurring revenue',
+    live: true,
+    Icon: CognitiveSynthesisV2,
+    children: [],
+  },
+
 ];
 
 
