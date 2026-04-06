@@ -690,3 +690,330 @@
     padding: 16px 18px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTIONS 06 & 07 — Asset argument, ROI timeline, Own vs Rent,
+   TAM expansion, Valuation table
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── ROI timeline ───────────────────────────────────────────── */
+
+.pt-roi-timeline {
+  margin-top: 32px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.pt-roi-header {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.pt-roi-item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.pt-roi-item:last-child {
+  border-bottom: none;
+}
+
+.pt-roi-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+  background: rgba(139, 92, 246, 0.02);
+  border-right: 1px solid var(--color-border-subtle);
+}
+
+.pt-roi-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.45);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
+}
+
+.pt-roi-connector {
+  width: 1px;
+  flex: 1;
+  background: linear-gradient(to bottom, rgba(139, 92, 246, 0.25), rgba(139, 92, 246, 0.06));
+  margin: 6px 0 0;
+}
+
+.pt-roi-content {
+  padding: 20px 24px;
+  background: var(--card-bg);
+}
+
+.pt-roi-when {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(139, 92, 246, 0.6);
+  margin-bottom: 4px;
+}
+
+.pt-roi-what {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.pt-roi-detail {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ── Own vs Rent ────────────────────────────────────────────── */
+
+.pt-own-rent {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  margin-top: 24px;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+.pt-own-rent-row {
+  padding: 24px 28px;
+  background: var(--card-bg);
+}
+
+.pt-own-rent-row--bad {
+  border-left: 3px solid rgba(255, 80, 80, 0.18);
+}
+
+.pt-own-rent-row--good {
+  border-left: 3px solid rgba(80, 200, 120, 0.3);
+  background: rgba(80, 200, 120, 0.015);
+}
+
+.pt-own-rent-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.pt-own-rent-row--good .pt-own-rent-label {
+  color: rgba(80, 200, 120, 0.6);
+}
+
+.pt-own-rent-math {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.pt-own-rent-note {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.pt-own-rent-row--good .pt-own-rent-note {
+  color: var(--color-text-secondary);
+}
+
+/* ── TAM grid ───────────────────────────────────────────────── */
+
+.pt-tam-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 40px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.pt-tam-card {
+  background: var(--card-bg);
+  padding: 28px 24px;
+  border-right: 1px solid var(--color-border-subtle);
+  transition: background 0.25s ease;
+}
+
+.pt-tam-card:last-child {
+  border-right: none;
+}
+
+.pt-tam-card--accent {
+  background: rgba(139, 92, 246, 0.04);
+  border-top: 1px solid rgba(139, 92, 246, 0.15);
+  position: relative;
+}
+
+.pt-tam-card--accent::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.4), transparent);
+}
+
+.pt-tam-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.pt-tam-card--accent .pt-tam-label {
+  color: rgba(139, 92, 246, 0.6);
+}
+
+.pt-tam-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ── Valuation table ────────────────────────────────────────── */
+
+.pt-valuation-block {
+  margin-top: 32px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.pt-valuation-header {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.pt-valuation-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.pt-valuation-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.8fr 1fr;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.pt-valuation-row:last-of-type {
+  border-bottom: none;
+}
+
+.pt-valuation-row--head .pt-valuation-cell {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  padding: 12px 20px;
+  background: var(--card-bg);
+  border-right: 1px solid var(--color-border-subtle);
+}
+
+.pt-valuation-row--head .pt-valuation-cell:last-child {
+  border-right: none;
+}
+
+.pt-valuation-cell {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  padding: 16px 20px;
+  background: var(--card-bg);
+  border-right: 1px solid var(--color-border-subtle);
+}
+
+.pt-valuation-cell:last-child {
+  border-right: none;
+}
+
+.pt-valuation-row--highlighted .pt-valuation-cell {
+  background: rgba(139, 92, 246, 0.03);
+  color: var(--color-text-primary);
+}
+
+.pt-valuation-cell--muted {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.pt-valuation-cell--gold {
+  color: var(--color-gold);
+  font-weight: 500;
+}
+
+.pt-valuation-note {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  padding: 20px 24px;
+  background: rgba(139, 92, 246, 0.02);
+  border-top: 1px solid rgba(139, 92, 246, 0.08);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .pt-tam-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pt-tam-card {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .pt-tam-card:last-child {
+    border-bottom: none;
+  }
+
+  .pt-valuation-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pt-valuation-row--head {
+    display: none;
+  }
+}

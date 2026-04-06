@@ -87,6 +87,51 @@ const SIMULATION = [
   },
 ];
 
+// ── ROI timeline ──────────────────────────────────────────────
+
+const ROI_ITEMS = [
+  {
+    timeline: 'Day 1',
+    what: 'Historical context recovered.',
+    detail: 'Import pipeline processes prior email, document, and CRM exports. Hundreds of recovered memories, gravity-weighted from the start. Your client does not start from zero.',
+  },
+  {
+    timeline: '90 days',
+    what: 'A queryable model of their business.',
+    detail: 'Customer relationship depth scores. Decision history with outcomes. Behavioral patterns visible only across months of data. Risk signals that no dashboard surfaces.',
+  },
+  {
+    timeline: '1 year',
+    what: 'An intelligence asset that outperforms any new hire.',
+    detail: 'The substrate knows the client\u2019s business better than anyone who joined in the last 12 months. It does not leave. It does not take competing offers. It does not need an exit interview.',
+  },
+  {
+    timeline: '3 years',
+    what: 'A documented institutional memory with provable value.',
+    detail: 'Every significant decision, every customer relationship arc, every operational pattern — structured, queryable, and permanently owned. This is a balance sheet asset. Not a software subscription.',
+  },
+];
+
+// ── TAM expansion ─────────────────────────────────────────────
+
+const TAM_ITEMS = [
+  {
+    label: 'Your current TAM',
+    desc: 'Clients who can afford your day rates. Competitive on rate. Capped by hours. Revenue resets after every project.',
+    accent: false,
+  },
+  {
+    label: 'Your expanded TAM',
+    desc: 'Any organization that benefits from compounding institutional memory — offered as a productized $5\u201325K/month subscription. New clients. New revenue tier. Running in parallel with your existing practice.',
+    accent: true,
+  },
+  {
+    label: 'The intelligence advisory tier',
+    desc: 'High-value engagements to design, govern, and evolve a client\u2019s entire knowledge architecture. A category of work that did not exist three years ago. Only firms who own the platform can credibly deliver it.',
+    accent: false,
+  },
+];
+
 // ── Page ──────────────────────────────────────────────────────
 
 export default function PartnersPage() {
@@ -167,7 +212,6 @@ export default function PartnersPage() {
               </p>
             </div>
             <div data-reveal data-delay="2">
-              {/* Stat cards with citations */}
               <div className="pt-stats">
                 {STATS.map((s, i) => (
                   <div key={i} className="pt-stat-card">
@@ -320,9 +364,121 @@ export default function PartnersPage() {
 
         <hr className="pt-rule" />
 
-        {/* ═══ 06 — THE WINDOW ════════════════════════════════════ */}
+        {/* ═══ 06 — THE ASSET ARGUMENT ════════════════════════════ */}
         <section className="pt-section">
           <span className="pt-section-num">06</span>
+          <span className="pt-section-label">The Asset Argument</span>
+          <h2 className="pt-h2" data-reveal>
+            Not promised efficiencies.<br />
+            A compounding asset your clients own.
+          </h2>
+          <p className="pt-lead" data-reveal data-delay="1">
+            Every AI vendor in market today sells the same thing: efficiency gains measured
+            in percentages, backed by slide decks, delivered as OPEX that evaporates when
+            you stop paying. LongStrider sells something categorically different — an intelligence
+            asset that grows in value, belongs to your client permanently, and that you are
+            uniquely positioned to deliver because you own the platform.
+          </p>
+
+          <div className="pt-roi-timeline" data-reveal data-delay="2">
+            <div className="pt-roi-header">What your client actually gets — not a number in a deck</div>
+            {ROI_ITEMS.map((item, i) => (
+              <div key={i} className="pt-roi-item">
+                <div className="pt-roi-track">
+                  <div className="pt-roi-dot" />
+                  {i < ROI_ITEMS.length - 1 && <div className="pt-roi-connector" />}
+                </div>
+                <div className="pt-roi-content">
+                  <div className="pt-roi-when">{item.timeline}</div>
+                  <div className="pt-roi-what">{item.what}</div>
+                  <p className="pt-roi-detail">{item.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="pt-own-rent" data-reveal data-delay="3">
+            <div className="pt-own-rent-row pt-own-rent-row--bad">
+              <div className="pt-own-rent-label">Renting AI &mdash; OpenAI · Anthropic · etc.</div>
+              <div className="pt-own-rent-math">$60K/year &times; 3 years = $180K spent &rarr; zero residual asset</div>
+              <p className="pt-own-rent-note">
+                100% OPEX. Intelligence stays with the vendor. Subscription ends, memory ends.
+                You paid for access to a tool, not ownership of an asset.
+              </p>
+            </div>
+            <div className="pt-own-rent-row pt-own-rent-row--good">
+              <div className="pt-own-rent-label">Deploying LongStrider</div>
+              <div className="pt-own-rent-math">Same investment &rarr; 3-year compounded substrate, permanently owned</div>
+              <p className="pt-own-rent-note">
+                The intelligence lives in your client&apos;s infrastructure. It does not expire.
+                Every night it compounds. After 3 years, synthesized over 1,000 times.
+                The data, the patterns, the decision history — that is a balance sheet asset.
+                Your clients know the difference.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr className="pt-rule" />
+
+        {/* ═══ 07 — REVENUE & VALUATION ════════════════════════════ */}
+        <section className="pt-section">
+          <span className="pt-section-num">07</span>
+          <span className="pt-section-label">Revenue &amp; Valuation</span>
+          <h2 className="pt-h2" data-reveal>
+            A new revenue stream.<br />
+            A different business valuation.
+          </h2>
+          <p className="pt-lead" data-reveal data-delay="1">
+            Firms that deploy LongStrider are not just protecting existing revenue. They are
+            entering a new market category — and revaluing their own business in the process.
+          </p>
+
+          <div className="pt-tam-grid" data-reveal data-delay="2">
+            {TAM_ITEMS.map((item, i) => (
+              <div key={i} className={`pt-tam-card${item.accent ? ' pt-tam-card--accent' : ''}`}>
+                <div className="pt-tam-label">{item.label}</div>
+                <p className="pt-tam-desc">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="pt-valuation-block" data-reveal data-delay="3">
+            <div className="pt-valuation-header">The valuation arbitrage — same revenue, different multiple</div>
+            <div className="pt-valuation-table">
+              <div className="pt-valuation-row pt-valuation-row--head">
+                <div className="pt-valuation-cell">Business type</div>
+                <div className="pt-valuation-cell">Revenue model</div>
+                <div className="pt-valuation-cell">Typical multiple</div>
+                <div className="pt-valuation-cell">$1M ARR value</div>
+              </div>
+              <div className="pt-valuation-row">
+                <div className="pt-valuation-cell">Services firm (today)</div>
+                <div className="pt-valuation-cell">Project billing</div>
+                <div className="pt-valuation-cell">1&ndash;2&times;</div>
+                <div className="pt-valuation-cell pt-valuation-cell--muted">$1&ndash;$2M</div>
+              </div>
+              <div className="pt-valuation-row pt-valuation-row--highlighted">
+                <div className="pt-valuation-cell">Platform-embedded firm</div>
+                <div className="pt-valuation-cell">Recurring subscription</div>
+                <div className="pt-valuation-cell">5&ndash;10&times;</div>
+                <div className="pt-valuation-cell pt-valuation-cell--gold">$5&ndash;$10M</div>
+              </div>
+            </div>
+            <p className="pt-valuation-note">
+              A firm with 10 clients on a $10K/month intelligence subscription generates $1.2M ARR.
+              At a 7&times; platform multiple versus 1.5&times; services: $8.4M versus $1.8M of enterprise
+              value — from a revenue stream that did not exist before you deployed this.
+              Platform multiples are a market reality. This is a business architecture decision.
+            </p>
+          </div>
+        </section>
+
+        <hr className="pt-rule" />
+
+        {/* ═══ 08 — THE WINDOW ═════════════════════════════════════ */}
+        <section className="pt-section">
+          <span className="pt-section-num">08</span>
           <span className="pt-section-label">The Window</span>
           <h2 className="pt-h2" data-reveal>
             The window is open now.<br />It will not stay open long.
@@ -361,7 +517,7 @@ export default function PartnersPage() {
 
         <hr className="pt-rule" />
 
-        {/* ═══ CTA ════════════════════════════════════════════════ */}
+        {/* ═══ CTA ═════════════════════════════════════════════════ */}
         <div className="pt-cta-section" data-reveal>
           <span className="pt-cta-eyebrow">Begin the Conversation</span>
           <h2 className="pt-cta-h2">
