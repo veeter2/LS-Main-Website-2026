@@ -9,25 +9,25 @@ import { useEffect, useCallback, useRef } from 'react';
 
 const STATS = [
   {
-    figure: '25%',
-    label: 'faster task completion',
-    source: 'Harvard Business School & BCG, 2023',
-    href: 'https://www.hbs.edu/ris/Publication%20Files/24-013_d9b45b68-9e74-42d3-a0fe-1776df1c56fb.pdf',
-    context: 'Consultants with AI access completed tasks 25.1% faster and produced outputs rated 40% higher in quality.',
+    figure: '78%',
+    label: 'of organizations using AI in 2025',
+    source: 'McKinsey Global Survey on AI, 2025',
+    href: 'https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai',
+    context: '78% of organizations now use AI in at least one business function — up from 55% in 2023. Adoption doubled in two years. The firms not building an intelligence layer are already behind.',
   },
   {
-    figure: '39%',
-    label: 'of core skills disrupted by 2030',
-    source: 'World Economic Forum, Future of Jobs 2025',
-    href: 'https://www.weforum.org/publications/the-future-of-jobs-report-2025/',
-    context: 'Employers expect 39% of workers\u2019 core skills to be transformed or obsolete within five years — across every professional services category.',
+    figure: '$761B',
+    label: 'in AI services spending by 2027',
+    source: 'Gartner Worldwide AI Spending Forecast, January 2026',
+    href: 'https://www.gartner.com/en/newsroom/press-releases/2026-01-22-gartner-forecasts-worldwide-ai-spending-to-reach-nearly-3-trillion-by-2027',
+    context: 'Global spend on AI services alone reaches $761B by 2027. The organizations capturing that spend are not the ones building models — they are the ones owning the intelligence layer clients cannot exit.',
   },
   {
     figure: '$5.9B',
     label: 'in GenAI bookings, one firm, one year',
     source: 'Accenture FY2025 Annual Report',
     href: 'https://www.accenture.com/us-en/investor-relations',
-    context: 'Accenture nearly doubled its generative AI bookings to $5.9B in FY2025. The market for AI-wrapped services is not coming — it\u2019s here.',
+    context: 'Accenture nearly doubled its generative AI bookings to $5.9B in FY2025. The market for AI-wrapped professional services is not coming — it arrived.',
   },
 ];
 

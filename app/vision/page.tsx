@@ -3,6 +3,22 @@
 import './vision.css';
 import Link from 'next/link';
 import { useEffect, useCallback, useRef } from 'react';
+import { StoryTimeline } from '@/components/story-timeline';
+
+// ── Chapter timeline nodes ────────────────────────────────────
+const GOLD   = '#c8a96e';
+const PURPLE = '#8b5cf6';
+const GOLD_G = 'rgba(200,169,110,0.40)';
+const PURP_G = 'rgba(139,92,246,0.45)';
+
+const TIMELINE = [
+  { id: 'progression', label: 'The Progression', color: PURPLE, glow: PURP_G },
+  { id: 'claim',       label: 'The Claim',        color: GOLD,   glow: GOLD_G },
+  { id: 'evidence',   label: 'The Evidence',      color: PURPLE, glow: PURP_G },
+  { id: 'means',      label: 'What It Means',     color: GOLD,   glow: GOLD_G },
+  { id: 'direction',  label: 'The Direction',     color: PURPLE, glow: PURP_G },
+  { id: 'position',   label: 'The Position',      color: GOLD,   glow: GOLD_G },
+];
 
 // ── Generation taxonomy ───────────────────────────────────────
 
@@ -106,10 +122,12 @@ export default function VisionPage() {
       <div className="vis-orb-2" aria-hidden />
       <div className="vis-orb-3" aria-hidden />
 
+      <StoryTimeline nodes={TIMELINE} showAfter={50} />
+
       <div className="vis-container">
 
         {/* ═══ HERO ═══════════════════════════════════════════════ */}
-        <div className="vis-hero">
+        <div className="vis-hero" data-section="progression">
           <span className="vis-eyebrow" data-reveal>Vision — The Third Generation</span>
           <h1 className="vis-hero-h1" data-reveal data-delay="1">
             What comes after agents.
@@ -125,7 +143,7 @@ export default function VisionPage() {
         <hr className="vis-rule" />
 
         {/* ═══ THE THREE GENERATIONS ══════════════════════════════ */}
-        <section className="vis-section">
+        <section className="vis-section" data-section="progression">
           <span className="vis-section-label" data-reveal>The Progression</span>
           <h2 className="vis-h2" data-reveal data-delay="1">
             Three generations of machine intelligence.<br />
@@ -161,7 +179,7 @@ export default function VisionPage() {
         <hr className="vis-rule" />
 
         {/* ═══ THE CLAIM — precisely stated ═══════════════════════ */}
-        <section className="vis-section">
+        <section className="vis-section" data-section="claim">
           <span className="vis-section-label" data-reveal>The Claim</span>
           <h2 className="vis-h2" data-reveal data-delay="1">
             Stated precisely,<br />without overclaiming.
@@ -201,7 +219,7 @@ export default function VisionPage() {
         <hr className="vis-rule" />
 
         {/* ═══ THE EVIDENCE — from actual code ═══════════════════ */}
-        <section className="vis-section">
+        <section className="vis-section" data-section="evidence">
           <span className="vis-section-label" data-reveal>The Evidence</span>
           <h2 className="vis-h2" data-reveal data-delay="1">
             Five mechanisms. All running.<br />All verifiable in the codebase.
@@ -233,7 +251,7 @@ export default function VisionPage() {
         <hr className="vis-rule" />
 
         {/* ═══ WHAT THIS MEANS ════════════════════════════════════ */}
-        <section className="vis-section">
+        <section className="vis-section" data-section="means">
           <span className="vis-section-label" data-reveal>What It Means</span>
           <h2 className="vis-h2" data-reveal data-delay="1">
             The relationship between<br />human and machine<br className="vis-br-mobile" />just changed category.
@@ -268,7 +286,7 @@ export default function VisionPage() {
         <hr className="vis-rule" />
 
         {/* ═══ THE DIRECTION ══════════════════════════════════════ */}
-        <section className="vis-section">
+        <section className="vis-section" data-section="direction">
           <span className="vis-section-label" data-reveal>The Direction</span>
           <h2 className="vis-h2" data-reveal data-delay="1">
             Where we are headed.<br />Stated honestly.
@@ -315,7 +333,7 @@ export default function VisionPage() {
         <hr className="vis-rule" />
 
         {/* ═══ CLOSING STATEMENT ══════════════════════════════════ */}
-        <div className="vis-close" data-reveal>
+        <div className="vis-close" data-reveal data-section="position">
           <p className="vis-close-text">
             &ldquo;We are not building a better chatbot. We are not building a smarter agent.
             We are building the first enterprise system that genuinely reflects — on what it knows,
