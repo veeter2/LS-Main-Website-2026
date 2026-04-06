@@ -147,12 +147,12 @@ const NAV_ITEMS: NavItem[] = [
     label: 'About',
     href: '/about',
     sub: 'Founding story, team & stack',
-    live: false,
+    live: true,
     Icon: ConvergenceV1,
     children: [
-      { label: 'Our Mission',      href: '/about',        live: false },
-      { label: 'The Team',         href: '/about#team',   live: false },
-      { label: 'Vision & Roadmap', href: '/vision',       live: true  },
+      { label: 'Our Mission',      href: '/about',        live: true },
+      { label: 'The Team',         href: '/about#team',   live: true },
+      { label: 'Vision & Roadmap', href: '/vision',       live: true },
     ],
   },
   {

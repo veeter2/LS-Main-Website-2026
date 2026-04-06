@@ -2,81 +2,95 @@
 
 import Link from 'next/link';
 import { LongstriderLogo } from '@/components/longstrider-logo';
-const GOLD_BORDER = 'var(--color-border-gold)';
-const MUTED       = 'var(--color-text-muted)';
-const MUTED_HOVER = 'var(--color-text-secondary)';
+import './footer.css';
 
+// ── Single source of truth for footer links ───────────────────
+// Update here — footer stays in sync automatically.
 
-const NAV_LINKS = [
-  { label: 'Manifesto',       href: '/manifesto'  },
-  { label: 'Technology',     href: '/technology' },
-  { label: 'Industry Briefs', href: '/briefs'     },
-  { label: 'Field Notes',    href: '/field-notes' },
-  { label: 'About',          href: '/about'      },
-];
-
-const LEGAL_LINKS = [
-  { label: 'Contact',  href: '/contact'  },
-  { label: 'Privacy',  href: '/privacy'  },
-  { label: 'Terms',    href: '/terms'    },
+const FOOTER_COLS = [
+  {
+    heading: 'Platform',
+    links: [
+      { label: 'Manifesto',    href: '/manifesto'   },
+      { label: 'Technology',   href: '/technology'  },
+      { label: 'Vision',       href: '/vision'      },
+      { label: 'Start a Pilot',href: '/pilot'       },
+    ],
+  },
+  {
+    heading: 'Industry',
+    links: [
+      { label: 'Insurance',         href: '/briefs/insurance'   },
+      { label: 'Legal',             href: '/briefs/legal'       },
+      { label: 'Automotive',        href: '/briefs/automotive'  },
+      { label: 'All Briefs',        href: '/briefs'             },
+    ],
+  },
+  {
+    heading: 'Learn',
+    links: [
+      { label: 'Field Notes',    href: '/field-notes'                         },
+      { label: 'White Papers',   href: '/field-notes?category=white-papers'   },
+      { label: 'Novel Thoughts', href: '/field-notes?category=novel-thoughts' },
+      { label: 'Partners',       href: '/partners'                            },
+    ],
+  },
+  {
+    heading: 'Company',
+    links: [
+      { label: 'About',    href: '/about'   },
+      { label: 'Contact',  href: '/contact' },
+      { label: 'Privacy',  href: '/privacy' },
+      { label: 'Terms',    href: '/terms'   },
+    ],
+  },
 ];
 
 export function Footer() {
   return (
-    <footer style={{
-      background: 'var(--color-bg)',
-      borderTop: `1px solid ${GOLD_BORDER}`,
-      fontFamily: 'Inter, system-ui, sans-serif',
-    }}>
-      <div style={{
-        maxWidth: '1000px', margin: '0 auto',
-        padding: '18px 48px',
-        display: 'grid',
-        gridTemplateColumns: '1fr auto 1fr',
-        alignItems: 'center',
-        gap: '24px',
-      }}>
+    <footer className="ft-root">
+      <div className="ft-inner">
 
-        {/* Empty left spacer */}
-        <div />
+        {/* ── Brand column ── */}
+        <div className="ft-brand">
+          <Link href="/" className="ft-logo-link">
+            <LongstriderLogo className="ft-logo" />
+          </Link>
+          <p className="ft-tagline">
+            Sovereign intelligence.<br />
+            Permanently yours.
+          </p>
+          <p className="ft-sovereignty">
+            100% On-Premises · LLM-Agnostic · Zero Telemetry
+          </p>
+        </div>
 
-        {/* Nav links — truly centered */}
-        <nav style={{ display: 'flex', gap: '0', alignItems: 'center' }}>
-          {NAV_LINKS.map(({ label, href }, i, arr) => (
-            <span key={href} style={{ display: 'flex', alignItems: 'center' }}>
-              <Link
-                href={href}
-                style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.08em', color: MUTED, textDecoration: 'none', transition: 'color 0.2s ease', padding: '0 10px' }}
-                onMouseEnter={e => (e.currentTarget.style.color = MUTED_HOVER)}
-                onMouseLeave={e => (e.currentTarget.style.color = MUTED)}
-              >
-                {label}
-              </Link>
-              {i < arr.length - 1 && <span style={{ color: 'rgba(200,169,110,0.2)', fontSize: '10px' }}>·</span>}
-            </span>
-          ))}
-          {/* Divider */}
-          <span style={{ width: '1px', height: '10px', background: 'rgba(255,255,255,0.1)', margin: '0 10px' }} />
-          {LEGAL_LINKS.map(({ label, href }, i, arr) => (
-            <span key={href} style={{ display: 'flex', alignItems: 'center' }}>
-              <Link
-                href={href}
-                style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.18)', textDecoration: 'none', transition: 'color 0.2s ease', padding: '0 10px' }}
-                onMouseEnter={e => (e.currentTarget.style.color = MUTED)}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.18)')}
-              >
-                {label}
-              </Link>
-              {i < arr.length - 1 && <span style={{ color: 'rgba(200,169,110,0.2)', fontSize: '10px' }}>·</span>}
-            </span>
-          ))}
-        </nav>
+        {/* ── Nav columns ── */}
+        {FOOTER_COLS.map((col) => (
+          <div key={col.heading} className="ft-col">
+            <span className="ft-col-heading">{col.heading}</span>
+            <ul className="ft-col-list">
+              {col.links.map(({ label, href }) => (
+                <li key={href}>
+                  <Link href={href} className="ft-link">{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
 
-        {/* Copyright — hard right */}
-        <p style={{ fontSize: '11px', color: MUTED, letterSpacing: '0.04em', whiteSpace: 'nowrap', textAlign: 'right' }}>
-          © 2026 Longstrider, LLC
-        </p>
+      </div>
 
+      {/* ── Bottom bar ── */}
+      <div className="ft-bottom">
+        <span className="ft-copyright">© {new Date().getFullYear()} Longstrider, LLC</span>
+        <span className="ft-bottom-links">
+          <Link href="/privacy" className="ft-bottom-link">Privacy</Link>
+          <span className="ft-bottom-sep">·</span>
+          <Link href="/terms" className="ft-bottom-link">Terms</Link>
+          <span className="ft-bottom-sep">·</span>
+          <Link href="/contact" className="ft-bottom-link">Contact</Link>
+        </span>
       </div>
     </footer>
   );

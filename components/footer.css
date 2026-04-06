@@ -1,0 +1,180 @@
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER — footer.css
+   Full token compliance · No inline styles in component
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Root ────────────────────────────────────────────────────── */
+
+.ft-root {
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border-gold);
+  font-family: var(--font-body);
+}
+
+/* ── Main grid ───────────────────────────────────────────────── */
+
+.ft-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 48px 48px;
+  display: grid;
+  grid-template-columns: 1.6fr repeat(4, 1fr);
+  gap: 48px;
+}
+
+/* ── Brand column ────────────────────────────────────────────── */
+
+.ft-logo-link {
+  display: inline-flex;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.ft-logo {
+  height: 22px;
+  width: auto;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.ft-logo:hover {
+  opacity: 1;
+}
+
+.ft-tagline {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+
+.ft-sovereignty {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold-dim);
+  opacity: 0.6;
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* ── Nav columns ─────────────────────────────────────────────── */
+
+.ft-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ft-col-heading {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+.ft-col-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ft-link {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ft-link:hover {
+  color: var(--color-text-secondary);
+}
+
+/* ── Bottom bar ──────────────────────────────────────────────── */
+
+.ft-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 48px;
+  border-top: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ft-copyright {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  opacity: 0.45;
+}
+
+.ft-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ft-bottom-link {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  opacity: 0.35;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.ft-bottom-link:hover {
+  opacity: 0.65;
+}
+
+.ft-bottom-sep {
+  font-size: 10px;
+  color: var(--color-gold-dim);
+  opacity: 0.2;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+
+@media (max-width: 1000px) {
+  .ft-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 48px;
+    padding: 48px 32px 40px;
+  }
+
+  .ft-brand {
+    grid-column: 1 / -1;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+}
+
+@media (max-width: 640px) {
+  .ft-inner {
+    grid-template-columns: 1fr 1fr;
+    padding: 40px 24px 32px;
+    gap: 32px;
+  }
+
+  .ft-bottom {
+    padding: 16px 24px;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
