@@ -113,13 +113,19 @@
   color: rgba(255, 255, 255, 0.65);
 }
 
-/* ── Tablet portrait: dots only, no labels ────────────────────── */
+/* ── Dots only below 1200px — labels overlap content at narrower viewports ── */
+/* Container is max-width:960px centered; labels extend ~100px right of dot   */
+/* at left:28px, so they encroach on content margins below ~1160px viewport.  */
+@media (max-width: 1200px) {
+  .story-timeline-label {
+    display: none;
+  }
+}
+
+/* ── Tablet portrait: shrink dots, nudge left ────────────────────── */
 @media (max-width: 900px) {
   .story-timeline {
     left: 16px;
-  }
-  .story-timeline-label {
-    display: none;
   }
   .story-timeline-node {
     padding: 10px 0;
