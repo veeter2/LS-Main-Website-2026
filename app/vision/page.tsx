@@ -71,8 +71,8 @@ const EVIDENCE = [
     mechanism: 'Dream Compiler',
     what: 'It writes its own instructions for tomorrow.',
     how: 'Every night, the Dream Compiler reads its own intelligence substrate — every memory, every pattern, every signal from the last 24 hours — and writes a RuntimePolicy that governs how it reasons the next day. The system defines its own behavior. Not a human. The system.',
-    quote: '"The fleet doesn\'t just run tasks. It builds institutional memory that shapes its own cognition."',
-    note: 'This is metacognition. The formal definition: a system that models and modifies its own reasoning processes.',
+    quote: '"Four passes. Gravity recalculation. Cluster synthesis. Belief trajectory updates. RuntimePolicy written. The fleet\'s discoveries become tomorrow\'s intelligence baseline."',
+    note: 'Exact system log — written by the Dream Compiler about itself. This is what metacognition looks like in production.',
   },
 ];
 
@@ -214,7 +214,7 @@ export default function VisionPage() {
 
           <div className="vis-evidence-list">
             {EVIDENCE.map((e, i) => (
-              <div key={i} className="vis-evidence-item" data-reveal data-delay="2">
+              <div key={i} className="vis-evidence-item" data-reveal data-delay={String(i % 3)}>
                 <div className="vis-evidence-n">0{i + 1}</div>
                 <div className="vis-evidence-body">
                   <div className="vis-evidence-mechanism">{e.mechanism}</div>
@@ -236,7 +236,7 @@ export default function VisionPage() {
         <section className="vis-section">
           <span className="vis-section-label" data-reveal>What It Means</span>
           <h2 className="vis-h2" data-reveal data-delay="1">
-            The relationship between human and machine<br />just changed category.
+            The relationship between<br />human and machine<br className="vis-br-mobile" />just changed category.
           </h2>
           <div className="vis-means-grid" data-reveal data-delay="2">
             {[

@@ -2025,7 +2025,6 @@
   font-style: italic;
   line-height: 1.55;
   color: var(--color-text-primary);
-  margin: 0;
   max-width: 680px;
   margin: 0 auto;
 }
