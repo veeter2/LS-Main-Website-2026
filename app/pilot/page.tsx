@@ -241,7 +241,7 @@ function Field({ label, value, onChange, type = 'text', required = false }: {
         style={{
           width: '100%', padding: '13px 18px', borderRadius: '10px', fontSize: '15px',
           background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
-          color: 'rgba(255,255,255,0.88)', fontFamily: "'Lora', Georgia, serif",
+          color: 'rgba(255,255,255,0.88)', fontFamily: 'var(--font-body)',
           outline: 'none', boxSizing: 'border-box',
           transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
         }}

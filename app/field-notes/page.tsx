@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 const CATEGORIES = [
   { id: 'all',           label: 'All',          count: 6 },
@@ -142,6 +143,36 @@ export default function FieldNotesPage() {
               transition: 'border-color 0.2s ease',
             }}
           />
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ padding: '0 10vw 0', borderTop: '1px solid var(--color-border-subtle)' }}>
+        <div style={{ padding: '64px 0', textAlign: 'center' }}>
+          <p style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(20px, 2.5vw, 30px)',
+            fontWeight: 300,
+            letterSpacing: '-0.02em',
+            color: 'var(--color-text-primary)',
+            marginBottom: '24px',
+            lineHeight: 1.25,
+          }}>
+            See the architecture in your environment.
+          </p>
+          <Link href="/pilot" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '10px',
+            fontFamily: 'var(--font-body)', fontStyle: 'italic',
+            fontSize: '15px', letterSpacing: '0.04em',
+            color: 'var(--color-gold)', textDecoration: 'none',
+            padding: '12px 36px',
+            border: '1px solid var(--color-gold-border)',
+            borderRadius: '100px',
+            background: 'var(--color-gold-ghost)',
+            transition: 'all 0.35s var(--ease-out)',
+          }}>
+            Start a Pilot →
+          </Link>
         </div>
       </section>
 

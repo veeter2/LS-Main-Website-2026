@@ -289,7 +289,7 @@
   font-size: clamp(16px, 1.8vw, 20px);
   font-style: italic;
   line-height: 1.55;
-  color: rgba(255,255,255,0.82);
+  color: var(--color-text-body);
   margin: 0 0 16px;
 }
 
@@ -551,4 +551,48 @@
 [data-reveal].deck-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .ab-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .ab-team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ab-atx-section {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ab-atx-mark {
+    font-size: clamp(40px, 8vw, 72px);
+  }
+}
+
+@media (max-width: 640px) {
+  .ab-team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ab-container {
+    padding: 0 24px;
+  }
+
+  .ab-hero {
+    padding: clamp(100px, 14vh, 160px) 0 clamp(48px, 6vh, 72px);
+  }
+
+  .ab-section {
+    padding: 64px 0;
+  }
+
+  .ab-stack-grid {
+    gap: 10px;
+  }
 }
