@@ -1193,3 +1193,15 @@
   .h2-evolves-headline { font-size: 19px; }
   .h2-evolves-stat-num { font-size: 20px; }
 }
+
+/* ── Responsive 640px ───────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .h2-sectors-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .h2-decision-wrap {
+    padding: 0 24px;
+  }
+}
