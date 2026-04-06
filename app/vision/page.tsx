@@ -254,7 +254,7 @@ export default function VisionPage() {
         <section className="vis-section" data-section="means">
           <span className="vis-section-label" data-reveal>What It Means</span>
           <h2 className="vis-h2" data-reveal data-delay="1">
-            The relationship between<br />human and machine<br className="vis-br-mobile" />just changed category.
+            The relationship between<br />human and machine just changed category.
           </h2>
           <div className="vis-means-grid" data-reveal data-delay="2">
             {[
