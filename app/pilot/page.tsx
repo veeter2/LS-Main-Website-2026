@@ -232,7 +232,7 @@ function Field({ label, value, onChange, type = 'text', required = false }: {
   const GOLD_BORDER = 'rgba(200,169,110,0.30)';
   return (
     <div>
-      <label style={{ display: 'block', fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '9px' }}>
+      <label style={{ display: 'block', fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '9px' }}>
         {label}
       </label>
       <input
@@ -241,7 +241,7 @@ function Field({ label, value, onChange, type = 'text', required = false }: {
         style={{
           width: '100%', padding: '13px 18px', borderRadius: '10px', fontSize: '15px',
           background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
-          color: 'rgba(255,255,255,0.88)', fontFamily: 'var(--font-body)',
+          color: 'var(--color-text-body)', fontFamily: 'var(--font-body)',
           outline: 'none', boxSizing: 'border-box',
           transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
         }}

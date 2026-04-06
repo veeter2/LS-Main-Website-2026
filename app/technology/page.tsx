@@ -853,12 +853,12 @@ export default function TechnologyPage() {
                   Same substrate. Same memory. Same retrieval architecture.
                 </p>
                 <div className="tech-card tech-card-purple" style={{ marginTop: '28px' }} data-reveal data-delay="3">
-                  <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(16px, 1.8vw, 21px)', fontStyle: 'italic', color: 'rgba(255,255,255,0.82)', lineHeight: 1.55, margin: 0 }}>
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(16px, 1.8vw, 21px)', fontStyle: 'italic', color: 'var(--color-text-body)', lineHeight: 1.55, margin: 0 }}>
                     &ldquo;Configure personality in minutes via the Cortex operating interface.
                     Sliders with real-time preview. Not a fine-tuning run.&rdquo;
                   </p>
                 </div>
-                <div data-reveal data-delay="4" style={{ marginTop: '28px', paddingTop: '24px', borderTop: '1px solid var(--color-border-subtle)' }}>
+                <div data-reveal data-delay="3" style={{ marginTop: '28px', paddingTop: '24px', borderTop: '1px solid var(--color-border-subtle)' }}>
                   <p className="tech-label" style={{ color: 'var(--color-text-muted)', marginBottom: '10px' }}>Full Observability</p>
                   <p className="tech-body" style={{ margin: 0 }}>
                     Every agent action, every decision trail, every correction — recorded, weighted,
