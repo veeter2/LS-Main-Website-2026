@@ -248,3 +248,8 @@
   .mem-signal-flow   { flex-direction: column; }
   .mem-signal-arrow  { transform: rotate(90deg); }
 }
+
+@media (max-width: 640px) {
+  .mem-container    { padding: 0 24px; }
+  .mem-correction-step { flex-direction: column; }
+}

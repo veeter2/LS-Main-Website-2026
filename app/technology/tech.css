@@ -2059,3 +2059,8 @@
   padding-top: 28px;
   border-top: 1px solid var(--color-border-subtle);
 }
+
+@media (max-width: 640px) {
+  .tech-hero-v2-container { padding: 0 24px; }
+  .cc-satellites { grid-template-columns: 1fr 1fr; }
+}

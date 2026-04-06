@@ -435,3 +435,9 @@
   .kn-agent-grid      { grid-template-columns: 1fr; }
   .kn-queries-grid    { grid-template-columns: repeat(3, 1fr); }
 }
+
+@media (max-width: 640px) {
+  .kn-container     { padding: 0 24px; }
+  .kn-queries-grid  { grid-template-columns: 1fr; }
+  .kn-policy-key    { min-width: 120px; }
+}
