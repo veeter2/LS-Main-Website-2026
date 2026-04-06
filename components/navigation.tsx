@@ -152,7 +152,7 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       { label: 'Our Mission',      href: '/about',        live: false },
       { label: 'The Team',         href: '/about#team',   live: false },
-      { label: 'Vision & Roadmap', href: '/vision',       live: false },
+      { label: 'Vision & Roadmap', href: '/vision',       live: true  },
     ],
   },
   {
