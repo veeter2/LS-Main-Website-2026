@@ -113,6 +113,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'Overview',                href: '/technology',           live: true },
       { label: 'The Intelligence Kernel', href: '/technology/kernel',    live: true },
       { label: 'Living Memory',           href: '/technology/memory',    live: true },
+      { label: 'Agent Intelligence',      href: '/agents',               live: true },
     ],
   },
   {
