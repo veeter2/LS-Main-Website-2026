@@ -437,38 +437,137 @@
   flex-shrink: 0;
 }
 
-/* ── Austin section ───────────────────────────────────────────── */
+/* ── Built list (replaces inline styles) ──────────────────────── */
 
-.ab-atx-section {
-  border-top: 1px solid var(--color-border-subtle);
-  padding: 48px 0;
+.ab-built-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.ab-built-row {
   display: flex;
-  align-items: center;
-  gap: 48px;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 0;
 }
 
-.ab-atx-mark {
-  font-family: var(--font-display);
-  font-size: clamp(48px, 7vw, 88px);
-  font-weight: 300;
-  letter-spacing: -0.04em;
-  color: rgba(200,169,110,0.10);
-  white-space: nowrap;
+.ab-built-row-border {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ab-built-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  opacity: 0.6;
   flex-shrink: 0;
-  line-height: 1;
+  margin-top: 6px;
 }
 
-.ab-atx-copy {
+.ab-built-text {
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.78;
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--color-text-secondary);
-  max-width: 480px;
 }
 
-.ab-atx-copy strong {
-  color: var(--color-text-body);
-  font-weight: 500;
+/* ── Principles list (How We Got Here section) ────────────────── */
+
+.ab-principles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ab-principle-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ab-principle-item:first-child {
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.ab-principle-item-label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold-dim);
+  margin-bottom: 6px;
+}
+
+.ab-principle-item-detail {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+/* ── Team intro / Stack intro ─────────────────────────────────── */
+
+.ab-team-intro,
+.ab-stack-intro {
+  max-width: 560px;
+}
+
+/* ── Identity initials z-index ────────────────────────────────── */
+
+.ab-identity-initials {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── CTA section ──────────────────────────────────────────────── */
+
+.ab-cta-section {
+  text-align: center;
+  padding: var(--section-pad-v) 0 calc(var(--section-pad-v) * 1.5);
+}
+
+.ab-label-center {
+  justify-content: center;
+}
+
+.ab-cta-heading {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 42px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+  margin: 0 0 40px;
+  line-height: 1.2;
+}
+
+.ab-cta-gold {
+  color: var(--color-gold);
+}
+
+.ab-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--color-gold);
+  text-decoration: none;
+  padding: 14px 44px;
+  border: 1px solid var(--color-gold-border);
+  border-radius: 100px;
+  background: var(--color-gold-ghost);
+  transition: all 0.35s var(--ease-out);
+}
+
+.ab-cta-btn:hover {
+  background: rgba(200,169,110,0.14);
+  border-color: var(--color-gold-dim);
 }
 
 /* ── Founding Principle ───────────────────────────────────────── */

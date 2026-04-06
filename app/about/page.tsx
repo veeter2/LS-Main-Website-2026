@@ -4,36 +4,6 @@ import './about.css';
 import Link from 'next/link';
 import { useEffect, useCallback, useRef } from 'react';
 
-// ── Frontier stops — honest, in order ────────────────────────────
-
-const FRONTIER = [
-  {
-    company: 'Mall.com',
-    role: 'Early internet pioneer',
-    detail: 'First stop in a career-long pattern: see the structural problem before the market does.',
-  },
-  {
-    company: 'Snapwire',
-    role: 'Founder',
-    detail: 'Built it. Sold it to ARGUS. Proved the pattern works.',
-  },
-  {
-    company: 'Hypergiant',
-    role: 'Senior Leadership',
-    detail: 'Enterprise AI at scale. Watched the memory problem up close.',
-  },
-  {
-    company: 'Growth Acceleration Partners',
-    role: 'Sr. Director of Technology',
-    detail: 'Still here. The funding runway that made LongStrider possible.',
-  },
-  {
-    company: 'LongStrider Systems',
-    role: 'Founder & Architect',
-    detail: '18 months. Solo build. Every line of architecture, every design decision.',
-  },
-];
-
 // ── Team ─────────────────────────────────────────────────────────
 
 const TEAM = [
@@ -42,25 +12,35 @@ const TEAM = [
     name: 'Matt Veitch',
     title: 'Founder & Architect',
     identity: 'gold' as const,
-    bio: '30-year technology veteran. Serial founder. Built LongStrider solo — every edge function, every table, every design decision. He and an AI. 18 months.',
+    bio: 'Thirty years in technology across enterprise software, AI infrastructure, and two previous companies. Drives architecture and product direction.',
   },
   {
     initials: 'MB',
     name: 'Marc Boudria',
     title: 'Co-Founder, Enterprise Strategy',
     identity: 'purple' as const,
-    bio: 'Enterprise AI expert. Brought the sovereignty framing, named the Kernel, made the introductions that opened enterprise doors. Decades of domain depth.',
+    bio: 'Enterprise AI strategy and go-to-market. Brings decades of domain depth and the relationships that open enterprise doors.',
   },
   {
     initials: 'IB',
     name: 'Isabella Buzziard',
     title: 'Co-Founder, Revenue Operations',
     identity: 'neutral' as const,
-    bio: 'The operational backbone. Revenue architecture, partner relationships, and the person who kept the mission grounded every step of the way.',
+    bio: 'Revenue architecture, partner relationships, and the operational backbone that keeps the mission grounded and moving.',
   },
 ];
 
-// ── Tech stack / partners ─────────────────────────────────────────
+// ── What was built ────────────────────────────────────────────────
+
+const BUILT = [
+  'Complete intelligence infrastructure — not a wrapper, not a bolt-on',
+  'Gravity-weighted memory substrate — 52,000+ memories in production',
+  'Nightly consolidation engine — compounds automatically',
+  'Five-axis recall router — semantic, gravitational, structural, relational, temporal',
+  'Behavioral operating layer — configurable without retraining',
+];
+
+// ── Tech stack ────────────────────────────────────────────────────
 
 const STACK = [
   'Supabase',
@@ -111,19 +91,13 @@ export default function AboutPage() {
             About LongStrider
           </div>
           <h1 className="ab-hero-h1" data-reveal data-delay="1">
-            Built by a founder who got tired of watching
-            {' '}<em>AI forget everything.</em>
+            We built this because{' '}
+            <em>the problem needed solving.</em>
           </h1>
           <p className="ab-hero-lead" data-reveal data-delay="2">
-            Thirty years in tech. Five companies. One pattern: find the structural
-            problem nobody&apos;s solving at the right layer, and build the fix.
-            LongStrider is that pattern applied to the most fundamental unsolved
-            problem in AI.
+            Three people. A clear structural gap in how AI handles institutional
+            knowledge. Eighteen months of building the layer that didn&apos;t exist.
           </p>
-          <div className="ab-atx-badge" data-reveal data-delay="3">
-            <span className="ab-atx-dot" />
-            Built in Austin, Texas
-          </div>
         </div>
 
         <hr className="ab-divider" />
@@ -147,39 +121,24 @@ export default function AboutPage() {
               </p>
               <p className="ab-body" data-reveal data-delay="2">
                 That&apos;s not a model problem. It&apos;s an architectural layer that
-                doesn&apos;t exist yet. LongStrider is that layer: the programmable middle
-                intelligence layer between the LLM and the world — where memory is
-                sovereign, compounding, and permanently yours.
+                doesn&apos;t exist yet. LongStrider is that layer: the programmable
+                intelligence infrastructure between the LLM and the world — where memory
+                is sovereign, compounding, and permanently yours.
               </p>
             </div>
             <div data-reveal data-delay="2">
               <div className="ab-callout">
                 <p className="ab-callout-quote">
-                  &ldquo;AI without persistent, sovereign, compounding memory isn&apos;t
-                  intelligent — it&apos;s a very fast amnesiac.&rdquo;
+                  &ldquo;AI without persistent, sovereign, compounding memory
+                  isn&apos;t intelligent — it&apos;s a very fast amnesiac.&rdquo;
                 </p>
-                <span className="ab-callout-attr">Matt Veitch — Founder & Architect</span>
               </div>
               <div className="ab-callout" style={{ marginTop: '16px' }}>
-                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: '16px' }}>
-                  What was actually built
-                </p>
-                {[
-                  'Complete intelligence infrastructure — not a wrapper, not a bolt-on',
-                  'Gravity-weighted memory substrate — 52,000+ memories in production',
-                  'Nightly consolidation engine — compounds automatically',
-                  'Four-axis recall router — semantic, gravitational, structural, relational, temporal',
-                  'Behavioral operating layer — configurable without retraining',
-                ].map((item, i) => (
-                  <div key={i} style={{
-                    display: 'flex', gap: '10px', alignItems: 'flex-start',
-                    padding: '8px 0',
-                    borderBottom: i < 4 ? '1px solid var(--color-border-subtle)' : 'none',
-                  }}>
-                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--color-gold)', opacity: 0.6, flexShrink: 0, marginTop: '6px' }} />
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>
-                      {item}
-                    </span>
+                <p className="ab-built-label">What was actually built</p>
+                {BUILT.map((item, i) => (
+                  <div key={i} className={`ab-built-row${i < BUILT.length - 1 ? ' ab-built-row-border' : ''}`}>
+                    <div className="ab-built-dot" />
+                    <span className="ab-built-text">{item}</span>
                   </div>
                 ))}
               </div>
@@ -236,35 +195,43 @@ export default function AboutPage() {
 
         <hr className="ab-divider" />
 
-        {/* ══ THE FRONTIER PATTERN ═══════════════════════════════════ */}
+        {/* ══ HOW WE GOT HERE ════════════════════════════════════════ */}
         <section className="ab-section">
           <div className="ab-grid">
             <div>
-              <span className="ab-label" data-reveal>The Founder</span>
+              <span className="ab-label" data-reveal>How We Got Here</span>
               <h2 className="ab-h2" data-reveal data-delay="1">
-                Thirty years.<br />The same pattern.
+                The pattern was<br />always the same.
               </h2>
               <p className="ab-body" data-reveal data-delay="2">
-                Every stop in a 30-year career was the same thing: find the structural
-                problem nobody&apos;s solving at the right layer. Build the fix. Get it
-                to market. LongStrider is that pattern applied to the most fundamental
-                unsolved problem in AI right now.
+                Across enterprise software, AI deployments, and two previous companies,
+                the same problem kept surfacing: organizations building on AI platforms
+                were generating institutional intelligence that didn&apos;t belong to them.
+                Every conversation trained the vendor. Every insight fed the platform.
+                The customer got a bill.
               </p>
               <p className="ab-body" data-reveal data-delay="2">
-                Marc Boudria brought the sovereignty framing at a critical moment —
-                the idea that your institutional knowledge should be portable, private, and
-                permanent regardless of which model handles the voice. That sharpened
-                the architecture when it needed sharpening.
+                LongStrider started with a clear premise — sovereignty first — and was
+                built from the ground up to deliver it. The sovereignty framing, the
+                architecture decisions, the go-to-market approach: every piece shaped
+                by the founding team working the problem from different angles.
+              </p>
+              <p className="ab-body" data-reveal data-delay="2">
+                Eighteen months. A small team. A production system with 52,000+
+                memories and a real behavioral engine. Built lean on purpose.
               </p>
             </div>
             <div data-reveal data-delay="2">
-              <div className="ab-frontier">
-                {FRONTIER.map((stop, i) => (
-                  <div key={i} className="ab-frontier-stop">
-                    <div className="ab-frontier-dot" />
-                    <div className="ab-frontier-company">{stop.company}</div>
-                    <div className="ab-frontier-role">{stop.role}</div>
-                    <div className="ab-frontier-detail">{stop.detail}</div>
+              <div className="ab-principles-list">
+                {[
+                  { label: 'Sovereignty first', detail: 'Your intelligence stays on your infrastructure. Non-negotiable from day one.' },
+                  { label: 'No wrappers', detail: 'Purpose-built architecture. Not an API layer over someone else\'s platform.' },
+                  { label: 'Compounding by design', detail: 'The system gets more valuable over time. That\'s the architecture, not the pitch.' },
+                  { label: 'Replaceable components', detail: 'Run OpenAI today, switch to Ollama tomorrow. The memory layer stays put.' },
+                ].map((p, i) => (
+                  <div key={i} className="ab-principle-item">
+                    <div className="ab-principle-item-label">{p.label}</div>
+                    <div className="ab-principle-item-detail">{p.detail}</div>
                   </div>
                 ))}
               </div>
@@ -280,7 +247,7 @@ export default function AboutPage() {
           <h2 className="ab-h2" data-reveal data-delay="1">
             Small. On purpose.
           </h2>
-          <p className="ab-body" style={{ maxWidth: '560px' }} data-reveal data-delay="2">
+          <p className="ab-body ab-team-intro" data-reveal data-delay="2">
             LongStrider was built lean and will grow lean. The people in this room
             have been here from the beginning — no titles inflated for optics.
           </p>
@@ -288,7 +255,7 @@ export default function AboutPage() {
             {TEAM.map((member) => (
               <div key={member.name} className="ab-team-card">
                 <div className={`ab-identity ab-identity-${member.identity}`}>
-                  <span style={{ position: 'relative', zIndex: 1 }}>{member.initials}</span>
+                  <span className="ab-identity-initials">{member.initials}</span>
                 </div>
                 <h3 className="ab-team-name">{member.name}</h3>
                 <span className="ab-team-title">{member.title}</span>
@@ -306,7 +273,7 @@ export default function AboutPage() {
           <h2 className="ab-h2" data-reveal data-delay="1">
             Production-grade stack.<br />No proprietary lock-in.
           </h2>
-          <p className="ab-body" style={{ maxWidth: '520px' }} data-reveal data-delay="2">
+          <p className="ab-body ab-stack-intro" data-reveal data-delay="2">
             Every component is replaceable. That&apos;s the architecture — not a pitch.
             Run on OpenAI today, switch to Ollama tomorrow. The intelligence layer stays
             exactly where you left it.
@@ -321,48 +288,17 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ══ AUSTIN ═════════════════════════════════════════════════ */}
-        <div className="ab-atx-section" data-reveal>
-          <div className="ab-atx-mark">ATX</div>
-          <p className="ab-atx-copy">
-            <strong>Austin is the tech hub of the United States right now.</strong> The people
-            who live here know it. The people who don&apos;t are catching up. LongStrider
-            was conceived, architected, and built here — in a city that builds
-            things without asking permission from the coasts.
-          </p>
-        </div>
-
         {/* ══ CTA ════════════════════════════════════════════════════ */}
-        <section className="ab-section" style={{ textAlign: 'center', paddingBottom: 'calc(var(--section-pad-v) * 1.5)' }}>
+        <section className="ab-cta-section">
           <div data-reveal>
-            <span className="ab-label" style={{ justifyContent: 'center' }}>Ready to build?</span>
-            <p style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(24px, 3.5vw, 42px)',
-              fontWeight: 300,
-              letterSpacing: '-0.025em',
-              color: 'var(--color-text-primary)',
-              margin: '0 0 40px',
-              lineHeight: 1.2,
-            }}>
+            <span className="ab-label ab-label-center">Ready to build?</span>
+            <p className="ab-cta-heading">
               Memory Sovereignty.<br />
-              <span style={{ color: 'var(--color-gold)' }}>Now available as infrastructure.</span>
+              <span className="ab-cta-gold">Now available as infrastructure.</span>
             </p>
           </div>
           <div data-reveal data-delay="1">
-            <Link href="/pilot" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '10px',
-              fontFamily: 'var(--font-body)',
-              fontSize: '16px', fontStyle: 'italic',
-              letterSpacing: '0.04em',
-              color: 'var(--color-gold)',
-              textDecoration: 'none',
-              padding: '14px 44px',
-              border: '1px solid var(--color-gold-border)',
-              borderRadius: '100px',
-              background: 'var(--color-gold-ghost)',
-              transition: 'all 0.35s var(--ease-out)',
-            }}>
+            <Link href="/pilot" className="ab-cta-btn">
               Start a Pilot →
             </Link>
           </div>
