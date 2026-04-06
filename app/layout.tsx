@@ -86,9 +86,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: BASE_URL,
   },
-  verification: {
-    google: 'longstrider-google-verify',   // replace with actual GSC token
-  },
 }
 
 export const viewport: Viewport = {
