@@ -3,6 +3,24 @@
 import './partners.css';
 import Link from 'next/link';
 import { useEffect, useCallback, useRef } from 'react';
+import { StoryTimeline } from '@/components/story-timeline';
+
+// ── Chapter timeline ──────────────────────────────────────────
+const GOLD   = '#c8a96e';
+const PURPLE = '#8b5cf6';
+const GOLD_G = 'rgba(200,169,110,0.40)';
+const PURP_G = 'rgba(139,92,246,0.45)';
+
+const TIMELINE = [
+  { id: 'burning',   label: 'The Threat',         color: PURPLE, glow: PURP_G },
+  { id: 'opp',       label: 'The Opportunity',     color: GOLD,   glow: GOLD_G },
+  { id: 'shift',     label: 'The Model Shift',     color: PURPLE, glow: PURP_G },
+  { id: 'models',    label: 'Partner Models',      color: GOLD,   glow: GOLD_G },
+  { id: 'compound',  label: 'Compound Effect',     color: PURPLE, glow: PURP_G },
+  { id: 'asset',     label: 'The Asset',           color: GOLD,   glow: GOLD_G },
+  { id: 'revenue',   label: 'Revenue',             color: PURPLE, glow: PURP_G },
+  { id: 'window',    label: 'The Window',          color: GOLD,   glow: GOLD_G },
+];
 
 // ── Verified-source stat data ─────────────────────────────────
 // All citations link directly to primary sources.
@@ -161,6 +179,8 @@ export default function PartnersPage() {
       <div className="pt-orb-1" aria-hidden />
       <div className="pt-orb-2" aria-hidden />
 
+      <StoryTimeline nodes={TIMELINE} showAfter={50} />
+
       <div className="pt-container">
 
         {/* ═══ HERO ═══════════════════════════════════════════════ */}
@@ -184,7 +204,7 @@ export default function PartnersPage() {
         <hr className="pt-rule" />
 
         {/* ═══ 01 — THE BURNING PLATFORM ══════════════════════════ */}
-        <section className="pt-section">
+        <section className="pt-section" data-section="burning">
           <span className="pt-section-num">01</span>
           <span className="pt-section-label">The Burning Platform</span>
           <div className="pt-section-grid">
@@ -236,7 +256,7 @@ export default function PartnersPage() {
         <hr className="pt-rule" />
 
         {/* ═══ 02 — THE OPPORTUNITY ════════════════════════════════ */}
-        <section className="pt-section">
+        <section className="pt-section" data-section="opp">
           <span className="pt-section-num">02</span>
           <span className="pt-section-label">The Opportunity</span>
           <h2 className="pt-h2" data-reveal>
@@ -278,7 +298,7 @@ export default function PartnersPage() {
         <hr className="pt-rule" />
 
         {/* ═══ 03 — THE MODEL SHIFT ════════════════════════════════ */}
-        <section className="pt-section">
+        <section className="pt-section" data-section="shift">
           <span className="pt-section-num">03</span>
           <span className="pt-section-label">The Model Shift</span>
           <h2 className="pt-h2" data-reveal>
@@ -310,7 +330,7 @@ export default function PartnersPage() {
         <hr className="pt-rule" />
 
         {/* ═══ 04 — THREE PARTNER MODELS ══════════════════════════ */}
-        <section className="pt-section">
+        <section className="pt-section" data-section="models">
           <span className="pt-section-num">04</span>
           <span className="pt-section-label">Partner Models</span>
           <h2 className="pt-h2" data-reveal>
@@ -335,7 +355,7 @@ export default function PartnersPage() {
         <hr className="pt-rule" />
 
         {/* ═══ 05 — THE COMPOUND EFFECT ════════════════════════════ */}
-        <section className="pt-section">
+        <section className="pt-section" data-section="compound">
           <span className="pt-section-num">05</span>
           <span className="pt-section-label">The Compound Effect</span>
           <h2 className="pt-h2" data-reveal>
@@ -365,7 +385,7 @@ export default function PartnersPage() {
         <hr className="pt-rule" />
 
         {/* ═══ 06 — THE ASSET ARGUMENT ════════════════════════════ */}
-        <section className="pt-section">
+        <section className="pt-section" data-section="asset">
           <span className="pt-section-num">06</span>
           <span className="pt-section-label">The Asset Argument</span>
           <h2 className="pt-h2" data-reveal>
@@ -422,7 +442,7 @@ export default function PartnersPage() {
         <hr className="pt-rule" />
 
         {/* ═══ 07 — REVENUE & VALUATION ════════════════════════════ */}
-        <section className="pt-section">
+        <section className="pt-section" data-section="revenue">
           <span className="pt-section-num">07</span>
           <span className="pt-section-label">Revenue &amp; Valuation</span>
           <h2 className="pt-h2" data-reveal>
@@ -477,7 +497,7 @@ export default function PartnersPage() {
         <hr className="pt-rule" />
 
         {/* ═══ 08 — THE WINDOW ═════════════════════════════════════ */}
-        <section className="pt-section">
+        <section className="pt-section" data-section="window">
           <span className="pt-section-num">08</span>
           <span className="pt-section-label">The Window</span>
           <h2 className="pt-h2" data-reveal>
