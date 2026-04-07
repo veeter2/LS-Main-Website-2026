@@ -569,7 +569,9 @@ export default function HomeV2Page() {
                 different: the LLM is a voicebox, the intelligence is sovereign.
                 Deploy on your own infrastructure, connect any model — hosted
                 or local — and keep every byte of organizational intelligence
-                exactly where you tell it to stay.
+                exactly where you tell it to stay. The{' '}
+                <Link href="/agents" style={{ color: 'var(--color-gold-dim)', textDecoration: 'none', borderBottom: '1px solid var(--color-border-gold)' }}>agents that run on this substrate</Link>
+                {' '}are architecturally different from every framework you&apos;ve evaluated.
               </p>
               <div className="h2-compare">
                 <div>Deploy on your own infrastructure — cloud or on-prem</div>

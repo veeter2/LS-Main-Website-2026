@@ -11,6 +11,7 @@ import { CognitiveSynthesisV2 } from '@/components/icons/cognitive-synthesis';
 import { GravityWellV3 } from '@/components/icons/gravity-well';
 import { MemoryArcV1 } from '@/components/icons/memory-arc';
 import { ConvergenceV1 } from '@/components/icons/convergence';
+import { AgentsV1 } from '@/components/icons/agents';
 
 // ── Design tokens ─────────────────────────────────────────────
 const GOLD        = 'var(--color-gold)';
@@ -26,6 +27,7 @@ const PAGE_NAMES: Record<string, string> = {
   '/technology':                  'Technology',
   '/technology/kernel':           'Intelligence Kernel',
   '/technology/memory':           'Living Memory',
+  '/agents':                      'Agent Intelligence',
   '/briefs':                      'Industry Briefs',
   '/briefs/insurance':            'Insurance Brief',
   '/briefs/healthcare':           'Healthcare Brief',
@@ -113,8 +115,14 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'Overview',                href: '/technology',           live: true },
       { label: 'The Intelligence Kernel', href: '/technology/kernel',    live: true },
       { label: 'Living Memory',           href: '/technology/memory',    live: true },
-      { label: 'Agent Intelligence',      href: '/agents',               live: true },
     ],
+  },
+  {
+    label: 'Agents',
+    href: '/agents',
+    sub: 'Why agent intelligence compounds here and evaporates everywhere else',
+    live: true,
+    Icon: AgentsV1,
   },
   {
     label: 'Industry Briefs',
