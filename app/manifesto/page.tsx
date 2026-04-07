@@ -25,11 +25,11 @@ const TIMELINE: TimelineNode[] = [
   { id: 'gap',         label: 'The Gap',       color: PURPLE, glow: PURP_G,  gated: false },
   { id: 'what',        label: 'What It Is',    color: GOLD,   glow: GOLD_G,  gated: false },
   { id: 'moat',        label: 'Your Moat',     color: PURPLE, glow: PURP_G,  gated: false },
-  { id: 'practice',    label: 'In Practice',   color: GOLD,   glow: GOLD_G,  gated: true  },
-  { id: 'who',         label: "Who It's For",  color: PURPLE, glow: PURP_G,  gated: true  },
-  { id: 'how',         label: 'How It Works',  color: GOLD,   glow: GOLD_G,  gated: true  },
-  { id: 'competitive', label: 'Competitive',   color: PURPLE, glow: PURP_G,  gated: true  },
-  { id: 'engage',      label: "What's Next",   color: GOLD,   glow: GOLD_G,  gated: true  },
+  { id: 'practice',    label: 'In Practice',   color: GOLD,   glow: GOLD_G,  gated: false },
+  { id: 'who',         label: "Who It's For",  color: PURPLE, glow: PURP_G,  gated: false },
+  { id: 'how',         label: 'How It Works',  color: GOLD,   glow: GOLD_G,  gated: false },
+  { id: 'competitive', label: 'Competitive',   color: PURPLE, glow: PURP_G,  gated: false },
+  { id: 'engage',      label: "What's Next",   color: GOLD,   glow: GOLD_G,  gated: false },
 ];
 
 // ── CONTENT DATA ──────────────────────────────────────────────
@@ -76,7 +76,6 @@ const COMPETITORS = [
 // ── PAGE COMPONENT ──────────────────────────────────────────────
 
 export default function ManifestoPage() {
-  const [isRevealed, setIsRevealed] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
@@ -104,10 +103,6 @@ export default function ManifestoPage() {
     return () => observerRef.current?.disconnect();
   }, [setupObserver]);
 
-  useEffect(() => {
-    if (isRevealed) setTimeout(() => setupObserver(), 100);
-  }, [isRevealed, setupObserver]);
-
   // Scroll progress bar
   useEffect(() => {
     const onScroll = () => {
@@ -128,7 +123,7 @@ export default function ManifestoPage() {
 
 
 
-      <StoryTimeline key={String(isRevealed)} nodes={TIMELINE} unlockGated={isRevealed} />
+      <StoryTimeline nodes={TIMELINE} unlockGated={true} />
 
       <main className="deck-container">
 
@@ -252,23 +247,8 @@ export default function ManifestoPage() {
           </div>
         </section>
 
-        {/* ── TEASE / REVEAL GATE ──────────────── */}
-        {!isRevealed && (
-          <div className="deck-tease">
-            <button
-              id="deck-reveal-btn"
-              className="deck-tease-button"
-              onClick={() => setIsRevealed(true)}
-            >
-              <span>Continue Reading</span>
-            </button>
-            <p className="deck-tease-hint">Three scenarios. Four kinds of organizations. Five capabilities no one else has built. One decision.</p>
-          </div>
-        )}
-
-        {isRevealed && (
-          <>
-            {/* ── IN PRACTICE ── */}
+        {/* ── IN PRACTICE ── */}
+        <>
             <section className="deck-section" data-section="practice">
               <div data-reveal>
                 <div className="deck-label">In Practice</div>
@@ -401,7 +381,6 @@ export default function ManifestoPage() {
 
             </footer>
           </>
-        )}
       </main>
     </div>
   );
