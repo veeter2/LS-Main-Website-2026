@@ -33,22 +33,25 @@ export function BetaSignupForm() {
     setIsLoading(true)
 
     try {
-      // TODO: Replace with actual HubSpot API endpoint
-      // const response = await fetch('/api/hubspot/subscribe', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email })
-      // })
-
-      // Simulate API call for now
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      toast({
-        title: "Welcome to the future!",
-        description: "You've been added to our beta waitlist. We'll be in touch soon.",
-      })
-
-      setEmail("")
+      const params = new URLSearchParams()
+      params.append('email', email.trim().toLowerCase())
+      params.append('hs_context', JSON.stringify({
+        pageUri: 'https://longstrider.ai',
+        pageName: 'LongStrider — Beta Waitlist',
+      }))
+      const res = await fetch(
+        'https://forms.hubspot.com/uploads/form/v2/243871028/6ccbf5d8-fae4-4ee4-8fe5-48f749d33905',
+        { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: params.toString() }
+      )
+      if (res.ok || res.status === 204 || res.status === 302) {
+        toast({
+          title: "Welcome to the future!",
+          description: "You've been added to our beta waitlist. We'll be in touch soon.",
+        })
+        setEmail("")
+      } else {
+        throw new Error(`HubSpot error ${res.status}`)
+      }
     } catch (error) {
       toast({
         title: "Something went wrong",
