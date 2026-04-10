@@ -174,7 +174,7 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       { label: 'Our Mission',      href: '/about',        live: true },
       { label: 'The Team',         href: '/about#team',   live: true },
-      { label: 'Vision & Roadmap', href: '/vision',       live: true },
+      { label: 'Manifesto',         href: '/manifesto',    live: true },
     ],
   },
   {
