@@ -324,7 +324,7 @@ export default function ManifestoPage() {
               </div>
               <div data-reveal data-delay="1">
                 <p className="deck-body">
-                  LongStrider isn&apos;t a SaaS subscription you spin up and forget. It&apos;s institutional intelligence you <span style={{ color: '#c8a96e' }}>build</span>, <span style={{ color: '#c8a96e' }}>own</span>, and <span style={{ color: '#c8a96e' }}>compound</span> — configured for your environment, your regulatory requirements, and your timeline. We work with organizations across four deployment models.
+                  LongStrider isn&apos;t a SaaS subscription you spin up and forget. It&apos;s institutional intelligence you <span style={{ color: GOLD }}>build</span>, <span style={{ color: GOLD }}>own</span>, and <span style={{ color: GOLD }}>compound</span> — configured for your environment, your regulatory requirements, and your timeline. We work with organizations across four deployment models.
                 </p>
               </div>
               <div data-reveal data-delay="2" style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '32px' }}>

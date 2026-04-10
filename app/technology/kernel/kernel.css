@@ -122,7 +122,7 @@
 }
 .kn-pipe-stage-gold   .kn-pipe-symbol { background: var(--color-gold-ghost);   color: var(--color-gold);   border: 1px solid var(--color-border-gold); }
 .kn-pipe-stage-purple .kn-pipe-symbol { background: var(--color-purple-ghost);  color: var(--color-purple); border: 1px solid var(--color-purple-border); }
-.kn-pipe-stage-neutral .kn-pipe-symbol{ background: rgba(255,255,255,0.03);     color: rgba(255,255,255,0.3); border: 1px solid var(--color-border-subtle); }
+.kn-pipe-stage-neutral .kn-pipe-symbol{ background: rgba(255,255,255,0.03);     color: var(--color-text-muted); border: 1px solid var(--color-border-subtle); }
 
 .kn-pipe-label {
   font-family: var(--font-body);

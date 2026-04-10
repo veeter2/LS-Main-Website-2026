@@ -389,8 +389,8 @@
   margin-bottom: 6px;
 }
 
-.ag-depth-source--human { color: rgba(200, 169, 110, 0.45); }
-.ag-depth-source--agent { color: rgba(139, 92, 246, 0.45); }
+.ag-depth-source--human { color: var(--color-gold-dim); }
+.ag-depth-source--agent { color: var(--color-purple-dim); }
 
 .ag-depth-desc {
   font-family: var(--font-body);
