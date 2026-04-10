@@ -12,6 +12,7 @@ import { GravityWellV3 } from '@/components/icons/gravity-well';
 import { MemoryArcV1 } from '@/components/icons/memory-arc';
 import { ConvergenceV1 } from '@/components/icons/convergence';
 import { AgentsV1 } from '@/components/icons/agents';
+import { LabsV1 } from '@/components/icons/labs';
 
 // ── Design tokens ─────────────────────────────────────────────
 const GOLD        = 'var(--color-gold)';
@@ -23,6 +24,8 @@ const GOLD_BORDER = 'var(--color-gold-border)';
 const PAGE_NAMES: Record<string, string> = {
   '/manifesto':                  'The Manifesto',
   '/pilot':                       'Start a Pilot',
+  '/labs':                         'Labs',
+  '/labs/beyond-retrieval':        'Beyond Retrieval',
   '/field-notes':                 'Field Notes',
   '/technology':                  'Technology',
   '/technology/kernel':           'Intelligence Kernel',
@@ -150,6 +153,16 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'White Papers',   href: '/field-notes?category=white-papers',   live: true },
       { label: 'Novel Thoughts', href: '/field-notes?category=novel-thoughts', live: true },
       { label: 'Guides',         href: '/field-notes?category=guides',         live: true },
+    ],
+  },
+  {
+    label: 'Labs',
+    href: '/labs',
+    sub: 'Benchmarks, experiments & empirical findings',
+    live: true,
+    Icon: LabsV1,
+    children: [
+      { label: 'Beyond Retrieval', href: '/labs/beyond-retrieval', live: true },
     ],
   },
   {

@@ -32,6 +32,7 @@ const FOOTER_COLS = [
       { label: 'Field Notes',    href: '/field-notes'                         },
       { label: 'White Papers',   href: '/field-notes?category=white-papers'   },
       { label: 'Novel Thoughts', href: '/field-notes?category=novel-thoughts' },
+      { label: 'Labs',           href: '/labs'                                },
       { label: 'Partners',       href: '/partners'                            },
     ],
   },
