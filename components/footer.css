@@ -140,8 +140,7 @@
 
 .ft-bottom-sep {
   font-size: 10px;
-  color: var(--color-gold-dim);
-  opacity: 0.2;
+  color: var(--color-text-muted);
 }
 
 /* ── Responsive ──────────────────────────────────────────────── */

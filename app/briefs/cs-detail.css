@@ -320,7 +320,7 @@
 .bd-outcome-card {
   background: var(--card-bg);
   border: var(--card-border);
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   padding: 20px;
   transition: border-color 0.3s ease;
 }
@@ -398,8 +398,7 @@
 
 .bd-owns-item::before {
   content: '✦';
-  color: var(--color-gold);
-  opacity: 0.6;
+  color: var(--color-gold-dim);
   font-size: 10px;
   margin-top: 3px;
   flex-shrink: 0;

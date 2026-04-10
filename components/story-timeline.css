@@ -60,8 +60,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--node-color, #c8a96e) 12%, transparent);
-  border: 1px solid color-mix(in srgb, var(--node-color, #c8a96e) 18%, transparent);
+  background: color-mix(in srgb, var(--node-color, var(--color-gold)) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--node-color, var(--color-gold)) 18%, transparent);
   flex-shrink: 0;
   transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -70,9 +70,9 @@
 .story-timeline-node.st-active .story-timeline-dot {
   width: 8px;
   height: 8px;
-  background: var(--node-color, #c8a96e);
-  border-color: var(--node-color, #c8a96e);
-  box-shadow: 0 0 10px var(--node-glow, rgba(200, 169, 110, 0.35));
+  background: var(--node-color, var(--color-gold));
+  border-color: var(--node-color, var(--color-gold));
+  box-shadow: 0 0 10px var(--node-glow, var(--color-gold-border));
   animation: st-pulse 2.4s ease-in-out infinite;
 }
 
@@ -83,8 +83,8 @@
 
 /* Passed dot */
 .story-timeline-node.st-passed .story-timeline-dot {
-  background: color-mix(in srgb, var(--node-color, #c8a96e) 40%, transparent);
-  border-color: color-mix(in srgb, var(--node-color, #c8a96e) 30%, transparent);
+  background: color-mix(in srgb, var(--node-color, var(--color-gold)) 40%, transparent);
+  border-color: color-mix(in srgb, var(--node-color, var(--color-gold)) 30%, transparent);
 }
 
 /* Label */
@@ -105,12 +105,12 @@
 /* Label visible on hover or active */
 .story-timeline-node:hover .story-timeline-label,
 .story-timeline-node.st-active .story-timeline-label {
-  color: rgba(255, 255, 255, 0.50);
+  color: var(--color-text-muted);
   transform: translateX(0);
 }
 
 .story-timeline-node.st-active .story-timeline-label {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--color-text-secondary);
 }
 
 /* ── Dots only below 1200px — labels overlap content at narrower viewports ── */

@@ -124,7 +124,7 @@
   gap: 16px; max-width: 860px; margin: 0 auto;
 }
 .mem-axis-card {
-  padding: 28px; border-radius: 8px;
+  padding: 28px; border-radius: var(--card-radius);
   border: 1px solid var(--color-border); background: var(--card-bg);
   transition: all 0.35s ease; position: relative; overflow: hidden;
 }
@@ -138,14 +138,14 @@
 .mem-axis-card:hover { border-color: var(--color-border-gold); transform: translateY(-2px); }
 .mem-axis-card-purple:hover { border-color: var(--color-purple-border); }
 .mem-axis-n { font-family: var(--font-ui); font-size: 10px; letter-spacing: 0.14em; color: var(--color-gold-dim); margin-bottom: 10px; }
-.mem-axis-card-purple .mem-axis-n { color: rgba(139,92,246,0.7); }
+.mem-axis-card-purple .mem-axis-n { color: var(--color-purple-dim); }
 .mem-axis-name { font-family: var(--font-body); font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 8px; }
 .mem-axis-badge {
   display: inline-block; font-family: var(--font-ui); font-size: 8px; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--color-gold-dim); border: 1px solid var(--color-border-gold);
   padding: 2px 8px; border-radius: 100px; margin-bottom: 14px;
 }
-.mem-axis-card-purple .mem-axis-badge { color: rgba(139,92,246,0.7); border-color: var(--color-purple-border); }
+.mem-axis-card-purple .mem-axis-badge { color: var(--color-purple-dim); border-color: var(--color-purple-border); }
 .mem-axis-desc { font-family: var(--font-body); font-size: 13px; line-height: 1.65; color: var(--color-text-secondary); }
 
 /* ── KNOWLEDGE CLUSTERS ────────────────────────────────────── */
@@ -153,7 +153,7 @@
 .mem-cluster-visual {
   position: relative; height: 320px;
   background: radial-gradient(ellipse at center, rgba(200,169,110,0.03), transparent 70%);
-  border-radius: 12px; border: 1px solid var(--color-border-subtle);
+  border-radius: var(--card-radius); border: 1px solid var(--color-border-subtle);
   overflow: hidden;
 }
 .mem-cluster-node {
@@ -176,12 +176,12 @@
 }
 .mem-cluster-orbit {
   width: 38px; height: 38px;
-  background: rgba(200,169,110,0.07); border: 1px solid rgba(200,169,110,0.2);
+  background: var(--color-gold-ghost); border: 1px solid var(--color-gold-border);
   color: var(--color-gold-dim); font-size: 7px;
 }
 .mem-cluster-orbit-purple {
-  background: rgba(139,92,246,0.07); border-color: rgba(139,92,246,0.2);
-  color: rgba(139,92,246,0.5);
+  background: var(--color-purple-ghost); border-color: var(--color-purple-border);
+  color: var(--color-purple-dim);
 }
 /* Orbital positions */
 .mem-o1 { top: 18%; left: 22%; }
@@ -215,7 +215,7 @@
 /* ── CORRECTION PROPAGATION ────────────────────────────────── */
 .mem-correction-chain {
   display: flex; align-items: center; gap: 0;
-  padding: 28px; border-radius: 8px;
+  padding: 28px; border-radius: var(--card-radius);
   border: 1px solid var(--color-purple-border);
   background: var(--color-purple-ghost);
   overflow-x: auto;
@@ -229,7 +229,7 @@
 }
 .mem-correction-step-name { font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
 .mem-correction-step-sub  { font-family: var(--font-ui); font-size: 9px; letter-spacing: 0.1em; color: var(--color-text-muted); }
-.mem-correction-pipe { font-size: 16px; color: rgba(139,92,246,0.4); padding: 0 4px; }
+.mem-correction-pipe { font-size: 16px; color: var(--color-purple-dim); padding: 0 4px; }
 
 /* ── CTA ────────────────────────────────────────────────────── */
 .mem-cta-section { text-align: center; padding: clamp(80px,10vh,120px) 0; border-top: 1px solid var(--color-border-subtle); }

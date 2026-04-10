@@ -536,7 +536,7 @@
 .br-cant-item {
   background: var(--card-bg);
   border: var(--card-border);
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   padding: 18px;
   transition: border-color 0.3s ease;
 }

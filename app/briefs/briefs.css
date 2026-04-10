@@ -207,8 +207,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--color-gold);
-  opacity: 0.6;
+  background: var(--color-gold-dim);
   flex-shrink: 0;
 }
 

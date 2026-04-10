@@ -189,7 +189,7 @@
 }
 
 .ag-compare-card--good .ag-compare-label {
-  color: rgba(139, 92, 246, 0.55);
+  color: var(--color-purple-dim);
 }
 
 .ag-compare-flow {
@@ -231,7 +231,6 @@
 .ag-compare-arrow {
   font-size: 11px;
   color: var(--color-text-muted);
-  opacity: 0.3;
 }
 
 .ag-compare-note {
@@ -329,7 +328,7 @@
   font-family: var(--font-ui);
   font-size: 10px;
   letter-spacing: 0.08em;
-  color: rgba(139, 92, 246, 0.35);
+  color: var(--color-purple-dim);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -375,7 +374,7 @@
   font-size: 9px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(139, 92, 246, 0.45);
+  color: var(--color-purple-dim);
   margin-bottom: 24px;
 }
 
@@ -403,9 +402,9 @@
 .ag-depth-synthesis {
   margin-top: 20px;
   padding: 16px 18px;
-  background: rgba(139, 92, 246, 0.03);
-  border: 1px solid rgba(139, 92, 246, 0.1);
-  border-radius: 8px;
+  background: var(--color-purple-ghost);
+  border: 1px solid var(--color-purple-border);
+  border-radius: var(--card-radius);
 }
 
 .ag-depth-synthesis-label {
@@ -413,7 +412,7 @@
   font-size: 9px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(139, 92, 246, 0.4);
+  color: var(--color-purple-dim);
   margin-bottom: 8px;
 }
 
@@ -458,7 +457,7 @@
   font-family: var(--font-ui);
   font-size: 9px;
   letter-spacing: 0.12em;
-  color: rgba(139, 92, 246, 0.3);
+  color: var(--color-purple-dim);
 }
 
 .ag-fleet-badge {
@@ -467,7 +466,6 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold-dim);
-  opacity: 0.45;
 }
 
 .ag-fleet-name {
@@ -515,7 +513,6 @@
   letter-spacing: 0.20em;
   text-transform: uppercase;
   color: var(--color-gold-dim);
-  opacity: 0.55;
   margin-bottom: 12px;
 }
 
@@ -635,7 +632,6 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  opacity: 0.4;
   margin: 0;
 }
 

@@ -306,7 +306,7 @@
   align-items: center;
   gap: 10px;
   padding: 6px 10px;
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   border: 1px solid transparent;
   transition: all 0.35s var(--ease-out);
   cursor: default;
@@ -365,7 +365,7 @@
   align-items: center;
 }
 .h2-card-footer-label {
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--font-body);
   font-style: italic;
   font-size: 11px;
   color: var(--color-gold);
@@ -416,7 +416,7 @@
   padding: 36px 28px;
   background: var(--card-bg);
   border: var(--card-border);
-  border-radius: 12px;
+  border-radius: var(--card-radius);
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 .h2-sector-card:hover {
@@ -692,7 +692,6 @@
   font-style: italic;
   font-size: 11px;
   color: var(--color-gold);
-  opacity: 0.88;
 }
 
 .h2-knows-footer-meta {
@@ -889,7 +888,7 @@
 .h2-evolves-stat {
   background: rgba(255,255,255,0.03);
   border: 0.5px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   padding: 12px 14px;
 }
 
@@ -1122,7 +1121,7 @@
 .h2-evolves-stat {
   background: rgba(255,255,255,0.03);
   border: 0.5px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   padding: 12px 14px;
 }
 

@@ -20,7 +20,7 @@
   filter: blur(120px);
   pointer-events: none;
 }
-.kn-orb-gold   { width: 700px; height: 700px; top: -200px; right: -180px; background: radial-gradient(circle, rgba(200,169,110,0.08), transparent 70%); }
+.kn-orb-gold   { width: 700px; height: 700px; top: -200px; right: -180px; background: radial-gradient(circle, var(--color-gold-ghost), transparent 70%); }
 .kn-orb-purple { width: 500px; height: 500px; bottom: -100px; left: -100px; background: radial-gradient(circle, rgba(139,92,246,0.07), transparent 70%); }
 
 .kn-hero-grid {
@@ -93,7 +93,7 @@
 
 .kn-pipe-stage {
   width: 100%;
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   padding: 16px 20px;
   border: 1px solid var(--color-border);
   background: var(--card-bg);
@@ -103,7 +103,7 @@
   position: relative;
   transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
-.kn-pipe-stage:hover { border-color: var(--color-border-gold); box-shadow: 0 0 24px rgba(200,169,110,0.06); }
+.kn-pipe-stage:hover { border-color: var(--color-border-gold); box-shadow: 0 0 24px var(--color-gold-ghost); }
 
 .kn-pipe-stage-gold   { border-color: rgba(200,169,110,0.22); }
 .kn-pipe-stage-purple { border-color: rgba(139,92,246,0.22); }
@@ -211,7 +211,7 @@
 
 .kn-control-card {
   padding: 28px 28px 24px;
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   border: 1px solid var(--color-border);
   background: var(--card-bg);
   transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
@@ -292,7 +292,7 @@
   margin-left: auto;
   animation: kn-blink 2.4s ease-in-out infinite;
 }
-.kn-intent-row-purple .kn-intent-dot { background: rgba(139,92,246,0.6); animation-delay: 0.8s; }
+.kn-intent-row-purple .kn-intent-dot { background: var(--color-purple-dim); animation-delay: 0.8s; }
 @keyframes kn-blink { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
 
 /* ── FIVE-AXIS RADAR ────────────────────────────────────────── */
@@ -367,10 +367,10 @@
 }
 .kn-cip-package {
   padding: 24px;
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   border: 1px solid var(--color-border-gold);
-  background: linear-gradient(135deg, rgba(200,169,110,0.06), rgba(0,0,0,0) 60%);
-  box-shadow: 0 0 40px rgba(200,169,110,0.06);
+  background: linear-gradient(135deg, var(--color-gold-ghost), rgba(0,0,0,0) 60%);
+  box-shadow: 0 0 40px var(--color-gold-ghost);
 }
 .kn-cip-package-label { font-family: var(--font-ui); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-gold-dim); margin-bottom: 14px; }
 .kn-cip-line { padding: 8px 0; border-bottom: 1px solid var(--color-border-subtle); font-family: var(--font-body); font-size: 12px; color: var(--color-text-secondary); display: flex; gap: 8px; align-items: center; }
@@ -385,7 +385,7 @@
 }
 .kn-agent-card {
   padding: 24px;
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   border: 1px solid var(--color-border);
   background: var(--card-bg);
   transition: all 0.35s ease;

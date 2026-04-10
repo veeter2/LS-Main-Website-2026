@@ -133,7 +133,7 @@
 }
 
 .tech-label-purple {
-  color: rgba(139,92,246,0.55);
+  color: var(--color-purple-dim);
 }
 
 .tech-heading {
@@ -401,8 +401,8 @@
   font-style: italic;
   letter-spacing: 0.04em;
   color: var(--color-gold);
-  background: rgba(200,169,110,0.06);
-  border: 1px solid rgba(200,169,110,0.35);
+  background: var(--color-gold-ghost);
+  border: 1px solid var(--color-gold-border);
   border-radius: 100px;
   padding: 14px 40px;
   cursor: pointer;
@@ -592,7 +592,7 @@
 /* Message card — clean glass, no extra tech-card wrapper */
 .tech-correction-card {
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   background: var(--card-bg);
   overflow: hidden;
   margin-bottom: 2px;
@@ -756,7 +756,7 @@
 }
 
 .tech-prop-complete .tech-prop-timing { color: var(--color-gold-dim); }
-.tech-prop-active   .tech-prop-timing { color: rgba(139,92,246,0.70); }
+.tech-prop-active   .tech-prop-timing { color: var(--color-purple-dim); }
 .tech-prop-pending  .tech-prop-timing { color: var(--color-text-muted); }
 
 .tech-prop-sub {
@@ -1493,7 +1493,7 @@
 .cc-ip-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(200,169,110,0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, var(--color-gold-ghost) 0%, transparent 70%);
   pointer-events: none;
   animation: ccIPGlow 4s ease-in-out infinite;
 }
@@ -1537,8 +1537,8 @@
 
 .cc-mobile-hub {
   padding: 24px 22px;
-  background: rgba(200,169,110,0.06);
-  border: 1px solid rgba(200,169,110,0.30);
+  background: var(--color-gold-ghost);
+  border: 1px solid var(--color-gold-border);
   border-radius: var(--card-radius) var(--card-radius) 0 0;
   text-align: center;
 }
@@ -1952,7 +1952,7 @@
   margin-bottom: 8px;
 }
 
-.tech-fleet-sim-turn--agent .tech-fleet-sim-speaker { color: rgba(139, 92, 246, 0.6); }
+.tech-fleet-sim-turn--agent .tech-fleet-sim-speaker { color: var(--color-purple-dim); }
 .tech-fleet-sim-turn--system .tech-fleet-sim-speaker { color: var(--color-gold-dim); }
 .tech-fleet-sim-turn--ls .tech-fleet-sim-speaker { color: var(--color-gold-dim); }
 
@@ -1995,7 +1995,7 @@
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(139, 92, 246, 0.55);
+  color: var(--color-purple-dim);
   margin-bottom: 16px;
 }
 
