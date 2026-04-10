@@ -12,7 +12,7 @@ const GOLD_G = 'rgba(200,169,110,0.40)';
 const PURP_G = 'rgba(139,92,246,0.45)';
 
 const TIMELINE = [
-  { id: 'burning',   label: 'The Threat',         color: PURPLE, glow: PURP_G },
+  { id: 'burning',   label: 'The Landscape',       color: PURPLE, glow: PURP_G },
   { id: 'opp',       label: 'The Opportunity',     color: GOLD,   glow: GOLD_G },
   { id: 'shift',     label: 'The Model Shift',     color: PURPLE, glow: PURP_G },
   { id: 'models',    label: 'Partner Models',      color: GOLD,   glow: GOLD_G },
@@ -187,13 +187,13 @@ export default function PartnersPage() {
         <div className="pt-hero">
           <span className="pt-badge" data-reveal>Partner Brief — Confidential</span>
           <h1 className="pt-hero-h1" data-reveal data-delay="1">
-            Your clients need institutional memory.<br />
-            You can sell it.
+            Help your clients build something<br />
+            that gets more valuable every year.
           </h1>
           <p className="pt-hero-sub" data-reveal data-delay="2">
             LongStrider is the sovereign intelligence platform that consulting and software
-            engineering firms deploy, wrap services around, and own as a recurring revenue asset —
-            without building a single line of AI infrastructure.
+            engineering firms deploy, build services around, and grow as a recurring revenue asset —
+            without writing a single line of AI infrastructure.
           </p>
           <div className="pt-hero-cta" data-reveal data-delay="3">
             <Link href="/pilot" className="pt-cta-primary">Start the Conversation →</Link>
@@ -206,22 +206,23 @@ export default function PartnersPage() {
         {/* ═══ 01 — THE BURNING PLATFORM ══════════════════════════ */}
         <section className="pt-section" data-section="burning">
           <span className="pt-section-num">01</span>
-          <span className="pt-section-label">The Burning Platform</span>
+          <span className="pt-section-label">The Landscape</span>
           <div className="pt-section-grid">
             <div>
               <h2 className="pt-h2" data-reveal>
-                Your business model is under siege.<br />You already know it.
+                The intelligence shift is here.<br />The firms leading it are moving now.
               </h2>
               <p className="pt-lead" data-reveal data-delay="1">
-                AI agents can now do in hours what junior consultants and engineers took
-                weeks to deliver. Your clients are starting to ask the question you have
-                been dreading: why are we paying for headcount when AI does it faster?
+                AI agents can now do in hours what took consultants and engineers weeks to deliver.
+                Clients are asking sharper questions about where their investment goes — and the
+                firms with compelling answers are the ones building something more than a
+                billable-hour practice.
               </p>
               <p className="pt-body" data-reveal data-delay="2">
-                The firms that survive this shift will not be the ones who fight AI.
-                They will be the ones who wrap themselves around it — and own the layer
-                that AI cannot commoditize. The research is not ambiguous about the
-                direction. The only open question is who positions themselves first in each vertical.
+                The firms that thrive in this shift will not be the ones who fight AI.
+                They will be the ones who build around it — and own the layer
+                that AI cannot commoditize. The research is clear on the direction.
+                The question is who establishes the intelligence practice in each vertical first.
               </p>
               <p className="pt-body" data-reveal data-delay="2">
                 There is one layer AI will never commoditize: the institutional memory
@@ -302,12 +303,12 @@ export default function PartnersPage() {
           <span className="pt-section-num">03</span>
           <span className="pt-section-label">The Model Shift</span>
           <h2 className="pt-h2" data-reveal>
-            Stop selling time.<br />Start selling intelligence.
+            A new revenue stream.<br />A deeper relationship with every client.
           </h2>
           <p className="pt-lead" data-reveal data-delay="1">
-            This is not a gradual optimization of your current model. It is a
-            structural shift in what you sell, how you price it, and what makes
-            clients impossible to replace. The comparison is not subtle.
+            This is not a gradual tweak to your existing practice. It is a meaningful
+            shift in what you deliver, how you price it, and how much more valuable
+            your client relationships become over time. The contrast is clear.
           </p>
           <div className="pt-comparison-table" data-reveal data-delay="2">
             <div className="pt-comparison-header">
@@ -359,14 +360,14 @@ export default function PartnersPage() {
           <span className="pt-section-num">05</span>
           <span className="pt-section-label">The Compound Effect</span>
           <h2 className="pt-h2" data-reveal>
-            The longer you are in it,<br />the more impossible you are to replace.
+            Every engagement deepens the value<br />your clients get from working with you.
           </h2>
           <p className="pt-lead" data-reveal data-delay="1">
-            Most consulting relationships are as durable as the last invoice.
-            A competitor quotes lower and the conversation starts.
-            A LongStrider-embedded engagement is architecturally different —
-            because the intelligence the client has built lives in a platform
-            your firm operates and your methodology shaped.
+            Most consulting relationships plateau — they're only as strong as the
+            most recent project. A LongStrider-embedded engagement is architecturally
+            different: the intelligence the client builds lives in a platform your
+            firm operates and your methodology shaped. Every engagement makes the
+            next one more valuable.
           </p>
 
           <div className="pt-sim-wrap" data-reveal data-delay="2">
@@ -501,21 +502,21 @@ export default function PartnersPage() {
           <span className="pt-section-num">08</span>
           <span className="pt-section-label">The Window</span>
           <h2 className="pt-h2" data-reveal>
-            The window is open now.<br />It will not stay open long.
+            There is a clear window right now<br />to lead this in your vertical.
           </h2>
           <p className="pt-lead" data-reveal data-delay="1">
-            The firms that become known as institutional intelligence partners
-            in their verticals will own that positioning for a decade.
-            The firms that wait — watching their billable hours compress,
-            their margins thin, and their junior pipelines evaporate —
-            will spend that decade trying to catch up.
+            The firms that establish themselves as institutional intelligence partners
+            in their verticals will carry that positioning for a long time.
+            Early movers in a category tend to define what the category looks like —
+            and the firms moving now are building practices their clients
+            will grow alongside for years.
           </p>
           <p className="pt-body" data-reveal data-delay="2">
-            LongStrider is not asking you to bet on AI. You already know AI is changing
-            everything. We are asking you to own the layer of intelligence that AI companies
+            LongStrider is not asking you to make a bet on AI. You already see
+            where this is going. We are inviting you to own the layer that AI companies
             cannot commoditize — the sovereign memory of your clients&apos; organizations —
-            and to build a business around it that grows with every engagement
-            instead of resetting after every project.
+            and to build a practice around it that compounds with every engagement
+            instead of starting over after every project.
           </p>
           <p className="pt-body" data-reveal data-delay="2">
             When you deploy LongStrider, the expertise, the relationships, and the
@@ -526,11 +527,11 @@ export default function PartnersPage() {
           <div className="pt-sovereignty-block" data-reveal data-delay="3">
             <span className="pt-sovereignty-eyebrow">The partner position</span>
             <p className="pt-sovereignty-statement">
-              &ldquo;The product of a consulting engagement should increasingly be a living
-              intelligence layer the client compounds on — not a document about what they
-              should do. LongStrider is that layer. And when you deploy it, everything it
-              learns stays with your firm&apos;s relationship — not with a vendor
-              who doesn&apos;t know the client.&rdquo;
+              &ldquo;The product of a great consulting engagement should increasingly be a living
+              intelligence layer the client continues to build on — not just a document about
+              what they should do. LongStrider is that layer. Everything it learns stays
+              inside your client&apos;s organization, shaped by the expertise
+              your firm brought to it.&rdquo;
             </p>
           </div>
         </section>
@@ -541,12 +542,12 @@ export default function PartnersPage() {
         <div className="pt-cta-section" data-reveal>
           <span className="pt-cta-eyebrow">Begin the Conversation</span>
           <h2 className="pt-cta-h2">
-            Ready to own the intelligence layer<br />your clients can&apos;t live without?
+            Let&apos;s explore what this could<br />look like for your practice.
           </h2>
           <p className="pt-cta-body">
             LongStrider works with a select group of professional services partners.
-            We are looking for firms ready to lead this shift — not follow it.
-            Reach the founding team directly.
+            We keep the intake small so we can genuinely collaborate on how this
+            fits your clients and your practice. Reach the founding team directly.
           </p>
           <div className="pt-cta-actions">
             <Link href="/pilot" className="pt-cta-primary">Reach the Founding Team →</Link>
