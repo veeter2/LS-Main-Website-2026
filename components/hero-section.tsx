@@ -79,7 +79,7 @@ export function HeroSection() {
             color: 'var(--color-text-primary)',
             margin: '0 0 40px',
           }}>
-            The AI layer that knows{' '}
+            The Intelligence layer that knows{' '}
             <span style={{ color: 'var(--color-gold)' }}>you</span>,
             {' '}knows your business&nbsp;&mdash; and never forgets.
           </h1>

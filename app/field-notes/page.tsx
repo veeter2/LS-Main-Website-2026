@@ -199,11 +199,7 @@ export default function FieldNotesPage() {
                   alignItems: 'start',
                   padding: '40px 0',
                   borderBottom: '1px solid var(--color-border)',
-                  cursor: 'pointer',
-                  transition: 'opacity 0.2s ease',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.75'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
               >
                 {/* Left: meta */}
                 <div>
@@ -249,13 +245,13 @@ export default function FieldNotesPage() {
                   </p>
                 </div>
 
-                {/* Right: arrow */}
+                {/* Right: coming soon badge */}
                 <div style={{
-                  fontFamily: 'var(--font-body)', fontSize: '16px',
-                  color: 'var(--color-text-muted)', paddingTop: '4px',
-                  transition: 'color 0.2s ease, transform 0.2s ease',
+                  fontFamily: 'var(--font-ui)', fontSize: '9px',
+                  letterSpacing: '0.14em', textTransform: 'uppercase',
+                  color: 'var(--color-text-muted)', paddingTop: '6px',
                 }}>
-                  →
+                  Coming Soon
                 </div>
               </article>
             ))}

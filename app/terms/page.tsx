@@ -24,7 +24,7 @@ export default function TermsOfServicePage() {
   ]
 
   return (
-    <main className="min-h-screen bg-background pt-16">
+    <main className="min-h-screen bg-background pt-16" style={{ '--color-primary': '#c8a96e', '--tw-ring-color': '#c8a96e' } as React.CSSProperties}>
       {/* Hero Section */}
       <section className="py-24 px-6 bg-gradient-to-br from-background via-background to-primary/5">
         <div className="max-w-4xl mx-auto text-center">
@@ -176,7 +176,7 @@ export default function TermsOfServicePage() {
                   <h4 className="font-semibold text-foreground mb-2">License Grant</h4>
                   <p>
                     We grant you a limited, non-exclusive, non-transferable license to use Longstrider according to your
-                    subscription tier for the duration of your active subscription.
+                    service tier for the duration of your active service agreement.
                   </p>
                 </div>
               </CardContent>
@@ -265,8 +265,8 @@ export default function TermsOfServicePage() {
                   </p>
                   <p>
                     <strong className="text-foreground">Support:</strong> Visit our{" "}
-                    <a href="/help-center" className="text-primary hover:underline">
-                      Help Center
+                    <a href="/contact" className="text-primary hover:underline">
+                      Contact Us
                     </a>
                   </p>
                   <p>

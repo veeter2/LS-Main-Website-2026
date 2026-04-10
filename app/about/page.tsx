@@ -23,7 +23,7 @@ const TEAM = [
   },
   {
     initials: 'IB',
-    name: 'Isabella Buzziard',
+    name: 'Isabella Burzair',
     title: 'Co-Founder, Revenue Operations',
     identity: 'neutral' as const,
     bio: 'Revenue architecture, partner relationships, and the operational backbone that keeps the mission grounded and moving.',

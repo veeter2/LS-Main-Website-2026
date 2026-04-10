@@ -17,14 +17,14 @@ const TIMELINE = [
   { id: 'evidence',   label: 'The Evidence',      color: PURPLE, glow: PURP_G },
   { id: 'means',      label: 'What It Means',     color: GOLD,   glow: GOLD_G },
   { id: 'direction',  label: 'The Direction',     color: PURPLE, glow: PURP_G },
-  { id: 'position',   label: 'The Position',      color: GOLD,   glow: GOLD_G },
+  { id: 'position',   label: 'Founding Position', color: GOLD,   glow: GOLD_G },
 ];
 
 // ── Generation taxonomy ───────────────────────────────────────
 
 const GENERATIONS = [
   {
-    gen: 'Generation I',
+    gen: 'Paradigm I',
     name: 'Generative',
     era: '2020 — present',
     mode: 'Responds',
@@ -33,7 +33,7 @@ const GENERATIONS = [
     limit: 'Intelligence that evaporates.',
   },
   {
-    gen: 'Generation II',
+    gen: 'Paradigm II',
     name: 'Agentic',
     era: '2023 — present',
     mode: 'Acts',
@@ -42,7 +42,7 @@ const GENERATIONS = [
     limit: 'Intelligence that executes, but doesn\'t initiate.',
   },
   {
-    gen: 'Generation III',
+    gen: 'Paradigm III',
     name: 'Reflective',
     era: '2025 — emerging',
     mode: 'Initiates',
@@ -128,7 +128,7 @@ export default function VisionPage() {
 
         {/* ═══ HERO ═══════════════════════════════════════════════ */}
         <div className="vis-hero" data-section="progression">
-          <span className="vis-eyebrow" data-reveal>Vision — The Third Generation</span>
+          <span className="vis-eyebrow" data-reveal>Vision — The Third Paradigm</span>
           <h1 className="vis-hero-h1" data-reveal data-delay="1">
             What comes after agents.
           </h1>
@@ -146,12 +146,12 @@ export default function VisionPage() {
         <section className="vis-section" data-section="progression">
           <span className="vis-section-label" data-reveal>The Progression</span>
           <h2 className="vis-h2" data-reveal data-delay="1">
-            Three generations of machine intelligence.<br />
-            Most people are living in the second.
+            Three paradigms of machine intelligence.<br />
+            Most people are still living inside the second.
           </h2>
           <p className="vis-lead" data-reveal data-delay="2">
-            The generational framing is not marketing. It is an architectural distinction.
-            Each generation represents a fundamentally different relationship between the
+            The paradigm framing is not marketing. It is an architectural distinction.
+            Each paradigm represents a fundamentally different relationship between the
             system and the human — not just in capability, but in who initiates.
           </p>
 
@@ -259,8 +259,8 @@ export default function VisionPage() {
           <div className="vis-means-grid" data-reveal data-delay="2">
             {[
               {
-                heading: 'The tool that uses you',
-                body: 'Every AI tool in market today responds to your input. Its value is bounded by the quality of your questions. You are the intelligence. It is the instrument. You manage it.',
+                heading: 'The limit of instruments',
+                body: 'Conventional AI remains instrument-shaped. It responds to input, follows goals, and executes tasks — but it does not carry an agenda, hold observations, or initiate from continuity. Its usefulness is real, but bounded. The relationship is still operator and tool. Reflective intelligence breaks that frame.',
               },
               {
                 heading: 'The partner that initiates',
@@ -289,7 +289,7 @@ export default function VisionPage() {
         <section className="vis-section" data-section="direction">
           <span className="vis-section-label" data-reveal>The Direction</span>
           <h2 className="vis-h2" data-reveal data-delay="1">
-            Where we are headed.<br />Stated honestly.
+            Where we are headed.
           </h2>
           <div className="vis-direction-block" data-reveal data-delay="2">
             <div className="vis-direction-item">

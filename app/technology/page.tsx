@@ -271,11 +271,11 @@ export default function TechnologyPage() {
         <div className="tech-hero-v2">
           <span className="tech-hero-v2-eyebrow" data-reveal>Technology — Architecture</span>
           <h1 className="tech-hero-v2-h1" data-reveal data-delay="1">
-            The AI layer your organization builds once — and compounds forever.
+            The Sovereign Intelligence Layer — built once, compounds forever.
           </h1>
           <p className="tech-hero-v2-sub" data-reveal data-delay="2">
             Every AI tool your organization runs today is an island.
-            LongStrider is the Intelligence layer that connects them —
+            LongStrider is the Sovereign Intelligence Layer that connects them —
             compounding organizational intelligence that no individual
             tool can build on its own.
           </p>
@@ -332,10 +332,10 @@ export default function TechnologyPage() {
       {/* Chapter I intro */}
       <div className="tech-container">
         <div className="tech-chapter-intro" style={{ marginTop: '56px' }} data-reveal>
-          <span className="tech-chapter-intro-number">How knowledge accumulates</span>
           <p className="tech-chapter-intro-title">
             What happens from the moment data enters to the moment it becomes intelligence you can act on.
           </p>
+          <span className="tech-chapter-intro-number" style={{ display: 'block', marginTop: '12px', fontSize: '15px' }}>How knowledge accumulates</span>
           <p className="tech-chapter-intro-body">
             The field is converging on one insight: intelligence should compound — not just retrieve.
             The right architecture ingests signals, compiles them into structured knowledge,
@@ -365,7 +365,7 @@ export default function TechnologyPage() {
                 </div>
               ))}
             </div>
-            <div className="tech-pattern-arrow-col">
+            <div className="tech-pattern-arrow-col" style={{ justifyContent: 'center', alignItems: 'center' }}>
               {[0,1,2,3,4].map((i) => <div key={i} className="tech-pattern-arrow">→</div>)}
             </div>
             <div className="tech-pattern-col tech-pattern-col-ls">
@@ -654,10 +654,10 @@ export default function TechnologyPage() {
           </div>
           <div className="tech-container">
             <div className="tech-chapter-intro" style={{ marginTop: '56px' }} data-reveal>
-              <span className="tech-chapter-intro-number">How the system retrieves and reasons</span>
               <p className="tech-chapter-intro-title">
                 What happens between your question and the response that knows your business.
               </p>
+              <span className="tech-chapter-intro-number" style={{ display: 'block', marginTop: '12px', fontSize: '15px' }}>How the system retrieves and reasons</span>
               <p className="tech-chapter-intro-body">
                 The Intelligence Engine doesn&apos;t retrieve records. It assembles a Contextual Intelligence
                 Package — a curated narrative built from five simultaneous scoring axes. Here is the pipeline.
@@ -803,10 +803,10 @@ export default function TechnologyPage() {
           </div>
           <div className="tech-container">
             <div className="tech-chapter-intro" style={{ marginTop: '56px' }} data-reveal>
-              <span className="tech-chapter-intro-number">What you own and configure</span>
               <p className="tech-chapter-intro-title">
                 The intelligence substrate is yours. The behavior is yours to define. The data never leaves.
               </p>
+              <span className="tech-chapter-intro-number" style={{ display: 'block', marginTop: '12px', fontSize: '15px' }}>What you own and configure</span>
               <p className="tech-chapter-intro-body">
                 Enterprise AI has one unsolved problem: who&apos;s actually in control?
                 LongStrider answers that architecturally — not through policy.
@@ -924,6 +924,37 @@ export default function TechnologyPage() {
             </div>
           </section>
 
+          {/* ═════════ BYK — Bring Your Own Key ═════════ */}
+          <section className="tech-section tech-container">
+            <div className="tech-card tech-card-gold" data-reveal style={{ maxWidth: '840px', margin: '0 auto' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', flexWrap: 'wrap' }}>
+                <div style={{ flex: 1, minWidth: '240px' }}>
+                  <p className="tech-label" style={{ marginBottom: '10px' }}>Bring Your Own Key</p>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 300, letterSpacing: '-0.02em', lineHeight: 1.2, color: 'var(--color-text-primary)', margin: '0 0 14px' }}>
+                    Your model. Your key. Your intelligence.
+                  </h3>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', lineHeight: 1.65, color: 'var(--color-text-secondary)', margin: 0 }}>
+                    LongStrider is model-agnostic by design. Bring your own API key for OpenAI, Anthropic, or any other provider — or run a fully local model via Ollama or LM Studio. You control the LLM. We supply the intelligence layer. Your keys, your costs, your privacy perimeter.
+                  </p>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '200px' }}>
+                  {[
+                    'OpenAI · GPT-4o, o1, o3',
+                    'Anthropic · Claude 3.5 / 4',
+                    'Ollama · any local model',
+                    'LM Studio · on-prem GPU',
+                    'Any OpenAI-compatible API',
+                  ].map((item) => (
+                    <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--color-text-secondary)' }}>
+                      <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--color-gold)', flexShrink: 0 }} />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* ══════════════════════════════════════════════
               CHAPTER IV — THE FLEET
           ══════════════════════════════════════════════ */}
@@ -943,10 +974,10 @@ export default function TechnologyPage() {
           {/* Chapter IV intro */}
           <div className="tech-container">
             <div className="tech-chapter-intro" style={{ marginTop: '56px' }} data-reveal>
-              <span className="tech-chapter-intro-number">The cognitive substrate agents run on</span>
               <p className="tech-chapter-intro-title">
                 LongStrider is not an agent framework.<br />It is what agent intelligence compounds into.
               </p>
+              <span className="tech-chapter-intro-number" style={{ display: 'block', marginTop: '12px', fontSize: '15px' }}>The cognitive substrate agents run on</span>
               <p className="tech-chapter-intro-body">
                 When you deploy an agent fleet on LangChain or CrewAI, they share nothing. Each agent
                 has no memory of what others found — and when the process ends, the intelligence

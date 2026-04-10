@@ -140,7 +140,7 @@ const TAM_ITEMS = [
   },
   {
     label: 'Your expanded TAM',
-    desc: 'Any organization that benefits from compounding institutional memory — offered as a productized $5\u201325K/month subscription. New clients. New revenue tier. Running in parallel with your existing practice.',
+    desc: 'Any organization that benefits from compounding institutional memory — offered as a productized $5\u201325K/month service contract. New clients. New revenue tier. Running in parallel with your existing practice.',
     accent: true,
   },
   {
@@ -283,7 +283,7 @@ export default function PartnersPage() {
                 body: 'LongStrider is the first platform built specifically for sovereign, persistent, compounding institutional memory. Memory that grows more valuable with every engagement, every interaction, every decision made.',
               },
               {
-                label: 'One your clients cannot self-serve',
+                label: 'Not one they can solve alone',
                 body: 'They cannot build this. It requires infrastructure architecture, intelligence design, and ongoing operational expertise. That is what you become. That is why they cannot leave.',
               },
             ].map((item, i) => (
@@ -422,7 +422,7 @@ export default function PartnersPage() {
               <div className="pt-own-rent-label">Renting AI &mdash; OpenAI · Anthropic · etc.</div>
               <div className="pt-own-rent-math">$60K/year &times; 3 years = $180K spent &rarr; zero residual asset</div>
               <p className="pt-own-rent-note">
-                100% OPEX. Intelligence stays with the vendor. Subscription ends, memory ends.
+                100% OPEX. Intelligence stays with the vendor. Service contract ends, memory ends.
                 You paid for access to a tool, not ownership of an asset.
               </p>
             </div>
@@ -480,7 +480,7 @@ export default function PartnersPage() {
               </div>
               <div className="pt-valuation-row pt-valuation-row--highlighted">
                 <div className="pt-valuation-cell">Platform-embedded firm</div>
-                <div className="pt-valuation-cell">Recurring subscription</div>
+                <div className="pt-valuation-cell">Recurring service contract</div>
                 <div className="pt-valuation-cell">5&ndash;10&times;</div>
                 <div className="pt-valuation-cell pt-valuation-cell--gold">$5&ndash;$10M</div>
               </div>

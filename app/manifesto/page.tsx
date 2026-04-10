@@ -22,7 +22,7 @@ const PURP_G  = 'rgba(139,92,246,0.45)';
 
 const TIMELINE: TimelineNode[] = [
   { id: 'hero',        label: 'LongStrider',   color: GOLD,   glow: GOLD_G,  gated: false },
-  { id: 'gap',         label: 'The Gap',       color: PURPLE, glow: PURP_G,  gated: false },
+  { id: 'gap',         label: 'The Evidence',  color: PURPLE, glow: PURP_G,  gated: false },
   { id: 'what',        label: 'What It Is',    color: GOLD,   glow: GOLD_G,  gated: false },
   { id: 'moat',        label: 'Your Moat',     color: PURPLE, glow: PURP_G,  gated: false },
   { id: 'practice',    label: 'In Practice',   color: GOLD,   glow: GOLD_G,  gated: false },
@@ -145,16 +145,16 @@ export default function ManifestoPage() {
               <div className="deck-pain-line">The decision your team made six months ago.</div>
               <div className="deck-pain-line">The client context that only one person carries in their head.</div>
               <div className="deck-pain-line">The pattern that only shows up when you look across everything at once.</div>
-              <div className="deck-pain-closer">None of it got smarter. And when they leave, it&apos;s gone.</div>
+              <div className="deck-pain-closer">It only taught the LLM — when they leave, their knowledge goes with them.</div>
             </div>
             <p className="deck-body">
-              LongStrider isn&apos;t a tool you subscribe to. It&apos;s an intelligence asset you own — one that sits above your existing stack, makes sense of everything your tools know, and gets smarter every day without anyone maintaining it.
+              LongStrider isn&apos;t a tool you subscribe to. It&apos;s an intelligence asset you own that sits above your existing stack, makes sense of everything your tools know, and gets smarter every day without anyone maintaining it.
             </p>
             <p className="deck-body" style={{ fontWeight: 500, color: 'rgba(255,255,255,0.90)' }}>
               Permanently. Sovereign. Yours.
             </p>
             <div className="deck-cta-moment">
-              <span className="deck-cta-text">The gap between what your AI stack knows and what your organization knows — that&apos;s what LongStrider closes.</span>
+              <span className="deck-cta-text">LongStrider closes the gap between what your AI stack knows and what your organization knows.</span>
             </div>
           </div>
         </section>
@@ -169,33 +169,28 @@ export default function ManifestoPage() {
           </div>
           <div data-reveal data-delay="1">
             <p className="deck-lead">
-              Your tools execute. Your dashboards visualize. Your search finds documents. None of them remember.
+              Your tools execute. Your dashboards visualize. Your search finds documents.<br />
+              And not one of them remembers.
             </p>
           </div>
           <div data-reveal data-delay="2">
             <p className="deck-body">
-              Every model provider is building &ldquo;memory&rdquo; features. They&apos;ll remember your preferences, your history, your patterns. Read the fine print: it&apos;s their memory, not yours. Every conversation your team has on their platforms makes their models smarter — and your competitor&apos;s experience identical to yours.
+              The race to the bottom everyone predicted — it&apos;s here. The model is already commodity.
             </p>
             <p className="deck-body">
-              The organizations that moved fastest on AI in 2025 are about to discover what they actually built. Not an asset. A dependency.
+              Every model provider is building &ldquo;memory&rdquo; features that retain your preferences, your history, your patterns. But read the fine print: it&apos;s their memory, not yours. Every conversation your team has on their platforms makes the vendor&apos;s models smarter — and your competitor&apos;s experience identical to yours.
             </p>
             <p className="deck-body">
-              Every conversation their teams had on those platforms made the vendor&apos;s model smarter — not theirs. When the next model drops — cheaper, faster, better — they&apos;ll switch. And they&apos;ll start from zero. Again.
-            </p>
-            <p className="deck-body">
-              The model is becoming commodity. It already is. Nobody asks which search algorithm powers the bar they type into. They won&apos;t ask which model runs your stack either. The race to the bottom everyone predicted — it&apos;s not coming. It&apos;s here.
+              Nobody asks which search algorithm powers the bar they type into. They won&apos;t ask which model runs your stack either. And when the next model drops — cheaper, faster, better — they&apos;ll switch. And they&apos;ll start from zero. Again.
             </p>
             <p className="deck-body">
               The question your organization hasn&apos;t answered yet: what happens to everything you learn between now and when you switch again? Where does that go? Who owns it?
             </p>
-            <p className="deck-body">
-              The subscription model isn&apos;t the problem. Renting your own intelligence back is.
-              What your organization learns — every decision, every client relationship, every
-              hard-won pattern — should compound for you. Permanently. Not stay on someone
-              else&apos;s servers when you decide to change tools.
+            <p className="deck-body" style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.88)' }}>
+              That layer wasn&apos;t built.
             </p>
-            <p className="deck-body">
-              That layer wasn&apos;t built. LongStrider builds it.
+            <p className="deck-body" style={{ fontWeight: 500, color: 'rgba(255,255,255,0.95)' }}>
+              Until now.
             </p>
           </div>
         </section>
@@ -368,7 +363,7 @@ export default function ManifestoPage() {
                 Bring us your hardest problem.
               </p>
               <p className="deck-body" style={{ textAlign: 'center', maxWidth: '520px', margin: '0 auto 32px', color: 'rgba(255,255,255,0.6)', fontSize: '16px', lineHeight: '1.7' }}>
-                If what you read resonates — if you recognize your organization in these pages — start a pilot. That&apos;s the conversation worth having.
+                If what you read resonates — if you recognize your organization in these pages — start a pilot.
               </p>
               <Link href="/pilot" className="deck-footer-button">
                 <span>Start a pilot</span>

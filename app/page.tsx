@@ -548,6 +548,28 @@ export default function HomeV2Page() {
 
         <div data-reveal className="h2-divider" />
 
+        {/* ══ AGENTS CALLOUT ═════════════════════════ */}
+        <section className="h2-section h2-section-center" data-section="agents" style={{ paddingTop: 'calc(var(--section-pad-v) * 0.7)', paddingBottom: 'calc(var(--section-pad-v) * 0.7)' }}>
+          <div className="h2-inner">
+            <div data-reveal>
+              <span className="h2-label">Agent Intelligence</span>
+              <h2 className="h2-heading" style={{ maxWidth: 700, margin: '0 auto 24px' }}>
+                Agents that compound.<br />Not agents that evaporate.
+              </h2>
+              <p className="h2-lead" style={{ maxWidth: 580, margin: '0 auto 32px' }}>
+                Every other agent framework resets. Findings disappear. Context doesn&apos;t transfer.
+                Agents built on LongStrider write to the same sovereign substrate your primary AI runs on —
+                so what they discover tonight shapes how the system reasons tomorrow.
+              </p>
+              <Link href="/agents" className="h2-cta-pill" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '15px', padding: '12px 32px' }}>
+                See how agents work here →
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <div data-reveal className="h2-divider" />
+
         {/* ══ Chapter 4: YOU OWN IT ══════════════════ */}
         <section className="h2-section h2-section-alt" data-section="sovereign">
           <div className="h2-grid" data-reveal>

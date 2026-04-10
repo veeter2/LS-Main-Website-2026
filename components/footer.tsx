@@ -13,7 +13,7 @@ const FOOTER_COLS = [
     links: [
       { label: 'Manifesto',    href: '/manifesto'   },
       { label: 'Technology',   href: '/technology'  },
-      { label: 'Vision',       href: '/vision'      },
+      { label: 'Agents',       href: '/agents'      },
       { label: 'Start a Pilot',href: '/pilot'       },
     ],
   },
