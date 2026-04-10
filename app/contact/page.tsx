@@ -267,7 +267,7 @@ function Field({ label, value, onChange, type = 'text', required = false }: {
           background: 'rgba(255,255,255,0.03)',
           border: '1px solid rgba(255,255,255,0.08)',
           color: 'rgba(255,255,255,0.88)',
-          fontFamily: "'Lora', Georgia, serif",
+          fontFamily: 'var(--font-body)',
           outline: 'none', boxSizing: 'border-box',
           transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
         }}

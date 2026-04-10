@@ -127,7 +127,7 @@ export default function ArchivePage() {
         {/* Header */}
         <div style={{ marginBottom: "72px" }}>
           <p style={{
-            fontFamily: "'Lora', Georgia, serif",
+            fontFamily: 'var(--font-body)',
             fontSize: "11px", letterSpacing: "0.18em",
             textTransform: "uppercase", color: GOLD_DIM,
             marginBottom: "16px",
@@ -135,7 +135,7 @@ export default function ArchivePage() {
             Internal · Not Indexed
           </p>
           <h1 style={{
-            fontFamily: "'Lora', Georgia, serif",
+            fontFamily: 'var(--font-body)',
             fontSize: "clamp(32px, 5vw, 48px)",
             fontWeight: 300, letterSpacing: "-0.025em",
             color: "rgba(255,255,255,0.95)",
@@ -144,7 +144,7 @@ export default function ArchivePage() {
             Page Archive
           </h1>
           <p style={{
-            fontFamily: "'Lora', Georgia, serif",
+            fontFamily: 'var(--font-body)',
             fontSize: "18px", lineHeight: 1.72,
             color: "rgba(255,255,255,0.55)",
           }}>
@@ -163,7 +163,7 @@ export default function ArchivePage() {
             <div key={status} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: color }} />
               <span style={{
-                fontFamily: "'Lora', Georgia, serif",
+                fontFamily: 'var(--font-body)',
                 fontSize: "12px", letterSpacing: "0.06em",
                 color: "rgba(255,255,255,0.4)",
               }}>
@@ -186,7 +186,7 @@ export default function ArchivePage() {
             >
               {/* Number */}
               <span style={{
-                fontFamily: "'Lora', Georgia, serif",
+                fontFamily: 'var(--font-body)',
                 fontSize: "12px", color: "rgba(200,169,110,0.5)",
                 minWidth: "24px", paddingTop: "3px",
                 letterSpacing: "0.06em",
@@ -201,7 +201,7 @@ export default function ArchivePage() {
                     href={page.href}
                     target="_blank"
                     style={{
-                      fontFamily: "'Lora', Georgia, serif",
+                      fontFamily: 'var(--font-body)',
                       fontSize: "18px", fontWeight: 500,
                       color: "rgba(255,255,255,0.88)",
                       textDecoration: "none",
@@ -213,7 +213,7 @@ export default function ArchivePage() {
                     {page.title}
                   </Link>
                   <span style={{
-                    fontFamily: "'Lora', Georgia, serif",
+                    fontFamily: 'var(--font-body)',
                     fontSize: "10px", letterSpacing: "0.1em",
                     textTransform: "uppercase",
                     color: STATUS_COLORS[page.status],
@@ -222,7 +222,7 @@ export default function ArchivePage() {
                   </span>
                 </div>
                 <p style={{
-                  fontFamily: "'Lora', Georgia, serif",
+                  fontFamily: 'var(--font-body)',
                   fontSize: "15px", lineHeight: 1.65,
                   color: "rgba(255,255,255,0.45)",
                   margin: 0,
@@ -237,7 +237,7 @@ export default function ArchivePage() {
         {/* Footer note */}
         <div style={{ marginTop: "72px", paddingTop: "32px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
           <p style={{
-            fontFamily: "'Lora', Georgia, serif",
+            fontFamily: 'var(--font-body)',
             fontSize: "14px", fontStyle: "italic",
             color: "rgba(255,255,255,0.28)",
           }}>

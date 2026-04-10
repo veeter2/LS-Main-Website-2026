@@ -329,19 +329,19 @@ export default function ManifestoPage() {
               </div>
               <div data-reveal data-delay="2" style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
                 <div className="deck-deploy-card" style={{ border: '1px solid rgba(200,169,110,0.2)', borderRadius: '4px', background: 'rgba(200,169,110,0.04)' }}>
-                  <div style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(200,169,110,0.7)', marginBottom: '10px', fontFamily: "'Lora', Georgia, serif" }}>Hosted Intelligence</div>
+                  <div style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(200,169,110,0.7)', marginBottom: '10px', fontFamily: 'var(--font-ui)' }}>Hosted Intelligence</div>
                   <p className="deck-body" style={{ marginBottom: 0 }}>Your data stays in your environment. The intelligence engine runs in a dedicated instance we operate — isolated to your organization, accessible via API, no shared infrastructure. You own the knowledge. We run the engine.</p>
                 </div>
                 <div className="deck-deploy-card" style={{ border: '1px solid rgba(200,169,110,0.15)', borderRadius: '4px', background: 'rgba(200,169,110,0.025)' }}>
-                  <div style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(200,169,110,0.6)', marginBottom: '10px', fontFamily: "'Lora', Georgia, serif" }}>Private Cloud</div>
+                  <div style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(200,169,110,0.6)', marginBottom: '10px', fontFamily: 'var(--font-ui)' }}>Private Cloud</div>
                   <p className="deck-body" style={{ marginBottom: 0 }}>For organizations requiring complete network control. The intelligence engine deploys as containerized software into your private cloud — your VPC, your servers, your perimeter. No external calls. No source code. Full data residency.</p>
                 </div>
                 <div className="deck-deploy-card" style={{ border: '1px solid rgba(200,169,110,0.1)', borderRadius: '4px', background: 'rgba(200,169,110,0.015)' }}>
-                  <div style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(200,169,110,0.5)', marginBottom: '10px', fontFamily: "'Lora', Georgia, serif" }}>Sovereign Build</div>
+                  <div style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(200,169,110,0.5)', marginBottom: '10px', fontFamily: 'var(--font-ui)' }}>Sovereign Build</div>
                   <p className="deck-body" style={{ marginBottom: 0 }}>For the most sensitive environments. We build alongside your team — containerized, compiled, no source code transferred. When the engagement is complete, the intelligence layer, the knowledge graph, and every compounding insight belong to you. Permanently.</p>
                 </div>
                 <div className="deck-deploy-card" style={{ border: '1px solid rgba(200,169,110,0.08)', borderRadius: '4px', background: 'rgba(200,169,110,0.015)' }}>
-                  <div style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(200,169,110,0.45)', marginBottom: '10px', fontFamily: "'Lora', Georgia, serif" }}>Partner Program</div>
+                  <div style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(200,169,110,0.45)', marginBottom: '10px', fontFamily: 'var(--font-ui)' }}>Partner Program</div>
                   <p className="deck-body" style={{ marginBottom: 0 }}>Deploy LongStrider under your brand, in your client environments. For consultancies, managed service providers, and technology firms building institutional intelligence into their own offerings. You bring the relationships and the vertical knowledge. The intelligence engine is yours to operate, configure, and take to market.</p>
                 </div>
               </div>
