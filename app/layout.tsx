@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter, Lora } from "next/font/google"
+import { Lora } from "next/font/google"
 import "./globals.css"
 import "../styles/ls-tokens.css"
 import "../styles/responsive.css"
@@ -9,8 +9,7 @@ import { SiteAmbient } from "@/components/site-ambient"
 import { Footer } from "@/components/footer"
 import { Toaster } from "@/components/ui/toaster"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
-const lora = Lora({ 
+const lora = Lora({
   subsets: ["latin"], 
   variable: "--font-lora",
   style: ["normal", "italic"],
@@ -143,7 +142,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`dark ${lora.variable} ${inter.variable}`}>
+    <html lang="en" className={`dark ${lora.variable}`}>
       <head>
         <script
           type="application/ld+json"

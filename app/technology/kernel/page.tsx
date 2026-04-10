@@ -107,7 +107,7 @@ function FiveAxisRadar() {
       {pts.map((p, i) => {
         const lx = cx + (p.x-cx)*1.3; const ly = cy + (p.y-cy)*1.3;
         return <text key={i} x={lx} y={ly} textAnchor="middle" dominantBaseline="middle"
-          fontSize="8" fill="rgba(200,169,110,0.55)" fontFamily="'Inter',system-ui" letterSpacing="0.14em">
+          fontSize="8" fill="rgba(200,169,110,0.55)" fontFamily="Lora,Georgia,serif" letterSpacing="0.14em">
           {AXES[i].badge.toUpperCase()}
         </text>;
       })}

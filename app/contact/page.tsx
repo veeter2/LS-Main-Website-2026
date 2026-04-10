@@ -255,7 +255,7 @@ function Field({ label, value, onChange, type = 'text', required = false }: {
   const GOLD_BORDER = 'rgba(200,169,110,0.30)';
   return (
     <div>
-      <label style={{ display: 'block', fontFamily: 'Inter, system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '9px' }}>
+      <label style={{ display: 'block', fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: '9px' }}>
         {label}
       </label>
       <input

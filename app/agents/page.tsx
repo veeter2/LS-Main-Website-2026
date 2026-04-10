@@ -175,7 +175,7 @@ function FlywheelViz() {
       ctx.stroke();
 
       // Core label
-      ctx.font = '500 11px Inter, system-ui';
+      ctx.font = '500 11px Lora, Georgia, serif';
       ctx.fillStyle = GOLD;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -215,7 +215,7 @@ function FlywheelViz() {
 
         // Node label
         const lines = node.label.split('\n');
-        ctx.font = '500 10px Inter, system-ui';
+        ctx.font = '500 10px Lora, Georgia, serif';
         ctx.fillStyle = node.color;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';

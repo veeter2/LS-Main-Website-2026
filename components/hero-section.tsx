@@ -45,7 +45,7 @@ export function HeroSection() {
   const easedProgress = easeOutCubic(progress)
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-black via-zinc-950 to-black">
+    <section className="relative w-full" style={{ background: 'var(--color-bg)' }}>
       {/* Content — manifesto-aligned, above the fold */}
       <div
         className="relative z-10"
