@@ -237,7 +237,7 @@ function OverlayRow({
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
           <span style={{
-            fontFamily: "'Lora', Georgia, serif",
+            fontFamily: 'var(--font-body)',
             fontSize: 'clamp(20px, 2.6vw, 28px)',
             fontWeight: 400, letterSpacing: '-0.02em',
             color: rowColor, transition: 'color 0.3s ease',
@@ -264,15 +264,15 @@ function OverlayRow({
 
           {coming && (
             <span style={{
-              fontFamily: "'Lora', Georgia, serif", fontSize: '9px',
+              fontFamily: 'var(--font-ui)', fontSize: '9px',
               letterSpacing: '0.14em', textTransform: 'uppercase' as const,
               color: 'rgba(255,255,255,0.16)',
             }}>— coming</span>
           )}
         </div>
         <p style={{
-          fontFamily: "'Lora', Georgia, serif", fontSize: '12px',
-          color: coming ? 'rgba(255,255,255,0.10)' : 'rgba(255,255,255,0.28)',
+          fontFamily: 'var(--font-body)', fontSize: '12px',
+          color: coming ? 'rgba(255,255,255,0.12)' : 'var(--color-text-muted)',
           marginTop: '4px', letterSpacing: '0.01em',
           transition: 'color 0.3s ease',
         }}>
@@ -308,20 +308,20 @@ function OverlayRow({
         {item.children?.map((child) => (
           child.live !== false ? (
             <Link key={child.href} href={child.href} onClick={onClose} style={{
-              fontFamily: "'Lora', Georgia, serif", fontSize: '13px',
-              color: 'rgba(255,255,255,0.45)', textDecoration: 'none',
+              fontFamily: 'var(--font-body)', fontSize: '13px',
+              color: 'var(--color-text-secondary)', textDecoration: 'none',
               padding: '6px 0', letterSpacing: '0.01em',
               transition: 'color 0.2s ease', display: 'flex', alignItems: 'center', gap: '7px',
             }}
               onMouseEnter={(e) => (e.currentTarget.style.color = GOLD)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
             >
               {child.label} <span style={{ opacity: 0.35, fontSize: '11px' }}>→</span>
             </Link>
           ) : (
             <span key={child.href} style={{
-              fontFamily: "'Lora', Georgia, serif", fontSize: '13px',
-              color: 'rgba(255,255,255,0.15)', padding: '6px 0',
+              fontFamily: 'var(--font-body)', fontSize: '13px',
+              color: 'rgba(255,255,255,0.18)', padding: '6px 0',
               letterSpacing: '0.01em', display: 'flex', alignItems: 'center', gap: '8px',
             }}>
               {child.label} <span style={{ fontSize: '8px', letterSpacing: '0.12em', textTransform: 'uppercase' as const }}>— coming</span>
@@ -440,7 +440,7 @@ export function Navigation() {
         justifyContent: 'space-between',
         padding: '0 48px',
         overflow: 'visible',
-        background: 'rgba(8,8,9,0.88)',
+        background: 'var(--glass-bg)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderBottom: scrolled
@@ -475,15 +475,15 @@ export function Navigation() {
           {/* Wordmark + breadcrumb */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
             <span style={{
-              fontFamily: "'Lora', Georgia, serif",
+              fontFamily: 'var(--font-body)',
               fontSize: '15px', fontWeight: 500,
               letterSpacing: '0.09em', textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.95)', lineHeight: 1, whiteSpace: 'nowrap',
+              color: 'var(--color-text-primary)', lineHeight: 1, whiteSpace: 'nowrap',
             }}>
               LongStrider
             </span>
             <span style={{
-              fontFamily: "'Lora', Georgia, serif",
+              fontFamily: 'var(--font-ui)',
               fontSize: '10px', letterSpacing: '0.15em',
               textTransform: 'uppercase',
               color: pathname === '/' ? GOLD_DIM : GOLD,
@@ -508,20 +508,20 @@ export function Navigation() {
           aria-label={menuOpen ? 'Close menu' : 'Open navigation'}
           style={{
             position: 'relative',
-            fontFamily: "'Lora', Georgia, serif",
+            fontFamily: 'var(--font-body)',
             fontSize: '13px', fontStyle: 'italic',
             letterSpacing: '0.08em',
             color: GOLD,
             background: 'none',
             cursor: 'pointer',
             padding: '9px 26px',
-            border: `1px solid ${menuOpen || beginHover ? 'rgba(200,169,110,0.65)' : 'rgba(200,169,110,0.45)'}`,
+            border: `1px solid ${menuOpen || beginHover ? 'var(--color-gold-dim)' : GOLD_BORDER}`,
             borderRadius: '100px',
             backgroundColor: menuOpen ? 'rgba(200,169,110,0.09)' : beginHover ? 'rgba(200,169,110,0.07)' : 'transparent',
             boxShadow: menuOpen
-              ? '0 0 32px rgba(200,169,110,0.12), inset 0 0 16px rgba(200,169,110,0.04)'
+              ? 'var(--glow-gold)'
               : beginHover
-              ? '0 0 20px rgba(200,169,110,0.08), inset 0 0 10px rgba(200,169,110,0.03)'
+              ? '0 0 20px rgba(200,169,110,0.08)'
               : 'none',
             transition: 'all 0.35s cubic-bezier(0.16,1,0.3,1)',
             overflow: 'hidden',
@@ -599,9 +599,9 @@ export function Navigation() {
             onClick={() => { setMenuOpen(false); setExpandedItem(null); }}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '10px',
-              fontFamily: "'Lora', Georgia, serif",
+              fontFamily: 'var(--font-body)',
               fontSize: '15px', fontStyle: 'italic', letterSpacing: '0.04em',
-              color: '#c8a96e', textDecoration: 'none',
+              color: GOLD, textDecoration: 'none',
               padding: '12px 28px',
               border: '1px solid rgba(200,169,110,0.35)',
               borderRadius: '100px',
@@ -609,12 +609,12 @@ export function Navigation() {
               transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(200,169,110,0.10)';
-              e.currentTarget.style.borderColor = 'rgba(200,169,110,0.55)';
+              e.currentTarget.style.background = 'var(--color-gold-ghost)';
+              e.currentTarget.style.borderColor = 'var(--color-gold-dim)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'rgba(200,169,110,0.05)';
-              e.currentTarget.style.borderColor = 'rgba(200,169,110,0.35)';
+              e.currentTarget.style.borderColor = GOLD_BORDER;
             }}
           >
             Start a Pilot →
@@ -685,7 +685,7 @@ export function Navigation() {
                   transition: 'all 0.45s cubic-bezier(0.16,1,0.3,1)',
                 }} />
                 <span className="node-label" style={{
-                  fontFamily: "'Lora', Georgia, serif",
+                  fontFamily: 'var(--font-ui)',
                   fontSize: '10px', letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   color: isActive ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0)',
