@@ -89,7 +89,7 @@
 
 /* Label */
 .story-timeline-label {
-  font-family: var(--font-ui, 'Inter', system-ui, sans-serif);
+  font-family: var(--font-ui);
   font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.16em;

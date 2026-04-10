@@ -1,5 +1,5 @@
-/* LONGSTRIDER DESIGN TOKENS v1.1 — responsive */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+/* LONGSTRIDER DESIGN TOKENS v2.0 — Manifesto gold standard */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 
 :root {
   /* ── Color ─────────────────────────────────────────────── */
@@ -10,30 +10,33 @@
   --color-gold-border: rgba(200,169,110,0.35);
   --color-gold-ghost: rgba(200,169,110,0.08);
   --color-purple: #8b5cf6;
-  --color-purple-dim: rgba(139,92,246,0.50);
+  --color-purple-dim: rgba(139,92,246,0.55);
   --color-purple-ghost: rgba(139,92,246,0.08);
   --color-purple-border: rgba(139,92,246,0.25);
   --color-purple-glow: rgba(139,92,246,0.45);
   --color-text-primary: rgba(255,255,255,0.97);
   --color-text-body: rgba(255,255,255,0.88);
-  --color-text-secondary: rgba(255,255,255,0.68);
-  --color-text-muted: rgba(255,255,255,0.38);
-  --color-border: rgba(255,255,255,0.06);
-  --color-border-subtle: rgba(255,255,255,0.04);
+  --color-text-secondary: rgba(255,255,255,0.75);
+  --color-text-muted: rgba(255,255,255,0.50);
+  --color-border: rgba(255,255,255,0.07);
+  --color-border-subtle: rgba(255,255,255,0.05);
   --color-border-gold: rgba(200,169,110,0.22);
 
   /* ── Typography ────────────────────────────────────────── */
+  /* display = Cormorant Garamond for big moments only (wordmarks, H1/H2, large numbers, pull quotes) */
+  /* body    = Lora for all prose, leads, body copy */
+  /* ui      = Lora for all chrome: labels, eyebrows, badges, nav, uppercase tracking */
   --font-display: 'Cormorant Garamond','Lora',Georgia,serif;
   --font-body: 'Lora',Georgia,serif;
-  --font-ui: 'Inter',-apple-system,system-ui,sans-serif;
+  --font-ui: 'Lora',Georgia,serif;
 
   /* ── Surface ───────────────────────────────────────────── */
   --glass-bg: rgba(8,8,9,0.85);
   --glass-blur: blur(20px);
   --card-bg: rgba(255,255,255,0.02);
   --card-bg-hover: rgba(255,255,255,0.038);
-  --card-border: 1px solid rgba(255,255,255,0.06);
-  --card-radius: 14px;
+  --card-border: 1px solid rgba(255,255,255,0.07);
+  --card-radius: 4px;
   --ease-out: cubic-bezier(0.16,1,0.3,1);
   --shadow-float: 0 12px 48px rgba(0,0,0,0.55);
   --glow-gold: 0 0 24px rgba(200,169,110,0.15);
@@ -97,8 +100,17 @@ body {
   text-rendering: geometricPrecision;
 }
 
-[data-reveal] { opacity:0; transform:translateY(24px); transition: opacity .85s var(--ease-out), transform .85s var(--ease-out); }
-[data-reveal].revealed { opacity:1; transform:translateY(0); }
-[data-reveal][data-delay="1"] { transition-delay:100ms; }
-[data-reveal][data-delay="2"] { transition-delay:220ms; }
-[data-reveal][data-delay="3"] { transition-delay:340ms; }
+/* ── Reveal animation — canonical spec (manifesto gold standard) ── */
+/* All pages use IntersectionObserver → adds .deck-visible               */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out);
+}
+[data-reveal].deck-visible { opacity: 1; transform: translateY(0); }
+[data-reveal][data-delay="1"] { transition-delay: 120ms; }
+[data-reveal][data-delay="2"] { transition-delay: 240ms; }
+[data-reveal][data-delay="3"] { transition-delay: 360ms; }
+[data-reveal][data-delay="4"] { transition-delay: 480ms; }
+[data-reveal][data-delay="5"] { transition-delay: 600ms; }
+[data-reveal][data-delay="6"] { transition-delay: 720ms; }

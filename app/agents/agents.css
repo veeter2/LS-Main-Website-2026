@@ -72,22 +72,7 @@
   margin: 80px 0;
 }
 
-/* ── Reveal ──────────────────────────────────────────────────── */
-
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
-}
-
-[data-reveal][data-delay="1"] { transition-delay: 0.1s; }
-[data-reveal][data-delay="2"] { transition-delay: 0.2s; }
-[data-reveal][data-delay="3"] { transition-delay: 0.32s; }
-
-[data-reveal].deck-visible {
-  opacity: 1;
-  transform: none;
-}
+/* [data-reveal] — canonical spec in styles/ls-tokens.css */
 
 /* ── Section structure ───────────────────────────────────────── */
 
@@ -118,7 +103,7 @@
   font-size: 10px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(139, 92, 246, 0.55);
+  color: var(--color-purple-dim);
   margin-bottom: 24px;
 }
 
@@ -142,7 +127,7 @@
 }
 
 .ag-hero-sub--accent {
-  border-left: 2px solid rgba(139, 92, 246, 0.3);
+  border-left: 2px solid var(--color-purple-border);
   padding-left: 20px;
   font-style: italic;
   color: var(--color-text-primary);
@@ -581,7 +566,7 @@
   font-size: 9px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(139, 92, 246, 0.45);
+  color: var(--color-purple-dim);
   margin-bottom: 24px;
 }
 

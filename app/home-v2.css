@@ -185,7 +185,7 @@
   font-size: 10px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.28);
+  color: var(--color-text-muted);
 }
 
 .h2-card-counter {
@@ -274,7 +274,7 @@
   padding: 3px 10px;
   border-radius: 100px;
   border: 1px solid var(--color-border);
-  color: rgba(255,255,255,0.28);
+  color: var(--color-text-muted);
   margin-left: auto;
 }
 
@@ -373,7 +373,7 @@
 .h2-card-footer-meta {
   font-family: monospace;
   font-size: 10px;
-  color: rgba(255,255,255,0.25);
+  color: var(--color-text-muted);
 }
 
 /* ── Canvas card ──────────────────────────────────────────────── */
@@ -496,15 +496,7 @@
   margin: 28px 0 0;
 }
 
-/* ── Scroll reveal — same token as ls-tokens.css ─────────────── */
-/* ls-tokens.css defines [data-reveal] → .revealed               */
-/* We ADD the manifesto-style alias so both work                  */
-
-[data-reveal].deck-visible,
-[data-reveal].revealed {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
+/* [data-reveal] — canonical spec in styles/ls-tokens.css */
 
 /* ── Keyframes ────────────────────────────────────────────────── */
 
