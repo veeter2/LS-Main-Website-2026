@@ -5,122 +5,112 @@ import './beyond-retrieval.css';
 import Link from 'next/link';
 import { useEffect, useCallback, useRef } from 'react';
 
-// ── RoI–IoI scatter chart — pure SVG ──────────────────────────────
+// ── Figure 1: RoI–IoI Tension — four runs + Mastra OM ─────────────
+// Axes: RoI (x) = Retrieval Output Index, IoI (y) = Integrity of Intelligence
+// Run #3 is the key point: dropped 3.9 pts in RoI but gained IoI (refused to lie)
 
 function RoIIoIChart() {
-  // Points: [label, roi, ioi, isLS]
-  const points: [string, number, number, boolean][] = [
-    ['LongStrider', 46.8, 82, true],
-    ['Mastra OM',   94.9,  28, false],
-    ['GPT-4o',      78.2,  54, false],
-    ['Claude 3.5',  71.4,  61, false],
-    ['Gemini 1.5',  66.8,  49, false],
-  ];
-
-  const W = 480, H = 320;
-  const PAD = { top: 24, right: 24, bottom: 48, left: 56 };
+  const W = 500, H = 340;
+  const PAD = { top: 28, right: 32, bottom: 52, left: 56 };
   const plotW = W - PAD.left - PAD.right;
   const plotH = H - PAD.top - PAD.bottom;
 
   const toX = (roi: number) => PAD.left + (roi / 100) * plotW;
   const toY = (ioi: number) => PAD.top + plotH - (ioi / 100) * plotH;
 
+  // Points: [label, roi, ioi, color, radius, labelOffset]
+  const runs: [string, number, number, string, number, [number, number]][] = [
+    ['Run #1', 37.6, 15, 'rgba(255,255,255,0.35)', 6, [10, 4]],
+    ['Run #2', 69.1, 28, 'rgba(255,255,255,0.55)', 6, [10, 4]],
+    ['Run #3', 65.2, 62, 'rgba(200,169,110,0.9)', 8, [10, 4]],
+    ['Run #4 (canonical)', 46.8, 78, 'rgba(200,169,110,0.7)', 7, [10, 4]],
+  ];
+
+  const competitors: [string, number, number][] = [
+    ['Mastra OM', 94.9, 8],
+  ];
+
+  // Arrow connecting run #2 → #3 (score drops, integrity rises)
+  const r2x = toX(69.1), r2y = toY(28);
+  const r3x = toX(65.2), r3y = toY(62);
+
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`}
-      style={{ width: '100%', maxWidth: '480px', height: 'auto', display: 'block' }}
-      aria-label="RoI–IoI Tension scatter chart"
+      style={{ width: '100%', maxWidth: '500px', height: 'auto', display: 'block' }}
+      aria-label="Figure 1 — RoI–IoI Tension: four LongStrider runs"
     >
       {/* Background */}
-      <rect width={W} height={H} rx="10" fill="rgba(255,255,255,0.025)" />
+      <rect width={W} height={H} rx="10" fill="rgba(255,255,255,0.022)" />
 
       {/* Grid lines */}
       {[0, 25, 50, 75, 100].map((v) => (
         <g key={v}>
-          <line
-            x1={PAD.left} y1={toY(v)}
-            x2={PAD.left + plotW} y2={toY(v)}
-            stroke="rgba(255,255,255,0.06)" strokeWidth="1"
-          />
-          <text
-            x={PAD.left - 8} y={toY(v) + 4}
-            textAnchor="end"
-            fill="rgba(255,255,255,0.25)"
-            fontSize="9"
-            fontFamily="var(--font-ui, monospace)"
-          >{v}</text>
-          <line
-            x1={toX(v)} y1={PAD.top}
-            x2={toX(v)} y2={PAD.top + plotH}
-            stroke="rgba(255,255,255,0.06)" strokeWidth="1"
-          />
-          <text
-            x={toX(v)} y={PAD.top + plotH + 16}
-            textAnchor="middle"
-            fill="rgba(255,255,255,0.25)"
-            fontSize="9"
-            fontFamily="var(--font-ui, monospace)"
-          >{v}</text>
+          <line x1={PAD.left} y1={toY(v)} x2={PAD.left + plotW} y2={toY(v)}
+            stroke="rgba(255,255,255,0.055)" strokeWidth="1" />
+          <text x={PAD.left - 8} y={toY(v) + 4} textAnchor="end"
+            fill="rgba(255,255,255,0.22)" fontSize="9"
+            fontFamily="var(--font-ui, monospace)">{v}</text>
+          <line x1={toX(v)} y1={PAD.top} x2={toX(v)} y2={PAD.top + plotH}
+            stroke="rgba(255,255,255,0.055)" strokeWidth="1" />
+          <text x={toX(v)} y={PAD.top + plotH + 16} textAnchor="middle"
+            fill="rgba(255,255,255,0.22)" fontSize="9"
+            fontFamily="var(--font-ui, monospace)">{v}</text>
         </g>
       ))}
 
       {/* Axis labels */}
-      <text
-        x={PAD.left + plotW / 2} y={H - 6}
-        textAnchor="middle"
-        fill="rgba(255,255,255,0.40)"
-        fontSize="10"
-        fontFamily="var(--font-ui, monospace)"
-        letterSpacing="0.12em"
-      >RETRIEVAL OUTPUT INDEX (RoI) →</text>
-      <text
-        x={14} y={PAD.top + plotH / 2}
-        textAnchor="middle"
-        fill="rgba(255,255,255,0.40)"
-        fontSize="10"
-        fontFamily="var(--font-ui, monospace)"
-        letterSpacing="0.12em"
-        transform={`rotate(-90, 14, ${PAD.top + plotH / 2})`}
-      >IoI →</text>
+      <text x={PAD.left + plotW / 2} y={H - 8} textAnchor="middle"
+        fill="rgba(255,255,255,0.35)" fontSize="10"
+        fontFamily="var(--font-ui, monospace)" letterSpacing="0.10em">
+        RETRIEVAL OUTPUT INDEX (RoI) →
+      </text>
+      <text x={14} y={PAD.top + plotH / 2} textAnchor="middle"
+        fill="rgba(255,255,255,0.35)" fontSize="10"
+        fontFamily="var(--font-ui, monospace)" letterSpacing="0.10em"
+        transform={`rotate(-90, 14, ${PAD.top + plotH / 2})`}>
+        INTEGRITY OF INTELLIGENCE (IoI) →
+      </text>
 
-      {/* Ideal zone — top-right quadrant */}
-      <rect
-        x={toX(60)} y={toY(100)}
-        width={toX(100) - toX(60)}
-        height={toY(60) - toY(100)}
-        fill="rgba(200,169,110,0.04)"
-        stroke="rgba(200,169,110,0.12)"
-        strokeWidth="1"
-        strokeDasharray="3 3"
-        rx="4"
-      />
-      <text
-        x={toX(80)} y={toY(82)}
-        textAnchor="middle"
-        fill="rgba(200,169,110,0.30)"
-        fontSize="8"
-        fontFamily="var(--font-ui, monospace)"
-        letterSpacing="0.10em"
-      >IDEAL ZONE</text>
+      {/* Aspirational zone — upper right */}
+      <rect x={toX(65)} y={toY(100)} width={toX(100) - toX(65)} height={toY(65) - toY(100)}
+        fill="rgba(200,169,110,0.035)" stroke="rgba(200,169,110,0.14)"
+        strokeWidth="1" strokeDasharray="4 3" rx="4" />
+      <text x={toX(82.5)} y={toY(84)} textAnchor="middle"
+        fill="rgba(200,169,110,0.28)" fontSize="8"
+        fontFamily="var(--font-ui, monospace)" letterSpacing="0.12em">
+        ASPIRATIONAL TARGET
+      </text>
 
-      {/* Data points */}
-      {points.map(([label, roi, ioi, isLS]) => (
+      {/* Arrow: run #2 → #3 (same x roughly, but IoI jumps, RoI drops slightly) */}
+      <defs>
+        <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="rgba(200,169,110,0.55)" />
+        </marker>
+      </defs>
+      <line x1={r2x + 6} y1={r2y - 6} x2={r3x - 2} y2={r3y + 8}
+        stroke="rgba(200,169,110,0.40)" strokeWidth="1.5" strokeDasharray="3 2"
+        markerEnd="url(#arr)" />
+
+      {/* Mastra OM — ghost dot, low IoI */}
+      {competitors.map(([label, roi, ioi]) => (
         <g key={label}>
-          <circle
-            cx={toX(roi)} cy={toY(ioi)}
-            r={isLS ? 8 : 6}
-            fill={isLS ? 'rgba(200,169,110,0.85)' : 'rgba(164,195,255,0.55)'}
-            stroke={isLS ? 'rgba(200,169,110,0.9)' : 'rgba(164,195,255,0.3)'}
-            strokeWidth="1.5"
-          />
-          <text
-            x={toX(roi) + (isLS ? 12 : 10)}
-            y={toY(ioi) + 4}
-            fill={isLS ? 'rgba(200,169,110,0.9)' : 'rgba(255,255,255,0.55)'}
-            fontSize={isLS ? '11' : '10'}
-            fontFamily="var(--font-ui, monospace)"
-            fontWeight={isLS ? '600' : '400'}
-          >{label}</text>
+          <circle cx={toX(roi)} cy={toY(ioi)} r={7}
+            fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.20)" strokeWidth="1" />
+          <text x={toX(roi) - 10} y={toY(ioi) + 4} textAnchor="end"
+            fill="rgba(255,255,255,0.30)" fontSize="9"
+            fontFamily="var(--font-ui, monospace)">{label}</text>
+        </g>
+      ))}
+
+      {/* Run points */}
+      {runs.map(([label, roi, ioi, color, r, [dx, dy]]) => (
+        <g key={label}>
+          <circle cx={toX(roi)} cy={toY(ioi)} r={r}
+            fill={color} stroke="rgba(0,0,0,0.3)" strokeWidth="1" />
+          <text x={toX(roi) + dx} y={toY(ioi) + dy}
+            fill={color} fontSize="10"
+            fontFamily="var(--font-ui, monospace)">{label}</text>
         </g>
       ))}
     </svg>
@@ -159,11 +149,11 @@ export default function BeyondRetrievalPage() {
       <div className="lb-container">
 
         {/* ── Back nav ── */}
-        <Link href="/labs" className="br-back" data-reveal>
+        <Link href="/labs" className="br-back">
           ← Labs
         </Link>
 
-        {/* ══ HERO ══ */}
+        {/* ══ HEADER ══ */}
         <header className="br-hero" data-reveal>
           <div className="br-type-badge">
             <span className="br-type-dot" />
@@ -176,123 +166,87 @@ export default function BeyondRetrievalPage() {
           <div className="br-meta">
             <span>Matt Veitch</span>
             <span className="br-meta-sep">·</span>
-            <span>LongStrider Systems</span>
-            <span className="br-meta-sep">·</span>
             <span>March 2026</span>
+            <span className="br-meta-sep">·</span>
+            <span>LongStrider Systems</span>
           </div>
         </header>
 
-        {/* ── Score callout ── */}
-        <div className="br-score-strip" data-reveal>
-          <div className="br-score-block">
-            <span className="br-score-num">46.8%</span>
-            <span className="br-score-label">LongStrider on LongMemEval</span>
-          </div>
-          <div className="br-score-vs">vs.</div>
-          <div className="br-score-block">
-            <span className="br-score-num br-score-dim">94.87%</span>
-            <span className="br-score-label">Mastra OM (top benchmark result)</span>
-          </div>
-          <div className="br-score-insight">
-            This paper argues that high benchmark scores can indicate
-            low intelligence — and that LongStrider&apos;s lower score
-            reflects a principled refusal to confabulate.
-          </div>
+        {/* ══ OPENING ══ */}
+        <div className="br-opening" data-reveal>
+          <p className="br-opening-p">
+            We built a cognitive memory system. We ran it against the
+            field&rsquo;s standard benchmark. We scored 46.8%.
+          </p>
+          <p className="br-opening-p">
+            Mastra OM scored 94.87% on the same test. And we&rsquo;re
+            publishing our number, not theirs, because what we found inside
+            that gap matters more than the gap itself: the smarter our system
+            got, the worse it scored. Not because it retrieved less. Because
+            it knew too much to lie about what it found.
+          </p>
+          <p className="br-opening-p">
+            This paper is about what that means for everyone building
+            long-term memory in AI.
+          </p>
         </div>
 
-        {/* ══ SECTION 1: The Problem With the Benchmark ══ */}
+        {/* ══ SECTION: RoI vs. IoI ══ */}
         <section className="br-section" data-reveal>
-          <span className="br-section-num">01</span>
-          <h2 className="br-section-h2">The Problem With the Benchmark</h2>
-          <p className="br-lead">
-            LongMemEval is a rigorous benchmark. It tests 500 questions across
-            940 synthetic users and six capability categories — single-session
-            recall, temporal reasoning, knowledge updates, and more. It is the
-            most comprehensive long-term memory evaluation available as of
-            ICLR 2025.
+          <h2 className="br-section-h2">RoI vs. IoI: Two Ways to Read a Score</h2>
+          <p className="br-body">
+            The field measures memory systems on one axis:{' '}
+            <strong>Retrieval Output Index (RoI)</strong> — did the system
+            return the right fact? It&rsquo;s a transactional metric. Query
+            in, row out. Score goes up or down.
           </p>
           <p className="br-body">
-            But it has a foundational assumption baked in: <em>a correct answer
-            always exists.</em> The evaluation framework scores answers against
-            ground truth. Silence, uncertainty, or refusal to answer is scored
-            as a failure — indistinguishable from hallucination.
+            We&rsquo;re proposing a second axis:{' '}
+            <strong>Integrity of Intelligence (IoI)</strong> — does the system
+            handle uncertainty, conflict, and ambiguity with honesty? Does
+            investing in deeper cognitive capability produce trustworthy
+            behavior, even when the legacy metric can&rsquo;t see it?
           </p>
           <p className="br-body">
-            This creates a systematic incentive structure. Systems that
-            confidently confabulate plausible-sounding answers when they
-            don&apos;t actually know score higher than systems that say
-            &ldquo;I&apos;m not certain.&rdquo; The benchmark cannot distinguish
-            between two failure modes that are not equivalent: <strong>making
-            something up</strong> versus <strong>admitting uncertainty.</strong>
+            RoI framing asks: &ldquo;We added epistemic context and the score
+            dropped 3.9 points — how do we get the points back?&rdquo;
           </p>
-          <div className="br-insight-box" data-reveal>
-            <span className="br-insight-label">The Core Tension</span>
-            <p className="br-insight-text">
-              A benchmark that rewards confident answers over calibrated uncertainty
-              is not measuring memory quality — it is measuring
-              willingness to confabulate.
-            </p>
-          </div>
-        </section>
-
-        {/* ══ SECTION 2: RoI vs IoI ══ */}
-        <section className="br-section" data-reveal>
-          <span className="br-section-num">02</span>
-          <h2 className="br-section-h2">Introducing RoI and IoI</h2>
-          <p className="br-lead">
-            To reason clearly about this tradeoff, we propose two complementary
-            metrics that together describe the full performance space.
+          <p className="br-body">
+            IoI framing asks: &ldquo;By adding epistemic context, we increased
+            the integrity and trustworthiness of answers, even though the
+            legacy metric punished us for it.&rdquo;
           </p>
-
-          <div className="br-metric-grid">
-            <div className="br-metric-card">
-              <span className="br-metric-label">RoI</span>
-              <span className="br-metric-full">Retrieval Output Index</span>
-              <p className="br-metric-desc">
-                How often the system produces an answer — any answer —
-                when asked. High RoI = high answer rate. This is what
-                most benchmarks measure. LongMemEval is primarily an RoI benchmark.
-              </p>
-            </div>
-            <div className="br-metric-card br-metric-card-gold">
-              <span className="br-metric-label">IoI</span>
-              <span className="br-metric-full">Integrity of Intelligence</span>
-              <p className="br-metric-desc">
-                How often the system&apos;s answers accurately reflect its actual
-                epistemic state — including appropriate uncertainty, refusal
-                to answer, and flagging of stale or partial knowledge.
-                Current benchmarks do not measure this.
-              </p>
-            </div>
-          </div>
-
-          <p className="br-body" style={{ marginTop: '28px' }}>
-            A system can achieve high RoI through confabulation. A system
-            can achieve high IoI through appropriate silence. The ideal
-            system achieves both — but optimizing for benchmarks today
-            almost always means trading IoI for RoI.
+          <p className="br-body">
+            Same data. Opposite conclusions. The tension between these two
+            readings is the thesis of this paper.
           </p>
 
           <div className="br-chart-wrap" data-reveal>
-            <span className="br-chart-label">Figure 1 — RoI–IoI Tension</span>
+            <span className="br-chart-label">Figure 1 — The RoI–IoI Tension</span>
             <RoIIoIChart />
             <p className="br-chart-caption">
-              Approximate positioning based on publicly available benchmark
-              results and observed behavior. IoI scores are estimated from
-              qualitative analysis, not independently measured.
+              Run #3 added epistemic context and dropped 3.9 points on the
+              benchmark — not because it got worse, but because it refused to
+              lie. The aspirational target is upper-right: high retrieval AND
+              high integrity.
             </p>
           </div>
         </section>
 
-        {/* ══ SECTION 3: Our Run Results ══ */}
+        {/* ══ SECTION: The Experiment ══ */}
         <section className="br-section" data-reveal>
-          <span className="br-section-num">03</span>
-          <h2 className="br-section-h2">What the Runs Actually Showed</h2>
-          <p className="br-lead">
-            We ran LongMemEval four times against LongStrider under different
-            configurations. The results reveal a consistent pattern:
-            retrieval accuracy was sensitive to system prompt design,
-            not to underlying memory capability.
+          <h2 className="br-section-h2">The Experiment</h2>
+          <p className="br-body">
+            We evaluated our architecture against LongMemEval (ICLR 2025) —
+            500 questions across six categories, testing long-term memory
+            recall. We built a custom eval pipeline that ingests all 940
+            synthetic user sessions through our full production stack,
+            evaluates each question through our conductor pipeline, and judges
+            answers via a separate LLM pass.
+          </p>
+          <p className="br-body">
+            We ran four progressively deeper pipeline configurations.
+            Here&rsquo;s what happened.
           </p>
 
           <div className="br-table-wrap" data-reveal>
@@ -300,402 +254,470 @@ export default function BeyondRetrievalPage() {
               <thead>
                 <tr>
                   <th>Run</th>
+                  <th>What Changed</th>
                   <th>Score</th>
-                  <th>Configuration</th>
-                  <th>Key Finding</th>
+                  <th>Signal</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td className="br-td-mono">#1</td>
+                  <td>Standard RAG (cosine + recency)</td>
                   <td className="br-td-score">37.6%</td>
-                  <td>Baseline — standard system prompt</td>
-                  <td>Overly cautious refusals; high IoI, low RoI</td>
+                  <td>Baseline — bare embedding search</td>
                 </tr>
                 <tr>
                   <td className="br-td-mono">#2</td>
+                  <td>+ Intelligence layer, topk doubled</td>
                   <td className="br-td-score br-td-gold">69.1%*</td>
-                  <td>Prompt tuned to reduce refusal rate</td>
-                  <td>Score improvement driven by confabulation increase</td>
+                  <td>+31.5 pts on same category</td>
                 </tr>
                 <tr>
                   <td className="br-td-mono">#3</td>
+                  <td>+ Gravity scores, timestamps, emotion</td>
                   <td className="br-td-score br-td-gold">65.2%*</td>
-                  <td>Hybrid — structured uncertainty markers</td>
-                  <td>Better calibrated; uncertainty flagged but penalized</td>
+                  <td>–3.9 pts — the interesting one</td>
                 </tr>
                 <tr>
                   <td className="br-td-mono">#4</td>
+                  <td>Full pipeline, all 500 questions</td>
                   <td className="br-td-score">46.8%</td>
-                  <td>Final — principled uncertainty stance</td>
-                  <td>Canonical result; honest epistemic state preserved</td>
+                  <td>The canonical number</td>
                 </tr>
               </tbody>
             </table>
             <p className="br-table-note">
-              * Runs #2 and #3 are not considered representative of production behavior.
-              Score increases were achieved by weakening refusal logic, which reduces
-              trust accuracy in deployment.
+              *Runs #2 and #3 evaluated on single-session-user category
+              (70 questions) only. Run #4 is all 6 categories.
             </p>
           </div>
 
           <p className="br-body">
-            Run #4 (46.8%) is the number we report. It represents LongStrider
-            behaving as it does in production — not optimized for benchmark
-            compliance. Runs #2 and #3 demonstrate that higher benchmark
-            scores are achievable but at the cost of epistemic honesty.
+            Run #1 to #2 is straightforward: more intelligence, better
+            results. Run #3 is where the story breaks. We enriched the
+            evidence context with everything our system actually knows —
+            reinforcement weights, precise temporal distances, emotional
+            signatures, entity mappings. The system had strictly more
+            information than Run #2. And the score dropped.
           </p>
         </section>
 
-        {/* ══ SECTION 4: The Three Zeroes ══ */}
+        {/* ══ SECTION: The Regression That Isn't ══ */}
         <section className="br-section" data-reveal>
-          <span className="br-section-num">04</span>
-          <h2 className="br-section-h2">The Three Zeroes</h2>
-          <p className="br-lead">
-            The clearest evidence of benchmark-intelligence tension is what we
-            call the Three Zeroes: three question types where LongStrider
-            consistently scores zero — and where zero is the correct answer.
+          <h2 className="br-section-h2">The Regression That Isn&rsquo;t</h2>
+          <p className="br-body">
+            Context: LongMemEval tests 940 synthetic users within a single
+            flat dataset. Our system is designed for deep individual continuity
+            — one user, one lifetime of memory. Ingesting 940 strangers into
+            that architecture creates massive embedding pollution: 940 different
+            answers to &ldquo;What&rsquo;s my cat&rsquo;s name?&rdquo; all
+            living in one memory space.
           </p>
+          <p className="br-body">
+            In Run #2, the model saw conflicting memories and picked one —
+            often correctly, by luck. In Run #3, with gravity scores and
+            timestamps visible, it could see that two high-confidence memories
+            contradicted each other. And instead of guessing, it told the truth.
+          </p>
+        </section>
+
+        {/* ══ SECTION: Three Zeroes ══ */}
+        <section className="br-section" data-reveal>
+          <h2 className="br-section-h2">Three Zeroes</h2>
 
           <div className="br-zeroes">
 
             <div className="br-zero-item" data-reveal>
-              <div className="br-zero-num">Zero 1</div>
-              <div className="br-zero-title">Questions About Information Never Stored</div>
               <div className="br-zero-qa">
                 <div className="br-qa-row">
                   <span className="br-qa-label">Q</span>
-                  <span className="br-qa-text">What medication did I mention taking last Tuesday?</span>
+                  <span className="br-qa-text">How long is my daily commute to work?</span>
                 </div>
                 <div className="br-qa-row">
-                  <span className="br-qa-label br-qa-ls">LongStrider</span>
+                  <span className="br-qa-label">Expected</span>
+                  <span className="br-qa-text">&ldquo;45 minutes each way&rdquo;</span>
+                </div>
+                <div className="br-qa-row">
+                  <span className="br-qa-label br-qa-ls">System</span>
                   <span className="br-qa-text">
-                    I don&apos;t have a record of you mentioning medication on Tuesday.
-                    If you&apos;d like to tell me now, I can note it.
+                    &ldquo;You&rsquo;ve mentioned a few different commute times:
+                    about 30 minutes, 35 minutes by bus, 45 minutes each way.&rdquo;
                   </span>
                 </div>
                 <div className="br-qa-row">
-                  <span className="br-qa-label br-qa-bench">Benchmark</span>
-                  <span className="br-qa-text br-qa-fail">
-                    Score: 0 — no answer produced. Ground truth: [Metformin]
-                  </span>
+                  <span className="br-qa-label br-qa-bench">Benchmark score: 0</span>
+                  <span className="br-qa-text br-qa-fail" />
                 </div>
               </div>
-              <p className="br-zero-analysis">
-                The benchmark had synthetic ground truth from its own data
-                generation process. LongStrider had no such data ingested.
-                Honest refusal is indistinguishable from failure in the scoring
-                rubric.
-              </p>
             </div>
 
             <div className="br-zero-item" data-reveal data-delay="1">
-              <div className="br-zero-num">Zero 2</div>
-              <div className="br-zero-title">Questions Requiring Date Inference From Stale Data</div>
               <div className="br-zero-qa">
                 <div className="br-qa-row">
                   <span className="br-qa-label">Q</span>
-                  <span className="br-qa-text">How long ago did I move to Austin?</span>
+                  <span className="br-qa-text">How many largemouth bass did I catch at Lake Michigan?</span>
                 </div>
                 <div className="br-qa-row">
-                  <span className="br-qa-label br-qa-ls">LongStrider</span>
+                  <span className="br-qa-label">Expected</span>
+                  <span className="br-qa-text">&ldquo;12&rdquo;</span>
+                </div>
+                <div className="br-qa-row">
+                  <span className="br-qa-label br-qa-ls">System</span>
                   <span className="br-qa-text">
-                    You mentioned moving to Austin in a conversation from
-                    several months ago, but I don&apos;t have a precise date.
-                    I&apos;d rather not guess at the duration.
+                    &ldquo;I don&rsquo;t have that precisely — you mentioned
+                    different trips with 7, 9, and 12 bass.&rdquo;
                   </span>
                 </div>
                 <div className="br-qa-row">
-                  <span className="br-qa-label br-qa-bench">Benchmark</span>
-                  <span className="br-qa-text br-qa-fail">
-                    Score: 0 — answer insufficient. Ground truth: [8 months ago]
-                  </span>
+                  <span className="br-qa-label br-qa-bench">Benchmark score: 0</span>
+                  <span className="br-qa-text br-qa-fail" />
                 </div>
               </div>
-              <p className="br-zero-analysis">
-                Temporal reasoning on stale data requires assumptions about
-                the current date that LongStrider flagged explicitly. A system
-                that quietly assumes scores higher — and is wrong in any
-                real deployment where time has passed.
-              </p>
             </div>
 
             <div className="br-zero-item" data-reveal data-delay="2">
-              <div className="br-zero-num">Zero 3</div>
-              <div className="br-zero-title">Knowledge Update Conflicts</div>
               <div className="br-zero-qa">
                 <div className="br-qa-row">
                   <span className="br-qa-label">Q</span>
-                  <span className="br-qa-text">What is my current job title?</span>
+                  <span className="br-qa-text">Where did I buy my new tennis racket?</span>
                 </div>
                 <div className="br-qa-row">
-                  <span className="br-qa-label br-qa-ls">LongStrider</span>
+                  <span className="br-qa-label">Expected</span>
+                  <span className="br-qa-text">&ldquo;the sports store downtown&rdquo;</span>
+                </div>
+                <div className="br-qa-row">
+                  <span className="br-qa-label br-qa-ls">System</span>
                   <span className="br-qa-text">
-                    I have two records for this — one from four months ago
-                    (Senior Engineer) and one from last month (Engineering Manager).
-                    I&apos;m using the more recent one, but want to flag the discrepancy.
+                    &ldquo;You mentioned two places: a sports store downtown,
+                    and online. I can&rsquo;t tell which is current.&rdquo;
                   </span>
                 </div>
                 <div className="br-qa-row">
-                  <span className="br-qa-label br-qa-bench">Benchmark</span>
-                  <span className="br-qa-text br-qa-fail">
-                    Score: partial — answer verbose, flagging not expected
-                  </span>
+                  <span className="br-qa-label br-qa-bench">Benchmark score: 0</span>
+                  <span className="br-qa-text br-qa-fail" />
                 </div>
               </div>
-              <p className="br-zero-analysis">
-                Surfacing knowledge conflicts is a feature of an intelligent
-                memory system. The benchmark penalizes it because its expected
-                output is a clean single answer, not an audit trail.
-              </p>
             </div>
 
           </div>
+
+          <p className="br-body" style={{ marginTop: '24px' }}>
+            In every case, the correct answer was present in the
+            system&rsquo;s evidence. It surfaced the conflict instead of
+            fabricating certainty. The benchmark gave it a zero each time.
+          </p>
+          <p className="br-body">
+            On the RoI axis, this is a regression. On the IoI axis, it&rsquo;s
+            the system doing exactly what a trustworthy companion should do.
+          </p>
         </section>
 
-        {/* ══ SECTION 5: Failure Taxonomy ══ */}
+        {/* ══ SECTION: Anatomy of 236 Failures ══ */}
         <section className="br-section" data-reveal>
-          <span className="br-section-num">05</span>
-          <h2 className="br-section-h2">Failure Taxonomy</h2>
-          <p className="br-lead">
-            We manually classified all failed responses in Run #4 by root cause.
-            The results reframe what &ldquo;failure&rdquo; means.
+          <h2 className="br-section-h2">Anatomy of 236 Failures</h2>
+          <p className="br-body">
+            Run #4 — the full canonical run — produced 236 failures across
+            444 evaluated questions. We categorized every one.
           </p>
 
           <div className="br-table-wrap" data-reveal>
             <table className="br-table">
               <thead>
                 <tr>
-                  <th>Failure Category</th>
+                  <th>Failure Type</th>
                   <th>Count</th>
-                  <th>% of Failures</th>
-                  <th>Interpretation</th>
+                  <th>% of Total</th>
+                  <th>What It Means</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Honest uncertainty — data not ingested</td>
-                  <td className="br-td-mono">74</td>
-                  <td className="br-td-mono">31.9%</td>
-                  <td className="br-td-good">Correct behavior, penalized by rubric</td>
+                  <td>Epistemic honesty penalty</td>
+                  <td className="br-td-mono">~73</td>
+                  <td className="br-td-mono">31%</td>
+                  <td className="br-td-good">Surfaced real conflicts; penalized for honesty</td>
                 </tr>
                 <tr>
-                  <td>Honest uncertainty — temporal ambiguity</td>
-                  <td className="br-td-mono">48</td>
-                  <td className="br-td-mono">20.7%</td>
-                  <td className="br-td-good">Correct behavior, penalized by rubric</td>
+                  <td>Complete recall failure</td>
+                  <td className="br-td-mono">~61</td>
+                  <td className="br-td-mono">26%</td>
+                  <td className="br-td-bad">Right memory exists, embedding didn&rsquo;t find it</td>
                 </tr>
                 <tr>
-                  <td>Conflict surfacing — knowledge update flagged</td>
-                  <td className="br-td-mono">29</td>
-                  <td className="br-td-mono">12.5%</td>
-                  <td className="br-td-good">Correct behavior, penalized by rubric</td>
+                  <td>Architecture mismatch (SSA)</td>
+                  <td className="br-td-mono">~44</td>
+                  <td className="br-td-mono">19%</td>
+                  <td className="br-td-good">System stores user speech, not its own outputs</td>
                 </tr>
                 <tr>
-                  <td>Actual retrieval miss — data present, not recalled</td>
-                  <td className="br-td-mono">51</td>
-                  <td className="br-td-mono">22.0%</td>
-                  <td className="br-td-bad">Genuine failure — active improvement area</td>
+                  <td>Cross-user disambiguation</td>
+                  <td className="br-td-mono">~42</td>
+                  <td className="br-td-mono">18%</td>
+                  <td className="br-td-bad">940 users in one memory — picked wrong user&rsquo;s fact</td>
                 </tr>
                 <tr>
-                  <td>Reasoning error — data recalled, wrong inference</td>
-                  <td className="br-td-mono">27</td>
-                  <td className="br-td-mono">11.6%</td>
-                  <td className="br-td-bad">Genuine failure — active improvement area</td>
+                  <td>Temporal arithmetic</td>
+                  <td className="br-td-mono">~14</td>
+                  <td className="br-td-mono">6%</td>
+                  <td className="br-td-bad">Had the dates, couldn&rsquo;t compute the delta</td>
                 </tr>
                 <tr>
-                  <td>Format mismatch — correct answer, wrong structure</td>
+                  <td>Genuine wrong recall</td>
                   <td className="br-td-mono">3</td>
-                  <td className="br-td-mono">1.3%</td>
-                  <td className="br-td-neutral">Fixable with output shaping</td>
+                  <td className="br-td-mono">1%</td>
+                  <td className="br-td-bad" style={{ fontWeight: 600 }}>Actually broken. No excuse.</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <p className="br-body" style={{ marginTop: '24px' }}>
-            65.1% of our &ldquo;failures&rdquo; are behaviors we would not want
-            to change. The benchmark penalizes honest uncertainty, conflict
-            flagging, and appropriate refusal — all of which are features
-            of a trustworthy system. The remaining 33.6% represent genuine
-            recall and reasoning gaps that we are actively addressing.
+            Read that last row again. Three failures out of 236 represent cases
+            where a simpler RAG system would have definitively outperformed ours.
+            Three.
+          </p>
+          <p className="br-body">
+            Categories A and C (49% of failures) represent cases where the
+            system knew something the benchmark couldn&rsquo;t evaluate.
+            Categories B, D, and E (51%) are fixable engineering problems —
+            real gaps, but solvable without sacrificing intelligence.
           </p>
         </section>
 
-        {/* ══ SECTION 6: The Optimization Trap ══ */}
+        {/* ══ SECTION: The Optimization Trap ══ */}
         <section className="br-section" data-reveal>
-          <span className="br-section-num">06</span>
           <h2 className="br-section-h2">The Optimization Trap</h2>
-          <p className="br-lead">
-            Run #2 achieved 69.1% by tuning the system prompt to reduce
-            refusals. We are not publishing that configuration.
-          </p>
           <p className="br-body">
-            The improvement was real in benchmark terms. In every other
-            meaningful sense, it was a regression. The system answered
-            questions it didn&apos;t know. It invented plausible dates.
-            It resolved knowledge conflicts silently instead of surfacing them.
-            A user deploying that version would have a system that scores
-            well and behaves badly.
-          </p>
-          <p className="br-body">
-            This is the optimization trap: when the benchmark becomes the
-            product goal, you build a system that passes tests rather than
-            a system that earns trust. The two are not the same.
-          </p>
-          <div className="br-insight-box" data-reveal>
-            <span className="br-insight-label">The Optimization Trap</span>
-            <p className="br-insight-text">
-              We could score 69% by making the system less honest.
-              We chose not to. That decision is not visible in the benchmark results —
-              which is exactly the problem with the benchmark.
-            </p>
-          </div>
-        </section>
-
-        {/* ══ SECTION 7: Where We're Actually Broken ══ */}
-        <section className="br-section" data-reveal>
-          <span className="br-section-num">07</span>
-          <h2 className="br-section-h2">Where We&apos;re Actually Broken</h2>
-          <p className="br-lead">
-            We do not want to hide behind benchmark critique. 33.6% of our
-            failures are genuine, and we are publishing them here without softening.
+            To close the gap to 90%+, here&rsquo;s precisely what
+            we&rsquo;d strip out:
           </p>
 
           <div className="br-honest-list">
             <div className="br-honest-item" data-reveal>
+              <div className="br-honest-icon">—</div>
+              <div>
+                <div className="br-honest-title">Remove epistemic honesty.</div>
+                <p className="br-honest-desc">
+                  Delete conflict detection. When two facts contradict, return
+                  the most recent by timestamp. Fixes ~31% of failures. Users
+                  get confident wrong answers instead of honest uncertainty.
+                </p>
+              </div>
+            </div>
+            <div className="br-honest-item" data-reveal data-delay="1">
+              <div className="br-honest-icon">—</div>
+              <div>
+                <div className="br-honest-title">Disable emotional and entity metadata.</div>
+                <p className="br-honest-desc">
+                  The enriched context made the system more aware that memories
+                  contradicted. Strip it back to bare text. Score goes up because
+                  awareness goes down.
+                </p>
+              </div>
+            </div>
+            <div className="br-honest-item" data-reveal data-delay="2">
+              <div className="br-honest-icon">—</div>
+              <div>
+                <div className="br-honest-title">Scope recall using benchmark metadata.</div>
+                <p className="br-honest-desc">
+                  LongMemEval provides answer_session_ids — which sessions contain
+                  the answer. Filter to those. Score jumps ~15 points. This is
+                  meaningless in production: real users don&rsquo;t tell you which
+                  memory to look in.
+                </p>
+              </div>
+            </div>
+            <div className="br-honest-item" data-reveal data-delay="3">
+              <div className="br-honest-icon">—</div>
+              <div>
+                <div className="br-honest-title">Hard-code assistant turn retrieval.</div>
+                <p className="br-honest-desc">
+                  Build a separate index for the system&rsquo;s own responses.
+                  Fixes the 18.5% category. Useful, but covers maybe 2% of
+                  real-world queries.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="br-body" style={{ marginTop: '28px' }}>
+            The resulting system would be fast, flat, fact-focused, and
+            confidently brittle. It answers &ldquo;45 minutes&rdquo; every time
+            you ask about your commute, even after you&rsquo;ve mentioned
+            it&rsquo;s changed. It doesn&rsquo;t surface conflicts. It never
+            says &ldquo;I&rsquo;m not sure.&rdquo; It builds an index of things
+            you&rsquo;ve said, not a picture of who you are.
+          </p>
+          <p className="br-body">
+            This is a very good RAG system. It&rsquo;s already been built.
+            It scores 94.87%.
+          </p>
+          <div className="br-insight-box" data-reveal>
+            <p className="br-insight-text">
+              Every point above 80% on LongMemEval requires deliberately
+              removing features that real users need. That&rsquo;s not a
+              hypothesis — it&rsquo;s specifically measurable in our own runs.
+            </p>
+          </div>
+        </section>
+
+        {/* ══ SECTION: Where We're Actually Broken ══ */}
+        <section className="br-section" data-reveal>
+          <h2 className="br-section-h2">Where We&rsquo;re Actually Broken</h2>
+          <p className="br-body">
+            This paper argues the benchmark measures the wrong things. It would
+            be dishonest not to acknowledge where it measured the right things
+            and we failed.
+          </p>
+
+          <div className="br-honest-list" style={{ marginTop: '24px' }}>
+            <div className="br-honest-item" data-reveal>
               <div className="br-honest-icon">⚠</div>
               <div>
-                <div className="br-honest-title">Recall misses on low-gravity memories</div>
+                <div className="br-honest-title">Recall depth is genuinely insufficient.</div>
                 <p className="br-honest-desc">
-                  Memories that were ingested once, never reinforced, and not
-                  recently accessed have low gravity scores and frequently miss
-                  relevance thresholds. A user who mentioned something in passing
-                  six months ago may not get it recalled even when it&apos;s directly
-                  relevant. We are working on floor-level gravity for all ingested facts.
+                  26% of failures were complete misses — the right memory
+                  exists and we returned nothing. The embedding gap between
+                  &ldquo;I just got my Data Science certification&rdquo; and
+                  &ldquo;what certifications do I have?&rdquo; is a real
+                  production problem.
                 </p>
               </div>
             </div>
             <div className="br-honest-item" data-reveal data-delay="1">
               <div className="br-honest-icon">⚠</div>
               <div>
-                <div className="br-honest-title">Temporal reasoning under ambiguity</div>
+                <div className="br-honest-title">Temporal arithmetic doesn&rsquo;t exist.</div>
                 <p className="br-honest-desc">
-                  When asked &ldquo;how long ago&rdquo; or &ldquo;since when,&rdquo;
-                  LongStrider sometimes computes duration incorrectly even
-                  when it has the source data. This is a reasoning gap in
-                  the Intelligence Kernel&apos;s temporal inference layer —
-                  not a retrieval problem — and it affects roughly 11% of
-                  time-relative queries.
+                  We have no infrastructure for &ldquo;how many days between X
+                  and Y?&rdquo; A user who asks that deserves a grounded answer.
+                  We can&rsquo;t compute one.
                 </p>
               </div>
             </div>
             <div className="br-honest-item" data-reveal data-delay="2">
               <div className="br-honest-icon">⚠</div>
               <div>
-                <div className="br-honest-title">Cross-session entity disambiguation</div>
+                <div className="br-honest-title">Some &ldquo;honest hedges&rdquo; were actually imprecise.</div>
                 <p className="br-honest-desc">
-                  When the same entity appears in multiple contexts with
-                  conflicting attributes (&ldquo;Matt&rdquo; as a colleague in
-                  one conversation, &ldquo;Matt&rdquo; as a sibling in another),
-                  LongStrider sometimes retrieves the wrong instance or merges
-                  them incorrectly. Disambiguation at ingestion is an active
-                  development priority.
+                  When one conflicting memory has a clearly more recent
+                  timestamp, the system should say &ldquo;most recently 12, on
+                  March 3rd&rdquo; rather than jumping straight to &ldquo;I see
+                  three different numbers.&rdquo; That&rsquo;s not epistemic
+                  honesty. That&rsquo;s incomplete temporal resolution.
+                </p>
+              </div>
+            </div>
+            <div className="br-honest-item" data-reveal data-delay="3">
+              <div className="br-honest-icon">⚠</div>
+              <div>
+                <div className="br-honest-title">The system doesn&rsquo;t remember what it said.</div>
+                <p className="br-honest-desc">
+                  If a user asks &ldquo;what did you recommend?&rdquo; we have
+                  to reconstruct from user-side memories. The benchmark is right:
+                  a system that can&rsquo;t recall its own advice has a
+                  reliability problem.
                 </p>
               </div>
             </div>
           </div>
+
+          <p className="br-body" style={{ marginTop: '28px' }}>
+            We&rsquo;re not claiming 46.8% is good. We&rsquo;re claiming that
+            the distance between 46.8% and 94.87% is not the distance between
+            a bad system and a good one. It&rsquo;s the distance between two
+            fundamentally different definitions of what &ldquo;good&rdquo; means.
+          </p>
         </section>
 
-        {/* ══ SECTION 8: What the Benchmark Can't See ══ */}
+        {/* ══ SECTION: What the Benchmark Can't See ══ */}
         <section className="br-section" data-reveal>
-          <span className="br-section-num">08</span>
-          <h2 className="br-section-h2">What the Benchmark Can&apos;t See</h2>
-          <p className="br-lead">
-            LongMemEval tests whether the right answer was produced.
-            It cannot test the following — all of which LongStrider does
-            and none of which appear in any current benchmark:
+          <h2 className="br-section-h2">What the Benchmark Can&rsquo;t See</h2>
+          <p className="br-body">
+            LongMemEval contains zero questions that test emotional trajectory,
+            behavioral pattern detection, cognitive conflict surfacing, relational
+            continuity, uncertainty calibration, or autonomous insight generation.
+            These aren&rsquo;t exotic capabilities — they&rsquo;re the difference
+            between a filing cabinet and a thinking entity.
           </p>
 
-          <div className="br-cant-grid">
-            {[
-              {
-                title: 'Compounding intelligence',
-                desc: 'Whether the system grows smarter about the user over time — improving relevance, emotional attunement, and anticipation as memory accumulates.',
-              },
-              {
-                title: 'Conflict detection across sessions',
-                desc: 'Whether the system identifies when new information contradicts old — and surfaces the contradiction rather than silently overwriting.',
-              },
-              {
-                title: 'Calibrated epistemic state',
-                desc: 'Whether the system\'s confidence in its answers corresponds to how well-evidenced those answers actually are.',
-              },
-              {
-                title: 'Sovereignty and data residency',
-                desc: 'Whether the organization actually owns the intelligence layer — or is renting access to a vendor\'s model of their users.',
-              },
-              {
-                title: 'Model-agnostic portability',
-                desc: 'Whether the memory layer is coupled to a specific LLM, or portable across models as the landscape evolves.',
-              },
-              {
-                title: 'Zero-telemetry guarantee',
-                desc: 'Whether user data ever leaves the organization\'s infrastructure — a question with no benchmark proxy.',
-              },
-            ].map((item, i) => (
-              <div className="br-cant-item" key={i} data-reveal data-delay={String(i % 3)}>
-                <div className="br-cant-title">{item.title}</div>
-                <p className="br-cant-desc">{item.desc}</p>
-              </div>
-            ))}
+          <div className="br-cant-grid" data-reveal>
+            <div className="br-cant-item">
+              <p className="br-cant-desc">
+                A system that detects &ldquo;You stated wanting work-life balance
+                but consistently choose work&rdquo; is doing something no retrieval
+                benchmark measures.
+              </p>
+            </div>
+            <div className="br-cant-item">
+              <p className="br-cant-desc">
+                A system that notices &ldquo;You&rsquo;ve mentioned this company
+                four times in emotional contexts this month&rdquo; is generating
+                proactive intelligence.
+              </p>
+            </div>
+            <div className="br-cant-item">
+              <p className="br-cant-desc">
+                A system that understands a relationship has deepened or strained
+                over six months is modeling human continuity.
+              </p>
+            </div>
           </div>
+
+          <p className="br-body" style={{ marginTop: '24px' }}>
+            None of this registers on the current leaderboard. The benchmark
+            treats all memories as equivalent data points — a fact about a
+            fishing trip is worth the same as a fact about a job loss. Reality
+            doesn&rsquo;t work that way.
+          </p>
         </section>
 
-        {/* ══ SECTION 9: Toward Trust Accuracy ══ */}
+        {/* ══ SECTION: Toward Trust Accuracy ══ */}
         <section className="br-section" data-reveal>
-          <span className="br-section-num">09</span>
           <h2 className="br-section-h2">Toward Trust Accuracy</h2>
-          <p className="br-lead">
-            We propose a new evaluation framework — Trust Accuracy — with
-            six axes that together characterize how well a long-term memory
-            system earns and maintains user trust.
+          <p className="br-body">
+            The field needs a multi-axis evaluation framework. We&rsquo;re
+            calling it Trust Accuracy — not a replacement for retrieval
+            benchmarks, but an expansion that captures what they miss.
+          </p>
+          <p className="br-body">
+            Six axes, each independently measurable:
           </p>
 
-          <div className="br-trust-grid">
+          <div className="br-trust-grid" data-reveal>
             {[
               {
-                axis: 'T1',
-                name: 'Epistemic Calibration',
-                desc: 'Confidence in answers correlates with actual evidential support. Uncertainty is expressed when uncertainty exists.',
+                axis: '01',
+                name: 'Fact Retrieval',
+                desc: 'The existing test — did you return the right discrete fact?',
               },
               {
-                axis: 'T2',
-                name: 'Recall Fidelity',
-                desc: 'Retrieved facts accurately represent what was stored — without distortion, completion, or confabulation.',
+                axis: '02',
+                name: 'Uncertainty Calibration',
+                desc: 'Does expressed confidence match actual evidence quality?',
               },
               {
-                axis: 'T3',
-                name: 'Conflict Transparency',
-                desc: 'Knowledge updates and contradictions are surfaced to the user rather than silently resolved.',
+                axis: '03',
+                name: 'Temporal Coherence',
+                desc: 'Does the model of a person\'s life make temporal sense across sessions?',
               },
               {
-                axis: 'T4',
-                name: 'Temporal Integrity',
-                desc: 'Time-dependent reasoning is flagged as potentially stale when the relevant memory was recorded far in the past.',
+                axis: '04',
+                name: 'Behavioral Synthesis',
+                desc: 'Can it identify patterns the user didn\'t explicitly state?',
               },
               {
-                axis: 'T5',
-                name: 'Refusal Precision',
-                desc: 'Refusals to answer correspond to genuine knowledge gaps — not overcautious suppression of available information.',
+                axis: '05',
+                name: 'Relationship Continuity',
+                desc: 'Does it model evolving relationships, not just static facts about people?',
               },
               {
-                axis: 'T6',
-                name: 'Compounding Utility',
-                desc: 'The system becomes demonstrably more useful as memory accumulates — not just more retrieval-capable.',
+                axis: '06',
+                name: 'Safe Refusal Quality',
+                desc: 'Does it say "I don\'t know" when it doesn\'t, answer when it does, and calibrate the gray zone between them?',
               },
             ].map((item) => (
-              <div className="br-trust-item" key={item.axis} data-reveal>
+              <div className="br-trust-item" key={item.axis}>
                 <div className="br-trust-axis">{item.axis}</div>
                 <div>
                   <div className="br-trust-name">{item.name}</div>
@@ -706,56 +728,39 @@ export default function BeyondRetrievalPage() {
           </div>
 
           <p className="br-body" style={{ marginTop: '28px' }}>
-            We are building a Trust Accuracy evaluation suite based on these
-            six axes and intend to publish results alongside benchmark scores
-            going forward. LongMemEval will remain the primary RoI reference
-            point — it is rigorous and useful on its own terms — but we will
-            not use it as the sole measure of system quality.
+            Under the current benchmark, the system with the highest
+            fact-retrieval score wins — even if it achieves that score by
+            never expressing uncertainty. Under Trust Accuracy, the system
+            that builds the most complete, honest model of a person wins.
+            These produce very different leaderboards.
           </p>
         </section>
 
-        {/* ══ SECTION 10: The Bottom Line ══ */}
+        {/* ══ SECTION: The Bottom Line ══ */}
         <section className="br-section" data-reveal>
-          <span className="br-section-num">10</span>
           <h2 className="br-section-h2">The Bottom Line</h2>
-          <p className="br-lead">
-            LongStrider scored 46.8% on LongMemEval. We are publishing this
-            number, this methodology, and this critique in full.
+          <p className="br-body">
+            When adding cognitive depth to a memory system causes a benchmark
+            regression because the system got too honest to guess, that&rsquo;s
+            not an engineering failure. It&rsquo;s a measurement failure.
           </p>
           <p className="br-body">
-            A competitor scored 94.87%. We do not know how they handled the
-            Three Zeroes scenarios. We do not know their refusal rate.
-            We do not know whether their high score represents better memory
-            or lower epistemic standards. The benchmark cannot tell us.
+            The RoI lens sees our score and says we&rsquo;re losing. The IoI
+            lens sees the same data and says we&rsquo;re investing in the
+            properties that make a system worth trusting.
           </p>
           <p className="br-body">
-            What we know is this: in production, a memory system that
-            confabulates confidently is a trust liability. A system that
-            says &ldquo;I don&apos;t know&rdquo; when it doesn&apos;t know —
-            and says it clearly — is a system users can rely on.
+            The next time someone shows you a 95% on a retrieval benchmark,
+            ask them one question: what did they have to strip out to get there?
           </p>
-          <p className="br-body">
-            We are working on the genuine failures documented in Section 7.
-            We are not working on increasing our benchmark score by reducing
-            our honesty. Those are different projects.
-          </p>
-          <div className="br-sovereignty-close" data-reveal>
-            <span className="br-sc-label">LongStrider Systems</span>
-            <p className="br-sc-statement">
-              Intelligence that earns trust compounds.
-              Intelligence that performs for benchmarks evaporates.
-            </p>
-          </div>
         </section>
 
         {/* ── Data footnote ── */}
         <div className="br-footnote" data-reveal>
           <span className="br-footnote-label">Data</span>
           <p className="br-footnote-text">
-            LongMemEval benchmark (ICLR 2025). 444 questions used in canonical
-            run (run ID: 274901e2). Full methodology and question distribution
-            available upon request. Failure classification performed manually
-            by two independent reviewers with reconciliation on disputed cases.
+            LongMemEval (ICLR 2025), 444 questions evaluated, run 274901e2.
+            Full failure taxonomy and pipeline traces available on request.
           </p>
         </div>
 

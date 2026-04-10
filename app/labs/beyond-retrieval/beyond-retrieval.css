@@ -3,6 +3,24 @@
    Extends labs.css + ls-tokens.css
 ══════════════════════════════════════════════════════════════ */
 
+/* ── Opening lede ──────────────────────────────────────────────── */
+
+.br-opening {
+  padding: 0 0 var(--section-pad-v);
+  border-bottom: 1px solid var(--color-border-subtle);
+  max-width: 720px;
+}
+
+.br-opening-p {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.9vw, 21px);
+  line-height: 1.72;
+  color: var(--color-text-body);
+  margin: 0 0 20px;
+}
+
+.br-opening-p:last-child { margin-bottom: 0; }
+
 /* ── Back nav ──────────────────────────────────────────────────── */
 
 .br-back {
@@ -401,23 +419,6 @@
   border: var(--card-border);
   border-radius: var(--card-radius);
   padding: var(--card-pad);
-}
-
-.br-zero-num {
-  font-family: var(--font-ui);
-  font-size: 10px;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: var(--color-gold-dim);
-  margin-bottom: 6px;
-}
-
-.br-zero-title {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--color-text-primary);
-  margin-bottom: 16px;
 }
 
 .br-zero-qa {
