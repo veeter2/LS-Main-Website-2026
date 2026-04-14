@@ -146,7 +146,7 @@ export default function ArchivePage() {
           <p style={{
             fontFamily: 'var(--font-body)',
             fontSize: "18px", lineHeight: 1.72,
-            color: "rgba(255,255,255,0.55)",
+            color: "rgba(255,255,255,0.72)",
           }}>
             Pages under review before the final site consolidation.
             Review each before any deletions are made.
@@ -165,7 +165,7 @@ export default function ArchivePage() {
               <span style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: "12px", letterSpacing: "0.06em",
-                color: "rgba(255,255,255,0.4)",
+                color: "rgba(255,255,255,0.65)",
               }}>
                 {status}
               </span>
@@ -187,7 +187,7 @@ export default function ArchivePage() {
               {/* Number */}
               <span style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: "12px", color: "rgba(200,169,110,0.5)",
+                fontSize: "12px", color: "rgba(200,169,110,0.70)",
                 minWidth: "24px", paddingTop: "3px",
                 letterSpacing: "0.06em",
               }}>
@@ -224,7 +224,7 @@ export default function ArchivePage() {
                 <p style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: "15px", lineHeight: 1.65,
-                  color: "rgba(255,255,255,0.45)",
+                  color: "rgba(255,255,255,0.68)",
                   margin: 0,
                 }}>
                   {page.note}
@@ -239,7 +239,7 @@ export default function ArchivePage() {
           <p style={{
             fontFamily: 'var(--font-body)',
             fontSize: "14px", fontStyle: "italic",
-            color: "rgba(255,255,255,0.28)",
+            color: "rgba(255,255,255,0.50)",
           }}>
             Nothing is deleted until explicitly approved. This page is not indexed or linked from any public-facing route.
           </p>

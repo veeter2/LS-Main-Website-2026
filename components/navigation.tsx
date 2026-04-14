@@ -205,11 +205,11 @@ function OverlayRow({
   const rowColor = coming ? 'rgba(255,255,255,0.22)'
     : isActive ? GOLD
     : hovered ? 'rgba(255,255,255,0.95)'
-    : 'rgba(255,255,255,0.68)';
+    : 'rgba(255,255,255,0.85)';
 
   const iconColor = coming ? 'rgba(255,255,255,0.18)'
     : isActive || hovered ? GOLD
-    : 'rgba(255,255,255,0.35)';
+    : 'rgba(255,255,255,0.55)';
 
   const inner = (
     <div
@@ -250,7 +250,7 @@ function OverlayRow({
           {!coming && (
             <span style={{
               fontSize: hasChildren ? '19px' : '15px',
-              color: isActive || hovered ? GOLD : 'rgba(255,255,255,0.20)',
+              color: isActive || hovered ? GOLD : 'rgba(255,255,255,0.40)',
               transform: hasChildren
                 ? (expanded ? 'rotate(90deg)' : 'rotate(0deg)')
                 : (hovered ? 'translateX(4px)' : 'translateX(0)'),
@@ -663,24 +663,24 @@ export function Navigation() {
                 onMouseEnter={(e) => {
                   const label = e.currentTarget.querySelector('.node-label') as HTMLElement;
                   const dot   = e.currentTarget.querySelector('.node-dot') as HTMLElement;
-                  if (label) { label.style.color = 'rgba(255,255,255,0.65)'; label.style.transform = 'translateX(0)'; }
-                  if (dot && !isActive) { dot.style.background = node.color; dot.style.opacity = '0.55'; }
+                  if (label) { label.style.color = 'rgba(255,255,255,0.85)'; label.style.transform = 'translateX(0)'; }
+                  if (dot && !isActive) { dot.style.background = node.color; dot.style.opacity = '0.70'; }
                 }}
                 onMouseLeave={(e) => {
                   const label = e.currentTarget.querySelector('.node-label') as HTMLElement;
                   const dot   = e.currentTarget.querySelector('.node-dot') as HTMLElement;
                   if (label) { label.style.color = 'rgba(255,255,255,0)'; label.style.transform = 'translateX(-4px)'; }
-                  if (dot && !isActive) { dot.style.background = 'rgba(255,255,255,0.12)'; dot.style.opacity = '1'; }
+                  if (dot && !isActive) { dot.style.background = 'rgba(255,255,255,0.28)'; dot.style.opacity = '1'; }
                 }}
               >
                 <div className="node-dot" style={{
                   width: isActive ? '10px' : '8px',
                   height: isActive ? '10px' : '8px',
                   borderRadius: '50%',
-                  background: isActive || isPassed ? node.color : 'rgba(255,255,255,0.12)',
-                  border: `1px solid ${isActive ? node.color : 'rgba(255,255,255,0.08)'}`,
+                  background: isActive || isPassed ? node.color : 'rgba(255,255,255,0.28)',
+                  border: `1px solid ${isActive ? node.color : 'rgba(255,255,255,0.20)'}`,
                   boxShadow: isActive ? `0 0 12px ${node.glow}` : 'none',
-                  opacity: isPassed ? 0.45 : 1,
+                  opacity: isPassed ? 0.60 : 1,
                   flexShrink: 0,
                   transition: 'all 0.45s cubic-bezier(0.16,1,0.3,1)',
                 }} />
@@ -688,7 +688,7 @@ export function Navigation() {
                   fontFamily: 'var(--font-ui)',
                   fontSize: '10px', letterSpacing: '0.1em',
                   textTransform: 'uppercase',
-                  color: isActive ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0)',
+                  color: isActive ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0)',
                   whiteSpace: 'nowrap',
                   transform: isActive ? 'translateX(0)' : 'translateX(-4px)',
                   transition: 'color 0.35s ease, transform 0.35s ease',
