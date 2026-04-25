@@ -136,7 +136,7 @@ export default function ManifestoPage() {
           <div data-reveal data-delay="1" className="deck-divider" />
           <div data-reveal data-delay="2">
             <h1 className="deck-hero-heading">
-              The AI layer that knows your business — and never forgets.
+              The Intelligence layer that knows your business — and never forgets.
             </h1>
           </div>
           <div data-reveal data-delay="3">
