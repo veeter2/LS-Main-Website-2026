@@ -39,7 +39,7 @@ export default function CookiesPage() {
       {/* Header */}
       <section style={{ padding: '80px 10vw 64px' }}>
         <p style={{ fontFamily: 'var(--font-ui)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: '24px' }}>
-          Legal · Last updated January 2025
+          Legal · Last updated April 2026
         </p>
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 5vw, 64px)', fontWeight: 300, letterSpacing: '-0.02em', lineHeight: 1.1, color: 'var(--color-text-primary)', marginBottom: '20px' }}>
           Cookie Policy

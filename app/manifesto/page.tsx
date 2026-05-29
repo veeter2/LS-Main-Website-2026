@@ -365,14 +365,16 @@ export default function ManifestoPage() {
               <p className="deck-body" style={{ textAlign: 'center', maxWidth: '520px', margin: '0 auto 32px', color: 'rgba(255,255,255,0.6)', fontSize: '16px', lineHeight: '1.7' }}>
                 If what you read resonates — if you recognize your organization in these pages — start a pilot.
               </p>
-              <Link href="/pilot" className="deck-footer-button">
-                <span>Start a pilot</span>
-                <span style={{ fontSize: '14px', opacity: 0.7 }}>→</span>
-              </Link>
-              <Link href="/contact" className="deck-footer-button" style={{ marginTop: '12px' }}>
-                <span>See it in action</span>
-                <span style={{ fontSize: '14px', opacity: 0.7 }}>→</span>
-              </Link>
+              <div className="deck-footer-actions">
+                <Link href="/pilot" className="deck-footer-button">
+                  <span>Start a pilot</span>
+                  <span style={{ fontSize: '14px', opacity: 0.7 }}>→</span>
+                </Link>
+                <Link href="/contact" className="deck-footer-button">
+                  <span>See it in action</span>
+                  <span style={{ fontSize: '14px', opacity: 0.7 }}>→</span>
+                </Link>
+              </div>
 
             </footer>
           </>

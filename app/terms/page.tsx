@@ -68,7 +68,7 @@ export default function TermsOfServicePage() {
 
         {/* Hero */}
         <p style={{ fontFamily: 'var(--font-ui)', fontSize: '10px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--color-gold-dim)', marginBottom: '20px' }}>
-          Legal · Last updated January 2025
+          Legal · Last updated April 2026
         </p>
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 300, letterSpacing: '-0.025em', lineHeight: 1.1, color: 'var(--color-text-primary)', marginBottom: '24px' }}>
           Terms of Service

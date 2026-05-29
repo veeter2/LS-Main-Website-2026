@@ -95,8 +95,8 @@ export function StoryTimeline({ nodes, unlockGated = true, showAfter = 300 }: Pr
               isGated  ? 'st-gated'  : '',
             ].filter(Boolean).join(' ')}
             style={{
-              '--node-color': node.color ?? '#c8a96e',
-              '--node-glow':  node.glow  ?? 'rgba(200,169,110,0.35)',
+              '--node-color': node.color ?? 'var(--color-gold)',
+              '--node-glow':  node.glow  ?? 'var(--color-gold-border)',
             } as React.CSSProperties}
             onClick={() => !isGated && scrollTo(node.id)}
             role="button"
