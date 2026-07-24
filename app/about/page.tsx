@@ -4,32 +4,6 @@ import './about.css';
 import Link from 'next/link';
 import { useEffect, useCallback, useRef } from 'react';
 
-// ── Team ─────────────────────────────────────────────────────────
-
-const TEAM = [
-  {
-    initials: 'MV',
-    name: 'Matt Veitch',
-    title: 'Founder & Architect',
-    identity: 'gold' as const,
-    bio: 'Thirty years in technology across enterprise software, AI infrastructure, and two previous companies. Drives architecture and product direction.',
-  },
-  {
-    initials: 'MB',
-    name: 'Marc Boudria',
-    title: 'Co-Founder, Enterprise Strategy',
-    identity: 'purple' as const,
-    bio: 'Enterprise AI strategy and go-to-market. Brings decades of domain depth and the relationships that open enterprise doors.',
-  },
-  {
-    initials: 'IB',
-    name: 'Isabella Burzair',
-    title: 'Co-Founder, Revenue Operations',
-    identity: 'neutral' as const,
-    bio: 'Revenue architecture, partner relationships, and the operational backbone that keeps the mission grounded and moving.',
-  },
-];
-
 // ── What was built ────────────────────────────────────────────────
 
 const BUILT = [
@@ -236,32 +210,6 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-          </div>
-        </section>
-
-        <hr className="ab-divider" />
-
-        {/* ══ TEAM ═══════════════════════════════════════════════════ */}
-        <section className="ab-section">
-          <span className="ab-label" data-reveal>The Team</span>
-          <h2 className="ab-h2" data-reveal data-delay="1">
-            Small. On purpose.
-          </h2>
-          <p className="ab-body ab-team-intro" data-reveal data-delay="2">
-            LongStrider was built lean and will grow lean. The people in this room
-            have been here from the beginning — no titles inflated for optics.
-          </p>
-          <div className="ab-team-grid" data-reveal data-delay="2">
-            {TEAM.map((member) => (
-              <div key={member.name} className="ab-team-card">
-                <div className={`ab-identity ab-identity-${member.identity}`}>
-                  <span className="ab-identity-initials">{member.initials}</span>
-                </div>
-                <h3 className="ab-team-name">{member.name}</h3>
-                <span className="ab-team-title">{member.title}</span>
-                <p className="ab-team-bio">{member.bio}</p>
-              </div>
-            ))}
           </div>
         </section>
 
