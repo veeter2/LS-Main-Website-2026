@@ -21,6 +21,10 @@ const ARRIVAL: Row = {
   state: "pending",
 }
 
+// Each row's first note is its longest; it sits invisibly under the live
+// note so a row never shrinks when "Due Friday…" becomes "Done · sent 9:14".
+const FIRST_NOTE: Record<string, string> = Object.fromEntries([...START, ARRIVAL].map((r) => [r.id, r.when]))
+
 const OVERNIGHT = [
   "Merged 3 notes about Alder that said the same thing",
   "Flagged a conflict — two renewal dates were mentioned",
@@ -89,10 +93,24 @@ export function Desk() {
                   {r.from} <span aria-hidden>→</span> {r.to}
                 </span>
                 <span className="dx-what">{r.what}</span>
-                <span className="dx-when">{r.when}</span>
+                <span className="dx-when">
+                  <span>{r.when}</span>
+                  <span className="dx-when-ghost" aria-hidden>
+                    {FIRST_NOTE[r.id]}
+                  </span>
+                </span>
               </div>
-              {r.state === "waiting" && <span className="dx-tag">Waiting</span>}
-              {r.state === "new" && <span className="dx-tag dx-tag-new">New</span>}
+              {/* The tag slot is always there (empty ones hold the widest label,
+                  invisibly), so a tag coming or going never re-wraps the row. */}
+              {r.state === "waiting" ? (
+                <span className="dx-tag">Waiting</span>
+              ) : r.state === "new" ? (
+                <span className="dx-tag dx-tag-new">New</span>
+              ) : (
+                <span className="dx-tag dx-tag-empty" aria-hidden>
+                  Waiting
+                </span>
+              )}
             </li>
           ))}
         </ul>

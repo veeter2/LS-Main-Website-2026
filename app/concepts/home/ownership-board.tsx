@@ -41,7 +41,13 @@ export function OwnershipBoard() {
       <div className="ob-pane ob-rented" data-switched={switched}>
         <div className="ob-head">
           <span className="ob-title">On a rented platform</span>
-          <span className="ob-sub">{switched ? "Back to zero" : "Theirs · resets when you switch"}</span>
+          <span className="ob-sub">
+            {/* The longer label stays underneath, invisibly, so the header keeps its height. */}
+            <span>{switched ? "Back to zero" : "Theirs · resets when you switch"}</span>
+            <span className="ob-ghost" aria-hidden>
+              Theirs · resets when you switch
+            </span>
+          </span>
         </div>
         <ul className="ob-list">
           {ITEMS.map((it, i) => (
@@ -59,7 +65,12 @@ export function OwnershipBoard() {
       <div className="ob-pane ob-owned">
         <div className="ob-head">
           <span className="ob-title">In LongStrider</span>
-          <span className="ob-sub ob-sub-owned">{switched ? "Nothing lost" : "Yours · kept with its source"}</span>
+          <span className="ob-sub ob-sub-owned">
+            <span>{switched ? "Nothing lost" : "Yours · kept with its source"}</span>
+            <span className="ob-ghost" aria-hidden>
+              Yours · kept with its source
+            </span>
+          </span>
         </div>
         <ul className="ob-list">
           {ITEMS.map((it, i) => (
