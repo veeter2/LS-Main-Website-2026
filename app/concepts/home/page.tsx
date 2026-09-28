@@ -49,6 +49,24 @@ const COMPARE = [
   },
 ]
 
+const BUYERS = [
+  {
+    who: "For the CFO",
+    title: "An AI budget that ends in an asset, not a renewal.",
+    href: "/concepts/for/finance",
+  },
+  {
+    who: "For the CTO",
+    title: "A memory layer your architects can inspect.",
+    href: "/concepts/for/technology",
+  },
+  {
+    who: "For your team",
+    title: "Stop explaining your job to a chat window every morning.",
+    href: "/concepts/for/teams",
+  },
+]
+
 const ASSET = [
   { n: "I", title: "Nothing taught twice", body: "What your team explains once stays explained — shared only with the people it belongs to." },
   { n: "II", title: "Answers you can audit", body: "Counts and dates come from the record, with the source attached. Finance can check the work." },
@@ -295,6 +313,31 @@ export default function HomeConcept() {
               <p>{p.body}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Three people have to say yes */}
+      <section className="hx-section hx-deep" id="buyers">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            Who it&rsquo;s for
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            Three people have to say <em>yes</em>.
+          </h2>
+        </div>
+        <div className="lx-wrap">
+          <div className="lx-doors-grid mh-doors">
+            {BUYERS.map((d, i) => (
+              <Link key={d.who} href={d.href} className="lx-door" data-reveal data-delay={String(i + 1)}>
+                <span className="lx-eyebrow">{d.who}</span>
+                <h3>{d.title}</h3>
+                <span className="lx-more">
+                  Read more <span aria-hidden>→</span>
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

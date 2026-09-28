@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 
-type Row = { id: string; from: string; to: string; what: string; when: string; state: "open" | "waiting" | "done" | "new" }
+type Row = { id: string; from: string; to: string; what: string; when: string; state: "open" | "waiting" | "done" | "new" | "pending" }
 
 const START: Row[] = [
   { id: "terms", from: "You", to: "Alder", what: "Send revised terms", when: "Due Friday · from the 22 Sep call", state: "open" },
@@ -10,13 +10,15 @@ const START: Row[] = [
   { id: "board", from: "Sam", to: "Board", what: "Q4 plan, final draft", when: "Due in 6 days", state: "open" },
 ]
 
+// The promise that arrives mid-story. Its row is laid out from the start
+// (hidden) so its arrival never pushes the page below it down.
 const ARRIVAL: Row = {
   id: "forecast",
   from: "You",
   to: "Finance",
   what: "Put the Q4 rate hold in the forecast",
   when: "Caught just now · from your chat",
-  state: "new",
+  state: "pending",
 }
 
 const OVERNIGHT = [
@@ -26,7 +28,7 @@ const OVERNIGHT = [
 ]
 
 export function Desk() {
-  const [rows, setRows] = useState<Row[]>(START)
+  const [rows, setRows] = useState<Row[]>([...START, ARRIVAL])
   const [seen, setSeen] = useState(false)
   const sceneRef = useRef<HTMLDivElement>(null)
 
@@ -48,11 +50,11 @@ export function Desk() {
   useEffect(() => {
     if (!seen) return
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setRows([{ ...START[0], state: "done", when: "Done · sent 9:14" }, ...START.slice(1), ARRIVAL])
+      setRows([{ ...START[0], state: "done", when: "Done · sent 9:14" }, ...START.slice(1), { ...ARRIVAL, state: "open" }])
       return
     }
     const timers = [
-      setTimeout(() => setRows((r) => [...r, ARRIVAL]), 2200),
+      setTimeout(() => setRows((r) => r.map((x) => (x.id === "forecast" ? { ...x, state: "new" } : x))), 2200),
       setTimeout(
         () => setRows((r) => r.map((x) => (x.id === "terms" ? { ...x, state: "done", when: "Done · sent 9:14" } : x))),
         4600,
@@ -62,7 +64,7 @@ export function Desk() {
     return () => timers.forEach(clearTimeout)
   }, [seen])
 
-  const open = rows.filter((r) => r.state !== "done").length
+  const open = rows.filter((r) => r.state !== "done" && r.state !== "pending").length
 
   return (
     <div className="dx-scene" ref={sceneRef} aria-label="Example: a desk of commitments and an overnight note">
@@ -76,7 +78,7 @@ export function Desk() {
         </div>
         <ul className="dx-rows">
           {rows.map((r) => (
-            <li key={r.id} className="dx-row" data-state={r.state}>
+            <li key={r.id} className="dx-row" data-state={r.state} aria-hidden={r.state === "pending" || undefined}>
               <span className="dx-box" aria-hidden>
                 <svg viewBox="0 0 16 16">
                   <path d="M3.5 8.5l3 3 6-7" />
