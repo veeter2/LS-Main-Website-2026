@@ -71,6 +71,9 @@ export default function ConceptsIndex() {
           <Link href="/concepts/manifesto">The Manifesto</Link>
           <Link href="/concepts/company">Company</Link>
           <Link href="/concepts/partners">Partners</Link>
+          <Link href="/concepts/for/finance">For the CFO</Link>
+          <Link href="/concepts/for/technology">For the CTO</Link>
+          <Link href="/concepts/for/teams">For your team</Link>
           <Link href="/concepts/book">Book a session</Link>
           <Link href="/concepts/security">Security &amp; ownership</Link>
         </nav>
