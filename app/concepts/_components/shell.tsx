@@ -7,6 +7,7 @@ import { LongstriderLogo } from "@/components/longstrider-logo"
 const NAV = [
   { label: "Product", href: "/concepts/product" },
   { label: "How it works", href: "/concepts/how-it-works" },
+  { label: "Industries", href: "/concepts/industries" },
   { label: "Security", href: "/concepts/security" },
   { label: "Research", href: "/concepts/research" },
   { label: "Company", href: "/concepts/company" },
