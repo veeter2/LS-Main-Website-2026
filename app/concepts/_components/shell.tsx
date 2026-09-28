@@ -7,7 +7,7 @@ import { LongstriderLogo } from "@/components/longstrider-logo"
 // Pages that exist link to themselves; the rest point at the homepage
 // section that covers them until they are built.
 const NAV = [
-  { label: "Product", href: "/concepts/home#own" },
+  { label: "Product", href: "/concepts/product" },
   { label: "How it works", href: "/concepts/home#different" },
   { label: "Security", href: "/concepts/security" },
   { label: "Research", href: "/concepts/home#asset" },
