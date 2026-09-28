@@ -207,7 +207,9 @@
 .lx-hero {
   position: relative;
   padding: clamp(48px, 8vh, 96px) 0 clamp(72px, 10vh, 120px);
-  overflow: hidden;
+  /* clip, not hidden: the wash overhangs the edges, and a hidden box can
+     still be scrolled sideways when a control inside it takes focus */
+  overflow: clip;
 }
 .lx-hero::before {
   /* daylight wash — the manifesto aurora, turned to morning */
@@ -1016,3 +1018,72 @@
 }
 .cx-older { margin: 12px 0 0; font-size: 13px; color: var(--lx-ink-muted); }
 .cx-older a { color: var(--lx-gold-ink); }
+
+/* ═══════════════════════════════════════════════════════════
+   SECURITY & OWNERSHIP
+   ═══════════════════════════════════════════════════════════ */
+.dm { padding: 18px; }
+.dm-tab { text-align: center; justify-items: center; }
+.dm-zones { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 12px; margin-top: 16px; animation: ox-in 0.5s var(--lx-ease); }
+.dm-zone { border-radius: var(--lx-radius); padding: 14px; min-height: 250px; }
+.dm-zone ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.dm-zone-label { display: block; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 12px; }
+.dm-inside {
+  border: 1.5px dashed var(--lx-gold-line);
+  background: linear-gradient(180deg, var(--lx-gold-paper), var(--lx-cream));
+}
+.dm-inside .dm-zone-label { color: var(--lx-gold-ink); }
+.dm-outside { border: 1px solid var(--lx-line-subtle); background: rgba(var(--lx-ink-rgb), 0.02); }
+.dm-outside .dm-zone-label { color: var(--lx-ink-hint); }
+.dm-block {
+  display: grid;
+  gap: 3px;
+  padding: 10px 12px;
+  border-radius: 3px;
+  background: var(--lx-surface);
+  border: 1px solid rgba(var(--lx-gold-rgb), 0.35);
+  box-shadow: var(--lx-shadow-rest);
+}
+.dm-block-out { border-color: var(--lx-line); box-shadow: none; }
+.dm-block-name { font-size: 14px; font-weight: 500; color: var(--lx-ink-primary); }
+.dm-block-where { font-size: 12.5px; color: var(--lx-ink-muted); }
+.dm-nothing { margin: 0; font-size: 14px; line-height: 1.55; color: var(--lx-ink-secondary); }
+.dm-line { margin: 14px 2px 0; font-size: 14.5px; line-height: 1.55; color: var(--lx-ink-secondary); }
+@media (max-width: 560px) {
+  .dm-zones { grid-template-columns: 1fr; }
+  .dm-zone { min-height: 0; }
+}
+
+/* Who can see what — three nested scopes */
+.sc-rings { position: relative; display: grid; }
+.sc-ring {
+  border-radius: 24px;
+  padding: 18px 20px 20px;
+  border: 1px solid rgba(var(--lx-gold-rgb), 0.35);
+}
+.sc-ring-0 { background: var(--lx-surface); box-shadow: 0 0 0 6px var(--lx-gold-wash), var(--lx-shadow-lift); position: relative; z-index: 3; }
+.sc-ring-1 { margin-top: -8px; padding-top: 26px; background: var(--lx-gold-paper); position: relative; z-index: 2; margin-left: 16px; margin-right: 16px; }
+.sc-ring-2 { margin-top: -8px; padding-top: 26px; background: rgba(var(--lx-gold-rgb), 0.06); position: relative; z-index: 1; margin-left: 32px; margin-right: 32px; border-style: dashed; }
+.sc-ring-label { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lx-gold-ink); margin-bottom: 8px; }
+.sc-ring ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.sc-ring li { font-size: 14.5px; color: var(--lx-ink-body); }
+.sc-ring li::before { content: "·"; color: var(--lx-gold); margin-right: 8px; }
+
+/* Four ways to run it */
+.sw-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: clamp(36px, 5vh, 56px);
+}
+.sw-card { padding: 24px 22px 22px; }
+.sw-card h3 { font-family: var(--lx-display); font-weight: 500; font-size: 21px; color: var(--lx-ink-primary); margin: 0 0 8px; }
+.sw-line { margin: 0 0 14px; font-size: 14.5px; line-height: 1.55; color: var(--lx-ink-secondary); }
+.sw-card ul { list-style: none; margin: 0; padding: 12px 0 0; border-top: 1px solid var(--lx-line-subtle); display: grid; gap: 7px; }
+.sw-card li { font-size: 13.5px; line-height: 1.45; color: var(--lx-ink-body); padding-left: 16px; position: relative; }
+.sw-card li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--lx-gold); }
+@media (max-width: 1100px) { .sw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .sw-grid { grid-template-columns: 1fr; } }
+.cx-pages { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-top: 18px; padding: 14px 0; border-top: 1px solid var(--lx-line-subtle); border-bottom: 1px solid var(--lx-line-subtle); }
+.cx-pages a { font-size: 15px; color: var(--lx-ink-primary); text-decoration: none; border-bottom: 1px solid var(--lx-gold-line); }
+.cx-pages a:hover { color: var(--lx-gold-ink); }
