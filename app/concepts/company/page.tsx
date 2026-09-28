@@ -52,7 +52,7 @@ export default function CompanyConcept() {
               so we&rsquo;re building it, and making sure it belongs to you.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/pilot">
+              <a className="lx-btn lx-btn-primary" href="/concepts/book">
                 Book a working session <span className="lx-arrow" aria-hidden>→</span>
               </a>
               <Link className="lx-btn lx-btn-ghost" href="/concepts/manifesto">
@@ -187,7 +187,7 @@ export default function CompanyConcept() {
             with a working session.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/pilot">
+            <a className="lx-btn lx-btn-primary" href="/concepts/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
             </a>
             <Link className="lx-btn lx-btn-ghost" href="/concepts/research">

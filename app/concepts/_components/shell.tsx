@@ -69,7 +69,7 @@ export function ConceptShell({ children }: { children: ReactNode }) {
             <Link className="lx-btn lx-btn-ghost" href="/concepts/home#own">
               See it answer
             </Link>
-            <a className="lx-btn lx-btn-primary" href="/pilot">
+            <a className="lx-btn lx-btn-primary" href="/concepts/book">
               <span className="lx-long">Book a working session</span>
               <span className="lx-short">Book a session</span>
               <span className="lx-arrow" aria-hidden>→</span>

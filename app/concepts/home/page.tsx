@@ -72,7 +72,7 @@ export default function HomeConcept() {
               leave. LongStrider keeps it: exact, sourced, and yours.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/pilot">
+              <a className="lx-btn lx-btn-primary" href="/concepts/book">
                 Book a working session <span className="lx-arrow" aria-hidden>→</span>
               </a>
               <a className="lx-btn lx-btn-ghost" href="#own">
@@ -309,7 +309,7 @@ export default function HomeConcept() {
             — and what your company would own ninety days from now.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/pilot">
+            <a className="lx-btn lx-btn-primary" href="/concepts/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
             </a>
             <a className="lx-btn lx-btn-ghost" href="/concepts/manifesto">

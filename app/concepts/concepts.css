@@ -1873,3 +1873,62 @@
   .pt-layer, .pt-terms li { grid-template-columns: 1fr; }
   .pt-who { grid-row: auto; padding: 0 0 4px; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   BOOK A WORKING SESSION
+   ═══════════════════════════════════════════════════════════ */
+.bk-grid { align-items: start; }
+.bk-steps { list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 4px; }
+.bk-steps li { display: grid; grid-template-columns: 36px 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--lx-line); }
+.bk-n {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 13px;
+  color: var(--lx-gold-ink);
+  border: 1px solid var(--lx-gold-line);
+  background: var(--lx-surface);
+}
+.bk-steps h2 { font-family: var(--lx-display); font-weight: 500; font-size: 19px; color: var(--lx-ink-primary); margin: 2px 0 4px; letter-spacing: 0; }
+.bk-steps p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--lx-ink-secondary); }
+
+.bk-card { display: grid; gap: 14px; padding: 26px 26px 20px; }
+.bk-label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lx-gold-ink); }
+.bk-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.bk-field { display: grid; gap: 6px; }
+.bk-field > span { font-size: 13px; font-weight: 500; color: var(--lx-ink-primary); }
+.bk-field input,
+.bk-field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 15px;
+  color: var(--lx-ink-primary);
+  background: var(--lx-paper);
+  border: 1px solid var(--lx-line);
+  border-radius: var(--lx-radius);
+  padding: 11px 12px;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.bk-field textarea { resize: vertical; min-height: 104px; line-height: 1.55; }
+.bk-field input:focus,
+.bk-field textarea:focus {
+  outline: none;
+  background: var(--lx-surface);
+  border-color: var(--lx-gold);
+  box-shadow: 0 0 0 3px var(--lx-gold-wash);
+}
+.bk-field textarea::placeholder { color: var(--lx-ink-muted); }
+.bk-submit { justify-content: center; margin-top: 4px; }
+.bk-submit:disabled { opacity: 0.7; cursor: progress; }
+.bk-note { margin: 0; font-size: 13px; color: var(--lx-ink-muted); text-align: center; }
+.bk-note a { color: var(--lx-gold-ink); }
+.bk-done { gap: 12px; padding: 36px 30px; }
+.bk-done h2 { font-size: clamp(28px, 2.6vw, 38px); margin: 0; }
+.bk-done p { margin: 0; font-size: 16px; line-height: 1.7; color: var(--lx-ink-secondary); }
+.mh-question a { color: var(--lx-gold-ink); }
+@media (max-width: 560px) {
+  .bk-row { grid-template-columns: 1fr; }
+  .bk-card { padding: 22px 18px 18px; }
+}

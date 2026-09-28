@@ -20,7 +20,7 @@ export default function CommitmentsConcept() {
               not hunting for it.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/pilot">
+              <a className="lx-btn lx-btn-primary" href="/concepts/book">
                 Book a working session <span className="lx-arrow" aria-hidden>→</span>
               </a>
               <a className="lx-btn lx-btn-ghost" href="#product">

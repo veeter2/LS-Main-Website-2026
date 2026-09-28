@@ -109,7 +109,7 @@ export default function PartnersConcept() {
               yours.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/pilot">
+              <a className="lx-btn lx-btn-primary" href="/concepts/book">
                 Start the conversation <span className="lx-arrow" aria-hidden>→</span>
               </a>
               <a className="lx-btn lx-btn-ghost" href="#ways">
@@ -246,7 +246,7 @@ export default function PartnersConcept() {
             deployment looks like.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/pilot">
+            <a className="lx-btn lx-btn-primary" href="/concepts/book">
               Start the conversation <span className="lx-arrow" aria-hidden>→</span>
             </a>
             <Link className="lx-btn lx-btn-ghost" href="/concepts/how-it-works">

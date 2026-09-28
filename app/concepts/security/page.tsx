@@ -67,7 +67,7 @@ export default function SecurityConcept() {
               calls out.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/pilot">
+              <a className="lx-btn lx-btn-primary" href="/concepts/book">
                 Book a security walkthrough <span className="lx-arrow" aria-hidden>→</span>
               </a>
               <Link className="lx-btn lx-btn-ghost" href="#ways">
@@ -201,7 +201,7 @@ export default function SecurityConcept() {
             Walk through where it runs, who can see what, and which model it talks to — with your own people in the room.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/pilot">
+            <a className="lx-btn lx-btn-primary" href="/concepts/book">
               Book a security walkthrough <span className="lx-arrow" aria-hidden>→</span>
             </a>
             <Link className="lx-btn lx-btn-ghost" href="/concepts/home">

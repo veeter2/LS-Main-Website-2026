@@ -128,7 +128,7 @@ export default function IndustriesConcept() {
               behind a decision matters as much as the decision itself.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/pilot">
+              <a className="lx-btn lx-btn-primary" href="/concepts/book">
                 Book a working session <span className="lx-arrow" aria-hidden>→</span>
               </a>
             </div>
@@ -197,7 +197,7 @@ export default function IndustriesConcept() {
             You&rsquo;ll see what LongStrider would keep, and what your company would own.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/pilot">
+            <a className="lx-btn lx-btn-primary" href="/concepts/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
             </a>
             <Link className="lx-btn lx-btn-ghost" href="/concepts/security">

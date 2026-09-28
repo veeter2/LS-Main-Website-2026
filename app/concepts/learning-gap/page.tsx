@@ -39,7 +39,7 @@ export default function LearningGapConcept() {
             it — so month twelve is worth more than month one.
           </p>
           <div className="lx-cta-row gx-cta" data-rise="3">
-            <a className="lx-btn lx-btn-primary" href="/pilot">
+            <a className="lx-btn lx-btn-primary" href="/concepts/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
             </a>
             <a className="lx-btn lx-btn-ghost" href="#how">
