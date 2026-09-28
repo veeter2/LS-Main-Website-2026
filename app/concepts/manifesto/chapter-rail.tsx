@@ -6,29 +6,26 @@ export type Chapter = { id: string; label: string }
 
 /**
  * The Manifesto's reading aids: a thin progress line under the bar and a
- * chapter list that follows the reader. Both read the concept shell's own
- * scroll container, not the window.
+ * chapter list that follows the reader. Both read the document's scroll.
  */
 export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
   const [active, setActive] = useState(chapters[0]?.id)
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    const root = document.getElementById("lx-root")
-    if (!root) return
-
     const onScroll = () => {
-      const max = root.scrollHeight - root.clientHeight
-      setProgress(max > 0 ? Math.min(root.scrollTop / max, 1) : 0)
+      const doc = document.documentElement
+      const max = doc.scrollHeight - window.innerHeight
+      setProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0)
     }
     onScroll()
-    root.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("scroll", onScroll, { passive: true })
 
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) if (e.isIntersecting) setActive(e.target.id)
       },
-      { root, rootMargin: "-30% 0px -60% 0px" },
+      { rootMargin: "-30% 0px -60% 0px" },
     )
     chapters.forEach((c) => {
       const el = document.getElementById(c.id)
@@ -36,7 +33,7 @@ export function ChapterRail({ chapters }: { chapters: Chapter[] }) {
     })
 
     return () => {
-      root.removeEventListener("scroll", onScroll)
+      window.removeEventListener("scroll", onScroll)
       io.disconnect()
     }
   }, [chapters])

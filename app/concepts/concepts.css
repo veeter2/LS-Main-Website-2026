@@ -4,6 +4,9 @@
  * 4px radius, the canonical reveal. Only the ground changes: ivory paper, warm ink.
  */
 
+/* The document behind the page (overscroll, rubber-banding) matches the paper. */
+html:has(#lx-root) { --lx-page-ground: #f6f3ec; }
+
 .lx {
   /* ── Ground + ink ───────────────────────────────────── */
   --lx-paper: #f6f3ec;
@@ -56,17 +59,25 @@
   --lx-max: 1240px;
   --lx-gutter: clamp(20px, 5vw, 64px);
 
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  overflow-y: auto;
-  overflow-x: hidden;
+  /* The page scrolls the document; clip (not hidden) stops sideways
+     overflow without making this a second scroll container. */
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
   background: var(--lx-paper);
   color: var(--lx-ink-body);
   font-family: var(--lx-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+
+/* One scroller: on /concepts the document scrolls, and the site's dark
+   chrome (ambient layer, nav, footer, toasts) is hidden rather than covered.
+   Keyed on #lx-root so it can never apply outside the concept pages. */
+html:has(#lx-root) { scroll-behavior: auto; background: var(--lx-page-ground); }
+body:has(#lx-root) { background: var(--lx-page-ground); }
+body:has(#lx-root) > :not(:has(#lx-root)):not(script):not(next-route-announcer):not(nextjs-portal) { display: none !important; }
+body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important; }
 
 .lx ::selection { background: var(--lx-gold-wash); color: var(--lx-ink); }
 
@@ -191,22 +202,21 @@
 }
 .lx-rule { height: 1px; background: var(--lx-line); border: 0; margin: 0; }
 
-/* ── Reveal (canonical manifesto spec) ───────────────── */
-.lx [data-reveal] {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.85s var(--lx-ease), transform 0.85s var(--lx-ease);
+/* ── Reveal ──────────────────────────────────────────────
+   A short opacity fade, no movement, and only for people who haven't asked
+   for reduced motion. Without the preference, everything is simply there. */
+@media (prefers-reduced-motion: no-preference) {
+  .lx [data-reveal] { opacity: 0; transition: opacity 0.5s ease-out; }
+  .lx [data-reveal].deck-visible { opacity: 1; }
+  .lx [data-reveal][data-delay="1"] { transition-delay: 60ms; }
+  .lx [data-reveal][data-delay="2"] { transition-delay: 120ms; }
+  .lx [data-reveal][data-delay="3"] { transition-delay: 180ms; }
+  .lx [data-reveal][data-delay="4"] { transition-delay: 240ms; }
+  .lx [data-reveal][data-delay="5"] { transition-delay: 300ms; }
 }
-.lx [data-reveal].deck-visible { opacity: 1; transform: none; }
-.lx [data-reveal][data-delay="1"] { transition-delay: 120ms; }
-.lx [data-reveal][data-delay="2"] { transition-delay: 240ms; }
-.lx [data-reveal][data-delay="3"] { transition-delay: 360ms; }
-.lx [data-reveal][data-delay="4"] { transition-delay: 480ms; }
-.lx [data-reveal][data-delay="5"] { transition-delay: 600ms; }
 
 @media (prefers-reduced-motion: reduce) {
   .lx *, .lx *::before, .lx *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  .lx [data-reveal] { opacity: 1; transform: none; }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -439,13 +449,15 @@
 }
 
 /* Above-the-fold entrance: pure CSS, so the first screen never waits on JS. */
-.lx [data-rise] { animation: lx-rise 0.9s var(--lx-ease) both; }
-.lx [data-rise="1"] { animation-delay: 80ms; }
-.lx [data-rise="2"] { animation-delay: 180ms; }
-.lx [data-rise="3"] { animation-delay: 300ms; }
-.lx [data-rise="4"] { animation-delay: 420ms; }
-.lx [data-rise="5"] { animation-delay: 540ms; }
-@keyframes lx-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .lx [data-rise] { animation: lx-rise 0.5s ease-out both; }
+  .lx [data-rise="1"] { animation-delay: 40ms; }
+  .lx [data-rise="2"] { animation-delay: 90ms; }
+  .lx [data-rise="3"] { animation-delay: 140ms; }
+  .lx [data-rise="4"] { animation-delay: 190ms; }
+  .lx [data-rise="5"] { animation-delay: 240ms; }
+}
+@keyframes lx-rise { from { opacity: 0; } to { opacity: 1; } }
 
 /* ═══════════════════════════════════════════════════════════
    CONCEPT B — THE LEARNING GAP
@@ -736,6 +748,10 @@
 .dx-who { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lx-ink-hint); }
 .dx-what { font-size: 16px; color: var(--lx-ink-primary); transition: color 0.4s; }
 .dx-when { font-size: 13px; color: var(--lx-ink-muted); }
+.dx-when { display: grid; }
+.dx-when > span { grid-area: 1 / 1; }
+.dx-when-ghost { visibility: hidden; }
+.dx-tag-empty { visibility: hidden; }
 .dx-tag {
   align-self: center;
   font-size: 10.5px;
@@ -747,6 +763,8 @@
   background: var(--lx-purple-wash);
 }
 .dx-tag-new { color: var(--lx-gold-ink); background: var(--lx-gold-wash); }
+/* Every tag is the same width, so "New" and "Waiting" take the same room. */
+.dx-tag { min-width: 76px; text-align: center; box-sizing: border-box; }
 
 .dx-night {
   position: absolute;
@@ -910,6 +928,9 @@
   transition: opacity 0.5s var(--lx-ease), transform 0.5s var(--lx-ease);
 }
 .ob-item[data-in="true"] { opacity: 1; transform: none; }
+.ob-sub { display: grid; }
+.ob-sub > span { grid-area: 1 / 1; }
+.ob-ghost { visibility: hidden; }
 .ob-owned .ob-item { background: var(--lx-surface); border-color: rgba(var(--lx-gold-rgb), 0.3); }
 .ob-source { font-size: 11px; color: var(--lx-gold-ink); letter-spacing: 0.04em; }
 .ob-rented[data-switched="true"] .ob-item[data-in="true"] {

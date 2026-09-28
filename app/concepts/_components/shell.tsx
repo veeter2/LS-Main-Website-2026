@@ -14,8 +14,9 @@ const NAV = [
 ]
 
 /**
- * Daylight concept shell. Sits over the site's dark chrome as its own scroll
- * container, so concept pages need no changes to the shared nav or footer.
+ * Daylight concept shell. The page scrolls the document itself; the site's
+ * dark nav, footer and ambient layer are hidden for /concepts in
+ * concepts.css (keyed on #lx-root), so there is only ever one scroller.
  */
 export function ConceptShell({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -24,8 +25,9 @@ export function ConceptShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     const root = rootRef.current
     if (!root) return
-    const onScroll = () => setScrolled(root.scrollTop > 8)
-    root.addEventListener("scroll", onScroll, { passive: true })
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -36,7 +38,7 @@ export function ConceptShell({ children }: { children: ReactNode }) {
           }
         }
       },
-      { root, threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
     )
     const watch = () => root.querySelectorAll("[data-reveal]:not(.deck-visible)").forEach((el) => io.observe(el))
     watch()
@@ -44,7 +46,7 @@ export function ConceptShell({ children }: { children: ReactNode }) {
     mo.observe(root, { childList: true, subtree: true })
 
     return () => {
-      root.removeEventListener("scroll", onScroll)
+      window.removeEventListener("scroll", onScroll)
       io.disconnect()
       mo.disconnect()
     }
