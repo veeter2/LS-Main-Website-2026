@@ -50,6 +50,17 @@ export default function ConceptsIndex() {
           Four ways to open the site, each aimed at a different buyer. Every one keeps Lora, the Manifesto&rsquo;s gold
           and spacing, and says only what the product does today.
         </p>
+        <Link href="/concepts/home" className="cx-card cx-feature lx-card" data-rise="2">
+          <span className="lx-eyebrow">The homepage — all four, one story</span>
+          <span className="cx-line">What it is → why you need it → what it&rsquo;s like → why it&rsquo;s safe to own.</span>
+          <span className="cx-why">
+            Leads with The Record, then the learning gap, the promise kept, and owned memory — one running example
+            from top to bottom.
+          </span>
+          <span className="cx-open">
+            Open the homepage <span aria-hidden>→</span>
+          </span>
+        </Link>
         <div className="cx-grid">
           {CONCEPTS.map((c, i) => (
             <Link key={c.href} href={c.href} className="cx-card lx-card" data-rise={String(i + 2)}>

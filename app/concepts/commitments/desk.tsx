@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 type Row = { id: string; from: string; to: string; what: string; when: string; state: "open" | "waiting" | "done" | "new" }
 
@@ -27,8 +27,26 @@ const OVERNIGHT = [
 
 export function Desk() {
   const [rows, setRows] = useState<Row[]>(START)
+  const [seen, setSeen] = useState(false)
+  const sceneRef = useRef<HTMLDivElement>(null)
+
+  // The desk's small story (a promise arrives, one gets done) plays when it
+  // comes into view — further down a long page it would otherwise be over.
+  useEffect(() => {
+    const el = sceneRef.current
+    if (!el) return
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        setSeen(true)
+        io.disconnect()
+      }
+    }, { threshold: 0.35 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
   useEffect(() => {
+    if (!seen) return
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setRows([{ ...START[0], state: "done", when: "Done · sent 9:14" }, ...START.slice(1), ARRIVAL])
       return
@@ -42,12 +60,12 @@ export function Desk() {
       setTimeout(() => setRows((r) => r.map((x) => (x.id === "forecast" ? { ...x, state: "open" } : x))), 6800),
     ]
     return () => timers.forEach(clearTimeout)
-  }, [])
+  }, [seen])
 
   const open = rows.filter((r) => r.state !== "done").length
 
   return (
-    <div className="dx-scene" aria-label="Example: a desk of commitments and an overnight note">
+    <div className="dx-scene" ref={sceneRef} aria-label="Example: a desk of commitments and an overnight note">
       <div className="dx-desk lx-card">
         <div className="dx-head">
           <div>
