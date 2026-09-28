@@ -8,7 +8,7 @@ import { LongstriderLogo } from "@/components/longstrider-logo"
 // section that covers them until they are built.
 const NAV = [
   { label: "Product", href: "/concepts/product" },
-  { label: "How it works", href: "/concepts/home#different" },
+  { label: "How it works", href: "/concepts/how-it-works" },
   { label: "Security", href: "/concepts/security" },
   { label: "Research", href: "/concepts/home#asset" },
   { label: "Company", href: "/concepts/home#company" },
