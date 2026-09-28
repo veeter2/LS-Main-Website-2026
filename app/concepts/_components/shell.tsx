@@ -4,14 +4,12 @@ import Link from "next/link"
 import { useEffect, useRef, useState, type ReactNode } from "react"
 import { LongstriderLogo } from "@/components/longstrider-logo"
 
-// Pages that exist link to themselves; the rest point at the homepage
-// section that covers them until they are built.
 const NAV = [
   { label: "Product", href: "/concepts/product" },
   { label: "How it works", href: "/concepts/how-it-works" },
   { label: "Security", href: "/concepts/security" },
   { label: "Research", href: "/concepts/research" },
-  { label: "Company", href: "/concepts/home#company" },
+  { label: "Company", href: "/concepts/company" },
 ]
 
 /**
