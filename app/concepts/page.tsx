@@ -1,99 +1,110 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-export const metadata: Metadata = { title: "Hero concepts" }
+export const metadata: Metadata = { title: "Site preview" }
 
-const CONCEPTS = [
+/**
+ * The review map for the new site: every page grouped the way a visitor
+ * meets it, so the team can walk it end to end before it goes live. The
+ * earlier hero explorations sit at the bottom, kept for reference.
+ */
+
+const GROUPS = [
   {
-    href: "/concepts/record",
-    letter: "A",
-    name: "The Record",
-    line: "Ask what happened. Get the record, not a guess.",
-    who: "Leads with the end user · proof for the CTO",
-    why: "Owns the category's biggest complaint — AI that's almost right — with exact, sourced answers and the honesty to say “not yet.”",
+    name: "The argument",
+    pages: [
+      { href: "/concepts/home", title: "Home", line: "You're building on rented land. Here's how to own what your company learns." },
+      { href: "/concepts/manifesto", title: "The Manifesto", line: "The long read: the evidence, the moat, and what it looks like in the room." },
+    ],
   },
   {
-    href: "/concepts/learning-gap",
-    letter: "B",
-    name: "The Learning Gap",
-    line: "Most AI pilots stall for one reason. They forget.",
-    who: "Leads with the CFO",
-    why: "Builds on MIT's finding that 95% of AI pilots show no return because the tools don't learn. Nobody in the category uses it on their homepage.",
+    name: "The product",
+    pages: [
+      { href: "/concepts/product", title: "What it does", line: "The record, the promises, the specialists, the overnight tidy, your agents." },
+      { href: "/concepts/how-it-works", title: "How it works", line: "One sentence followed through the system, and the three layers." },
+      { href: "/concepts/security", title: "Security & ownership", line: "Where it runs, who can see what, and whose keys." },
+      { href: "/concepts/research", title: "Research", line: "The score we published, what we fixed, and where we're going." },
+    ],
   },
   {
-    href: "/concepts/owned",
-    letter: "C",
-    name: "Owned Memory",
-    line: "The model is rented. The memory is yours.",
-    who: "Leads with the CTO",
-    why: "OpenAI, Anthropic and Microsoft all keep memory inside their own walls. This one says what you keep when you switch.",
+    name: "Who it's for",
+    pages: [
+      { href: "/concepts/industries", title: "Industries", line: "Insurance, legal and automotive — where judgement lives in people." },
+      { href: "/concepts/for/finance", title: "For the CFO", line: "An AI budget that ends in an asset, not a renewal." },
+      { href: "/concepts/for/technology", title: "For the CTO", line: "A memory layer your architects can inspect." },
+      { href: "/concepts/for/teams", title: "For your team", line: "Stop explaining your job to a chat window every morning." },
+      { href: "/concepts/partners", title: "Partners", line: "Your client owns their memory. You own your method." },
+    ],
   },
   {
-    href: "/concepts/commitments",
-    letter: "D",
-    name: "Commitments",
-    line: "It remembers who promised what, and by when.",
-    who: "Leads with the people who use it daily",
-    why: "Competitors store “facts” and “context.” Nobody sells promises kept — the thing a user feels every morning.",
+    name: "The company",
+    pages: [
+      { href: "/concepts/company", title: "Company", line: "Why we exist, and the four things we won't trade." },
+      { href: "/concepts/book", title: "Book a session", line: "Not a demo — a working session on your problem." },
+    ],
   },
+]
+
+const EARLIER = [
+  { href: "/concepts/home-v1", name: "Homepage, record-first" },
+  { href: "/concepts/record", name: "A · The Record" },
+  { href: "/concepts/learning-gap", name: "B · The Learning Gap" },
+  { href: "/concepts/owned", name: "C · Owned Memory" },
+  { href: "/concepts/commitments", name: "D · Commitments" },
 ]
 
 export default function ConceptsIndex() {
   return (
     <main className="lx-hero cx-index">
       <div className="lx-wrap">
-        <p className="lx-eyebrow" data-rise="0">Homepage hero — four directions</p>
+        <p className="lx-eyebrow" data-rise="0">Site preview — for review</p>
         <h1 className="lx-display cx-h1" data-rise="1">
-          Same brand. Same Lora. <em>Daylight.</em>
+          The new LongStrider site, <em>in daylight</em>.
         </h1>
         <p className="lx-lead cx-lead" data-rise="2">
-          Four ways to open the site, each aimed at a different buyer. Every one keeps Lora, the Manifesto&rsquo;s gold
-          and spacing, and says only what the product does today.
+          Every page of the new site, grouped the way a visitor meets it. Lora throughout, the Manifesto&rsquo;s gold and
+          spacing, and only claims the product can back today. Not public — share the link, and every page is hidden from
+          search.
         </p>
+
         <Link href="/concepts/home" className="cx-card cx-feature lx-card" data-rise="2">
-          <span className="lx-eyebrow">The homepage — the Manifesto&rsquo;s argument</span>
+          <span className="lx-eyebrow">Start here — the homepage</span>
           <span className="cx-line">Every dollar you spent on AI this year made someone else&rsquo;s platform smarter.</span>
           <span className="cx-why">
-            Ownership first: you&rsquo;re building on rented land, knowledge walks out the door, and the record, the
-            promises and the pushback are the proof. Not search — an asset.
+            Ownership first: you&rsquo;re building on rented land, knowledge walks out the door, and the record, the promises
+            and the pushback are the proof. Not search — an asset.
           </span>
           <span className="cx-open">
             Open the homepage <span aria-hidden>→</span>
           </span>
         </Link>
-        <nav className="cx-pages" aria-label="The new site so far">
-          <span className="lx-eyebrow">The new site so far</span>
-          <Link href="/concepts/home">Home</Link>
-          <Link href="/concepts/product">What it does</Link>
-          <Link href="/concepts/how-it-works">How it works</Link>
-          <Link href="/concepts/industries">Industries</Link>
-          <Link href="/concepts/research">Research</Link>
-          <Link href="/concepts/manifesto">The Manifesto</Link>
-          <Link href="/concepts/company">Company</Link>
-          <Link href="/concepts/partners">Partners</Link>
-          <Link href="/concepts/for/finance">For the CFO</Link>
-          <Link href="/concepts/for/technology">For the CTO</Link>
-          <Link href="/concepts/for/teams">For your team</Link>
-          <Link href="/concepts/book">Book a session</Link>
-          <Link href="/concepts/security">Security &amp; ownership</Link>
-        </nav>
-        <p className="cx-older">
-          Earlier version, led by the record: <Link href="/concepts/home-v1">/concepts/home-v1</Link>
-        </p>
-        <div className="cx-grid">
-          {CONCEPTS.map((c, i) => (
-            <Link key={c.href} href={c.href} className="cx-card lx-card" data-rise={String(i + 2)}>
-              <span className="cx-letter">{c.letter}</span>
-              <span className="lx-eyebrow">{c.name}</span>
-              <span className="cx-line">{c.line}</span>
-              <span className="cx-who">{c.who}</span>
-              <span className="cx-why">{c.why}</span>
-              <span className="cx-open">
-                Open <span aria-hidden>→</span>
-              </span>
-            </Link>
+
+        <div className="cx-map" data-rise="3">
+          {GROUPS.map((g) => (
+            <section key={g.name} className="cx-group" aria-label={g.name}>
+              <span className="lx-eyebrow">{g.name}</span>
+              <ul>
+                {g.pages.map((p) => (
+                  <li key={p.href}>
+                    <Link href={p.href}>
+                      <span className="cx-map-title">{p.title}</span>
+                      <span className="cx-map-line">{p.line}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
           ))}
         </div>
+
+        <nav className="cx-pages" aria-label="Earlier explorations">
+          <span className="lx-eyebrow">Earlier explorations</span>
+          {EARLIER.map((e) => (
+            <Link key={e.href} href={e.href}>
+              {e.name}
+            </Link>
+          ))}
+        </nav>
       </div>
     </main>
   )
