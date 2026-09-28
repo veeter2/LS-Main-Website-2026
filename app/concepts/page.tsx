@@ -64,6 +64,7 @@ export default function ConceptsIndex() {
         <nav className="cx-pages" aria-label="The new site so far">
           <span className="lx-eyebrow">The new site so far</span>
           <Link href="/concepts/home">Home</Link>
+          <Link href="/concepts/product">What it does</Link>
           <Link href="/concepts/security">Security &amp; ownership</Link>
         </nav>
         <p className="cx-older">
