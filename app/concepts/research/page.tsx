@@ -220,7 +220,7 @@ export default function ResearchConcept() {
             <a className="lx-btn lx-btn-primary" href="/labs/beyond-retrieval">
               Read Beyond Retrieval <span className="lx-arrow" aria-hidden>→</span>
             </a>
-            <a className="lx-btn lx-btn-ghost" href="/pilot">
+            <a className="lx-btn lx-btn-ghost" href="/concepts/book">
               Book a working session
             </a>
           </div>
