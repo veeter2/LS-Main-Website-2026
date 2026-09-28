@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Doors } from "../_components/doors"
 import { ModelSwitch } from "./model-switch"
 
-export const metadata: Metadata = { title: "Concept C — Owned Memory" }
+export const metadata: Metadata = { title: "Concept C · Owned Memory" }
 
 export default function OwnedConcept() {
   return (
@@ -38,7 +38,7 @@ export default function OwnedConcept() {
 
           <div data-rise="2">
             <ModelSwitch />
-            <p className="lx-illustrative">Illustrative example — try switching the model</p>
+            <p className="lx-illustrative">Illustrative example: try switching the model</p>
           </div>
         </div>
       </section>

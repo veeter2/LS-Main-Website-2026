@@ -7,9 +7,9 @@ type Kept = { kind: string; text: string; source: string }
 
 // One call, four things worth keeping. Each marked phrase becomes one row.
 const LINES: Line[] = [
-  { who: "Dana, Alder", before: "The ", mark: "contract's with our legal team", after: " — back by mid-October." },
+  { who: "Dana, Alder", before: "The ", mark: "contract's with our legal team", after: ". Back by mid-October." },
   { who: "Priya", before: "And ", mark: "the rate holds through Q4", after: ", as long as it's two years." },
-  { who: "Dana, Alder", before: "", mark: "Send contract questions to me now", after: " — Marcus moved to procurement." },
+  { who: "Dana, Alder", before: "", mark: "Send contract questions to me now", after: ". Marcus moved to procurement." },
   { who: "Dana, Alder", before: "Honestly, ", mark: "price is the whole conversation", after: " again this year." },
 ]
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { SentenceJourney } from "./sentence-journey"
 
-export const metadata: Metadata = { title: "How it works — concept" }
+export const metadata: Metadata = { title: "How it works · concept" }
 
 /**
  * How LongStrider works, for the technical buyer: one sentence followed
@@ -13,9 +13,9 @@ export const metadata: Metadata = { title: "How it works — concept" }
 const SOURCES = ["Calls", "Chat", "Email", "Documents", "Your agents"]
 
 const OURS = [
-  { name: "The record", body: "Every conversation broken into facts — each dated, each with who said it and where." },
+  { name: "The record", body: "Every conversation broken into facts, each dated, each with who said it and where." },
   { name: "The order", body: "Facts filed by account, project and person, linked to each other, with promises on the right desk." },
-  { name: "The judgement", body: "What kind of question this is, what counts, what contradicts — and the rules you set." },
+  { name: "The judgement", body: "What kind of question this is, what counts, what contradicts, and the rules you set." },
 ]
 
 const MODEL_DOES = [
@@ -27,7 +27,7 @@ const MODEL_DOES = [
 const WE_DO = [
   "Remembers every conversation, dated and sourced",
   "Counts, orders and compares across months of work",
-  "Decides what the model sees — and who is allowed to see it",
+  "Decides what the model sees, and who is allowed to see it",
   "Checks for contradictions before it answers",
   "Keeps corrections, so they stay corrected",
 ]
@@ -39,7 +39,7 @@ const ARCHITECT = [
   },
   {
     title: "Your agents plug in",
-    body: "Agents read the record before they act and write back what they found — so their work adds up instead of starting over.",
+    body: "Agents read the record before they act and write back what they found, so their work adds up instead of starting over.",
   },
   {
     title: "Scoped by default",
@@ -71,7 +71,7 @@ export default function HowItWorksConcept() {
             </h1>
             <p className="lx-lead" data-rise="2">
               LongStrider sits between the work your people do and the model that writes the answers. It turns
-              conversations into a record you own, keeps that record in order, and hands the model exactly what it needs —
+              conversations into a record you own, keeps that record in order, and hands the model exactly what it needs,
               so answers come from your company&rsquo;s history, not a model&rsquo;s best guess.
             </p>
             <div className="lx-cta-row" data-rise="3">
@@ -90,12 +90,12 @@ export default function HowItWorksConcept() {
           </div>
           <div data-rise="2">
             <SentenceJourney />
-            <p className="lx-illustrative">Illustrative example — pick any stage</p>
+            <p className="lx-illustrative">Illustrative example: pick any stage</p>
           </div>
         </div>
       </section>
 
-      {/* 01 — Three layers */}
+      {/* 01: Three layers */}
       <section className="hx-section hx-deep" id="layers">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -120,7 +120,7 @@ export default function HowItWorksConcept() {
             <span />
           </div>
           <div className="ly-band ly-ours">
-            <span className="ly-label">LongStrider — yours</span>
+            <span className="ly-label">LongStrider: yours</span>
             <div className="ly-parts">
               {OURS.map((p) => (
                 <div key={p.name} className="ly-part">
@@ -136,7 +136,7 @@ export default function HowItWorksConcept() {
             <span />
           </div>
           <div className="ly-band">
-            <span className="ly-label">The model — rented, and replaceable</span>
+            <span className="ly-label">The model: rented, and replaceable</span>
             <p className="ly-model">
               Any frontier model through your keys, or a private one on your hardware. It gets the facts it needs for this
               question and writes the answer. It never needs to keep the memory.
@@ -145,7 +145,7 @@ export default function HowItWorksConcept() {
         </div>
       </section>
 
-      {/* 02 — Division of labour */}
+      {/* 02: Division of labour */}
       <section className="hx-section" id="split">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -156,7 +156,7 @@ export default function HowItWorksConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Language models are brilliant with words and unreliable with arithmetic across hundreds of conversations. So
-            LongStrider does the remembering, counting and checking itself — and gives the model the result to put into
+            LongStrider does the remembering, counting and checking itself, then gives the model the result to put into
             words.
           </p>
         </div>
@@ -180,7 +180,7 @@ export default function HowItWorksConcept() {
         </div>
       </section>
 
-      {/* 03 — Correction */}
+      {/* 03: Correction */}
       <section className="hx-section hx-deep" id="correct">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -191,20 +191,20 @@ export default function HowItWorksConcept() {
               A correction is a <em>lesson</em>, not an edit.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              When someone fixes a fact, LongStrider keeps the fix, who made it and why. The old fact isn&rsquo;t erased —
-              it&rsquo;s marked as replaced, so you can always see what it believed, when, and what changed its mind.
+              When someone fixes a fact, LongStrider keeps the fix, who made it and why. The old fact isn&rsquo;t erased.
+              It&rsquo;s marked as replaced, so you can always see what it believed, when, and what changed its mind.
             </p>
           </div>
           <div data-reveal data-delay="2">
             <article className="cr lx-card" aria-label="Example: a corrected fact">
               <span className="cr-label">Alder · contract contact</span>
               <p className="cr-old">
-                Marcus handles Alder&rsquo;s contract <span className="lx-num">— since March</span>
+                Marcus handles Alder&rsquo;s contract <span className="lx-num">(since March)</span>
               </p>
               <p className="cr-new">Dana handles Alder&rsquo;s contract</p>
               <div className="cr-why">
                 <span className="cr-why-label">Why it changed</span>
-                <span>Marcus moved to procurement — Dana, on the renewal call, 22 Sep</span>
+                <span>Marcus moved to procurement (Dana, on the renewal call, 22 Sep)</span>
               </div>
               <div className="mh-note-sources">
                 <span className="rx-source">
@@ -219,7 +219,7 @@ export default function HowItWorksConcept() {
         </div>
       </section>
 
-      {/* 04 — For architects */}
+      {/* 04: For architects */}
       <section className="hx-section" id="architects">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -261,7 +261,7 @@ export default function HowItWorksConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

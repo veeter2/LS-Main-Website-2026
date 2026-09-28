@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ChapterRail, type Chapter } from "./chapter-rail"
 
-export const metadata: Metadata = { title: "The Manifesto — concept" }
+export const metadata: Metadata = { title: "The Manifesto · concept" }
 
 /**
  * The Manifesto in daylight. Matt’s argument and words, set as a long read.
@@ -26,17 +26,17 @@ const SCENARIOS = [
   {
     title: "The board meeting",
     paragraphs: [
-      "Tuesday afternoon. A partner asks why a key client’s engagement has shifted — and what’s actually driving it.",
+      "Tuesday afternoon. A partner asks why a key client’s engagement has shifted, and what’s actually driving it.",
       "Without LongStrider, that question takes two days. Someone pulls CRM data. Someone digs through email. Someone remembers a conversation from March that never got documented. The answer arrives as a spreadsheet with no story.",
-      "With LongStrider, the system has already been tidying this overnight — connecting that client’s interactions, keeping what mattered, letting go of what didn’t. The answer arrives as a trajectory: where the relationship was, when the shift started, the conversation that preceded it, and two other accounts following the same arc.",
+      "With LongStrider, the system has already been tidying this overnight: connecting that client’s interactions, keeping what mattered, letting go of what didn’t. The answer arrives as a trajectory: where the relationship was, when the shift started, the conversation that preceded it, and two other accounts following the same arc.",
     ],
     turn: "Not a report. An understanding.",
   },
   {
     title: "The key departure",
     paragraphs: [
-      "Your head of client services gives two weeks’ notice on a Friday. She’s been with you for eleven years. She knows every key account personally — the politics, the preferences, the history that never made it into a CRM record.",
-      "On Monday morning, her replacement opens LongStrider. What she knew is there — not as a knowledge dump, but as a living record. The relationships. The conversations that shaped each engagement. The moments a client’s tone shifted before anyone noticed.",
+      "Your head of client services gives two weeks’ notice on a Friday. She’s been with you for eleven years. She knows every key account personally: the politics, the preferences, the history that never made it into a CRM record.",
+      "On Monday morning, her replacement opens LongStrider. What she knew is there. Not as a knowledge dump, but as a living record. The relationships. The conversations that shaped each engagement. The moments a client’s tone shifted before anyone noticed.",
       "Not because someone asked her to document it. Because the system was learning alongside her the entire time.",
     ],
     turn: "Her expertise didn’t walk out the door. It became the company’s.",
@@ -47,37 +47,37 @@ const SCENARIOS = [
       "Ninety days after deployment. Nobody’s maintaining the system. Nobody’s feeding it data. But this morning’s briefing flagged something: a pricing decision your team made last week contradicts a pattern the system has been tracking for three months.",
       "It doesn’t just show you the data. It shows you what happened last time, what changed, and why the current path looks familiar. It pushes back, with evidence, because the history earned it the right to.",
     ],
-    turn: "Not a tool that answers questions. A system that asks them — before you knew to.",
+    turn: "Not a tool that answers questions. A system that asks them, before you knew to.",
   },
 ]
 
 const PERSONAS = [
   {
     type: "The PE-backed portfolio company",
-    body: "Your board didn’t ask whether you’re using AI. They asked what you own. LongStrider compounds from week one and gives you something that shows up in due diligence. Not a subscription renewal — a line item on the asset side.",
+    body: "Your board didn’t ask whether you’re using AI. They asked what you own. LongStrider compounds from week one and gives you something that shows up in due diligence. Not a subscription renewal. A line item on the asset side.",
   },
   {
     type: "The regulated-industry operator",
-    body: "Financial services. Healthcare. Legal. Your data doesn’t leave your perimeter — because your regulators, your clients and your counsel require it. LongStrider was built for exactly this: sovereign deployment, full data residency, air-gapped where required.",
+    body: "Financial services. Healthcare. Legal. Your data doesn’t leave your perimeter, because your regulators, your clients and your counsel require it. LongStrider was built for exactly this: sovereign deployment, full data residency, air-gapped where required.",
   },
   {
     type: "The professional services firm",
-    body: "Your product is what your people know. Every methodology, every relationship, every hard-won pattern lives in people, not systems. LongStrider makes it permanent — not a knowledge base someone has to maintain, but a living system that learns alongside your team and stays when they don’t.",
+    body: "Your product is what your people know. Every methodology, every relationship, every hard-won pattern lives in people, not systems. LongStrider makes it permanent. Not a knowledge base someone has to maintain, but a living system that learns alongside your team and stays when they don’t.",
   },
   {
     type: "The technology company building on AI",
-    body: "Everything you’re building is only as smart as what it remembers — and right now, it resets every session. LongStrider is the layer underneath that makes what you deploy compound, stay in context, and become worth defending. Not a competitor. A foundation.",
+    body: "Everything you’re building is only as smart as what it remembers. Right now, it resets every session. LongStrider is the layer underneath that makes what you deploy compound, stay in context, and become worth defending. Not a competitor. A foundation.",
   },
 ]
 
 const CAPABILITIES = [
   {
     title: "It runs by your rules",
-    body: "Most AI has guardrails bolted on after the fact. LongStrider has a written operating code — how it thinks, speaks, challenges and stays in bounds. Configure it for a law firm and it behaves one way; for a PE fund, another. Same engine. A different operating mind. Entirely yours.",
+    body: "Most AI has guardrails bolted on after the fact. LongStrider has a written operating code: how it thinks, speaks, challenges and stays in bounds. Configure it for a law firm and it behaves one way; for a PE fund, another. Same engine. A different operating mind. Entirely yours.",
   },
   {
     title: "It retrieves understanding, not documents",
-    body: "Ask a question and it doesn’t search an index. It weighs what’s relevant, what mattered, who was involved and how recent it is — and answers with the arc: where things started, how they shifted, where they are now.",
+    body: "Ask a question and it doesn’t search an index. It weighs what’s relevant, what mattered, who was involved and how recent it is. Then it answers with the arc: where things started, how they shifted, where they are now.",
   },
   {
     title: "It gets smarter while you sleep",
@@ -85,7 +85,7 @@ const CAPABILITIES = [
   },
   {
     title: "It has the integrity to challenge you",
-    body: "Every other AI is optimised to keep the conversation rolling. LongStrider is built not to tell you what you want to hear under pressure. When a decision cuts against the evidence, it says so — and would rather stop than give in.",
+    body: "Every other AI is optimised to keep the conversation rolling. LongStrider is built not to tell you what you want to hear under pressure. When a decision cuts against the evidence, it says so, and would rather stop than give in.",
   },
   {
     title: "The interface remembers too",
@@ -104,13 +104,13 @@ const LANDSCAPE = [
   },
   {
     name: "The memory infrastructure startups",
-    body: "Real technology, and we respect the work — but it’s developer plumbing: APIs that store and fetch. Nobody built the layer an enterprise needs to accumulate, weigh, challenge and fully own what it learns.",
+    body: "Real technology, and we respect the work. But it’s developer plumbing: APIs that store and fetch. Nobody built the layer an enterprise needs to accumulate, weigh, challenge and fully own what it learns.",
   },
 ]
 
 const TIERS = [
   { name: "Hosted", body: "A dedicated instance we run, isolated to you. You own the knowledge; we run the engine." },
-  { name: "Private cloud", body: "Containerised inside your VPC — your servers, your perimeter, full data residency. No source code shipped." },
+  { name: "Private cloud", body: "Containerised inside your VPC: your servers, your perimeter, full data residency. No source code shipped." },
   { name: "Sovereign build", body: "Built alongside your team, on your hardware, air-gap capable. When it’s done, every part belongs to you. Permanently." },
   { name: "Partner program", body: "Run it under your brand for your clients. You bring the relationships and the vertical knowledge; the engine is yours to operate." },
 ]
@@ -122,7 +122,7 @@ export default function ManifestoConcept() {
         <div className="lx-wrap mf-hero-inner">
           <p className="lx-eyebrow" data-rise="0">The Manifesto</p>
           <h1 className="lx-display lx-h1 mf-h1" data-rise="1">
-            The intelligence layer that knows your business — and never <em>forgets</em>.
+            The intelligence layer that knows your business, and never <em>forgets</em>.
           </h1>
           <p className="mf-hook" data-rise="2">
             Every dollar your organisation spent on AI this year made someone else&rsquo;s platform smarter.
@@ -152,13 +152,13 @@ export default function ManifestoConcept() {
               <p>Your tools execute. Your dashboards visualise. Your search finds documents. And not one of them remembers.</p>
               <p>
                 The race to the bottom everyone predicted is here. The model is already a commodity. Every provider is
-                building &ldquo;memory&rdquo; that keeps your preferences, your history, your patterns — but it&rsquo;s
+                building &ldquo;memory&rdquo; that keeps your preferences, your history, your patterns. But it&rsquo;s
                 their memory, not yours. Every conversation on their platform makes their models smarter, and your
                 competitor&rsquo;s experience identical to yours.
               </p>
               <p>
                 Nobody asks which search algorithm powers the bar they type into. They won&rsquo;t ask which model runs
-                your stack either. When the next one drops — cheaper, faster, better — you&rsquo;ll switch. And start from
+                your stack either. When the next one drops (cheaper, faster, better), you&rsquo;ll switch. And start from
                 zero. Again.
               </p>
             </div>
@@ -179,14 +179,14 @@ export default function ManifestoConcept() {
             </h2>
             <div className="mf-prose" data-reveal data-delay="2">
               <p>
-                LongStrider sits above your existing stack — making sense of what every tool knows, keeping what actually
+                LongStrider sits above your existing stack, making sense of what every tool knows, keeping what actually
                 mattered, and compounding it over time. It doesn&rsquo;t replace your tools. It&rsquo;s what makes them
                 worth keeping.
               </p>
               <p>
                 It adapts at every scale. For a person, it learns how you think and what you need. For a team, it builds
                 shared context that survives people changing roles. For an enterprise, it accumulates what thousands of
-                people and years of decisions have taught it — all sovereign, all yours.
+                people and years of decisions have taught it. All sovereign, all yours.
               </p>
               <p>
                 And it isn&rsquo;t a black box. Every answer shows what it drew on and why. Disagree, correct it, and the
@@ -205,8 +205,8 @@ export default function ManifestoConcept() {
             </h2>
             <div className="mf-prose" data-reveal data-delay="2">
               <p>
-                The models get smarter every quarter. The prices drop every month. And when you switch providers — and you
-                will — you start over with nothing.
+                The models get smarter every quarter. The prices drop every month. And when you switch providers (and you
+                will), you start over with nothing.
               </p>
               <p>
                 The companies that win the next decade won&rsquo;t be the ones with the best models. Everyone has the same
@@ -220,7 +220,7 @@ export default function ManifestoConcept() {
             </div>
             <blockquote className="mf-pull" data-reveal>
               The models will keep getting smarter. The question is whether they&rsquo;re getting smarter about{" "}
-              <em>your</em> business — or just smarter in general.
+              <em>your</em> business, or just smarter in general.
             </blockquote>
           </section>
 
@@ -324,7 +324,7 @@ export default function ManifestoConcept() {
             <div className="mf-prose" data-reveal data-delay="2">
               <p>
                 LongStrider isn&rsquo;t a subscription you spin up and forget. It&rsquo;s institutional intelligence you
-                build, own and compound — configured for your environment, your regulators and your timeline.
+                build, own and compound. It&rsquo;s configured for your environment, your regulators and your timeline.
               </p>
             </div>
             <div className="mf-grid">
@@ -336,7 +336,7 @@ export default function ManifestoConcept() {
               ))}
             </div>
             <p className="mf-coda" data-reveal>
-              We don&rsquo;t sell seat licences. We build it with you — and what gets built belongs to you.
+              We don&rsquo;t sell seat licences. We build it with you, and what gets built belongs to you.
             </p>
           </section>
         </article>
@@ -351,7 +351,7 @@ export default function ManifestoConcept() {
             Bring us your <em>hardest</em> problem.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            If you recognise your organisation in these pages, start with a working session — your people, a real question,
+            If you recognise your organisation in these pages, start with a working session: your people, a real question,
             and what you&rsquo;d own ninety days from now.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="3">
@@ -367,7 +367,7 @@ export default function ManifestoConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

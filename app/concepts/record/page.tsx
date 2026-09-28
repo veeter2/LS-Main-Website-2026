@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Doors } from "../_components/doors"
 import { RecordDemo } from "./record-demo"
 
-export const metadata: Metadata = { title: "Concept A — The Record" }
+export const metadata: Metadata = { title: "Concept A · The Record" }
 
 export default function RecordConcept() {
   return (

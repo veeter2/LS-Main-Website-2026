@@ -12,7 +12,7 @@ export type Buyer = {
 }
 
 /**
- * One short page per buyer — finance, technology, the team. The same
+ * One short page per buyer: finance, technology, the team. The same
  * product, argued from what that person has to answer for.
  */
 export function BuyerPage({ b }: { b: Buyer }) {
@@ -96,7 +96,7 @@ export function BuyerPage({ b }: { b: Buyer }) {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

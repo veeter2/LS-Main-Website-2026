@@ -79,7 +79,7 @@ export function RecordDemo() {
 
   // Every exchange is laid out from the first frame and stacked in one cell,
   // so the card is always the height of its tallest exchange: typing, the
-  // reading line and the answer only fade — nothing below them ever moves.
+  // reading line and the answer only fade. Nothing below them ever moves.
   // Reduced motion lists both exchanges, finished.
   return (
     <div className="rx-demo lx-card" id="see" aria-label="Example: asking LongStrider about an account">

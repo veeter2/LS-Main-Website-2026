@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { IndustryAsk } from "./industry-ask"
 
-export const metadata: Metadata = { title: "Industries — concept" }
+export const metadata: Metadata = { title: "Industries · concept" }
 
 /**
  * Industries: insurance, legal and automotive only. Lines and scenarios come
@@ -29,7 +29,7 @@ const VERTICALS: Vertical[] = [
         The precedent is the real <em>policy</em>.
       </>
     ),
-    lead: "Decades of adjuster judgement, edge-case precedent and carrier-specific exceptions live in people. When they leave, the reasoning leaves with them — and in a business where inconsistency means bad-faith and E&O exposure, that's not an inconvenience.",
+    lead: "Decades of adjuster judgement, edge-case precedent and carrier-specific exceptions live in people. When they leave, the reasoning leaves with them. In a business where inconsistency means bad-faith and E&O exposure, that's not an inconvenience.",
     quote: "Copilots make individuals faster, not organisations smarter.",
     breaks: [
       {
@@ -59,7 +59,7 @@ const VERTICALS: Vertical[] = [
         Practice intelligence shouldn&rsquo;t retire when partners <em>do</em>.
       </>
     ),
-    lead: "Law firms don't have an AI problem. They have a continuity problem. The tools can retrieve and draft — none of them remember which concessions were deliberate, which positions the firm approved, or what the client said privately.",
+    lead: "Law firms don't have an AI problem. They have a continuity problem. The tools can retrieve and draft, but none of them remember which concessions were deliberate, which positions the firm approved, or what the client said privately.",
     quote: "Your tools can retrieve and generate. None of them remember.",
     breaks: [
       {
@@ -72,7 +72,7 @@ const VERTICALS: Vertical[] = [
       },
       {
         title: "Handoffs lose the reasoning",
-        body: "The new team gets the documents — not the strategy behind them.",
+        body: "The new team gets the documents, not the strategy behind them.",
       },
     ],
     owns: [
@@ -89,7 +89,7 @@ const VERTICALS: Vertical[] = [
         Distribution does not guarantee <em>absorption</em>.
       </>
     ),
-    lead: "Dealer networks don't lack information. They suffer from fragmented operational memory — guidance spread across portals, inboxes, PDFs, training and calls, with no view of what actually took hold in each store.",
+    lead: "Dealer networks don't lack information. They suffer from fragmented operational memory: guidance spread across portals, inboxes, PDFs, training and calls, with no view of what actually took hold in each store.",
     quote: "A network gets smarter only when what works in one store reaches the others.",
     breaks: [
       {
@@ -102,7 +102,7 @@ const VERTICALS: Vertical[] = [
       },
       {
         title: "The field never talks back",
-        body: "Repeated questions and local fixes don't flow up — so the next rollout repeats the last one's mistakes.",
+        body: "Repeated questions and local fixes don't flow up, so the next rollout repeats the last one's mistakes.",
       },
     ],
     owns: [
@@ -142,7 +142,7 @@ export default function IndustriesConcept() {
           </div>
           <div data-rise="2">
             <IndustryAsk />
-            <p className="lx-illustrative">Illustrative examples — pick an industry</p>
+            <p className="lx-illustrative">Illustrative examples: pick an industry</p>
           </div>
         </div>
       </section>
@@ -193,7 +193,7 @@ export default function IndustriesConcept() {
             Bring the case that keeps you up at <em>night</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            A working session with your people and one real question from your business — a claim, a matter, a rollout.
+            A working session with your people and one real question from your business: a claim, a matter, a rollout.
             You&rsquo;ll see what LongStrider would keep, and what your company would own.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
@@ -209,7 +209,7 @@ export default function IndustriesConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

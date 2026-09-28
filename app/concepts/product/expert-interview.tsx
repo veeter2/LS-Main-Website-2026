@@ -59,7 +59,7 @@ export function ExpertInterview() {
         ))}
       </ol>
       <p className="ei-foot" data-on={done}>
-        Kept in the record — so it starts from <em>your</em> rules, not a generic playbook.
+        Kept in the record, so it starts from <em>your</em> rules, not a generic playbook.
       </p>
     </div>
   )

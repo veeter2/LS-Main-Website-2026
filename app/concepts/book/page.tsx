@@ -2,10 +2,10 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { SessionForm } from "./session-form"
 
-export const metadata: Metadata = { title: "Book a working session — concept" }
+export const metadata: Metadata = { title: "Book a working session · concept" }
 
 const STEPS = [
-  { title: "Bring one real question", body: "A client, a claim, a matter, a rollout — something your team can't answer quickly today." },
+  { title: "Bring one real question", body: "A client, a claim, a matter, a rollout: something your team can't answer quickly today." },
   { title: "Watch it become a record", body: "We show what LongStrider keeps from your own material: the facts, the promises, the sources." },
   { title: "See what you'd own", body: "Where it would run, who could see what, and what your company would own ninety days in." },
 ]
@@ -28,7 +28,7 @@ export default function BookConcept() {
             </h1>
             <p className="lx-lead" data-rise="2">
               An hour with the people who built LongStrider, your people, and one real question. You leave knowing whether
-              it&rsquo;s worth building — and what you would own if it is.
+              it&rsquo;s worth building, and what you would own if it is.
             </p>
             <ol className="bk-steps" data-rise="3">
               {STEPS.map((s, i) => (
@@ -73,7 +73,7 @@ export default function BookConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

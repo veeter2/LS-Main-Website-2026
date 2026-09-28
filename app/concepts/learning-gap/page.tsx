@@ -2,13 +2,13 @@ import type { Metadata } from "next"
 import { Doors } from "../_components/doors"
 import { MemoryCurve } from "./memory-curve"
 
-export const metadata: Metadata = { title: "Concept B — The Learning Gap" }
+export const metadata: Metadata = { title: "Concept B · The Learning Gap" }
 
 const POINTS = [
   {
     n: "I",
     title: "Nothing taught twice",
-    body: "What your team explains once stays explained — shared only with the people it belongs to.",
+    body: "What your team explains once stays explained, shared only with the people it belongs to.",
   },
   {
     n: "II",
@@ -36,7 +36,7 @@ export default function LearningGapConcept() {
           <p className="lx-lead gx-lead" data-rise="2">
             MIT reviewed more than 300 enterprise AI initiatives and found 95% delivered no measurable return. The cause
             wasn&rsquo;t the model. It was tools that don&rsquo;t keep what they learn. LongStrider is the layer that keeps
-            it — so month twelve is worth more than month one.
+            it, so month twelve is worth more than month one.
           </p>
           <div className="lx-cta-row gx-cta" data-rise="3">
             <a className="lx-btn lx-btn-primary" href="/concepts/book">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-export const metadata: Metadata = { title: "Research — concept" }
+export const metadata: Metadata = { title: "Research · concept" }
 
 /**
  * Research: publish the score, not the spin. The Beyond Retrieval paper
@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "Research — concept" }
  */
 
 const NUMBERS = [
-  { n: "46.8%", label: "Our LongMemEval score — published, not hidden" },
+  { n: "46.8%", label: "Our LongMemEval score: published, not hidden" },
   { n: "444", label: "Questions evaluated, and every failure sorted by cause" },
   { n: "6", label: "Axes we propose for measuring whether memory can be trusted" },
 ]
@@ -21,7 +21,7 @@ const AXES = [
   { title: "Temporal coherence", body: "Does its picture of events make sense across months, not just one session?" },
   { title: "Pattern synthesis", body: "Can it see patterns nobody stated outright?" },
   { title: "Relationship continuity", body: "Does it follow how relationships change, not just static facts about people?" },
-  { title: "Safe refusal", body: "Does it say “I don’t know” when it doesn’t — and answer when it does?" },
+  { title: "Safe refusal", body: "Does it say “I don’t know” when it doesn’t, and answer when it does?" },
 ]
 
 export default function ResearchConcept() {
@@ -36,7 +36,7 @@ export default function ResearchConcept() {
             </h1>
             <p className="lx-lead" data-rise="2">
               We publish our numbers, including the ones that don&rsquo;t flatter us. The question that matters to a
-              business isn&rsquo;t whether a system can find a fact — it&rsquo;s whether you can trust what it tells you
+              business isn&rsquo;t whether a system can find a fact. It&rsquo;s whether you can trust what it tells you
               when the evidence is thin, old or contradictory.
             </p>
             <div className="lx-cta-row" data-rise="3">
@@ -80,7 +80,7 @@ export default function ResearchConcept() {
         </div>
       </section>
 
-      {/* 01 — The paper */}
+      {/* 01: The paper */}
       <section className="hx-section hx-deep" id="paper">
         <div className="lx-wrap mh-story">
           <p className="lx-eyebrow" data-reveal>
@@ -92,7 +92,7 @@ export default function ResearchConcept() {
           <div className="mh-story-body" data-reveal data-delay="2">
             <p>
               We ran LongStrider against LongMemEval, the field&rsquo;s standard long-term memory benchmark, and scored
-              46.8%. Systems tuned to the test score above 90%. We published our number anyway — because of what we found
+              46.8%. Systems tuned to the test score above 90%. We published our number anyway, because of what we found
               inside the gap.
             </p>
             <p>
@@ -115,7 +115,7 @@ export default function ResearchConcept() {
         </div>
       </section>
 
-      {/* 02 — Trust Accuracy */}
+      {/* 02: Trust Accuracy */}
       <section className="hx-section" id="trust">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -140,7 +140,7 @@ export default function ResearchConcept() {
         </div>
       </section>
 
-      {/* 03 — What changed since */}
+      {/* 03: What changed since */}
       <section className="hx-section hx-deep" id="since">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -151,20 +151,20 @@ export default function ResearchConcept() {
               We published where we were broken. Then we got to <em>work</em>.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              The paper listed what the benchmark caught us getting wrong. One of them: there was no reliable way to
-              answer &ldquo;how many times?&rdquo; — so the model estimated. Today that question is answered by an exact
+              The paper listed what the benchmark caught us getting wrong. One of them: the model had no reliable way to
+              count, so &ldquo;how many times?&rdquo; got an estimate. Today that question is answered by an exact
               counting engine over the record, and the model is handed the number to put into words.
             </p>
           </div>
           <div className="rf" data-reveal data-delay="2">
             <div className="rf-row">
               <span className="rf-when">March 2026 · the paper</span>
-              <p>&ldquo;How many times did pricing come up?&rdquo; — the model estimated from the few notes it was shown.</p>
+              <p>&ldquo;How many times did pricing come up?&rdquo; The model estimated from the few notes it was shown.</p>
             </div>
             <div className="rf-row rf-now">
               <span className="rf-when">Since August 2026</span>
               <p>
-                Counted exactly across the whole record — whole words only, only what people said, with the first and last
+                Counted exactly across the whole record: whole words only, only what people said, with the first and last
                 time it came up.
               </p>
             </div>
@@ -172,7 +172,7 @@ export default function ResearchConcept() {
         </div>
       </section>
 
-      {/* 04 — Direction */}
+      {/* 04: Direction */}
       <section className="hx-section" id="direction">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -184,7 +184,7 @@ export default function ResearchConcept() {
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             People make most decisions quickly and a few slowly. We&rsquo;re building the same split: a small, fast,
             carefully calibrated model for the constant everyday calls, and the large model of your choice for the moments
-            that need real reasoning — both working over the memory you own.
+            that need real reasoning. Both work over the memory you own.
           </p>
         </div>
         <div className="lx-wrap s12" data-reveal data-delay="2" aria-label="A fast system and a slow system sharing one memory">
@@ -199,7 +199,7 @@ export default function ResearchConcept() {
           <div className="s12-lane">
             <span className="s12-tag">Slow</span>
             <h3>When it matters</h3>
-            <p>The frontier or private model you choose, called in for the hard questions — and given exactly the record it needs.</p>
+            <p>The frontier or private model you choose, called in for the hard questions and given exactly the record it needs.</p>
           </div>
         </div>
         <p className="lx-wrap rs-note" data-reveal data-delay="3">
@@ -213,7 +213,7 @@ export default function ResearchConcept() {
             Judge us by what we <em>publish</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            Read the full paper — the method, the failures sorted by cause, and the case for Trust Accuracy. Then bring us
+            Read the full paper: the method, the failures sorted by cause, and the case for Trust Accuracy. Then bring us
             a question from your own business and hold us to it.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
@@ -229,7 +229,7 @@ export default function ResearchConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

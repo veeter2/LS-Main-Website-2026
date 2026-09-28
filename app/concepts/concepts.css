@@ -1,4 +1,4 @@
-/* LONGSTRIDER DAYLIGHT — concept tokens
+/* LONGSTRIDER DAYLIGHT: concept tokens
  * Same type system as the Manifesto gold standard (styles/ls-tokens.css):
  * Cormorant Garamond for display, Lora for prose and chrome, gold + purple accents,
  * 4px radius, the canonical reveal. Only the ground changes: ivory paper, warm ink.
@@ -220,7 +220,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 }
 
 /* ═══════════════════════════════════════════════════════════
-   HERO FRAME — shared across concepts
+   HERO FRAME: shared across concepts
    ═══════════════════════════════════════════════════════════ */
 .lx-hero {
   position: relative;
@@ -230,7 +230,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
   overflow: clip;
 }
 .lx-hero::before {
-  /* daylight wash — the manifesto aurora, turned to morning */
+  /* daylight wash: the manifesto aurora, turned to morning */
   content: "";
   position: absolute;
   inset: -20% -10% auto -10%;
@@ -281,7 +281,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 }
 
 /* ═══════════════════════════════════════════════════════════
-   DOORS — the three-buyer band under every hero
+   DOORS: the three-buyer band under every hero
    ═══════════════════════════════════════════════════════════ */
 .lx-doors { border-top: 1px solid var(--lx-line); background: var(--lx-surface); }
 .lx-doors-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -331,7 +331,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 .lx-foot a { color: var(--lx-ink-muted); }
 
 /* ═══════════════════════════════════════════════════════════
-   CONCEPT A — THE RECORD
+   CONCEPT A: THE RECORD
    ═══════════════════════════════════════════════════════════ */
 .rx-demo { padding: 0; display: flex; flex-direction: column; }
 /* All exchanges share one grid cell: the card is always as tall as the tallest. */
@@ -460,7 +460,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 @keyframes lx-rise { from { opacity: 0; } to { opacity: 1; } }
 
 /* ═══════════════════════════════════════════════════════════
-   CONCEPT B — THE LEARNING GAP
+   CONCEPT B: THE LEARNING GAP
    ═══════════════════════════════════════════════════════════ */
 .gx-head { text-align: center; }
 .gx-h1 { font-size: clamp(38px, 4.6vw, 68px); }
@@ -560,7 +560,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 }
 
 /* ═══════════════════════════════════════════════════════════
-   CONCEPT C — OWNED MEMORY
+   CONCEPT C: OWNED MEMORY
    ═══════════════════════════════════════════════════════════ */
 .ox-stack { display: grid; gap: 0; }
 .ox-layer { padding: 20px 22px 22px; border-radius: var(--lx-radius); }
@@ -694,7 +694,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 .ox-h1 { font-size: clamp(36px, 3.7vw, 54px); }
 
 /* ═══════════════════════════════════════════════════════════
-   CONCEPT D — COMMITMENTS
+   CONCEPT D: COMMITMENTS
    ═══════════════════════════════════════════════════════════ */
 .dx-h1 { font-size: clamp(36px, 4vw, 58px); }
 .dx-scene { position: relative; padding-bottom: 156px; }
@@ -830,7 +830,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 @media (max-width: 860px) { .cx-grid { grid-template-columns: 1fr; } }
 
 /* ═══════════════════════════════════════════════════════════
-   HOMEPAGE — one story, four sections
+   HOMEPAGE: one story, four sections
    ═══════════════════════════════════════════════════════════ */
 .hx-section { padding: clamp(80px, 12vh, 136px) 0; position: relative; }
 .hx-deep {
@@ -876,14 +876,14 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 .cx-feature + .cx-grid { margin-top: 20px; }
 
 /* ═══════════════════════════════════════════════════════════
-   HOMEPAGE v2 — the Manifesto's argument
+   HOMEPAGE v2: the Manifesto's argument
    ═══════════════════════════════════════════════════════════ */
 .mh-h1 { font-size: clamp(34px, 3.5vw, 52px); }
 .mh-h3 { font-size: clamp(26px, 2.4vw, 34px); margin: 0; }
 .mh-second { margin-top: clamp(64px, 9vh, 104px); }
 .mh-left { text-align: left; }
 
-/* Ownership board — rented vs owned */
+/* Ownership board: rented vs owned */
 .ob-board {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -969,7 +969,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
   .ob-pane { min-height: 0; }
 }
 
-/* Rented land — three facts */
+/* Rented land: three facts */
 .mh-facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -990,7 +990,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 .mh-question em { color: var(--lx-gold-ink); }
 @media (max-width: 860px) { .mh-facts { grid-template-columns: 1fr; } }
 
-/* The departure — editorial story */
+/* The departure: editorial story */
 .mh-story { max-width: 820px; }
 .mh-story-body { margin-top: 28px; display: grid; gap: 18px; }
 .mh-story-body p {
@@ -1006,7 +1006,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 }
 .mh-story-turn em { color: var(--lx-gold-ink); }
 
-/* The morning note — a contradiction, flagged */
+/* The morning note: a contradiction, flagged */
 .mh-note { padding: 24px 26px 22px; }
 .mh-note-label {
   display: block;
@@ -1020,7 +1020,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 .mh-note-sources { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 18px; }
 .mh-note .rx-source { opacity: 1; transform: none; }
 
-/* Retrieval is not intelligence — comparison */
+/* Retrieval is not intelligence: comparison */
 .mh-compare {
   margin-top: clamp(36px, 5vh, 56px);
   border: 1px solid var(--lx-line);
@@ -1084,7 +1084,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
   .dm-zone { min-height: 0; }
 }
 
-/* Who can see what — three nested scopes */
+/* Who can see what: three nested scopes */
 .sc-rings { position: relative; display: grid; }
 .sc-ring {
   border-radius: 24px;
@@ -1122,7 +1122,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
    WHAT IT DOES
    ═══════════════════════════════════════════════════════════ */
 
-/* Hero — one call, four things kept */
+/* Hero: one call, four things kept */
 .cs { display: grid; gap: 14px; }
 .cs-call { padding: 0; }
 .cs-head {
@@ -1177,7 +1177,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
   .cs-head-meta { display: none; }
 }
 
-/* The specialists — an interview before work starts */
+/* The specialists: an interview before work starts */
 .ei { padding: 0; }
 .ei-head {
   display: flex;
@@ -1239,7 +1239,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
   .ei-head { flex-direction: column; align-items: flex-start; }
 }
 
-/* Overnight — three moments on a line */
+/* Overnight: three moments on a line */
 .nt-line {
   list-style: none;
   display: grid;
@@ -1281,7 +1281,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
   .nt-step:last-child::before { display: none; }
 }
 
-/* Agents — runs that start over vs runs that build */
+/* Agents: runs that start over vs runs that build */
 .ag { display: grid; gap: 16px; }
 .ag-row { padding: 16px 18px 18px; border-radius: var(--lx-radius); border: 1px solid var(--lx-line); background: rgba(var(--lx-ink-rgb), 0.02); }
 .ag-row-ours {
@@ -1637,7 +1637,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 }
 
 /* ═══════════════════════════════════════════════════════════
-   THE MANIFESTO — a long read
+   THE MANIFESTO: a long read
    ═══════════════════════════════════════════════════════════ */
 .mf-progress { position: fixed; top: 68px; left: 0; right: 0; height: 2px; z-index: 11; pointer-events: none; }
 .mf-progress span { display: block; height: 100%; background: var(--lx-gold); transform-origin: 0 50%; transition: transform 0.12s linear; }
@@ -1656,7 +1656,7 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
 }
 .mf-litany { list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 10px; }
 .mf-litany li { font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; color: var(--lx-ink-secondary); }
-.mf-litany li::before { content: "—"; color: var(--lx-gold); margin-right: 12px; }
+.mf-litany li::before { content: ""; display: inline-block; width: 14px; height: 1px; vertical-align: 0.32em; background: var(--lx-gold); margin-right: 12px; }
 .mf-litany-turn { margin: 22px 0 0; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; color: var(--lx-ink-primary); font-style: italic; }
 
 .mf-body {

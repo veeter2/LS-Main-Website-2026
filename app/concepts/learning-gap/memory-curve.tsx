@@ -1,5 +1,5 @@
 /**
- * What an AI knows about your business over a year — a shape, not a measurement.
+ * What an AI knows about your business over a year: a shape, not a measurement.
  * No y-axis numbers on purpose: nothing here is a measured figure.
  */
 const W = 1120
@@ -51,8 +51,8 @@ export function MemoryCurve() {
   return (
     <figure className="gx-figure lx-card">
       <figcaption className="gx-legend">
-        <span className="gx-key gx-key-kept">LongStrider — kept, linked, tidied every night</span>
-        <span className="gx-key gx-key-forget">A tool that forgets — every session starts from zero</span>
+        <span className="gx-key gx-key-kept">LongStrider: kept, linked, tidied every night</span>
+        <span className="gx-key gx-key-forget">A tool that forgets: every session starts from zero</span>
       </figcaption>
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Illustration: a tool that forgets keeps returning to zero, while LongStrider's knowledge of your business keeps rising over twelve months.">
         <defs>

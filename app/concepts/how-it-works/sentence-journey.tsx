@@ -12,7 +12,7 @@ const STAGES: Stage[] = [
     title: "It hears the work",
     body: (
       <>
-        <p className="sj-quote">&ldquo;We can hold this year&rsquo;s rate through Q4 — as long as it&rsquo;s a two-year renewal.&rdquo;</p>
+        <p className="sj-quote">&ldquo;We can hold this year&rsquo;s rate through Q4, as long as it&rsquo;s a two-year renewal.&rdquo;</p>
         <div className="sj-meta">
           <span>Priya, to Dana at Alder</span>
           <span className="lx-num">Renewal call · 22 Sep</span>
@@ -29,7 +29,7 @@ const STAGES: Stage[] = [
         <li><span className="sj-kind">Offer</span>Priya will hold this year&rsquo;s rate for Alder</li>
         <li><span className="sj-kind">Until</span>The end of Q4</li>
         <li><span className="sj-kind">If</span>Alder signs a two-year renewal</li>
-        <li><span className="sj-kind">Source</span>Renewal call, 22 Sep — who said it, to whom</li>
+        <li><span className="sj-kind">Source</span>Renewal call, 22 Sep: who said it, to whom</li>
       </ul>
     ),
   },
@@ -40,9 +40,9 @@ const STAGES: Stage[] = [
     body: (
       <ul className="sj-rows">
         <li><span className="sj-kind">Under</span>Alder · the renewal</li>
-        <li><span className="sj-kind">Linked to</span>Pricing — now 14 conversations this year</li>
+        <li><span className="sj-kind">Linked to</span>Pricing, now 14 conversations this year</li>
         <li><span className="sj-kind">A promise</span>Priya → Alder, due 31 Dec, on Priya&rsquo;s desk</li>
-        <li><span className="sj-kind">Visible to</span>The Alder team — no one else</li>
+        <li><span className="sj-kind">Visible to</span>The Alder team and no one else</li>
       </ul>
     ),
   },
@@ -53,7 +53,7 @@ const STAGES: Stage[] = [
     body: (
       <ul className="sj-rows">
         <li><span className="sj-kind">Merged</span>With the 11 June note that said the same thing</li>
-        <li><span className="sj-kind">Flagged</span>An email on 24 Sep says &ldquo;one-year renewal&rdquo; — that conflicts</li>
+        <li><span className="sj-kind">Flagged</span>An email on 24 Sep says &ldquo;one-year renewal&rdquo;, which conflicts</li>
         <li><span className="sj-kind">Raised</span>To Priya in her morning note, with both sources</li>
       </ul>
     ),
@@ -67,7 +67,7 @@ const STAGES: Stage[] = [
         <p className="sj-quote sj-ask">&ldquo;What did we agree on Alder&rsquo;s rate?&rdquo;</p>
         <ul className="sj-rows">
           <li><span className="sj-kind">Kind</span>A question about what was agreed, and when</li>
-          <li><span className="sj-kind">Pulls</span>The offer, its condition, its date — and the open conflict</li>
+          <li><span className="sj-kind">Pulls</span>The offer, its condition, its date, and the open conflict</li>
         </ul>
       </>
     ),
@@ -80,7 +80,7 @@ const STAGES: Stage[] = [
       <>
         <p className="sj-answer">
           Priya agreed on <b>22 Sep</b> to hold this year&rsquo;s rate through Q4 if Alder signs for <b>two years</b>. One
-          email on <b>24 Sep</b> says one year — that&rsquo;s still open with Priya.
+          email on <b>24 Sep</b> says one year. That&rsquo;s still open with Priya.
         </p>
         <div className="sj-meta">
           <span>Call, 22 Sep · Email, 24 Sep</span>
