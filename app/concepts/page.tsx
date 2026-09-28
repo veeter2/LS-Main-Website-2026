@@ -70,6 +70,7 @@ export default function ConceptsIndex() {
           <Link href="/concepts/research">Research</Link>
           <Link href="/concepts/manifesto">The Manifesto</Link>
           <Link href="/concepts/company">Company</Link>
+          <Link href="/concepts/partners">Partners</Link>
           <Link href="/concepts/security">Security &amp; ownership</Link>
         </nav>
         <p className="cx-older">
