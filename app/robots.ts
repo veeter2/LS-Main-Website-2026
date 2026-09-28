@@ -11,6 +11,7 @@ export default function robots(): MetadataRoute.Robots {
           '/help-center',
           '/be-a-vendor',
           '/archive',
+          '/concepts',
         ],
       },
       // Block AI training scrapers
