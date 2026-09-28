@@ -4,6 +4,16 @@ import Link from "next/link"
 import { useEffect, useRef, useState, type ReactNode } from "react"
 import { LongstriderLogo } from "@/components/longstrider-logo"
 
+// Pages that exist link to themselves; the rest point at the homepage
+// section that covers them until they are built.
+const NAV = [
+  { label: "Product", href: "/concepts/home#own" },
+  { label: "How it works", href: "/concepts/home#different" },
+  { label: "Security", href: "/concepts/security" },
+  { label: "Research", href: "/concepts/home#asset" },
+  { label: "Company", href: "/concepts/home#company" },
+]
+
 /**
  * Daylight concept shell. Sits over the site's dark chrome as its own scroll
  * container, so concept pages need no changes to the shared nav or footer.
@@ -45,19 +55,21 @@ export function ConceptShell({ children }: { children: ReactNode }) {
     <div className="lx" ref={rootRef} id="lx-root">
       <header className="lx-bar" data-scrolled={scrolled}>
         <div className="lx-wrap lx-bar-inner">
-          <Link href="/concepts" className="lx-brand" aria-label="LongStrider concepts">
+          <Link href="/concepts/home" className="lx-brand" aria-label="LongStrider home">
             <LongstriderLogo size={30} className="lx-brand-mark" />
             <span className="lx-brand-word">LongStrider</span>
           </Link>
           <nav className="lx-links" aria-label="Primary">
-            <a href="#product">Product</a>
-            <a href="#how">How it works</a>
-            <a href="#security">Security</a>
-            <a href="#research">Research</a>
-            <a href="#company">Company</a>
+            {NAV.map((n) => (
+              <Link key={n.label} href={n.href}>
+                {n.label}
+              </Link>
+            ))}
           </nav>
           <div className="lx-bar-cta">
-            <a className="lx-btn lx-btn-ghost" href="#see">See it answer</a>
+            <Link className="lx-btn lx-btn-ghost" href="/concepts/home#own">
+              See it answer
+            </Link>
             <a className="lx-btn lx-btn-primary" href="/pilot">
               <span className="lx-long">Book a working session</span>
               <span className="lx-short">Book a session</span>
