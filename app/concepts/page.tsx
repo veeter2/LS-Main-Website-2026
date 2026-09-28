@@ -51,16 +51,19 @@ export default function ConceptsIndex() {
           and spacing, and says only what the product does today.
         </p>
         <Link href="/concepts/home" className="cx-card cx-feature lx-card" data-rise="2">
-          <span className="lx-eyebrow">The homepage — all four, one story</span>
-          <span className="cx-line">What it is → why you need it → what it&rsquo;s like → why it&rsquo;s safe to own.</span>
+          <span className="lx-eyebrow">The homepage — the Manifesto&rsquo;s argument</span>
+          <span className="cx-line">Every dollar you spent on AI this year made someone else&rsquo;s platform smarter.</span>
           <span className="cx-why">
-            Leads with The Record, then the learning gap, the promise kept, and owned memory — one running example
-            from top to bottom.
+            Ownership first: you&rsquo;re building on rented land, knowledge walks out the door, and the record, the
+            promises and the pushback are the proof. Not search — an asset.
           </span>
           <span className="cx-open">
             Open the homepage <span aria-hidden>→</span>
           </span>
         </Link>
+        <p className="cx-older">
+          Earlier version, led by the record: <Link href="/concepts/home-v1">/concepts/home-v1</Link>
+        </p>
         <div className="cx-grid">
           {CONCEPTS.map((c, i) => (
             <Link key={c.href} href={c.href} className="cx-card lx-card" data-rise={String(i + 2)}>
