@@ -26,7 +26,7 @@ export function SessionForm() {
     if (question) params.append("message", `[PILOT] ${question}`)
     params.append(
       "hs_context",
-      JSON.stringify({ pageUri: window.location.href, pageName: "LongStrider — Book a working session" }),
+      JSON.stringify({ pageUri: window.location.href, pageName: "LongStrider · Book a working session" }),
     )
 
     setStatus("sending")
@@ -50,7 +50,7 @@ export function SessionForm() {
           The session starts <em>here</em>.
         </h2>
         <p>
-          We have what we need. Expect to hear from us within one business day — and we&rsquo;ll come prepared with your
+          We have what we need. Expect to hear from us within one business day, and we&rsquo;ll come prepared with your
           question.
         </p>
       </div>
@@ -83,7 +83,7 @@ export function SessionForm() {
         <textarea
           name="question"
           rows={4}
-          placeholder="A client, a claim, a matter, a rollout — the more specific, the better."
+          placeholder="A client, a claim, a matter, a rollout. The more specific, the better."
         />
       </label>
       <button className="lx-btn lx-btn-primary bk-submit" type="submit" disabled={status === "sending"}>
@@ -92,7 +92,7 @@ export function SessionForm() {
       <p className="bk-note" aria-live="polite">
         {status === "error" ? (
           <>
-            Something went wrong — email us at <a href="mailto:hello@longstrider.ai">hello@longstrider.ai</a>.
+            Something went wrong. Email us at <a href="mailto:hello@longstrider.ai">hello@longstrider.ai</a>.
           </>
         ) : (
           "We reply within one business day."

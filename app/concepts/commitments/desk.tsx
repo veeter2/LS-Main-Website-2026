@@ -27,7 +27,7 @@ const FIRST_NOTE: Record<string, string> = Object.fromEntries([...START, ARRIVAL
 
 const OVERNIGHT = [
   "Merged 3 notes about Alder that said the same thing",
-  "Flagged a conflict — two renewal dates were mentioned",
+  "Flagged a conflict: two renewal dates were mentioned",
   "Moved the board pack up: due in 6 days",
 ]
 
@@ -37,7 +37,7 @@ export function Desk() {
   const sceneRef = useRef<HTMLDivElement>(null)
 
   // The desk's small story (a promise arrives, one gets done) plays when it
-  // comes into view — further down a long page it would otherwise be over.
+  // comes into view. Further down a long page it would otherwise be over.
   useEffect(() => {
     const el = sceneRef.current
     if (!el) return

@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { BuyerPage } from "../buyer-page"
 import { DeploymentMap } from "../../security/deployment-map"
 
-export const metadata: Metadata = { title: "For technology — concept" }
+export const metadata: Metadata = { title: "For technology · concept" }
 
 export default function ForTechnology() {
   return (
@@ -14,7 +14,7 @@ export default function ForTechnology() {
             A memory layer your architects can <em>inspect</em>.
           </>
         ),
-        lead: "Model-agnostic, scoped to each person, every answer traceable, and deployable from hosted to air-gapped. LongStrider sits beside your stack — it doesn't ask you to rebuild it.",
+        lead: "Model-agnostic, scoped to each person, every answer traceable, and deployable from hosted to air-gapped. LongStrider sits beside your stack. It doesn't ask you to rebuild it.",
         points: [
           {
             title: "Any model, your keys",

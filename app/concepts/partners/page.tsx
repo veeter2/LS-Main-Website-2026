@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-export const metadata: Metadata = { title: "Partners — concept" }
+export const metadata: Metadata = { title: "Partners · concept" }
 
 /**
  * Partners: for consultancies and engineering firms. Built from the partner
  * brief, minus its fictional client quote, its internal counts and its
- * "clients can't leave" framing — the promise here is that the client owns
+ * "clients can't leave" framing. The promise here is that the client owns
  * their memory and the partner owns their method.
  */
 
@@ -14,7 +14,7 @@ const STACK = [
   {
     who: "Your client's",
     what: "Their memory",
-    body: "Every fact, decision and correction — on their infrastructure, theirs to keep.",
+    body: "Every fact, decision and correction: on their infrastructure, theirs to keep.",
     tone: "client",
   },
   {
@@ -105,7 +105,7 @@ export default function PartnersConcept() {
             </h1>
             <p className="lx-lead" data-rise="2">
               LongStrider is the engine consultancies and engineering firms deploy, build services on, and run as recurring
-              work — without writing a line of AI infrastructure. The substrate is ours. The vertical IP is completely
+              work, without writing a line of AI infrastructure. The substrate is ours. The vertical IP is completely
               yours.
             </p>
             <div className="lx-cta-row" data-rise="3">
@@ -131,7 +131,7 @@ export default function PartnersConcept() {
         </div>
       </section>
 
-      {/* 01 — The shift */}
+      {/* 01: The shift */}
       <section className="hx-section hx-deep" id="shift">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -142,7 +142,7 @@ export default function PartnersConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Agents now do in hours what took teams weeks, and clients are asking sharper questions about what they pay for.
-            What no model knows and no vendor ships is the memory of one specific organisation — its decisions, its
+            What no model knows and no vendor ships is the memory of one specific organisation: its decisions, its
             relationships, what it learned the hard way. The firms that build that for their clients will lead their
             vertical.
           </p>
@@ -160,7 +160,7 @@ export default function PartnersConcept() {
         </div>
       </section>
 
-      {/* 02 — Ways to partner */}
+      {/* 02: Ways to partner */}
       <section className="hx-section" id="ways">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -185,7 +185,7 @@ export default function PartnersConcept() {
         </div>
       </section>
 
-      {/* 03 — What the client gets */}
+      {/* 03: What the client gets */}
       <section className="hx-section hx-deep" id="arc">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -206,7 +206,7 @@ export default function PartnersConcept() {
         </ol>
       </section>
 
-      {/* 04 — The deal */}
+      {/* 04: The deal */}
       <section className="hx-section" id="deal">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -217,9 +217,9 @@ export default function PartnersConcept() {
               Your client owns their memory. You own your <em>method</em>.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              Clients stay because the work keeps getting better — not because they&rsquo;re locked in. Their memory is
-              theirs, on their infrastructure. What you build on the engine — your configurations, your specialists, your
-              way of running the practice — is yours to take to every client in your vertical.
+              Clients stay because the work keeps getting better, not because they&rsquo;re locked in. Their memory is
+              theirs, on their infrastructure. What you build on the engine (your configurations, your specialists, your
+              way of running the practice) is yours to take to every client in your vertical.
             </p>
           </div>
           <ul className="pt-terms" data-reveal data-delay="2">
@@ -258,7 +258,7 @@ export default function PartnersConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

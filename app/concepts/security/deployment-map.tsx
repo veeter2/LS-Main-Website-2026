@@ -19,7 +19,7 @@ const OPTIONS: Option[] = [
     inside: [{ name: "Your company's memory", where: "Stays in your environment" }],
     outside: [
       { name: "The LongStrider engine", where: "A dedicated instance, isolated to you" },
-      { name: "The model", where: "Your choice — through your own keys" },
+      { name: "The model", where: "Your choice, through your own keys" },
     ],
   },
   {
@@ -30,7 +30,7 @@ const OPTIONS: Option[] = [
       { name: "Your company's memory", where: "In your cloud, your perimeter" },
       { name: "The LongStrider engine", where: "Containerised, in your VPC" },
     ],
-    outside: [{ name: "The model", where: "Frontier through your keys — or bring a private one inside" }],
+    outside: [{ name: "The model", where: "Frontier through your keys, or bring a private one inside" }],
   },
   {
     id: "sovereign",
@@ -90,7 +90,7 @@ export function DeploymentMap() {
               ))}
             </ul>
           ) : (
-            <p className="dm-nothing">Nothing. No calls out — air-gap capable.</p>
+            <p className="dm-nothing">Nothing. No calls out. Air-gap capable.</p>
           )}
         </div>
       </div>

@@ -17,7 +17,7 @@ const CASES: Case[] = [
     label: "Insurance",
     who: "Chief claims officer",
     q: "Have we seen an aggregation dispute like this before?",
-    a: "Yes. A commercial property loss eighteen months ago turned on the same clause, and it settled below reserve once the earlier precedent was applied. The adjuster who handled it has retired — two current adjusters have similar files open. Want me to brief them?",
+    a: "Yes. A commercial property loss eighteen months ago turned on the same clause, and it settled below reserve once the earlier precedent was applied. The adjuster who handled it has retired, but two current adjusters have similar files open. Want me to brief them?",
     sources: ["Claim notes", "Coverage memo", "Settlement email"],
   },
   {
@@ -25,7 +25,7 @@ const CASES: Case[] = [
     label: "Legal",
     who: "Managing partner",
     q: "How have we handled indemnity in tech licensing matters?",
-    a: "Across fourteen matters since 2022. The firm's position changed twice — most recently after an adverse arbitration last year, which now governs six of them. The partner who led it is on leave; two associates worked it with her.",
+    a: "Across fourteen matters since 2022. The firm's position changed twice, most recently after an adverse arbitration last year, which now governs six of them. The partner who led it is on leave; two associates worked it with her.",
     sources: ["Matter files", "Arbitration debrief", "Partner meeting"],
   },
   {
@@ -33,7 +33,7 @@ const CASES: Case[] = [
     label: "Automotive",
     who: "Regional director",
     q: "Where is the service-retention program stalling?",
-    a: "Seven of eighteen stores have taken it up fully, six partly, five not yet. The same question about warranty add-ons keeps coming from eleven stores — the guidance is unclear, not ignored. One store has it working, and its approach could be shared.",
+    a: "Seven of eighteen stores have taken it up fully, six partly, five not yet. The same question about warranty add-ons keeps coming from eleven stores. The guidance is unclear, not ignored. One store has it working, and its approach could be shared.",
     sources: ["Field calls", "Store check-ins", "Program memo"],
   },
 ]

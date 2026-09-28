@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { BuyerPage } from "../buyer-page"
 import { MemoryCurve } from "../../learning-gap/memory-curve"
 
-export const metadata: Metadata = { title: "For finance — concept" }
+export const metadata: Metadata = { title: "For finance · concept" }
 
 export default function ForFinance() {
   return (
@@ -14,7 +14,7 @@ export default function ForFinance() {
             An AI budget that ends in an <em>asset</em>, not a renewal.
           </>
         ),
-        lead: "Most AI spend buys access. When you change vendors, what your people taught it stays behind. LongStrider turns that spend into something the company owns — and can point to in due diligence.",
+        lead: "Most AI spend buys access. When you change vendors, what your people taught it stays behind. LongStrider turns that spend into something the company owns and can point to in due diligence.",
         points: [
           {
             title: "Owned, not rented",
@@ -26,7 +26,7 @@ export default function ForFinance() {
           },
           {
             title: "Ready for the price war",
-            body: "Models get cheaper every quarter. Switch whenever it pays to — nothing has to be re-taught.",
+            body: "Models get cheaper every quarter. Switch whenever it pays to. Nothing has to be re-taught.",
           },
         ],
         proof: {
@@ -35,14 +35,14 @@ export default function ForFinance() {
               Month twelve knows what month one <em>couldn&rsquo;t</em>.
             </>
           ),
-          body: "MIT reviewed more than 300 enterprise AI initiatives and found 95% delivered no measurable return — the tools didn't keep what they learned. A system that keeps it gets more valuable the longer you run it.",
+          body: "MIT reviewed more than 300 enterprise AI initiatives and found 95% delivered no measurable return. The tools didn't keep what they learned. A system that keeps it gets more valuable the longer you run it.",
           visual: <MemoryCurve />,
           caption: "Illustration, not a measurement. Study: MIT NANDA, The GenAI Divide, 2025",
         },
         questions: [
           {
             q: "How is it priced?",
-            a: "As a build you own, not per seat. The cost depends on where it runs and how widely it's used — we scope it with you in the working session.",
+            a: "As a build you own, not per seat. The cost depends on where it runs and how widely it's used. We scope it with you in the working session.",
           },
           {
             q: "What should we measure?",
@@ -50,7 +50,7 @@ export default function ForFinance() {
           },
           {
             q: "What if we stop?",
-            a: "It's your company's memory. Agree the exit terms up front — and in a sovereign build it never leaves your hardware in the first place.",
+            a: "It's your company's memory. Agree the exit terms up front, and in a sovereign build it never leaves your hardware in the first place.",
           },
         ],
         next: { label: "For your CTO", href: "/concepts/for/technology" },

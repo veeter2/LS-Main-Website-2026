@@ -3,12 +3,12 @@ import Link from "next/link"
 import { DeploymentMap } from "./deployment-map"
 import { ModelSwitch } from "../owned/model-switch"
 
-export const metadata: Metadata = { title: "Security & ownership — concept" }
+export const metadata: Metadata = { title: "Security & ownership · concept" }
 
 const OWNERSHIP = [
   {
     title: "It belongs to you",
-    body: "The memory, the links between facts and every correction are your company's asset — not a feature of our service.",
+    body: "The memory, the links between facts and every correction are your company's asset, not a feature of our service.",
   },
   {
     title: "It trains no one's model",
@@ -62,7 +62,7 @@ export default function SecurityConcept() {
               Your <em>keys</em>.
             </h1>
             <p className="lx-lead" data-rise="2">
-              Everything LongStrider learns about your business belongs to you — where it runs, who can see it, and which
+              Everything LongStrider learns about your business belongs to you: where it runs, who can see it, and which
               model it talks to. Choose how much lives inside your own perimeter, all the way to a sovereign build with no
               calls out.
             </p>
@@ -110,7 +110,7 @@ export default function SecurityConcept() {
               Scoped to the person it <em>belongs</em> to.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              Every memory belongs to someone. What&rsquo;s yours stays yours; team knowledge is visible to the team — and
+              Every memory belongs to someone. What&rsquo;s yours stays yours; team knowledge is visible to the team, and
               only the team. Every answer shows where it came from, and every correction is logged, so you can always see how
               it learned what it knows.
             </p>
@@ -141,13 +141,13 @@ export default function SecurityConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Bring the frontier model you trust through your own keys, or run a private model on your own hardware.
-              LongStrider keeps the memory in one place you control and lets the model do the talking — so when a better one
+              LongStrider keeps the memory in one place you control and lets the model do the talking, so when a better one
               arrives, you switch and nothing has to be re-taught.
             </p>
           </div>
           <div data-reveal data-delay="2">
             <ModelSwitch />
-            <p className="lx-illustrative">Illustrative example — try switching the model</p>
+            <p className="lx-illustrative">Illustrative example: try switching the model</p>
           </div>
         </div>
       </section>
@@ -161,7 +161,7 @@ export default function SecurityConcept() {
             You write the rules. It keeps the <em>record</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Set how it speaks, what it won&rsquo;t do, and when it must check with a person first — configuration, not
+            Set how it speaks, what it won&rsquo;t do, and when it must check with a person first. That&rsquo;s configuration, not
             prompting. Every correction your people make is kept, so the system&rsquo;s judgement can be audited, not taken
             on trust.
           </p>
@@ -198,7 +198,7 @@ export default function SecurityConcept() {
             Bring your <em>security</em> team.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            Walk through where it runs, who can see what, and which model it talks to — with your own people in the room.
+            Walk through where it runs, who can see what, and which model it talks to, with your own people in the room.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <a className="lx-btn lx-btn-primary" href="/concepts/book">
@@ -213,7 +213,7 @@ export default function SecurityConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

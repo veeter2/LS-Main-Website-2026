@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-export const metadata: Metadata = { title: "Company — concept" }
+export const metadata: Metadata = { title: "Company · concept" }
 
 /**
  * Company: why LongStrider exists and how it works as a business. Built from
@@ -22,7 +22,7 @@ const PRINCIPLES = [
   },
   {
     title: "Plain words, true numbers",
-    body: "We say what it does in language anyone can check, and we publish our scores — including the ones that don't flatter us.",
+    body: "We say what it does in language anyone can check, and we publish our scores, including the ones that don't flatter us.",
   },
   {
     title: "The record over the guess",
@@ -48,7 +48,7 @@ export default function CompanyConcept() {
             </h1>
             <p className="lx-lead" data-rise="2">
               The industry built brilliant engines and gave them amnesia. Every AI conversation starts from zero; every
-              deployment needs your business explained again. That isn&rsquo;t a model problem. It&rsquo;s a missing layer —
+              deployment needs your business explained again. That isn&rsquo;t a model problem. It&rsquo;s a missing layer,
               so we&rsquo;re building it, and making sure it belongs to you.
             </p>
             <div className="lx-cta-row" data-rise="3">
@@ -79,7 +79,7 @@ export default function CompanyConcept() {
         </div>
       </section>
 
-      {/* 01 — Why */}
+      {/* 01: Why */}
       <section className="hx-section hx-deep" id="why">
         <div className="lx-wrap mh-story">
           <p className="lx-eyebrow" data-reveal>
@@ -91,11 +91,11 @@ export default function CompanyConcept() {
           <div className="mh-story-body" data-reveal data-delay="2">
             <p>
               For thirty years, enterprise software ran the same play: charge for access, keep the intelligence, make the
-              exit painful. Your data lives on their servers. Your workflows depend on their APIs. Your knowledge compounds
-              — for them.
+              exit painful. Your data lives on their servers. Your workflows depend on their APIs. Your knowledge compounds.
+              For them.
             </p>
             <p>
-              Small and mid-sized companies have paid the most for it — rebuilding from scratch every time they switch tools,
+              Small and mid-sized companies have paid the most for it, rebuilding from scratch every time they switch tools,
               every time a vendor changes its pricing, every time a model provider decides your data is its training set.
             </p>
             <p className="mh-story-turn">
@@ -104,12 +104,12 @@ export default function CompanyConcept() {
           </div>
         </div>
         <blockquote className="lx-wrap cp-quote" data-reveal data-delay="2">
-          &ldquo;AI without persistent, sovereign, compounding memory isn&rsquo;t intelligent — it&rsquo;s a very fast
+          &ldquo;AI without persistent, sovereign, compounding memory isn&rsquo;t intelligent. It&rsquo;s a very fast
           amnesiac.&rdquo;
         </blockquote>
       </section>
 
-      {/* 02 — How we got here */}
+      {/* 02: How we got here */}
       <section className="hx-section" id="story">
         <div className="lx-wrap mh-story">
           <p className="lx-eyebrow" data-reveal>
@@ -125,14 +125,14 @@ export default function CompanyConcept() {
               the vendor. Every insight fed the platform. The customer got the bill.
             </p>
             <p>
-              LongStrider started from a single premise — sovereignty first — and was built from the ground up to deliver
+              LongStrider started from a single premise (sovereignty first) and was built from the ground up to deliver
               it. A small team, building lean on purpose, with a production system people use every day.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 03 — How we work */}
+      {/* 03: How we work */}
       <section className="hx-section hx-deep" id="principles">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -153,7 +153,7 @@ export default function CompanyConcept() {
         </div>
       </section>
 
-      {/* 04 — Replaceable parts */}
+      {/* 04: Replaceable parts */}
       <section className="hx-section" id="parts">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -164,7 +164,7 @@ export default function CompanyConcept() {
               Every component is <em>replaceable</em>. That&rsquo;s the architecture.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              Run on a frontier model today and a private one tomorrow. The memory stays exactly where you left it —
+              Run on a frontier model today and a private one tomorrow. The memory stays exactly where you left it,
               because the only part that has to be ours is the engine, and even that can run inside your walls.
             </p>
           </div>
@@ -172,7 +172,7 @@ export default function CompanyConcept() {
             {PARTS.map((p) => (
               <li key={p}>{p}</li>
             ))}
-            <li className="cp-parts-ours">Your memory — the one part that stays</li>
+            <li className="cp-parts-ours">Your memory: the one part that stays</li>
           </ul>
         </div>
       </section>
@@ -199,7 +199,7 @@ export default function CompanyConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

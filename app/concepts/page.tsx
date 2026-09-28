@@ -29,7 +29,7 @@ const GROUPS = [
   {
     name: "Who it's for",
     pages: [
-      { href: "/concepts/industries", title: "Industries", line: "Insurance, legal and automotive — where judgement lives in people." },
+      { href: "/concepts/industries", title: "Industries", line: "Insurance, legal and automotive: where judgement lives in people." },
       { href: "/concepts/for/finance", title: "For the CFO", line: "An AI budget that ends in an asset, not a renewal." },
       { href: "/concepts/for/technology", title: "For the CTO", line: "A memory layer your architects can inspect." },
       { href: "/concepts/for/teams", title: "For your team", line: "Stop explaining your job to a chat window every morning." },
@@ -40,7 +40,7 @@ const GROUPS = [
     name: "The company",
     pages: [
       { href: "/concepts/company", title: "Company", line: "Why we exist, and the four things we won't trade." },
-      { href: "/concepts/book", title: "Book a session", line: "Not a demo — a working session on your problem." },
+      { href: "/concepts/book", title: "Book a session", line: "Not a demo. A working session on your problem." },
     ],
   },
 ]
@@ -57,22 +57,22 @@ export default function ConceptsIndex() {
   return (
     <main className="lx-hero cx-index">
       <div className="lx-wrap">
-        <p className="lx-eyebrow" data-rise="0">Site preview — for review</p>
+        <p className="lx-eyebrow" data-rise="0">Site preview, for review</p>
         <h1 className="lx-display cx-h1" data-rise="1">
           The new LongStrider site, <em>in daylight</em>.
         </h1>
         <p className="lx-lead cx-lead" data-rise="2">
           Every page of the new site, grouped the way a visitor meets it. Lora throughout, the Manifesto&rsquo;s gold and
-          spacing, and only claims the product can back today. Not public — share the link, and every page is hidden from
+          spacing, and only claims the product can back today. Not public. Share the link, and every page is hidden from
           search.
         </p>
 
         <Link href="/concepts/home" className="cx-card cx-feature lx-card" data-rise="2">
-          <span className="lx-eyebrow">Start here — the homepage</span>
+          <span className="lx-eyebrow">Start here: the homepage</span>
           <span className="cx-line">Every dollar you spent on AI this year made someone else&rsquo;s platform smarter.</span>
           <span className="cx-why">
             Ownership first: you&rsquo;re building on rented land, knowledge walks out the door, and the record, the promises
-            and the pushback are the proof. Not search — an asset.
+            and the pushback are the proof. Not search. An asset.
           </span>
           <span className="cx-open">
             Open the homepage <span aria-hidden>→</span>

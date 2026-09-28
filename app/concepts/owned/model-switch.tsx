@@ -13,18 +13,18 @@ const MODELS = [
     id: "gpt",
     name: "GPT",
     maker: "OpenAI",
-    answer: "On 11 June, Priya agreed Alder keeps this year’s rate through Q4 — on the condition of a two-year renewal.",
+    answer: "On 11 June, Priya agreed Alder keeps this year’s rate through Q4, on the condition of a two-year renewal.",
   },
   {
     id: "private",
     name: "Private model",
     maker: "On your servers",
-    answer: "11 June — rate held through Q4. Condition: two-year renewal. Agreed by Priya.",
+    answer: "11 June: rate held through Q4. Condition: two-year renewal. Agreed by Priya.",
   },
 ]
 
 const MEMORY = [
-  { kind: "Person", text: "Priya Shah — owns the Alder renewal" },
+  { kind: "Person", text: "Priya Shah: owns the Alder renewal" },
   { kind: "Decision", text: "Hold this year’s rate through Q4" },
   { kind: "Condition", text: "Two-year renewal" },
   { kind: "Source", text: "Call notes, 11 June · Email, 12 June" },

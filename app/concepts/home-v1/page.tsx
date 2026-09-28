@@ -5,7 +5,7 @@ import { MemoryCurve } from "../learning-gap/memory-curve"
 import { Desk } from "../commitments/desk"
 import { ModelSwitch } from "../owned/model-switch"
 
-export const metadata: Metadata = { title: "Homepage concept — v1 (the record first)" }
+export const metadata: Metadata = { title: "Homepage concept · v1 (the record first)" }
 
 /**
  * One story, told top to bottom with one running example (the Alder account):
@@ -16,7 +16,7 @@ const WHY = [
   {
     n: "I",
     title: "Nothing taught twice",
-    body: "What your team explains once stays explained — shared only with the people it belongs to.",
+    body: "What your team explains once stays explained, shared only with the people it belongs to.",
   },
   {
     n: "II",
@@ -33,7 +33,7 @@ const WHY = [
 export default function HomeConcept() {
   return (
     <main>
-      {/* 01 — What it is */}
+      {/* 01: What it is */}
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -71,7 +71,7 @@ export default function HomeConcept() {
         </div>
       </section>
 
-      {/* 02 — Why you need it */}
+      {/* 02: Why you need it */}
       <section className="hx-section hx-deep" id="research">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -84,7 +84,7 @@ export default function HomeConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Ask a typical assistant about Alder and it starts from zero, every time. MIT reviewed more than 300 enterprise
-            AI initiatives and found 95% delivered no measurable return — not because the models were weak, but because
+            AI initiatives and found 95% delivered no measurable return. Not because the models were weak, but because
             the tools didn&rsquo;t keep what they learned. LongStrider keeps it, so month twelve is worth more than month
             one.
           </p>
@@ -113,7 +113,7 @@ export default function HomeConcept() {
         </div>
       </section>
 
-      {/* 03 — What it's like */}
+      {/* 03: What it's like */}
       <section className="hx-section" id="product">
         <div className="lx-wrap lx-hero-grid hx-flip">
           <div data-reveal data-delay="1">
@@ -125,7 +125,7 @@ export default function HomeConcept() {
               <span className="hx-step">03</span> What it did with that answer
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              It caught the <em>promise</em> — and kept it on your desk.
+              It caught the <em>promise</em>, and kept it on your desk.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               When Priya agreed to hold the rate, that wasn&rsquo;t just a fact. It was a commitment, with a condition and
@@ -141,7 +141,7 @@ export default function HomeConcept() {
         </div>
       </section>
 
-      {/* 04 — Why it's safe to own */}
+      {/* 04: Why it's safe to own */}
       <section className="hx-section hx-deep" id="security">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -156,7 +156,7 @@ export default function HomeConcept() {
             <p className="lx-lead" data-reveal data-delay="2">
               Models change every few months. The Alder history shouldn&rsquo;t. LongStrider keeps your company&rsquo;s
               memory in one place you control, scoped to each person, and lets the model you choose do the talking.
-              It&rsquo;s built to run frontier or private models, with your own keys — switch, and nothing has to be
+              It&rsquo;s built to run frontier or private models, with your own keys. Switch, and nothing has to be
               re-taught.
             </p>
             <div className="lx-assure" data-reveal data-delay="3">
@@ -167,7 +167,7 @@ export default function HomeConcept() {
           </div>
           <div data-reveal data-delay="2">
             <ModelSwitch />
-            <p className="lx-illustrative">Illustrative example — try switching the model</p>
+            <p className="lx-illustrative">Illustrative example: try switching the model</p>
           </div>
         </div>
       </section>
@@ -181,7 +181,7 @@ export default function HomeConcept() {
             Watch the <em>record</em> build.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            A working session with your people and a real question — so you can see the answer, the source and the promise
+            A working session with your people and a real question, so you can see the answer, the source and the promise
             for yourself.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
@@ -197,7 +197,7 @@ export default function HomeConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. Examples on this page are illustrative.{" "}
+          Concept preview, not published. Examples on this page are illustrative.{" "}
           <Link href="/concepts">All concepts</Link>
         </div>
       </footer>

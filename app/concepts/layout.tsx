@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-// Lora carries everything, display included — loaded once in the root layout.
+// Lora carries everything, display included. It is loaded once in the root layout.
 export default function ConceptsLayout({ children }: { children: ReactNode }) {
   return <ConceptShell>{children}</ConceptShell>
 }

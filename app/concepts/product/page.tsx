@@ -5,7 +5,7 @@ import { ExpertInterview } from "./expert-interview"
 import { RecordDemo } from "../record/record-demo"
 import { Desk } from "../commitments/desk"
 
-export const metadata: Metadata = { title: "What it does — concept" }
+export const metadata: Metadata = { title: "What it does · concept" }
 
 /**
  * What LongStrider does, in the order a buyer meets it: the record, the
@@ -14,9 +14,9 @@ export const metadata: Metadata = { title: "What it does — concept" }
  */
 
 const RECORD_POINTS = [
-  { title: "Counted, not guessed", body: "How often, since when, who said it — answered from the record with the source attached." },
+  { title: "Counted, not guessed", body: "How often, since when, who said it: answered from the record with the source attached." },
   { title: "Correct it once", body: "Fix a fact and the fix is kept, with who made it and when. It won't come back wrong." },
-  { title: "Honest about gaps", body: "When there isn't enough to go on, it says so — and tells you what it's waiting for." },
+  { title: "Honest about gaps", body: "When there isn't enough to go on, it says so, and tells you what it's waiting for." },
 ]
 
 const NIGHT = [
@@ -50,7 +50,7 @@ export default function ProductConcept() {
               Your people talk. Your company <em>remembers</em>.
             </h1>
             <p className="lx-lead" data-rise="2">
-              LongStrider listens to the work your team already does — calls, chats, email, documents — and keeps what
+              LongStrider listens to the work your team already does (calls, chats, email, documents) and keeps what
               matters: the facts, the promises, what changed and what keeps coming up. Each with its source, and each
               yours.
             </p>
@@ -77,7 +77,7 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 01 — The record */}
+      {/* 01: The record */}
       <section className="hx-section hx-deep" id="record">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -88,7 +88,7 @@ export default function ProductConcept() {
               Retrieval is not <em>intelligence</em>.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              Search finds a document that mentions Alder. LongStrider knows what happened with Alder — every fact dated,
+              Search finds a document that mentions Alder. LongStrider knows what happened with Alder: every fact dated,
               every change kept, every answer traceable to where it came from.
             </p>
           </div>
@@ -107,7 +107,7 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 02 — Promises */}
+      {/* 02: Promises */}
       <section className="hx-section" id="promises">
         <div className="lx-wrap lx-hero-grid hx-flip">
           <div data-reveal data-delay="1">
@@ -123,14 +123,14 @@ export default function ProductConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               &ldquo;I&rsquo;ll send the revised terms Friday&rdquo; is a commitment, not small talk. LongStrider notices
-              it, suggests it to the person who made it, and — once they confirm — keeps it on their desk until it&rsquo;s
+              it, suggests it to the person who made it and, once they confirm, keeps it on their desk until it&rsquo;s
               done. Nothing is tracked that nobody agreed to.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 03 — Specialists */}
+      {/* 03: Specialists */}
       <section className="hx-section hx-deep" id="experts">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -141,7 +141,7 @@ export default function ProductConcept() {
               Hire a specialist that <em>interviews</em> you first.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              Choose the expertise you need — renewals, claims, a practice area. Before it does anything, it asks how your
+              Choose the expertise you need: renewals, claims, a practice area. Before it does anything, it asks how your
               company works: what matters, what counts as risk, who decides. Your answers go into the record, so it starts
               from your judgement instead of someone else&rsquo;s.
             </p>
@@ -153,7 +153,7 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 04 — Overnight */}
+      {/* 04: Overnight */}
       <section className="hx-section" id="overnight">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
@@ -164,7 +164,7 @@ export default function ProductConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Every night it tidies what the day taught it: duplicates merged, conflicts flagged, new facts filed where they
-            belong and checked against what happened before. You wake up to what changed — not a pile to sort.
+            belong and checked against what happened before. You wake up to what changed, not a pile to sort.
           </p>
         </div>
         <ol className="lx-wrap nt-line">
@@ -178,7 +178,7 @@ export default function ProductConcept() {
         </ol>
       </section>
 
-      {/* 05 — Agents */}
+      {/* 05: Agents */}
       <section className="hx-section hx-deep" id="agents">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -190,7 +190,7 @@ export default function ProductConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               The model is the voice; LongStrider is the memory and the judgement. Your agents read the record before they
-              act and write back what they found — so Wednesday&rsquo;s run starts where Tuesday&rsquo;s finished, instead
+              act and write back what they found, so Wednesday&rsquo;s run starts where Tuesday&rsquo;s finished, instead
               of from nothing.
             </p>
           </div>
@@ -219,7 +219,7 @@ export default function ProductConcept() {
                 ))}
               </ol>
               <div className="ag-record">
-                <span>The record — yours, growing with every run</span>
+                <span>The record: yours, growing with every run</span>
               </div>
             </div>
           </div>
@@ -233,7 +233,7 @@ export default function ProductConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
             Bring a real account and the people who know it. In one working session you&rsquo;ll see the record, the
-            promises and the first morning note — built from your conversations, not ours.
+            promises and the first morning note, built from your conversations, not ours.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <a className="lx-btn lx-btn-primary" href="/concepts/book">
@@ -248,7 +248,7 @@ export default function ProductConcept() {
 
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </main>

@@ -12,7 +12,7 @@ const ITEMS = [
   { text: "Alder: hold this year's rate through Q4", source: "Call · 11 Jun" },
   { text: "Priya owns the Alder renewal", source: "Email · 12 Jun" },
   { text: "Why we left the old supplier", source: "Retro · March" },
-  { text: "Board pack is Sam's — due Friday", source: "Weekly review" },
+  { text: "Board pack is Sam's, due Friday", source: "Weekly review" },
   { text: "Brennan prefers a call to an email", source: "Call · 2 Sep" },
 ]
 
@@ -81,7 +81,7 @@ export function OwnershipBoard() {
           ))}
         </ul>
         <div className="ob-foot">
-          <span className="ob-count lx-num">{shown}</span> things your team taught it this week — still here next year
+          <span className="ob-count lx-num">{shown}</span> things your team taught it this week, still here next year
         </div>
       </div>
     </div>

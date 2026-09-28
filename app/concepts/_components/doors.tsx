@@ -16,7 +16,7 @@ const DOORS = [
   {
     who: "For your team",
     title: "Stop re-explaining. Start from what's known.",
-    body: "It remembers the people, the decisions and the promises — and keeps them in front of you until they're done.",
+    body: "It remembers the people, the decisions and the promises, and keeps them in front of you until they're done.",
     href: "/concepts/commitments",
   },
 ]
@@ -40,7 +40,7 @@ export function Doors() {
       </section>
       <footer className="lx-foot">
         <div className="lx-wrap">
-          Concept preview — not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
+          Concept preview, not published. Examples on this page are illustrative. <Link href="/concepts">All concepts</Link>
         </div>
       </footer>
     </>
