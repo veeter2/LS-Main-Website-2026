@@ -312,7 +312,7 @@ export default function HomeConcept() {
             <a className="lx-btn lx-btn-primary" href="/pilot">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
             </a>
-            <a className="lx-btn lx-btn-ghost" href="/manifesto">
+            <a className="lx-btn lx-btn-ghost" href="/concepts/manifesto">
               Read the manifesto
             </a>
           </div>
