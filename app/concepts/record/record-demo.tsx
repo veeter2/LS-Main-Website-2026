@@ -77,9 +77,10 @@ export function RecordDemo() {
     return () => clearTimeout(t)
   }, [phase, typed, current.q.length, reduced])
 
-  // Reduced motion: show both exchanges, finished.
-  const shown = reduced ? EXCHANGES : [current]
-
+  // Every exchange is laid out from the first frame and stacked in one cell,
+  // so the card is always the height of its tallest exchange: typing, the
+  // reading line and the answer only fade — nothing below them ever moves.
+  // Reduced motion lists both exchanges, finished.
   return (
     <div className="rx-demo lx-card" id="see" aria-label="Example: asking LongStrider about an account">
       <div className="rx-demo-head">
@@ -88,42 +89,51 @@ export function RecordDemo() {
         <span className="rx-head-meta">Alder account · shared with Sales</span>
       </div>
 
-      {shown.map((ex, i) => {
-        const isLive = !reduced
-        const qText = isLive ? ex.q.slice(0, typed) : ex.q
-        const showReading = isLive ? phase !== "typing" : true
-        const showAnswer = isLive ? phase === "answered" : true
-        return (
-          <div className="rx-exchange" key={ex.q} style={i > 0 ? { borderTop: "1px solid var(--lx-line-subtle)" } : undefined}>
-            <div className="rx-q">
-              <span className="rx-who">You</span>
-              <p>
-                {qText}
-                {isLive && phase === "typing" && <span className="rx-caret" aria-hidden />}
-              </p>
-            </div>
-
-            <div className="rx-reading" data-on={showReading && !showAnswer}>
-              <span className="rx-pulse" aria-hidden />
-              {ex.reading}
-            </div>
-
-            <div className="rx-a" data-on={showAnswer}>
-              <span className="rx-who rx-who-ls">LongStrider</span>
-              <p>{ex.answer}</p>
-              <div className="rx-sources">
-                {ex.sources.map((s, j) => (
-                  <span className="rx-source" key={s.kind + s.date} style={{ transitionDelay: `${240 + j * 90}ms` }}>
-                    <span className="rx-source-kind">{s.kind}</span>
-                    <span className="rx-source-date lx-num">{s.date}</span>
+      <div className={reduced ? "rx-list" : "rx-stage"}>
+        {EXCHANGES.map((ex, i) => {
+          const live = !reduced
+          const active = reduced || i === index
+          const qTyped = live ? (active ? ex.q.slice(0, typed) : "") : ex.q
+          const showReading = live ? active && phase !== "typing" : false
+          const showAnswer = live ? active && phase === "answered" : true
+          return (
+            <div className="rx-exchange" key={ex.q} data-active={active} aria-hidden={!active}>
+              <div className="rx-q">
+                <span className="rx-who">You</span>
+                <p className="rx-q-text">
+                  {/* the whole question, invisible, holds its final size */}
+                  <span className="rx-q-ghost" aria-hidden>
+                    {ex.q}
                   </span>
-                ))}
-                <span className={`rx-stamp rx-stamp-${ex.stamp.tone}`}>{ex.stamp.label}</span>
+                  <span className="rx-q-typed">
+                    {qTyped}
+                    {live && active && phase === "typing" && <span className="rx-caret" aria-hidden />}
+                  </span>
+                </p>
+              </div>
+
+              <div className="rx-reading" data-on={showReading && !showAnswer}>
+                <span className="rx-pulse" aria-hidden />
+                {ex.reading}
+              </div>
+
+              <div className="rx-a" data-on={showAnswer}>
+                <span className="rx-who rx-who-ls">LongStrider</span>
+                <p>{ex.answer}</p>
+                <div className="rx-sources">
+                  {ex.sources.map((s, j) => (
+                    <span className="rx-source" key={s.kind + s.date} style={{ transitionDelay: `${240 + j * 90}ms` }}>
+                      <span className="rx-source-kind">{s.kind}</span>
+                      <span className="rx-source-date lx-num">{s.date}</span>
+                    </span>
+                  ))}
+                  <span className={`rx-stamp rx-stamp-${ex.stamp.tone}`}>{ex.stamp.label}</span>
+                </div>
               </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </div>
   )
 }
