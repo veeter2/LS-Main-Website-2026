@@ -1,0 +1,4 @@
+.in-owns p { margin: 4px 0 0; font-size: 15px; line-height: 1.6; color: var(--lx-ink-primary); }
+.in-signs { margin: 18px 0 0; font-size: 15px; line-height: 1.6; color: var(--lx-ink-body); }
+.in-signs b { color: var(--lx-ink-primary); font-weight: 600; }
+.ia-sources-label { font-size: 13px; color: var(--lx-ink-secondary); align-self: center; }

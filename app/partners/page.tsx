@@ -1,564 +1,245 @@
-'use client';
+import type { Metadata } from "next"
+import Link from "next/link"
+import "./partners.css"
 
-import './partners.css';
-import Link from 'next/link';
-import { useEffect, useCallback, useRef } from 'react';
-import { StoryTimeline } from '@/components/story-timeline';
+export const metadata: Metadata = {
+  title: "Partner with LongStrider · Your client's memory, your method",
+  description:
+    "For consultancies and service firms: deploy it, build on it, or lead the work. The engine is ours. The vertical knowledge is yours.",
+}
 
-// ── Chapter timeline ──────────────────────────────────────────
-const GOLD   = '#c8a96e';
-const PURPLE = '#8b5cf6';
-const GOLD_G = 'rgba(200,169,110,0.40)';
-const PURP_G = 'rgba(139,92,246,0.45)';
+/**
+ * Partners: for consultancies, managed service providers and engineering firms.
+ * The promise is that the client owns their memory and the partner owns their method.
+ */
 
-const TIMELINE = [
-  { id: 'burning',   label: 'The Landscape',       color: PURPLE, glow: PURP_G },
-  { id: 'opp',       label: 'The Opportunity',     color: GOLD,   glow: GOLD_G },
-  { id: 'shift',     label: 'The Model Shift',     color: PURPLE, glow: PURP_G },
-  { id: 'models',    label: 'Partner Models',      color: GOLD,   glow: GOLD_G },
-  { id: 'compound',  label: 'Compound Effect',     color: PURPLE, glow: PURP_G },
-  { id: 'asset',     label: 'The Asset',           color: GOLD,   glow: GOLD_G },
-  { id: 'revenue',   label: 'Revenue',             color: PURPLE, glow: PURP_G },
-  { id: 'window',    label: 'The Window',          color: GOLD,   glow: GOLD_G },
-];
-
-// ── Verified-source stat data ─────────────────────────────────
-// All citations link directly to primary sources.
-
-const STATS = [
+const STACK = [
   {
-    figure: '78%',
-    label: 'of organizations using AI in 2025',
-    source: 'McKinsey Global Survey on AI, 2025',
-    href: 'https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai',
-    context: '78% of organizations now use AI in at least one business function — up from 55% in 2023. Adoption doubled in two years. The firms not building an intelligence layer are already behind.',
+    who: "Your client's",
+    what: "Their memory.",
+    body: "Every fact, decision and correction, on their instance, theirs to keep.",
+    tone: "client",
   },
   {
-    figure: '$761B',
-    label: 'in AI services spending by 2027',
-    source: 'Gartner Worldwide AI Spending Forecast, January 2026',
-    href: 'https://www.gartner.com/en/newsroom/press-releases/2026-01-22-gartner-forecasts-worldwide-ai-spending-to-reach-nearly-3-trillion-by-2027',
-    context: 'Global spend on AI services alone reaches $761B by 2027. The organizations capturing that spend are not the ones building models — they are the ones owning the intelligence layer clients cannot exit.',
+    who: "Yours",
+    what: "Your method.",
+    body: "Vertical configurations, specialist playbooks, integrations, the relationship.",
+    tone: "partner",
   },
   {
-    figure: '$5.9B',
-    label: 'in GenAI bookings, one firm, one year',
-    source: 'Accenture FY2025 Annual Report',
-    href: 'https://www.accenture.com/us-en/investor-relations',
-    context: 'Accenture nearly doubled its generative AI bookings to $5.9B in FY2025. The market for AI-wrapped professional services is not coming — it arrived.',
+    who: "Ours",
+    what: "The engine.",
+    body: "The record, the overnight pass, the judgment and the rules layer.",
+    tone: "ours",
   },
-];
+]
 
-// ── Partner model comparison ──────────────────────────────────
-
-const MODEL_COMPARISON = [
-  { dimension: 'Revenue model',        before: 'Selling hours and headcount',                            after: 'Recurring revenue from clients who cannot leave' },
-  { dimension: 'Client relationship',  before: 'Resets after every engagement',                          after: 'Embeds deeper with every engagement' },
-  { dimension: 'Competitive moat',     before: 'Rate comparison — you lose eventually',                  after: 'Switching costs are real. The intelligence stays.' },
-  { dimension: 'Delivery economics',   before: 'Junior headcount under growing AI pressure',             after: 'AI-amplified delivery at a fraction of the cost' },
-  { dimension: 'Proprietary IP',       before: 'None — your methodology walks out with your people',     after: 'Proprietary vertical IP built on a proven architecture' },
-  { dimension: 'Engagement continuity',before: 'Each project starts from zero context',                  after: 'Every engagement compounds on the last' },
-];
-
-// ── Three partner models ──────────────────────────────────────
-
-const PARTNER_MODELS = [
+const SIGNALS = [
   {
-    n: '01',
-    name: 'Deploy & Maintain',
-    body: 'License the platform, deploy it into client environments, and maintain it as a managed service. Your clients accumulate intelligence that cannot migrate to a competitor. Predictable recurring revenue from organizations whose institutional memory now lives in a system you own and operate.',
+    text: "88% of organizations now use AI in at least one function. About 37% see any profit from it.",
+    source: "McKinsey, State of AI, 2025 and 2026",
+    href: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
   },
   {
-    n: '02',
-    name: 'Wrap & Extend',
-    body: 'Build vertical-specific configurations, custom agent types, and proprietary integrations on top of LongStrider\u2019s architecture. What you build is yours — defensible, scalable, and sellable as a distinct offering. The substrate is ours. The vertical IP is completely yours.',
+    text: "Gartner forecasts $761 billion of spending on AI services in 2027 alone.",
+    source: "Gartner, January 2026",
+    href: "https://www.gartner.com/en/newsroom/press-releases/2026-01-22-gartner-forecasts-worldwide-ai-spending-to-reach-nearly-3-trillion-by-2027",
   },
   {
-    n: '03',
-    name: 'Advise & Transform',
-    body: 'Lead institutional intelligence engagements — helping clients design, govern, and evolve their knowledge architecture. High-value advisory work that only firms who own the platform can credibly do. You\u2019re not selling hours. You\u2019re selling a transformation your clients can\u2019t execute without you.',
+    text: "Accenture booked $5.9 billion of generative AI work in fiscal 2025.",
+    source: "Accenture 8-K, September 2025",
+    href: "https://www.accenture.com/us-en/investor-relations",
   },
-];
+]
 
-// ── Simulation ────────────────────────────────────────────────
+const WAYS = [
+  {
+    name: "Deploy and maintain.",
+    body: "Run it for your clients as a managed service. Deploy into each client's instance, keep it healthy and configured, recurring work instead of one-off projects.",
+  },
+  {
+    name: "Wrap and extend.",
+    body: "Build your vertical on the engine. Configurations for your industry, specialists that carry your playbook, sold as your own offering.",
+  },
+  {
+    name: "Advise and transform.",
+    body: "Lead the knowledge work itself. Design what a client should keep, govern who sees what, evolve it as the business changes.",
+  },
+  {
+    name: "Private equity operating partners.",
+    body: "One operating partner, ten to thirty portfolio companies, one memory engine each. We treat PE as a partner channel, not a customer segment, because that's how the buying actually works.",
+  },
+]
 
-const SIMULATION = [
+const ARC = [
   {
-    speaker: 'Partner — Year 1 — Discovery',
-    role: 'partner',
-    text: 'We\u2019re deploying LongStrider into a mid-market financial services client. Six months of engagement history. Three prior consultants whose context we can recover from email exports and document archives.',
+    time: "Day one.",
+    body: "It starts learning from the first conversation and the documents your client brings. Nobody fills it in by hand.",
   },
   {
-    speaker: 'LongStrider — During Onboarding',
-    role: 'ls',
-    text: 'Historical import pipeline processed. 847 memories recovered from prior engagement artifacts, gravity-weighted, and embedded. Knowledge cluster formation begins tonight. Your client is not starting from zero — they\u2019re starting with six months of context already structured and retrievable.',
+    time: "Ninety days.",
+    body: "A working model of the business: decisions and their outcomes, relationships, patterns only visible across months.",
   },
   {
-    speaker: 'Partner — Month 6',
-    role: 'partner',
-    text: 'Client asked why they would ever switch consultants. Their exact words: \u201ceven if we wanted to, the system knows us too well.\u201d',
+    time: "One year.",
+    body: "It knows more than any recent hire. It doesn't leave, doesn't take competing offers, and doesn't need an exit interview.",
   },
-  {
-    speaker: 'LongStrider',
-    role: 'ls',
-    text: 'That is the architectural outcome. The intelligence is sovereign to the client\u2019s infrastructure — but the expertise that shaped it, the agents that built it, the governance layer that ensures it stays accurate — that belongs to the relationship you have with them. Switching the consultant means rebuilding the methodology. No one does that.',
-  },
-];
+]
 
-// ── ROI timeline ──────────────────────────────────────────────
-
-const ROI_ITEMS = [
-  {
-    timeline: 'Day 1',
-    what: 'Historical context recovered.',
-    detail: 'Import pipeline processes prior email, document, and CRM exports. Hundreds of recovered memories, gravity-weighted from the start. Your client does not start from zero.',
-  },
-  {
-    timeline: '90 days',
-    what: 'A queryable model of their business.',
-    detail: 'Customer relationship depth scores. Decision history with outcomes. Behavioral patterns visible only across months of data. Risk signals that no dashboard surfaces.',
-  },
-  {
-    timeline: '1 year',
-    what: 'An intelligence asset that outperforms any new hire.',
-    detail: 'The substrate knows the client\u2019s business better than anyone who joined in the last 12 months. It does not leave. It does not take competing offers. It does not need an exit interview.',
-  },
-  {
-    timeline: '3 years',
-    what: 'A documented institutional memory with provable value.',
-    detail: 'Every significant decision, every customer relationship arc, every operational pattern — structured, queryable, and permanently owned. This is a balance sheet asset. Not a software subscription.',
-  },
-];
-
-// ── TAM expansion ─────────────────────────────────────────────
-
-const TAM_ITEMS = [
-  {
-    label: 'Your current TAM',
-    desc: 'Clients who can afford your day rates. Competitive on rate. Capped by hours. Revenue resets after every project.',
-    accent: false,
-  },
-  {
-    label: 'Your expanded TAM',
-    desc: 'Any organization that benefits from compounding institutional memory — offered as a productized $5\u201325K/month service contract. New clients. New revenue tier. Running in parallel with your existing practice.',
-    accent: true,
-  },
-  {
-    label: 'The intelligence advisory tier',
-    desc: 'High-value engagements to design, govern, and evolve a client\u2019s entire knowledge architecture. A category of work that did not exist three years ago. Only firms who own the platform can credibly deliver it.',
-    accent: false,
-  },
-];
-
-// ── Page ──────────────────────────────────────────────────────
-
-export default function PartnersPage() {
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  const setupObserver = useCallback(() => {
-    observerRef.current?.disconnect();
-    observerRef.current = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) e.target.classList.add('deck-visible');
-      }),
-      { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
-    );
-    document.querySelectorAll('[data-reveal]').forEach((el) =>
-      observerRef.current?.observe(el)
-    );
-  }, []);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setupObserver();
-    return () => observerRef.current?.disconnect();
-  }, [setupObserver]);
-
+export default function PartnersConcept() {
   return (
-    <div className="pt-page">
-      <div className="pt-orb-1" aria-hidden />
-      <div className="pt-orb-2" aria-hidden />
-
-      <StoryTimeline nodes={TIMELINE} showAfter={50} />
-
-      <div className="pt-container">
-
-        {/* ═══ HERO ═══════════════════════════════════════════════ */}
-        <div className="pt-hero">
-          <span className="pt-badge" data-reveal>Partner Brief — Confidential</span>
-          <h1 className="pt-hero-h1" data-reveal data-delay="1">
-            Help your clients build something<br />
-            that gets more valuable every year.
-          </h1>
-          <p className="pt-hero-sub" data-reveal data-delay="2">
-            LongStrider is the sovereign intelligence platform that consulting and software
-            engineering firms deploy, build services around, and grow as a recurring revenue asset —
-            without writing a single line of AI infrastructure.
-          </p>
-          <div className="pt-hero-cta" data-reveal data-delay="3">
-            <Link href="/pilot" className="pt-cta-primary">Start the Conversation →</Link>
-            <span className="pt-cta-note">Select partner engagements only · Founding team intake</span>
+    <main>
+      <section className="lx-hero">
+        <div className="lx-wrap lx-hero-grid">
+          <div>
+            <p className="lx-eyebrow" data-rise="0">Partners</p>
+            <h1 className="lx-display lx-h1" data-rise="1">
+              Your client owns their memory. You own your <em>method</em>.
+            </h1>
+            <p className="lx-lead" data-rise="2">
+              LongStrider is the engine consultancies, managed service providers and engineering firms deploy for clients,
+              build services on, and run as recurring work, without writing a line of AI infrastructure. The engine is ours.
+              The vertical knowledge and the relationship are yours.
+            </p>
+            <div className="lx-cta-row" data-rise="3">
+              <a className="lx-btn lx-btn-primary" href="/book">
+                Start the conversation <span className="lx-arrow" aria-hidden>→</span>
+              </a>
+              <a className="lx-btn lx-btn-ghost" href="#ways">
+                Three ways to partner
+              </a>
+            </div>
+          </div>
+          <div data-rise="2">
+            <div className="pt-stack" aria-label="Who owns which part">
+              {STACK.map((s) => (
+                <div key={s.what} className="pt-layer" data-tone={s.tone}>
+                  <span className="pt-who">{s.who}</span>
+                  <span className="pt-what">{s.what}</span>
+                  <span className="pt-body">{s.body}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+      </section>
 
-        <hr className="pt-rule" />
-
-        {/* ═══ 01 — THE BURNING PLATFORM ══════════════════════════ */}
-        <section className="pt-section" data-section="burning">
-          <span className="pt-section-num">01</span>
-          <span className="pt-section-label">The Landscape</span>
-          <div className="pt-section-grid">
-            <div>
-              <h2 className="pt-h2" data-reveal>
-                The intelligence shift is here.<br />The firms leading it are moving now.
-              </h2>
-              <p className="pt-lead" data-reveal data-delay="1">
-                AI agents can now do in hours what took consultants and engineers weeks to deliver.
-                Clients are asking sharper questions about where their investment goes — and the
-                firms with compelling answers are the ones building something more than a
-                billable-hour practice.
-              </p>
-              <p className="pt-body" data-reveal data-delay="2">
-                The firms that thrive in this shift will not be the ones who fight AI.
-                They will be the ones who build around it — and own the layer
-                that AI cannot commoditize. The research is clear on the direction.
-                The question is who establishes the intelligence practice in each vertical first.
-              </p>
-              <p className="pt-body" data-reveal data-delay="2">
-                There is one layer AI will never commoditize: the institutional memory
-                of a specific organization. The decisions made, the relationships built,
-                the patterns accumulated over years of operation. No model knows that.
-                No vendor ships it. No tool compounds it — unless you deploy one
-                specifically designed to.
-              </p>
-            </div>
-            <div data-reveal data-delay="2">
-              <div className="pt-stats">
-                {STATS.map((s, i) => (
-                  <div key={i} className="pt-stat-card">
-                    <div className="pt-stat-figure">{s.figure}</div>
-                    <div className="pt-stat-label">{s.label}</div>
-                    <p className="pt-stat-context">{s.context}</p>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="pt-stat-source"
-                    >
-                      ↗ {s.source}
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <hr className="pt-rule" />
-
-        {/* ═══ 02 — THE OPPORTUNITY ════════════════════════════════ */}
-        <section className="pt-section" data-section="opp">
-          <span className="pt-section-num">02</span>
-          <span className="pt-section-label">The Opportunity</span>
-          <h2 className="pt-h2" data-reveal>
-            What every client desperately needs —<br />and cannot build themselves.
+      {/* 01: The shift */}
+      <section className="hx-section hx-deep" id="shift">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">01</span> The shift
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            There&rsquo;s one layer AI won&rsquo;t <em>commoditize</em>.
           </h2>
-          <p className="pt-lead" data-reveal data-delay="1">
-            Every professional services client has the same invisible problem:
-            institutional knowledge walks out the door every time someone leaves.
-            Projects restart from zero. Decisions get relitigated. Context lives
-            in email threads and the memories of people who no longer work there.
-          </p>
-          <div className="pt-opportunity-grid" data-reveal data-delay="2">
-            {[
-              {
-                label: 'Not a data problem',
-                body: 'Clients have data. They have CRMs, ERPs, Slack archives, project management tools. None of those systems know what the data means to this specific organization. That\u2019s the gap.',
-              },
-              {
-                label: 'Not a search problem',
-                body: 'Retrieval is solved. The problem is that what gets retrieved lacks gravity — there is no system that knows what mattered, what was learned from it, and how it should shape the next decision.',
-              },
-              {
-                label: 'A memory problem',
-                body: 'LongStrider is the first platform built specifically for sovereign, persistent, compounding institutional memory. Memory that grows more valuable with every engagement, every interaction, every decision made.',
-              },
-              {
-                label: 'Not one they can solve alone',
-                body: 'They cannot build this. It requires infrastructure architecture, intelligence design, and ongoing operational expertise. That is what you become. That is why they cannot leave.',
-              },
-            ].map((item, i) => (
-              <div key={i} className="pt-opportunity-card">
-                <div className="pt-opportunity-label">{item.label}</div>
-                <p className="pt-opportunity-body">{item.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <hr className="pt-rule" />
-
-        {/* ═══ 03 — THE MODEL SHIFT ════════════════════════════════ */}
-        <section className="pt-section" data-section="shift">
-          <span className="pt-section-num">03</span>
-          <span className="pt-section-label">The Model Shift</span>
-          <h2 className="pt-h2" data-reveal>
-            A new revenue stream.<br />A deeper relationship with every client.
-          </h2>
-          <p className="pt-lead" data-reveal data-delay="1">
-            This is not a gradual tweak to your existing practice. It is a meaningful
-            shift in what you deliver, how you price it, and how much more valuable
-            your client relationships become over time. The contrast is clear.
-          </p>
-          <div className="pt-comparison-table" data-reveal data-delay="2">
-            <div className="pt-comparison-header">
-              <div className="pt-comparison-dim" />
-              <div className="pt-comparison-col-header">Your model today</div>
-              <div className="pt-comparison-col-header pt-comparison-col-header--ls">
-                Your model with LongStrider
-              </div>
-            </div>
-            {MODEL_COMPARISON.map((row, i) => (
-              <div key={i} className="pt-comparison-row">
-                <div className="pt-comparison-dim">{row.dimension}</div>
-                <div className="pt-comparison-before">{row.before}</div>
-                <div className="pt-comparison-after">{row.after}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <hr className="pt-rule" />
-
-        {/* ═══ 04 — THREE PARTNER MODELS ══════════════════════════ */}
-        <section className="pt-section" data-section="models">
-          <span className="pt-section-num">04</span>
-          <span className="pt-section-label">Partner Models</span>
-          <h2 className="pt-h2" data-reveal>
-            Three ways you build revenue<br />around LongStrider.
-          </h2>
-          <p className="pt-lead" data-reveal data-delay="1">
-            Partner firms choose the motion that fits their practice — or combine
-            all three across different client segments. Each model is architecturally
-            distinct. All three compound in the same direction.
-          </p>
-          <div className="pt-models-grid" data-reveal data-delay="2">
-            {PARTNER_MODELS.map((m) => (
-              <div key={m.n} className="pt-model-card">
-                <div className="pt-model-n">{m.n}</div>
-                <div className="pt-model-name">{m.name}</div>
-                <p className="pt-model-body">{m.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <hr className="pt-rule" />
-
-        {/* ═══ 05 — THE COMPOUND EFFECT ════════════════════════════ */}
-        <section className="pt-section" data-section="compound">
-          <span className="pt-section-num">05</span>
-          <span className="pt-section-label">The Compound Effect</span>
-          <h2 className="pt-h2" data-reveal>
-            Every engagement deepens the value<br />your clients get from working with you.
-          </h2>
-          <p className="pt-lead" data-reveal data-delay="1">
-            Most consulting relationships plateau — they're only as strong as the
-            most recent project. A LongStrider-embedded engagement is architecturally
-            different: the intelligence the client builds lives in a platform your
-            firm operates and your methodology shaped. Every engagement makes the
-            next one more valuable.
-          </p>
-
-          <div className="pt-sim-wrap" data-reveal data-delay="2">
-            <div className="pt-sim-context">
-              Context: A financial services consulting firm deploys LongStrider at the start of a new client engagement. Six months in, a competitor approaches the client with a lower rate proposal.
-            </div>
-            {SIMULATION.map((turn, i) => (
-              <div key={i} className={`pt-sim-turn pt-sim-turn--${turn.role}`}>
-                <div className="pt-sim-speaker">{turn.speaker}</div>
-                <p className="pt-sim-text">{turn.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <hr className="pt-rule" />
-
-        {/* ═══ 06 — THE ASSET ARGUMENT ════════════════════════════ */}
-        <section className="pt-section" data-section="asset">
-          <span className="pt-section-num">06</span>
-          <span className="pt-section-label">The Asset Argument</span>
-          <h2 className="pt-h2" data-reveal>
-            Not promised efficiencies.<br />
-            A compounding asset your clients own.
-          </h2>
-          <p className="pt-lead" data-reveal data-delay="1">
-            Every AI vendor in market today sells the same thing: efficiency gains measured
-            in percentages, backed by slide decks, delivered as OPEX that evaporates when
-            you stop paying. LongStrider sells something categorically different — an intelligence
-            asset that grows in value, belongs to your client permanently, and that you are
-            uniquely positioned to deliver because you own the platform.
-          </p>
-
-          <div className="pt-roi-timeline" data-reveal data-delay="2">
-            <div className="pt-roi-header">What your client actually gets — not a number in a deck</div>
-            {ROI_ITEMS.map((item, i) => (
-              <div key={i} className="pt-roi-item">
-                <div className="pt-roi-track">
-                  <div className="pt-roi-dot" />
-                  {i < ROI_ITEMS.length - 1 && <div className="pt-roi-connector" />}
-                </div>
-                <div className="pt-roi-content">
-                  <div className="pt-roi-when">{item.timeline}</div>
-                  <div className="pt-roi-what">{item.what}</div>
-                  <p className="pt-roi-detail">{item.detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="pt-own-rent" data-reveal data-delay="3">
-            <div className="pt-own-rent-row pt-own-rent-row--bad">
-              <div className="pt-own-rent-label">Renting AI &mdash; OpenAI · Anthropic · etc.</div>
-              <div className="pt-own-rent-math">$60K/year &times; 3 years = $180K spent &rarr; zero residual asset</div>
-              <p className="pt-own-rent-note">
-                100% OPEX. Intelligence stays with the vendor. Service contract ends, memory ends.
-                You paid for access to a tool, not ownership of an asset.
-              </p>
-            </div>
-            <div className="pt-own-rent-row pt-own-rent-row--good">
-              <div className="pt-own-rent-label">Deploying LongStrider</div>
-              <div className="pt-own-rent-math">Same investment &rarr; 3-year compounded substrate, permanently owned</div>
-              <p className="pt-own-rent-note">
-                The intelligence lives in your client&apos;s infrastructure. It does not expire.
-                Every night it compounds. After 3 years, synthesized over 1,000 times.
-                The data, the patterns, the decision history — that is a balance sheet asset.
-                Your clients know the difference.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <hr className="pt-rule" />
-
-        {/* ═══ 07 — REVENUE & VALUATION ════════════════════════════ */}
-        <section className="pt-section" data-section="revenue">
-          <span className="pt-section-num">07</span>
-          <span className="pt-section-label">Revenue &amp; Valuation</span>
-          <h2 className="pt-h2" data-reveal>
-            A new revenue stream.<br />
-            A different business valuation.
-          </h2>
-          <p className="pt-lead" data-reveal data-delay="1">
-            Firms that deploy LongStrider are not just protecting existing revenue. They are
-            entering a new market category — and revaluing their own business in the process.
-          </p>
-
-          <div className="pt-tam-grid" data-reveal data-delay="2">
-            {TAM_ITEMS.map((item, i) => (
-              <div key={i} className={`pt-tam-card${item.accent ? ' pt-tam-card--accent' : ''}`}>
-                <div className="pt-tam-label">{item.label}</div>
-                <p className="pt-tam-desc">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="pt-valuation-block" data-reveal data-delay="3">
-            <div className="pt-valuation-header">The valuation arbitrage — same revenue, different multiple</div>
-            <div className="pt-valuation-table">
-              <div className="pt-valuation-row pt-valuation-row--head">
-                <div className="pt-valuation-cell">Business type</div>
-                <div className="pt-valuation-cell">Revenue model</div>
-                <div className="pt-valuation-cell">Typical multiple</div>
-                <div className="pt-valuation-cell">$1M ARR value</div>
-              </div>
-              <div className="pt-valuation-row">
-                <div className="pt-valuation-cell">Services firm (today)</div>
-                <div className="pt-valuation-cell">Project billing</div>
-                <div className="pt-valuation-cell">1&ndash;2&times;</div>
-                <div className="pt-valuation-cell pt-valuation-cell--muted">$1&ndash;$2M</div>
-              </div>
-              <div className="pt-valuation-row pt-valuation-row--highlighted">
-                <div className="pt-valuation-cell">Platform-embedded firm</div>
-                <div className="pt-valuation-cell">Recurring service contract</div>
-                <div className="pt-valuation-cell">5&ndash;10&times;</div>
-                <div className="pt-valuation-cell pt-valuation-cell--gold">$5&ndash;$10M</div>
-              </div>
-            </div>
-            <p className="pt-valuation-note">
-              A firm with 10 clients on a $10K/month intelligence subscription generates $1.2M ARR.
-              At a 7&times; platform multiple versus 1.5&times; services: $8.4M versus $1.8M of enterprise
-              value — from a revenue stream that did not exist before you deployed this.
-              Platform multiples are a market reality. This is a business architecture decision.
-            </p>
-          </div>
-        </section>
-
-        <hr className="pt-rule" />
-
-        {/* ═══ 08 — THE WINDOW ═════════════════════════════════════ */}
-        <section className="pt-section" data-section="window">
-          <span className="pt-section-num">08</span>
-          <span className="pt-section-label">The Window</span>
-          <h2 className="pt-h2" data-reveal>
-            There is a clear window right now<br />to lead this in your vertical.
-          </h2>
-          <p className="pt-lead" data-reveal data-delay="1">
-            The firms that establish themselves as institutional intelligence partners
-            in their verticals will carry that positioning for a long time.
-            Early movers in a category tend to define what the category looks like —
-            and the firms moving now are building practices their clients
-            will grow alongside for years.
-          </p>
-          <p className="pt-body" data-reveal data-delay="2">
-            LongStrider is not asking you to make a bet on AI. You already see
-            where this is going. We are inviting you to own the layer that AI companies
-            cannot commoditize — the sovereign memory of your clients&apos; organizations —
-            and to build a practice around it that compounds with every engagement
-            instead of starting over after every project.
-          </p>
-          <p className="pt-body" data-reveal data-delay="2">
-            When you deploy LongStrider, the expertise, the relationships, and the
-            compounding knowledge stay with your firm — not with a model provider
-            who doesn&apos;t know your client&apos;s name.
-          </p>
-
-          <div className="pt-sovereignty-block" data-reveal data-delay="3">
-            <span className="pt-sovereignty-eyebrow">The partner position</span>
-            <p className="pt-sovereignty-statement">
-              &ldquo;The product of a great consulting engagement should increasingly be a living
-              intelligence layer the client continues to build on — not just a document about
-              what they should do. LongStrider is that layer. Everything it learns stays
-              inside your client&apos;s organization, shaped by the expertise
-              your firm brought to it.&rdquo;
-            </p>
-          </div>
-        </section>
-
-        <hr className="pt-rule" />
-
-        {/* ═══ CTA ═════════════════════════════════════════════════ */}
-        <div className="pt-cta-section" data-reveal>
-          <span className="pt-cta-eyebrow">Begin the Conversation</span>
-          <h2 className="pt-cta-h2">
-            Let&apos;s explore what this could<br />look like for your practice.
-          </h2>
-          <p className="pt-cta-body">
-            LongStrider works with a select group of professional services partners.
-            We keep the intake small so we can genuinely collaborate on how this
-            fits your clients and your practice. Reach the founding team directly.
-          </p>
-          <div className="pt-cta-actions">
-            <Link href="/pilot" className="pt-cta-primary">Reach the Founding Team →</Link>
-            <Link href="/technology" className="pt-cta-secondary">Review the Architecture</Link>
-          </div>
-          <p className="pt-cta-note-bottom">
-            Memory Sovereignty · Institutional Intelligence · Recurring Revenue
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            Agents now do in hours what took teams weeks, and clients are asking sharper questions about what they pay for.
+            What no model knows and no vendor ships is the memory of one specific company: its decisions, its
+            relationships, what it learned the hard way. The firms that build that for their clients will own their
+            vertical.
           </p>
         </div>
+        <ul className="lx-wrap pt-sig">
+          {SIGNALS.map((s, i) => (
+            <li key={s.source} data-reveal data-delay={String(i + 1)}>
+              <span>{s.text}</span>
+              <a className="pt-source" href={s.href} target="_blank" rel="noreferrer">
+                ({s.source})
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      </div>
-    </div>
-  );
+      {/* 02: Ways to partner */}
+      <section className="hx-section" id="ways">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">02</span> Three ways to partner
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            Deploy it, build on it, or lead the <em>work</em>.
+          </h2>
+        </div>
+        <div className="lx-wrap sw-grid pt-ways pt-ways-four">
+          {WAYS.map((w, i) => (
+            <article key={w.name} className="sw-card lx-card" data-reveal data-delay={String(i + 1)}>
+              <h3>{w.name}</h3>
+              <p className="sw-line">{w.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* 03: What the client gets */}
+      <section className="hx-section hx-deep" id="arc">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">03</span> What your client gets
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            A project that doesn&rsquo;t end. An asset that keeps <em>growing</em>.
+          </h2>
+        </div>
+        <ol className="lx-wrap nt-line pt-arc pt-arc-three">
+          {ARC.map((a, i) => (
+            <li key={a.time} className="nt-step" data-reveal data-delay={String(i + 1)}>
+              <span className="nt-time">{a.time}</span>
+              <p>{a.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* 04: The deal */}
+      <section className="hx-section" id="deal">
+        <div className="lx-wrap lx-hero-grid">
+          <div>
+            <p className="lx-eyebrow" data-reveal>
+              <span className="hx-step">04</span> The deal
+            </p>
+            <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+              Clients stay because the work keeps getting better, not because they&rsquo;re <em>locked in</em>.
+            </h2>
+            <p className="lx-lead" data-reveal data-delay="2">
+              Their memory is theirs, on their instance. What you build on the engine, your configurations, your specialists, your
+              way of running the practice, is yours to take to every client in your vertical.
+            </p>
+          </div>
+          <ul className="pt-terms" data-reveal data-delay="2">
+            <li>
+              <span>Selective.</span>A small number of partners per vertical.
+            </li>
+            <li>
+              <span>Direct.</span>You work with the founding team from day one.
+            </li>
+            <li>
+              <span>Where they need it.</span>Hosted now; private cloud and on-premises built together.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="hx-close">
+        <div className="lx-wrap hx-center">
+          <h2 className="lx-display hx-h2" data-reveal>
+            Build the memory practice in your <em>vertical</em>.
+          </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
+            Tell us your clients, your industry and the problem you keep seeing. We&rsquo;ll show you what a first
+            deployment looks like.
+          </p>
+          <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
+            <a className="lx-btn lx-btn-primary" href="/book">
+              Start the conversation <span className="lx-arrow" aria-hidden>→</span>
+            </a>
+            <Link className="lx-btn lx-btn-ghost" href="/how-it-works">
+              Review the architecture
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
 }
