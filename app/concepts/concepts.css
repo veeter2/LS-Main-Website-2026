@@ -2013,3 +2013,12 @@ body:has(#lx-root) > :has(#lx-root) > :not(#lx-root) { display: none !important;
   .mh-doors-4 .lx-door:nth-child(-n+2) { border-top: 1px solid var(--lx-line); }
   .mh-doors-4 .lx-door:first-child { border-top: 0; }
 }
+
+/* book form honeypot: off-screen, never shown, never focusable */
+.bk-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

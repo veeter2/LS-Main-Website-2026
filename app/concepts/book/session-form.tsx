@@ -2,9 +2,9 @@
 
 import { useState, type FormEvent } from "react"
 
-// Same HubSpot form as /pilot, so a booking from the concept site lands in
-// the same place. The page address travels with it, so these are easy to tell apart.
-const HS_ENDPOINT = "https://forms.hubspot.com/uploads/form/v2/243871028/6ccbf5d8-fae4-4ee4-8fe5-48f749d33905"
+// Posts to the site's own route (app/api/lead), which keeps the lead in the
+// LongStrider project and emails the team. No CRM, no third-party script.
+const LEAD_ENDPOINT = "/api/lead"
 
 type Status = "idle" | "sending" | "sent" | "error"
 
@@ -17,26 +17,24 @@ export function SessionForm() {
     const data = new FormData(e.currentTarget)
     const field = (k: string) => String(data.get(k) ?? "").trim()
 
-    const params = new URLSearchParams()
-    params.append("firstname", field("firstname"))
-    params.append("lastname", field("lastname"))
-    params.append("email", field("email").toLowerCase())
-    params.append("company", field("company"))
-    const question = field("question")
-    if (question) params.append("message", `[PILOT] ${question}`)
-    params.append(
-      "hs_context",
-      JSON.stringify({ pageUri: window.location.href, pageName: "LongStrider · Book a working session" }),
-    )
+    const payload = {
+      firstname: field("firstname"),
+      lastname: field("lastname"),
+      email: field("email").toLowerCase(),
+      company: field("company"),
+      question: field("question"),
+      website: field("website"),
+      page: window.location.pathname,
+    }
 
     setStatus("sending")
     try {
-      const res = await fetch(HS_ENDPOINT, {
+      const res = await fetch(LEAD_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params.toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       })
-      setStatus(res.ok || res.status === 204 || res.status === 302 ? "sent" : "error")
+      setStatus(res.ok ? "sent" : "error")
     } catch {
       setStatus("error")
     }
@@ -77,6 +75,10 @@ export function SessionForm() {
       <label className="bk-field">
         <span>Company</span>
         <input name="company" autoComplete="organization" required />
+      </label>
+      <label className="bk-trap" aria-hidden="true">
+        <span>Website</span>
+        <input name="website" tabIndex={-1} autoComplete="off" />
       </label>
       <label className="bk-field">
         <span>The question your team can&rsquo;t answer today</span>
