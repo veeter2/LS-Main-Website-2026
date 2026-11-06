@@ -1,29 +1,25 @@
-import type { MetadataRoute } from 'next';
+import type { MetadataRoute } from "next"
 
+// Search and answer engines are welcome. Training-only crawlers are not.
+// OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User and PerplexityBot
+// fetch pages to answer questions and cite us; GPTBot, ClaudeBot, CCBot and
+// Google-Extended only collect training data.
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: [
-          '/api/',
-          '/help-center',
-          '/be-a-vendor',
-          '/archive',
-          '/concepts',
-        ],
-      },
-      // Block AI training scrapers
-      { userAgent: 'GPTBot',        disallow: '/' },
-      { userAgent: 'ChatGPT-User',  disallow: '/' },
-      { userAgent: 'CCBot',         disallow: '/' },
-      { userAgent: 'anthropic-ai',  disallow: '/' },
-      { userAgent: 'Claude-Web',    disallow: '/' },
-      { userAgent: 'Google-Extended',disallow: '/' },
-      { userAgent: 'PerplexityBot', allow: '/' },
+      { userAgent: "*", allow: "/", disallow: ["/api/"] },
+      { userAgent: "OAI-SearchBot", allow: "/" },
+      { userAgent: "ChatGPT-User", allow: "/" },
+      { userAgent: "Claude-SearchBot", allow: "/" },
+      { userAgent: "Claude-User", allow: "/" },
+      { userAgent: "PerplexityBot", allow: "/" },
+      { userAgent: "GPTBot", disallow: "/" },
+      { userAgent: "ClaudeBot", disallow: "/" },
+      { userAgent: "CCBot", disallow: "/" },
+      { userAgent: "Google-Extended", disallow: "/" },
+      { userAgent: "Bytespider", disallow: "/" },
     ],
-    sitemap: 'https://longstrider.ai/sitemap.xml',
-    host: 'https://longstrider.ai',
-  };
+    sitemap: "https://www.longstrider.ai/sitemap.xml",
+    host: "https://www.longstrider.ai",
+  }
 }

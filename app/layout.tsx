@@ -4,87 +4,74 @@ import { Lora } from "next/font/google"
 import "./globals.css"
 import "../styles/ls-tokens.css"
 import "../styles/responsive.css"
-import { Navigation } from "@/components/navigation"
-import { SiteAmbient } from "@/components/site-ambient"
-import { Footer } from "@/components/footer"
-import { Toaster } from "@/components/ui/toaster"
+import "./site.css"
+import { ConceptShell } from "./_components/shell"
 
 const lora = Lora({
-  subsets: ["latin"], 
+  subsets: ["latin"],
   variable: "--font-lora",
   style: ["normal", "italic"],
   weight: ["400", "500", "600"],
   display: "swap",
 })
 
-const BASE_URL = 'https://longstrider.ai';
-const OG_IMAGE  = `${BASE_URL}/og-default.png`;
+const BASE_URL = "https://www.longstrider.ai"
+const OG_IMAGE = `${BASE_URL}/og-default.png`
+const TITLE = "LongStrider · The AI memory your company owns"
+const DESCRIPTION =
+  "Every fact, promise and decision your team puts into AI, kept with its source and owned by your company. Works with any model. Book a working session."
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'LongStrider — Sovereign Intelligence Platform',
-    template: '%s | LongStrider',
+    default: TITLE,
+    template: "%s · LongStrider",
   },
-  description:
-    'LongStrider is the sovereign intelligence platform that accumulates institutional knowledge across every interaction, compounds it overnight, and permanently owns it on your infrastructure. LLM-agnostic. 100% on-premises.',
+  description: DESCRIPTION,
   keywords: [
-    'sovereign AI platform',
-    'institutional memory AI',
-    'enterprise AI knowledge graph',
-    'on-premises AI platform',
-    'LLM-agnostic AI',
-    'compounding intelligence',
-    'AI agent substrate',
-    'data sovereignty AI',
-    'enterprise AI memory',
-    'AI for professional services',
-    'sovereign intelligence',
-    'LongStrider',
+    "institutional knowledge software",
+    "institutional memory",
+    "AI knowledge management",
+    "private LLM",
+    "self-hosted AI",
+    "on-premises AI",
+    "AI memory for business",
+    "company memory",
+    "LongStrider",
   ],
-  authors:  [{ name: 'LongStrider', url: BASE_URL }],
-  creator:  'LongStrider',
-  publisher:'LongStrider',
-  category: 'Technology',
+  authors: [{ name: "LongStrider", url: BASE_URL }],
+  creator: "LongStrider",
+  publisher: "LongStrider",
+  category: "Technology",
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
-    type:        'website',
-    locale:      'en_US',
-    url:          BASE_URL,
-    siteName:    'LongStrider',
-    title:       'LongStrider — Sovereign Intelligence Platform',
-    description: 'The AI platform that accumulates institutional knowledge, compounds it overnight, and permanently owns it on your infrastructure.',
-    images: [
-      {
-        url:    OG_IMAGE,
-        width:  1200,
-        height: 630,
-        alt:    'LongStrider — Sovereign Intelligence. Permanently Yours.',
-        type:   'image/png',
-      },
-    ],
+    type: "website",
+    locale: "en_US",
+    url: BASE_URL,
+    siteName: "LongStrider",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "LongStrider. The AI memory your company owns.", type: "image/png" }],
   },
   twitter: {
-    card:        'summary_large_image',
-    site:        '@longstriderai',
-    creator:     '@longstriderai',
-    title:       'LongStrider — Sovereign Intelligence Platform',
-    description: 'The AI platform that accumulates institutional knowledge, compounds it overnight, and permanently owns it on your infrastructure.',
-    images:      [OG_IMAGE],
+    card: "summary_large_image",
+    site: "@longstriderai",
+    creator: "@longstriderai",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
-  alternates: {
-    canonical: BASE_URL,
-  },
+  alternates: { canonical: BASE_URL },
 }
 
 export const viewport: Viewport = {
@@ -92,72 +79,60 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#000000" }],
+  themeColor: "#f6f3ec",
 }
 
-
-const JSONLD_ORG = {
-  '@context': 'https://schema.org',
-  '@graph': [
+const JSONLD = {
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      '@type': 'Organization',
-      '@id': 'https://longstrider.ai/#organization',
-      name: 'LongStrider',
-      url: 'https://longstrider.ai',
-      logo: { '@type': 'ImageObject', url: 'https://longstrider.ai/longstrider-logo.svg' },
-      description: 'LongStrider is the sovereign intelligence platform that accumulates institutional knowledge across every interaction, compounds it overnight, and permanently owns it on your infrastructure.',
-      foundingDate: '2024',
-      sameAs: ['https://twitter.com/longstriderai'],
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      name: "LongStrider",
+      url: BASE_URL,
+      logo: { "@type": "ImageObject", url: `${BASE_URL}/longstrider-logo.svg` },
+      description: "LongStrider keeps every fact, promise and decision a company puts into AI, with its source, owned by the company and independent of the model.",
+      foundingDate: "2024",
+      address: { "@type": "PostalAddress", addressLocality: "Austin", addressRegion: "TX", addressCountry: "US" },
+      sameAs: ["https://twitter.com/longstriderai"],
     },
     {
-      '@type': 'SoftwareApplication',
-      '@id': 'https://longstrider.ai/#software',
-      name: 'LongStrider Intelligence Platform',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Linux, macOS, Windows, Cloud',
-      description: 'A sovereign, LLM-agnostic intelligence substrate with Four-Axis Recall, nightly Dream Compiler synthesis, and a 13-agent autonomous fleet — on your own infrastructure.',
+      "@type": "SoftwareApplication",
+      "@id": `${BASE_URL}/#software`,
+      name: "LongStrider",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Cloud, private cloud, on-premises",
+      description: "Company memory for AI: dated, sourced facts, promises and decisions kept in Postgres, scoped to each person, answered by the model you choose.",
       featureList: [
-        'Sovereign on-premises deployment',
-        'LLM-agnostic (OpenAI, Anthropic, Ollama, Llama)',
-        'Four-Axis Recall (Entity × Temporal × Well × Topic)',
-        'Nightly Dream Compiler synthesis',
-        '13-agent autonomous fleet',
-        'MCP-native architecture',
-        'Zero telemetry',
+        "Facts, promises and decisions kept with their source",
+        "Counts and dates from the record, not estimates",
+        "Any model through your own keys, or a model you already run",
+        "Row-level scoping in Postgres",
+        "Receipts on every reply",
+        "Overnight pass that links repeats and flags conflicts",
+        "Licensed and installed, not rented per seat",
       ],
+      offers: { "@type": "Offer", description: "Licensed software with a build fee and yearly support. Scoped in a working session." },
     },
     {
-      '@type': 'WebSite',
-      '@id': 'https://longstrider.ai/#website',
-      url: 'https://longstrider.ai',
-      name: 'LongStrider',
-      publisher: { '@id': 'https://longstrider.ai/#organization' },
+      "@type": "WebSite",
+      "@id": `${BASE_URL}/#website`,
+      url: BASE_URL,
+      name: "LongStrider",
+      publisher: { "@id": `${BASE_URL}/#organization` },
     },
   ],
-};
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark ${lora.variable}`}>
+    <html lang="en" className={lora.variable}>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD_ORG) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD) }} />
       </head>
       <body>
-        <SiteAmbient />
-        <div style={{ position: "relative", zIndex: 1 }}>
-        <Navigation />
-        {children}
-        <Footer /></div>
-        <Toaster />
+        <ConceptShell>{children}</ConceptShell>
       </body>
     </html>
   )
 }
-

@@ -1,0 +1,35 @@
+.sec-models {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sec-model {
+  padding: 8px 14px;
+  border: 1px solid var(--lx-line-subtle);
+  border-radius: var(--lx-radius);
+  background: var(--lx-paper);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--lx-ink-secondary);
+}
+.sec-bridge { display: flex; justify-content: center; height: 32px; }
+.sec-bridge span { width: 1px; background: var(--lx-gold-line); }
+.sec-stat {
+  margin: 28px 0 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--lx-ink-secondary);
+}
+.sec-map { max-width: 760px; margin: clamp(36px, 5vh, 56px) auto 0; }
+.sec-map-status {
+  margin: 16px 2px 0;
+  font-family: var(--lx-display);
+  font-weight: 500;
+  font-size: 21px;
+  color: var(--lx-ink-primary);
+}
+.sec-partner { max-width: 760px; margin: 24px auto 0; padding: 20px 22px; }
+.sec-partner p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--lx-ink-secondary); }
+.sec-partner b { color: var(--lx-ink-primary); }
+.sec-partner a { color: var(--lx-gold-ink); }
+.sec-rules-note { max-width: 46em; margin: 20px auto 0; font-size: 15.5px; line-height: 1.65; color: var(--lx-ink-secondary); }
