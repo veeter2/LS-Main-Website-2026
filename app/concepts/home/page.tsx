@@ -1,48 +1,60 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { OwnershipBoard } from "./ownership-board"
-import { RecordDemo } from "../record/record-demo"
-import { Desk } from "../commitments/desk"
 import { MemoryCurve } from "../learning-gap/memory-curve"
 
-export const metadata: Metadata = { title: "Homepage concept" }
+export const metadata: Metadata = {
+  title: "The AI memory your company owns",
+  description:
+    "Every fact, promise and decision your people put into AI, kept with its source, on your infrastructure, under your own model. Licensed, not rented.",
+}
 
 /**
- * The Manifesto's argument as a homepage: the problem is ownership (you are
- * building on rented land), memory is how you get it back, and the proof is
- * shown, not claimed. One running example (the Alder account) throughout.
+ * Homepage v1 copy: the ownership spine. The problem is that company memory
+ * lives in rented seats; the answer is a record the company licenses and owns.
+ * Scenarios are fictional (Reyes closing, Pellworth renewal).
  */
 
-const RENTED = [
+const PROBLEMS = [
   {
-    title: "It's their memory",
-    body: "The memory features vendors offer keep your history on their platform, under their terms. What your team teaches them improves their product.",
+    title: "It isn’t a record",
+    body: "What the vendor keeps is a paraphrase. You can’t see the line it came from, and you can’t audit it.",
   },
   {
-    title: "Switch, and start from zero",
-    body: "Models get cheaper and better every quarter, and you will change them. The context your team built doesn't come with you.",
+    title: "It doesn’t move",
+    body: "Models get cheaper and better every quarter. When you switch, and you will, the memory stays in the old seat.",
   },
   {
-    title: "People leave. So does what they knew",
-    body: "The client history only one person carried goes with them on their last day. It was never written down. It was only ever taught to a chat window.",
+    title: "People leave with it",
+    body: "The history only one person carried goes out the door on their last day, because the only place it was ever written down was a chat window.",
   },
 ]
 
-const COMPARE_ROWS = ["What it does", "Who it belongs to", "What it knows"]
+const COMPARE_ROWS = ["What it keeps", "Who owns it", "What you pay for", "What it can tell you"]
 const COMPARE = [
   {
     name: "Enterprise search",
-    cells: ["Finds the documents you already have", "Rented, per seat", "What someone wrote down"],
+    cells: [
+      "The documents you already have",
+      "You rent it per seat",
+      "Seats, forever",
+      "What someone wrote down",
+    ],
   },
   {
-    name: "Memory tools for developers",
-    cells: ["Stores and fetches data for apps engineers build", "Plumbing: you build the product", "What it was handed"],
+    name: "Memory inside a chat seat",
+    cells: [
+      "A summary the vendor writes about you",
+      "The vendor. You can read it, not export it",
+      "Seats, forever",
+      "What it remembers about your preferences",
+    ],
   },
   {
     name: "LongStrider",
     cells: [
-      "Builds what your company learns, as it works",
-      "You, and it survives model switches and departures",
+      "Dated facts, promises and decisions, each with its source",
+      "Your company. You license the software, it runs where you say, and it survives a model switch and a resignation",
+      "A build you own, then support. An asset on your books, not a line that resets every January",
       "Who promised what, what changed, and when to push back",
     ],
     ours: true,
@@ -57,8 +69,13 @@ const BUYERS = [
   },
   {
     who: "For the CTO",
-    title: "A memory layer your architects can inspect.",
+    title: "A memory layer your architects can open up and inspect.",
     href: "/concepts/for/technology",
+  },
+  {
+    who: "For compliance",
+    title: "Every read checked against who’s asking. Every write receipted.",
+    href: "/concepts/security",
   },
   {
     who: "For your team",
@@ -67,70 +84,86 @@ const BUYERS = [
   },
 ]
 
-const ASSET = [
-  { n: "I", title: "Nothing taught twice", body: "What your team explains once stays explained, shared only with the people it belongs to." },
-  { n: "II", title: "Answers you can audit", body: "Counts and dates come from the record, with the source attached. Finance can check the work." },
-  { n: "III", title: "It outlives the model", body: "Change providers next year and the memory stays put. The asset is the memory, not the model." },
+const PROOF = [
+  "Every fact has a source",
+  "Counts, not guesses",
+  "Your own model, your own keys",
+  "Licensed, not rented",
+  "Nothing tracked without your yes",
 ]
+
+function ShotPlaceholder({ label }: { label: string }) {
+  return (
+    <div className="lx-card mh-shot" role="img" aria-label={label}>
+      <span>{label}</span>
+    </div>
+  )
+}
 
 export default function HomeConcept() {
   return (
     <main>
-      {/* The problem */}
+      {/* Hero */}
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>
-            <p className="lx-eyebrow" data-rise="0">The intelligence layer you own</p>
+            <p className="lx-eyebrow" data-rise="0">Company memory</p>
             <h1 className="lx-display lx-h1 mh-h1" data-rise="1">
-              Every dollar you spent on AI this year made someone else&rsquo;s platform <em>smarter</em>.
+              The AI memory your company <em>owns</em>.
             </h1>
             <p className="lx-lead" data-rise="2">
-              Your team teaches AI your business every day: the decisions, the clients, the promises. Today that
-              knowledge sits on a platform you rent, resets when you change models, and walks out the door when people
-              leave. LongStrider keeps it: exact, sourced, and yours.
+              Every fact, promise and decision your people put into AI, kept with its source, on your infrastructure,
+              under your own model. You license it and own it. Switch models next year and nothing has to be taught twice.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <a className="lx-btn lx-btn-primary" href="/concepts/book">
                 Book a working session <span className="lx-arrow" aria-hidden>→</span>
               </a>
               <a className="lx-btn lx-btn-ghost" href="#own">
-                See what you&rsquo;d own
+                See it answer
               </a>
             </div>
             <div className="lx-assure" data-rise="4">
-              <span>Yours, not your vendor&rsquo;s</span>
-              <span>Survives a model switch</span>
-              <span>Every answer sourced</span>
+              {PROOF.map((p) => (
+                <span key={p}>{p}</span>
+              ))}
             </div>
           </div>
           <div data-rise="2">
-            <OwnershipBoard />
-            <p className="lx-illustrative">Illustration</p>
+            <ShotPlaceholder label="Screenshot of Living Memory goes here" />
+            <p className="lx-illustrative">Real screen. Example data.</p>
           </div>
         </div>
       </section>
 
-      {/* 01: Rented land */}
+      {/* 01: The problem */}
       <section className="hx-section hx-deep" id="rented">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">01</span> The problem
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Every company using AI is building on <em>rented land</em>.
+            Your people teach AI your business every day. Then it <em>forgets</em>.
           </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            Every chat window your team opens starts from zero. The client history, the reason you walked away from a
+            supplier, the rate someone agreed to hold through December: your people type it in, and it&rsquo;s gone by the
+            next session. The vendors now offer &ldquo;memory.&rdquo; Read what you actually get. A summary you can&rsquo;t
+            open, inside a seat you rent, that you can&rsquo;t export and can&rsquo;t take with you.
+          </p>
         </div>
         <div className="lx-wrap mh-facts">
-          {RENTED.map((f, i) => (
+          {PROBLEMS.map((f, i) => (
             <div key={f.title} className="mh-fact" data-reveal data-delay={String(i + 1)}>
               <h3>{f.title}</h3>
               <p>{f.body}</p>
             </div>
           ))}
         </div>
-        <p className="lx-wrap mh-question" data-reveal data-delay="2">
-          The question most companies haven&rsquo;t answered: where does everything you learn go, and{" "}
-          <em>who owns it?</em>
+        <p className="lx-wrap mh-question mh-plain" data-reveal data-delay="2">
+          Deloitte asked 3,500 leaders this year. 81% said AI has made their decisions faster. 25% said it has changed how
+          the business works. The rest are, in Deloitte&rsquo;s words, &ldquo;stuffing new capabilities into old operating
+          models.&rdquo; (Deloitte, State of AI in the Enterprise, October 2026)
         </p>
       </section>
 
@@ -149,7 +182,7 @@ export default function HomeConcept() {
               preferences, the history no CRM ever held.
             </p>
             <p>
-              On Monday, her replacement opens LongStrider. The relationships, the decisions and the promises are there,
+              On Monday her replacement opens LongStrider. The relationships, the decisions and the promises are there,
               each with where it came from, because the system was learning alongside her the whole time.
             </p>
             <p className="mh-story-turn">
@@ -173,81 +206,160 @@ export default function HomeConcept() {
               Ask what happened. Get the <em>record</em>, not a guess.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              Every conversation becomes facts with a source. Ask how often, or when, and get a number you can check. When
-              there isn&rsquo;t enough to go on, it says so.
+              Every conversation becomes dated facts with a source. Ask how many times, or when, and you get a number you
+              can check. When there isn&rsquo;t enough to go on, it tells you that instead.
             </p>
           </div>
           <div data-reveal data-delay="2">
-            <RecordDemo />
-            <p className="lx-illustrative">Illustrative example</p>
+            <div className="rx-demo lx-card" aria-label="Example: asking LongStrider about a closing date">
+              <div className="rx-list">
+                <div className="rx-exchange">
+                  <div className="rx-q">
+                    <span className="rx-who">You</span>
+                    <p className="rx-q-text">
+                      How many times has the Reyes closing date come up this month, and what&rsquo;s the latest?
+                    </p>
+                  </div>
+                  <div className="rx-reading" data-on="true">
+                    <span className="rx-pulse" aria-hidden />
+                    Reading 9 conversations across 2 people
+                  </div>
+                  <div className="rx-a" data-on="true">
+                    <span className="rx-who rx-who-ls">LongStrider</span>
+                    <p>
+                      The Reyes closing date has come up <b className="lx-num">7 times</b> since <b>3 November</b>. You
+                      gave me two dates: <b>the 12th</b> on Monday, and <b>the 19th</b> yesterday, in a different thread.
+                      I&rsquo;ve flagged that as a conflict. Which one stands?
+                    </p>
+                    <div className="rx-sources">
+                      <span className="rx-source">
+                        <span className="rx-source-kind">Chat</span>
+                        <span className="rx-source-date lx-num">3 Nov</span>
+                      </span>
+                      <span className="rx-source">
+                        <span className="rx-source-kind">Chat</span>
+                        <span className="rx-source-date lx-num">6 Nov</span>
+                      </span>
+                      <span className="rx-stamp rx-stamp-gold">Counted from the record</span>
+                      <span className="rx-stamp rx-stamp-gold">Conflict flagged overnight</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="rx-exchange">
+                  <div className="rx-q">
+                    <span className="rx-who">You</span>
+                    <p className="rx-q-text">The 19th. Legal pushed it.</p>
+                  </div>
+                  <div className="rx-a" data-on="true">
+                    <span className="rx-who rx-who-ls">LongStrider</span>
+                    <p>Kept. The 12th is marked as replaced, with your correction and the reason. It won&rsquo;t come back.</p>
+                    <div className="rx-sources">
+                      <span className="rx-stamp rx-stamp-quiet">Correction kept</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className="lx-illustrative">Real behavior. Fictional firm.</p>
           </div>
         </div>
 
         <div className="lx-wrap lx-hero-grid hx-flip mh-second">
           <div data-reveal data-delay="1">
-            <Desk />
-            <p className="lx-illustrative">Illustrative example</p>
+            <ShotPlaceholder label="Screenshot of Pulse, today's five, goes here" />
+            <p className="lx-illustrative">Real screen. Example data.</p>
           </div>
           <div>
             <h3 className="lx-display mh-h3" data-reveal>
               And it keeps the <em>promises</em>.
             </h3>
             <p className="lx-lead" data-reveal data-delay="1">
-              When Priya agreed to hold the rate, that was a commitment with a condition and a date. LongStrider tracks who
-              promised what, to whom and by when. It tidies what it learned overnight and brings it back before it slips.
+              &ldquo;I&rsquo;ll have the revised schedule to the broker by Friday&rdquo; is a commitment with an owner and
+              a date. LongStrider hears it, files it, and shows it to the person who said it. Nothing goes on your desk
+              until you say so. Friday morning it&rsquo;s in your five for the day, with the message it came from one click
+              away.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 04: Integrity */}
-      <section className="hx-section" id="integrity">
+      {/* 04: Fast and slow */}
+      <section className="hx-section" id="fast-slow">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">04</span> Fast and slow
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            It thinks <em>twice</em>. Once now, once tonight.
+          </h2>
+        </div>
+        <div className="lx-wrap mh-facts mh-facts-2">
+          <div className="mh-fact" data-reveal data-delay="1">
+            <h3>In the moment</h3>
+            <p>
+              Every message is filed as you type it. The facts in it are dated, sourced and put in the right drawer, and
+              the reply comes back in about ten seconds. Most of that work is arithmetic and lookups, not a model guessing.
+            </p>
+          </div>
+          <div className="mh-fact" data-reveal data-delay="2">
+            <h3>Overnight</h3>
+            <p>
+              At five in the morning it checks whether anything new landed yesterday. If nothing did, it does nothing, and
+              that&rsquo;s most nights. If something did, it reads what the day wrote, links what repeats, flags what
+              contradicts, and leaves you a note. That&rsquo;s how the two Reyes dates got caught.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 05: Integrity */}
+      <section className="hx-section hx-deep" id="integrity">
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">04</span> The integrity to push back
+              <span className="hx-step">05</span> The integrity to push back
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Most AI remembers everything and agrees with everything.
+              Most AI agrees with everything. This one has a <em>record</em> to check you against.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              LongStrider remembers, and has the integrity to challenge you. When a decision contradicts a pattern
-              it&rsquo;s been tracking, it says so, with the evidence and what happened last time. Ninety days in, it&rsquo;s
-              asking the questions you didn&rsquo;t know to ask.
+              When a decision cuts against something it&rsquo;s been tracking, it says so, with the evidence and what
+              happened last time. It would rather ask than guess. Ninety days in, it&rsquo;s asking the questions you
+              didn&rsquo;t know to ask.
             </p>
           </div>
           <div data-reveal data-delay="2">
             <article className="mh-note lx-card">
               <span className="mh-note-label">This morning</span>
               <p className="mh-note-text">
-                Last week&rsquo;s plan to discount Alder looks like Brennan in March: the discount didn&rsquo;t secure the
-                renewal, and the margin never came back. Worth a second look before Friday?
+                You&rsquo;re about to hold the Pellworth rate for a second year. Last time you held a rate on a telematics
+                gap, the loss ratio didn&rsquo;t recover. Worth a look before the renewal call?
               </p>
               <div className="mh-note-sources">
                 <span className="rx-source">
-                  <span className="rx-source-kind">Pricing call</span>
-                  <span className="rx-source-date lx-num">18 Sep</span>
+                  <span className="rx-source-kind">Underwriting notes</span>
+                  <span className="rx-source-date lx-num">14 Jan</span>
                 </span>
                 <span className="rx-source">
-                  <span className="rx-source-kind">Brennan retro</span>
+                  <span className="rx-source-kind">Renewal review</span>
                   <span className="rx-source-date lx-num">March</span>
                 </span>
                 <span className="rx-stamp rx-stamp-gold">A contradiction, flagged</span>
               </div>
             </article>
-            <p className="lx-illustrative">Illustrative example</p>
+            <p className="lx-illustrative">Real behavior. Fictional account.</p>
           </div>
         </div>
       </section>
 
-      {/* 05: Retrieval is not intelligence */}
-      <section className="hx-section hx-deep" id="different">
+      {/* 06: What it is, and isn't */}
+      <section className="hx-section" id="different">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">05</span> Retrieval is not intelligence
+            <span className="hx-step">06</span> What it is, and isn&rsquo;t
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Not search. Not a memory API. <em>An asset.</em>
+            Three things that look alike and <em>aren&rsquo;t</em>.
           </h2>
         </div>
         <div className="lx-wrap" data-reveal data-delay="2">
@@ -277,19 +389,24 @@ export default function HomeConcept() {
         </div>
       </section>
 
-      {/* 06: An asset */}
-      <section className="hx-section" id="asset">
+      {/* 07: An asset */}
+      <section className="hx-section hx-deep" id="asset">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">06</span> An asset, not a subscription
+            <span className="hx-step">07</span> An asset, not a renewal
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            The one AI line item that&rsquo;s worth <em>more</em> every month.
+            The one AI line item that&rsquo;s worth <em>more</em> in month twelve than month one.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            MIT reviewed more than 300 enterprise AI initiatives and found 95% delivered no measurable return, because the
-            tools didn&rsquo;t keep what they learned. LongStrider does, so month twelve knows what month one never could.
-            And what it knows belongs to the company: something that shows up in due diligence, not in a renewal notice.
+            An MIT NANDA study of more than 300 enterprise AI deployments found 95% saw no measurable return, and named the
+            reason: &ldquo;Most GenAI systems do not retain feedback, adapt to context, or improve over time.&rdquo; (MIT
+            NANDA, The GenAI Divide, 2025)
+          </p>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            LongStrider retains it. Week one it learns your people. Month four it knows what was decided and why. Month
+            twelve it answers questions no single person could. And all of it belongs to the company, which is the part
+            that shows up when someone asks what you own.
           </p>
         </div>
         <div className="lx-wrap hx-chart" data-reveal data-delay="2">
@@ -301,33 +418,24 @@ export default function HomeConcept() {
               target="_blank"
               rel="noreferrer"
             >
-              MIT NANDA, &ldquo;The GenAI Divide: State of AI in Business 2025&rdquo;
+              MIT NANDA, The GenAI Divide: State of AI in Business 2025
             </a>
           </p>
         </div>
-        <div className="lx-wrap gx-points">
-          {ASSET.map((p, i) => (
-            <div key={p.n} className="gx-point" data-reveal data-delay={String(i + 1)}>
-              <span className="gx-numeral">{p.n}</span>
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
-      {/* Three people have to say yes */}
-      <section className="hx-section hx-deep" id="buyers">
+      {/* Who it's for */}
+      <section className="hx-section" id="buyers">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             Who it&rsquo;s for
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Three people have to say <em>yes</em>.
+            Four people have to say <em>yes</em>.
           </h2>
         </div>
         <div className="lx-wrap">
-          <div className="lx-doors-grid mh-doors">
+          <div className="lx-doors-grid mh-doors mh-doors-4">
             {BUYERS.map((d, i) => (
               <Link key={d.who} href={d.href} className="lx-door" data-reveal data-delay={String(i + 1)}>
                 <span className="lx-eyebrow">{d.who}</span>
@@ -348,8 +456,8 @@ export default function HomeConcept() {
             Bring us your <em>hardest</em> problem.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            A working session with your people and a real question. You&rsquo;ll see the answer, the source and the promise,
-            and what your company would own ninety days from now.
+            An hour, your people, one real question. You&rsquo;ll see the answer, the source it came from, and the promise
+            it caught, built from your material. You leave knowing what your company would own ninety days from now.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <a className="lx-btn lx-btn-primary" href="/concepts/book">
@@ -359,6 +467,9 @@ export default function HomeConcept() {
               Read the manifesto
             </a>
           </div>
+          <p className="lx-illustrative mh-center" data-reveal data-delay="3">
+            Built live with real users since spring 2026.
+          </p>
         </div>
       </section>
 
