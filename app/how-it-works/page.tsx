@@ -1,12 +1,9 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { SentenceJourney } from "./sentence-journey"
 
-export const metadata: Metadata = {
-  title: "How LongStrider works · The model is the voice, we're the memory",
-  description:
-    "Three layers: the record, the order, the judgment. Counted by the system, written by the model you choose. Scoped to the person in the database.",
-}
+export const metadata: Metadata = pageMeta("/how-it-works", "How LongStrider works · The memory layer", "Three layers: the record, the order, the judgment. Counted by the system, written by the model you choose. Scoped to the person in the database.")
 
 /**
  * How LongStrider works, for the technical buyer: one sentence followed
@@ -150,7 +147,7 @@ export default function HowItWorksConcept() {
         </div>
       </section>
 
-      {/* 02: Division of labour */}
+      {/* 02: Division of labor */}
       <section className="hx-section" id="split">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>

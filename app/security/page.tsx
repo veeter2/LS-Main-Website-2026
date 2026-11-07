@@ -1,13 +1,10 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { DeploymentMap } from "./deployment-map"
 import "./security.css"
 
-export const metadata: Metadata = {
-  title: "Security and ownership · Your memory, your rules, your keys",
-  description:
-    "Software you install and own. Where it runs, who can see what, and which model it talks to, including one you already run. Straight answers.",
-}
+export const metadata: Metadata = pageMeta("/security", "Security and ownership · Your rules, your keys", "Software you install and own. Where it runs, who can see what, and which model it talks to, including one you already run. Straight answers.")
 
 const OWNERSHIP = [
   {

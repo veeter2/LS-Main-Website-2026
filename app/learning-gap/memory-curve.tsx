@@ -54,7 +54,7 @@ export function MemoryCurve() {
         <span className="gx-key gx-key-kept">LongStrider: kept, linked, tidied every night</span>
         <span className="gx-key gx-key-forget">A tool that forgets: every session starts from zero</span>
       </figcaption>
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Illustration: a tool that forgets keeps returning to zero, while LongStrider's knowledge of your business keeps rising over twelve months.">
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Illustration: a tool that forgets keeps returning to zero, while LongStrider’s knowledge of your business keeps rising over twelve months.">
         <defs>
           <linearGradient id="gx-fill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#c8a96e" stopOpacity="0.22" />

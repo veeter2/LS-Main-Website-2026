@@ -1,12 +1,9 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import "./partners.css"
 
-export const metadata: Metadata = {
-  title: "Partner with LongStrider · Your client's memory, your method",
-  description:
-    "For consultancies and service firms: deploy it, build on it, or lead the work. The engine is ours. The vertical knowledge is yours.",
-}
+export const metadata: Metadata = pageMeta("/partners", "Partners · Your client’s memory, your method", "For consultancies and service firms: deploy it, build on it, or lead the work. The engine is ours. The vertical knowledge is yours.")
 
 /**
  * Partners: for consultancies, managed service providers and engineering firms.
@@ -15,7 +12,7 @@ export const metadata: Metadata = {
 
 const STACK = [
   {
-    who: "Your client's",
+    who: "Your client’s",
     what: "Their memory.",
     body: "Every fact, decision and correction, on their instance, theirs to keep.",
     tone: "client",
@@ -55,7 +52,7 @@ const SIGNALS = [
 const WAYS = [
   {
     name: "Deploy and maintain.",
-    body: "Run it for your clients as a managed service. Deploy into each client's instance, keep it healthy and configured, recurring work instead of one-off projects.",
+    body: "Run it for your clients as a managed service. Deploy into each client’s instance, keep it healthy and configured, recurring work instead of one-off projects.",
   },
   {
     name: "Wrap and extend.",
@@ -67,7 +64,7 @@ const WAYS = [
   },
   {
     name: "Private equity operating partners.",
-    body: "One operating partner, ten to thirty portfolio companies, one memory engine each. We treat PE as a partner channel, not a customer segment, because that's how the buying actually works.",
+    body: "One operating partner, ten to thirty portfolio companies, one memory engine each. We treat PE as a partner channel, not a customer segment, because that’s how the buying actually works.",
   },
 ]
 
@@ -82,7 +79,7 @@ const ARC = [
   },
   {
     time: "One year.",
-    body: "It knows more than any recent hire. It doesn't leave, doesn't take competing offers, and doesn't need an exit interview.",
+    body: "It knows more than any recent hire. It doesn’t leave, doesn’t take competing offers, and doesn’t need an exit interview.",
   },
 ]
 

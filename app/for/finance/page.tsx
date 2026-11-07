@@ -1,12 +1,9 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import { BuyerPage } from "../buyer-page"
 import { MemoryCurve } from "../../learning-gap/memory-curve"
 
-export const metadata: Metadata = {
-  title: "LongStrider for the CFO · An AI budget that ends in an asset",
-  description:
-    "Licensed and installed, not rented per seat. Your own model, your own bill. Answers you can audit. Spend that becomes something the company owns.",
-}
+export const metadata: Metadata = pageMeta("/for/finance", "For the CFO · AI spend that ends in an asset", "Licensed and installed, not rented per seat. Your own model, your own bill. Answers you can audit. Spend that becomes something the company owns.")
 
 export default function ForFinance() {
   return (
@@ -77,7 +74,7 @@ export default function ForFinance() {
         questions: [
           {
             q: "How is it priced?",
-            a: "As software you own, not seats you rent. A license and a one-time build fee, which depend on where it runs and what we connect, then a yearly support fee. No per-seat meter. The model bill is yours, through your own keys or your own hardware, so you see it and you choose it. We scope all of it in the working session, and you'll have a number before you leave.",
+            a: "As software you own, not seats you rent. A license and a one-time build fee, which depend on where it runs and what we connect, then a yearly support fee. No per-seat meter. The model bill is yours, through your own keys or your own hardware, so you see it and you choose it. We scope all of it in the working session, and you’ll have a number before you leave.",
           },
           {
             q: "Operating cost or capital?",
@@ -89,7 +86,7 @@ export default function ForFinance() {
           },
           {
             q: "What if we stop?",
-            a: "It's your company's memory. We agree the exit terms up front, and you get the rows, not a PDF.",
+            a: "It’s your company’s memory. We agree the exit terms up front, and you get the rows, not a PDF.",
           },
         ],
         next: { label: "For your CTO", href: "/for/technology" },

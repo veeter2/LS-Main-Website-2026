@@ -1,11 +1,9 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { SessionForm } from "./session-form"
 
-export const metadata: Metadata = {
-  title: "Book a working session with LongStrider",
-  description: "An hour, your people, one real question. You leave knowing whether it's worth building and what you'd own.",
-}
+export const metadata: Metadata = pageMeta("/book", "Book a working session", "An hour, your people, one real question. You leave knowing whether it’s worth building and what you’d own. Not a demo, a working session.")
 
 const STEPS = [
   { title: "Bring one real question.", body: "A client, a claim, a matter, an engagement. Something your team can’t answer quickly today." },

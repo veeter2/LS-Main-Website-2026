@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { MemoryCurve } from "./learning-gap/memory-curve"
 import { OwnershipBoard } from "./_components/ownership-board"
 import { Desk } from "./commitments/desk"
 
 export const metadata: Metadata = {
-  title: "The AI memory your company owns",
-  description:
-    "Every fact, promise and decision your people put into AI, kept with its source, on your infrastructure, under your own model. Licensed, not rented.",
+  ...pageMeta("", "The AI memory your company owns", "Every fact, promise and decision your people put into AI, kept with its source, on your infrastructure, under your own model. Licensed, not rented."),
+  title: { absolute: "LongStrider · The AI memory your company owns" },
 }
 
 /**

@@ -1,11 +1,8 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import { BuyerPage } from "../buyer-page"
 
-export const metadata: Metadata = {
-  title: "LongStrider for the CTO · A memory layer you can open up",
-  description:
-    "Postgres, row-level scoping, receipts on every reply, any model through your keys. What's hosted today and what we build with you.",
-}
+export const metadata: Metadata = pageMeta("/for/technology", "For the CTO · A memory layer you can open up", "Postgres, row-level scoping, receipts on every reply, any model through your keys. What’s hosted today and what we build with you.")
 
 const FEATURES: { heading: string; items: string[] }[] = [
   {
@@ -32,8 +29,8 @@ const FEATURES: { heading: string; items: string[] }[] = [
     items: [
       "Counts, dates and trends come from tools that read the whole record, and the model is handed the number. It is not allowed to estimate.",
       "Every reply carries a receipt: which drawers it opened, which facts it was shown, how long each step took.",
-      "When there isn't enough on record, it says so instead of guessing.",
-      "Promises are heard and filed with an owner and a date. Nothing goes on a person's desk until they confirm it.",
+      "When there isn’t enough on record, it says so instead of guessing.",
+      "Promises are heard and filed with an owner and a date. Nothing goes on a person’s desk until they confirm it.",
     ],
   },
   {
@@ -71,16 +68,16 @@ export default function ForTechnology() {
             A memory layer your architects can <em>open</em> up.
           </>
         ),
-        lead: "Model-agnostic, scoped to each person in the database, every answer receipted, and deployable from hosted to inside your walls. LongStrider sits beside your stack. It doesn't ask you to rebuild it.",
+        lead: "Model-agnostic, scoped to each person in the database, every answer receipted, and deployable from hosted to inside your walls. LongStrider sits beside your stack. It doesn’t ask you to rebuild it.",
         cta: "Book an architecture session",
         points: [
           {
             title: "Any model, your keys.",
-            body: "Seven jobs, seven model settings. Swap one and the memory doesn't change. Embeddings are a separate setting, and that's the one switch that does cost a re-index.",
+            body: "Seven jobs, seven model settings. Swap one and the memory doesn’t change. Embeddings are a separate setting, and that’s the one switch that does cost a re-index.",
           },
           {
             title: "Scoped by default.",
-            body: "Every fact belongs to a person, a team or the company. Every read is checked against who's asking, by row-level rules in Postgres, not by a prompt.",
+            body: "Every fact belongs to a person, a team or the company. Every read is checked against who’s asking, by row-level rules in Postgres, not by a prompt.",
           },
           {
             title: "Traceable end to end.",
@@ -155,7 +152,7 @@ export default function ForTechnology() {
         questions: [
           {
             q: "Does it train on our data?",
-            a: "No. There's no training code in the product. The model vendors are bound by their business terms, which we'll show you.",
+            a: "No. There’s no training code in the product. The model vendors are bound by their business terms, which we’ll show you.",
           },
           {
             q: "How do our agents use it?",
@@ -163,7 +160,7 @@ export default function ForTechnology() {
           },
           {
             q: "Can it run with no calls out?",
-            a: "Not fully, yet. The filing lane can. Chat, overnight and the judge still call a model through your keys. That's the honest answer and we'd rather you hear it here.",
+            a: "Not fully, yet. The filing lane can. Chat, overnight and the judge still call a model through your keys. That’s the honest answer and we’d rather you hear it here.",
           },
           {
             q: "What happens when we switch models?",
