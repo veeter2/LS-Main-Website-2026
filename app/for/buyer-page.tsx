@@ -37,9 +37,9 @@ export function BuyerPage({ b }: { b: Buyer }) {
             {b.lead}
           </p>
           <div className="lx-cta-row" data-rise="3">
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               {cta} <span className="lx-arrow" aria-hidden>→</span>
-            </a>
+            </Link>
           </div>
         </div>
         <div className={`lx-wrap mh-facts by-points${b.points.length === 4 ? " mh-facts-2" : ""}`}>
@@ -97,9 +97,9 @@ export function BuyerPage({ b }: { b: Buyer }) {
             Bring one real <em>question</em>.
           </h2>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="1">
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               {cta} <span className="lx-arrow" aria-hidden>→</span>
-            </a>
+            </Link>
             <Link className="lx-btn lx-btn-ghost" href={b.next.href}>
               {b.next.label}
             </Link>

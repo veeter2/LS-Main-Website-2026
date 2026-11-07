@@ -69,6 +69,13 @@ export const metadata: Metadata = {
     images: [OG_IMAGE],
   },
   alternates: { canonical: BASE_URL },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon-light-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-icon.png",
+  },
 }
 
 export const viewport: Viewport = {
@@ -87,7 +94,7 @@ const JSONLD = {
       "@id": `${BASE_URL}/#organization`,
       name: "LongStrider",
       url: BASE_URL,
-      logo: { "@type": "ImageObject", url: `${BASE_URL}/longstrider-logo.svg` },
+      logo: { "@type": "ImageObject", url: `${BASE_URL}/longstrider-logo-512.png`, width: 512, height: 512 },
       description: "LongStrider keeps every fact, promise and decision a company puts into AI, with its source, owned by the company and independent of the model.",
       foundingDate: "2024",
       address: { "@type": "PostalAddress", addressLocality: "Austin", addressRegion: "TX", addressCountry: "US" },

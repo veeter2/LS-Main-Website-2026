@@ -56,9 +56,9 @@ export default function SecurityConcept() {
               model it talks to. Here is exactly what that means today, and what we build with you.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/book">
+              <Link className="lx-btn lx-btn-primary" href="/book">
                 Book a security walkthrough <span className="lx-arrow" aria-hidden>→</span>
-              </a>
+              </Link>
               <Link className="lx-btn lx-btn-ghost" href="#ways">
                 What&rsquo;s true today
               </Link>
@@ -245,9 +245,9 @@ export default function SecurityConcept() {
             Walk through where it runs, who can see what, and which model it talks to, with your own people in the room.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               Book a security walkthrough <span className="lx-arrow" aria-hidden>→</span>
-            </a>
+            </Link>
             <Link className="lx-btn lx-btn-ghost" href="/">
               Back to the homepage
             </Link>

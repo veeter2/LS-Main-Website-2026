@@ -348,9 +348,9 @@ export default function ManifestoConcept() {
             and what you&rsquo;d own ninety days from now.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="3">
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
-            </a>
+            </Link>
             <Link className="lx-btn lx-btn-ghost" href="/product">
               See what it does
             </Link>

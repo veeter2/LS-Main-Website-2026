@@ -110,9 +110,9 @@ export default function HomeConcept() {
               under your own model. You license it and own it. Switch models next year and nothing has to be taught twice.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/book">
+              <Link className="lx-btn lx-btn-primary" href="/book">
                 Book a working session <span className="lx-arrow" aria-hidden>→</span>
-              </a>
+              </Link>
               <a className="lx-btn lx-btn-ghost" href="#own">
                 See it answer
               </a>
@@ -454,12 +454,12 @@ export default function HomeConcept() {
             it caught, built from your material. You leave knowing what your company would own ninety days from now.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
-            </a>
-            <a className="lx-btn lx-btn-ghost" href="/manifesto">
+            </Link>
+            <Link className="lx-btn lx-btn-ghost" href="/manifesto">
               Read the manifesto
-            </a>
+            </Link>
           </div>
           <p className="lx-illustrative mh-center" data-reveal data-delay="3">
             Built live with real users since spring 2026.

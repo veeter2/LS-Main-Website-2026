@@ -63,9 +63,9 @@ export default function ProductConcept() {
               up. Each with its source. Each yours.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/book">
+              <Link className="lx-btn lx-btn-primary" href="/book">
                 Book a working session <span className="lx-arrow" aria-hidden>→</span>
-              </a>
+              </Link>
               <a className="lx-btn lx-btn-ghost" href="#record">
                 See it answer
               </a>
@@ -241,9 +241,9 @@ export default function ProductConcept() {
             promises and the first morning note, built from your conversations, not ours.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
-            </a>
+            </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Where it runs, and who owns it
             </Link>

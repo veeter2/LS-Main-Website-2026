@@ -71,11 +71,11 @@ export function ConceptShell({ children }: { children: ReactNode }) {
             <Link className="lx-btn lx-btn-ghost" href="/product">
               See it answer
             </Link>
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               <span className="lx-long">Book a working session</span>
               <span className="lx-short">Book a session</span>
               <span className="lx-arrow" aria-hidden>→</span>
-            </a>
+            </Link>
           </div>
         </div>
       </header>

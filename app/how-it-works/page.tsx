@@ -77,9 +77,9 @@ export default function HowItWorksConcept() {
               this one question. The answer comes from your company&rsquo;s history, not from a model&rsquo;s best guess.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/book">
+              <Link className="lx-btn lx-btn-primary" href="/book">
                 Book an architecture session <span className="lx-arrow" aria-hidden>→</span>
-              </a>
+              </Link>
               <a className="lx-btn lx-btn-ghost" href="#layers">
                 See the three layers
               </a>
@@ -252,9 +252,9 @@ export default function HowItWorksConcept() {
             company would own at the end.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               Book an architecture session <span className="lx-arrow" aria-hidden>→</span>
-            </a>
+            </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Security and ownership
             </Link>
