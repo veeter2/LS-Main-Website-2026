@@ -117,11 +117,11 @@ export default function HomeConcept() {
                 See it answer
               </a>
             </div>
-            <div className="lx-assure" data-rise="4">
+            <ul className="lx-assure" data-rise="4" aria-label="What you get">
               {PROOF.map((p) => (
-                <span key={p}>{p}</span>
+                <li key={p}>{p}</li>
               ))}
-            </div>
+            </ul>
           </div>
           <div data-rise="2">
             <OwnershipBoard />
