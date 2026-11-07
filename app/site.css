@@ -206,8 +206,8 @@ html:has(#lx-root) { --lx-page-ground: #f6f3ec; }
   --lx-ink-primary: rgba(23, 21, 15, 0.94);
   --lx-ink-body: rgba(23, 21, 15, 0.8);
   --lx-ink-secondary: rgba(23, 21, 15, 0.7);
-  --lx-ink-muted: rgba(23, 21, 15, 0.6);
-  --lx-ink-hint: rgba(23, 21, 15, 0.46);
+  --lx-ink-muted: rgba(23, 21, 15, 0.66);
+  --lx-ink-hint: rgba(23, 21, 15, 0.62);
   --lx-ink-ghost: rgba(23, 21, 15, 0.16);
 
   /* ── Accents (Manifesto gold + purple, with ink-safe text variants) ── */
@@ -2125,10 +2125,10 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .bk-field textarea { resize: vertical; min-height: 104px; line-height: 1.55; }
 .bk-field input:focus,
 .bk-field textarea:focus {
-  outline: none;
+  outline: 2px solid var(--lx-gold-ink);
+  outline-offset: 2px;
   background: var(--lx-surface);
-  border-color: var(--lx-gold);
-  box-shadow: 0 0 0 3px var(--lx-gold-wash);
+  border-color: var(--lx-gold-ink);
 }
 .bk-field textarea::placeholder { color: var(--lx-ink-muted); }
 .bk-submit { justify-content: center; margin-top: 4px; }
@@ -2265,3 +2265,31 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 /* Headlines balance across lines so no single word is left alone; paragraphs avoid one-word last lines. */
 .lx :is(h1, h2, h3, h4) { text-wrap: balance; }
 .lx :is(p, li, blockquote, figcaption) { text-wrap: pretty; }
+
+/* ── Legal pages (privacy, terms) ─────────────────────── */
+.lg-hero { padding-bottom: clamp(40px, 6vh, 72px); }
+.lg-wrap { max-width: 780px; }
+.lg-strip { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.lg-strip li { border-top: 1px solid var(--lx-gold-line); padding-top: 14px; font-size: 15px; line-height: 1.6; color: var(--lx-ink-secondary); }
+.lg-strip-label { display: block; margin-bottom: 6px; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lx-gold-ink); }
+@media (max-width: 720px) { .lg-strip { grid-template-columns: 1fr; } }
+.lg-body { padding: 0 0 clamp(80px, 12vh, 136px); }
+.lg-section { padding: 36px 0; border-top: 1px solid var(--lx-line); }
+.lg-section p { margin: 0; font-size: 16px; line-height: 1.75; color: var(--lx-ink-secondary); }
+.lg-section p + p, .lg-section p + .lg-items, .lg-section .lg-items + p { margin-top: 16px; }
+.lg-section .lg-lead { font-weight: 500; color: var(--lx-ink-body); }
+.lg-h2 { font-size: clamp(24px, 2.4vw, 32px); line-height: 1.2; margin: 0 0 18px; color: var(--lx-ink-primary); }
+.lg-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.lg-items li { padding-left: 18px; border-left: 2px solid var(--lx-gold-line); font-size: 16px; line-height: 1.7; color: var(--lx-ink-secondary); }
+.lg-items strong { display: block; margin-bottom: 2px; font-weight: 600; color: var(--lx-ink-body); }
+.lg-section .lg-note { font-style: italic; padding-left: 18px; border-left: 2px solid var(--lx-line); color: var(--lx-ink-muted); }
+.lg-section a { color: var(--lx-gold-ink); text-underline-offset: 3px; }
+
+/* Keyboard focus for every link and button on the site. */
+.lx a:focus-visible, .lx button:focus-visible { outline: 2px solid var(--lx-gold-ink); outline-offset: 3px; border-radius: 2px; }
+.lx-btn-primary:focus-visible { outline-color: var(--lx-gold-ink); }
+
+/* ── Not found ────────────────────────────────────────── */
+.nf-hero { padding-bottom: clamp(96px, 16vh, 160px); }
+.nf-wrap { max-width: 720px; }
+.nf-hero .lx-cta-row { margin-top: 32px; }
