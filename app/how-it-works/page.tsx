@@ -141,7 +141,8 @@ export default function HowItWorksConcept() {
             <span className="ly-label">The model, rented and replaceable.</span>
             <p className="ly-model">
               Any frontier model through your keys, or a local model on your hardware for the filing lane. It gets the facts
-              it needs for this question and writes the answer. It never has to keep the memory.
+              it needs for this question and writes the answer. It never has to keep the memory. If its vendor changes
+              its interface, its terms or its price, you change a setting.
             </p>
           </div>
         </div>

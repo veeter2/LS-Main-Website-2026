@@ -35,6 +35,13 @@
   background: var(--lx-gold);
 }
 .fo-tiers { margin-top: clamp(28px, 4vh, 44px); }
+.fo-cost { margin-top: 24px; padding: 6px 22px; max-width: 640px; }
+.fo-cost-row { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; font-size: 16px; color: var(--lx-ink-body); }
+.fo-cost-row + .fo-cost-row { border-top: 1px solid var(--lx-line-subtle); }
+.fo-cost-row span:last-child { color: var(--lx-ink-primary); font-weight: 500; text-align: right; }
+.fo-narrow .lx-lead + .lx-lead { margin-top: 18px; }
+.fo-moat p { margin-top: 24px; font-size: 17px; line-height: 1.75; color: var(--lx-ink-body); }
+.fo-moat p + p { margin-top: 16px; }
 .fo-demo { padding: 26px 28px 30px; display: grid; gap: 14px; }
 .fo-demo-head {
   font-size: 13px;
@@ -47,5 +54,7 @@
 .fo-demo p + p { padding-top: 14px; border-top: 1px solid var(--lx-line-subtle); }
 @media (max-width: 860px) {
   .fo-grid { grid-template-columns: 1fr; }
+  .fo-cost-row { flex-direction: column; gap: 4px; }
+  .fo-cost-row span:last-child { text-align: left; }
   .fo-demo { padding: 22px 18px 24px; }
 }

@@ -214,6 +214,10 @@ export default function PartnersConcept() {
             <li>
               <span>Where they need it.</span>Hosted now; private cloud and on-premises built together.
             </li>
+            <li>
+              <span>Theirs to keep.</span>The client holds the license, the keys and the rows. A vendor&rsquo;s price
+              change is a setting, not a crisis.
+            </li>
           </ul>
         </div>
       </section>

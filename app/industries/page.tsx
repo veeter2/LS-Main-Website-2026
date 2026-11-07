@@ -185,7 +185,8 @@ export default function IndustriesConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
             A working session with your people and one real question from your business: a claim, a matter, an engagement.
-            You&rsquo;ll see what LongStrider would keep, and what your company would own.
+            You&rsquo;ll see what LongStrider would keep, and what your company would own, on a license you hold rather
+            than a seat you rent.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
