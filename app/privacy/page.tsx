@@ -54,7 +54,7 @@ export default function PrivacyPolicyPage() {
           Privacy Policy
         </h1>
         <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(16px, 1.8vw, 19px)', lineHeight: 1.7, color: 'var(--color-text-secondary)', maxWidth: '540px', marginBottom: '64px' }}>
-          Your data belongs to you. That isn't a policy statement — it's the architectural premise of everything we build.
+          Your data belongs to you. That isn’t a policy statement. It’s the architectural premise of everything we build.
         </p>
 
         {/* Principles strip */}
