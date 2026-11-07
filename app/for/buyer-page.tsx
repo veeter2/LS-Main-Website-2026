@@ -45,7 +45,7 @@ export function BuyerPage({ b }: { b: Buyer }) {
         <div className={`lx-wrap mh-facts by-points${b.points.length === 4 ? " mh-facts-2" : ""}`}>
           {b.points.map((p, i) => (
             <div key={p.title} className="mh-fact" data-rise={String(i + 3)}>
-              <h3>{p.title}</h3>
+              <h2>{p.title}</h2>
               <p>{p.body}</p>
             </div>
           ))}

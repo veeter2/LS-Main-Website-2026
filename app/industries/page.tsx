@@ -1,13 +1,10 @@
 import "./industries.css"
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { IndustryAsk } from "./industry-ask"
 
-export const metadata: Metadata = {
-  title: "LongStrider for insurance, legal and professional services",
-  description:
-    "Where what people know is the business. Keep adjuster judgment, partner knowledge and client history when the people leave.",
-}
+export const metadata: Metadata = pageMeta("/industries", "For insurance, legal and professional services", "Where what people know is the business. Keep adjuster judgment, partner knowledge and client history when the people leave.")
 
 type Vertical = {
   id: string

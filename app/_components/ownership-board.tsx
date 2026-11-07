@@ -9,10 +9,10 @@ import { useEffect, useState } from "react"
  */
 
 const ITEMS = [
-  { text: "Pellworth: hold this year's rate through December", source: "Note · 14 Jan" },
+  { text: "Pellworth: hold this year’s rate through December", source: "Note · 14 Jan" },
   { text: "Hailey owns the Pellworth renewal", source: "Chat · 15 Jan" },
   { text: "Reyes closing moved to the 19th", source: "Chat · 6 Nov" },
-  { text: "Thistlewood scope revision is Dev's, due Friday", source: "Call transcript" },
+  { text: "Thistlewood scope revision is Dev’s, due Friday", source: "Call transcript" },
   { text: "Why we walked away from the old supplier", source: "Review · March" },
 ]
 

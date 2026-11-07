@@ -976,7 +976,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   margin-top: clamp(40px, 6vh, 64px);
 }
 .mh-fact { padding-top: 18px; border-top: 1px solid var(--lx-gold-line); }
-.mh-fact h3 { font-family: var(--lx-display); font-weight: 500; font-size: 21px; line-height: 1.3; color: var(--lx-ink-primary); margin: 0 0 10px; }
+.mh-fact :is(h2, h3) { font-family: var(--lx-display); font-weight: 500; font-size: 21px; line-height: 1.3; color: var(--lx-ink-primary); margin: 0 0 10px; }
 .mh-fact p { margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--lx-ink-secondary); }
 .mh-question {
   margin-top: clamp(40px, 6vh, 64px) !important;
@@ -2071,3 +2071,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 @media (max-width: 560px) {
   .sf-cols { grid-template-columns: 1fr; }
 }
+
+/* Headlines balance across lines so no single word is left alone; paragraphs avoid one-word last lines. */
+.lx :is(h1, h2, h3, h4) { text-wrap: balance; }
+.lx :is(p, li, blockquote, figcaption) { text-wrap: pretty; }

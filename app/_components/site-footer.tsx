@@ -13,7 +13,7 @@ const COLUMNS = [
     ],
   },
   {
-    title: "Who it's for",
+    title: "Who it’s for",
     links: [
       { label: "Insurance", href: "/industries#insurance" },
       { label: "Legal", href: "/industries#legal" },

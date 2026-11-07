@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { ChapterRail, type Chapter } from "./chapter-rail"
 
-export const metadata: Metadata = { title: "The Manifesto · concept" }
+export const metadata: Metadata = pageMeta("/manifesto", "The Manifesto", "The intelligence layer that knows your business, and never forgets. Why the money spent on AI should build something your company owns.")
 
 /**
  * The Manifesto in daylight. Matt’s argument and words, set as a long read.
@@ -73,11 +74,11 @@ const CAPABILITIES = [
   },
   {
     title: "It gets smarter while you sleep",
-    body: "Every night, without being asked, it tidies what the day taught it: merging what repeats, flagging what conflicts, summarising what’s settled, and noticing where priorities are starting to move. It compounds without anyone maintaining it.",
+    body: "Every night, without being asked, it tidies what the day taught it: merging what repeats, flagging what conflicts, summarizing what’s settled, and noticing where priorities are starting to move. It compounds without anyone maintaining it.",
   },
   {
     title: "It has the integrity to challenge you",
-    body: "Every other AI is optimised to keep the conversation rolling. LongStrider is built not to tell you what you want to hear under pressure. When a decision cuts against the evidence, it says so, and would rather stop than give in.",
+    body: "Every other AI is optimized to keep the conversation rolling. LongStrider is built not to tell you what you want to hear under pressure. When a decision cuts against the evidence, it says so, and would rather stop than give in.",
   },
   {
     title: "The interface remembers too",
@@ -92,7 +93,7 @@ const LANDSCAPE = [
   },
   {
     name: "The enterprise search layer",
-    body: "Retrieval systems dressed up as intelligence. They find things and summarise things. They don’t understand your business, remember what mattered, or get smarter about it over time.",
+    body: "Retrieval systems dressed up as intelligence. They find things and summarize things. They don’t understand your business, remember what mattered, or get smarter about it over time.",
   },
   {
     name: "The memory infrastructure startups",
@@ -102,7 +103,7 @@ const LANDSCAPE = [
 
 const TIERS = [
   { name: "Hosted", body: "A dedicated instance we run, isolated to you. You own the knowledge; we run the engine." },
-  { name: "Private cloud", body: "Containerised inside your VPC: your servers, your perimeter, full data residency. No source code shipped." },
+  { name: "Private cloud", body: "Containerized inside your VPC: your servers, your perimeter, full data residency. No source code shipped." },
   { name: "Sovereign build", body: "Built alongside your team, on your hardware. When it’s done, every part belongs to you. Permanently." },
   { name: "Partner program", body: "Run it under your brand for your clients. You bring the relationships and the vertical knowledge; the engine is yours to operate." },
 ]
@@ -117,7 +118,7 @@ export default function ManifestoConcept() {
             The intelligence layer that knows your business, and never <em>forgets</em>.
           </h1>
           <p className="mf-hook" data-rise="2">
-            Every dollar your organisation spent on AI this year made someone else&rsquo;s platform smarter.
+            Every dollar your organization spent on AI this year made someone else&rsquo;s platform smarter.
           </p>
           <ul className="mf-litany" data-rise="3">
             <li>The decision your team made six months ago.</li>
@@ -265,7 +266,7 @@ export default function ManifestoConcept() {
             </h2>
             <div className="mf-prose" data-reveal data-delay="2">
               <p>
-                LongStrider sits between your organisation and whichever model you choose. It doesn&rsquo;t replace the
+                LongStrider sits between your organization and whichever model you choose. It doesn&rsquo;t replace the
                 model. It makes the model aware of your business in a way no model provider can.
               </p>
             </div>
@@ -328,7 +329,7 @@ export default function ManifestoConcept() {
               ))}
             </div>
             <p className="mf-coda" data-reveal>
-              We don&rsquo;t sell seat licences. We build it with you, and what gets built belongs to you.
+              We don&rsquo;t sell seat licenses. We build it with you, and what gets built belongs to you.
             </p>
           </section>
         </article>
@@ -343,7 +344,7 @@ export default function ManifestoConcept() {
             Bring us your <em>hardest</em> problem.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            If you recognise your organisation in these pages, start with a working session: your people, a real question,
+            If you recognize your organization in these pages, start with a working session: your people, a real question,
             and what you&rsquo;d own ninety days from now.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="3">

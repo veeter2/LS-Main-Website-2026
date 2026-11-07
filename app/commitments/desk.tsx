@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react"
 type Row = { id: string; from: string; to: string; what: string; when: string; state: "open" | "waiting" | "done" | "new" | "pending" }
 
 const START: Row[] = [
-  { id: "schedule", from: "You", to: "Broker", what: "Revised schedule for Pellworth", when: "Due Friday · from Tuesday's chat", state: "open" },
+  { id: "schedule", from: "You", to: "Broker", what: "Revised schedule for Pellworth", when: "Due Friday · from Tuesday’s chat", state: "open" },
   { id: "closing", from: "Kayla", to: "You", what: "Confirm the Reyes closing date", when: "Waiting 3 days", state: "waiting" },
   { id: "scope", from: "Dev", to: "Thistlewood", what: "Scope revision, promised twice", when: "Due in 6 days", state: "open" },
 ]

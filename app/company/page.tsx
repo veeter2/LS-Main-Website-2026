@@ -1,11 +1,8 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 
-export const metadata: Metadata = {
-  title: "About LongStrider · Why we built it",
-  description:
-    "The industry built brilliant engines and gave them amnesia. We built the missing layer, and built it to belong to you.",
-}
+export const metadata: Metadata = pageMeta("/company", "About LongStrider · Why we built it", "The industry built brilliant engines and gave them amnesia. We built the missing layer, and built it to belong to you. Here is why we built it.")
 
 /**
  * Company: why LongStrider exists and how it works as a business.
@@ -16,19 +13,19 @@ const CHARTER = ["You pay for it. You own it.", "Your data stays where you put i
 const PRINCIPLES = [
   {
     title: "Ownership first.",
-    body: "Every design decision starts with one question: does the customer end up owning more? If not, we don't build it that way.",
+    body: "Every design decision starts with one question: does the customer end up owning more? If not, we don’t build it that way.",
   },
   {
     title: "Plain words, true numbers.",
-    body: "We say what it does in language anyone can check. When something isn't built yet, the site says “not yet.”",
+    body: "We say what it does in language anyone can check. When something isn’t built yet, the site says “not yet.”",
   },
   {
     title: "The record over the guess.",
-    body: "When the evidence is thin, the honest answer is “I don't know yet.” The system is built to say that, and so are we.",
+    body: "When the evidence is thin, the honest answer is “I don’t know yet.” The system is built to say that, and so are we.",
   },
   {
     title: "Built with you, owned by you.",
-    body: "We don't sell seats. We build it alongside your team, and what gets built stays with the company that built it.",
+    body: "We don’t sell seats. We build it alongside your team, and what gets built stays with the company that built it.",
   },
 ]
 

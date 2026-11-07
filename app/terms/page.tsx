@@ -24,7 +24,7 @@ const SECTIONS = [
     title: 'Intellectual Property',
     items: [
       { label: 'Your Content', text: 'You retain all rights to content you create, upload, or process using LongStrider. We do not claim ownership of your data, institutional memory, or outputs.' },
-      { label: 'Our Technology', text: 'LongStrider — including its software, algorithms, architecture, and branding — is protected by intellectual property laws. You may not copy, modify, distribute, or reverse engineer our technology without explicit written permission.' },
+      { label: 'Our Technology', text: 'LongStrider, including its software, algorithms, architecture, and branding, is protected by intellectual property laws. You may not copy, modify, distribute, or reverse engineer our technology without explicit written permission.' },
       { label: 'License Grant', text: 'We grant you a limited, non-exclusive, non-transferable license to use LongStrider according to your service agreement for its duration.' },
     ],
   },

@@ -1,10 +1,8 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import { BuyerPage } from "../buyer-page"
 
-export const metadata: Metadata = {
-  title: "LongStrider for your team · Stop re-explaining your job",
-  description: "It remembers what you told it, keeps your promises in view, and says when it doesn't know.",
-}
+export const metadata: Metadata = pageMeta("/for/teams", "For your team · Stop re-explaining your job", "It remembers what you told it, keeps your promises in view, and says when it doesn’t know. Licensed and installed, with your own model.")
 
 export default function ForTeams() {
   return (
@@ -16,7 +14,7 @@ export default function ForTeams() {
             Stop explaining your job to a chat window every <em>morning</em>.
           </>
         ),
-        lead: "LongStrider remembers what you've already told it, keeps track of what you promised, and tells you what changed overnight, so you start the day where you left off.",
+        lead: "LongStrider remembers what you’ve already told it, keeps track of what you promised, and tells you what changed overnight, so you start the day where you left off.",
         points: [
           {
             title: "It remembers.",
@@ -24,11 +22,11 @@ export default function ForTeams() {
           },
           {
             title: "It keeps your promises in view.",
-            body: "What you said you'd do, for whom and by when, on your desk until you close it. It never closes anything for you.",
+            body: "What you said you’d do, for whom and by when, on your desk until you close it. It never closes anything for you.",
           },
           {
-            title: "It says when it doesn't know.",
-            body: "No confident guesses. If the record is thin, it tells you so, along with what it's waiting for.",
+            title: "It says when it doesn’t know.",
+            body: "No confident guesses. If the record is thin, it tells you so, along with what it’s waiting for.",
           },
         ],
         proof: {
@@ -55,10 +53,10 @@ export default function ForTeams() {
         questions: [
           {
             q: "Who can see what I tell it?",
-            a: "What's yours stays yours. Team knowledge is visible to the team, and only the team. The check is in the database, not in the prompt.",
+            a: "What’s yours stays yours. Team knowledge is visible to the team, and only the team. The check is in the database, not in the prompt.",
           },
           {
-            q: "Will it track things I didn't agree to?",
+            q: "Will it track things I didn’t agree to?",
             a: "No. It suggests a promise when it hears one. It only goes on your desk once you confirm it.",
           },
           {

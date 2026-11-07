@@ -1,15 +1,12 @@
 import type { Metadata } from "next"
+import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { CallSplit } from "./call-split"
 import { ExpertInterview } from "./expert-interview"
 import { RecordDemo } from "../record/record-demo"
 import { Desk } from "../commitments/desk"
 
-export const metadata: Metadata = {
-  title: "What LongStrider does \u00b7 Facts, promises, decisions, kept",
-  description:
-    "LongStrider turns your team's conversations into a dated, sourced record your company owns. Counts, not guesses. Promises tracked only after you confirm.",
-}
+export const metadata: Metadata = pageMeta("/product", "What it does: facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced record your company owns. Counts, not guesses. Promises tracked only after you confirm.")
 
 /**
  * What LongStrider does, in the order a buyer meets it: the record, the
