@@ -115,9 +115,9 @@ export default function IndustriesConcept() {
               matters as much as the decision.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/book">
+              <Link className="lx-btn lx-btn-primary" href="/book">
                 Book a working session <span className="lx-arrow" aria-hidden>→</span>
-              </a>
+              </Link>
             </div>
             <nav className="in-jump" data-rise="4" aria-label="Industries on this page">
               {VERTICALS.map((v) => (
@@ -188,9 +188,9 @@ export default function IndustriesConcept() {
             You&rsquo;ll see what LongStrider would keep, and what your company would own.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
-            </a>
+            </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Where it runs, and who owns it
             </Link>

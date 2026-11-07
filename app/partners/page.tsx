@@ -99,9 +99,9 @@ export default function PartnersConcept() {
               The vertical knowledge and the relationship are yours.
             </p>
             <div className="lx-cta-row" data-rise="3">
-              <a className="lx-btn lx-btn-primary" href="/book">
+              <Link className="lx-btn lx-btn-primary" href="/book">
                 Start the conversation <span className="lx-arrow" aria-hidden>→</span>
-              </a>
+              </Link>
               <a className="lx-btn lx-btn-ghost" href="#ways">
                 Three ways to partner
               </a>
@@ -228,9 +228,9 @@ export default function PartnersConcept() {
             deployment looks like.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
-            <a className="lx-btn lx-btn-primary" href="/book">
+            <Link className="lx-btn lx-btn-primary" href="/book">
               Start the conversation <span className="lx-arrow" aria-hidden>→</span>
-            </a>
+            </Link>
             <Link className="lx-btn lx-btn-ghost" href="/how-it-works">
               Review the architecture
             </Link>
