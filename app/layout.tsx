@@ -1,9 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Lora } from "next/font/google"
-import "./globals.css"
-import "../styles/ls-tokens.css"
-import "../styles/responsive.css"
 import "./site.css"
 import { ConceptShell } from "./_components/shell"
 
