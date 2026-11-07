@@ -247,6 +247,8 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .lx-hero .lx-lead { margin: 28px 0 0; max-width: 34em; }
 .lx-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
 .lx-assure {
+  list-style: none;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 8px 22px;
@@ -254,8 +256,8 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   font-size: 13px;
   color: var(--lx-ink-muted);
 }
-.lx-assure span { display: inline-flex; align-items: center; gap: 8px; }
-.lx-assure span::before {
+.lx-assure > * { display: inline-flex; align-items: center; gap: 8px; }
+.lx-assure > *::before {
   content: "";
   width: 5px;
   height: 5px;
@@ -927,6 +929,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .ob-sub { display: grid; }
 .ob-sub > span { grid-area: 1 / 1; }
 .ob-ghost { visibility: hidden; }
+.ob-ghost::before { content: attr(data-text); }
 .ob-owned .ob-item { background: var(--lx-surface); border-color: rgba(var(--lx-gold-rgb), 0.3); }
 .ob-source { font-size: 11px; color: var(--lx-gold-ink); letter-spacing: 0.04em; }
 .ob-rented[data-switched="true"] .ob-item[data-in="true"] {

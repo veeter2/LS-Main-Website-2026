@@ -21,7 +21,10 @@ const SWITCH_AT = ITEMS.length + 1 // step when the model changes
 const LOOP_AT = SWITCH_AT + 7 // step when the story restarts
 
 export function OwnershipBoard() {
-  const [step, setStep] = useState(0)
+  // Start on the finished picture so the first paint (and anyone reading the
+  // HTML without JavaScript) sees five things kept, not a zero. The story then
+  // loops from the top once the page is live.
+  const [step, setStep] = useState(SWITCH_AT + 1)
   const [reduced, setReduced] = useState(false)
 
   useEffect(() => {
@@ -44,9 +47,7 @@ export function OwnershipBoard() {
           <span className="ob-sub">
             {/* The longer label stays underneath, invisibly, so the header keeps its height. */}
             <span>{switched ? "Back to zero" : "Theirs · resets when you switch"}</span>
-            <span className="ob-ghost" aria-hidden>
-              Theirs · resets when you switch
-            </span>
+            <span className="ob-ghost" aria-hidden data-text="Theirs · resets when you switch" />
           </span>
         </div>
         <ul className="ob-list">
@@ -67,9 +68,7 @@ export function OwnershipBoard() {
           <span className="ob-title">In LongStrider</span>
           <span className="ob-sub ob-sub-owned">
             <span>{switched ? "Nothing lost" : "Yours · kept with its source"}</span>
-            <span className="ob-ghost" aria-hidden>
-              Yours · kept with its source
-            </span>
+            <span className="ob-ghost" aria-hidden data-text="Yours · kept with its source" />
           </span>
         </div>
         <ul className="ob-list">
