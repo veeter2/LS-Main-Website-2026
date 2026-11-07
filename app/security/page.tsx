@@ -19,6 +19,10 @@ const OWNERSHIP = [
     title: "It outlives every vendor.",
     body: "Change models and nothing has to be re-taught. We moved every job to a different model in October. The memory didn\u2019t notice.",
   },
+  {
+    title: "It isn\u2019t on a vendor\u2019s terms.",
+    body: "Rent an AI stack and you keep its terms: the interface, the privacy rules, the price, each of which can change without you. Here the license is yours, the keys are yours, the rows are yours, and the model is a setting.",
+  },
 ]
 
 const SCOPES = [
@@ -76,7 +80,7 @@ export default function SecurityConcept() {
             Yours. Not a feature of <em>our</em> service.
           </h2>
         </div>
-        <div className="lx-wrap mh-facts">
+        <div className="lx-wrap mh-facts mh-facts-2">
           {OWNERSHIP.map((f, i) => (
             <div key={f.title} className="mh-fact" data-reveal data-delay={String(i + 1)}>
               <h3>{f.title}</h3>
@@ -133,7 +137,8 @@ export default function SecurityConcept() {
               Bring the frontier model you trust through your own keys, point it at a model you already run in-house, or put
               a local model on your own hardware for the filing lane. LongStrider is not a service you log into with our
               model behind it. It is software you install, and the model is whatever you choose. When a better one arrives,
-              you switch, and nothing has to be re-taught.
+              you switch, and nothing has to be re-taught. If a vendor changes its interface, its terms or its price,
+              you change a setting.
             </p>
           </div>
           <div data-reveal data-delay="2">
