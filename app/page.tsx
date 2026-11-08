@@ -3,6 +3,8 @@ import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { MemoryCurve } from "./learning-gap/memory-curve"
 import { OwnershipBoard } from "./_components/ownership-board"
+import { RentVsOwn } from "./_components/rent-vs-own"
+import { OvernightPass } from "./_components/overnight-pass"
 import { Desk } from "./commitments/desk"
 import { AskYourAI } from "./_components/ask-your-ai"
 import { ORGANS } from "@/lib/for-your-ai"
@@ -352,6 +354,10 @@ export default function HomeConcept() {
             </p>
           </div>
         </div>
+        <div className="lx-wrap hx-chart" data-reveal data-delay="2">
+          <OvernightPass />
+          <p className="lx-illustrative">Illustration. Example names.</p>
+        </div>
       </section>
 
       {/* 06: Integrity */}
@@ -427,6 +433,10 @@ export default function HomeConcept() {
                 ))}
               </div>
             ))}
+          </div>
+          <div className="hx-chart" data-reveal data-delay="2">
+            <RentVsOwn />
+            <p className="lx-illustrative">Illustration</p>
           </div>
           <p className="mh-question mh-plain" data-reveal data-delay="2">
             Ask for an export and you get rows, not a paragraph. Every write has a name, a date and a receipt. That
