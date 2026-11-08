@@ -61,18 +61,18 @@ export function RecordDemo() {
     let t: ReturnType<typeof setTimeout>
     if (phase === "typing") {
       if (typed < current.q.length) {
-        t = setTimeout(() => setTyped((n) => n + 1), 26 + Math.random() * 30)
+        t = setTimeout(() => setTyped((n) => n + 1), 40 + Math.random() * 40)
       } else {
-        t = setTimeout(() => setPhase("reading"), 420)
+        t = setTimeout(() => setPhase("reading"), 700)
       }
     } else if (phase === "reading") {
-      t = setTimeout(() => setPhase("answered"), 1500)
+      t = setTimeout(() => setPhase("answered"), 2200)
     } else {
       t = setTimeout(() => {
         setIndex((i) => (i + 1) % EXCHANGES.length)
         setTyped(0)
         setPhase("typing")
-      }, 7200)
+      }, 14000) // the answer is about 45 words plus sources; reading it takes this long
     }
     return () => clearTimeout(t)
   }, [phase, typed, current.q.length, reduced])
