@@ -20,6 +20,7 @@ const FEATURES: { heading: string; items: string[] }[] = [
     items: [
       "Seven jobs, seven model settings, changed in Settings without a deploy. Chat, filing, mood, the overnight pass, the judge, pictures and embeddings.",
       "Any frontier model through your keys. Any model you already run in-house. A local model on your hardware for the filing lane.",
+      "The model layer speaks the OpenAI chat-completions dialect, so any compatible server works: vLLM, LM Studio, NVIDIA NIM, llama.cpp. Embeddings follow the same setting.",
       "Embeddings are the one switch that costs a re-index. We say so on the screen.",
       "Spend by job and by model, every day, on one screen.",
     ],
@@ -68,7 +69,7 @@ export default function ForTechnology() {
             A memory layer your architects can <em>open</em> up.
           </>
         ),
-        lead: "Model-agnostic, scoped to each person in the database, every answer receipted, and deployable from hosted to inside your walls. LongStrider sits beside your stack. It doesn’t ask you to rebuild it.",
+        lead: "Model-agnostic, scoped to each person in the database, every answer receipted, and deployable from hosted to inside your walls. LongStrider sits beside your stack. It doesn’t ask you to rebuild it, and it doesn’t put a vendor between you and your own model.",
         cta: "Book an architecture session",
         points: [
           {
@@ -101,6 +102,26 @@ export default function ForTechnology() {
             </section>
 
             <section className="hx-section">
+              <div className="lx-wrap fo-narrow fo-moat">
+                <h2 className="lx-display hx-h2" data-reveal>
+                  Anyone can stand up Postgres. That isn&rsquo;t the two <em>years</em>.
+                </h2>
+                <p data-reveal data-delay="1">
+                  The database is the easy part. Any team can have Postgres with a vector column running by lunch, and
+                  you should be suspicious of anyone who calls that a product. The two years went into what reads and
+                  writes it. The intake that turns a message into dated, sourced facts. The filing that puts each one in
+                  the right drawer without being told. The overnight passes that link what repeats and flag what
+                  contradicts. The identity rules that decide who may see what, in the database, on every read. The
+                  experts that interview you and hold your rules. The governance screen where every model, key and dollar
+                  is set and every write gets a receipt. And the part that took longest: all of them read and write one
+                  record, so a correction in chat changes what the overnight pass believes and what an agent sees on
+                  Wednesday. That is the moat. Copy the schema and you have a table. The system is the part that fills
+                  it, keeps it in order, and answers from it.
+                </p>
+              </div>
+            </section>
+
+            <section className="hx-section hx-deep">
               <div className="lx-wrap">
                 <h2 className="lx-display hx-h2" data-reveal>
                   Features and functionality, the plain <em>list</em>.
@@ -123,7 +144,7 @@ export default function ForTechnology() {
               </div>
             </section>
 
-            <section className="hx-section hx-deep">
+            <section className="hx-section">
               <div className="lx-wrap">
                 <h2 className="lx-display hx-h2" data-reveal>
                   As much of it inside your walls as you <em>need</em>.
@@ -165,6 +186,10 @@ export default function ForTechnology() {
           {
             q: "What happens when we switch models?",
             a: "We did it in October, for every job, in Settings. 222,000 facts, no re-teaching, no deploy.",
+          },
+          {
+            q: "What happens when a model vendor turns the screws?",
+            a: "You move. Every job’s model is yours to set, through your keys, and the memory doesn’t notice the swap. We did exactly that in October. The same goes for us: you hold the license and the rows, and the exit terms are written before you start.",
           },
         ],
         next: { label: "How it works", href: "/how-it-works" },

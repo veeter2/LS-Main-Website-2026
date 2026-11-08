@@ -15,7 +15,7 @@ export default function ForFinance() {
             An AI budget that ends in an <em>asset</em>, not a renewal.
           </>
         ),
-        lead: "Most AI spend buys access. Seats, renewals, a bill that resets every January, and when you change vendors, what your people taught it stays behind. LongStrider is the other kind of purchase. You license the software, install it on your infrastructure, run it under your own model, and own the result. Spend that was operating cost becomes something the company holds.",
+        lead: "Most AI spend buys access. Seats, renewals, a bill that resets every January, and when you change vendors, what your people taught it stays behind. Rent the whole stack and the vendor writes the rules you run under, and can rewrite them whenever it likes. LongStrider is the other kind of purchase. You license the software, install it on your infrastructure, run it under your own model, and own the result. Spend that was operating cost becomes something the company holds.",
         points: [
           {
             title: "Owned, not rented.",
@@ -31,7 +31,7 @@ export default function ForFinance() {
           },
           {
             title: "Ready for the price war.",
-            body: "Models get cheaper every quarter. Switch whenever it pays to. Nothing has to be re-taught.",
+            body: "Models get cheaper every quarter. Switch whenever it pays to. Nothing has to be re-taught, and no vendor gets to decide your price for you.",
           },
         ],
         proof: {
@@ -68,6 +68,26 @@ export default function ForFinance() {
                 2026) LongStrider shows spend by job and by model, every day, on one screen. You&rsquo;ll know what the
                 overnight pass cost last night, and most nights the answer is nothing.
               </p>
+              <p className="lx-lead" data-reveal data-delay="2">
+                Here is what that screen told us about our own instance over the last two weeks, for the one call that
+                answers a person&rsquo;s message:
+              </p>
+              <div className="fo-cost lx-card" data-reveal data-delay="2" role="table" aria-label="Cost per chat reply by model">
+                <div className="fo-cost-row" role="row">
+                  <span role="cell">Claude Sonnet 5.5, direct</span>
+                  <span role="cell" className="lx-num">about 4.8 cents a reply</span>
+                </div>
+                <div className="fo-cost-row" role="row">
+                  <span role="cell">DeepSeek V4.1 Flash, through Isoquant</span>
+                  <span role="cell" className="lx-num">about 0.09 cents a reply</span>
+                </div>
+              </div>
+              <p className="lx-lead" data-reveal data-delay="3">
+                Roughly 55 times apart. Same memory, same tools, same receipts. Only the model answering changed. We
+                don&rsquo;t claim the answers are identical; we measure that separately, and we&rsquo;ll show you that
+                number next to this one. The point is that the choice is yours, per job, and you can change your mind,
+                because the memory doesn&rsquo;t live in the model.
+              </p>
             </div>
           </section>
         ),
@@ -83,6 +103,10 @@ export default function ForFinance() {
           {
             q: "What should we measure?",
             a: "How long the questions that used to take days take now. How much knowledge stays when people leave. How many corrections stay corrected. What you spent on models last month, by job.",
+          },
+          {
+            q: "What if a vendor changes its terms?",
+            a: "Which vendor? The model vendors sit behind your own keys, so a worse deal means a new setting, not a new system. We sit behind a license you hold and rows you can export, with exit terms agreed up front. Nobody in that chain can change an interface, a privacy rule or a price and leave you stuck.",
           },
           {
             q: "What if we stop?",

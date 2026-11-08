@@ -63,6 +63,10 @@ export default function ForTeams() {
             q: "What if it gets something wrong?",
             a: "Correct it once. It keeps the fix, with your name and the date, and marks the old fact as replaced.",
           },
+          {
+            q: "What happens if the company changes AI vendors?",
+            a: "Nothing, for you. The model is a setting your company controls. What you taught it stays, with its sources, and nobody has to brief it again.",
+          },
         ],
         next: { label: "What it does", href: "/product" },
       }}

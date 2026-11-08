@@ -155,7 +155,8 @@ export default function CompanyConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Run on a frontier model today and a local one tomorrow. The memory stays exactly where you left it, because the only
-              part that has to be ours is the engine, and even that can move inside your walls.
+              part that has to be ours is the engine, and even that can move inside your walls. When a vendor gets
+              worse, you lose an afternoon in Settings, not your business.
             </p>
           </div>
           <ul className="cp-parts" data-reveal data-delay="2" aria-label="Components LongStrider runs with">

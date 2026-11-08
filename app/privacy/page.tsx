@@ -20,6 +20,10 @@ const SECTIONS: LegalSection[] = [
     note: 'We do not collect the content of your interactions, institutional memory, documents, or any information processed within your LongStrider environment.',
   },
   {
+    title: 'This Website',
+    body: 'This website runs no trackers and sets no cookies. The one thing it counts is how many times the “Copy the prompt” button on the Ask your own AI block is pressed: a single number per button, with no cookie and nothing that identifies you.',
+  },
+  {
     title: 'Changes to This Policy',
     body: 'We may update this Privacy Policy to reflect changes in our practices or legal requirements. We will notify you of material changes by posting the updated policy on our website and emailing your registered address. Continued use of LongStrider after changes constitutes acceptance of the updated policy.',
   },

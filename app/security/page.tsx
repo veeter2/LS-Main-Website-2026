@@ -19,6 +19,10 @@ const OWNERSHIP = [
     title: "It outlives every vendor.",
     body: "Change models and nothing has to be re-taught. We moved every job to a different model in October. The memory didn\u2019t notice.",
   },
+  {
+    title: "It isn\u2019t on a vendor\u2019s terms.",
+    body: "A rented stack comes with someone else\u2019s rules, and those rules can move. Here the license is yours, the keys are yours, the rows are yours. The model is a setting.",
+  },
 ]
 
 const SCOPES = [
@@ -76,7 +80,7 @@ export default function SecurityConcept() {
             Yours. Not a feature of <em>our</em> service.
           </h2>
         </div>
-        <div className="lx-wrap mh-facts">
+        <div className="lx-wrap mh-facts mh-facts-2">
           {OWNERSHIP.map((f, i) => (
             <div key={f.title} className="mh-fact" data-reveal data-delay={String(i + 1)}>
               <h3>{f.title}</h3>

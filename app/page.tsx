@@ -4,6 +4,8 @@ import Link from "next/link"
 import { MemoryCurve } from "./learning-gap/memory-curve"
 import { OwnershipBoard } from "./_components/ownership-board"
 import { Desk } from "./commitments/desk"
+import { AskYourAI } from "./_components/ask-your-ai"
+import { ORGANS } from "@/lib/for-your-ai"
 
 export const metadata: Metadata = {
   ...pageMeta("", "The AI memory your company owns", "Every fact, promise and decision your people put into AI, kept with its source, on your infrastructure, under your own model. Licensed, not rented."),
@@ -29,9 +31,13 @@ const PROBLEMS = [
     title: "People leave with it",
     body: "The history only one person carried goes out the door on their last day, because the only place it was ever written down was a chat window.",
   },
+  {
+    title: "You don’t set the terms",
+    body: "The vendor can change the interface, the privacy rules or the token price on a Tuesday. You find out when something your business runs on stops working, and you keep paying.",
+  },
 ]
 
-const COMPARE_ROWS = ["What it keeps", "Who owns it", "What you pay for", "What it can tell you"]
+const COMPARE_ROWS = ["What it keeps", "Who owns it", "What you pay for", "Who sets the terms", "What it can tell you"]
 const COMPARE = [
   {
     name: "Enterprise search",
@@ -39,6 +45,7 @@ const COMPARE = [
       "The documents you already have",
       "You rent it per seat",
       "Seats, forever",
+      "The vendor. Interface, privacy rules and price can change without you",
       "What someone wrote down",
     ],
   },
@@ -48,6 +55,7 @@ const COMPARE = [
       "A summary the vendor writes about you",
       "The vendor. You can read it, not export it",
       "Seats, forever",
+      "The vendor. Same seat, same terms",
       "What it remembers about your preferences",
     ],
   },
@@ -57,6 +65,7 @@ const COMPARE = [
       "Dated facts, promises and decisions, each with its source",
       "Your company. You license the software, it runs where you say, and it survives a model switch and a resignation",
       "A build you own, then support. An asset on your books, not a line that resets every January",
+      "You. The model is a setting, the keys are yours, and the rows export",
       "Who promised what, what changed, and when to push back",
     ],
     ours: true,
@@ -107,7 +116,8 @@ export default function HomeConcept() {
             </h1>
             <p className="lx-lead" data-rise="2">
               Every fact, promise and decision your people put into AI, kept with its source, on your infrastructure,
-              under your own model. You license it and own it. Switch models next year and nothing has to be taught twice.
+              under your own model. You license it and install it. Switch models next year and nothing has to be
+              taught twice.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
@@ -146,7 +156,7 @@ export default function HomeConcept() {
             open, inside a seat you rent, that you can&rsquo;t export and can&rsquo;t take with you.
           </p>
         </div>
-        <div className="lx-wrap mh-facts">
+        <div className="lx-wrap mh-facts mh-facts-2">
           {PROBLEMS.map((f, i) => (
             <div key={f.title} className="mh-fact" data-reveal data-delay={String(i + 1)}>
               <h3>{f.title}</h3>
@@ -277,11 +287,42 @@ export default function HomeConcept() {
         </div>
       </section>
 
-      {/* 04: Fast and slow */}
-      <section className="hx-section" id="fast-slow">
+      {/* 04: More than memory */}
+      <section className="hx-section" id="more">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">04</span> Fast and slow
+            <span className="hx-step">04</span> More than memory
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            Memory is the floor. Everything else <em>stands</em> on it.
+          </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            Each part below works because it remembers. Take the memory away and they&rsquo;re the same tools everyone
+            else sells. Keep it, and every one of them gets better each month, because the record does.
+          </p>
+        </div>
+        <div className="lx-wrap">
+          <ol className="mm-rows" aria-label="Seven things that run on the memory">
+            {ORGANS.map((o, i) => (
+              <li key={o.name} className="mm-row" data-reveal data-delay={String((i % 3) + 1)}>
+                <span className="mm-n lx-num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mm-name">{o.name}</span>
+                <p className="mm-body">{o.body}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mm-foot" data-reveal>
+            All seven read one record. That&rsquo;s what you license, and that&rsquo;s what you own.{" "}
+            <Link href="/product">What it does →</Link>
+          </p>
+        </div>
+      </section>
+
+      {/* 05: Fast and slow */}
+      <section className="hx-section hx-deep" id="fast-slow">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">05</span> Fast and slow
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             It thinks <em>twice</em>. Once now, once tonight.
@@ -306,12 +347,12 @@ export default function HomeConcept() {
         </div>
       </section>
 
-      {/* 05: Integrity */}
-      <section className="hx-section hx-deep" id="integrity">
+      {/* 06: Integrity */}
+      <section className="hx-section" id="integrity">
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">05</span> The integrity to push back
+              <span className="hx-step">06</span> The integrity to push back
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Most AI agrees with everything. This one has a <em>record</em> to check you against.
@@ -346,11 +387,11 @@ export default function HomeConcept() {
         </div>
       </section>
 
-      {/* 06: What it is, and isn't */}
-      <section className="hx-section" id="different">
+      {/* 07: What it is, and isn't */}
+      <section className="hx-section hx-deep" id="different">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">06</span> What it is, and isn&rsquo;t
+            <span className="hx-step">07</span> What it is, and isn&rsquo;t
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Three things that look alike and <em>aren&rsquo;t</em>.
@@ -380,14 +421,19 @@ export default function HomeConcept() {
               </div>
             ))}
           </div>
+          <p className="mh-question mh-plain" data-reveal data-delay="2">
+            Ask for an export and you get rows, not a paragraph. Every write has a name, a date and a receipt. That
+            matters more than it used to: 23% of leaders say accountability is unclear when AI produces a negative
+            outcome. (Deloitte, October 2026)
+          </p>
         </div>
       </section>
 
-      {/* 07: An asset */}
-      <section className="hx-section hx-deep" id="asset">
+      {/* 08: An asset */}
+      <section className="hx-section" id="asset">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">07</span> An asset, not a renewal
+            <span className="hx-step">08</span> An asset, not a renewal
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             The one AI line item that&rsquo;s worth <em>more</em> in month twelve than month one.
@@ -415,6 +461,25 @@ export default function HomeConcept() {
               MIT NANDA, The GenAI Divide: State of AI in Business 2025
             </a>
           </p>
+        </div>
+      </section>
+
+      {/* Ask your own AI */}
+      <section className="hx-section hx-deep" id="ask">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            Don&rsquo;t take our word for it
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            Ask your <em>own</em> AI.
+          </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            Paste one prompt into ChatGPT, Claude, Gemini, Perplexity or Copilot. It reads our pages, pulls in what it
+            already knows about your company, and tells you where LongStrider fits and where it doesn&rsquo;t.
+          </p>
+        </div>
+        <div className="lx-wrap ay-wrap" data-reveal data-delay="2">
+          <AskYourAI strip />
         </div>
       </section>
 
