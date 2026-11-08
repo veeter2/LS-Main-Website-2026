@@ -166,6 +166,11 @@ export default function ForTechnology() {
                     </p>
                   </div>
                 </div>
+                <ul className="fo-install" data-reveal data-delay="3" aria-label="What the install needs from you">
+                  <li>No GPU purchase. The memory lives in Postgres; the thinking is done by whichever model you point it at.</li>
+                  <li>Inference goes through your own keys to the model you choose, or to a server you already run.</li>
+                  <li>Authentication is on by default, and nothing listens on the open internet.</li>
+                </ul>
               </div>
             </section>
           </>

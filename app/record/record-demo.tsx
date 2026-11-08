@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { PauseButton, usePlayback } from "../_components/pause-button"
 
 type Exchange = {
   q: string
@@ -48,16 +49,12 @@ export function RecordDemo() {
   const [index, setIndex] = useState(0)
   const [phase, setPhase] = useState<Phase>("typing")
   const [typed, setTyped] = useState(0)
-  const [reduced, setReduced] = useState(false)
-
-  useEffect(() => {
-    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-  }, [])
+  const { playing, reduced, toggle } = usePlayback()
 
   const current = EXCHANGES[index]
 
   useEffect(() => {
-    if (reduced) return
+    if (reduced || !playing) return
     let t: ReturnType<typeof setTimeout>
     if (phase === "typing") {
       if (typed < current.q.length) {
@@ -75,7 +72,7 @@ export function RecordDemo() {
       }, 14000) // the answer is about 45 words plus sources; reading it takes this long
     }
     return () => clearTimeout(t)
-  }, [phase, typed, current.q.length, reduced])
+  }, [phase, typed, current.q.length, reduced, playing])
 
   // Every exchange is laid out from the first frame and stacked in one cell,
   // so the card is always the height of its tallest exchange: typing, the
@@ -87,6 +84,7 @@ export function RecordDemo() {
         <span className="rx-dot" aria-hidden />
         <span>Ask LongStrider</span>
         <span className="rx-head-meta">Reyes matter · shared with the deal team</span>
+        <PauseButton playing={playing} reduced={reduced} onToggle={toggle} />
       </div>
 
       <div className={reduced ? "rx-list" : "rx-stage"}>

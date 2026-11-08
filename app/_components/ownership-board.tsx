@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { PauseButton, usePlayback } from "./pause-button"
 
 /**
  * The problem in one picture: the same things a team teaches AI land in two
@@ -25,15 +26,13 @@ export function OwnershipBoard() {
   // HTML without JavaScript) sees five things kept, not a zero. The story then
   // loops from the top once the page is live.
   const [step, setStep] = useState(SWITCH_AT + 1)
-  const [reduced, setReduced] = useState(false)
+  const { playing, reduced, toggle } = usePlayback()
 
   useEffect(() => {
-    const r = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    setReduced(r)
-    if (r) return
+    if (reduced || !playing) return
     const t = setInterval(() => setStep((s) => (s + 1) % LOOP_AT), STEP_MS)
     return () => clearInterval(t)
-  }, [])
+  }, [reduced, playing])
 
   const s = reduced ? SWITCH_AT + 1 : step
   const shown = Math.min(ITEMS.length, s)
@@ -64,6 +63,7 @@ export function OwnershipBoard() {
       </div>
 
       <div className="ob-pane ob-owned">
+        <PauseButton playing={playing} reduced={reduced} onToggle={toggle} className="ob-pause" />
         <div className="ob-head">
           <span className="ob-title">In LongStrider</span>
           <span className="ob-sub ob-sub-owned">

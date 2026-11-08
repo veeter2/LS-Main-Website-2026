@@ -101,6 +101,7 @@ const PROOF = [
   "Your own model, your own keys",
   "Licensed, not rented",
   "Nothing tracked without your yes",
+  "Yours if you leave",
 ]
 
 export default function HomeConcept() {
@@ -168,6 +169,12 @@ export default function HomeConcept() {
           Deloitte asked 3,500 leaders this year. 81% said AI has made their decisions faster. 25% said it has changed how
           the business works. The rest are, in Deloitte&rsquo;s words, &ldquo;stuffing new capabilities into old operating
           models.&rdquo; (Deloitte, State of AI in the Enterprise, October 2026)
+        </p>
+        <p className="lx-wrap mh-question mh-plain mh-question-tight" data-reveal data-delay="3">
+          Nearly 90% of 542 executives with AI contracts believed they could switch vendors inside four weeks. Of the
+          companies that tried, 58% said the move failed or took far more than planned. (Zapier survey, reported by The
+          Register, April 2026.) Companies planned to spend 1.9 times last year on AI and spent 4.7 times. (Menlo
+          Ventures, November 2026.)
         </p>
       </section>
 

@@ -262,7 +262,7 @@ html:has(#lx-root) { --lx-page-ground: #f6f3ec; }
 }
 
 /* One scroller: the document scrolls; the shell (#lx-root) is the whole site. */
-html:has(#lx-root) { scroll-behavior: auto; background: var(--lx-page-ground); }
+html:has(#lx-root) { scroll-behavior: auto; background: var(--lx-page-ground); scroll-padding-top: 84px; }
 body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body); }
 
 .lx ::selection { background: var(--lx-gold-wash); color: var(--lx-ink); }
@@ -2366,3 +2366,29 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .ay-strip-btn { min-width: 11em; justify-content: center; }
 .ay-strip-btn[data-copied="true"] { border-color: var(--lx-gold-ink); color: var(--lx-gold-ink); }
 .ay-strip-note { margin-top: 18px; }
+
+/* ── Pause/play on the demos that move (WCAG 2.2.2) ───── */
+.dm-pause {
+  flex: none;
+  padding: 3px 9px;
+  font-family: var(--lx-body);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lx-ink-muted);
+  background: transparent;
+  border: 1px solid var(--lx-line);
+  border-radius: var(--lx-radius);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.dm-pause:hover { color: var(--lx-ink-primary); border-color: var(--lx-gold-line); }
+.dm-pause[aria-pressed="true"] { color: var(--lx-gold-ink); border-color: var(--lx-gold-line); }
+.rx-demo-head .dm-pause { margin-left: 10px; }
+.ob-pause { position: absolute; top: 12px; right: 12px; z-index: 1; }
+.dx-head .dx-pause { margin-left: 12px; }
+.mh-question-tight { margin-top: 24px !important; }
+.fo-install { list-style: none; margin: clamp(28px, 4vh, 44px) 0 0; padding: 20px 0 0; border-top: 1px solid var(--lx-gold-line); display: grid; gap: 10px; max-width: 760px; }
+.fo-install li { position: relative; padding-left: 18px; font-size: 15.5px; line-height: 1.65; color: var(--lx-ink-secondary); }
+.fo-install li::before { content: ""; position: absolute; left: 0; top: 0.75em; width: 6px; height: 6px; border-radius: 50%; background: var(--lx-gold); }
+.dx-head .dx-count { margin-left: auto; }
