@@ -16,7 +16,7 @@ const ITEMS = [
   { text: "Why we walked away from the old supplier", source: "Review · March" },
 ]
 
-const STEP_MS = 850
+const STEP_MS = 1500 // one line is about seven words; a reader needs this long to take it in
 const SWITCH_AT = ITEMS.length + 1 // step when the model changes
 const LOOP_AT = SWITCH_AT + 7 // step when the story restarts
 

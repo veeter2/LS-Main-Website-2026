@@ -58,12 +58,12 @@ export function Desk() {
       return
     }
     const timers = [
-      setTimeout(() => setRows((r) => r.map((x) => (x.id === "forecast" ? { ...x, state: "new" } : x))), 2200),
+      setTimeout(() => setRows((r) => r.map((x) => (x.id === "forecast" ? { ...x, state: "new" } : x))), 3500),
       setTimeout(
         () => setRows((r) => r.map((x) => (x.id === "terms" ? { ...x, state: "done", when: "Done · sent 9:14" } : x))),
-        4600,
+        7500,
       ),
-      setTimeout(() => setRows((r) => r.map((x) => (x.id === "forecast" ? { ...x, state: "open" } : x))), 6800),
+      setTimeout(() => setRows((r) => r.map((x) => (x.id === "forecast" ? { ...x, state: "open" } : x))), 11000),
     ]
     return () => timers.forEach(clearTimeout)
   }, [seen])
