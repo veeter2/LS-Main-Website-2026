@@ -3,6 +3,7 @@ import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { DeploymentMap } from "./deployment-map"
 import "./security.css"
+import { FaqJsonLd } from "../_components/faq-jsonld"
 
 export const metadata: Metadata = pageMeta("/security", "Security and ownership · Your rules, your keys", "Software you install and own. Where it runs, who can see what, and which model it talks to, including one you already run. Straight answers.")
 
@@ -48,6 +49,7 @@ const VOICES = ["Claude", "GPT", "DeepSeek", "Local model"]
 export default function SecurityConcept() {
   return (
     <main>
+      <FaqJsonLd items={ANSWERS.map((a) => ({ q: a.title.replace(/\.$/, ""), a: a.body }))} />
       <section className="lx-hero">
         <div className="lx-wrap">
           <div>

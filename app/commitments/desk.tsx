@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { PauseButton, usePlayback } from "../_components/pause-button"
 
 type Row = { id: string; from: string; to: string; what: string; when: string; state: "open" | "waiting" | "done" | "new" | "pending" }
 
@@ -34,6 +35,8 @@ const OVERNIGHT = [
 export function Desk() {
   const [rows, setRows] = useState<Row[]>([...START, ARRIVAL])
   const [seen, setSeen] = useState(false)
+  const [elapsed, setElapsed] = useState(0)
+  const { playing, reduced, toggle } = usePlayback()
   const sceneRef = useRef<HTMLDivElement>(null)
 
   // The desk's small story (a promise arrives, one gets done) plays when it
@@ -51,22 +54,25 @@ export function Desk() {
     return () => io.disconnect()
   }, [])
 
+  // Reduced motion: show the finished story at once.
   useEffect(() => {
-    if (!seen) return
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setRows([{ ...START[0], state: "done", when: "Done · sent 9:14" }, ...START.slice(1), { ...ARRIVAL, state: "open" }])
-      return
-    }
-    const timers = [
-      setTimeout(() => setRows((r) => r.map((x) => (x.id === "forecast" ? { ...x, state: "new" } : x))), 3500),
-      setTimeout(
-        () => setRows((r) => r.map((x) => (x.id === "terms" ? { ...x, state: "done", when: "Done · sent 9:14" } : x))),
-        7500,
-      ),
-      setTimeout(() => setRows((r) => r.map((x) => (x.id === "forecast" ? { ...x, state: "open" } : x))), 11000),
-    ]
-    return () => timers.forEach(clearTimeout)
-  }, [seen])
+    if (!seen || !reduced) return
+    setRows([{ ...START[0], state: "done", when: "Done · sent 9:14" }, ...START.slice(1), { ...ARRIVAL, state: "open" }])
+  }, [seen, reduced])
+
+  // Otherwise a clock runs while the story is in view and playing; pausing
+  // stops the clock, and play resumes it where it left off.
+  useEffect(() => {
+    if (!seen || reduced || !playing || elapsed >= 11000) return
+    const t = setInterval(() => setElapsed((e) => e + 250), 250)
+    return () => clearInterval(t)
+  }, [seen, reduced, playing, elapsed])
+
+  useEffect(() => {
+    if (elapsed === 3500) setRows((r) => r.map((x) => (x.id === ARRIVAL.id ? { ...x, state: "new" } : x)))
+    if (elapsed === 7500) setRows((r) => r.map((x) => (x.id === START[0].id ? { ...x, state: "done", when: "Done · sent 9:14" } : x)))
+    if (elapsed === 11000) setRows((r) => r.map((x) => (x.id === ARRIVAL.id ? { ...x, state: "open" } : x)))
+  }, [elapsed])
 
   const open = rows.filter((r) => r.state !== "done" && r.state !== "pending").length
 
@@ -79,6 +85,7 @@ export function Desk() {
             <span className="dx-sub">Thursday morning</span>
           </div>
           <span className="dx-count lx-num">{open} open</span>
+          <PauseButton playing={playing} reduced={reduced} onToggle={toggle} className="dx-pause" />
         </div>
         <ul className="dx-rows">
           {rows.map((r) => (

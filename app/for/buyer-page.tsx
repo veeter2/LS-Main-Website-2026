@@ -1,6 +1,7 @@
 import Link from "next/link"
 import type { ReactNode } from "react"
 import "./for.css"
+import { FaqJsonLd } from "../_components/faq-jsonld"
 
 export type Buyer = {
   eyebrow: string
@@ -25,6 +26,7 @@ export function BuyerPage({ b }: { b: Buyer }) {
   const cta = b.cta ?? "Book a working session"
   return (
     <main>
+      <FaqJsonLd items={b.questions} />
       <section className="lx-hero">
         <div className="lx-wrap by-hero">
           <p className="lx-eyebrow" data-rise="0">
