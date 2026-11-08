@@ -7,23 +7,26 @@ import { PROMPTS } from "@/lib/for-your-ai"
 /**
  * "Don't take our word for it. Ask your own AI." Three prompts, one Copy
  * button. Copying sends one anonymous tick to /api/tick (a counter, not a
- * tracker: no cookie, no identity). The prompt text is static on the page so
- * it works, and can be selected by hand, without JavaScript.
+ * tracker: no cookie, no identity).
+ *
+ * Two shapes. The full block (used on /for-your-ai) shows the prompt text as
+ * static text with tabs and a Copy button. The strip (used on the homepage)
+ * is three buttons that each copy their prompt directly, with a link to the
+ * page where the full prompts stay visible.
  */
-export function AskYourAI({ compact = false }: { compact?: boolean }) {
+export function AskYourAI({ compact = false, strip = false }: { compact?: boolean; strip?: boolean }) {
   const [active, setActive] = useState(0)
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState<number | null>(null)
   const timer = useRef<number | null>(null)
   const preRef = useRef<HTMLPreElement>(null)
-  const prompt = PROMPTS[active]
 
   useEffect(() => () => { if (timer.current) window.clearTimeout(timer.current) }, [])
 
-  async function copy() {
-    const text = prompt.text
+  async function copy(i: number) {
+    const prompt = PROMPTS[i]
     let ok = false
     try {
-      await navigator.clipboard.writeText(text)
+      await navigator.clipboard.writeText(prompt.text)
       ok = true
     } catch {
       // Older browsers: select the visible text so a manual copy works.
@@ -38,9 +41,9 @@ export function AskYourAI({ compact = false }: { compact?: boolean }) {
       }
     }
     if (!ok) return
-    setCopied(true)
+    setCopied(i)
     if (timer.current) window.clearTimeout(timer.current)
-    timer.current = window.setTimeout(() => setCopied(false), 2000)
+    timer.current = window.setTimeout(() => setCopied(null), 2000)
     try {
       fetch("/api/tick", {
         method: "POST",
@@ -51,6 +54,30 @@ export function AskYourAI({ compact = false }: { compact?: boolean }) {
     } catch {
       // The count is a nicety. Never let it touch the page.
     }
+  }
+
+  if (strip) {
+    return (
+      <div className="ay-strip">
+        <div className="lx-cta-row ay-strip-row" role="group" aria-label="Copy a prompt">
+          {PROMPTS.map((p, i) => (
+            <button
+              key={p.id}
+              type="button"
+              className="lx-btn lx-btn-ghost ay-strip-btn"
+              onClick={() => copy(i)}
+              data-copied={copied === i}
+            >
+              <span aria-live="polite">{copied === i ? "Copied" : `Copy: ${p.label.replace(/^For the /, "")}`}</span>
+            </button>
+          ))}
+        </div>
+        <p className="ay-note ay-strip-note">
+          Each button copies a prompt for that reader. Works with any AI that can open a link; if yours can&rsquo;t,
+          the prompt carries the facts. Read the prompts and the facts first: <Link href="/for-your-ai">/for-your-ai</Link>
+        </p>
+      </div>
+    )
   }
 
   return (
@@ -64,7 +91,7 @@ export function AskYourAI({ compact = false }: { compact?: boolean }) {
             aria-selected={i === active}
             aria-controls={`ay-panel-${p.id}`}
             className="ox-tab dm-tab"
-            onClick={() => { setActive(i); setCopied(false) }}
+            onClick={() => { setActive(i); setCopied(null) }}
           >
             <span className="ox-tab-name">{p.label}</span>
           </button>
@@ -90,8 +117,8 @@ export function AskYourAI({ compact = false }: { compact?: boolean }) {
       </div>
 
       <div className="ay-foot">
-        <button type="button" className="lx-btn lx-btn-primary ay-copy" onClick={copy} data-copied={copied}>
-          <span aria-live="polite">{copied ? "Copied" : "Copy the prompt"}</span>
+        <button type="button" className="lx-btn lx-btn-primary ay-copy" onClick={() => copy(active)} data-copied={copied === active}>
+          <span aria-live="polite">{copied === active ? "Copied" : "Copy the prompt"}</span>
         </button>
         <p className="ay-note">
           Works with any AI that can open a link. If yours can&rsquo;t, the prompt carries the facts.

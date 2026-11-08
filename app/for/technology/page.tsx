@@ -188,8 +188,8 @@ export default function ForTechnology() {
             a: "We did it in October, for every job, in Settings. 222,000 facts, no re-teaching, no deploy.",
           },
           {
-            q: "What if a model vendor changes its interface or its price?",
-            a: "You change a setting. Every job’s model is yours to set, through your keys, and the memory doesn’t notice. We did exactly that in October. The same goes for us: you hold the license and the rows, and the exit terms are written before you start.",
+            q: "What happens when a model vendor turns the screws?",
+            a: "You move. Every job’s model is yours to set, through your keys, and the memory doesn’t notice the swap. We did exactly that in October. The same goes for us: you hold the license and the rows, and the exit terms are written before you start.",
           },
         ],
         next: { label: "How it works", href: "/how-it-works" },

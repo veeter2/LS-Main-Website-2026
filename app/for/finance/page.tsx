@@ -15,7 +15,7 @@ export default function ForFinance() {
             An AI budget that ends in an <em>asset</em>, not a renewal.
           </>
         ),
-        lead: "Most AI spend buys access. Seats, renewals, a bill that resets every January, and when you change vendors, what your people taught it stays behind. Rent the whole stack and you also take the vendor’s terms: its interface, its privacy rules, its token price, any of which can change without asking you. LongStrider is the other kind of purchase. You license the software, install it on your infrastructure, run it under your own model, and own the result. Spend that was operating cost becomes something the company holds.",
+        lead: "Most AI spend buys access. Seats, renewals, a bill that resets every January, and when you change vendors, what your people taught it stays behind. Rent the whole stack and the vendor writes the rules you run under, and can rewrite them whenever it likes. LongStrider is the other kind of purchase. You license the software, install it on your infrastructure, run it under your own model, and own the result. Spend that was operating cost becomes something the company holds.",
         points: [
           {
             title: "Owned, not rented.",

@@ -116,8 +116,8 @@ export default function HomeConcept() {
             </h1>
             <p className="lx-lead" data-rise="2">
               Every fact, promise and decision your people put into AI, kept with its source, on your infrastructure,
-              under your own model. You license it and install it. If a vendor changes its interface, its privacy rules
-              or its prices, nothing of yours moves. Switch models next year and nothing has to be taught twice.
+              under your own model. You license it and install it. Switch models next year and nothing has to be
+              taught twice.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
@@ -479,7 +479,7 @@ export default function HomeConcept() {
           </p>
         </div>
         <div className="lx-wrap ay-wrap" data-reveal data-delay="2">
-          <AskYourAI />
+          <AskYourAI strip />
         </div>
       </section>
 

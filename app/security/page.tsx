@@ -21,7 +21,7 @@ const OWNERSHIP = [
   },
   {
     title: "It isn\u2019t on a vendor\u2019s terms.",
-    body: "Rent an AI stack and you keep its terms: the interface, the privacy rules, the price, each of which can change without you. Here the license is yours, the keys are yours, the rows are yours, and the model is a setting.",
+    body: "A rented stack comes with someone else\u2019s rules, and those rules can move. Here the license is yours, the keys are yours, the rows are yours. The model is a setting.",
   },
 ]
 
@@ -137,8 +137,7 @@ export default function SecurityConcept() {
               Bring the frontier model you trust through your own keys, point it at a model you already run in-house, or put
               a local model on your own hardware for the filing lane. LongStrider is not a service you log into with our
               model behind it. It is software you install, and the model is whatever you choose. When a better one arrives,
-              you switch, and nothing has to be re-taught. If a vendor changes its interface, its terms or its price,
-              you change a setting.
+              you switch, and nothing has to be re-taught.
             </p>
           </div>
           <div data-reveal data-delay="2">
