@@ -129,9 +129,9 @@ export default function HomeConcept() {
               <Link className="lx-btn lx-btn-primary" href="/book">
                 Book a working session <span className="lx-arrow" aria-hidden>→</span>
               </Link>
-              <a className="lx-btn lx-btn-ghost" href="#own">
-                See it answer
-              </a>
+              <Link className="lx-btn lx-btn-ghost" href="/pricing">
+                See pricing
+              </Link>
             </div>
             <ul className="lx-assure" data-rise="4" aria-label="What you get">
               {PROOF.map((p) => (

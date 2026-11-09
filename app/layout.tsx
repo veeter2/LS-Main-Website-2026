@@ -116,7 +116,7 @@ const JSONLD = {
         "Overnight pass that links repeats and flags conflicts",
         "Licensed and installed, not rented per seat",
       ],
-      offers: { "@type": "Offer", description: "Licensed software with a build fee and yearly support. Scoped in a working session." },
+      offers: { "@type": "Offer", description: "Licensed software from $25,000, plus a build and monthly support you can cancel. Ranges at longstrider.ai/pricing; scoped in a working session." },
     },
     {
       "@type": "WebSite",
