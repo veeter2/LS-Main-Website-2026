@@ -8,6 +8,7 @@ const PAGES: { path: string; priority: number; changeFrequency: "weekly" | "mont
   { path: "/how-it-works", priority: 0.9, changeFrequency: "monthly" },
   { path: "/industries", priority: 0.8, changeFrequency: "monthly" },
   { path: "/security", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/pricing", priority: 0.9, changeFrequency: "monthly" },
   { path: "/for/finance", priority: 0.7, changeFrequency: "monthly" },
   { path: "/for/technology", priority: 0.7, changeFrequency: "monthly" },
   { path: "/for/teams", priority: 0.6, changeFrequency: "monthly" },
@@ -21,6 +22,6 @@ const PAGES: { path: string; priority: number; changeFrequency: "weekly" | "mont
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-11-07")
+  const lastModified = new Date("2026-11-09")
   return PAGES.map((p) => ({ url: `${BASE}${p.path}`, lastModified, changeFrequency: p.changeFrequency, priority: p.priority }))
 }
