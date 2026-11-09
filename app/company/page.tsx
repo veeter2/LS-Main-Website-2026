@@ -114,8 +114,8 @@ export default function CompanyConcept() {
             </p>
             <p>
               LongStrider started from one premise, that the memory has to be the customer&rsquo;s, and was built from the
-              ground up to deliver it. A small team, building lean on purpose. Thirteen real people have used it every day
-              since spring 2026, and it has kept about 222,000 facts for them so far. We&rsquo;d rather tell you that number
+              ground up to deliver it. A small team, building lean on purpose. It has run our own business every day
+              since spring 2026. Thirteen people have put about 223,000 facts into it so far. We&rsquo;d rather tell you that number
               than pretend it&rsquo;s thousands of companies.
             </p>
           </div>
