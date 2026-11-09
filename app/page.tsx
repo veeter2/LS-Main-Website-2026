@@ -39,12 +39,13 @@ const PROBLEMS = [
   },
 ]
 
-const COMPARE_ROWS = ["What it keeps", "Who owns it", "What you pay for", "Who sets the terms", "What it can tell you"]
+const COMPARE_ROWS = ["What it keeps", "What it does with it", "Who owns it", "What you pay for", "Who sets the terms", "What it can tell you"]
 const COMPARE = [
   {
     name: "Enterprise search",
     cells: [
       "The documents you already have",
+      "Finds it when you search",
       "You rent it per seat",
       "Seats, forever",
       "The vendor. Interface, privacy rules and price can change without you",
@@ -55,6 +56,7 @@ const COMPARE = [
     name: "Memory inside a chat seat",
     cells: [
       "A summary the vendor writes about you",
+      "Repeats it back, inside that one seat",
       "The vendor. You can read it, not export it",
       "Seats, forever",
       "The vendor. Same seat, same terms",
@@ -65,6 +67,7 @@ const COMPARE = [
     name: "LongStrider",
     cells: [
       "Dated facts, promises and decisions, each with its source",
+      "Works on it. Links repeats, flags conflicts, keeps promises, and answers from the record",
       "Your company. You license the software, it runs where you say, and it survives a model switch and a resignation",
       "A build you own, then support. An asset on your books, not a line that resets every January",
       "You. The model is a setting, the keys are yours, and the rows export",
@@ -118,9 +121,9 @@ export default function HomeConcept() {
               The AI memory your company <em>owns</em>.
             </h1>
             <p className="lx-lead" data-rise="2">
-              Every fact, promise and decision your people put into AI, kept with its source, on your infrastructure,
-              under your own model. You license it and install it. Switch models next year and nothing has to be
-              taught twice.
+              Not a search box over the documents you already have. Those find what you wrote down. LongStrider keeps
+              what your people say to AI, with its source, on your infrastructure, under your own model, and works on
+              it. You license it and install it. Switch models next year and nothing is taught twice.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
