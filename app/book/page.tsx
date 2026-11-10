@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { BrandArt } from "../_components/brand-art"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { SessionForm } from "./session-form"
@@ -44,6 +45,7 @@ export default function BookConcept() {
       </section>
 
       <section className="hx-section hx-deep">
+        <BrandArt name="arch" />
         <p className="lx-wrap mh-question" data-reveal>
           Rather see it first? Three annotated screens, no sales call.{" "}
           <Link href="/product">See it answer</Link>

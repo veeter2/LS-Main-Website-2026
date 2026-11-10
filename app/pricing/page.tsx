@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { pageMeta } from "@/lib/page-meta"
 import { FaqJsonLd } from "../_components/faq-jsonld"
+import { BrandArt } from "../_components/brand-art"
 
 export const metadata: Metadata = pageMeta(
   "/pricing",
@@ -130,6 +131,7 @@ export default function PricingPage() {
           </div>
           <p className="lx-illustrative pr-note">License ranges, United States dollars. Build and services scoped separately.</p>
         </div>
+        <BrandArt name="steps" />
       </section>
 
       <section className="hx-section hx-deep" id="also">
