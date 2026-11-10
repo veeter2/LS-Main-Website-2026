@@ -13,7 +13,7 @@ const lora = Lora({
 })
 
 const BASE_URL = "https://www.longstrider.ai"
-const OG_IMAGE = `${BASE_URL}/og-default.png`
+const OG_IMAGE = `${BASE_URL}/og-default.jpg`
 const TITLE = "LongStrider · The AI memory your company owns"
 const DESCRIPTION =
   "Every fact, promise and decision your team puts into AI, kept with its source and owned by your company. Works with any model. Book a working session."
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     siteName: "LongStrider",
     title: TITLE,
     description: DESCRIPTION,
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "LongStrider. The AI memory your company owns.", type: "image/png" }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "LongStrider. The AI memory your company owns.", type: "image/jpeg" }],
   },
   twitter: {
     card: "summary_large_image",

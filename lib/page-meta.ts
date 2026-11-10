@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 const BASE_URL = "https://www.longstrider.ai"
-const OG_IMAGE = `${BASE_URL}/og-default.png`
+const OG_IMAGE = `${BASE_URL}/og-default.jpg`
 
 /**
  * Per-page metadata. A page that sets openGraph or twitter replaces the layout's
@@ -23,7 +23,7 @@ export function pageMeta(path: string, title: string, description: string): Meta
       url,
       title: full,
       description,
-      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "LongStrider. The AI memory your company owns.", type: "image/png" }],
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "LongStrider. The AI memory your company owns.", type: "image/jpeg" }],
     },
     twitter: {
       card: "summary_large_image",
