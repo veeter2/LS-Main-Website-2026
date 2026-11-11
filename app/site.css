@@ -2471,3 +2471,20 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .lx-art img { display: block; width: 100%; height: auto; max-height: 420px; object-fit: cover; object-position: center 40%; border-radius: var(--lx-radius); border: 1px solid var(--lx-line-subtle); }
 @media (max-width: 720px) { .lx-art img { max-height: 240px; } }
 .pr-tiers-section .lx-art { margin-top: 28px; }
+
+/* ── Homepage v2: real screens from the demo account ───────── */
+.mh-screen {
+  margin: clamp(32px, 5vh, 56px) auto 0;
+  max-width: 900px;
+}
+.mh-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--lx-line);
+  border-radius: 10px;
+  background: var(--lx-paper-deep);
+}
+.mh-screen figcaption { margin-top: 10px; text-align: center; }
+.mh-nots { font-size: clamp(20px, 2.2vw, 24px); color: var(--lx-ink); }
+.lx-assure.mh-center { justify-content: center; }
