@@ -10,7 +10,7 @@ export const SITE = "https://www.longstrider.ai"
 /** The seven things that stand on the memory. Each says what it does because it remembers. */
 export const ORGANS: { name: string; body: string }[] = [
   { name: "Chat that knows each person.", body: "Every reply, with receipts." },
-  { name: "Living Memory.", body: "Files what people say into drawers, on its own, overnight." },
+  { name: "Memory.", body: "Files what people say into drawers, on its own, overnight." },
   { name: "The desk.", body: "Promises and decisions, who owes what to whom, caught from conversation." },
   { name: "Experts.", body: "Seat a specialist that holds your rules and your history." },
   { name: "Agents.", body: "Work that runs overnight, on your record, and leaves a note." },

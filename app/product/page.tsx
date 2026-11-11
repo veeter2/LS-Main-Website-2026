@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMeta("/product", "What it does: facts, pro
 
 /**
  * What LongStrider does: the seven things that run on the memory, in the
- * order a buyer meets them. Chat, Living Memory, the desk, experts, agents,
+ * order a buyer meets them. Chat, Memory, the desk, experts, agents,
  * governance, any model. The names come from lib/for-your-ai so the homepage,
  * this page and /llms.txt say the same seven.
  */
@@ -137,7 +137,7 @@ export default function ProductConcept() {
       <section className="hx-section" id="living-memory">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">02</span> Living Memory
+            <span className="hx-step">02</span> Memory
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Most nights it does <em>nothing</em>. That&rsquo;s the point.
