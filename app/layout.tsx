@@ -83,7 +83,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#f6f3ec",
+  themeColor: "#f1ecdf",
 }
 
 const JSONLD = {
