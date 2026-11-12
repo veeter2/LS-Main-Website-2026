@@ -291,7 +291,7 @@ export default function ProductConcept() {
             <p className="lx-lead" data-reveal data-delay="2">
               The model is rented and replaceable. The memory is yours and stays put. Run a frontier model through your
               own keys, a model you already host, or a local one on your hardware for the filing lane. We moved every job
-              to a different model in October. 222,000 facts, none re-taught.
+              to a different model in October. Nothing was re-taught.
             </p>
           </div>
           <ul className="cp-parts" data-reveal data-delay="2" aria-label="Models LongStrider runs with">

@@ -42,9 +42,17 @@ export default function CompanyConcept() {
               We built this because nobody else <em>would</em>.
             </h1>
             <p className="lx-lead" data-rise="2">
-              The industry built brilliant engines and gave them amnesia. Every AI conversation starts from zero, and every
-              deployment needs your business explained again. That isn&rsquo;t a model problem. It&rsquo;s a missing layer.
-              So we built it, and we built it to belong to you.
+              We believe a company&rsquo;s memory should belong to the company. Not to the model it rents this year, and
+              not to the vendor that sold it the chat window.
+            </p>
+            <p className="lx-lead" data-rise="2">
+              The personal computer gave one person their own machine. LongStrider gives one company its own mind:
+              software that keeps what your people tell it, works on it overnight, and hands it to whichever model you
+              choose. Switch models and nothing is taught twice.
+            </p>
+            <p className="lx-lead" data-rise="2">
+              AI isn&rsquo;t here to replace your people. It&rsquo;s here to remember what they already know. That&rsquo;s
+              what we&rsquo;re building.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
@@ -115,8 +123,7 @@ export default function CompanyConcept() {
             <p>
               LongStrider started from one premise, that the memory has to be the customer&rsquo;s, and was built from the
               ground up to deliver it. A small team, building lean on purpose. It has run our own business every day
-              since spring 2026. Thirteen people have put about 223,000 facts into it so far. We&rsquo;d rather tell you that number
-              than pretend it&rsquo;s thousands of companies.
+              since spring 2026. We&rsquo;d rather show you that than a logo wall.
             </p>
           </div>
         </div>
