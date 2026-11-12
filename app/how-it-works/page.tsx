@@ -38,7 +38,7 @@ const WE_DO = [
 const ARCHITECT = [
   {
     title: "Any model, your keys.",
-    body: "Seven jobs, seven model settings, one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We did it in October. 222,000 facts, none re-taught.",
+    body: "Seven jobs, seven model settings, one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We did it in October. Nothing was re-taught.",
   },
   {
     title: "Your agents plug in.",

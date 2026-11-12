@@ -195,20 +195,20 @@
  */
 
 /* The document behind the page (overscroll, rubber-banding) matches the paper. */
-html:has(#lx-root) { --lx-page-ground: #f6f3ec; }
+html:has(#lx-root) { --lx-page-ground: #f1ecdf; }
 
 .lx {
   /* ── Ground + ink ───────────────────────────────────── */
-  --lx-paper: #f6f3ec;
-  --lx-paper-deep: #eee8dc;
-  --lx-surface: #fdfcf9;
-  --lx-ink: #17150f;
-  --lx-ink-primary: rgba(23, 21, 15, 0.94);
-  --lx-ink-body: rgba(23, 21, 15, 0.8);
-  --lx-ink-secondary: rgba(23, 21, 15, 0.7);
-  --lx-ink-muted: rgba(23, 21, 15, 0.66);
-  --lx-ink-hint: rgba(23, 21, 15, 0.62);
-  --lx-ink-ghost: rgba(23, 21, 15, 0.16);
+  --lx-paper: #f1ecdf;
+  --lx-paper-deep: #e7dfcf;
+  --lx-surface: #faf7f0;
+  --lx-ink: #1f1b14;
+  --lx-ink-primary: rgba(31, 27, 20, 0.94);
+  --lx-ink-body: rgba(31, 27, 20, 0.8);
+  --lx-ink-secondary: rgba(31, 27, 20, 0.7);
+  --lx-ink-muted: rgba(31, 27, 20, 0.72);
+  --lx-ink-hint: rgba(31, 27, 20, 0.7);
+  --lx-ink-ghost: rgba(31, 27, 20, 0.22);
 
   /* ── Accents (Manifesto gold + purple, with ink-safe text variants) ── */
   --lx-gold: #c8a96e;
@@ -221,17 +221,17 @@ html:has(#lx-root) { --lx-page-ground: #f6f3ec; }
   --lx-purple-wash: rgba(139, 92, 246, 0.08);
 
   /* ── Lines + surfaces ───────────────────────────────── */
-  --lx-line: rgba(23, 21, 15, 0.1);
-  --lx-line-subtle: rgba(23, 21, 15, 0.06);
+  --lx-line: rgba(31, 27, 20, 0.14);
+  --lx-line-subtle: rgba(31, 27, 20, 0.09);
   --lx-radius: 4px;
-  --lx-shadow-rest: 0 1px 2px rgba(23, 21, 15, 0.04), 0 8px 28px rgba(23, 21, 15, 0.06);
-  --lx-shadow-lift: 0 2px 4px rgba(23, 21, 15, 0.05), 0 24px 64px rgba(23, 21, 15, 0.11);
+  --lx-shadow-rest: 0 1px 2px rgba(31, 27, 20, 0.04), 0 8px 28px rgba(31, 27, 20, 0.06);
+  --lx-shadow-lift: 0 2px 4px rgba(31, 27, 20, 0.05), 0 24px 64px rgba(31, 27, 20, 0.11);
   --lx-ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* ── Channels + named tints (everything below reads these) ── */
   --lx-gold-rgb: 200, 169, 110;
-  --lx-ink-rgb: 23, 21, 15;
-  --lx-paper-rgb: 246, 243, 236;
+  --lx-ink-rgb: 31, 27, 20;
+  --lx-paper-rgb: 241, 236, 223;
   --lx-gold-light-rgb: 220, 195, 138;
   --lx-purple-rgb: 139, 92, 246;
   --lx-light-rgb: 255, 255, 255;
@@ -2471,3 +2471,20 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .lx-art img { display: block; width: 100%; height: auto; max-height: 420px; object-fit: cover; object-position: center 40%; border-radius: var(--lx-radius); border: 1px solid var(--lx-line-subtle); }
 @media (max-width: 720px) { .lx-art img { max-height: 240px; } }
 .pr-tiers-section .lx-art { margin-top: 28px; }
+
+/* ── Homepage v2: real screens from the demo account ───────── */
+.mh-screen {
+  margin: clamp(32px, 5vh, 56px) auto 0;
+  max-width: 900px;
+}
+.mh-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--lx-line);
+  border-radius: 10px;
+  background: var(--lx-paper-deep);
+}
+.mh-screen figcaption { margin-top: 10px; text-align: center; }
+.mh-nots { font-size: clamp(20px, 2.2vw, 24px); color: var(--lx-ink); }
+.lx-assure.mh-center { justify-content: center; }

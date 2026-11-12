@@ -190,7 +190,7 @@ export default function ForTechnology() {
           },
           {
             q: "What happens when we switch models?",
-            a: "We did it in October, for every job, in Settings. 222,000 facts, no re-teaching, no deploy.",
+            a: "We did it in October, for every job, in Settings. No re-teaching, no deploy.",
           },
           {
             q: "What happens when a model vendor turns the screws?",

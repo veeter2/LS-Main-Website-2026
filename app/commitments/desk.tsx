@@ -81,7 +81,7 @@ export function Desk() {
       <div className="dx-desk lx-card">
         <div className="dx-head">
           <div>
-            <span className="dx-title">Your desk</span>
+            <span className="dx-title">Your promises</span>
             <span className="dx-sub">Thursday morning</span>
           </div>
           <span className="dx-count lx-num">{open} open</span>

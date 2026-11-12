@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMeta("/product", "What it does: facts, pro
 
 /**
  * What LongStrider does: the seven things that run on the memory, in the
- * order a buyer meets them. Chat, Living Memory, the desk, experts, agents,
+ * order a buyer meets them. Chat, Memory, promises, experts, agents,
  * governance, any model. The names come from lib/for-your-ai so the homepage,
  * this page and /llms.txt say the same seven.
  */
@@ -133,11 +133,11 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 02: Living Memory */}
+      {/* 02: Memory */}
       <section className="hx-section" id="living-memory">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">02</span> Living Memory
+            <span className="hx-step">02</span> Memory
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Most nights it does <em>nothing</em>. That&rsquo;s the point.
@@ -162,7 +162,7 @@ export default function ProductConcept() {
         </ol>
       </section>
 
-      {/* 03: The desk */}
+      {/* 03: Promises */}
       <section className="hx-section hx-deep" id="desk">
         <div className="lx-wrap lx-hero-grid hx-flip">
           <div data-reveal data-delay="1">
@@ -170,13 +170,13 @@ export default function ProductConcept() {
           </div>
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">03</span> The desk
+              <span className="hx-step">03</span> Promises
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Every promise gets an owner and a <em>date</em>. After you say so.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              &ldquo;I&rsquo;ll send the revised terms Friday&rdquo; is a commitment. LongStrider notices it, files it,
+              &ldquo;I&rsquo;ll send the revised terms Friday&rdquo; is a promise. LongStrider notices it, files it,
               and suggests it to the person who said it. It only goes on their desk once they confirm. Decisions land
               the same way, with who made them and why. Nothing is tracked that nobody agreed to, and nothing clears
               itself.
@@ -291,7 +291,7 @@ export default function ProductConcept() {
             <p className="lx-lead" data-reveal data-delay="2">
               The model is rented and replaceable. The memory is yours and stays put. Run a frontier model through your
               own keys, a model you already host, or a local one on your hardware for the filing lane. We moved every job
-              to a different model in October. 222,000 facts, none re-taught.
+              to a different model in October. Nothing was re-taught.
             </p>
           </div>
           <ul className="cp-parts" data-reveal data-delay="2" aria-label="Models LongStrider runs with">
