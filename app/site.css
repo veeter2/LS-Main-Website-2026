@@ -2486,5 +2486,17 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   background: var(--lx-paper-deep);
 }
 .mh-screen figcaption { margin-top: 10px; text-align: center; }
+.mh-film { max-width: 1120px; }
+.mh-film-frame { position: relative; }
+.mh-film video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--lx-line);
+  border-radius: 10px;
+  background: var(--lx-paper-deep);
+}
+.mh-film-pause { position: absolute; top: 12px; right: 12px; z-index: 1; background: rgba(var(--lx-paper-rgb), 0.85); }
 .mh-nots { font-size: clamp(20px, 2.2vw, 24px); color: var(--lx-ink); }
 .lx-assure.mh-center { justify-content: center; }
