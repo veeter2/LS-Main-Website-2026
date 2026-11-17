@@ -30,7 +30,7 @@ const ROOM = [
   { name: "Promises.", body: "Who said they would do what, by when. It brings them back on the day." },
   { name: "Experts.", body: "Hire a specialist. It interviews you first, then works the way your business works." },
   { name: "Agents.", body: "Work that starts where yesterday’s left off, with the same memory as you." },
-  { name: "Governance.", body: "Which model, whose keys, what it cost, who saw what. One screen." },
+  { name: "Governance.", body: "Which model, whose keys, what each answer cost, who saw what. One screen." },
   { name: "Connections.", body: "CRM, calls, email, documents. Plugged in once, they teach it every day." },
 ]
 
