@@ -130,7 +130,9 @@ const Captions = ({ t }: { t: number }) => {
               color: n > 0.5 ? C.paper : C.ink,
               opacity: o,
               transform: `translateY(${rise}px)`,
-              textShadow: n > 0.5 ? `0 0 28px rgba(42,37,64,.95), 0 0 10px rgba(42,37,64,.9)` : `0 0 28px rgba(250,247,240,.95), 0 0 10px rgba(250,247,240,.95)`,
+              padding: "10px 32px",
+              background: n > 0.5 ? `radial-gradient(ellipse at center, rgba(42,37,64,.92) 40%, rgba(42,37,64,0) 78%)` : `radial-gradient(ellipse at center, rgba(250,247,240,.96) 40%, rgba(250,247,240,0) 78%)`,
+              textShadow: n > 0.5 ? `0 0 12px rgba(42,37,64,1)` : `0 0 12px rgba(250,247,240,1)`,
             }}
           >
             {b.text}
