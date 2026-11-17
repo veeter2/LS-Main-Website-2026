@@ -52,6 +52,10 @@ export default function ForFinance() {
                 A system that keeps what it learns gets more valuable the longer you run it. One that doesn&rsquo;t is a
                 cost that resets every January.
               </p>
+              <p className="lx-lead">
+                The AI cost nobody can see is the people checking its work. Here every check is a click on the
+                record, with a name and a time, so oversight shows up on the same screen as the model bill.
+              </p>
             </>
           ),
           visual: <MemoryCurve />,

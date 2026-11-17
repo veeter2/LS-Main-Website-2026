@@ -14,7 +14,7 @@ export const ORGANS: { name: string; body: string }[] = [
   { name: "Promises.", body: "Who said they would do what, by when, caught from conversation." },
   { name: "Experts.", body: "Seat a specialist that holds your rules and your history." },
   { name: "Agents.", body: "Work that runs overnight, on your record, and leaves a note." },
-  { name: "Governance.", body: "Every model, every key, every dollar, one screen. The AI proposes; a person confirms." },
+  { name: "Governance.", body: "Every model, every key, what each answer cost, one screen. The AI proposes; a person confirms, and the confirm is on the record." },
   { name: "Any model.", body: "Swap it next year. Nothing is taught twice." },
 ]
 
