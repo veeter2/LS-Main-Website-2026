@@ -10,7 +10,6 @@ const NAV = [
   { label: "How it works", href: "/how-it-works" },
   { label: "Industries", href: "/industries" },
   { label: "Security", href: "/security" },
-  { label: "Pricing", href: "/pricing" },
   { label: "Company", href: "/company" },
 ]
 
@@ -69,9 +68,6 @@ export function ConceptShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="lx-bar-cta">
-            <Link className="lx-btn lx-btn-ghost" href="/pricing">
-              See pricing
-            </Link>
             <Link className="lx-btn lx-btn-primary" href="/book">
               <span className="lx-long">Book a working session</span>
               <span className="lx-short">Book a session</span>

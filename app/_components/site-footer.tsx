@@ -11,7 +11,6 @@ const COLUMNS = [
       { label: "For technology", href: "/for/technology" },
       { label: "For your team", href: "/for/teams" },
       { label: "Ask your own AI", href: "/for-your-ai" },
-      { label: "Pricing", href: "/pricing" },
     ],
   },
   {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { notFound } from "next/navigation"
 import Link from "next/link"
 import { pageMeta } from "@/lib/page-meta"
 import { FaqJsonLd } from "../_components/faq-jsonld"
@@ -85,7 +86,11 @@ const QA = [
   },
 ]
 
+// Hidden until pricing is approved (2026-11-17). Flip to false to publish; the page below is untouched.
+const PRICING_HIDDEN = true
+
 export default function PricingPage() {
+  if (PRICING_HIDDEN) notFound()
   return (
     <main>
       <FaqJsonLd items={QA} />
