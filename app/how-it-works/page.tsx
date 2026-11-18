@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMeta("/how-it-works", "How LongStrider wor
  * and the memory, correction, and what an architect needs to know.
  */
 
-const SOURCES = ["Chat", "Documents", "Uploaded files", "Call transcripts from your call-tracking system", "Your own agents"]
+const SOURCES = ["Chat", "Documents", "Uploaded files", "Call transcripts from your call-tracking system", "Your teammates"]
 
 const OURS = [
   { name: "The record", body: "Every conversation broken into facts, each dated, each with who said it and where." },
@@ -41,7 +41,7 @@ const ARCHITECT = [
     body: "Seven jobs, seven model settings, one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We did it in October. Nothing was re-taught.",
   },
   {
-    title: "Your agents plug in.",
+    title: "Your teammates run on your record.",
     body: "They read the record before they act and bring back findings. A person decides what enters memory.",
   },
   {
@@ -79,7 +79,7 @@ export default function HowItWorksConcept() {
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book an architecture session <span className="lx-arrow" aria-hidden>→</span>
+                Book a working session <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <a className="lx-btn lx-btn-ghost" href="#layers">
                 See the three layers
@@ -141,8 +141,8 @@ export default function HowItWorksConcept() {
           <div className="ly-band">
             <span className="ly-label">The model, rented and replaceable.</span>
             <p className="ly-model">
-              Any frontier model through your keys, or a local model on your hardware for the filing lane. It gets the facts
-              it needs for this question and writes the answer. It never has to keep the memory.
+              Any frontier model through your keys, or a local model on your hardware for the filing lane, the background job
+              that files new facts. It gets the facts it needs for this question and writes the answer. It never has to keep the memory.
             </p>
           </div>
         </div>
@@ -258,7 +258,7 @@ export default function HowItWorksConcept() {
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book an architecture session <span className="lx-arrow" aria-hidden>→</span>
+              Book a working session <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Security and ownership

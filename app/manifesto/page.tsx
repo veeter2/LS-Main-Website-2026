@@ -51,7 +51,7 @@ const PERSONAS = [
   },
   {
     type: "The regulated-industry operator",
-    body: "Financial services. Healthcare. Legal. Your data doesn’t leave your perimeter, because your regulators, your clients and your counsel require it. LongStrider was built for exactly this: sovereign deployment and full data residency.",
+    body: "Financial services. Healthcare. Legal. Your data doesn’t leave your perimeter, because your regulators, your clients and your counsel require it. LongStrider was built for exactly this: a build on your servers and full data residency.",
   },
   {
     type: "The professional services firm",
@@ -74,7 +74,7 @@ const CAPABILITIES = [
   },
   {
     title: "It gets smarter while you sleep",
-    body: "Every night, without being asked, it tidies what the day taught it: merging what repeats, flagging what conflicts, summarizing what’s settled, and noticing where priorities are starting to move. It compounds without anyone maintaining it.",
+    body: "When there is something worth saying, it writes it down: merging what repeats, flagging what conflicts, summarizing what’s settled, and noticing where priorities are starting to move. It compounds without anyone maintaining it.",
   },
   {
     title: "It has the integrity to challenge you",
@@ -104,7 +104,7 @@ const LANDSCAPE = [
 const TIERS = [
   { name: "Hosted", body: "A dedicated instance we run, isolated to you. You own the knowledge; we run the engine." },
   { name: "Private cloud", body: "Containerized inside your VPC: your servers, your perimeter, full data residency. No source code shipped." },
-  { name: "Sovereign build", body: "Built alongside your team, on your hardware. When it’s done, every part belongs to you. Permanently." },
+  { name: "Owned build", body: "Built for you, on your servers, alongside your team. When it’s done, every part belongs to you." },
   { name: "Partner program", body: "Run it under your brand for your clients. You bring the relationships and the vertical knowledge; the engine is yours to operate." },
 ]
 
@@ -179,7 +179,7 @@ export default function ManifestoConcept() {
               <p>
                 It adapts at every scale. For a person, it learns how you think and what you need. For a team, it builds
                 shared context that survives people changing roles. For an enterprise, it accumulates what the whole
-                company has decided and learned. All sovereign, all yours.
+                company has decided and learned. All yours.
               </p>
               <p>
                 And it isn&rsquo;t a black box. Every answer shows what it drew on and why. Disagree, correct it, and the

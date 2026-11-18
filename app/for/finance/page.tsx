@@ -43,10 +43,8 @@ export default function ForFinance() {
           body: (
             <>
               <p className="lx-lead">
-                An MIT NANDA study of 300+ enterprise AI deployments found 95% saw no measurable return, and said why:
-                &ldquo;Most GenAI systems do not retain feedback, adapt to context, or improve over time.&rdquo; (MIT
-                NANDA, 2025) Deloitte&rsquo;s survey of 3,500 leaders this October found 86% plan to spend more on AI
-                next year, while only 25% say it has changed how they operate. (Deloitte, October 2026)
+                Most companies plan to spend more on AI next year. Few say it has changed how they operate, and the
+                research says why: most AI systems do not keep feedback, adapt to context, or improve over time.
               </p>
               <p className="lx-lead">
                 A system that keeps what it learns gets more valuable the longer you run it. One that doesn&rsquo;t is a
@@ -68,28 +66,18 @@ export default function ForFinance() {
                 You can see the bill. Can you see what <em>drives</em> it?
               </h2>
               <p className="lx-lead" data-reveal data-delay="1">
-                71% of companies track their total AI spend. 44% can see the cost per unit of work. (Deloitte, October
-                2026) LongStrider shows spend by job and by model, every day, on one screen. You&rsquo;ll know what the
-                overnight pass cost last night, and most nights the answer is nothing.
+                Most companies can see their total AI bill. Far fewer can see what one piece of work costs. LongStrider
+                shows spend by job and by model, every day, on one screen. You&rsquo;ll know what the overnight pass
+                cost last night, and most nights the answer is nothing.
               </p>
               <p className="lx-lead" data-reveal data-delay="2">
-                Here is what that screen told us about our own instance over the last two weeks, for the one call that
-                answers a person&rsquo;s message:
+                Here is what that screen told us about our own instance. The same reply to a person&rsquo;s message,
+                with the same memory, the same tools and the same receipts, costs a fraction as much when a cheaper
+                model answers. Only the model changed.
               </p>
-              <div className="fo-cost lx-card" data-reveal data-delay="2" role="table" aria-label="Cost per chat reply by model">
-                <div className="fo-cost-row" role="row">
-                  <span role="cell">Claude Sonnet 5.5, direct</span>
-                  <span role="cell" className="lx-num">about 4.8 cents a reply</span>
-                </div>
-                <div className="fo-cost-row" role="row">
-                  <span role="cell">DeepSeek V4.1 Flash, through Isoquant</span>
-                  <span role="cell" className="lx-num">about 0.09 cents a reply</span>
-                </div>
-              </div>
               <p className="lx-lead" data-reveal data-delay="3">
-                Roughly 55 times apart. Same memory, same tools, same receipts. Only the model answering changed. We
-                don&rsquo;t claim the answers are identical; we measure that separately, and we&rsquo;ll show you that
-                number next to this one. The point is that the choice is yours, per job, and you can change your mind,
+                We don&rsquo;t claim the answers are identical; we measure that separately, and we&rsquo;ll show you
+                that next to the bill. The point is that the choice is yours, per job, and you can change your mind,
                 because the memory doesn&rsquo;t live in the model.
               </p>
             </div>
@@ -110,7 +98,7 @@ export default function ForFinance() {
           },
           {
             q: "What if a vendor changes its terms?",
-            a: "Which vendor? The model vendors sit behind your own keys, so a worse deal means a new setting, not a new system. We sit behind a license you hold and rows you can export, with exit terms agreed up front. Nobody in that chain can change an interface, a privacy rule or a price and leave you stuck.",
+            a: "Which vendor? The model vendors sit behind your own keys, so a worse deal means a new setting, not a new system. We sit behind a license you hold and data that sits in plain Postgres you can read with any tool, with exit terms agreed up front. Nobody in that chain can change an interface, a privacy rule or a price and leave you stuck.",
           },
           {
             q: "What if we stop?",

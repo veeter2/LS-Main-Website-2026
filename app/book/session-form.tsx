@@ -104,11 +104,11 @@ export function SessionForm() {
         <input name="website" tabIndex={-1} autoComplete="off" />
       </label>
       <label className="bk-field">
-        <span>The question your team can&rsquo;t answer today</span>
+        <span>The hardest question your team can&rsquo;t answer today</span>
         <textarea
           name="question"
           rows={4}
-          placeholder="A client, a claim, a matter, a rollout. The more specific, the better."
+          placeholder="Why did we settle the Ashgrove claim the way we did? What did we promise this client in March?"
         />
       </label>
       <button className="lx-btn lx-btn-primary bk-submit" type="submit" disabled={status === "sending"}>

@@ -18,7 +18,7 @@ const EXCHANGES: Exchange[] = [
     answer: (
       <>
         The Reyes closing date has come up <b className="lx-num">7 times</b> since <b>3 November</b>. You gave me two
-        dates: <b>the 12th</b> on Monday, and <b>the 19th</b> yesterday, in a different thread. I&rsquo;ve flagged that
+        dates: <b>the 12th</b> on Monday, and <b>the 19th</b>{" "}yesterday, in a different thread. I&rsquo;ve flagged that
         as a conflict. Which one stands?
       </>
     ),
