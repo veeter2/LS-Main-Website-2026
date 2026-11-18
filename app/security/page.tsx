@@ -208,7 +208,7 @@ export default function SecurityConcept() {
             <span className="hx-step">05</span> Where it runs
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            As much of it inside your walls as <em>you</em> need. Here&rsquo;s what&rsquo;s true today.
+            As much of it inside your walls as <em>you</em>{" "}need. Here&rsquo;s what&rsquo;s true today.
           </h2>
         </div>
         <div className="lx-wrap">
