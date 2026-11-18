@@ -10,7 +10,7 @@ export const metadata: Metadata = pageMeta("/security", "Security and ownership 
 const OWNERSHIP = [
   {
     title: "It belongs to you.",
-    body: "The facts, the links between them and every correction are your company\u2019s asset. Ask for an export and you get rows, not a paragraph.",
+    body: "The facts, the links between them and every correction are your company\u2019s asset. Your data sits in plain Postgres you can read with any tool.",
   },
   {
     title: "It trains no one\u2019s model.",
@@ -107,8 +107,8 @@ export default function SecurityConcept() {
               what it opened, so you can always see how it learned what it knows.
             </p>
             <p className="sec-stat" data-reveal data-delay="3">
-              Three in four leaders now say where their AI runs shapes their strategy, and 62% worry about relying on
-              foreign-owned AI. (Deloitte, State of AI in the Enterprise, October 2026)
+              Most leaders now say where their AI runs shapes their strategy, and many worry about relying on AI owned
+              outside their country. (Deloitte, State of AI in the Enterprise)
             </p>
           </div>
           <div className="sc-rings" data-reveal data-delay="2" aria-label="Three scopes of memory">
@@ -137,7 +137,8 @@ export default function SecurityConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Bring the frontier model you trust through your own keys, point it at a model you already run in-house, or put
-              a local model on your own hardware for the filing lane. LongStrider is not a service you log into with our
+              a local model on your own hardware for the filing lane, the background job that files new facts. LongStrider is
+              not a service you log into with our
               model behind it. It is software you install, and the model is whatever you choose. When a better one arrives,
               you switch, and nothing has to be re-taught.
             </p>
@@ -194,9 +195,9 @@ export default function SecurityConcept() {
           </p>
           <p className="sec-rules-note" data-reveal data-delay="3">
             Deloitte&rsquo;s four levels of AI autonomy are informs, recommends, executes within limits, and acts.
-            LongStrider sits at &ldquo;recommends,&rdquo; on purpose. It proposes; a person confirms; every write is receipted
-            and can be undone. 40% of companies already let AI act without approval and only 9% call their multi-agent
-            workflows fully governed. We&rsquo;d rather be in the 9%. (Deloitte, October 2026)
+            LongStrider sits at &ldquo;recommends,&rdquo; on purpose. It proposes; a person confirms; every write leaves a
+            receipt and can be undone. Many companies already let AI act without approval, and few call their agent
+            workflows fully governed. We&rsquo;d rather be among the few. (Deloitte)
           </p>
         </div>
       </section>

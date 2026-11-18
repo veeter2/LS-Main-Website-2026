@@ -70,7 +70,7 @@ export default function ForTechnology() {
           </>
         ),
         lead: "Model-agnostic, scoped to each person in the database, every answer receipted, and deployable from hosted to inside your walls. LongStrider sits beside your stack. It doesn’t ask you to rebuild it, and it doesn’t put a vendor between you and your own model.",
-        cta: "Book an architecture session",
+        cta: "Book a working session",
         points: [
           {
             title: "Any model, your keys.",

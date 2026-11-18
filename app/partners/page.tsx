@@ -33,17 +33,17 @@ const STACK = [
 
 const SIGNALS = [
   {
-    text: "88% of organizations now use AI in at least one function. About 37% see any profit from it.",
+    text: "Most organizations now use AI somewhere in the business. Only a minority see any profit from it.",
     source: "McKinsey, State of AI, 2025 and 2026",
     href: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
   },
   {
-    text: "Gartner forecasts $761 billion of spending on AI services in 2027 alone.",
+    text: "Spending on AI services keeps climbing, and the forecasts keep rising with it.",
     source: "Gartner, January 2026",
     href: "https://www.gartner.com/en/newsroom/press-releases/2026-01-22-gartner-forecasts-worldwide-ai-spending-to-reach-nearly-3-trillion-by-2027",
   },
   {
-    text: "Accenture booked $5.9 billion of generative AI work in fiscal 2025.",
+    text: "The largest consultancies already book a large and growing share of their work in generative AI.",
     source: "Accenture 8-K, September 2025",
     href: "https://www.accenture.com/us-en/investor-relations",
   },
