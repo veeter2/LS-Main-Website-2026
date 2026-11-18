@@ -7,7 +7,7 @@ const SECTIONS: LegalSection[] = [
   },
   {
     title: 'Zero Access Architecture',
-    lead: 'We do not store, access, review, or have any ability to access your data.',
+    lead: 'On an owned build we have no access to your data. On hosted, your data is isolated by row-level rules and deleted on request.',
     items: [
       { label: 'On-Premises Deployments', text: 'All data remains on your infrastructure. We have zero access to your conversations, institutional memory, or any information processed by your LongStrider instance.' },
       { label: 'Hosted Intelligence', text: 'Your data is stored in isolated, dedicated instances. Our infrastructure team cannot access the contents of your data.' },
@@ -37,7 +37,7 @@ const SECTIONS: LegalSection[] = [
 const STRIP = [
   { label: 'Your Data', body: 'Belongs to you and you alone. We never claim rights to your content.' },
   { label: 'One-to-One', body: 'Your instance serves you exclusively. No data sharing across customers.' },
-  { label: 'Zero Access', body: 'We cannot access your conversations, memory, or processed data.' },
+  { label: 'Zero Access', body: 'On an owned build we cannot access your conversations, memory, or processed data.' },
 ];
 
 export default function PrivacyPolicyPage() {

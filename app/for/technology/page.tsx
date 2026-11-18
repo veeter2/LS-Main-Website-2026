@@ -69,7 +69,7 @@ export default function ForTechnology() {
             A memory layer your architects can <em>open</em> up.
           </>
         ),
-        lead: "Model-agnostic, scoped to each person in the database, every answer receipted, and deployable from hosted to inside your walls. LongStrider sits beside your stack. It doesn’t ask you to rebuild it, and it doesn’t put a vendor between you and your own model.",
+        lead: "Model-agnostic, scoped to each person in the database, a receipt on every answer, and deployable from hosted to inside your walls. LongStrider sits beside your stack. It doesn’t ask you to rebuild it, and it doesn’t put a vendor between you and your own model.",
         cta: "Book a working session",
         points: [
           {

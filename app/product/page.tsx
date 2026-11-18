@@ -217,10 +217,10 @@ export default function ProductConcept() {
               <span className="hx-step">05</span> Agents
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Your agents start where <em>yesterday&rsquo;s</em> left off.
+              Your teammates start where <em>yesterday&rsquo;s</em> left off.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              The model is the voice. LongStrider is the memory and the judgment. Agents you build read the record before
+              The model is the voice. LongStrider is the memory and the judgment. Your teammates read the record before
               they act, run overnight if you want them to, and bring their findings back as a note. You decide what goes
               into memory. So Wednesday&rsquo;s run starts from Monday&rsquo;s and Tuesday&rsquo;s, instead of from
               nothing.
