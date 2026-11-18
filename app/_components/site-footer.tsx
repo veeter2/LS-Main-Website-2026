@@ -27,7 +27,7 @@ const COLUMNS = [
     links: [
       { label: "About", href: "/company" },
       { label: "The manifesto", href: "/manifesto" },
-      { label: "Book a session", href: "/book" },
+      { label: "Book a working session", href: "/book" },
       { label: "Contact", href: "mailto:hello@longstrider.ai" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },

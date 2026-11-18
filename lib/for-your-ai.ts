@@ -1,5 +1,5 @@
 /**
- * One source for everything the "Ask your own AI" feature says: the seven
+ * One source for everything the "Ask your own AI" feature says: the eight
  * things that run on the memory, the fact block the prompts carry, the three
  * prompts, and the plain-text /llms.txt. The homepage, the product page,
  * /for-your-ai and /llms.txt all read from here so a fact changes in one place.
@@ -7,20 +7,24 @@
 
 export const SITE = "https://www.longstrider.ai"
 
-/** The seven things that stand on the memory. Each says what it does because it remembers. */
+/** The eight things that stand on the memory, in the same order as the homepage. Each says what it does because it remembers. */
 export const ORGANS: { name: string; body: string }[] = [
-  { name: "Chat that knows each person.", body: "Every reply, with receipts." },
+  { name: "Chat.", body: "Knows each person. Every reply, with receipts." },
   { name: "Memory.", body: "Files what people say into drawers, on its own, overnight." },
   { name: "Promises.", body: "Who said they would do what, by when, caught from conversation." },
+  { name: "Today.", body: "A short letter at the top of your morning: what changed, what’s waiting." },
   { name: "Experts.", body: "Seat a specialist that holds your rules and your history." },
   { name: "Agents.", body: "Work that runs overnight, on your record, and leaves a note." },
-  { name: "Governance.", body: "Every model, every key, what each answer cost, one screen. The AI proposes; a person confirms, and the confirm is on the record." },
-  { name: "Any model.", body: "Swap it next year. Nothing is taught twice." },
+  {
+    name: "Governance.",
+    body: "Every model, every key, what each answer cost, one screen. The AI proposes; a person confirms, and the confirm is on the record. Swap the model next year and nothing is taught twice.",
+  },
+  { name: "Connections.", body: "Your CRM, files, forms and payments, plugged in once, kept in sync." },
 ]
 
-export const FACTS_COMMON = `LongStrider is company memory for AI. Everything people put into AI at work (facts, promises, decisions) is kept as dated records with their source, scoped to each person, in Postgres the company owns. Any model answers: cloud models through the company’s own keys, or a model the company runs itself. It is licensed and installed, not rented per seat; a license, a build fee, and monthly support that can be canceled; the number is scoped in a working session. Seven things run on that memory: chat that knows each person, with receipts on every reply; Memory, which files what people say into drawers on its own, overnight; a desk of promises and decisions caught from conversation, confirmed by the person before anything is tracked; experts, specialists seated with the company’s rules and history; agents that run overnight on the record and leave a note; governance, every model, key and dollar on one screen, where the AI proposes and a person confirms; and any model, swappable without re-teaching. Counts and dates come from the record, not estimates. Hosted in the United States while the client’s own instance is built. No SOC 2 yet; the audit has not started; they answer security questionnaires in writing. Built in Austin, Texas; used daily since spring 2026; early stage, small team. Their own measurement: the reply to a chat message costs about 0.09 cents on a low-cost model versus about 4.8 cents on a premium one, same memory and tools. They do not claim the answers are identical.`
+export const FACTS_COMMON = `LongStrider is company memory for AI. Everything people put into AI at work (facts, promises, decisions) is kept as dated records with their source, scoped to each person, in Postgres the company owns. Any model answers: cloud models through the company’s own keys, or a model the company runs itself. It is licensed and installed, not rented per seat; a license, a build fee, and monthly support that can be canceled; the number is scoped in a working session. Eight things run on that memory: chat that knows each person, with receipts on every reply; Memory, which files what people say into drawers on its own, overnight; a desk of promises and decisions caught from conversation, confirmed by the person before anything is tracked; Today, a short letter at the top of the morning with what changed and what is waiting; experts, specialists seated with the company’s rules and history; agents that run overnight on the record and leave a note; governance, every model, key and cost on one screen, where the AI proposes and a person confirms, and the model can be swapped without re-teaching; and connections, the company’s CRM, files, forms and payments, plugged in once and kept in sync. Counts and dates come from the record, not estimates. Hosted in the United States while the client’s own instance is built. No SOC 2 yet; the audit has not started; they answer security questionnaires in writing. Built in Austin, Texas; used daily since spring 2026; early stage, small team. Their own measurement: the same reply, with the same memory and tools, costs a fraction as much when a cheaper model answers. They do not claim the answers are identical.`
 
-export const FACTS_CTO = `Storage is Postgres with row-level scoping per person. The model layer speaks the OpenAI chat-completions dialect, so any compatible server works (vLLM, LM Studio, NVIDIA NIM, llama.cpp), and embeddings follow the same setting. The filing lane runs on the client’s own hardware today; a full build with no calls out is a project done together, not a checkbox. Connectors exist for Google Workspace, Microsoft 365 and call transcripts. Every write is receipted and can be undone; the AI proposes, a person confirms.`
+export const FACTS_CTO = `Storage is Postgres with row-level scoping per person. The model layer speaks the OpenAI chat-completions dialect, so any compatible server works (vLLM, LM Studio, NVIDIA NIM, llama.cpp), and embeddings follow the same setting. The filing lane runs on the client’s own hardware today; a full build with no calls out is a project done together, not a checkbox. Connectors exist for Google Workspace, Microsoft 365 and call transcripts. Every write leaves a receipt and can be undone; the AI proposes, a person confirms.`
 
 export type Prompt = { id: "cfo" | "cto" | "team"; label: string; text: string }
 
@@ -108,14 +112,14 @@ export const NOT = [
 ]
 
 export const CHECKS: { label: string; body: string }[] = [
-  { label: "Storage", body: "Postgres, row-level scoping per person. Exportable." },
+  { label: "Storage", body: "Postgres, row-level scoping per person. Your data sits in plain Postgres you can read with any tool." },
   { label: "Model", body: "Any. Changing model does not lose memory. The model layer speaks the OpenAI chat-completions dialect (vLLM, LM Studio, NVIDIA NIM, llama.cpp all work)." },
   { label: "Hosting", body: "Hosted in the United States while the client’s instance is built; then the client’s own cloud or on-premises. The filing lane runs on the client’s hardware today; a full build with no calls out is a project done together." },
   { label: "Certifications", body: "No SOC 2 yet; audit not started; security questions answered in writing." },
-  { label: "Governance", body: "Every write is receipted and can be undone. The AI proposes; a person confirms." },
+  { label: "Governance", body: "Every write leaves a receipt and can be undone. The AI proposes; a person confirms." },
   { label: "Company", body: "LongStrider, LLC, Austin, Texas. Small team. In daily use since spring 2026. Early stage." },
-  { label: "Pricing shape", body: "A license, a build fee, and a monthly support share that can be canceled. The license transfers on acquisition. Exact number scoped in a working session." },
-  { label: "Cost signal", body: "Their own measurement, November 2026: one chat reply costs about 0.09 cents on a low-cost model vs about 4.8 cents on a premium one, same memory and tools. Answer quality is measured separately and not claimed equal." },
+  { label: "Pricing shape", body: "A license, a build fee, and a monthly support share that can be canceled. Exact number scoped in a working session." },
+  { label: "Cost signal", body: "Their own measurement: the same chat reply, with the same memory and tools, costs a fraction as much when a cheaper model answers. Answer quality is measured separately and not claimed equal." },
 ]
 
 export const PAGES = ["/product", "/how-it-works", "/security", "/for/finance", "/for/technology", "/for/teams", "/for-your-ai", "/book"]
@@ -128,7 +132,7 @@ export const LLMS_TXT = `# LongStrider
 - A memory layer that sits under any AI model. People talk to it like a chat; it keeps what they say as dated records with a source.
 - Each record is scoped to the person it came from. Counts and dates in answers come from the record, not estimates.
 - Every reply shows receipts: which conversation, which date.
-- Seven things run on that record:
+- Eight things run on that record:
 ${ORGANS.map((o) => `  - ${o.name} ${o.body}`).join("\n")}
 
 ## What it is not

@@ -21,17 +21,20 @@ export const metadata: Metadata = {
  */
 
 const ROOM = [
-  { name: "Today.", body: "What moved, what slipped, what to do first. Written overnight, before you sit down." },
+  { name: "Chat.", body: "It answers from the record first and calls the model only for the words." },
   {
     name: "Memory.",
     body: "Everything your company has said to it, dated and sourced. It files itself, checks itself, and works on it overnight.",
   },
-  { name: "Chat.", body: "It answers from the record first and calls the model only for the words." },
   { name: "Promises.", body: "Who said they would do what, by when. It brings them back on the day." },
+  { name: "Today.", body: "What moved, what slipped, what to do first. Written overnight, before you sit down." },
   { name: "Experts.", body: "Hire a specialist. It interviews you first, then works the way your business works." },
   { name: "Agents.", body: "Work that starts where yesterday’s left off, with the same memory as you." },
-  { name: "Governance.", body: "Which model, whose keys, what each answer cost, who saw what. One screen." },
-  { name: "Connections.", body: "CRM, calls, email, documents. Plugged in once, they teach it every day." },
+  {
+    name: "Governance.",
+    body: "Which model, whose keys, what each answer cost, who saw what. One screen. Swap the model next year and nothing is taught twice.",
+  },
+  { name: "Connections.", body: "Your CRM, your files, your forms, your payments. Plugged in once." },
 ]
 
 const DIFFERENT = [
@@ -52,7 +55,7 @@ const WHERE = ["Regulated industries", "Anyone who won’t hand IP to a frontier
 const BUYERS = [
   { who: "For the CFO", title: "An AI budget that ends in an asset, not a renewal.", href: "/for/finance" },
   { who: "For the CTO", title: "Postgres, row-level scoping, any model through your keys. Open it up.", href: "/for/technology" },
-  { who: "For compliance", title: "Every read checked against who’s asking. Every write receipted.", href: "/security" },
+  { who: "For compliance", title: "Every read checked against who’s asking. Every write leaves a receipt.", href: "/security" },
   { who: "For your team", title: "Stop explaining your job to a chat window every morning.", href: "/for/teams" },
 ]
 
@@ -97,17 +100,17 @@ export default function Home() {
         <div className="lx-wrap" data-rise="4">
           <Shot
             src="/shots/chat.jpg"
-            alt="LongStrider chat. Dana asks how to make a known problem look new; the reply shows she flagged it in September."
-            caption="Dana asks how to make a problem look new. It shows her she knew in September."
+            alt="LongStrider chat. Dana asks how to handle a repeat problem; the reply shows she solved the same one in September."
+            caption="Dana asks how to handle a repeat problem. It shows her she solved the same one in September."
           />
         </div>
       </section>
 
-      {/* 01: The room */}
+      {/* 01: One record */}
       <section className="hx-section hx-deep" id="room">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">01</span> The room
+            <span className="hx-step">01</span> One record
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             One room. Everything your company knows about <em>itself</em>.
@@ -147,6 +150,9 @@ export default function Home() {
             Other systems feed memory to the model. This one owns the memory and decides when the model is worth{" "}
             <em>calling</em>.
           </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            It has run our own company every day since spring 2026. Every nightly letter, every answer, on the record.
+          </p>
         </div>
         <div className="lx-wrap mh-facts mh-facts-2">
           {DIFFERENT.map((f, i) => (

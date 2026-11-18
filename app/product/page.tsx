@@ -10,10 +10,10 @@ import { ORGANS } from "@/lib/for-your-ai"
 export const metadata: Metadata = pageMeta("/product", "What it does: facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced record your company owns. Counts, not guesses. Promises tracked only after you confirm.")
 
 /**
- * What LongStrider does: the seven things that run on the memory, in the
- * order a buyer meets them. Chat, Memory, promises, experts, agents,
- * governance, any model. The names come from lib/for-your-ai so the homepage,
- * this page and /llms.txt say the same seven.
+ * What LongStrider does: the eight things that run on the memory. The hero
+ * chips read the names from lib/for-your-ai (ORGANS), the same list the
+ * homepage ROOM and /llms.txt use. The sections below walk through the ones
+ * a buyer meets first; Today and Connections have no section of their own yet.
  */
 
 const RECORD_POINTS = [
@@ -80,8 +80,8 @@ export default function ProductConcept() {
             <p className="lx-lead" data-rise="2">
               LongStrider takes what your team already puts into AI, in chat, in documents, in uploaded files and call
               transcripts, and keeps the part that matters: the facts, the promises, what changed, and what keeps coming
-              up. Each with its source. Each yours. Seven things run on that record. Here they are, in the order
-              you&rsquo;d meet them.
+              up. Each with its source. Each yours. Eight things run on that record. Here are the ones you&rsquo;d meet
+              first.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
@@ -145,9 +145,9 @@ export default function ProductConcept() {
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             At five in the morning it asks one question: did anything new land yesterday? If not, it stops, and you
             aren&rsquo;t paying for a model to re-read what it already knows. If something did, it reads what the day
-            wrote, files it into the right drawers, a person, an account, a matter, on its own, links the notes that say
-            the same thing, flags the ones that contradict, and leaves a short note at the top of your morning. Nobody
-            tags anything.
+            wrote and files it into the right drawers on its own: a person, an account, a matter. It links the notes
+            that say the same thing and flags the ones that contradict. Then it leaves a short note at the top of your
+            morning. Nobody tags anything.
           </p>
         </div>
         <ol className="lx-wrap nt-line">
