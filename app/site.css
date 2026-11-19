@@ -335,8 +335,8 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .lx-bar[data-scrolled="true"] { border-bottom-color: var(--lx-line-subtle); }
 .lx-bar-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 24px; }
 .lx-brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--lx-ink-primary); }
-.lx-brand-mark { filter: brightness(0); opacity: 0.9; }
-.lx-brand-word { font-family: var(--lx-display); font-size: 21px; letter-spacing: 0.005em; line-height: 1; }
+.lx-brand-mark { color: var(--lx-ink-primary); flex: none; }
+.lx-brand-word { font-family: var(--lx-display); font-size: 21px; font-weight: 500; letter-spacing: 0.01em; line-height: 1; }
 .lx-links { display: flex; gap: 32px; }
 .lx-links a {
   white-space: nowrap;

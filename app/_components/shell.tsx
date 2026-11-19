@@ -58,7 +58,7 @@ export function ConceptShell({ children }: { children: ReactNode }) {
       <header className="lx-bar" data-scrolled={scrolled}>
         <div className="lx-wrap lx-bar-inner">
           <Link href="/" className="lx-brand" aria-label="LongStrider home">
-            <LongstriderLogo size={30} className="lx-brand-mark" />
+            <LongstriderLogo size={32} className="lx-brand-mark" />
             <span className="lx-brand-word">LongStrider</span>
           </Link>
           <nav className="lx-links" aria-label="Primary">
