@@ -286,6 +286,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   line-height: 1.08;
 }
 .lx-display em { font-style: italic; color: var(--lx-gold-ink); }
+.lx-lead strong { font-weight: 600; color: var(--lx-gold-ink); }
 .lx-lead {
   font-size: clamp(17px, 1.35vw, 20px);
   line-height: 1.62;
