@@ -242,8 +242,8 @@ export default function Home() {
             <Link className="lx-btn lx-btn-primary" href="/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>
             </Link>
-            <Link className="lx-btn lx-btn-ghost" href="/manifesto">
-              Read the manifesto
+            <Link className="lx-btn lx-btn-ghost" href="/own-it">
+              Not SaaS? See how you own it
             </Link>
           </div>
         </div>

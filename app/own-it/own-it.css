@@ -1,0 +1,72 @@
+/* Styles for /own-it. Reuses the shared site vocabulary (hx-section, lx-wrap,
+   mh-facts, lx-cta-row from site.css). Only the ladder and callout are new. */
+
+.own-cost {
+  margin-top: 14px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.own-ladder {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.own-rung {
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 14px;
+  padding: 24px 24px 20px;
+  background: rgb(255 255 255 / 0.03);
+}
+
+.own-rung-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.own-rung-num {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  opacity: 0.45;
+}
+
+.own-rung h3 {
+  font-size: 19px;
+}
+
+.own-status {
+  margin-left: auto;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.own-modelbox {
+  border-left: 2px solid rgb(255 255 255 / 0.25);
+  padding: 8px 0 8px 28px;
+  align-self: center;
+}
+
+.own-modelbox-title {
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .own-ladder {
+    grid-template-columns: 1fr;
+  }
+}
