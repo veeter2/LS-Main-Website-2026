@@ -1,28 +1,28 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { pageMeta } from "@/lib/page-meta"
-import { LadderArt } from "../_components/ladder-art"
+import { MemoryStays } from "../_components/memory-stays"
 import "./own-it.css"
 
 export const metadata: Metadata = pageMeta(
   "/own-it",
-  "Own it outright · Hosted today, air-gapped when you're ready",
-  "Not SaaS. Licensed software you own: start hosted, bring your own keys, run your own model, move it inside your walls. The memory never has to move.",
+  "Own it outright · Your keys, your model, your machine",
+  "Not SaaS. Licensed software you own: your own key from day one, your own model on your own machine, hosted by us or in your rack. The memory never moves.",
 )
 
 /**
  * The buyer's side of how it works: the path from working session to
- * ownership, the deployment ladder from hosted to air-gapped, and what
- * "owning it" means in practice. Every claim here matches what is true
- * today; the ladder states honestly which rungs are scoped with you.
+ * ownership, the five ways to run it (your keys first), and what "owning
+ * it" means in practice. Every claim here matches what is true today; the
+ * ladder states honestly which rungs are scoped with you.
  */
 
 const PATH = [
   {
     step: "1",
     title: "The working session.",
-    body: "One hour. Your hardest question and your people in the room. You see the record, the promises and the morning note built from your material — not a slide deck about ours. You keep what we build.",
-    cost: "Free",
+    body: "One hour. Your hardest question and your people in the room. You see the record, the promises and the morning note built from your material, not a slide deck about ours. You keep what we build.",
+    cost: "",
   },
   {
     step: "2",
@@ -40,40 +40,40 @@ const PATH = [
 
 const LADDER = [
   {
-    rung: "Hosted to start",
+    rung: "Your own API key. Day one.",
     status: "Available now",
-    body: "Your company's own instance, isolated to you, run by us. The fastest way to start — most companies do. Your keys from day one; the memory is yours to export any time.",
+    body: "Frontier models, or open models through Isoquant such as GLM Flash and DeepSeek Flash. The spend lands on your bill, never ours. This is the first step: we never sell or rent a model.",
   },
   {
-    rung: "Your own keys (BYOK)",
+    rung: "Your own model on your own machine.",
     status: "Available now",
-    body: "Bring the frontier model you trust through your own API keys. We never hold a key we don't need, and the spend shows on your bill, not ours.",
+    body: "Ollama, vLLM, LM Studio, Qwen. Chat and filing both run on hardware you own. Nothing has to be re-taught when you switch.",
   },
   {
-    rung: "Your own model",
-    status: "Filing lane today, more scoped with you",
-    body: "Any OpenAI-compatible server, including Ollama on your own hardware. The background job that files new facts can run on your machines today. Which jobs move fully local is a scope conversation.",
+    rung: "The app hosted by us, isolated to you.",
+    status: "Available now",
+    body: "We run the software in an instance that is yours alone. We never hold a model you pay us for.",
   },
   {
-    rung: "Private cloud",
+    rung: "Your cloud or your rack.",
     status: "Scoped with you",
-    body: "The whole system inside your cloud account — AWS, Azure, GCP, or the rack in your office. Same software, your infrastructure, our help setting it up.",
+    body: "The whole system inside your cloud account or the rack in your office. Same software, your infrastructure, our help setting it up.",
   },
   {
-    rung: "Air-gapped",
+    rung: "Nothing leaves the building.",
     status: "Call us",
-    body: "Nothing leaves the building: no outside model, no outside connection in the memory's path. If that's your requirement, call us — it's the deployment the architecture was built for, and we scope it by hand.",
+    body: "No outside model, no outside connection in the memory\u2019s path. If that is your requirement, call us. It is the deployment the architecture was built for, and we scope it by hand.",
   },
 ]
 
 const OWN_FACTS = [
   {
     title: "Your data sits in plain Postgres.",
-    body: "Readable with any tool you already own. Ask for an export and you get rows, not a paragraph.",
+    body: "Your data sits in plain Postgres you can read with any tool you already own.",
   },
   {
     title: "No training, ever.",
-    body: "LongStrider has no training code. It learns by filing what your people say into the record — which is why nothing has to be re-taught when you change models.",
+    body: "LongStrider has no training code. It learns by filing what your people say into the record, which is why nothing has to be re-taught when you change models.",
   },
   {
     title: "Switch anything, lose nothing.",
@@ -98,9 +98,9 @@ export default function OwnItPage() {
               Rent the model. Own <em>everything</em> else.
             </h1>
             <p className="lx-lead" data-rise="2">
-              LongStrider is licensed software, not a subscription you rent. Start hosted and move it
-              inside your walls when you're ready — your keys, your model, or no model outside the
-              building at all. The memory never has to move, so nothing is ever re-taught.
+              LongStrider is licensed software, not a subscription you rent. Your own key from day
+              one, your own model on your own machine, hosted by us or in your rack. The memory never
+              moves, so nothing is ever re-taught.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
@@ -130,13 +130,13 @@ export default function OwnItPage() {
                 {p.step} {p.title}
               </h3>
               <p>{p.body}</p>
-              <p className="own-cost">{p.cost}</p>
+              {p.cost ? <p className="own-cost">{p.cost}</p> : null}
             </div>
           ))}
         </div>
       </section>
 
-      <LadderArt />
+      <MemoryStays />
 
       <section className="hx-section hx-deep" id="ladder">
         <div className="lx-wrap hx-center">
@@ -144,14 +144,14 @@ export default function OwnItPage() {
             <span className="hx-step">02</span> The ladder
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Five ways to run it. Climb <em>any</em> time.
+            Your keys. Your model. Your <em>machine</em>.
           </h2>
           <p className="lx-lead" data-reveal data-delay="2">
-            Every rung runs the same record. Moving up never moves the memory — that's the part
-            we own the architecture for, and the part no rented stack can offer.
+            Five ways to run it, in the order most companies take them. Every one runs the same
+            record. Moving between them never moves the memory.
           </p>
         </div>
-        <div className="lx-wrap own-ladder" aria-label="Deployment options from hosted to air-gapped">
+        <div className="lx-wrap own-ladder" aria-label="Five ways to run it">
           {LADDER.map((r, i) => (
             <div key={r.rung} className="own-rung" data-reveal data-delay={String((i % 3) + 1)}>
               <div className="own-rung-head">
@@ -176,7 +176,7 @@ export default function OwnItPage() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Connect your CRM, your files, your forms and your call transcripts. Import years of
-              history. It's filed into the record in days and useful the week it lands — dated,
+              history. It is filed into the record in days and useful the week it lands: dated,
               sourced, scoped to who it belongs to.
             </p>
           </div>
@@ -184,7 +184,7 @@ export default function OwnItPage() {
             <p className="own-modelbox-title">&ldquo;How long does it take to train?&rdquo;</p>
             <p>
               There is no training step. LongStrider learns by filing what your people say into a
-              record you own — so it's useful the week you import, and nothing has to be re-taught
+              record you own, so it is useful the week you import, and nothing has to be re-taught
               when you change models. A trained model is a cost
               you can't move. A record is an asset you can.
             </p>
@@ -218,7 +218,7 @@ export default function OwnItPage() {
           </h2>
           <p className="lx-lead" data-reveal data-delay="1">
             An hour, your people, one real question from your business. You leave knowing what your
-            company would own — and which rung of the ladder it would start on.
+            company would own, and which rung of the ladder it would start on.
           </p>
           <div className="lx-cta-row" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
