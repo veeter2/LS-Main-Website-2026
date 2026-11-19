@@ -208,7 +208,7 @@ export default function HowItWorksConcept() {
                 19 November <span className="lx-num">(Kayla, 6 Nov)</span>
               </p>
               <div className="cr-why">
-                <span className="cr-why-label">Why it changed</span>
+                <span className="lx-label">Why it changed</span>
                 <span>&ldquo;Legal pushed it.&rdquo; Kayla, 7 Nov.</span>
               </div>
               <div className="mh-note-sources">

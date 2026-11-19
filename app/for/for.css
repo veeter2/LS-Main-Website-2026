@@ -43,13 +43,6 @@
 .fo-moat p { margin-top: 24px; font-size: 17px; line-height: 1.75; color: var(--lx-ink-body); }
 .fo-moat p + p { margin-top: 16px; }
 .fo-demo { padding: 26px 28px 30px; display: grid; gap: 14px; }
-.fo-demo-head {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--lx-gold-ink);
-}
 .fo-demo p { margin: 0; font-size: 16px; line-height: 1.65; color: var(--lx-ink-body); }
 .fo-demo p + p { padding-top: 14px; border-top: 1px solid var(--lx-line-subtle); }
 @media (max-width: 860px) {

@@ -1,13 +1,7 @@
 /* Styles for /own-it. Reuses the shared site vocabulary (hx-section, lx-wrap,
    mh-facts, lx-cta-row from site.css). Only the ladder and callout are new. */
 
-.own-cost {
-  margin-top: 14px;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--lx-ink-hint);
-}
+.own-cost { margin-top: 14px; }
 
 .own-ladder {
   margin-top: 56px;
@@ -43,11 +37,6 @@
   margin-bottom: 10px;
 }
 
-.own-rung-num {
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--lx-gold-ink);
-}
 
 .own-rung h3 {
   font-size: 19px;
@@ -56,11 +45,8 @@
 
 .own-status {
   margin-left: auto;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: var(--lx-radius);
   border: 1px solid var(--lx-gold-line);
   color: var(--lx-gold-ink);
   background: var(--lx-gold-wash);

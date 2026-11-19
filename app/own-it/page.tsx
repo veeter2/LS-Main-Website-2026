@@ -130,7 +130,7 @@ export default function OwnItPage() {
                 {p.step} {p.title}
               </h3>
               <p>{p.body}</p>
-              {p.cost ? <p className="own-cost">{p.cost}</p> : null}
+              {p.cost ? <p className="lx-label lx-label-quiet own-cost">{p.cost}</p> : null}
             </div>
           ))}
         </div>
@@ -155,9 +155,9 @@ export default function OwnItPage() {
           {LADDER.map((r, i) => (
             <div key={r.rung} className="own-rung" data-reveal data-delay={String((i % 3) + 1)}>
               <div className="own-rung-head">
-                <span className="own-rung-num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="lx-label own-rung-num">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{r.rung}</h3>
-                <span className="own-status">{r.status}</span>
+                <span className="lx-label own-status">{r.status}</span>
               </div>
               <p>{r.body}</p>
             </div>

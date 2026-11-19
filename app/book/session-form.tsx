@@ -66,7 +66,7 @@ export function SessionForm() {
   if (status === "sent") {
     return (
       <div className="bk-card lx-card bk-done" role="status">
-        <span className="bk-label">Booked</span>
+        <span className="lx-label">Booked</span>
         <h2 className="lx-display">
           The session starts <em>here</em>.
         </h2>
@@ -80,7 +80,7 @@ export function SessionForm() {
 
   return (
     <form className="bk-card lx-card" onSubmit={onSubmit} aria-label="Book a working session">
-      <span className="bk-label">Book a working session</span>
+      <span className="lx-label">Book a working session</span>
       <div className="bk-row">
         <label className="bk-field">
           <span>First name</span>

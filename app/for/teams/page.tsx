@@ -43,7 +43,7 @@ export default function ForTeams() {
           ),
           visual: (
             <div className="lx-card fo-demo">
-              <span className="fo-demo-head">While you were away</span>
+              <span className="lx-label">While you were away</span>
               <p>Linked 3 notes about Thistlewood that say the same thing.</p>
               <p>Flagged a conflict: two dates for the Reyes closing.</p>
               <p>Caught a promise from your 4:50 chat: revised scope, due Friday. Track it?</p>
