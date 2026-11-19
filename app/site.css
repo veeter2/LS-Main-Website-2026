@@ -226,7 +226,7 @@ html:has(#lx-root) { --lx-page-ground: #f1ecdf; }
   --lx-line: rgba(31, 27, 20, 0.14);
   --lx-line-subtle: rgba(31, 27, 20, 0.09);
   /* Header bar: frosted glass a step lighter than the paper, with a visible hairline so it reads as its own surface */
-  --lx-bar-ground: rgba(var(--lx-light-rgb), 0.58);
+  --lx-bar-ground: rgba(var(--lx-light-rgb), 0.88);
   --lx-bar-sheen: rgba(var(--lx-light-rgb), 0.9);
   --lx-bar-line: rgba(var(--lx-ink-rgb), 0.16);
   --lx-bar-shadow: 0 1px 0 rgba(var(--lx-light-rgb), 0.6) inset, 0 6px 24px rgba(var(--lx-ink-rgb), 0.06);
@@ -415,7 +415,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 }
 .lx-short { display: none; }
 @media (max-width: 560px) {
-  .lx-bar { background: rgba(var(--lx-light-rgb), 0.78); }
+  .lx-bar { background: rgba(var(--lx-light-rgb), 0.94); }
   .lx-bar-cta .lx-btn-ghost { display: none; }
   .lx-long { display: none; }
   .lx-short { display: inline; }
