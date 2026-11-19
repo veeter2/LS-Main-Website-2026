@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { PauseButton, usePlayback } from "../_components/pause-button"
+import { PauseButton, usePlayback } from "./pause-button"
 
 type Row = { id: string; from: string; to: string; what: string; when: string; state: "open" | "waiting" | "done" | "new" | "pending" }
 

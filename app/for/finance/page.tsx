@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import { BuyerPage } from "../buyer-page"
-import { MemoryCurve } from "../../learning-gap/memory-curve"
+import { MemoryCurve } from "../../_components/memory-curve"
 
 export const metadata: Metadata = pageMeta("/for/finance", "For the CFO · AI spend that ends in an asset", "Licensed and installed, not rented per seat. Your own model, your own bill. Answers you can audit. Spend that becomes something the company owns.")
 

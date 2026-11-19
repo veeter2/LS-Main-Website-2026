@@ -3,8 +3,8 @@ import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { CallSplit } from "./call-split"
 import { ExpertInterview } from "./expert-interview"
-import { RecordDemo } from "../record/record-demo"
-import { Desk } from "../commitments/desk"
+import { RecordDemo } from "../_components/record-demo"
+import { Desk } from "../_components/desk"
 import { ORGANS } from "@/lib/for-your-ai"
 
 export const metadata: Metadata = pageMeta("/product", "What it does: facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced record your company owns. Counts, not guesses. Promises tracked only after you confirm.")

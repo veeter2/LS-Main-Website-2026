@@ -4,6 +4,7 @@ import Link from "next/link"
 import { pageMeta } from "@/lib/page-meta"
 import { FaqJsonLd } from "../_components/faq-jsonld"
 import { BrandArt } from "../_components/brand-art"
+import "./pricing.css"
 
 export const metadata: Metadata = pageMeta(
   "/pricing",
