@@ -15,11 +15,11 @@ export default function ForFinance() {
             An AI budget that ends in an <em>asset</em>, not a renewal.
           </>
         ),
-        lead: "Most AI spend buys access. Seats, renewals, a bill that resets every January, and when you change vendors, what your people taught it stays behind. Rent the whole stack and the vendor writes the rules you run under, and can rewrite them whenever it likes. LongStrider is the other kind of purchase. You license the software, install it on your infrastructure, run it under your own model, and own the result. Spend that was operating cost becomes something the company holds.",
+        lead: "Most AI spend buys access. Seats, renewals, a bill that resets every January, and when you change vendors, what your people taught it stays behind. Rent the whole thing and the vendor writes the rules you run under, and can rewrite them whenever it likes. LongStrider is the other kind of purchase. You license the software, install it on your infrastructure, run it under your own model, and own the result. You stop renting AI and start owning it. The spend ends as an asset on your books, not a bill every month.",
         points: [
           {
             title: "Owned, not rented.",
-            body: "You license the software and the memory belongs to the company. Neither resets when you switch models or when people leave.",
+            body: "You license the software and the memory belongs to the company. Neither resets when you switch models or when people leave. Your memory is yours. The company’s is shared. Hard wall between them.",
           },
           {
             title: "Capital, not subscription.",
@@ -27,11 +27,11 @@ export default function ForFinance() {
           },
           {
             title: "Answers you can audit.",
-            body: "Counts and dates come from the record with the source attached. Finance can check the work.",
+            body: "Counts and dates come from the record with the source attached. Finance can check the work. Nothing goes out in your name until a person says yes, and the yes is on the record.",
           },
           {
             title: "Ready for the price war.",
-            body: "Models get cheaper every quarter. Switch whenever it pays to. Nothing has to be re-taught, and no vendor gets to decide your price for you.",
+            body: "Models get cheaper every quarter. Switch whenever it pays to. Nothing has to be re-taught, and no vendor gets to decide your price for you. Experts and agents work from the same record, and every one of them makes it richer: one memory, not five AI tools each billing you.",
           },
         ],
         proof: {
@@ -44,7 +44,7 @@ export default function ForFinance() {
             <>
               <p className="lx-lead">
                 Most companies plan to spend more on AI next year. Few say it has changed how they operate, and the
-                research says why: most AI systems do not keep feedback, adapt to context, or improve over time.
+                research says why: most AI systems do not keep what you tell them, or get better with use.
               </p>
               <p className="lx-lead">
                 A system that keeps what it learns gets more valuable the longer you run it. One that doesn&rsquo;t is a

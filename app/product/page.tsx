@@ -239,7 +239,8 @@ export default function ProductConcept() {
               A specialist is a built-in expert for one job: renewals, claims, a practice area, your call traffic. Before
               it does anything it asks how your company works. What counts as risk here. Who can agree to what. Which
               accounts matter this quarter. Your answers go into the record, so it starts from your judgment, not a
-              generic playbook. Then it studies, and brings back findings you keep or bin.
+              generic playbook. Then it studies, and brings back findings you keep or drop. What it learns goes into
+              the same record your chat and your agents read, so every one of them gets richer.
             </p>
           </div>
           <div data-reveal data-delay="2">
@@ -310,7 +311,7 @@ export default function ProductConcept() {
             Every model, every key, every dollar. <em>One</em> screen.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Seven jobs, seven model settings, changed without a deploy. Your keys, not ours. Spend by job and by model,
+            Seven jobs, seven model settings, changed in Settings, no engineer needed. Your keys, not ours. Spend by job and by model,
             every day, so you know what last night cost, and most nights it&rsquo;s nothing. Set how it speaks, what it
             won&rsquo;t do, and when it must check with a person first.
           </p>
@@ -325,7 +326,8 @@ export default function ProductConcept() {
         </div>
         <div className="lx-wrap hx-center">
           <p className="lx-lead hx-lead-center" data-reveal>
-            The model is rented and replaceable. The memory is yours and stays put. Run a frontier model through your
+            The model is rented and replaceable. The memory is yours and stays put. One is a bill every month. The other
+            is something your company owns. Run a frontier model through your
             own keys, a model you already host, or a local one on your hardware. We moved every job to a different
             model in October. Nothing was re-taught.
           </p>

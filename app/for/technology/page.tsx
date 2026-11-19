@@ -19,7 +19,7 @@ const FEATURES: { heading: string; items: string[] }[] = [
     heading: "The models",
     items: [
       "Seven jobs, seven model settings, changed in Settings without a deploy. Chat, filing, mood, the overnight pass, the judge, pictures and embeddings.",
-      "Any frontier model through your keys. Any model you already run in-house. A local model on your hardware for the filing lane.",
+      "Any frontier model through your keys, or open models such as GLM Flash and DeepSeek Flash through a gateway like Isoquant. Any model you already run in-house. A local model on your hardware for the filing lane.",
       "The model layer speaks the OpenAI chat-completions dialect, so any compatible server works: vLLM, LM Studio, NVIDIA NIM, llama.cpp. Embeddings follow the same setting.",
       "Embeddings are the one switch that costs a re-index. We say so on the screen.",
       "Spend by job and by model, every day, on one screen.",
@@ -152,7 +152,7 @@ export default function ForTechnology() {
                 <div className="mh-facts fo-tiers">
                   <div className="mh-fact" data-reveal>
                     <h3>Hosted.</h3>
-                    <p>Isolated to you by access rules verified on every read. Available now.</p>
+                    <p>Isolated to you by access rules verified on every read. Available now. You hold the license either way.</p>
                   </div>
                   <div className="mh-fact" data-reveal data-delay="1">
                     <h3>Private cloud.</h3>

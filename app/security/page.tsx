@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMeta("/security", "Security and ownership 
 const OWNERSHIP = [
   {
     title: "It belongs to you.",
-    body: "The facts, the links between them and every correction are your company\u2019s asset. Your data sits in plain Postgres you can read with any tool.",
+    body: "The facts, the links between them and every correction are your company\u2019s asset, on your books, not a bill every month. Your data sits in plain Postgres you can read with any tool.",
   },
   {
     title: "It trains no one\u2019s model.",
@@ -23,7 +23,7 @@ const OWNERSHIP = [
   },
   {
     title: "It isn\u2019t on a vendor\u2019s terms.",
-    body: "A rented stack comes with someone else\u2019s rules, and those rules can move. Here the license is yours, the keys are yours, the rows are yours. The model is a setting.",
+    body: "A rented system comes with someone else\u2019s rules, and those rules can move. Here the license is yours, the keys are yours, the rows are yours. The model is a setting.",
   },
 ]
 
@@ -104,7 +104,7 @@ export default function SecurityConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Every fact belongs to someone. What&rsquo;s yours stays yours. Team knowledge is visible to the team, and only
-              the team. The check happens in the database, on every read, not in the prompt. Every reply writes a receipt of
+              the team. The check happens in the database, on every read, not in the instructions to the model. Every reply writes a receipt of
               what it opened, so you can always see how it learned what it knows.
             </p>
             <p className="sec-stat" data-reveal data-delay="3">
@@ -191,15 +191,16 @@ export default function SecurityConcept() {
             You write the rules. It keeps the <em>record</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Set how it speaks, what it won&rsquo;t do, and when it must check with a person first. That&rsquo;s configuration,
-            not prompting. Every correction your people make is kept, so the system&rsquo;s judgment can be audited rather
+            Set how it speaks, what it won&rsquo;t do, and when it must check with a person first. That&rsquo;s a setting,
+            not a prompt. Experts and agents work from the same record, and every one of them makes it richer, so
+            a rule set once holds everywhere. Every correction your people make is kept, so the system&rsquo;s judgment can be audited rather
             than taken on trust.
           </p>
           <p className="sec-rules-note" data-reveal data-delay="3">
             Deloitte&rsquo;s four levels of AI autonomy are informs, recommends, executes within limits, and acts.
             LongStrider sits at &ldquo;recommends,&rdquo; on purpose. It proposes; a person confirms; every write leaves a
-            receipt and can be undone. Many companies already let AI act without approval, and few call their agent
-            workflows fully governed. We&rsquo;d rather be among the few. (Deloitte)
+            receipt and can be undone. Many companies already let AI act with no one approving. We&rsquo;d rather be among
+            the few that don&rsquo;t. (Deloitte)
           </p>
         </div>
       </section>

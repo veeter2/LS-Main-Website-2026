@@ -43,7 +43,7 @@ const LADDER = [
   {
     rung: "Your own API key. Day one.",
     status: "Available now",
-    body: "Frontier models, or open models through Isoquant such as GLM Flash and DeepSeek Flash. The spend lands on your bill, never ours. This is the first step: we never sell or rent a model.",
+    body: "Cloud models, or open models through your own gateway. The spend lands on your bill, never ours. This is the first step: we never sell or rent a model.",
   },
   {
     rung: "Your own model on your own machine.",
@@ -84,6 +84,14 @@ const OWN_FACTS = [
     title: "Fire us and keep everything.",
     body: "Cancel support and the system keeps working. The license doesn't expire, the keys are yours, and the rows are yours.",
   },
+  {
+    title: "Nothing goes out in your name until you say yes.",
+    body: "Nothing goes out in your name until a person says yes, and the yes is on the record. The AI drafts and proposes; your people decide.",
+  },
+  {
+    title: "One record, not five AI tools.",
+    body: "Experts and agents work from the same record, and every one of them makes it richer. A correction in chat changes what the overnight pass believes.",
+  },
 ]
 
 export default function OwnItPage() {
@@ -99,9 +107,10 @@ export default function OwnItPage() {
               Rent the model. Own <em>everything</em> else.
             </h1>
             <p className="lx-lead" data-rise="2">
-              LongStrider is licensed software, not a subscription you rent. Your own key from day
-              one, your own model on your own machine, hosted by us or in your rack. The memory never
-              moves, so nothing is ever re-taught.
+              LongStrider is licensed software, not a subscription you rent. The money you’d have spent on
+              seats buys something your company owns, on your books, not a bill every month. Your own key
+              from day one, your own model on your own machine, hosted by us or in your rack. The memory
+              never moves, so nothing is ever re-taught.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">

@@ -26,7 +26,7 @@ export default function ForTeams() {
           },
           {
             title: "It says when it doesn’t know.",
-            body: "No confident guesses. If the record is thin, it tells you so, along with what it’s waiting for.",
+            body: "No confident guesses. If the record is thin, it tells you so, along with what it’s waiting for. Every reply shows where it came from: which conversation, which date.",
           },
         ],
         proof: {
@@ -65,7 +65,7 @@ export default function ForTeams() {
           },
           {
             q: "What happens if the company changes AI vendors?",
-            a: "Nothing, for you. The model is a setting your company controls. What you taught it stays, with its sources, and nobody has to brief it again.",
+            a: "Nothing, for you. The model is a setting your company controls. What you taught it stays, with its sources, and nobody has to brief it again. Experts and agents work from the same record, and every one of them makes it richer.",
           },
         ],
         next: { label: "What it does", href: "/product" },

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { FilmStill } from "../_components/film-still"
 import { ChapterRail, type Chapter } from "./chapter-rail"
 
-export const metadata: Metadata = pageMeta("/manifesto", "The Manifesto", "The intelligence layer that knows your business, and never forgets. Why the money spent on AI should build something your company owns.")
+export const metadata: Metadata = pageMeta("/manifesto", "The Manifesto", "The memory that knows your business, and never forgets. Why the money spent on AI should build something your company owns.")
 
 /**
  * The Manifesto in daylight. Matt’s argument and words, set as a long read.
@@ -60,21 +60,21 @@ const PERSONAS = [
   },
   {
     type: "The technology company building on AI",
-    body: "Everything you’re building is only as smart as what it remembers. Right now, it resets every session. LongStrider is the layer underneath that makes what you deploy compound, stay in context, and become worth defending. Not a competitor. A foundation.",
+    body: "Everything you’re building is only as smart as what it remembers. Right now, it resets every session. LongStrider is the memory under what you build, so it starts each day knowing what it learned, and that memory belongs to you. Not a competitor. A foundation.",
   },
 ]
 
 const CAPABILITIES = [
   {
     title: "It runs by your rules",
-    body: "Most AI has guardrails bolted on after the fact. LongStrider has a written operating code: how it thinks, speaks, challenges and stays in bounds. Configure it for a law firm and it behaves one way; for a PE fund, another. Same engine. A different operating mind. Entirely yours.",
+    body: "Most AI gets its rules added after the fact. LongStrider runs on rules you write: how it thinks, speaks, challenges and stays in bounds. Configure it for a law firm and it behaves one way; for a PE fund, another. Same engine. A different operating mind. Entirely yours.",
   },
   {
-    title: "It retrieves understanding, not documents",
-    body: "Ask a question and it doesn’t search an index. It weighs what’s relevant, what mattered, who was involved and how recent it is. Then it answers with the arc: where things started, how they shifted, where they are now.",
+    title: "It answers with the story, not a pile of documents",
+    body: "Ask a question and it doesn’t hand you a pile of documents. It weighs what’s relevant, what mattered, who was involved and how recent it is. Then it answers with the arc: where things started, how they shifted, where they are now.",
   },
   {
-    title: "It gets smarter while you sleep",
+    title: "It works while you sleep",
     body: "When there is something worth saying, it writes it down: merging what repeats, flagging what conflicts, summarizing what’s settled, and noticing where priorities are starting to move. It compounds without anyone maintaining it.",
   },
   {
@@ -116,7 +116,7 @@ export default function ManifestoConcept() {
         <div className="lx-wrap mf-hero-inner">
           <p className="lx-eyebrow" data-rise="0">The Manifesto</p>
           <h1 className="lx-display lx-h1 mf-h1" data-rise="1">
-            The intelligence layer that knows your business, and never <em>forgets</em>.
+            The memory that knows your business, and never <em>forgets</em>.
           </h1>
           <p className="mf-hook" data-rise="2">
             Every dollar your organization spent on AI this year made someone else&rsquo;s platform smarter.
@@ -169,12 +169,12 @@ export default function ManifestoConcept() {
               <span className="hx-step">02</span> What it is
             </p>
             <h2 className="lx-display mf-h2" data-reveal data-delay="1">
-              The intelligence layer that was never <em>built</em>.
+              The company memory that was never <em>built</em>.
             </h2>
             <div className="mf-prose" data-reveal data-delay="2">
               <p>
-                LongStrider sits above your existing stack, making sense of what every tool knows, keeping what actually
-                mattered, and compounding it over time. It doesn&rsquo;t replace your tools. It&rsquo;s what makes them
+                LongStrider sits beside the tools you already use, not on top of them. It keeps what they learn and what
+                actually mattered, and compounds it over time. It doesn&rsquo;t replace your tools. It&rsquo;s what makes them
                 worth keeping.
               </p>
               <p>
@@ -204,7 +204,7 @@ export default function ManifestoConcept() {
               </p>
               <p>
                 The companies that win the next decade won&rsquo;t be the ones with the best models. Everyone has the same
-                models. They&rsquo;ll be the ones who built something the models can&rsquo;t replace: an intelligence layer
+                models. They&rsquo;ll be the ones who built something the models can&rsquo;t replace: a memory
                 that knows their business, compounds over time, and belongs entirely to them.
               </p>
               <p>
@@ -319,8 +319,8 @@ export default function ManifestoConcept() {
             </h2>
             <div className="mf-prose" data-reveal data-delay="2">
               <p>
-                LongStrider isn&rsquo;t a subscription you spin up and forget. It&rsquo;s institutional intelligence you
-                build, own and compound. It&rsquo;s configured for your environment, your regulators and your timeline.
+                LongStrider isn&rsquo;t a subscription you spin up and forget. It&rsquo;s a memory your company builds and
+                owns. It&rsquo;s set up for your business, your regulators and your timeline.
               </p>
             </div>
             <div className="mf-grid">
@@ -341,7 +341,7 @@ export default function ManifestoConcept() {
       <section className="hx-close">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            You&rsquo;re not buying software. You&rsquo;re buying the head start.
+            You&rsquo;re buying software you own, and the head start that comes with it.
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Bring us your <em>hardest</em> problem.

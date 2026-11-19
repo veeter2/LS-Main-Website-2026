@@ -26,7 +26,7 @@ const ROOM = [
   { name: "Chat.", body: "It answers from the record first and calls the model only for the words." },
   {
     name: "Memory.",
-    body: "Everything your company has said to it, dated and sourced. It files itself, checks itself, and works on it overnight.",
+    body: "Everything your company has said to it, dated and sourced. Your memory is yours. The company’s is shared. Hard wall between them. It files itself, checks itself, and works on it overnight.",
   },
   { name: "Promises.", body: "Who said they would do what, by when. It brings them back on the day." },
   { name: "Today.", body: "What moved, what slipped, what to do first. Written overnight, before you sit down." },
@@ -40,7 +40,7 @@ const ROOM = [
 ]
 
 const DIFFERENT = [
-  { title: "Fewer tokens", body: "The model sees only the slice that earns it. Cost doesn’t grow with what it knows." },
+  { title: "A smaller model bill", body: "The model sees only the slice that earns it. Cost doesn’t grow with what it knows." },
   { title: "Fewer made-up answers", body: "Every answer traces to a record it can show you. When there isn’t one, it says so." },
   {
     title: "Teach it once",
@@ -166,7 +166,7 @@ export default function Home() {
             Your box, your models, your keys. Nothing leaves the <em>building</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Or a frontier model through a gateway you control. Same product either way. Fire us and keep everything.
+            Or a cloud model through your own keys. Same product either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.
           </p>
           <ul className="lx-assure mh-center" data-reveal data-delay="3" aria-label="Who this is for">
             {WHERE.map((w) => (

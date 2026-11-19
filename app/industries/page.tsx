@@ -44,7 +44,7 @@ const VERTICALS: Vertical[] = [
       },
     ],
     owns: "Every exception, and how it was resolved. The reasoning behind each reserve and settlement. What each retiring adjuster knew, confirmed by them while they were still here.",
-    signs: "The chief claims officer owns the pain. The CIO owns the budget. Compliance has the final word, and the NAIC AI bulletin, now adopted in many states, asks them to document exactly how an AI system is governed. Every write in LongStrider leaves a receipt and can be undone. That\u2019s the audit trail.",
+    signs: "The chief claims officer owns the pain. The CIO owns the budget. Compliance has the final word, and the NAIC AI bulletin, now adopted in many states, asks them to document exactly how an AI system is governed. Every write in LongStrider leaves a receipt and can be undone. Nothing goes out in your name until a person says yes, and the yes is on the record. That\u2019s the audit trail.",
   },
   {
     id: "legal",

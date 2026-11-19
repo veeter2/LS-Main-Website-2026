@@ -5,7 +5,7 @@ import Link from "next/link"
 import { FilmStill } from "../_components/film-still"
 import { SentenceJourney } from "./sentence-journey"
 
-export const metadata: Metadata = pageMeta("/how-it-works", "How LongStrider works · The memory layer", "Three layers: the record, the order, the judgment. Counted by the system, written by the model you choose. Scoped to the person in the database.")
+export const metadata: Metadata = pageMeta("/how-it-works", "How LongStrider works · The record, the order, the judgment", "Three layers: the record, the order, the judgment. Counted by the system, written by the model you choose. Scoped to the person in the database.")
 
 /**
  * How LongStrider works, for the technical buyer: one sentence followed
@@ -55,7 +55,7 @@ const ARCHITECT = [
   },
   {
     title: "Runs where you need it.",
-    body: "Hosted and isolated to you today. Private cloud and an on-premises build, scoped with you. The filing lane can already run on your own hardware.",
+    body: "Licensed to you in every case. Hosted and isolated to you today; your cloud or your rack, scoped with you. The filing lane can already run on your own hardware.",
   },
   {
     title: "Never trains a model.",
