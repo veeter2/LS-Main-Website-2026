@@ -111,7 +111,7 @@ const TIERS = [
 
 export default function ManifestoConcept() {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero mf-hero">
         <div className="lx-wrap mf-hero-inner">
           <p className="lx-eyebrow" data-rise="0">The Manifesto</p>

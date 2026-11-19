@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero nf-hero">
         <div className="lx-wrap nf-wrap">
           <p className="lx-eyebrow" data-rise="0">

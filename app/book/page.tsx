@@ -14,7 +14,7 @@ const STEPS = [
 
 export default function BookConcept() {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero bk-hero">
         <div className="lx-wrap lx-hero-grid bk-grid">
           <div>

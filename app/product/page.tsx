@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
-import Image from "next/image"
+import { FilmStill as Still } from "../_components/film-still"
 import { CallSplit } from "./call-split"
 import { ExpertInterview } from "./expert-interview"
 import { RecordDemo } from "../_components/record-demo"
@@ -68,18 +68,9 @@ const RUNS = ["Monday\u2019s run:", "Tuesday\u2019s run:", "Wednesday\u2019s run
 const ALONE = "starts from nothing"
 const OURS = ["starts from the record", "builds on Monday", "builds on both"]
 
-/** A still from the film as a quiet section opener. Static; the moving version is the hero on the home page. */
-function Still({ src, alt }: { src: string; alt: string }) {
-  return (
-    <figure className="lx-wrap pg-still" data-reveal>
-      <Image src={src} alt={alt} width={1920} height={1080} sizes="(max-width: 1240px) 100vw, 1240px" />
-    </figure>
-  )
-}
-
 export default function ProductConcept() {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>

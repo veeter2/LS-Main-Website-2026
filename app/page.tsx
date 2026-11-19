@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "./_components/film-still"
 import { AskYourAI } from "./_components/ask-your-ai"
 import { HeroVideo } from "./_components/hero-video"
 
@@ -151,6 +152,7 @@ export default function Home() {
 
       {/* 03: Where it runs */}
       <section className="hx-section hx-deep" id="where">
+        <FilmStill src="/art/film-sun.jpg" alt="The model as a sun over the memory: it lights the land, it does not own it." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">03</span> Where it runs
@@ -215,6 +217,7 @@ export default function Home() {
 
       {/* Close */}
       <section className="hx-close" id="company">
+        <FilmStill src="/art/film-strider.jpg" alt="The strider walks the road along the memory, the arch of the record behind." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Bring us your <em>hardest</em> problem.

@@ -65,7 +65,7 @@ const ARCHITECT = [
 
 export default function HowItWorksConcept() {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>

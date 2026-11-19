@@ -49,7 +49,7 @@ const VOICES = ["Claude", "GPT", "DeepSeek", "Local model"]
 
 export default function SecurityConcept() {
   return (
-    <main className="pg">
+    <main>
       <FaqJsonLd items={ANSWERS.map((a) => ({ q: a.title.replace(/\.$/, ""), a: a.body }))} />
       <section className="lx-hero">
         <div className="lx-wrap">

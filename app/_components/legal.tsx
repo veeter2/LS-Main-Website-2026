@@ -25,7 +25,7 @@ export function LegalPage({
   sections: LegalSection[]
 }) {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero lg-hero">
         <div className="lx-wrap lg-wrap">
           <p className="lx-eyebrow" data-rise="0">

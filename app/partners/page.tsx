@@ -86,7 +86,7 @@ const ARC = [
 
 export default function PartnersConcept() {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>

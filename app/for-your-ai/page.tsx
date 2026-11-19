@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMeta(
  */
 export default function ForYourAI() {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero">
         <div className="lx-wrap fy-wrap">
           <p className="lx-eyebrow" data-rise="0">For your AI</p>

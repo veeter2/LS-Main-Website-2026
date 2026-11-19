@@ -103,7 +103,7 @@ const VERTICALS: Vertical[] = [
 
 export default function IndustriesConcept() {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>

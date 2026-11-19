@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { pageMeta } from "@/lib/page-meta"
 import { MemoryStays } from "../_components/memory-stays"
+import { FilmStill } from "../_components/film-still"
 import "./own-it.css"
 
 export const metadata: Metadata = pageMeta(
@@ -212,6 +213,7 @@ export default function OwnItPage() {
       </section>
 
       <section className="hx-section">
+        <FilmStill src="/art/film-dune.jpg" alt="A dune of memory with a gold road along its foot." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Bring us your hardest <em>question</em>.

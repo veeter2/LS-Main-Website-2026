@@ -26,7 +26,7 @@ export type Buyer = {
 export function BuyerPage({ b }: { b: Buyer }) {
   const cta = b.cta ?? "Book a working session"
   return (
-    <main className="pg">
+    <main>
       <FaqJsonLd items={b.questions} />
       <section className="lx-hero">
         <div className="lx-wrap by-hero">

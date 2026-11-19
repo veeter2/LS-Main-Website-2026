@@ -34,7 +34,7 @@ const PARTS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compati
 
 export default function CompanyConcept() {
   return (
-    <main className="pg">
+    <main>
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>
