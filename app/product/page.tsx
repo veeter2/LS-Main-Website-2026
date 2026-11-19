@@ -62,7 +62,7 @@ const GOVERNANCE = [
   },
 ]
 
-const CONNECTIONS = ["HubSpot", "Pipedrive", "Stripe", "Mailchimp", "Airtable", "Notion", "Jotform", "Typeform", "Any API with a key", "Spreadsheets and chat exports"]
+const CONNECTIONS = ["Anything with an API", "Anything with an MCP server", "Your CRM", "Payments", "Forms", "Marketing", "Docs and files", "Spreadsheets and chat exports"]
 const MODELS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compatible server", "A local model on your hardware"]
 
 const RUNS = ["Monday\u2019s run:", "Tuesday\u2019s run:", "Wednesday\u2019s run:"]
@@ -324,13 +324,13 @@ export default function ProductConcept() {
               Plugged in once. It learns from them <em>every</em> day.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              Connect your CRM, payments, forms, marketing and docs tools with a read-only key and it keeps them in
-              sync on a schedule. Point it at any other system with an API, say what to pull, test it, save. Drop a
-              spreadsheet or an exported chat and it becomes memory. Remove a source and everything it produced goes
-              with it, with a record of what was removed.
+              If it has an API or an MCP server, it connects. Give it a read-only key, say what to pull, test it,
+              save, and it keeps the source in sync on a schedule. Your CRM, payments, forms, marketing and docs tools
+              have ready-made recipes. Drop a spreadsheet or an exported chat and it becomes memory. Remove a source
+              and everything it produced goes with it, with a record of what was removed.
             </p>
           </div>
-          <ul className="cp-parts" data-reveal data-delay="2" aria-label="Systems LongStrider connects to today">
+          <ul className="cp-parts" data-reveal data-delay="2" aria-label="What LongStrider connects to">
             {CONNECTIONS.map((c) => (
               <li key={c}>{c}</li>
             ))}
