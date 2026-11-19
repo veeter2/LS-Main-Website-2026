@@ -2255,11 +2255,14 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 /* Ambient depth: two static blobs per section, gold and purple, kept to the edges and never under text. */
 .pg .lx-hero,
 .pg .hx-section,
+.pg .lg-body,
 .pg .hx-close { position: relative; overflow: hidden; isolation: isolate; }
 .pg .lx-hero::before,
 .pg .lx-hero::after,
 .pg .hx-section::before,
 .pg .hx-section::after,
+.pg .lg-body::before,
+.pg .lg-body::after,
 .pg .hx-close::before {
   content: "";
   position: absolute;
@@ -2270,12 +2273,16 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   pointer-events: none;
   z-index: 0;
 }
-.pg .lx-hero::before, .pg .hx-section::before { left: -14vw; top: -12%; background: var(--lx-aura-gold); }
-.pg .lx-hero::after, .pg .hx-section::after { right: -16vw; bottom: -16%; background: var(--lx-aura-purple); }
+.pg .lx-hero::before, .pg .hx-section::before, .pg .lg-body::before { left: -14vw; top: -12%; background: var(--lx-aura-gold); }
+.pg .lx-hero::after, .pg .hx-section::after, .pg .lg-body::after { right: -16vw; bottom: -16%; background: var(--lx-aura-purple); }
 .pg .hx-section:nth-of-type(odd)::before { left: auto; right: -14vw; }
 .pg .hx-section:nth-of-type(odd)::after { right: auto; left: -16vw; }
 .pg .hx-close::before { left: 50%; top: 100%; transform: translate(-50%, -50%); background: var(--lx-aura-gold); }
-.pg .lx-hero > *, .pg .hx-section > *, .pg .hx-close > * { position: relative; z-index: 1; }
+.pg .lx-hero > *, .pg .hx-section > *, .pg .lg-body > *, .pg .hx-close > * { position: relative; z-index: 1; }
+.pg .lg-body { padding: clamp(64px, 10vh, 112px) 0; }
+.pg .lg-section { padding: 24px 26px 26px; background: var(--lx-glass-ground); border: 1px solid var(--lx-line); border-radius: var(--lx-radius); box-shadow: 0 1px 0 var(--lx-glass-sheen) inset, var(--lx-shadow-rest); -webkit-backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2); backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2); }
+.pg .lg-section + .lg-section { margin-top: 16px; }
+.pg .nf-hero .pg-still { margin: clamp(40px, 6vh, 64px) auto 0; }
 
 /* Rhythm: one idea per screen, more air between them, headlines that land fast. */
 .pg .hx-section { padding: clamp(104px, 16vh, 176px) 0; }
