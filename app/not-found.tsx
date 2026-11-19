@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { FilmStill } from "./_components/film-still"
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main>
+    <main className="pg">
       <section className="lx-hero nf-hero">
         <div className="lx-wrap nf-wrap">
           <p className="lx-eyebrow" data-rise="0">
@@ -29,6 +30,7 @@ export default function NotFound() {
             </Link>
           </div>
         </div>
+        <FilmStill src="/art/film-dawn.jpg" alt="Dawn over the memory: the road into the day." />
       </section>
     </main>
   )
