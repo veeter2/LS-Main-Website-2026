@@ -1,7 +1,7 @@
 const QUESTIONS = [
-  { q: "Which renewals matter most this quarter?", a: "Pellworth and Ashgrove. Both over $400k." },
+  { q: "Which renewals matter most this quarter?", a: "Pellworth and Ashgrove. Both are large accounts." },
   { q: "What counts as “at risk” here?", a: "Any account that asks for a second rate hold." },
-  { q: "Who can agree to hold a rate?", a: "Hailey, up to 10%. Above that it comes to me." },
+  { q: "Who can agree to hold a rate?", a: "Hailey, up to a tenth. Above that it comes to me." },
 ]
 
 // Static panel, example answers.

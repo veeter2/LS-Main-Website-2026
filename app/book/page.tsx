@@ -18,7 +18,7 @@ export default function BookConcept() {
       <section className="lx-hero bk-hero">
         <div className="lx-wrap lx-hero-grid bk-grid">
           <div>
-            <p className="lx-eyebrow" data-rise="0">BOOK</p>
+            <p className="lx-eyebrow" data-rise="0">Book</p>
             <h1 className="lx-display lx-h1" data-rise="1">
               Not a demo. A working session on your problem.
             </h1>

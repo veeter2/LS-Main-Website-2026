@@ -142,7 +142,7 @@ export default function ManifestoConcept() {
               Every AI you buy or build starts from <em>zero</em>.
             </h2>
             <div className="mf-prose" data-reveal data-delay="2">
-              <p>Your tools execute. Your dashboards visualise. Your search finds documents. And not one of them remembers.</p>
+              <p>Your tools execute. Your dashboards visualize. Your search finds documents. And not one of them remembers.</p>
               <p>
                 The race to the bottom everyone predicted is here. The model is already a commodity. Every provider is
                 building &ldquo;memory&rdquo; that keeps your preferences, your history, your patterns. But it&rsquo;s

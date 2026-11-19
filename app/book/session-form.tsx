@@ -112,7 +112,7 @@ export function SessionForm() {
         />
       </label>
       <button className="lx-btn lx-btn-primary bk-submit" type="submit" disabled={status === "sending"}>
-        {status === "sending" ? "Sending…" : "Book the session"} <span className="lx-arrow" aria-hidden>→</span>
+        {status === "sending" ? "Sending…" : "Book a working session"} <span className="lx-arrow" aria-hidden>→</span>
       </button>
       <p className="bk-note" aria-live="polite">
         {status === "error" ? (

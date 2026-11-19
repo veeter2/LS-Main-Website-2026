@@ -6,7 +6,7 @@ import "./own-it.css"
 
 export const metadata: Metadata = pageMeta(
   "/own-it",
-  "Sovereign by design · Your keys, your model, your machine",
+  "Sovereign by design · Your keys, your machine",
   "Not SaaS. Sovereign software you own: your own key from day one, your own model on your own machine, hosted by us or in your rack. The memory never moves.",
 )
 

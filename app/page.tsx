@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   ...pageMeta(
     "",
     "Stop teaching AI your business every morning",
-    "Not a model, not a search box, not a wrapper. LongStrider is the software your company runs its AI on, and owns. It keeps what your people tell it, works on it overnight, and hands it to whichever model you run this year.",
+    "Not a model, not a search box, not a wrapper. LongStrider is the software your company runs its AI on, and owns. It keeps what your people tell it.",
   ),
   title: { absolute: "LongStrider · Stop teaching AI your business every morning" },
 }
@@ -50,7 +50,7 @@ const DIFFERENT = [
   },
 ]
 
-const WHERE = ["Regulated industries", "Anyone who won’t hand IP to a frontier model", "Companies quoted seven figures to build a brain"]
+const WHERE = ["Regulated industries", "Anyone who won’t hand IP to a frontier model", "Companies quoted a fortune to build a brain"]
 
 const BUYERS = [
   { who: "For the CFO", title: "An AI budget that ends in an asset, not a renewal.", href: "/for/finance" },

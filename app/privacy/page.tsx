@@ -11,7 +11,7 @@ const SECTIONS: LegalSection[] = [
     items: [
       { label: 'On-Premises Deployments', text: 'All data remains on your infrastructure. We have zero access to your conversations, institutional memory, or any information processed by your LongStrider instance.' },
       { label: 'Hosted Intelligence', text: 'Your data is stored in isolated, dedicated instances. Our infrastructure team cannot access the contents of your data.' },
-      { label: 'Owned Build', text: 'You maintain complete ownership of your data and the compiled intelligence layer. No telemetry to us.' },
+      { label: 'Owned Build', text: 'You maintain complete ownership of your data and the compiled intelligence layer. Nothing about usage is sent to us.' },
     ],
   },
   {

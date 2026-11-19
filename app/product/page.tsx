@@ -7,7 +7,7 @@ import { RecordDemo } from "../_components/record-demo"
 import { Desk } from "../_components/desk"
 import { ORGANS } from "@/lib/for-your-ai"
 
-export const metadata: Metadata = pageMeta("/product", "What it does: facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced record your company owns. Counts, not guesses. Promises tracked only after you confirm.")
+export const metadata: Metadata = pageMeta("/product", "What it does · Facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced record your company owns. Counts, not guesses. Promises tracked only after you confirm.")
 
 /**
  * What LongStrider does: the eight things that run on the memory. The hero

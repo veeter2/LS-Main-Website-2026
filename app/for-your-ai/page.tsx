@@ -7,7 +7,7 @@ import { CHECKS, NOT, ORGANS } from "@/lib/for-your-ai"
 export const metadata: Metadata = pageMeta(
   "/for-your-ai",
   "Ask your own AI about LongStrider",
-  "The plain facts about LongStrider, written for the AI you already use, and three prompts to paste into ChatGPT, Claude, Gemini, Perplexity or Copilot for an honest read.",
+  "The plain facts about LongStrider, written for the AI you already use, with three prompts to paste into ChatGPT, Claude, Gemini or Copilot for an honest read.",
 )
 
 /**
@@ -25,7 +25,7 @@ export default function ForYourAI() {
           </h1>
           <p className="lx-lead" data-rise="2">
             Most buyers now have an AI read a vendor before they do. Good. Forrester expects two in three providers
-            to lose deals in 2027 because buyers can&rsquo;t verify their claims, and three in four business buyers
+            to lose deals next year because buyers can&rsquo;t verify their claims, and three in four business buyers
             to put an AI agent on the research. (Forrester, Predictions 2027: B2B Go-To-Market) This page is the plain
             version of what we&rsquo;d want that agent to know, and the same prompts the homepage offers. The
             machine-readable twin is at <a href="/llms.txt">/llms.txt</a>.
