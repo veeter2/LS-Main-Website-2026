@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import type { ReactNode } from "react"
 import "./for.css"
 import { FaqJsonLd } from "../_components/faq-jsonld"
@@ -25,7 +26,7 @@ export type Buyer = {
 export function BuyerPage({ b }: { b: Buyer }) {
   const cta = b.cta ?? "Book a working session"
   return (
-    <main>
+    <main className="pg">
       <FaqJsonLd items={b.questions} />
       <section className="lx-hero">
         <div className="lx-wrap by-hero">
@@ -78,6 +79,7 @@ export function BuyerPage({ b }: { b: Buyer }) {
       {b.sections}
 
       <section className="hx-section">
+        <FilmStill src="/art/film-topics.jpg" alt="Topics forming on the memory as the work settles." />
         <div className="lx-wrap by-faq">
           <p className="lx-eyebrow" data-reveal>
             What you&rsquo;ll want to know
