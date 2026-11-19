@@ -15,9 +15,8 @@ const NAV = [
 ]
 
 /**
- * Daylight concept shell. The page scrolls the document itself; the site's
- * dark nav, footer and ambient layer are hidden for the site in
- * concepts.css (keyed on #lx-root), so there is only ever one scroller.
+ * Daylight site shell. The page scrolls the document itself; site.css keys
+ * the page ground on #lx-root, so there is only ever one scroller.
  */
 export function ConceptShell({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null)

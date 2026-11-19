@@ -28,7 +28,7 @@ export default function ForYourAI() {
             to lose deals in 2027 because buyers can&rsquo;t verify their claims, and three in four business buyers
             to put an AI agent on the research. (Forrester, Predictions 2027: B2B Go-To-Market) This page is the plain
             version of what we&rsquo;d want that agent to know, and the same prompts the homepage offers. The
-            machine-readable twin is at <a className="fy-mono" href="/llms.txt">/llms.txt</a>.
+            machine-readable twin is at <a href="/llms.txt">/llms.txt</a>.
           </p>
           <div className="lx-cta-row" data-rise="3">
             <a className="lx-btn lx-btn-primary" href="#prompts">
