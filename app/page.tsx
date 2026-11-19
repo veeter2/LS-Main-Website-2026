@@ -39,14 +39,62 @@ const ROOM = [
   { name: "Connections.", body: "Your CRM, your files, your forms, your payments. Plugged in once." },
 ]
 
-const DIFFERENT = [
-  { title: "A smaller model bill", body: "The model sees only the slice that earns it. Cost doesn’t grow with what it knows." },
-  { title: "Fewer made-up answers", body: "Every answer traces to a record it can show you. When there isn’t one, it says so." },
+// Said as a buyer asks it. The "no" is the short answer; the sentence after it is the real one.
+const NOT_THIS = [
+  { no: "Not a chatbot.", yes: "A brain your company owns. Chat is one door into it." },
+  { no: "Not a harness.", yes: "The memory and the judgment live here. The model is only the voice." },
+  { no: "Not a wrapper around one model.", yes: "Any model, through your own keys. Swap it and nothing is re-taught." },
+  { no: "Not rented.", yes: "Software you own, on your machines or ours. A cost you capitalize, not a bill forever." },
+  { no: "Not a search box.", yes: "A record that counts, dates and sources every fact, and says when it is unsure." },
+  { no: "Not one person\u2019s assistant.", yes: "Private memory for each person, shared memory for the company, one record for the team." },
+]
+
+type Icon = "coin" | "receipt" | "pen" | "clocks"
+function CardIcon({ kind }: { kind: Icon }) {
+  const d: Record<Icon, React.ReactNode> = {
+    coin: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M9.5 10.2c0-1 1-1.7 2.5-1.7s2.5.7 2.5 1.7-1 1.4-2.5 1.8-2.5.8-2.5 1.8 1 1.7 2.5 1.7 2.5-.7 2.5-1.7M12 7v10" />
+      </>
+    ),
+    receipt: (
+      <>
+        <path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5L6 21z" />
+        <path d="M9 8h6M9 11.5h6M9 15h4" />
+      </>
+    ),
+    pen: (
+      <>
+        <path d="M4 20l4-1 10.5-10.5a2.1 2.1 0 0 0-3-3L5 16z" />
+        <path d="M13 7l3 3M4 20h16" />
+      </>
+    ),
+    clocks: (
+      <>
+        <circle cx="8" cy="12" r="4.5" />
+        <path d="M8 9.5V12l1.8 1.2" />
+        <path d="M16.5 7.5a4.5 4.5 0 1 0 3.2 7.7 3.6 3.6 0 0 1-3.2-7.7z" />
+      </>
+    ),
+  }
+  return (
+    <svg className="mh-icon" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      {d[kind]}
+    </svg>
+  )
+}
+
+const DIFFERENT: { title: string; body: string; icon: Icon }[] = [
+  { icon: "coin", title: "A smaller model bill", body: "The model sees only the slice that earns it. Cost doesn’t grow with what it knows." },
+  { icon: "receipt", title: "Fewer made-up answers", body: "Every answer traces to a record it can show you. When there isn’t one, it says so." },
   {
+    icon: "pen",
     title: "Teach it once",
     body: "Rules, corrections and lessons carry forward. Month twelve knows what month one never could.",
   },
   {
+    icon: "clocks",
     title: "Two speeds",
     body: "In the moment it decides what matters. At night it reads everything, links what repeats, flags what contradicts, and writes you a letter.",
   },
@@ -155,9 +203,26 @@ export default function Home() {
             It has run our own company every day since spring 2026. Every nightly letter, every answer, on the record.
           </p>
         </div>
+        <div className="lx-wrap">
+          <ul className="hx-not" data-reveal>
+            {NOT_THIS.map((n) => (
+              <li key={n.no}>
+                <span className="hx-not-no">
+                  <svg viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M7 7l10 10M17 7L7 17" /></svg>
+                  {n.no}
+                </span>
+                <span className="hx-not-yes">
+                  <svg viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                  {n.yes}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="lx-wrap mh-facts mh-facts-2">
           {DIFFERENT.map((f, i) => (
-            <div key={f.title} className="mh-fact" data-reveal data-delay={String(i + 1)}>
+            <div key={f.title} className="mh-fact mh-fact-icon" data-reveal data-delay={String(i + 1)}>
+              <CardIcon kind={f.icon} />
               <h3>{f.title}</h3>
               <p>{f.body}</p>
             </div>

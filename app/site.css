@@ -226,7 +226,7 @@ html:has(#lx-root) { --lx-page-ground: #f1ecdf; }
   --lx-line: rgba(31, 27, 20, 0.14);
   --lx-line-subtle: rgba(31, 27, 20, 0.09);
   /* Header bar: frosted glass a step lighter than the paper, with a visible hairline so it reads as its own surface */
-  --lx-bar-ground: rgba(var(--lx-light-rgb), 0.88);
+  --lx-bar-ground: rgba(var(--lx-light-rgb), 0.95);
   --lx-bar-sheen: rgba(var(--lx-light-rgb), 0.9);
   --lx-bar-line: rgba(var(--lx-ink-rgb), 0.16);
   --lx-bar-shadow: 0 1px 0 rgba(var(--lx-light-rgb), 0.6) inset, 0 6px 24px rgba(var(--lx-ink-rgb), 0.06);
@@ -1020,6 +1020,36 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .hx-center { text-align: center; }
 .hx-h2 { font-size: clamp(32px, 3.4vw, 50px); margin: 18px 0 0; }
 .hx-lead-center { margin: 24px auto 0 !important; max-width: 40em; }
+/* Not this / this: the buyer's question on the left, the real answer on the right. */
+.hx-not {
+  margin: clamp(32px, 5vh, 56px) auto 0;
+  padding: 0;
+  list-style: none;
+  max-width: 980px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+}
+.hx-not li {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  padding: 16px 0;
+  border-top: 1px solid var(--lx-line);
+}
+.hx-not-no,
+.hx-not-yes { display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+.hx-not-no { font-family: var(--lx-display); font-size: 19px; color: var(--lx-ink-primary); }
+.hx-not-yes { font-size: 15.5px; color: var(--lx-ink-secondary); }
+.hx-not svg { flex: none; width: 18px; height: 18px; margin-top: 3px; }
+.hx-not-no svg { color: var(--lx-ink-muted); }
+.hx-not-yes svg { color: var(--lx-gold-ink); }
+@media (max-width: 860px) { .hx-not { grid-template-columns: 1fr; } }
+
+/* Line icon on a fact card, gold ink, one stroke weight everywhere. */
+.mh-fact-icon { padding-top: 22px; }
+.mh-icon { display: block; width: 26px; height: 26px; margin-bottom: 12px; color: var(--lx-gold-ink); }
+
 .hx-claims {
   margin: 20px auto 0;
   max-width: 40em;
