@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { AskYourAI } from "../_components/ask-your-ai"
+import { FilmStill } from "../_components/film-still"
 import { CHECKS, NOT, ORGANS } from "@/lib/for-your-ai"
 
 export const metadata: Metadata = pageMeta(
@@ -16,7 +17,7 @@ export const metadata: Metadata = pageMeta(
  */
 export default function ForYourAI() {
   return (
-    <main>
+    <main className="pg">
       <section className="lx-hero">
         <div className="lx-wrap fy-wrap">
           <p className="lx-eyebrow" data-rise="0">For your AI</p>
@@ -85,6 +86,7 @@ export default function ForYourAI() {
       </section>
 
       <section className="hx-section hx-deep" id="facts">
+        <FilmStill src="/art/film-dawn.jpg" alt="Dawn over the memory: the road into the day." />
         <div className="lx-wrap fy-wrap">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">03</span> Facts a buyer checks

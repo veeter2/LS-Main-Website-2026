@@ -2179,7 +2179,9 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .pg .by-qa,
 .pg .in-side,
 .pg .gx-point,
-.pg .fo-group {
+.pg .fo-group,
+.pg .fy-list li,
+.pg .mf-scene {
   position: relative;
   background: var(--lx-glass-ground);
   -webkit-backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2);
@@ -2229,6 +2231,10 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .pg .in-side { padding: 22px 24px 24px; }
 .pg .gx-point { padding: 22px 24px 24px; }
 .pg .fo-group { padding: 20px 22px 22px; border-top: 1px solid var(--lx-gold-line); }
+.pg .fy-list li { padding: 16px 20px; border-left: 2px solid var(--lx-gold-line); }
+.pg .mf-scene { padding: 24px 26px 26px; }
+.pg .mf-chapter { padding: clamp(64px, 10vh, 112px) 0; }
+.pg .mf-chapter .pg-still { margin: 0 0 clamp(36px, 5vh, 56px); }
 .pg .bk-field input, .pg .bk-field textarea { background: rgba(var(--lx-light-rgb), 0.6); }
 .pg .in-side .in-breaks:first-of-type, .pg .in-side .in-breaks li:first-child { border-top: 0; padding-top: 0; }
 
