@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { BrandArt } from "../_components/brand-art"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import { SentenceJourney } from "./sentence-journey"
 
 export const metadata: Metadata = pageMeta("/how-it-works", "How LongStrider works · The memory layer", "Three layers: the record, the order, the judgment. Counted by the system, written by the model you choose. Scoped to the person in the database.")
@@ -64,7 +65,7 @@ const ARCHITECT = [
 
 export default function HowItWorksConcept() {
   return (
-    <main>
+    <main className="pg">
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -248,6 +249,7 @@ export default function HowItWorksConcept() {
       </section>
 
       <section className="hx-close">
+        <FilmStill src="/art/film-topics.jpg" alt="Topics form themselves on the memory as the day's work settles." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Bring your <em>architect</em>.

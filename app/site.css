@@ -2158,7 +2158,26 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .pg .ag-row,
 .pg .ag-run,
 .pg .cp-parts li,
-.pg .lx-assure {
+.pg .lx-assure,
+.pg .mm-rows,
+.pg .mh-doors,
+.pg .ly-band,
+.pg .ly-part,
+.pg .dl-col,
+.pg .in-owns,
+.pg .ox-tabs,
+.pg .ox-memory,
+.pg .sc-ring,
+.pg .sec-models li,
+.pg .pt-layer,
+.pg .ay-prompt,
+.pg .own-ladder,
+.pg .lg-strip li,
+.pg .bk-steps li,
+.pg .mf-caps li,
+.pg .fo-tiers,
+.pg .by-qa,
+.pg .in-side {
   position: relative;
   background: var(--lx-glass-ground);
   -webkit-backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2);
@@ -2177,6 +2196,36 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   background: var(--lx-glass-ground-lift);
   box-shadow: 0 1px 0 var(--lx-glass-sheen) inset, var(--lx-shadow-lift);
 }
+
+/* The gold "ours" surfaces keep their gold hairline and halo; the cream gradient becomes glass with a gold wash. */
+.pg .ly-ours,
+.pg .dl-ours,
+.pg .ox-memory,
+.pg .in-owns,
+.pg .pt-layer[data-tone="client"],
+.pg .sc-ring-0 {
+  background: linear-gradient(var(--lx-aura-gold), var(--lx-aura-gold)), var(--lx-glass-ground-lift);
+  border-color: var(--lx-gold-line);
+  box-shadow: 0 1px 0 var(--lx-glass-sheen) inset, var(--lx-shadow-halo);
+}
+.pg .sc-ring-1 { background: var(--lx-glass-ground); }
+.pg .sc-ring-2 { background: rgba(var(--lx-light-rgb), 0.35); }
+.pg .pt-layer[data-tone="ours"] { background: rgba(var(--lx-light-rgb), 0.3); border-style: dashed; }
+.pg .mm-rows { padding: 8px clamp(20px, 3vw, 36px); }
+.pg .mm-rows li:last-child { border-bottom: 0; }
+.pg .mh-doors { overflow: hidden; }
+.pg .mh-doors .lx-door { background: transparent; }
+.pg .mh-doors .lx-door:hover { background: var(--lx-glass-ground-lift); }
+.pg .own-ladder { -webkit-backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2); backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2); }
+.pg .lg-strip li, .pg .bk-steps li, .pg .mf-caps li, .pg .by-qa { padding: 18px 20px; }
+.pg .lg-strip li { border-top: 1px solid var(--lx-gold-line); }
+.pg .bk-steps, .pg .mf-caps { gap: 10px; }
+.pg .by-faq dl { display: grid; gap: 10px; }
+.pg .sec-models li { background: var(--lx-glass-ground); }
+.pg .ay-prompt { background: var(--lx-glass-ground-lift); }
+
+.pg .in-side { padding: 22px 24px 24px; }
+.pg .in-side .in-breaks:first-of-type, .pg .in-side .in-breaks li:first-child { border-top: 0; padding-top: 0; }
 
 /* Cards that used to be a rule over text are now a surface with air inside. */
 .pg .mh-fact { padding: 22px 24px 24px; border-top: 1px solid var(--lx-line); }
