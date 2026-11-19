@@ -594,7 +594,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .rx-pulse {
   width: 42px;
   height: 2px;
-  border-radius: 2px;
+  border-radius: var(--lx-radius);
   background: linear-gradient(90deg, transparent, var(--lx-gold), transparent);
   background-size: 200% 100%;
   animation: rx-scan 1.1s linear infinite;
@@ -662,7 +662,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .gx-figure svg { display: block; width: 100%; height: auto; }
 .gx-legend { display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 13px; color: var(--lx-ink-secondary); padding: 0 4px; }
 .gx-key { display: inline-flex; align-items: center; gap: 10px; }
-.gx-key::before { content: ""; width: 22px; height: 2px; border-radius: 2px; }
+.gx-key::before { content: ""; width: 22px; height: 2px; border-radius: var(--lx-radius); }
 .gx-key-kept::before { background: var(--lx-gold); box-shadow: 0 0 0 3px var(--lx-gold-wash); }
 .gx-key-forget::before { background: rgba(var(--lx-ink-rgb), 0.3); }
 .gx-grid { stroke: var(--lx-line-subtle); stroke-width: 1; }
@@ -771,7 +771,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   text-align: left;
   background: none;
   border: 0;
-  border-radius: 3px;
+  border-radius: var(--lx-radius);
   cursor: pointer;
   font-family: var(--lx-body);
 }
@@ -787,7 +787,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   width: calc((100% - 8px) / 3);
   background: var(--lx-surface);
   border: 1px solid var(--lx-line);
-  border-radius: 3px;
+  border-radius: var(--lx-radius);
   box-shadow: 0 1px 3px rgba(var(--lx-ink-rgb), 0.06);
   transition: transform 0.55s var(--lx-ease);
 }
@@ -815,7 +815,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   left: -1px;
   width: 3px;
   height: 10px;
-  border-radius: 2px;
+  border-radius: var(--lx-radius);
   background: var(--lx-gold);
   animation: ox-flow 1.8s var(--lx-ease) infinite;
 }
@@ -913,7 +913,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   height: 20px;
   margin-top: 2px;
   border: 1.5px solid rgba(var(--lx-ink-rgb), 0.22);
-  border-radius: 4px;
+  border-radius: var(--lx-radius);
   display: grid;
   place-items: center;
   transition: background 0.4s var(--lx-ease), border-color 0.4s;
@@ -1232,7 +1232,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   display: grid;
   gap: 3px;
   padding: 10px 12px;
-  border-radius: 3px;
+  border-radius: var(--lx-radius);
   background: var(--lx-surface);
   border: 1px solid rgba(var(--lx-gold-rgb), 0.35);
   box-shadow: var(--lx-shadow-rest);
@@ -1250,7 +1250,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 /* Who can see what: three nested scopes */
 .sc-rings { position: relative; display: grid; }
 .sc-ring {
-  border-radius: 24px;
+  border-radius: var(--lx-radius);
   padding: 18px 20px 20px;
   border: 1px solid rgba(var(--lx-gold-rgb), 0.35);
 }
@@ -1451,7 +1451,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   display: grid;
   gap: 4px;
   padding: 12px;
-  border-radius: 3px;
+  border-radius: var(--lx-radius);
   background: var(--lx-surface);
   border: 1px solid rgba(var(--lx-gold-rgb), 0.35);
 }
@@ -1466,7 +1466,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   height: 34px;
   display: grid;
   place-items: center;
-  border-radius: 3px;
+  border-radius: var(--lx-radius);
   font-size: 12.5px;
   color: var(--lx-ink-primary);
   background: linear-gradient(90deg, rgba(var(--lx-gold-rgb), 0.12), rgba(var(--lx-gold-rgb), 0.32));
@@ -1519,7 +1519,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   cursor: pointer;
   font-family: var(--lx-body);
 }
-.sj-step:focus-visible { outline: 2px solid var(--lx-gold); outline-offset: 2px; border-radius: 3px; }
+.sj-step:focus-visible { outline: 2px solid var(--lx-gold); outline-offset: 2px; border-radius: var(--lx-radius); }
 .sj-dot {
   display: grid;
   place-items: center;
@@ -1630,7 +1630,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .ly-parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .ly-part {
   padding: 14px 16px 16px;
-  border-radius: 3px;
+  border-radius: var(--lx-radius);
   background: var(--lx-surface);
   border: 1px solid rgba(var(--lx-gold-rgb), 0.35);
 }
@@ -2235,7 +2235,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .lg-section a { color: var(--lx-gold-ink); text-underline-offset: 3px; }
 
 /* Keyboard focus for every link and button on the site. */
-.lx a:focus-visible, .lx button:focus-visible { outline: 2px solid var(--lx-gold-ink); outline-offset: 3px; border-radius: 2px; }
+.lx a:focus-visible, .lx button:focus-visible { outline: 2px solid var(--lx-gold-ink); outline-offset: 3px; border-radius: var(--lx-radius); }
 .lx-btn-primary:focus-visible { outline-color: var(--lx-gold-ink); }
 
 /* ── Not found ────────────────────────────────────────── */
@@ -2427,7 +2427,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   width: 100%;
   height: auto;
   border: 1px solid var(--lx-line);
-  border-radius: 10px;
+  border-radius: var(--lx-radius);
   background: var(--lx-paper-deep);
 }
 .mh-screen figcaption { margin-top: 10px; text-align: center; }
@@ -2439,7 +2439,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   height: auto;
   aspect-ratio: 16 / 9;
   border: 1px solid var(--lx-line);
-  border-radius: 10px;
+  border-radius: var(--lx-radius);
   background: var(--lx-paper-deep);
 }
 .mh-film-pause { position: absolute; top: 12px; right: 12px; z-index: 1; background: rgba(var(--lx-paper-rgb), 0.85); }
