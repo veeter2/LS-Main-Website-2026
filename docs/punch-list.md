@@ -8,8 +8,8 @@ Check a box only when it is on localhost:3000 and pushed.
 - [x] Real brand mark, header on its own glass ground
 - [x] Glass system on every page
 - [x] Header no longer lets text bleed through
-- [ ] 1. Own-it headline: replace "Rent the model. Own everything else." (Matt gives the words, or use "Your keys. Your model. Your machine.")
-- [ ] 2. Product page: add Today and Connections sections so the page shows the eight it promises
+- [x] 1. Own-it headline stays "Rent the model. Own everything else." (Matt, 2026-11-19)
+- [x] 2. Product page shows all eight: Today and Connections added, Any model folded into Governance
 - [ ] 3. Gap map Part 2: decide which shipped powers go on the site now (receipts trail, teach a rule, Inbox, Team, held jobs, ask-your-data, named connectors). Add the chosen ones.
 - [ ] 4. Brand guide: daylight values and token path updated to match site.css
 - [ ] 5. Dark mode as a token pass (same tokens, dark values)

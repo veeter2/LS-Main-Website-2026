@@ -13,8 +13,8 @@ export const metadata: Metadata = pageMeta("/product", "What it does · Facts, p
 /**
  * What LongStrider does: the eight things that run on the memory. The hero
  * chips read the names from lib/for-your-ai (ORGANS), the same list the
- * homepage ROOM and /llms.txt use. The sections below walk through the ones
- * a buyer meets first; Today and Connections have no section of their own yet.
+ * homepage ROOM and /llms.txt use. The eight sections below match that list,
+ * in the order a buyer meets them. Any model lives inside Governance.
  */
 
 const RECORD_POINTS = [
@@ -62,6 +62,7 @@ const GOVERNANCE = [
   },
 ]
 
+const CONNECTIONS = ["HubSpot", "Pipedrive", "Stripe", "Mailchimp", "Airtable", "Notion", "Jotform", "Typeform", "Any API with a key", "Spreadsheets and chat exports"]
 const MODELS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compatible server", "A local model on your hardware"]
 
 const RUNS = ["Monday\u2019s run:", "Tuesday\u2019s run:", "Wednesday\u2019s run:"]
@@ -81,8 +82,8 @@ export default function ProductConcept() {
             <p className="lx-lead" data-rise="2">
               LongStrider takes what your team already puts into AI, in chat, in documents, in uploaded files and call
               transcripts, and keeps the part that matters: the facts, the promises, what changed, and what keeps coming
-              up. Each with its source. Each yours. Eight things run on that record. Here are the ones you&rsquo;d meet
-              first.
+              up. Each with its source. Each yours. Eight things run on that record. Here they are, in the order
+              you&rsquo;d meet them.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
@@ -187,12 +188,30 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 04: Experts */}
+      {/* 04: Today */}
+      <section className="hx-section" id="today">
+        <Still src="/art/film-sun.jpg" alt="Morning over the memory: the sun on the arch, a short letter on the road." />
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">04</span> Today
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            A short letter at the top of your <em>morning</em>.
+          </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            At night it reads the week and writes down what moved, what slipped, and what to do first. A promise due
+            today. A fact that changed since you last looked. Two notes that disagree. It is written before you sit
+            down, and on a quiet night it says so in one line and stops.
+          </p>
+        </div>
+      </section>
+
+      {/* 05: Experts */}
       <section className="hx-section" id="experts">
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">04</span> Experts
+              <span className="hx-step">05</span> Experts
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Hire a specialist. It <em>interviews</em> you first.
@@ -211,12 +230,12 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 05: Agents */}
+      {/* 06: Agents */}
       <section className="hx-section hx-deep" id="agents">
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">05</span> Agents
+              <span className="hx-step">06</span> Agents
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Your teammates start where <em>yesterday&rsquo;s</em> left off.
@@ -255,12 +274,12 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 06: Governance */}
+      {/* 07: Governance, which includes any model */}
       <section className="hx-section" id="governance">
         <Still src="/art/film-arch.jpg" alt="The record as an arch of stones, one per month, brightening toward now, with the company's topics in orbit." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">06</span> Governance
+            <span className="hx-step">07</span> Governance
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Every model, every key, every dollar. <em>One</em> screen.
@@ -279,29 +298,42 @@ export default function ProductConcept() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* 07: Any model */}
-      <section className="hx-section hx-deep" id="any-model">
-        <div className="lx-wrap lx-hero-grid">
-          <div>
-            <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">07</span> Any model
-            </p>
-            <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Swap it next year. Nothing is taught <em>twice</em>.
-            </h2>
-            <p className="lx-lead" data-reveal data-delay="2">
-              The model is rented and replaceable. The memory is yours and stays put. Run a frontier model through your
-              own keys, a model you already host, or a local one on your hardware for the filing lane. We moved every job
-              to a different model in October. Nothing was re-taught.
-            </p>
-          </div>
-          <ul className="cp-parts" data-reveal data-delay="2" aria-label="Models LongStrider runs with">
+        <div className="lx-wrap hx-center">
+          <p className="lx-lead hx-lead-center" data-reveal>
+            The model is rented and replaceable. The memory is yours and stays put. Run a frontier model through your
+            own keys, a model you already host, or a local one on your hardware. We moved every job to a different
+            model in October. Nothing was re-taught.
+          </p>
+          <ul className="cp-parts hx-cta-center" data-reveal data-delay="1" aria-label="Models LongStrider runs with">
             {MODELS.map((m) => (
               <li key={m}>{m}</li>
             ))}
             <li className="cp-parts-ours">Your memory: the one part that stays.</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* 08: Connections */}
+      <section className="hx-section hx-deep" id="connections">
+        <div className="lx-wrap lx-hero-grid">
+          <div>
+            <p className="lx-eyebrow" data-reveal>
+              <span className="hx-step">08</span> Connections
+            </p>
+            <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+              Plugged in once. It learns from them <em>every</em> day.
+            </h2>
+            <p className="lx-lead" data-reveal data-delay="2">
+              Connect your CRM, payments, forms, marketing and docs tools with a read-only key and it keeps them in
+              sync on a schedule. Point it at any other system with an API, say what to pull, test it, save. Drop a
+              spreadsheet or an exported chat and it becomes memory. Remove a source and everything it produced goes
+              with it, with a record of what was removed.
+            </p>
+          </div>
+          <ul className="cp-parts" data-reveal data-delay="2" aria-label="Systems LongStrider connects to today">
+            {CONNECTIONS.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
           </ul>
         </div>
       </section>
