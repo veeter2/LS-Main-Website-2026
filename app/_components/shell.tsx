@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useRef, useState, type ReactNode } from "react"
-import { LongstriderLogo } from "@/components/longstrider-logo"
+import Image from "next/image"
 import { SiteFooter } from "./site-footer"
 
 const NAV = [
@@ -57,7 +57,7 @@ export function ConceptShell({ children }: { children: ReactNode }) {
       <header className="lx-bar" data-scrolled={scrolled}>
         <div className="lx-wrap lx-bar-inner">
           <Link href="/" className="lx-brand" aria-label="LongStrider home">
-            <LongstriderLogo size={32} className="lx-brand-mark" />
+            <Image src="/longstrider-mark.png" alt="" width={56} height={68} priority className="lx-brand-mark" />
             <span className="lx-brand-word">LongStrider</span>
           </Link>
           <nav className="lx-links" aria-label="Primary">

@@ -225,6 +225,11 @@ html:has(#lx-root) { --lx-page-ground: #f1ecdf; }
   /* ── Lines + surfaces ───────────────────────────────── */
   --lx-line: rgba(31, 27, 20, 0.14);
   --lx-line-subtle: rgba(31, 27, 20, 0.09);
+  /* Header bar: frosted glass a step lighter than the paper, with a visible hairline so it reads as its own surface */
+  --lx-bar-ground: rgba(var(--lx-light-rgb), 0.58);
+  --lx-bar-sheen: rgba(var(--lx-light-rgb), 0.9);
+  --lx-bar-line: rgba(var(--lx-ink-rgb), 0.16);
+  --lx-bar-shadow: 0 1px 0 rgba(var(--lx-light-rgb), 0.6) inset, 0 6px 24px rgba(var(--lx-ink-rgb), 0.06);
   --lx-radius: 4px;
   --lx-shadow-rest: 0 1px 2px rgba(31, 27, 20, 0.04), 0 8px 28px rgba(31, 27, 20, 0.06);
   --lx-shadow-lift: 0 2px 4px rgba(31, 27, 20, 0.05), 0 24px 64px rgba(31, 27, 20, 0.11);
@@ -363,16 +368,17 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(var(--lx-paper-rgb), 0.82);
-  backdrop-filter: saturate(1.4) blur(16px);
-  -webkit-backdrop-filter: saturate(1.4) blur(16px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s;
+  background: var(--lx-bar-ground);
+  backdrop-filter: saturate(1.3) blur(18px);
+  -webkit-backdrop-filter: saturate(1.3) blur(18px);
+  border-bottom: 1px solid var(--lx-bar-line);
+  box-shadow: var(--lx-bar-shadow);
+  transition: box-shadow 0.3s var(--lx-ease);
 }
-.lx-bar[data-scrolled="true"] { border-bottom-color: var(--lx-line-subtle); }
+.lx-bar[data-scrolled="true"] { box-shadow: 0 1px 0 var(--lx-bar-sheen) inset, 0 10px 32px rgba(var(--lx-ink-rgb), 0.1); }
 .lx-bar-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 24px; }
 .lx-brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--lx-ink-primary); }
-.lx-brand-mark { color: var(--lx-ink-primary); flex: none; }
+.lx-brand-mark { display: block; width: auto; height: 34px; flex: none; }
 .lx-brand-word { font-family: var(--lx-display); font-size: 21px; font-weight: 500; letter-spacing: 0.01em; line-height: 1; }
 .lx-links { display: flex; gap: 32px; }
 .lx-links a {
@@ -399,7 +405,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 }
 .lx-short { display: none; }
 @media (max-width: 560px) {
-  .lx-bar { background: rgba(var(--lx-paper-rgb), 0.94); }
+  .lx-bar { background: rgba(var(--lx-light-rgb), 0.78); }
   .lx-bar-cta .lx-btn-ghost { display: none; }
   .lx-long { display: none; }
   .lx-short { display: inline; }
