@@ -6,8 +6,8 @@ import "./own-it.css"
 
 export const metadata: Metadata = pageMeta(
   "/own-it",
-  "Own it outright · Your keys, your model, your machine",
-  "Not SaaS. Licensed software you own: your own key from day one, your own model on your own machine, hosted by us or in your rack. The memory never moves.",
+  "Sovereign by design · Your keys, your model, your machine",
+  "Not SaaS. Sovereign software you own: your own key from day one, your own model on your own machine, hosted by us or in your rack. The memory never moves.",
 )
 
 /**
@@ -92,7 +92,7 @@ export default function OwnItPage() {
         <div className="lx-wrap">
           <div>
             <p className="lx-eyebrow" data-rise="0">
-              Not SaaS. Software you own.
+              Sovereign by design. Software you own.
             </p>
             <h1 className="lx-display lx-h1" data-rise="1">
               Rent the model. Own <em>everything</em> else.
