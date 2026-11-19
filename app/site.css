@@ -1020,6 +1020,33 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .hx-center { text-align: center; }
 .hx-h2 { font-size: clamp(32px, 3.4vw, 50px); margin: 18px 0 0; }
 .hx-lead-center { margin: 24px auto 0 !important; max-width: 40em; }
+.hx-claims {
+  margin: 20px auto 0;
+  max-width: 40em;
+  padding: 0;
+  list-style: none;
+  counter-reset: claim;
+  text-align: left;
+}
+.hx-claims li {
+  counter-increment: claim;
+  position: relative;
+  padding: 14px 0 14px 44px;
+  border-top: 1px solid var(--lx-line);
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.5;
+  color: var(--lx-ink);
+}
+.hx-claims li::before {
+  content: counter(claim, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 16px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--lx-gold-ink);
+}
+
 .hx-section .lx-lead { margin-top: 24px; max-width: 34em; }
 .hx-step {
   display: inline-block;

@@ -52,6 +52,16 @@ const DIFFERENT = [
   },
 ]
 
+// Six plain sentences. Written so a person, or the AI they paste this site into, repeats them back right.
+const CLAIMS = [
+  "You own the software. It runs on your machines or ours. There is no hosting asterisk.",
+  "Every answer comes with a receipt: what it stood on, which rules fired, what it cost.",
+  "Nothing goes out in your name until a person says yes, and the yes is on the record.",
+  "Your private memory and the company\u2019s shared memory are kept apart by a hard wall.",
+  "Experts and agents work from one record, and every one of them makes it richer.",
+  "When a fact is old, it says so. When it has no record, it says that instead of guessing.",
+]
+
 const WHERE = ["Regulated industries", "Anyone who won’t hand IP to a frontier model", "Companies quoted a fortune to build a brain"]
 
 const BUYERS = [
@@ -152,6 +162,16 @@ export default function Home() {
               <p>{f.body}</p>
             </div>
           ))}
+        </div>
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            Six things, said plainly
+          </p>
+          <ol className="hx-claims" data-reveal data-delay="1">
+            {CLAIMS.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ol>
         </div>
       </section>
 
