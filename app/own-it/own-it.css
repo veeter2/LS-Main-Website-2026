@@ -6,7 +6,7 @@
   font-size: 13px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  opacity: 0.55;
+  color: var(--lx-ink-hint);
 }
 
 .own-ladder {
@@ -16,11 +16,23 @@
   gap: 20px;
 }
 
+/* Liquid glass on ivory: translucent surface, soft blur, visible hairline. */
 .own-rung {
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid var(--lx-line);
   border-radius: 14px;
   padding: 24px 24px 20px;
-  background: rgb(255 255 255 / 0.03);
+  background: rgba(250, 247, 240, 0.62);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--lx-shadow-rest);
+}
+
+.own-rung p,
+.mh-fact p,
+.own-modelbox p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .own-rung-head {
@@ -34,11 +46,12 @@
 .own-rung-num {
   font-size: 12px;
   letter-spacing: 0.08em;
-  opacity: 0.45;
+  color: var(--lx-gold-ink);
 }
 
 .own-rung h3 {
   font-size: 19px;
+  color: var(--lx-ink-primary);
 }
 
 .own-status {
@@ -48,13 +61,14 @@
   text-transform: uppercase;
   padding: 3px 10px;
   border-radius: 999px;
-  border: 1px solid rgb(255 255 255 / 0.16);
-  opacity: 0.75;
+  border: 1px solid var(--lx-gold-line);
+  color: var(--lx-gold-ink);
+  background: var(--lx-gold-wash);
   white-space: nowrap;
 }
 
 .own-modelbox {
-  border-left: 2px solid rgb(255 255 255 / 0.25);
+  border-left: 2px solid var(--lx-gold-line);
   padding: 8px 0 8px 28px;
   align-self: center;
 }
