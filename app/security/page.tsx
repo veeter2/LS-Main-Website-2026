@@ -254,7 +254,7 @@ export default function SecurityConcept() {
             Walk through where it runs, who can see what, and which model it talks to, with your own people in the room.
           </p>
           <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
-            Your people will use AI either way. The question is whether it happens inside your walls, on your record, or in a chat box you don\u2019t control. This is the approved tool.
+            Your people will use AI either way. The question is whether it happens inside your walls, on your record, or in a chat box you don&rsquo;t control. This is the approved tool.
           </p>
           <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
             Methods built inside a chat box can stop being yours. Built here, they stay yours: your keys, your record, your license.

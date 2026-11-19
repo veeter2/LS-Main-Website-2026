@@ -191,7 +191,7 @@ export default function IndustriesConcept() {
             than a seat you rent.
           </p>
           <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
-            Your people will use AI either way. The question is whether it happens inside your walls, on your record, or in a chat box you don\u2019t control. This is the approved tool.
+            Your people will use AI either way. The question is whether it happens inside your walls, on your record, or in a chat box you don&rsquo;t control. This is the approved tool.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
