@@ -2177,7 +2177,8 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .pg .mf-caps li,
 .pg .fo-tiers,
 .pg .by-qa,
-.pg .in-side {
+.pg .in-side,
+.pg .gx-point {
   position: relative;
   background: var(--lx-glass-ground);
   -webkit-backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2);
@@ -2225,6 +2226,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .pg .ay-prompt { background: var(--lx-glass-ground-lift); }
 
 .pg .in-side { padding: 22px 24px 24px; }
+.pg .gx-point { padding: 22px 24px 24px; }
 .pg .in-side .in-breaks:first-of-type, .pg .in-side .in-breaks li:first-child { border-top: 0; padding-top: 0; }
 
 /* Cards that used to be a rule over text are now a surface with air inside. */

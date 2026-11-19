@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import { DeploymentMap } from "./deployment-map"
 import "./security.css"
 import { FaqJsonLd } from "../_components/faq-jsonld"
@@ -48,7 +49,7 @@ const VOICES = ["Claude", "GPT", "DeepSeek", "Local model"]
 
 export default function SecurityConcept() {
   return (
-    <main>
+    <main className="pg">
       <FaqJsonLd items={ANSWERS.map((a) => ({ q: a.title.replace(/\.$/, ""), a: a.body }))} />
       <section className="lx-hero">
         <div className="lx-wrap">
@@ -181,6 +182,7 @@ export default function SecurityConcept() {
       </section>
 
       <section className="hx-section" id="rules">
+        <FilmStill src="/art/film-arch.jpg" alt="The record as an arch of stones, each month in its place, nothing erased." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">04</span> It follows your rules
