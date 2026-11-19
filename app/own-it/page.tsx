@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { pageMeta } from "@/lib/page-meta"
-import { BrandArt } from "../_components/brand-art"
+import { LadderArt } from "../_components/ladder-art"
 import "./own-it.css"
 
 export const metadata: Metadata = pageMeta(
@@ -136,7 +136,7 @@ export default function OwnItPage() {
         </div>
       </section>
 
-      <BrandArt name="ladder" caption="Five rungs, one record. Moving up never moves the memory." />
+      <LadderArt />
 
       <section className="hx-section hx-deep" id="ladder">
         <div className="lx-wrap hx-center">
