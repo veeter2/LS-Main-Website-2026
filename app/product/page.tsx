@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import Image from "next/image"
 import { CallSplit } from "./call-split"
 import { ExpertInterview } from "./expert-interview"
 import { RecordDemo } from "../_components/record-demo"
@@ -67,9 +68,18 @@ const RUNS = ["Monday\u2019s run:", "Tuesday\u2019s run:", "Wednesday\u2019s run
 const ALONE = "starts from nothing"
 const OURS = ["starts from the record", "builds on Monday", "builds on both"]
 
+/** A still from the film as a quiet section opener. Static; the moving version is the hero on the home page. */
+function Still({ src, alt }: { src: string; alt: string }) {
+  return (
+    <figure className="lx-wrap pg-still" data-reveal>
+      <Image src={src} alt={alt} width={1920} height={1080} sizes="(max-width: 1240px) 100vw, 1240px" />
+    </figure>
+  )
+}
+
 export default function ProductConcept() {
   return (
-    <main>
+    <main className="pg">
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -135,6 +145,7 @@ export default function ProductConcept() {
 
       {/* 02: Memory */}
       <section className="hx-section" id="living-memory">
+        <Still src="/art/film-night.jpg" alt="Night over the memory: gold threads link what the day wrote, and a letter waits on the road for morning." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">02</span> Memory
@@ -255,6 +266,7 @@ export default function ProductConcept() {
 
       {/* 06: Governance */}
       <section className="hx-section" id="governance">
+        <Still src="/art/film-arch.jpg" alt="The record as an arch of stones, one per month, brightening toward now, with the company's topics in orbit." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">06</span> Governance
@@ -304,6 +316,7 @@ export default function ProductConcept() {
       </section>
 
       <section className="hx-close">
+        <Still src="/art/film-dune.jpg" alt="A dune of memory with a gold road along its foot." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             See it on your <em>own</em> work.
