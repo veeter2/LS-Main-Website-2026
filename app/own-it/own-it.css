@@ -15,7 +15,7 @@
   border: 1px solid var(--lx-line);
   border-radius: var(--lx-radius);
   padding: 24px 24px 20px;
-  background: rgba(250, 247, 240, 0.62);
+  background: rgba(var(--lx-surface-rgb), 0.62);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--lx-shadow-rest);

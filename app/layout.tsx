@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Lora } from "next/font/google"
 import "./site.css"
 import { ConceptShell } from "./_components/shell"
+import { PAPER } from "@/lib/page-meta"
 
 const lora = Lora({
   subsets: ["latin"],
@@ -83,7 +84,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#f1ecdf",
+  themeColor: PAPER,
 }
 
 const JSONLD = {

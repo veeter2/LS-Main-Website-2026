@@ -235,6 +235,7 @@ html:has(#lx-root) { --lx-page-ground: #f1ecdf; }
   --lx-gold-rgb: 200, 169, 110;
   --lx-ink-rgb: 31, 27, 20;
   --lx-paper-rgb: 241, 236, 223;
+  --lx-surface-rgb: 250, 247, 240;
   --lx-gold-light-rgb: 220, 195, 138;
   --lx-purple-rgb: 139, 92, 246;
   --lx-light-rgb: 255, 255, 255;

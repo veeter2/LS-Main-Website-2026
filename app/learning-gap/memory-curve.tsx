@@ -57,8 +57,8 @@ export function MemoryCurve() {
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Illustration: a tool that forgets keeps returning to zero, while LongStrider’s knowledge of your business keeps rising over twelve months.">
         <defs>
           <linearGradient id="gx-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#c8a96e" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="#c8a96e" stopOpacity="0" />
+            <stop offset="0%" style={{ stopColor: "var(--lx-gold)" }} stopOpacity="0.22" />
+            <stop offset="100%" style={{ stopColor: "var(--lx-gold)" }} stopOpacity="0" />
           </linearGradient>
         </defs>
 
