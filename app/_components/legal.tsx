@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { FilmStill } from "./film-still"
 
 export type LegalSection = {
   title: string
@@ -24,7 +25,7 @@ export function LegalPage({
   sections: LegalSection[]
 }) {
   return (
-    <main>
+    <main className="pg">
       <section className="lx-hero lg-hero">
         <div className="lx-wrap lg-wrap">
           <p className="lx-eyebrow" data-rise="0">
@@ -50,6 +51,7 @@ export function LegalPage({
       </section>
 
       <section className="lg-body">
+        <FilmStill src="/art/film-dune.jpg" alt="A dune of memory with a gold road along its foot." />
         <div className="lx-wrap lg-wrap">
           {sections.map((s) => (
             <section key={s.title} className="lg-section">
