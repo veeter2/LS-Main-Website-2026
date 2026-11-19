@@ -4,10 +4,10 @@ import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { SessionForm } from "./session-form"
 
-export const metadata: Metadata = pageMeta("/book", "Book a working session", "An hour, your people, one real question. You leave knowing whether it’s worth building and what you’d own. Not a demo, a working session.")
+export const metadata: Metadata = pageMeta("/book", "Book a working session", "An hour, your people, your hardest question. You leave knowing whether it’s worth building and what you’d own. Not a demo, a working session.")
 
 const STEPS = [
-  { title: "Bring one real question.", body: "A client, a claim, a matter, an engagement. Something your team can’t answer quickly today." },
+  { title: "Bring your hardest question.", body: "A client, a claim, a matter, an engagement. Something your team can’t answer today." },
   { title: "Watch it become a record.", body: "We show what LongStrider keeps from your own material: the facts, the promises, the sources." },
   { title: "See what you’d own.", body: "Where it would run, who could see what, and what your company would have ninety days in." },
 ]
@@ -23,7 +23,7 @@ export default function BookConcept() {
               Not a demo. A working session on your problem.
             </h1>
             <p className="lx-lead" data-rise="2">
-              An hour with the people who built LongStrider, your people, and one real question. You leave knowing whether
+              An hour with the people who built LongStrider, your people, and your hardest question. You leave knowing whether
               it&rsquo;s worth building, and what you&rsquo;d own if it is.
             </p>
             <ol className="bk-steps" data-rise="3">
@@ -47,9 +47,9 @@ export default function BookConcept() {
       <section className="hx-section hx-deep">
         <BrandArt name="arch" />
         <p className="lx-wrap mh-question" data-reveal>
-          Rather see it first? Three annotated screens, no sales call.{" "}
+          Rather see it first? A short walk through the product, no sales call.{" "}
           <Link href="/product">See it answer</Link>{" "}
-          Or see what owning it means: <Link href="/own-it">hosted today, air-gapped when you're ready</Link>.
+          Or see what owning it means: <Link href="/own-it">hosted today, inside your walls when you&rsquo;re ready</Link>.
         </p>
       </section>
     </main>

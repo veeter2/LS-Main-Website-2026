@@ -27,7 +27,7 @@ const VERTICALS: Vertical[] = [
       </>
     ),
     lead: "Decades of adjuster judgment, edge-case precedent and carrier-specific exceptions live in people. When they leave, the reasoning leaves with them. In a business where inconsistency means bad-faith and E&O exposure, that isn\u2019t an inconvenience.",
-    stat: "Nearly a quarter of claims adjusters are expected to retire by the end of 2027, and 73% of insurance professionals say the biggest impact will be the loss of institutional knowledge. (Sedgwick, 2026 Loss Adjusting Insights, via Risk & Insurance)",
+    stat: "A large share of claims adjusters are expected to retire in the next few years, and most people in the industry say the biggest loss will be what those adjusters knew. (Sedgwick, Loss Adjusting Insights)",
     breaks: [
       {
         title: "A retirement resets judgment.",
@@ -43,7 +43,7 @@ const VERTICALS: Vertical[] = [
       },
     ],
     owns: "Every exception, and how it was resolved. The reasoning behind each reserve and settlement. What each retiring adjuster knew, confirmed by them while they were still here.",
-    signs: "The chief claims officer owns the pain. The CIO owns the budget. Compliance has the final word, and the NAIC AI bulletin now adopted in about half the states asks them to document exactly how an AI system is governed. Every write in LongStrider is receipted and undoable. That\u2019s the audit trail.",
+    signs: "The chief claims officer owns the pain. The CIO owns the budget. Compliance has the final word, and the NAIC AI bulletin, now adopted in many states, asks them to document exactly how an AI system is governed. Every write in LongStrider leaves a receipt and can be undone. That\u2019s the audit trail.",
   },
   {
     id: "legal",
@@ -54,7 +54,7 @@ const VERTICALS: Vertical[] = [
       </>
     ),
     lead: "Law firms don\u2019t have an AI problem. They have a continuity problem. The tools can retrieve and draft. None of them remember which concessions were deliberate, which positions the firm approved, or what the client said privately.",
-    stat: "US law firms recorded 3,009 lateral partner moves in 2025, a five-year high. (Global Legal Post, 2026)",
+    stat: "Partners move between US law firms more often than at any point in years, and each move takes client history with it. (Global Legal Post)",
     breaks: [
       {
         title: "Partners leave with the context.",
@@ -80,7 +80,7 @@ const VERTICALS: Vertical[] = [
         Your product is what your people <em>know</em>.
       </>
     ),
-    lead: "Every method, every relationship, every hard-won pattern lives in people. Firms are using AI on 44% of projects now, up from 23% a year ago, and 85% say it saves time. Only 30% say it makes money. (SPI Research, 2026) Savings don\u2019t compound. A record does.",
+    lead: "Every method, every relationship, every hard-won pattern lives in people. Firms now use AI on a growing share of projects, and most say it saves time. Few say it makes money. (SPI Research) Savings don\u2019t compound. A record does.",
     breaks: [
       {
         title: "The method lives in the partner.",
