@@ -48,7 +48,8 @@ export default function BookConcept() {
         <BrandArt name="arch" />
         <p className="lx-wrap mh-question" data-reveal>
           Rather see it first? A short walk through the product, no sales call.{" "}
-          <Link href="/product">See it answer</Link>
+          <Link href="/product">See it answer</Link>{" "}
+          Or see what owning it means: <Link href="/own-it">hosted today, inside your walls when you&rsquo;re ready</Link>.
         </p>
       </section>
     </main>

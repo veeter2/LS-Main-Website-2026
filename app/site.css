@@ -204,11 +204,11 @@ html:has(#lx-root) { --lx-page-ground: #f1ecdf; }
   --lx-surface: #faf7f0;
   --lx-ink: #1f1b14;
   --lx-ink-primary: rgba(31, 27, 20, 0.94);
-  --lx-ink-body: rgba(31, 27, 20, 0.8);
-  --lx-ink-secondary: rgba(31, 27, 20, 0.7);
-  --lx-ink-muted: rgba(31, 27, 20, 0.72);
-  --lx-ink-hint: rgba(31, 27, 20, 0.7);
-  --lx-ink-ghost: rgba(31, 27, 20, 0.22);
+  --lx-ink-body: rgba(31, 27, 20, 0.86);
+  --lx-ink-secondary: rgba(31, 27, 20, 0.8);
+  --lx-ink-muted: rgba(31, 27, 20, 0.8);
+  --lx-ink-hint: rgba(31, 27, 20, 0.78);
+  --lx-ink-ghost: rgba(31, 27, 20, 0.3);
 
   /* ── Accents (Manifesto gold + purple, with ink-safe text variants) ── */
   --lx-gold: #c8a96e;
