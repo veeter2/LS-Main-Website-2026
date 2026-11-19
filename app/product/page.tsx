@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { FilmStill as Still } from "../_components/film-still"
+import { DoorsArch } from "../_components/doors-arch"
 import { CallSplit } from "./call-split"
 import { ExpertInterview } from "./expert-interview"
 import { RecordDemo } from "../_components/record-demo"
@@ -62,7 +63,14 @@ const GOVERNANCE = [
   },
 ]
 
-const CONNECTIONS = ["Anything with an API", "Anything with an MCP server", "Your CRM", "Payments", "Forms", "Marketing", "Docs and files", "Spreadsheets and chat exports"]
+const BEATS = [
+  { title: "Every door", body: "Chat, your connected systems (anything with an API or an MCP server), documents, dropped files, and what your teammates find. Not five silos. One record." },
+  { title: "Nothing lands raw", body: "Each thing that comes in is broken into dated, sourced facts, filed into the right topic on its own, linked to what agrees, flagged against what contradicts, and judged before it is trusted." },
+  { title: "Two clocks", body: "By day, every door feeds the record as you work, and each new fact is filed within minutes. By night, it reads what the day brought, links it to what it already knew, merges topics, finds what contradicts, and writes down what it learned about your business. You come in to a company that knows more than it did yesterday. Nobody taught it." },
+  { title: "It compounds", body: "Tomorrow\u2019s answer stands on today\u2019s facts. The expert\u2019s rules, the agent\u2019s findings, the morning letter, the promise due today all come from the same record, and every one of them makes it richer. A chat box starts at zero every morning. This starts where it left off." },
+  { title: "Two books", body: "Yours and the company\u2019s. Your private connectors and drops feed your memory, and nobody else sees it. Shared sources feed the company\u2019s memory, which everyone works from. Same system, hard wall between them." },
+  { title: "The model never holds it", body: "Swap the model. The record does not move." },
+]
 const MODELS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compatible server", "A local model on your hardware"]
 
 const RUNS = ["Monday\u2019s run:", "Tuesday\u2019s run:", "Wednesday\u2019s run:"]
@@ -315,27 +323,30 @@ export default function ProductConcept() {
 
       {/* 08: Connections */}
       <section className="hx-section hx-deep" id="connections">
-        <div className="lx-wrap lx-hero-grid">
-          <div>
-            <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">08</span> Connections
-            </p>
-            <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Plugged in once. It learns from them <em>every</em> day.
-            </h2>
-            <p className="lx-lead" data-reveal data-delay="2">
-              If it has an API or an MCP server, it connects. Give it a read-only key, say what to pull, test it,
-              save, and it keeps the source in sync on a schedule. Your CRM, payments, forms, marketing and docs tools
-              have ready-made recipes. Drop a spreadsheet or an exported chat and it becomes memory. Remove a source
-              and everything it produced goes with it, with a record of what was removed.
-            </p>
-          </div>
-          <ul className="cp-parts" data-reveal data-delay="2" aria-label="What LongStrider connects to">
-            {CONNECTIONS.map((c) => (
-              <li key={c}>{c}</li>
-            ))}
-          </ul>
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">08</span> Connections
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            Every door feeds one <em>record</em>.
+          </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            ChatGPT is a box you talk to. LongStrider is a record everything feeds.
+          </p>
         </div>
+        <DoorsArch />
+        <div className="lx-wrap mh-facts cx-beats">
+          {BEATS.map((b, i) => (
+            <div key={b.title} className="mh-fact" data-reveal data-delay={String((i % 3) + 1)}>
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </div>
+          ))}
+        </div>
+        <p className="lx-wrap lx-display cx-close" data-reveal>
+          <span className="cx-dim">A chat box forgets by morning.</span>
+          <span className="cx-lit">The record remembers for the company.</span>
+        </p>
       </section>
 
       <section className="hx-close">

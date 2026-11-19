@@ -2314,3 +2314,34 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   .ag-row { padding: 16px; }
   .lx-hero::before, .lx-hero::after, .hx-section::before, .hx-section::after { width: 70vw; }
 }
+
+/* ── /product 08: every door feeds one record ───────────── */
+.cx-dia { margin: clamp(40px, 6vh, 64px) auto 0; padding: clamp(16px, 2.5vw, 32px); }
+.cx-dia,
+.cx-beats .mh-fact { position: relative; }
+.cx-dia {
+  background: var(--lx-glass-ground);
+  -webkit-backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2);
+  backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2);
+  border: 1px solid var(--lx-line);
+  border-radius: var(--lx-radius);
+  box-shadow: 0 1px 0 var(--lx-glass-sheen) inset, var(--lx-shadow-rest);
+}
+.cx-svg { display: block; width: 100%; height: auto; font-family: var(--lx-body); }
+.cx-svg-tall { display: none; }
+.cx-beats { margin-top: clamp(40px, 6vh, 64px); }
+.cx-close {
+  margin: clamp(56px, 8vh, 96px) auto 0;
+  text-align: center;
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.25;
+  display: grid;
+  gap: 6px;
+}
+.cx-dim { color: var(--lx-ink-hint); }
+.cx-lit { color: var(--lx-gold-ink); }
+@media (max-width: 860px) {
+  .cx-svg-wide { display: none; }
+  .cx-svg-tall { display: block; }
+  .cx-dia { padding: 14px; }
+}
