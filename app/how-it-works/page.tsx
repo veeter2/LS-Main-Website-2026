@@ -248,6 +248,27 @@ export default function HowItWorksConcept() {
         <BrandArt name="orbit" />
       </section>
 
+      <section className="hx-section hx-deep" id="clocks">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            Two clocks
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            By day it <em>files</em>. By night it <em>learns</em>.
+          </h2>
+        </div>
+        <div className="lx-wrap mh-facts mh-facts-2">
+          <div className="mh-fact" data-reveal data-delay="1">
+            <h3>By day</h3>
+            <p>Every door feeds the record as you work, and each new fact is filed within minutes.</p>
+          </div>
+          <div className="mh-fact" data-reveal data-delay="2">
+            <h3>By night</h3>
+            <p>It reads what the day brought, links it to what it already knew, merges topics, finds what contradicts, and writes down what it learned about your business. You come in to a company that knows more than it did yesterday. Nobody taught it.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="hx-close">
         <FilmStill src="/art/film-topics.jpg" alt="Topics form themselves on the memory as the day's work settles." />
         <div className="lx-wrap hx-center">

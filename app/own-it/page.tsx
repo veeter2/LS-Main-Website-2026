@@ -222,6 +222,9 @@ export default function OwnItPage() {
             An hour, your people, one real question from your business. You leave knowing what your
             company would own, and which rung of the ladder it would start on.
           </p>
+          <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
+            Methods built inside a chat box can stop being yours. Built here, they stay yours: your keys, your record, your license.
+          </p>
           <div className="lx-cta-row" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
               Book a working session <span className="lx-arrow" aria-hidden>→</span>

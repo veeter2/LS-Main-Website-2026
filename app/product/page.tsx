@@ -3,6 +3,7 @@ import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { FilmStill as Still } from "../_components/film-still"
 import { DoorsArch } from "../_components/doors-arch"
+import { HeldJobCard, ReceiptCard, TeachCard, TeamCard } from "../_components/proof-cards"
 import { CallSplit } from "./call-split"
 import { ExpertInterview } from "./expert-interview"
 import { RecordDemo } from "../_components/record-demo"
@@ -34,6 +35,11 @@ const RECORD_POINTS = [
 ]
 
 const NIGHT = [
+  {
+    time: "Last spring",
+    body: "Ashgrove moved its renewal to another carrier after two late documents.",
+    old: "last confirmed in March",
+  },
   {
     time: "11:04 pm",
     body: "A partner mentions, in passing, that Pellworth has been talking to another carrier.",
@@ -133,6 +139,10 @@ export default function ProductConcept() {
             <RecordDemo />
           </div>
         </div>
+        <div className="lx-wrap pf-wrap" data-reveal>
+          <ReceiptCard />
+          <p className="lx-illustrative">Every answer comes with its receipt. Click any line and it opens.</p>
+        </div>
         <div className="lx-wrap mh-facts">
           {RECORD_POINTS.map((f, i) => (
             <div key={f.title} className="mh-fact" data-reveal data-delay={String(i + 1)}>
@@ -158,16 +168,17 @@ export default function ProductConcept() {
             aren&rsquo;t paying for a model to re-read what it already knows. If something did, it reads what the day
             wrote and files it into the right drawers on its own: a person, an account, a matter. It links the notes
             that say the same thing and flags the ones that contradict. Then it leaves a short note at the top of your
-            morning. Nobody tags anything.
+            morning. Nobody tags anything. And when a fact has not been confirmed in a while, it says so.
           </p>
         </div>
         <ol className="lx-wrap nt-line">
           {NIGHT.map((n, i) => (
-            <li key={n.time} className="nt-step" data-reveal data-delay={String(i + 1)}>
+            <li key={n.time} className="nt-step" data-reveal data-delay={String(i + 1)} data-old={"old" in n || undefined}>
               <span className="nt-time lx-num">
                 <b>{n.time}</b>
               </span>
               <p>{n.body}</p>
+              {"old" in n && <span className="pf-old">{n.old}</span>}
             </li>
           ))}
         </ol>
@@ -236,6 +247,9 @@ export default function ProductConcept() {
             <p className="lx-illustrative">Real flow. Fictional answers.</p>
           </div>
         </div>
+        <div className="lx-wrap pf-wrap" data-reveal>
+          <TeachCard />
+        </div>
       </section>
 
       {/* 06: Agents */}
@@ -280,6 +294,9 @@ export default function ProductConcept() {
             </div>
           </div>
         </div>
+        <div className="lx-wrap pf-wrap" data-reveal>
+          <TeamCard />
+        </div>
       </section>
 
       {/* 07: Governance, which includes any model */}
@@ -318,6 +335,9 @@ export default function ProductConcept() {
             ))}
             <li className="cp-parts-ours">Your memory: the one part that stays.</li>
           </ul>
+        </div>
+        <div className="lx-wrap pf-wrap" data-reveal>
+          <HeldJobCard />
         </div>
       </section>
 
