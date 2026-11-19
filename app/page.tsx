@@ -23,7 +23,7 @@ export const metadata: Metadata = {
  */
 
 const ROOM = [
-  { name: "Chat.", body: "It answers from the record first and calls the model only for the words." },
+  { name: "Chat.", body: "It answers from the record first, everything your company has told it, dated, and calls the model only for the words." },
   {
     name: "Memory.",
     body: "Everything your company has said to it, dated and sourced. Your memory is yours. The company’s is shared. Hard wall between them. It files itself, checks itself, and works on it overnight.",
@@ -57,7 +57,7 @@ const WHERE = ["Regulated industries", "Anyone who won’t hand IP to a frontier
 const BUYERS = [
   { who: "For the CFO", title: "An AI budget that ends in an asset, not a renewal.", href: "/for/finance" },
   { who: "For the CTO", title: "Postgres, row-level scoping, any model through your keys. Open it up.", href: "/for/technology" },
-  { who: "For compliance", title: "Every read checked against who’s asking. Every write leaves a receipt.", href: "/security" },
+  { who: "For compliance", title: "Every read checked against who’s asking. Every write leaves a receipt: what changed, who, when.", href: "/security" },
   { who: "For your team", title: "Stop explaining your job to a chat window every morning.", href: "/for/teams" },
 ]
 

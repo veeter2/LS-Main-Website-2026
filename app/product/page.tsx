@@ -132,7 +132,8 @@ export default function ProductConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Every fact is dated. Every change is kept, with what it replaced. Every answer points back to the message
-              it came from, and you can open it. Every reply comes with its receipts.
+              it came from, and you can open it. Every reply comes with its receipt: what it stood on, which rules fired, and
+              what it cost.
             </p>
           </div>
           <div data-reveal data-delay="2">

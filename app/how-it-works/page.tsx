@@ -51,7 +51,7 @@ const ARCHITECT = [
   },
   {
     title: "Traceable.",
-    body: "Every reply writes a receipt: which drawers it opened, which facts it was shown, how long each step took.",
+    body: "Every reply writes a receipt: which drawers it opened (one page per person, company or project), which facts it was shown, how long each step took.",
   },
   {
     title: "Runs where you need it.",

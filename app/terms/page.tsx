@@ -25,7 +25,7 @@ const SECTIONS: LegalSection[] = [
     items: [
       { label: 'Your Content', text: 'You retain all rights to content you create, upload, or process using LongStrider. We do not claim ownership of your data, institutional memory, or outputs.' },
       { label: 'Our Technology', text: 'LongStrider, including its software, algorithms, architecture, and branding, is protected by intellectual property laws. You may not copy, modify, distribute, or reverse engineer our technology without explicit written permission.' },
-      { label: 'License Grant', text: 'We grant you a limited, non-exclusive, non-transferable license to use LongStrider according to your service agreement for its duration.' },
+      { label: 'License Grant', text: 'Your service agreement sets out the license to run LongStrider on your own systems or on ours. Your data, your memory and everything built from your material are yours outright, and they leave with you if the agreement ends.' },
     ],
   },
   {
