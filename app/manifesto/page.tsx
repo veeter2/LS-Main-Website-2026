@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import { ChapterRail, type Chapter } from "./chapter-rail"
 
 export const metadata: Metadata = pageMeta("/manifesto", "The Manifesto", "The intelligence layer that knows your business, and never forgets. Why the money spent on AI should build something your company owns.")
@@ -110,7 +111,7 @@ const TIERS = [
 
 export default function ManifestoConcept() {
   return (
-    <main>
+    <main className="pg">
       <section className="lx-hero mf-hero">
         <div className="lx-wrap mf-hero-inner">
           <p className="lx-eyebrow" data-rise="0">The Manifesto</p>
@@ -218,6 +219,7 @@ export default function ManifestoConcept() {
           </section>
 
           <section id="practice" className="mf-chapter">
+            <FilmStill src="/art/film-strider.jpg" alt="The strider on the road along the memory." />
             <p className="lx-eyebrow" data-reveal>
               <span className="hx-step">04</span> In practice
             </p>
@@ -287,6 +289,7 @@ export default function ManifestoConcept() {
           </section>
 
           <section id="landscape" className="mf-chapter">
+            <FilmStill src="/art/film-arch.jpg" alt="The record as an arch of stones, each month in its place." />
             <p className="lx-eyebrow" data-reveal>
               <span className="hx-step">07</span> The landscape
             </p>
