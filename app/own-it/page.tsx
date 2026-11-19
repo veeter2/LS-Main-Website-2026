@@ -153,7 +153,7 @@ export default function OwnItPage() {
         </div>
         <div className="lx-wrap own-ladder" aria-label="Five ways to run it">
           {LADDER.map((r, i) => (
-            <div key={r.rung} className="own-rung" data-reveal data-delay={String((i % 3) + 1)}>
+            <div key={r.rung} className="lx-card-flat own-rung" data-reveal data-delay={String((i % 3) + 1)}>
               <div className="own-rung-head">
                 <span className="lx-label own-rung-num">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{r.rung}</h3>

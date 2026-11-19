@@ -12,8 +12,6 @@
 
 /* Liquid glass on ivory: translucent surface, soft blur, visible hairline. */
 .own-rung {
-  border: 1px solid var(--lx-line);
-  border-radius: var(--lx-radius);
   padding: 24px 24px 20px;
   background: rgba(var(--lx-surface-rgb), 0.62);
   backdrop-filter: blur(12px);

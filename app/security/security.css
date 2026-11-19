@@ -14,12 +14,7 @@
 }
 .sec-bridge { display: flex; justify-content: center; height: 32px; }
 .sec-bridge span { width: 1px; background: var(--lx-gold-line); }
-.sec-stat {
-  margin: 28px 0 0;
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--lx-ink-secondary);
-}
+.sec-stat { margin: 28px 0 0; }
 .sec-map { max-width: 760px; margin: clamp(36px, 5vh, 56px) auto 0; }
 .sec-map-status {
   margin: 16px 2px 0;
@@ -32,4 +27,4 @@
 .sec-partner p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--lx-ink-secondary); }
 .sec-partner b { color: var(--lx-ink-primary); }
 .sec-partner a { color: var(--lx-gold-ink); }
-.sec-rules-note { max-width: 46em; margin: 20px auto 0; font-size: 15.5px; line-height: 1.65; color: var(--lx-ink-secondary); }
+.sec-rules-note { max-width: 46em; margin: 20px auto 0; }
