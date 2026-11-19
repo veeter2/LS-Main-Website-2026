@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
-import Image from "next/image"
 import { AskYourAI } from "./_components/ask-your-ai"
+import { HeroVideo } from "./_components/hero-video"
 
 export const metadata: Metadata = {
   ...pageMeta(
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 /**
  * Homepage v2 (Concept A, 2026-11-11): the enemy in the headline, the three
  * "not a" lines as the subhead, then the whole room. No stats anywhere; the
- * figures live in the briefs. Screens are the demo account (Dana Thistlewood,
- * COO of a fictional dealer group). Names match the app's tabs.
+ * figures live in the briefs. The hero is the concept film (rendered from
+ * /video); the section stills are gone. Names match the app's tabs.
  */
 
 const ROOM = [
@@ -59,15 +59,6 @@ const BUYERS = [
   { who: "For your team", title: "Stop explaining your job to a chat window every morning.", href: "/for/teams" },
 ]
 
-function Shot({ src, alt, caption }: { src: string; alt: string; caption: string }) {
-  return (
-    <figure className="mh-screen">
-      <Image src={src} alt={alt} width={800} height={537} sizes="(max-width: 900px) 100vw, 900px" />
-      <figcaption className="lx-illustrative">{caption}</figcaption>
-    </figure>
-  )
-}
-
 export default function Home() {
   return (
     <main>
@@ -99,11 +90,7 @@ export default function Home() {
           </div>
         </div>
         <div className="lx-wrap" data-rise="4">
-          <Shot
-            src="/shots/chat.jpg"
-            alt="LongStrider chat. Dana asks how to handle a repeat problem; the reply shows she solved the same one in September."
-            caption="Dana asks how to handle a repeat problem. It shows her she solved the same one in September."
-          />
+          <HeroVideo />
         </div>
       </section>
 
@@ -136,9 +123,6 @@ export default function Home() {
             <Link href="/product">What it does →</Link>
           </p>
         </div>
-        <div className="lx-wrap" data-reveal data-delay="2">
-          <Shot src="/shots/memory.jpg" alt="LongStrider Memory page, nine months of a company's record." caption="Memory, nine months in." />
-        </div>
       </section>
 
       {/* 02: How it's different */}
@@ -163,9 +147,6 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="lx-wrap" data-reveal data-delay="2">
-          <Shot src="/shots/today.jpg" alt="LongStrider Today page, the morning summary." caption="Today. The morning page, written overnight." />
-        </div>
       </section>
 
       {/* 03: Where it runs */}
@@ -185,9 +166,6 @@ export default function Home() {
               <li key={w}>{w}</li>
             ))}
           </ul>
-        </div>
-        <div className="lx-wrap" data-reveal data-delay="2">
-          <Shot src="/shots/experts.jpg" alt="LongStrider Experts page. Hire a role; it interviews you first." caption="Experts. Hire a role, it interviews you first." />
         </div>
       </section>
 
