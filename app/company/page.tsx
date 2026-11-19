@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 
 export const metadata: Metadata = pageMeta("/company", "About LongStrider · Why we built it", "The industry built brilliant engines and gave them amnesia. We built the missing layer, and built it to belong to you. Here is why we built it.")
 
@@ -33,7 +34,7 @@ const PARTS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compati
 
 export default function CompanyConcept() {
   return (
-    <main>
+    <main className="pg">
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -107,6 +108,7 @@ export default function CompanyConcept() {
 
       {/* 02: How we got here */}
       <section className="hx-section" id="story">
+        <FilmStill src="/art/film-topics.jpg" alt="Topics forming on the memory as the work settles." />
         <div className="lx-wrap mh-story">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">02</span> How we got here
@@ -176,6 +178,7 @@ export default function CompanyConcept() {
       </section>
 
       <section className="hx-close">
+        <FilmStill src="/art/film-strider.jpg" alt="The strider on the road along the memory." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Build it <em>with</em> us.
