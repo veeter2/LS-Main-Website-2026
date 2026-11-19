@@ -2,6 +2,7 @@ import "./industries.css"
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import { IndustryAsk } from "./industry-ask"
 
 export const metadata: Metadata = pageMeta("/industries", "For insurance, legal and professional services", "Where what people know is the business. Keep adjuster judgment, partner knowledge and client history when the people leave.")
@@ -102,7 +103,7 @@ const VERTICALS: Vertical[] = [
 
 export default function IndustriesConcept() {
   return (
-    <main>
+    <main className="pg">
       <section className="lx-hero">
         <div className="lx-wrap lx-hero-grid">
           <div>
@@ -179,6 +180,7 @@ export default function IndustriesConcept() {
       ))}
 
       <section className="hx-close">
+        <FilmStill src="/art/film-dawn.jpg" alt="Dawn over the memory: the road into the day, the letter waiting." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Bring the case that keeps you up at <em>night</em>.
