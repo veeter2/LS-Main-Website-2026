@@ -24,7 +24,7 @@ export function ReceiptCard({ compact = false }: { compact?: boolean }) {
       </div>
       <dl className="pf-lines">
         <div className="pf-line">
-          <dt>Stood on</dt>
+          <dt>Memory used</dt>
           <dd>
             <ul className="pf-stood">
               {STOOD_ON.map((s) => (
@@ -39,18 +39,14 @@ export function ReceiptCard({ compact = false }: { compact?: boolean }) {
           </dd>
         </div>
         <div className="pf-line">
-          <dt>Rules that fired</dt>
+          <dt>Rules fired</dt>
           <dd>Nothing goes to a customer while a condition is still open. The price list waits for Hailey&rsquo;s yes.</dd>
         </div>
         <div className="pf-line">
-          <dt>Model</dt>
-          <dd>Claude, through your own key</dd>
-        </div>
-        <div className="pf-line">
           <dt>Cost</dt>
-          <dd>a fraction of a cent</dd>
+          <dd>a fraction of a cent, Claude through your own key</dd>
         </div>
-        <div className="pf-line">
+                <div className="pf-line">
           <dt>Who can see this</dt>
           <dd>You and the deal team. Nobody else.</dd>
         </div>

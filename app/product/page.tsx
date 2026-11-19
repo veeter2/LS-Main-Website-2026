@@ -65,7 +65,7 @@ const GOVERNANCE = [
   },
   {
     title: "Every write has a receipt.",
-    body: "What changed, who did it, when, and the run it came from, so it can be found and undone.",
+    body: "What changed, who did it, when, and the run it came from, so it can be found and undone. Anything that happened without asking you is in one log, every day.",
   },
 ]
 
@@ -168,7 +168,8 @@ export default function ProductConcept() {
             aren&rsquo;t paying for a model to re-read what it already knows. If something did, it reads what the day
             wrote and files it into the right drawers on its own: a person, an account, a matter. It links the notes
             that say the same thing and flags the ones that contradict. Then it leaves a short note at the top of your
-            morning. Nobody tags anything. And when a fact has not been confirmed in a while, it says so.
+            morning. Nobody tags anything. When a fact has not been confirmed in a while, it says so. And when it
+            doesn&rsquo;t have something, it says that too, instead of guessing.
           </p>
         </div>
         <ol className="lx-wrap nt-line">
@@ -267,7 +268,8 @@ export default function ProductConcept() {
               The model is the voice. LongStrider is the memory and the judgment. Your teammates read the record before
               they act, run overnight if you want them to, and bring their findings back as a note. You decide what goes
               into memory. So Wednesday&rsquo;s run starts from Monday&rsquo;s and Tuesday&rsquo;s, instead of from
-              nothing.
+              nothing. A new agent starts as an observer and earns trust run by run. You see how often its work was
+              useful before you let it act.
             </p>
           </div>
           <div className="ag" data-reveal data-delay="2" aria-label="Agent runs with and without a shared record">
