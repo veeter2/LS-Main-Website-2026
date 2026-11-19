@@ -83,7 +83,8 @@ export default function Home() {
           </p>
           <p className="lx-lead hx-lead-center" data-rise="2">
             It keeps what your people tell it, works on it overnight, and hands it to whichever model you run this year.
-            Switch models and nothing is taught twice.
+            Switch models and nothing is taught twice. Sovereign by design: your box, your models, your keys.{" "}
+            <Link href="/own-it">See what owning it means</Link>.
           </p>
           <div className="lx-cta-row hx-cta-center" data-rise="3">
             <Link className="lx-btn lx-btn-primary" href="/book">
