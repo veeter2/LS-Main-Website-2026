@@ -37,12 +37,12 @@ const RECORD_POINTS = [
 const NIGHT = [
   {
     time: "Last spring",
-    body: "Ashgrove moved its renewal to another carrier after two late documents.",
+    body: "Ashgrove took its business to another supplier after two late deliveries.",
     old: "last confirmed in March",
   },
   {
     time: "11:04 pm",
-    body: "A partner mentions, in passing, that Pellworth has been talking to another carrier.",
+    body: "A rep mentions, in passing, that Pellworth has been talking to another supplier.",
   },
   {
     time: "Overnight",

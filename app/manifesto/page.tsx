@@ -35,11 +35,11 @@ const SCENARIOS = [
     turn: "Not a lost date. A decision with its history.",
   },
   {
-    title: "The rate review",
+    title: "The price hold",
     paragraphs: [
-      "Hailey works in underwriting at Caldbeck Mutual. Pellworth’s fleet loss ratio is up, and the renewal is due.",
-      "She holds the rate through December, on one condition: the telematics gap closes.",
-      "The system adds a note. “Telematics data is coming” has now been promised twice, first in October.",
+      "Hailey runs accounts at Caldbeck Supply. Pellworth’s invoices are running late, and their renewal is due.",
+      "She holds their price through December, on one condition: the signed renewal comes back first.",
+      "The system adds a note. “It’s on the owner’s desk” has now been said twice, first in October.",
     ],
     turn: "Not a reminder. A record of what was promised, and when.",
   },

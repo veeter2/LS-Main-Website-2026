@@ -6,9 +6,9 @@
  */
 
 const STOOD_ON = [
-  { what: "Pellworth asked for the telematics gap closed before any second hold.", kind: "Chat", when: "Tuesday" },
-  { what: "Hailey agreed to hold Pellworth’s rate through December.", kind: "Note", when: "Last week" },
-  { what: "Their broker said the telematics data is coming. Second time.", kind: "Call", when: "October" },
+  { what: "Hailey wants the signed renewal back before any second hold.", kind: "Chat", when: "Tuesday" },
+  { what: "Hailey agreed to hold Pellworth’s price through December.", kind: "Note", when: "Last week" },
+  { what: "Their office manager said the renewal is on the owner’s desk. Second time.", kind: "Call", when: "October" },
 ]
 
 export function ReceiptCard({ compact = false }: { compact?: boolean }) {
@@ -16,11 +16,11 @@ export function ReceiptCard({ compact = false }: { compact?: boolean }) {
     <article className={`pf-receipt lx-card${compact ? " pf-receipt-compact" : ""}`} aria-label="Example: an answer with its receipt">
       <div className="pf-q">
         <span className="pf-who">You</span>
-        <p>Can we send Pellworth the revised terms this week?</p>
+        <p>Can we send Pellworth next year&rsquo;s price list this week?</p>
       </div>
       <div className="pf-a">
         <span className="pf-who pf-who-ls">LongStrider</span>
-        <p>Not yet. Hailey&rsquo;s hold runs through December, and Pellworth wants the telematics gap closed first. Their broker has promised that data twice.</p>
+        <p>Not yet. Hailey&rsquo;s price hold runs through December, and she wants the signed renewal back first. Their office manager has said it&rsquo;s on the owner&rsquo;s desk twice.</p>
       </div>
       <dl className="pf-lines">
         <div className="pf-line">
@@ -40,7 +40,7 @@ export function ReceiptCard({ compact = false }: { compact?: boolean }) {
         </div>
         <div className="pf-line">
           <dt>Rules that fired</dt>
-          <dd>Nothing goes to a client before their open conditions are met. Terms wait for Hailey&rsquo;s yes.</dd>
+          <dd>Nothing goes to a customer while a condition is still open. The price list waits for Hailey&rsquo;s yes.</dd>
         </div>
         <div className="pf-line">
           <dt>Model</dt>
@@ -63,12 +63,12 @@ export function HeldJobCard() {
   return (
     <article className="pf-held lx-card" aria-label="Example: a job waiting for a person's yes">
       <span className="pf-tag">Waiting on you</span>
-      <p className="pf-held-line">LongStrider wants to send Pellworth the revised terms. Waiting for your yes.</p>
+      <p className="pf-held-line">LongStrider wants to send Pellworth next year&rsquo;s price list. Waiting for your yes.</p>
       <div className="pf-held-actions" aria-hidden>
         <span className="lx-btn lx-btn-primary pf-inert">Yes</span>
         <span className="lx-btn lx-btn-ghost pf-inert">Not now</span>
       </div>
-      <p className="pf-meta">Hailey, underwriting. This morning.</p>
+      <p className="pf-meta">Hailey, accounts. This morning.</p>
       <p className="pf-note">Nothing goes out in your name until a person says yes, and the yes is on the record.</p>
     </article>
   )
@@ -79,8 +79,8 @@ export function TeachCard() {
     <article className="pf-teach lx-card" aria-label="Example: a sentence in a reply taught as a rule">
       <span className="pf-who pf-who-ls">LongStrider</span>
       <p className="pf-teach-reply">
-        Pellworth is on hold through December. <mark className="pf-mark">Never quote a renewal while a condition the client set is still open.</mark>{" "}
-        I&rsquo;ll check their telematics gap first.
+        Pellworth&rsquo;s price is held through December. <mark className="pf-mark">Never send a new price list while a condition is still open.</mark>{" "}
+        I&rsquo;ll check for their signed renewal first.
       </p>
       <span className="pf-teach-tag">Teach</span>
       <p className="pf-note">Highlight any answer. It becomes a rule the system follows from then on.</p>
@@ -89,10 +89,10 @@ export function TeachCard() {
 }
 
 const TEAM = [
-  { name: "Renewals specialist", kind: "Expert", job: "Reads every renewal before it is quoted and flags what the client asked for.", for: "Underwriting", spent: "little", waiting: false },
-  { name: "Claims reviewer", kind: "Expert", job: "Checks a new claim against the file and what the policy actually says.", for: "Claims", spent: "none", waiting: false },
+  { name: "Renewals specialist", kind: "Expert", job: "Reads every renewal before it is priced and flags what the customer asked for.", for: "Accounts", spent: "little", waiting: false },
+  { name: "Invoice reviewer", kind: "Expert", job: "Checks a disputed invoice against the order and what was actually delivered.", for: "Billing", spent: "none", waiting: false },
   { name: "Morning letter", kind: "Agent", job: "Reads the night’s record and writes what moved and what is due.", for: "Everyone", spent: "little", waiting: false },
-  { name: "Broker follow-up", kind: "Agent", job: "Drafts the chase when a promised document is late, and waits for a yes.", for: "Hailey", spent: "more", waiting: true },
+  { name: "Customer follow-up", kind: "Agent", job: "Drafts the chase when a signed renewal is late, and waits for a yes.", for: "Hailey", spent: "more", waiting: true },
 ]
 
 export function TeamCard() {
