@@ -376,10 +376,11 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   transition: box-shadow 0.3s var(--lx-ease);
 }
 .lx-bar[data-scrolled="true"] { box-shadow: 0 1px 0 var(--lx-bar-sheen) inset, 0 10px 32px rgba(var(--lx-ink-rgb), 0.1); }
-.lx-bar-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 24px; }
+.lx-bar-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
 .lx-brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--lx-ink-primary); }
-.lx-brand-mark { display: block; width: auto; height: 34px; flex: none; }
-.lx-brand-word { font-family: var(--lx-display); font-size: 21px; font-weight: 500; letter-spacing: 0.01em; line-height: 1; }
+/* Brand mark: two thirds of the bar, clear space on the left equal to the figure’s head */
+.lx-brand-mark { display: block; width: auto; height: 46px; flex: none; }
+.lx-brand-word { font-family: var(--lx-display); font-size: 24px; font-weight: 500; letter-spacing: 0.01em; line-height: 1; }
 .lx-links { display: flex; gap: 32px; }
 .lx-links a {
   white-space: nowrap;
@@ -409,7 +410,8 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   .lx-bar-cta .lx-btn-ghost { display: none; }
   .lx-long { display: none; }
   .lx-short { display: inline; }
-  .lx-brand-word { font-size: 19px; }
+  .lx-brand-word { font-size: 21px; }
+  .lx-brand-mark { height: 38px; }
 }
 
 /* ── Surfaces ────────────────────────────────────────── */
