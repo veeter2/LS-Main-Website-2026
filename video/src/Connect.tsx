@@ -4,9 +4,8 @@ import { loadFont } from "@remotion/google-fonts/Lora"
 import { C } from "./beats"
 import { ramp, rng, win } from "./util"
 import { finish } from "./film/air"
-import { type Ctx, FILM_FPS, type RGB, W, H, hex, mix, rgba } from "./film/core"
-import { CONNECT_SECONDS, type Scene, connectScene } from "./film/connect"
-import { buildPlates } from "./film/plates"
+import { type Ctx, FILM_FPS, W, H, hex, mix, rgba } from "./film/core"
+import { CONNECT_SECONDS, type Scene, buildScene, connectScene, dayAt } from "./film/connect"
 
 export { CONNECT_SECONDS }
 
@@ -51,15 +50,7 @@ export const Connect = ({ phone = false, grain = 1 }: { phone?: boolean; grain?:
         im.onerror = rej
         im.src = src
       })
-    Promise.all([load(staticFile("art/orbit.webp")), load(staticFile("art/land.png"))]).then(([paint, landImg]) => {
-      // the paper is whatever the painting's own corner is, so the two never show a seam
-      const c = document.createElement("canvas")
-      c.width = c.height = 4
-      const x = c.getContext("2d")!
-      x.drawImage(paint, 0, 0, 40, 40, 0, 0, 4, 4)
-      const d = x.getImageData(1, 1, 1, 1).data
-      setLand({ paint, paper: [d[0], d[1], d[2]] as RGB, land: buildPlates(landImg) })
-    })
+    Promise.all([load(staticFile("art/orbit.webp")), load(staticFile("art/land.png"))]).then(([paint, landImg]) => setLand(buildScene(paint, landImg)))
   }, [])
 
   useLayoutEffect(() => {
@@ -75,20 +66,21 @@ export const Connect = ({ phone = false, grain = 1 }: { phone?: boolean; grain?:
     }
   }, [t, land, handle, grain])
 
-  // this film is all daylight on pale paper, so the words are always ink
-  const wordC = rgba(mix(hex(C.ink), hex(C.paper), 0), 1)
-  const padC = "253,252,246"
+  // words go from paper to ink as the light comes, quickly, so they are never grey on grey
+  const dk = t > 33.2 ? 0 : Math.max(0, Math.min(1, (1 - dayAt(t) - 0.38) / 0.24))
+  const wordC = rgba(mix(hex(C.ink), hex(C.paper), dk), 1)
+  const padC = mix([253, 252, 246], [22, 19, 38], dk).join(",")
   return (
-    <AbsoluteFill style={{ background: "#fdfcf6", overflow: "hidden" }}>
+    <AbsoluteFill style={{ background: C.dusk1, overflow: "hidden" }}>
       <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, transform: `scale(${fit})`, transformOrigin: "0 0" }}>
         <canvas ref={ref} width={W} height={H} style={{ position: "absolute", inset: 0, width: W, height: H }} />
 
-        <div style={{ position: "absolute", left: 0, right: 0, top: 330, textAlign: "center", ...DISPLAY, fontSize: 92, color: C.ink, opacity: 1 - ramp(t, 2.9, 3.5), transform: `scale(${1 + 0.012 * t})` }}>
+        <div style={{ position: "absolute", left: 0, right: 0, top: 330, textAlign: "center", ...DISPLAY, fontSize: 92, color: C.paper, opacity: 1 - ramp(t, 2.9, 3.5), transform: `scale(${1 + 0.012 * t})` }}>
           {"Where does the work go?".split(" ").map((w, i) => {
             const at = 0.25 + i * 0.16
             const lit = Math.exp(-Math.pow((t - 1.62) / 0.3, 2))
             return (
-              <span key={i} style={{ display: "inline-block", marginRight: "0.26em", opacity: ramp(t, at, at + 0.5), transform: `translateY(${(1 - ramp(t, at, at + 0.6)) * 18}px)`, textShadow: `0 0 ${10 + 36 * lit}px rgba(214,170,90,${0.7 * lit})` }}>
+              <span key={i} style={{ display: "inline-block", marginRight: "0.26em", opacity: ramp(t, at, at + 0.5), transform: `translateY(${(1 - ramp(t, at, at + 0.6)) * 18}px)`, textShadow: `0 0 ${10 + 36 * lit}px rgba(232,205,150,${0.85 * lit})` }}>
                 {w}
               </span>
             )
