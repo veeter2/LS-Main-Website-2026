@@ -222,8 +222,10 @@ export default function Home() {
         <div className="lx-wrap mh-facts mh-facts-2">
           {DIFFERENT.map((f, i) => (
             <div key={f.title} className="mh-fact mh-fact-icon" data-reveal data-delay={String(i + 1)}>
-              <CardIcon kind={f.icon} />
-              <h3>{f.title}</h3>
+              <h3>
+                <CardIcon kind={f.icon} />
+                {f.title}
+              </h3>
               <p>{f.body}</p>
             </div>
           ))}

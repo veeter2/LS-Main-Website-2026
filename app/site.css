@@ -1022,10 +1022,9 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .hx-lead-center { margin: 24px auto 0 !important; max-width: 40em; }
 /* Not this / this: the buyer's question on the left, the real answer on the right. */
 .hx-not {
-  margin: clamp(32px, 5vh, 56px) auto 0;
+  margin: clamp(32px, 5vh, 56px) 0 0;
   padding: 0;
   list-style: none;
-  max-width: 980px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0 40px;
@@ -1047,8 +1046,8 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 @media (max-width: 860px) { .hx-not { grid-template-columns: 1fr; } }
 
 /* Line icon on a fact card, gold ink, one stroke weight everywhere. */
-.mh-fact-icon { padding-top: 22px; }
-.mh-icon { display: block; width: 26px; height: 26px; margin-bottom: 12px; color: var(--lx-gold-ink); }
+.mh-fact-icon h3 { display: flex; align-items: center; gap: 10px; }
+.mh-icon { flex: none; width: 22px; height: 22px; color: var(--lx-gold-ink); }
 
 .hx-claims-wrap { margin-top: clamp(56px, 8vh, 88px); }
 .hx-who {
@@ -1070,8 +1069,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 }
 @media (max-width: 860px) { .hx-who { grid-template-columns: 1fr; } }
 .hx-claims {
-  margin: 20px auto 0;
-  max-width: 40em;
+  margin: 20px 0 0;
   padding: 0;
   list-style: none;
   counter-reset: claim;
