@@ -22,7 +22,7 @@ const DISPLAY = { fontFamily, fontWeight: 400, letterSpacing: "-0.022em", lineHe
 export const COST_CAPTIONS: { at: number; to: number; text: string }[] = [
   { at: 3.6, to: 7.3, text: "Most AI sends the model everything." },
   { at: 7.3, to: 10.4, text: "Every question. Every time." },
-  { at: 10.4, to: 14, text: "The more you know, the more each answer costs." },
+  { at: 10.4, to: 14, text: "Know more, and every answer burns more tokens." },
   { at: 14.4, to: 18.6, text: "LongStrider keeps the memory on your side." },
   { at: 18.6, to: 23, text: "Each question takes only what it needs." },
   { at: 23, to: 26.6, text: "So answers come fast, and the bill stays flat." },

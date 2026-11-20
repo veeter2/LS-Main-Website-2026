@@ -31,7 +31,7 @@ function spark(ctx: Ctx, x: number, y: number, px: number, py: number, c: RGB, a
   g.addColorStop(0, rgba(c, 0))
   g.addColorStop(1, rgba(c, 0.8 * a))
   ctx.strokeStyle = g
-  ctx.lineWidth = size * 0.7
+  ctx.lineWidth = size * 0.8
   ctx.lineCap = "round"
   ctx.beginPath()
   ctx.moveTo(px, py)
@@ -220,14 +220,14 @@ export function costWorld(ctx: Ctx, t: number, o: number) {
 
     // what is left of everything that was sent: ash, out the far side, and it never stops piling up
     const spent = ASK.reduce((s, a, i) => s + lin(t, a + 0.2, a + WAIT[i] + 0.4) * (0.45 + 0.275 * i), 0)
-    const ashX = BX + 470
+    const ashX = BX - 470
     if (pour > 0) {
       const ar = rng(331)
       for (let i = 0; i < 2600; i++) {
         const a = ar(), b = gz(ar), c = ar(), d = ar()
         if (d > pour * (0.35 + 0.65 * heavy)) continue
         const ph = (a + t * 0.9) % 1
-        const x = BX + BR * 0.8 + (ashX - BX - BR * 0.8) * ph + b * 26 * ph
+        const x = BX - BR * 0.8 + (ashX - BX + BR * 0.8) * ph + b * 26 * ph
         const y = BY - 10 - 150 * Math.sin(Math.PI * ph) * (0.5 + 0.5 * c) + (FLOOR - BY - 6) * ph * ph + b * 6
         // it leaves as gold and lands as ash
         ctx.fillStyle = rgba(mix([255, 196, 120], ASH[Math.floor(c * ASH.length)], Math.min(1, ph * 2.2)), 0.85 * (1 - 0.3 * ph))
@@ -262,6 +262,33 @@ export function costWorld(ctx: Ctx, t: number, o: number) {
 
 /* ---------- the land: the same questions, a pinch each ---------- */
 
+/** The outline of a heap that is not there: what the costly way would have burned by now. */
+function ghost(ctx: Ctx, cx: number, base: number, h: number, c: RGB, a: number, t: number) {
+  if (h < 2 || a <= 0) return
+  const w = h / Math.tan((33 * Math.PI) / 180)
+  const surf = (dx: number) => {
+    const u = Math.abs(dx) / w
+    return base - h * Math.max(0, 1 - Math.sqrt(u * u + 0.004))
+  }
+  ctx.save()
+  ctx.beginPath()
+  ctx.moveTo(cx - w, base)
+  for (let dx = -w; dx <= w; dx += 4) ctx.lineTo(cx + dx, surf(dx))
+  ctx.lineTo(cx + w, base)
+  const g = ctx.createLinearGradient(0, base - h, 0, base)
+  g.addColorStop(0, rgba(c, 0.17 * a))
+  g.addColorStop(1, rgba(c, 0.03 * a))
+  ctx.fillStyle = g
+  ctx.fill()
+  ctx.setLineDash([5, 9])
+  ctx.lineDashOffset = -t * 6
+  ctx.strokeStyle = rgba(c, 0.85 * a)
+  ctx.lineWidth = 2.3
+  ctx.lineCap = "round"
+  ctx.stroke()
+  ctx.restore()
+}
+
 const camC = (t: number): Cam => ({
   z: spline(t, [[15.4, 0.15], [17.8, 0.05], [25, 0.1], [31.6, 0.15], [36, 0.08]]),
   px: spline(t, [[15.4, 10], [17.8, -22], [25, 6], [31.6, 22], [36, -14]]),
@@ -272,6 +299,10 @@ const camC = (t: number): Cam => ({
 const ASKS = [18.4, 19.6, 20.6, 21.5, 22.3, 23.0, 23.6, 24.2, 24.8, 25.4, 26.0, 26.6, 27.2, 27.8, 28.4, 31.4, 32.0, 32.6, 33.2, 33.8, 34.4]
 const FALLS = [18.9, 22.4, 25.6]
 const LANDS = 1.5
+/** Where the ash lands on the land: left of the heap, away from the road the questions use. */
+const ASHX = SX - 500
+/** How many questions have been answered so far, counted smoothly. */
+const asked = (t: number) => ASKS.reduce((s2, a) => s2 + lin(t, a + 0.3, a + 0.9), 0)
 
 export function costLand(ctx: Ctx, t0: number, n: number, o: number, P: Plates) {
   const t = t0 + AHEAD
@@ -317,10 +348,20 @@ export function costLand(ctx: Ctx, t0: number, n: number, o: number, P: Plates) 
   ctx.fill()
   ctx.restore()
   if (n > 0.2) halo(ctx, SX, LY - heapH * 0.4, heapH * 3.2, [232, 205, 150], 0.3 * n * (0.94 + 0.06 * Math.sin(t * 1.3)))
+  // the bill, measured the same way in both worlds. The dotted heap is what the costly way would have
+  // burned by now, and it climbs with every question. The real ash is the small pile at its foot.
+  const cnt = asked(t)
+  const ashC: RGB = mix([70, 62, 96], [214, 204, 236], sm(n))
+  const ghostH = 112 + 150 * Math.pow(cnt / ASKS.length, 0.8)
+  let bump = 0
+  for (const a of ASKS) bump = Math.max(bump, Math.sin(Math.PI * lin(t, a + 0.3, a + 0.9)))
+  ghost(ctx, ASHX, LY + 2, ghostH * (1 + 0.025 * bump), ashC, ramp(t, 16.2, 17.6) * (0.75 + 0.25 * bump), t)
+  const ashH = 27 * Math.sqrt(cnt / ASKS.length)
+  pile(ctx, ASHX, LY + 3, ashH, 1, 343, 0, 0, ASH)
   const rich = ramp(t, 31.8, 33.8)
   if (rich > 0) halo(ctx, SX, LY - heapH * 0.45, heapH * 3.4, [255, 214, 130], 0.34 * rich * (1 - n))
   pile(ctx, SX, LY + 4, heapH, n, 81, Math.min(t, 27.6), rich)
-  // what the day adds comes in light: a drift of sand along the ground from the left, settling on the heap.
+  // what the day adds comes in light: a drift of sand along the road from the right, settling on the heap.
   // Nothing pours here. The flood belongs to the other world.
   const dpal = palAt(n)
   FALLS.forEach((f, i) => {
@@ -330,8 +371,8 @@ export function costLand(ctx: Ctx, t0: number, n: number, o: number, P: Plates) 
       const ph = (t - f - born) / LANDS
       if (ph <= 0 || ph >= 1) continue
       const e = Math.pow(ph, 0.85)
-      const x1 = SX - heapH * 0.9 + land * heapH * 1.3
-      const x = x1 - 880 * (1 - e)
+      const x1 = SX - heapH * 0.4 + land * heapH * 1.3
+      const x = x1 + 880 * (1 - e)
       const y1 = top + heapH * (0.15 + 0.7 * Math.abs(land - 0.45))
       const y = y1 + (LY - 24 - y1) * (1 - e) - (30 + 90 * lift) * Math.sin(Math.PI * ph) + 5 * Math.sin(ph * 9 + wob)
       ctx.fillStyle = rgba(dpal[Math.floor(c * dpal.length)], 0.85 * Math.min(1, ph * 5) * Math.min(1, (1 - ph) * 8))
@@ -400,8 +441,8 @@ export function costLand(ctx: Ctx, t0: number, n: number, o: number, P: Plates) 
     const sx0 = MX + 760, sy0 = MY - 250 + ((i * 53) % 90)
     const fin = lin(t, a - 0.5, a)
     if (fin > 0 && fin < 1) {
-      const e = fin * fin, e0 = Math.max(0, fin - 0.14) ** 2
-      spark(ctx, sx0 + (MX + seatR + 4 - sx0) * e, sy0 + (MY - sy0) * e, sx0 + (MX + seatR + 4 - sx0) * e0, sy0 + (MY - sy0) * e0, qC, 1, 5, qCore)
+      const e = fin * fin, e0 = Math.max(0, fin - 0.26) ** 2
+      spark(ctx, sx0 + (MX + seatR + 4 - sx0) * e, sy0 + (MY - sy0) * e, sx0 + (MX + seatR + 4 - sx0) * e0, sy0 + (MY - sy0) * e0, qC, 1, 7.5, qCore)
     }
     const up = lin(t, a - 0.05, a + 0.36)
     if (up > 0 && up < 1) {
@@ -416,13 +457,40 @@ export function costLand(ctx: Ctx, t0: number, n: number, o: number, P: Plates) 
         ctx.fill()
       }
     }
+    // the wait, drawn the way it was in the costly world: here the ring is round before you can watch it
+    const snap = lin(t, a - 0.04, a + 0.3)
+    const hold = lin(t, a + 0.3, a + 0.7)
+    if (snap > 0 && hold < 1) {
+      ctx.strokeStyle = rgba(qC, 0.95 * (1 - hold))
+      ctx.lineWidth = 3
+      ctx.lineCap = "round"
+      ctx.beginPath()
+      ctx.arc(MX, MY, seatR + 16, -Math.PI / 2, -Math.PI / 2 + 6.2832 * (1 - (1 - snap) * (1 - snap)))
+      ctx.stroke()
+    }
+    // what it burned: a few grains of ash, off to the small pile
+    const burn = lin(t, a + 0.3, a + 1.0)
+    if (burn > 0 && burn < 1) {
+      const br = rng(700 + i)
+      for (let j = 0; j < 11; j++) {
+        const lag = br() * 0.25, c = br(), b = gz(br)
+        const ph = Math.max(0, Math.min(1, (burn - lag) / 0.75))
+        if (ph <= 0 || ph >= 1) continue
+        const x = MX - seatR + (ASHX - MX + seatR + b * 10) * ph
+        const y = MY + (LY - ashH - MY) * ph * ph - 70 * Math.sin(Math.PI * ph) + b * 4
+        ctx.fillStyle = rgba(mix([255, 196, 120], mix(ASH[1 + Math.floor(c * 3)], ASH[4], sm(n) * 0.6), Math.min(1, ph * 3)), 0.9)
+        ctx.beginPath()
+        ctx.arc(x, y, 1.1 + c * 1.3, 0, 6.2832)
+        ctx.fill()
+      }
+    }
     const flash = lin(t, a + 0.3, a + 0.62)
     if (flash > 0 && flash < 1) halo(ctx, MX, MY, seatR * 4.5, mix([232, 176, 70], ANSWER, sm(n)), 0.55 * Math.sin(Math.PI * flash))
     const fout = lin(t, a + 0.36, a + 0.82)
     if (fout > 0 && fout < 1) {
-      const e = 1 - (1 - fout) * (1 - fout), e0 = Math.max(0, e - 0.14)
+      const e = 1 - (1 - fout) * (1 - fout), e0 = Math.max(0, e - 0.3)
       const ex = MX + 820, ey = MY - 120 + ((i * 37) % 80)
-      spark(ctx, MX + seatR + 4 + (ex - MX - seatR - 4) * e, MY + (ey - MY) * e, MX + seatR + 4 + (ex - MX - seatR - 4) * e0, MY + (ey - MY) * e0, aC, 1, 5, aCore)
+      spark(ctx, MX + seatR + 4 + (ex - MX - seatR - 4) * e, MY + (ey - MY) * e, MX + seatR + 4 + (ex - MX - seatR - 4) * e0, MY + (ey - MY) * e0, aC, 1, 7.5, aCore)
     }
   }
   ctx.restore()
