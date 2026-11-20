@@ -9,10 +9,10 @@ import { ReceiptCard } from "./_components/proof-cards"
 export const metadata: Metadata = {
   ...pageMeta(
     "",
-    "The AI memory your company owns",
+    "The model changes. The memory is yours.",
     "Not a model, not a search box, not a wrapper. LongStrider is the software your company runs its AI on, and owns. It keeps what your people tell it.",
   ),
-  title: { absolute: "LongStrider · The AI memory your company owns" },
+  title: { absolute: "LongStrider · The model changes. The memory is yours." },
 }
 
 /**
@@ -129,15 +129,15 @@ export default function Home() {
             Company memory
           </p>
           <h1 className="lx-display lx-h1 mh-h1" data-rise="1">
-            The AI memory your company <em>owns</em>.
+            The model changes. The memory is <em>yours</em>.
           </h1>
           <p className="lx-lead hx-lead-center mh-nots" data-rise="2">
             Not a model. Not a search box. Not a wrapper around someone else&rsquo;s chat. LongStrider is the software
             your company runs its AI on, and owns.
           </p>
           <p className="lx-lead hx-lead-center" data-rise="2">
-            It keeps what your people tell it, works on it overnight, and hands it to whichever model you run this year.
-            Switch models and nothing is taught twice. <strong>Sovereign by design.</strong> Your box, your models,
+            It sits between your business and any model, learns every day, and keeps what your company knows intact
+            when the model, the platform or the person changes. <strong>Sovereign by design.</strong> Your box, your models,
             your keys. <Link href="/own-it">See what owning it means</Link>.
           </p>
           <div className="lx-cta-row hx-cta-center" data-rise="3">
