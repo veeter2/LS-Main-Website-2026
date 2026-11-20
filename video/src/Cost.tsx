@@ -20,13 +20,13 @@ const DISPLAY = { fontFamily, fontWeight: 400, letterSpacing: "-0.022em", lineHe
  * The costly way first, then the same land as the home film. Same type, same world, it loops.
  */
 export const COST_CAPTIONS: { at: number; to: number; text: string }[] = [
-  { at: 3.6, to: 8, text: "Most AI sends the model everything." },
-  { at: 8, to: 12, text: "Every question. Every time." },
-  { at: 12, to: 16, text: "The more you know, the more each answer costs." },
-  { at: 16.4, to: 20.6, text: "LongStrider keeps the memory on your side." },
-  { at: 20.6, to: 25, text: "Each question takes only what it needs." },
-  { at: 25, to: 28.6, text: "So answers come fast, and the bill stays flat." },
-  { at: 28.6, to: 32.2, text: "Use a smaller model. Same memory." },
+  { at: 3.6, to: 7.3, text: "Most AI sends the model everything." },
+  { at: 7.3, to: 10.4, text: "Every question. Every time." },
+  { at: 10.4, to: 14, text: "The more you know, the more each answer costs." },
+  { at: 14.4, to: 18.6, text: "LongStrider keeps the memory on your side." },
+  { at: 18.6, to: 23, text: "Each question takes only what it needs." },
+  { at: 23, to: 26.6, text: "So answers come fast, and the bill stays flat." },
+  { at: 26.6, to: 30.2, text: "Use a smaller model. Same memory." },
 ]
 
 function paintCost(ctx: Ctx, t: number, P: Plates, grain: number) {
@@ -40,13 +40,13 @@ function paintCost(ctx: Ctx, t: number, P: Plates, grain: number) {
 
   const landIn = landInC(t)
   const first = 1 - landIn
-  const early = t < 17.3
+  const early = t < 15.3
   if (first > 0) {
-    const air = t < 4.4 ? 1 - ramp(t, 3.1, 4.4) : ramp(t, 35.2, COST_SECONDS)
+    const air = t < 4.4 ? 1 - ramp(t, 3.1, 4.4) : ramp(t, 33.2, COST_SECONDS)
     if (air > 0) openingAir(ctx, air, t < 20 ? t : t - COST_SECONDS)
     if (n > 0.3) {
       const r = rng(11)
-      const drift = early ? spline(t, [[0, 0], [10, 14], [17.3, 20]]) : 0
+      const drift = early ? spline(t, [[0, 0], [9, 14], [15.3, 20]]) : 0
       for (let i = 0; i < 260; i++) {
         const x = r() * W, y = r() * 620, s = r()
         const tw = 0.6 + 0.4 * Math.sin((t * 6.2832 * (4 + Math.floor(s * 14))) / COST_SECONDS + i)
@@ -59,7 +59,7 @@ function paintCost(ctx: Ctx, t: number, P: Plates, grain: number) {
     }
     if (early) {
       // a slow push in while the load gets heavier
-      const z = spline(t, [[0, 1], [3, 1.012], [15, 1.075], [17.3, 1.06]])
+      const z = spline(t, [[0, 1], [3, 1.012], [13.2, 1.075], [15.3, 1.06]])
       ctx.save()
       ctx.translate(BX, BY)
       ctx.scale(z, z)
@@ -140,12 +140,12 @@ export const Cost = ({ phone = false, grain = 1 }: { phone?: boolean; grain?: nu
         })}
 
         <div style={{ position: "absolute", left: 140, top: 150, ...DISPLAY, fontSize: 84, color: "rgba(31,27,20,.94)" }}>
-          <div style={{ opacity: win(t, 32.6, 35.5, 0.6), transform: `translateY(${(1 - ramp(t, 32.6, 33.5)) * 16}px)` }}>Know more.</div>
-          <div style={{ opacity: win(t, 33.2, 35.5, 0.6), transform: `translateY(${(1 - ramp(t, 33.2, 34.1)) * 16}px)` }}>
+          <div style={{ opacity: win(t, 30.6, 33.5, 0.6), transform: `translateY(${(1 - ramp(t, 30.6, 31.5)) * 16}px)` }}>Know more.</div>
+          <div style={{ opacity: win(t, 31.2, 33.5, 0.6), transform: `translateY(${(1 - ramp(t, 31.2, 32.1)) * 16}px)` }}>
             Spend <em style={{ fontStyle: "italic", color: C.goldInk }}>less</em>.
           </div>
         </div>
-        <div style={{ position: "absolute", left: 138, top: 372, display: "flex", alignItems: "center", gap: 20, opacity: win(t, 33.8, 35.5, 0.6) }}>
+        <div style={{ position: "absolute", left: 138, top: 372, display: "flex", alignItems: "center", gap: 20, opacity: win(t, 31.8, 33.5, 0.6) }}>
           <Img src={staticFile("art/mark.png")} style={{ height: 82, width: "auto" }} />
           <span style={{ fontFamily, fontWeight: 500, fontSize: 43, letterSpacing: "0.01em", lineHeight: 1, color: "rgba(31,27,20,.94)" }}>LongStrider</span>
         </div>

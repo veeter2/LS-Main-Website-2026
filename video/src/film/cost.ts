@@ -1,6 +1,6 @@
 import { C } from "../beats"
 import { k, ramp, rng, win } from "../util"
-import { type Ctx, H, LY, type RGB, SX, W, gz, halo, hex, lin, mix, orb, palAt, pile, rgba, sm, spline, splash, stream, trail } from "./core"
+import { type Ctx, H, LY, type RGB, SX, W, gz, halo, hex, lin, mix, orb, palAt, pile, rgba, sm, spline, stream, trail } from "./core"
 import { BR, BX, BY, FLOOR, F_TOP, funnelSide } from "./first"
 import { MR, MX, MY, compose, flick, roadAt } from "./land"
 import { type Cam, type Plates, camT, depthAt, warp } from "./plates"
@@ -11,12 +11,14 @@ import { strider } from "./strider"
  * First the costly way: the whole memory poured through the model for every question, more each time,
  * and ash where the money went. Then the same land as the home film, where a question takes a pinch.
  */
-export const COST_SECONDS = 36
+export const COST_SECONDS = 34
+/** The land half keeps its own clock, two seconds ahead: the costly half was tightened so the turn comes sooner. */
+const AHEAD = 2
 
 /** 1 = night, 0 = day. The costly world is all night. Day comes with the land, then dusk, night, dawn. */
-export const nightC = (t: number) => k(t, [[0, 1], [15.6, 1], [17.2, 0], [25, 0], [28.2, 1], [31.6, 1], [33.4, 0], [35.2, 0], [36, 1]])
-export const warmC = (t: number) => Math.max(win(t, 15.4, 19, 1.2) * 0.55, win(t, 24.6, 28.8, 1.6) * 0.9, k(t, [[29.6, 0], [31.6, 0.5], [33.2, 1], [35.2, 1], [36, 0]]))
-export const landInC = (t: number) => ramp(t, 15.4, 17.2) * (1 - ramp(t, 35.2, COST_SECONDS))
+export const nightC = (t0: number, t = t0 + AHEAD) => k(t, [[0, 1], [15.6, 1], [17.2, 0], [25, 0], [28.2, 1], [31.6, 1], [33.4, 0], [35.2, 0], [36, 1]])
+export const warmC = (t0: number, t = t0 + AHEAD) => Math.max(win(t, 15.4, 19, 1.2) * 0.55, win(t, 24.6, 28.8, 1.6) * 0.9, k(t, [[29.6, 0], [31.6, 0.5], [33.2, 1], [35.2, 1], [36, 0]]))
+export const landInC = (t0: number, t = t0 + AHEAD) => ramp(t, 15.4, 17.2) * (1 - ramp(t, 35.2, 36))
 
 const QUESTION: RGB = [226, 216, 244]
 const ANSWER: RGB = [255, 226, 160]
@@ -45,10 +47,10 @@ function spark(ctx: Ctx, x: number, y: number, px: number, py: number, c: RGB, a
 /* ---------- the costly world ---------- */
 
 /** Three questions. Each one waits longer than the last, because there is more to send. */
-const ASK = [4.7, 8.3, 12.1]
-const WAIT = [1.5, 2.3, 3.1]
+const ASK = [4.6, 7.5, 10.6]
+const WAIT = [1.4, 2.0, 2.6]
 /** How full the funnel is: it only ever fills. */
-const loadAt = (t: number) => 0.3 + 0.28 * ramp(t, 6.4, 8.1) + 0.34 * ramp(t, 10.8, 12.0)
+const loadAt = (t: number) => 0.3 + 0.28 * ramp(t, 6.5, 7.4) + 0.34 * ramp(t, 9.9, 10.6)
 const NECK = 470
 
 export function costWorld(ctx: Ctx, t: number, o: number) {
@@ -148,7 +150,7 @@ export function costWorld(ctx: Ctx, t: number, o: number) {
       ctx.stroke()
     }
     // more memory arrives between questions: the funnel only ever fills
-    for (const [a, b] of [[5.6, 7.2], [10.0, 11.1]]) {
+    for (const [a, b] of [[5.8, 6.9], [9.3, 10.1]]) {
       const hd = (t - a) * 0.85, tl = (t - b) * 0.85
       if (hd > 0 && tl < 1) stream(ctx, t, BX, -30, level + 6, 60, 5200, 1, 311, 0.5, { head: hd, tail: tl })
     }
@@ -269,10 +271,11 @@ const camC = (t: number): Cam => ({
 /** When each question reaches the model. They come faster and faster, and nothing slows them. */
 const ASKS = [18.4, 19.6, 20.6, 21.5, 22.3, 23.0, 23.6, 24.2, 24.8, 25.4, 26.0, 26.6, 27.2, 27.8, 28.4, 31.4, 32.0, 32.6, 33.2, 33.8, 34.4]
 const FALLS = [18.9, 22.4, 25.6]
-const LANDS = 1.18
+const LANDS = 1.5
 
-export function costLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) {
-  const warm = warmC(t)
+export function costLand(ctx: Ctx, t0: number, n: number, o: number, P: Plates) {
+  const t = t0 + AHEAD
+  const warm = warmC(t0)
   const dusk = t < 30
   compose(P, {
     t, n, warm,
@@ -317,10 +320,25 @@ export function costLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) {
   const rich = ramp(t, 31.8, 33.8)
   if (rich > 0) halo(ctx, SX, LY - heapH * 0.45, heapH * 3.4, [255, 214, 130], 0.34 * rich * (1 - n))
   pile(ctx, SX, LY + 4, heapH, n, 81, Math.min(t, 27.6), rich)
+  // what the day adds comes in light: a drift of sand along the ground from the left, settling on the heap.
+  // Nothing pours here. The flood belongs to the other world.
+  const dpal = palAt(n)
   FALLS.forEach((f, i) => {
-    const hd = (t - f) * 0.85, tl = (t - f - 1.0) * 0.85
-    if (hd > 0 && tl < 1) stream(ctx, t, SX, -30, top + 4, 15, 6400, n, 87 + i * 7, 0.42, { head: hd, tail: tl, lean: 240, sway: 3 })
-    splash(ctx, t, SX, top + 2, 0.3 * win(t, f + LANDS, f + LANDS + 1.1, 0.2), n, 89 + i * 7)
+    const dr = rng(87 + i * 7)
+    for (let j = 0; j < 520; j++) {
+      const born = dr() * 1.5, c = dr(), lift = dr(), land = dr(), wob = dr() * 6.28
+      const ph = (t - f - born) / LANDS
+      if (ph <= 0 || ph >= 1) continue
+      const e = Math.pow(ph, 0.85)
+      const x1 = SX - heapH * 0.9 + land * heapH * 1.3
+      const x = x1 - 880 * (1 - e)
+      const y1 = top + heapH * (0.15 + 0.7 * Math.abs(land - 0.45))
+      const y = y1 + (LY - 24 - y1) * (1 - e) - (30 + 90 * lift) * Math.sin(Math.PI * ph) + 5 * Math.sin(ph * 9 + wob)
+      ctx.fillStyle = rgba(dpal[Math.floor(c * dpal.length)], 0.85 * Math.min(1, ph * 5) * Math.min(1, (1 - ph) * 8))
+      ctx.beginPath()
+      ctx.arc(x, y, 0.8 + c * 1.3, 0, 6.2832)
+      ctx.fill()
+    }
   })
 
   // the seat, and the faint line a pinch of sand travels
