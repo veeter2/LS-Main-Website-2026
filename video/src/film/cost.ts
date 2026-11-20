@@ -25,7 +25,7 @@ const ANSWER: RGB = [255, 226, 160]
 const ASH: RGB[] = [[52, 48, 58], [74, 70, 82], [98, 94, 106], [124, 120, 132], [152, 148, 160]]
 
 /** A spark in flight: a bright point with a short tail the way it came. */
-function spark(ctx: Ctx, x: number, y: number, px: number, py: number, c: RGB, a: number, size = 4, core: RGB = [255, 255, 255]) {
+export function spark(ctx: Ctx, x: number, y: number, px: number, py: number, c: RGB, a: number, size = 4, core: RGB = [255, 255, 255]) {
   if (a <= 0) return
   const g = ctx.createLinearGradient(px, py, x, y)
   g.addColorStop(0, rgba(c, 0))
