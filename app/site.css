@@ -1050,6 +1050,25 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .mh-fact-icon { padding-top: 22px; }
 .mh-icon { display: block; width: 26px; height: 26px; margin-bottom: 12px; color: var(--lx-gold-ink); }
 
+.hx-claims-wrap { margin-top: clamp(56px, 8vh, 88px); }
+.hx-who {
+  list-style: none;
+  margin: 36px auto 0;
+  padding: 0;
+  max-width: 980px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.hx-who li {
+  padding: 18px 20px;
+  text-align: center;
+  font-family: var(--lx-display);
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--lx-ink-primary);
+}
+@media (max-width: 860px) { .hx-who { grid-template-columns: 1fr; } }
 .hx-claims {
   margin: 20px auto 0;
   max-width: 40em;

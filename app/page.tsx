@@ -228,7 +228,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="lx-wrap hx-center">
+        <div className="lx-wrap hx-center hx-claims-wrap">
           <p className="lx-eyebrow" data-reveal>
             Six things, said plainly
           </p>
@@ -253,9 +253,9 @@ export default function Home() {
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Or a cloud model through your own keys. Same product either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.
           </p>
-          <ul className="lx-assure mh-center" data-reveal data-delay="3" aria-label="Who this is for">
+          <ul className="hx-who" data-reveal data-delay="3" aria-label="Who this is for">
             {WHERE.map((w) => (
-              <li key={w}>{w}</li>
+              <li key={w} className="lx-card-flat">{w}</li>
             ))}
           </ul>
         </div>

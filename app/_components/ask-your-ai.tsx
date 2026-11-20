@@ -74,7 +74,7 @@ export function AskYourAI({ compact = false, strip = false }: { compact?: boolea
         </div>
         <p className="ay-note ay-strip-note">
           Each button copies a prompt for that reader. Works with any AI that can open a link; if yours can&rsquo;t,
-          the prompt carries the facts. Read the prompts and the facts first: <Link href="/for-your-ai">/for-your-ai</Link>
+          the prompt carries the facts. <Link href="/for-your-ai">Read the prompts and the facts first</Link>.
         </p>
       </div>
     )
