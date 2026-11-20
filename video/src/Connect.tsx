@@ -67,7 +67,7 @@ export const Connect = ({ phone = false, grain = 1 }: { phone?: boolean; grain?:
   }, [t, land, handle, grain])
 
   // words go from paper to ink as the light comes, quickly, so they are never grey on grey
-  const dk = t > 33.2 ? 0 : Math.max(0, Math.min(1, (1 - dayAt(t) - 0.38) / 0.24))
+  const dk = t > 33 ? 0 : Math.max(0, Math.min(1, (1 - dayAt(t) - 0.38) / 0.24))
   const wordC = rgba(mix(hex(C.ink), hex(C.paper), dk), 1)
   const padC = mix([253, 252, 246], [22, 19, 38], dk).join(",")
   return (
@@ -106,12 +106,12 @@ export const Connect = ({ phone = false, grain = 1 }: { phone?: boolean; grain?:
         })}
 
         <div style={{ position: "absolute", left: 140, top: 150, ...DISPLAY, fontSize: 84, color: "rgba(31,27,20,.94)" }}>
-          <div style={{ opacity: win(t, 34, 36.3, 0.4), transform: `translateY(${(1 - ramp(t, 34, 34.9)) * 16}px)` }}>
+          <div style={{ opacity: win(t, 33.5, 36.2, 0.4), transform: `translateY(${(1 - ramp(t, 33.5, 34.3)) * 16}px)` }}>
             One system of <em style={{ fontStyle: "italic", color: C.goldInk }}>intelligence</em>.
           </div>
-          <div style={{ opacity: win(t, 34.5, 36.3, 0.4), transform: `translateY(${(1 - ramp(t, 34.5, 35.4)) * 16}px)` }}>Every model.</div>
+          <div style={{ opacity: win(t, 34, 36.2, 0.4), transform: `translateY(${(1 - ramp(t, 34, 34.8)) * 16}px)` }}>Every model.</div>
         </div>
-        <div style={{ position: "absolute", left: 138, top: 372, display: "flex", alignItems: "center", gap: 20, opacity: win(t, 34.9, 36.3, 0.4) }}>
+        <div style={{ position: "absolute", left: 138, top: 372, display: "flex", alignItems: "center", gap: 20, opacity: win(t, 34.3, 36.2, 0.4) }}>
           <Img src={staticFile("art/mark.png")} style={{ height: 82, width: "auto" }} />
           <span style={{ fontFamily, fontWeight: 500, fontSize: 43, letterSpacing: "0.01em", lineHeight: 1, color: "rgba(31,27,20,.94)" }}>LongStrider</span>
         </div>

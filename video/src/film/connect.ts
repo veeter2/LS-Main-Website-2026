@@ -81,15 +81,15 @@ const TRUNK: Pt[] = [J0, [540, 690], [680, 640], J1]
 type Rib = { name: string; path: Pt[]; w: number; n: number; speed: number; size: number; day: RGB; dark: RGB; wave: number; h0: number }
 const RIBS: Rib[] = [
   // chat: quick and light
-  { name: "chat", path: [[-120, 250], [140, 300], [250, 600], J0], w: 9, n: 1500, speed: 0.3, size: 0.8, day: [120, 104, 150], dark: [246, 236, 214], wave: 0, h0: 0.06 },
+  { name: "chat", path: [[-120, 250], [140, 300], [250, 600], J0], w: 12, n: 2600, speed: 0.3, size: 0.8, day: [120, 104, 150], dark: [246, 236, 214], wave: 0, h0: 0.06 },
   // documents: slow and heavy
-  { name: "documents", path: [[-120, 1040], [130, 1010], [280, 800], J0], w: 26, n: 5200, speed: 0.09, size: 1.35, day: [70, 58, 34], dark: [236, 184, 100], wave: 0, h0: 0.06 },
+  { name: "documents", path: [[-120, 1040], [130, 1010], [280, 800], J0], w: 34, n: 9000, speed: 0.09, size: 1.35, day: [70, 58, 34], dark: [236, 184, 100], wave: 0, h0: 0.06 },
   // files: flat and even
-  { name: "files", path: [[-120, 640], [80, 640], [260, 690], J0], w: 15, n: 2600, speed: 0.14, size: 1.05, day: [138, 115, 71], dark: [232, 205, 150], wave: 0, h0: 0.05 },
+  { name: "files", path: [[-120, 640], [80, 640], [260, 690], J0], w: 20, n: 4600, speed: 0.14, size: 1.05, day: [138, 115, 71], dark: [232, 205, 150], wave: 0, h0: 0.05 },
   // a call: it wavers
-  { name: "call", path: [[850, -120], [760, 260], [560, 560], J0], w: 11, n: 2100, speed: 0.2, size: 0.95, day: [150, 84, 56], dark: [240, 190, 164], wave: 15, h0: 0.36 },
+  { name: "call", path: [[850, -120], [760, 260], [560, 560], J0], w: 15, n: 3600, speed: 0.2, size: 0.95, day: [150, 84, 56], dark: [240, 190, 164], wave: 15, h0: 0.36 },
   // a teammate: warm
-  { name: "teammate", path: [[1700, 1200], [1100, 1100], [640, 900], J0], w: 14, n: 2600, speed: 0.16, size: 1.2, day: [176, 124, 30], dark: [255, 226, 160], wave: 0, h0: 0.42 },
+  { name: "teammate", path: [[1700, 1200], [1100, 1100], [640, 900], J0], w: 19, n: 4600, speed: 0.16, size: 1.2, day: [176, 124, 30], dark: [255, 226, 160], wave: 0, h0: 0.42 },
 ]
 /** A point along a ribbon: the way in for the first 3/4, then the shared braid. */
 function along(r: Rib, i: number, u: number, t: number): [number, number, number, number] {
@@ -119,6 +119,19 @@ function ribbons(ctx: Ctx, t: number, amount: number, n: number) {
         halo(ctx, x, y, 26 + r.w * 2.4, tint, 0.075 * n * amount * (1 - ramp(u, 0.86, 1)))
       }
     }
+    // the gold edge the sand runs along
+    ctx.strokeStyle = rgba(mix(GOLD_HI, [255, 232, 170], n), 0.8 * amount)
+    ctx.lineWidth = 1.4
+    ctx.shadowColor = rgba([255, 214, 130], 0.9 * n)
+    ctx.shadowBlur = 10 * n
+    ctx.beginPath()
+    for (let s2 = 0; s2 <= 70; s2++) {
+      const u = (Math.min(head, 0.86) * s2) / 70
+      const [x, y, nx, ny] = along(r, i, u, t)
+      s2 === 0 ? ctx.moveTo(x - nx * r.w * 0.5, y - ny * r.w * 0.5) : ctx.lineTo(x - nx * r.w * 0.5, y - ny * r.w * 0.5)
+    }
+    ctx.stroke()
+    ctx.shadowBlur = 0
     const rr = rng(410 + i * 17)
     for (let j = 0; j < r.n; j++) {
       const u0 = rr(), b = gz(rr), c = rr(), keep = rr(), e = rr()
@@ -128,21 +141,22 @@ function ribbons(ctx: Ctx, t: number, amount: number, n: number) {
       if (u > head) continue
       // sand never runs evenly: it comes in pulses
       if (Math.sin(u * 46 - t * 7 + Math.floor(e * 3)) < -0.7 && e < 0.7) continue
-      const stray = e > 0.9 ? 3 : 1
+      const stray = e > 0.96 ? 2.2 : 1
       // at the end of the braid the ribbon opens out and lets go
       const open = 1 + 2.6 * ramp(u, 0.84, 1)
       const [x, y, nx, ny] = along(r, i, u, t)
-      const [xp, yp] = along(r, i, Math.max(0, u - 0.004 - sp * 0.05), t)
-      const off = b * r.w * stray * open
+      const [xp, yp] = along(r, i, Math.max(0, u - 0.0016 - sp * 0.022), t)
+      // dense along one edge and thinning away from it: the way the painted ribbons are made
+      const off = (Math.abs(b) * 1.5 * stray - 0.5) * r.w * open
       const fade = Math.min(1, u * 16) * (1 - ramp(u, 0.9 - 0.16 * (1 - n), 1 - 0.14 * (1 - n))) * (stray > 1 ? 0.55 : 1)
       ctx.strokeStyle = rgba(mix(pal[Math.floor(c * pal.length)], tint, 0.5), (0.4 + 0.55 * c) * fade)
-      ctx.lineWidth = (e < 0.72 ? 0.7 + c * 0.9 : 1.1 + c * 1.5) * r.size
+      ctx.lineWidth = (e < 0.8 ? 0.6 + c * 0.7 : 0.9 + c * 1.1) * r.size
       ctx.beginPath()
       ctx.moveTo(xp + nx * off, yp + ny * off)
       ctx.lineTo(x + nx * off, y + ny * off)
       ctx.stroke()
       // the facts inside the work: a bright bead, now and then
-      if (j % 130 === 0 && stray === 1) {
+      if (j % 230 === 0 && stray === 1) {
         const [bx2, by2] = [x + nx * off * 0.4, y + ny * off * 0.4]
         halo(ctx, bx2, by2, 14, mix(GOLD_HI, [255, 236, 190], n), 0.5 * fade)
         ctx.fillStyle = rgba(mix(GOLD, [255, 244, 214], n), fade)
@@ -190,24 +204,22 @@ function surface(ctx: Ctx, t: number, paper: RGB, n: number) {
   const a = ramp(t, 8.4, 10.6)
   if (a <= 0) return
   const veil = mix(paper, [92, 82, 132], n)
-  ctx.save()
-  ctx.beginPath()
-  for (let x = 140; x <= 1220; x += 12) x === 140 ? ctx.moveTo(x, topAt(x)) : ctx.lineTo(x, topAt(x))
-  for (let x = 1220; x >= 140; x -= 12) ctx.lineTo(x, botAt(x))
-  ctx.closePath()
-  const g = ctx.createLinearGradient(140, 0, 1220, 0)
-  g.addColorStop(0, rgba(veil, 0))
-  g.addColorStop(0.22, rgba(veil, (0.6 - 0.3 * n) * a))
-  g.addColorStop(0.86, rgba(veil, (0.6 - 0.3 * n) * a))
-  g.addColorStop(1, rgba(veil, 0))
-  ctx.fillStyle = g
-  ctx.fill()
-  ctx.restore()
+  // a faint veil, laid in thin upright strips so it has no edge anywhere: strongest under the top line, gone by the bottom
+  for (let x = 140; x < 1220; x += 10) {
+    const y0 = topAt(x + 5), y1 = botAt(x + 5)
+    const g = ctx.createLinearGradient(0, y0, 0, y1)
+    const k2 = a * sideAt(x + 5)
+    g.addColorStop(0, rgba(veil, (0.62 - 0.44 * n) * k2))
+    g.addColorStop(0.6, rgba(veil, (0.36 - 0.26 * n) * k2))
+    g.addColorStop(1, rgba(veil, 0))
+    ctx.fillStyle = g
+    ctx.fillRect(x, y0, 10.5, y1 - y0)
+  }
   // fine sand all over it, thickest along the top edge
   const pal = palAt(n)
   const r = rng(77)
-  for (let i = 0; i < 9000; i++) {
-    const x = 140 + r() * 1080, v = Math.pow(r(), 2.3), c = r()
+  for (let i = 0; i < 16000; i++) {
+    const x = 140 + r() * 1080, v = Math.pow(r(), 2.6), c = r()
     const y = topAt(x) + v * (botAt(x) - topAt(x))
     ctx.fillStyle = rgba(mix(INKC, pal[Math.floor(c * pal.length)], 0.45 + 0.55 * n), (0.12 + 0.5 * (1 - v)) * a * sideAt(x))
     ctx.beginPath()
@@ -512,10 +524,9 @@ export function connectScene(ctx: Ctx, t: number, S: Scene) {
     ctx.beginPath()
     ctx.arc(SUN[0], SUN[1], SUN_R, 0, 6.2832)
     ctx.clip()
-    ctx.fillStyle = rgba([40, 34, 62], 1)
-    ctx.fillRect(SUN[0] - SUN_R, SUN[1] - SUN_R, SUN_R * 2, SUN_R * 2)
-    ctx.globalAlpha = 0.5
     ctx.drawImage(S.paint, 0, 0, PW, H)
+    ctx.fillStyle = "rgba(34,28,54,.42)"
+    ctx.fillRect(SUN[0] - SUN_R, SUN[1] - SUN_R, SUN_R * 2, SUN_R * 2)
     ctx.restore()
   }
   if (inn > 0 && inn < 1) {
@@ -527,11 +538,11 @@ export function connectScene(ctx: Ctx, t: number, S: Scene) {
     ctx.beginPath()
     ctx.arc(SUN[0], SUN[1], SUN_R, 0, 6.2832)
     ctx.clip()
-    ctx.fillStyle = rgba([40, 34, 62], 1)
-    ctx.fillRect(SUN[0] - SUN_R, SUN[1] - SUN_R, SUN_R * 2, SUN_R * 2)
-    ctx.globalAlpha = 0.6 * ramp(inn, 0, 0.15)
     ctx.drawImage(S.paintB, 0, 0, PW, H)
+    ctx.fillStyle = `rgba(34,28,54,${0.4 * (1 - e)})`
+    ctx.fillRect(SUN[0] - SUN_R, SUN[1] - SUN_R, SUN_R * 2, SUN_R * 2)
     ctx.restore()
+    halo(ctx, SUN[0] + ox, SUN[1] + oy, SUN_R * 1.5, [214, 204, 255], 0.3 * e)
   }
   // the moment the second sun lights: a ring of its light goes out across everything
   if (litB > 0) {
@@ -652,7 +663,7 @@ export function connectScene(ctx: Ctx, t: number, S: Scene) {
   }
 
   // the close: for one beat the surface is the dawn road, and the strider steps in
-  const dawn = ramp(t, 33.2, 34.3)
+  const dawn = ramp(t, 33, 33.9)
   if (dawn > 0) {
     const P = S.land
     const cam = { z: 0.05 + 0.03 * lin(t, 33, 36.5), px: -8, py: -2 }
@@ -661,8 +672,8 @@ export function connectScene(ctx: Ctx, t: number, S: Scene) {
     ctx.save()
     ctx.globalAlpha = dawn
     ctx.drawImage(P.out, 0, 0)
-    const walked = (t - 33.2) * 185
-    const st = ramp(t, 33.5, 34.4)
+    const walked = (t - 32.9) * 185
+    const st = ramp(t, 33.2, 34)
     if (walked > 0 && st > 0) {
       const [fx, fy] = roadAt(walked)
       const h = 310 * (1 - 0.14 * Math.min(1, walked / 900))
@@ -674,7 +685,7 @@ export function connectScene(ctx: Ctx, t: number, S: Scene) {
     ctx.restore()
   }
   // the last half second falls back into the dark the film began in
-  const end = ramp(t, 35.8, CONNECT_SECONDS)
+  const end = ramp(t, 36, CONNECT_SECONDS)
   if (end > 0) {
     ctx.setTransform(1, 0, 0, 1, 0, 0)
     const sk = ctx.createLinearGradient(0, 0, 0, H)
