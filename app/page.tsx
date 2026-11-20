@@ -117,10 +117,6 @@ export default function Home() {
             LongStrider is a system of intelligence your company owns. It takes what your people, your systems and your
             files already know, learns from it every day, and any model you choose answers from it.
           </p>
-          <p className="lx-lead hx-lead-center" data-rise="2">
-            It sits between your business and any model, and keeps what your company knows intact when the model, the
-            platform or the person changes.
-          </p>
           <p className="lx-lead hx-lead-center mh-sovereign" data-rise="2">
             <Link href="/own-it">
               <strong>Sovereign by design.</strong> Your box, your models, your keys.

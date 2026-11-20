@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { PauseButton, usePlayback } from "./pause-button"
 
 /**
- * The homepage concept film as the hero: muted, looping, inline on phones,
+ * The home film as the hero: muted, looping, inline on phones,
  * poster first. The file is only attached once the hero is near the screen,
  * and phones get the 720 file. Under prefers-reduced-motion only the poster
  * shows (WCAG 2.3.3). Rendered from code in /video; the captions are the
@@ -48,8 +48,8 @@ export function HeroVideo() {
     return (
       <figure className="mh-screen mh-film">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/video/hero-poster.jpg" alt="A landscape of sand and gold: the company's memory, with a sun passing over it." width={1920} height={1080} />
-        <figcaption className="lx-illustrative">How it works, in a minute and a half.</figcaption>
+        <img src="/video/hero-poster.jpg" alt="A landscape of sand and gold at night: the company's memory, kept with you." width={1920} height={1080} />
+        <figcaption className="lx-illustrative">Where the memory lives, in half a minute.</figcaption>
       </figure>
     )
   }
@@ -68,11 +68,11 @@ export function HeroVideo() {
           preload="none"
           width={1920}
           height={1080}
-          aria-label="How LongStrider works: a landscape of memory grows from what a company says; any model lights it; at night it writes you a letter."
+          aria-label="Where the memory lives: kept with the model it blows away by morning; kept with you it grows, and the model can change without losing any of it."
         />
         <PauseButton playing={playing} reduced={reduced} onToggle={toggle} className="mh-film-pause" />
       </div>
-      <figcaption className="lx-illustrative">How it works, in a minute and a half. No sound.</figcaption>
+      <figcaption className="lx-illustrative">Where the memory lives, in half a minute. No sound.</figcaption>
     </figure>
   )
 }
