@@ -360,7 +360,7 @@ export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) 
     ctx.transform(ss, 0, 0, ss, sx, sy)
     // his shadow, long behind him, because the sun is ahead in the gateway
     ctx.save()
-    ctx.globalAlpha = o * st * 0.2 * (1 - n)
+    ctx.globalAlpha = o * st * 0.3 * (1 - n)
     ctx.translate(fx, fy)
     ctx.transform(1, 0, 1.05, -0.36, 0, 0)
     ctx.translate(-fx, -fy)

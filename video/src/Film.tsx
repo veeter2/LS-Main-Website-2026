@@ -1,17 +1,19 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
-import { AbsoluteFill, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig } from "remotion"
+import { AbsoluteFill, Img, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig } from "remotion"
 import { loadFont } from "@remotion/google-fonts/Lora"
-import { C, FPS } from "./beats"
+import { C } from "./beats"
 import { ramp, rng, win } from "./util"
-import { type Ctx, FILM_SECONDS, H, W, glowAt, hex, mix, nightAt, rgba, sm, spline } from "./film/core"
+import { type Ctx, FILM_FPS, FILM_SECONDS, H, W, glowAt, hex, mix, nightAt, rgba, sm, spline } from "./film/core"
 import { BX, BY, sceneOne } from "./film/first"
 import { sceneLand } from "./film/land"
 import { type Plates, buildPlates } from "./film/plates"
 
-export { FILM_SECONDS }
+export { FILM_FPS, FILM_SECONDS }
 
+// The site's face, set the site's way: Lora, regular weight, tight tracking, the turn of the line in gold italic.
 const { fontFamily } = loadFont("normal", { weights: ["400", "500"], subsets: ["latin"] })
-loadFont("italic", { weights: ["400", "500"], subsets: ["latin"] })
+loadFont("italic", { weights: ["400"], subsets: ["latin"] })
+const DISPLAY = { fontFamily, fontWeight: 400, letterSpacing: "-0.022em", lineHeight: 1.08 } as const
 
 /**
  * The home page film: where does the memory live?
@@ -109,14 +111,12 @@ function paint(ctx: Ctx, t: number, P: Plates) {
 
 /* ---------- the film ---------- */
 
-const Big = ({ o, top, color, italic = false, children, size = 92, left }: { o: number; top: number; color: string; italic?: boolean; children: string; size?: number; left?: number }) => (
-  <div style={{ position: "absolute", left: left ?? 0, right: 0, top, textAlign: left === undefined ? "center" : "left", fontFamily, fontWeight: 500, fontStyle: italic ? "italic" : "normal", fontSize: size, lineHeight: 1.1, letterSpacing: "-0.01em", color, opacity: o }}>
-    {children}
-  </div>
+const Big = ({ o, top, color, children, size = 92 }: { o: number; top: number; color: string; children: string; size?: number }) => (
+  <div style={{ position: "absolute", left: 0, right: 0, top, textAlign: "center", ...DISPLAY, fontSize: size, color, opacity: o }}>{children}</div>
 )
 
 export const Film = () => {
-  const t = useCurrentFrame() / FPS
+  const t = useCurrentFrame() / FILM_FPS
   const { width: vw } = useVideoConfig()
   const fit = vw / W
   const ref = useRef<HTMLCanvasElement>(null)
@@ -158,7 +158,7 @@ export const Film = () => {
         <canvas ref={ref} width={W} height={H} style={{ position: "absolute", inset: 0, width: W, height: H }} />
 
         {/* the question */}
-        <Big o={win(t, 0.3, 3.1, 0.5)} top={330} color={C.paper}>Where does the memory live?</Big>
+        <Big o={win(t, 0.3, 3.1, 0.5)} top={330 + (1 - ramp(t, 0.3, 1.1)) * 14} color={C.paper}>Where does the memory live?</Big>
 
         {/* the captions */}
         {CAPTIONS.map((c) => {
@@ -169,7 +169,7 @@ export const Film = () => {
             <div
               key={c.at}
               style={{
-                position: "absolute", left: "8%", right: "8%", bottom: "6.5%", textAlign: "center", fontFamily, fontWeight: 500, fontSize: 54, lineHeight: 1.2,
+                position: "absolute", left: "8%", right: "8%", bottom: "6.5%", textAlign: "center", ...DISPLAY, fontSize: 54, letterSpacing: "-0.015em", lineHeight: 1.2,
                 color: wordC, opacity: o, transform: `translateY(${rise}px)`, padding: "14px 32px",
                 textShadow: `0 0 18px rgba(${padC},1), 0 0 6px rgba(${padC},.9)`,
               }}
@@ -179,10 +179,18 @@ export const Film = () => {
           )
         })}
 
-        {/* the close: the page headline, word for word */}
-        <Big o={win(t, 31.4, 34.5, 0.6)} top={140} left={140} color={C.ink} size={80}>The model changes.</Big>
-        <Big o={win(t, 32.2, 34.5, 0.6)} top={236} left={140} color={C.goldInk} italic size={80}>The memory is yours.</Big>
-        <div style={{ position: "absolute", left: 146, top: 368, fontFamily, fontWeight: 500, fontSize: 30, letterSpacing: "0.24em", color: C.ink, opacity: win(t, 32.8, 34.5, 0.6) * 0.85, textShadow: "0 0 14px rgba(250,247,240,1)" }}>LONGSTRIDER</div>
+        {/* the close: the page headline, word for word and set as the page sets it */}
+        <div style={{ position: "absolute", left: 140, top: 150, ...DISPLAY, fontSize: 84, color: "rgba(31,27,20,.94)" }}>
+          <div style={{ opacity: win(t, 31.4, 34.5, 0.6), transform: `translateY(${(1 - ramp(t, 31.4, 32.3)) * 16}px)` }}>The model changes.</div>
+          <div style={{ opacity: win(t, 32.1, 34.5, 0.6), transform: `translateY(${(1 - ramp(t, 32.1, 33)) * 16}px)` }}>
+            The memory is <em style={{ fontStyle: "italic", color: C.goldInk }}>yours</em>.
+          </div>
+        </div>
+        {/* the mark and the name, as they sit in the site's bar */}
+        <div style={{ position: "absolute", left: 138, top: 372, display: "flex", alignItems: "center", gap: 20, opacity: win(t, 32.8, 34.5, 0.6) }}>
+          <Img src={staticFile("art/mark.png")} style={{ height: 82, width: "auto" }} />
+          <span style={{ fontFamily, fontWeight: 500, fontSize: 43, letterSpacing: "0.01em", lineHeight: 1, color: "rgba(31,27,20,.94)" }}>LongStrider</span>
+        </div>
       </div>
     </AbsoluteFill>
   )

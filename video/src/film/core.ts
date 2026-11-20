@@ -6,6 +6,7 @@ import { k, rng, win } from "../util"
  * Shared pieces: the clock, the colours, the bodies and the sand.
  */
 export const FILM_SECONDS = 35
+export const FILM_FPS = 30 // smoother than the old film's 24: the camera drift and the sand need it
 export const W = 1920
 export const H = 1080
 export const AX = 960 // the one axis: the stream, the arch and the model all sit on it
