@@ -106,6 +106,8 @@ ${FACTS_COMMON}`,
 
 /** The human-readable facts, shared by /for-your-ai and /llms.txt. */
 export const NOT = [
+  "Not a chatbot. A memory the company owns; chat is one door into it.",
+  "Not a harness or an agent framework. The memory and the judgment live in LongStrider; the model is only the voice.",
   "Not a SaaS seat. Licensed and installed; the company owns the install, the data and the keys.",
   "Not a model. It works with cloud models through the company’s own keys, or a model the company runs itself (any OpenAI-compatible server).",
   "Not a replacement for coding tools or for a document store. It sits next to them.",
@@ -120,6 +122,21 @@ export const CHECKS: { label: string; body: string }[] = [
   { label: "Company", body: "LongStrider, LLC, Austin, Texas. Small team. In daily use since spring 2026. Early stage." },
   { label: "Pricing shape", body: "A license, a build fee, and a monthly support share that can be canceled. Exact number scoped in a working session." },
   { label: "Cost signal", body: "Their own measurement: the same chat reply, with the same memory and tools, costs a fraction as much when a cheaper model answers. Answer quality is measured separately and not claimed equal." },
+]
+
+/** Questions buyers ask, answered plainly. Rendered on /for-your-ai, carried in /llms.txt, and marked up as FAQPage. */
+export const FAQ: { q: string; a: string }[] = [
+  { q: "Is this another chatbot?", a: "No. It is a memory your company owns. Chat is one door into it; connected systems, files and your teammates are the others. Everything lands in one record." },
+  { q: "Is it a harness or an agent framework?", a: "No. A harness hands your material to a model and hopes. Here the record, the counting and the judgment live in LongStrider. The model is only the voice, and it gets the slice that earned its place." },
+  { q: "Do you rent us a model?", a: "Never. You bring your own key to a frontier model, or run an open model on your own machine. We do not sit between you and the model, and we do not mark it up." },
+  { q: "What do we actually own?", a: "The software, the install, the data, the keys and everything built from your material. It runs on your machines or ours. A cost you capitalize, not a bill forever." },
+  { q: "What happens to our data if we leave?", a: "It is in plain Postgres you can read with any tool. It leaves with you. Nothing is trained on it, and there is no model of ours to take it back out of." },
+  { q: "How does it stay cheap?", a: "It reads the summary first, then the facts under it, and opens the raw notes only when they earn their place. The model gets that slice and nothing more. Most nights it finds nothing new and does nothing." },
+  { q: "How do we know an answer is true?", a: "Every answer comes with a receipt: what it stood on, which rules fired, what it cost. Counts and dates come from the record, not from the model. When it has no record, it says so instead of guessing." },
+  { q: "Can it act on its own?", a: "Only with a yes. It drafts and proposes; a person confirms, and the yes is on the record. Anything that happened without asking is in one log, every day." },
+  { q: "Can one person see another person's memory?", a: "No. Each person has private memory, and the company has shared memory. A hard wall sits between them, checked on every read." },
+  { q: "Do we need engineers to run it?", a: "Not day to day. Models, keys and spend are settings, changed on one screen. Connecting a new system is a project we scope with you." },
+  { q: "Is it proven?", a: "It has run our own company every day since spring. Every nightly letter and every answer is on the record. We are early stage, with no SOC 2 yet, and we answer security questions in writing." },
 ]
 
 export const PAGES = ["/product", "/how-it-works", "/security", "/for/finance", "/for/technology", "/for/teams", "/for-your-ai", "/book"]
@@ -140,6 +157,9 @@ ${NOT.map((n) => `- ${n}`).join("\n")}
 
 ## Facts a buyer checks
 ${CHECKS.map((c) => `- ${c.label}: ${c.body}`).join("\n")}
+
+## Questions buyers ask
+${FAQ.map((f) => `- Q: ${f.q}\n  A: ${f.a}`).join("\n")}
 
 ## Pages
 ${PAGES.map((p) => `- ${SITE}${p}`).join("\n")}

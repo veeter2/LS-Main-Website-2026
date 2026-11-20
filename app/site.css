@@ -2148,6 +2148,11 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .fy-list { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 12px; }
 .fy-list li { padding-left: 18px; border-left: 2px solid var(--lx-gold-line); font-size: 16px; line-height: 1.65; color: var(--lx-ink-secondary); }
 .fy-list b { color: var(--lx-ink-primary); font-weight: 600; }
+.fy-faq { margin: 24px 0 0; }
+.fy-faq-item { padding: 18px 0; border-top: 1px solid var(--lx-line); }
+.fy-faq-item:last-child { border-bottom: 1px solid var(--lx-line); }
+.fy-faq dt { margin: 0 0 6px; font-family: var(--lx-display); font-size: 20px; line-height: 1.4; color: var(--lx-ink-primary); }
+.fy-faq dd { margin: 0; font-size: 16px; line-height: 1.65; color: var(--lx-ink-secondary); }
 .fy-lead { margin-top: 24px; font-size: 17px; line-height: 1.7; color: var(--lx-ink-body); }
 .ay-strip { max-width: 760px; margin: 0 auto; text-align: center; }
 .ay-strip-row { justify-content: center; margin-top: clamp(24px, 4vh, 36px); }

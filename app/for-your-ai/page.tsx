@@ -3,7 +3,8 @@ import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { AskYourAI } from "../_components/ask-your-ai"
 import { FilmStill } from "../_components/film-still"
-import { CHECKS, NOT, ORGANS } from "@/lib/for-your-ai"
+import { CHECKS, FAQ, NOT, ORGANS } from "@/lib/for-your-ai"
+import { FaqJsonLd } from "../_components/faq-jsonld"
 
 export const metadata: Metadata = pageMeta(
   "/for-your-ai",
@@ -75,7 +76,7 @@ export default function ForYourAI() {
             <span className="hx-step">02</span> What it is not
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Three things it <em>isn&rsquo;t</em>.
+            What it <em>isn&rsquo;t</em>.
           </h2>
           <ul className="fy-list" data-reveal data-delay="2">
             {NOT.map((n) => (
@@ -104,10 +105,30 @@ export default function ForYourAI() {
         </div>
       </section>
 
-      <section className="hx-section" id="prompts">
+      <section className="hx-section" id="faq">
+        <FaqJsonLd items={FAQ} />
+        <div className="lx-wrap fy-wrap">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">04</span> Questions buyers ask
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            Asked the way a buyer <em>asks</em> it.
+          </h2>
+          <dl className="fy-faq" data-reveal data-delay="2">
+            {FAQ.map((f) => (
+              <div key={f.q} className="fy-faq-item">
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section className="hx-section hx-deep" id="prompts">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">04</span> The prompts
+            <span className="hx-step">05</span> The prompts
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Paste one into the AI you already <em>use</em>.
