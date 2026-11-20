@@ -473,6 +473,20 @@ export function connectScene(ctx: Ctx, t: number, S: Scene) {
   layer(ctx, t, 0)
   links(ctx, t, n)
   clusters(ctx, t, lit, cool, n)
+  // one slow pass of light over the system while it compounds, so time is seen to go by
+  const pass = lin(t, 25.4, 29.6)
+  if (pass > 0 && pass < 1) {
+    const px = -200 + 1900 * pass
+    const edge = Math.sin(Math.PI * pass)
+    const sh = ctx.createLinearGradient(px - 760, 0, px + 420, 300)
+    sh.addColorStop(0, "rgba(46,38,24,0)")
+    sh.addColorStop(0.35, `rgba(46,38,24,${0.16 * edge})`)
+    sh.addColorStop(0.62, "rgba(46,38,24,0)")
+    sh.addColorStop(0.8, `rgba(255,214,130,${0.34 * edge})`)
+    sh.addColorStop(1, "rgba(255,214,130,0)")
+    ctx.fillStyle = sh
+    ctx.fillRect(-300, 200, 2000, 800)
+  }
 
   // the sun's seat, the sun, and the one that takes its place
   if (out > 0 || inn > 0) {

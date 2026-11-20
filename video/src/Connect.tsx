@@ -15,16 +15,16 @@ const DISPLAY = { fontFamily, fontWeight: 400, letterSpacing: "-0.022em", lineHe
 
 /**
  * The connectors film: where does the work go?
- * Same land, same type as the other two. The work falls in from four places and lands as one memory.
+ * Same land, same type as the other two. The work comes in as five ribbons and becomes one system of intelligence.
  */
 export const CONNECT_CAPTIONS: { at: number; to: number; text: string }[] = [
   { at: 3.8, to: 8, text: "Chat. Files. Calls. Your people." },
-  { at: 8, to: 12.5, text: "It all lands in one memory. Yours." },
+  { at: 8, to: 12.5, text: "It becomes one system of intelligence. Yours." },
   { at: 12.5, to: 16.5, text: "The model lights it. It does not hold it." },
-  { at: 16.5, to: 21.5, text: "Experts and teammates read the same memory." },
-  { at: 21.5, to: 25.5, text: "What they learn comes back to it." },
+  { at: 16.5, to: 21.5, text: "Experts and teammates draw on the same system." },
+  { at: 21.5, to: 25.5, text: "What they learn makes it smarter." },
   { at: 25.5, to: 29.5, text: "It compounds." },
-  { at: 29.5, to: 33, text: "Change the model. The memory stays." },
+  { at: 29.5, to: 33, text: "Change the model. The system stays." },
 ]
 
 function paintConnect(ctx: Ctx, t: number, S: Scene, grain: number) {
@@ -107,7 +107,7 @@ export const Connect = ({ phone = false, grain = 1 }: { phone?: boolean; grain?:
 
         <div style={{ position: "absolute", left: 140, top: 150, ...DISPLAY, fontSize: 84, color: "rgba(31,27,20,.94)" }}>
           <div style={{ opacity: win(t, 34, 36.3, 0.4), transform: `translateY(${(1 - ramp(t, 34, 34.9)) * 16}px)` }}>
-            One <em style={{ fontStyle: "italic", color: C.goldInk }}>memory</em>.
+            One system of <em style={{ fontStyle: "italic", color: C.goldInk }}>intelligence</em>.
           </div>
           <div style={{ opacity: win(t, 34.5, 36.3, 0.4), transform: `translateY(${(1 - ramp(t, 34.5, 35.4)) * 16}px)` }}>Every model.</div>
         </div>
