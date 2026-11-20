@@ -39,8 +39,8 @@ const NOT_THIS = [
   { no: "Not a harness.", yes: "The memory and the judgment live here. The model is only the voice." },
   { no: "Not a wrapper around one model.", yes: "Any model, through your own keys. Swap it and nothing is re-taught." },
   { no: "Not rented.", yes: "Software you own, on your machines or ours. A cost you capitalize, not a bill forever." },
-  { no: "Not a search box.", yes: "A record that counts, dates and sources every fact, and says when it is unsure." },
-  { no: "Not one person\u2019s assistant.", yes: "Private memory for each person, shared memory for the company, one record for the team." },
+  { no: "Not a search box.", yes: "A memory that counts, dates and sources every fact, and says when it is unsure." },
+  { no: "Not one person\u2019s assistant.", yes: "Private memory for each person, shared memory for the company, both in one place." },
 ]
 
 type Icon = "coin" | "receipt" | "pen" | "clocks"
@@ -100,7 +100,7 @@ const CLAIMS = [
   "Every answer comes with a receipt: what it stood on, which rules fired, what it cost.",
   "Nothing goes out in your name until a person says yes, and the yes is on the record.",
   "Your private memory and the company\u2019s shared memory are kept apart by a hard wall.",
-  "Experts and agents work from one record, and every one of them makes it richer.",
+  "Experts and agents work from one memory, and every one of them makes it richer.",
   "When a fact is old, it says so. When it has no record, it says that instead of guessing.",
 ]
 
@@ -156,18 +156,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 01: One record */}
+      {/* 01: One memory */}
       <section className="hx-section hx-deep" id="room">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">01</span> One record
+            <span className="hx-step">01</span> One memory
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             One room. Everything your company knows about <em>itself</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Eight parts, one record underneath all of them. Take the record away and they&rsquo;re the same tools everyone
-            else sells. Keep it, and every one of them gets better each month, because the record does.
+            Eight parts, one memory underneath all of them. Take the memory away and they&rsquo;re the same tools everyone
+            else sells. Keep it, and every one of them gets better each month, because the memory does.
           </p>
         </div>
         <div className="lx-wrap">
@@ -181,7 +181,7 @@ export default function Home() {
             ))}
           </ol>
           <p className="mm-foot" data-reveal>
-            All eight read one record. That&rsquo;s what you license, and that&rsquo;s what you own.{" "}
+            All eight read one memory. That&rsquo;s what you license, and that&rsquo;s what you own.{" "}
             <Link href="/product">What it does →</Link>
           </p>
         </div>
@@ -198,7 +198,7 @@ export default function Home() {
             <em>calling</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            The record does the remembering. The model only supplies the words. That is why the bill is smaller, the
+            The memory does the remembering. The model only supplies the words. That is why the bill is smaller, the
             answers are backed, and nothing is taught twice.
           </p>
         </div>

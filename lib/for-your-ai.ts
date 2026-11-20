@@ -123,7 +123,7 @@ export const CHECKS: { label: string; body: string }[] = [
 
 /** Questions buyers ask, answered plainly. Rendered on /for-your-ai, carried in /llms.txt, and marked up as FAQPage. */
 export const FAQ: { q: string; a: string }[] = [
-  { q: "Is this another chatbot?", a: "No. It is a memory your company owns. Chat is one door into it; connected systems, files and your teammates are the others. Everything lands in one record." },
+  { q: "Is this another chatbot?", a: "No. It is a memory your company owns. Chat is one door into it; connected systems, files and your teammates are the others. Everything lands in one memory." },
   { q: "Is it a harness or an agent framework?", a: "No. A harness hands your material to a model and hopes. Here the record, the counting and the judgment live in LongStrider. The model is only the voice, and it gets the slice that earned its place." },
   { q: "Do you rent us a model?", a: "Never. You bring your own key to a frontier model, or run an open model on your own machine. We do not sit between you and the model, and we do not mark it up." },
   { q: "What do we actually own?", a: "The software, the install, the data, the keys and everything built from your material. It runs on your machines or ours. A cost you capitalize, not a bill forever." },
