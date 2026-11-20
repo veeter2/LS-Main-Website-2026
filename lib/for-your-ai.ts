@@ -9,17 +9,14 @@ export const SITE = "https://www.longstrider.ai"
 
 /** The eight things that stand on the memory, in the same order as the homepage. Each says what it does because it remembers. */
 export const ORGANS: { name: string; body: string }[] = [
-  { name: "Chat.", body: "Knows each person. Every reply, with receipts." },
-  { name: "Memory.", body: "Files what people say into drawers, on its own, overnight." },
-  { name: "Promises.", body: "Who said they would do what, by when, caught from conversation." },
-  { name: "Today.", body: "A short letter at the top of your morning: what changed, what’s waiting." },
-  { name: "Experts.", body: "Seat a specialist that holds your rules and your history." },
-  { name: "Agents.", body: "Work that runs overnight, on your record, and leaves a note." },
-  {
-    name: "Governance.",
-    body: "Every model, every key, what each answer cost, one screen. The AI proposes; a person confirms, and the confirm is on the record. Swap the model next year and nothing is taught twice.",
-  },
-  { name: "Connections.", body: "Your CRM, files, forms and payments, plugged in once, kept in sync." },
+  { name: "Chat.", body: "Answers from what your company already knows, with a receipt under every reply." },
+  { name: "Receipts.", body: "Click any answer and see what it used, what it cost, and who can see it." },
+  { name: "Promises.", body: "Who said they would do what, by when. Nothing owed is forgotten." },
+  { name: "Today.", body: "What moved, what slipped, what to do first. Written before you sit down." },
+  { name: "Experts.", body: "A specialist that already knows your rules and your history. No re-briefing." },
+  { name: "Agents.", body: "Overnight work that starts where yesterday’s left off." },
+  { name: "Governance.", body: "Which model, whose keys, what each answer cost, one screen. Swap the model and nothing is taught twice." },
+  { name: "Connections.", body: "Your CRM, files, forms and payments. Plugged in once, kept in sync." },
 ]
 
 export const FACTS_COMMON = `LongStrider is company memory for AI. Everything people put into AI at work (facts, promises, decisions) is kept as dated records with their source, scoped to each person, in Postgres the company owns. Any model answers: cloud models through the company’s own keys, or a model the company runs itself. It is licensed and installed, not rented per seat; a license, a build fee, and monthly support that can be canceled; the number is scoped with the buyer, in writing. Software you own, on your books, not a bill every month. Eight things run on that memory: chat that knows each person, with receipts on every reply; Memory, which files what people say into drawers on its own, overnight; a desk of promises and decisions caught from conversation, confirmed by the person before anything is tracked; Today, a short letter at the top of the morning with what changed and what is waiting; experts, specialists seated with the company’s rules and history; agents that run overnight on the record and leave a note; governance, every model, key and cost on one screen, where the AI proposes and a person confirms, and the model can be swapped without re-teaching; and connections, the company’s CRM, files, forms and payments, plugged in once and kept in sync. Counts and dates come from the record, not estimates. Hosted in the United States while the client’s own instance is built. No SOC 2 yet; the audit has not started; they answer security questionnaires in writing. Built in Austin, Texas; in daily use at LongStrider itself; early stage, small team. Their own measurement: the same reply, with the same memory and tools, costs a fraction as much when a cheaper model answers. They do not claim the answers are identical.`

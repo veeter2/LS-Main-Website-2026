@@ -23,20 +23,14 @@ export const metadata: Metadata = {
  */
 
 const ROOM = [
-  { name: "Chat.", body: "It answers from the record first, everything your company has told it, dated, and calls the model only for the words." },
-  {
-    name: "Memory.",
-    body: "Everything your company has said to it, dated and sourced. Your memory is yours. The company’s is shared. Hard wall between them. It files itself, checks itself, and works on it overnight.",
-  },
-  { name: "Promises.", body: "Who said they would do what, by when. It brings them back on the day." },
-  { name: "Today.", body: "What moved, what slipped, what to do first. Written overnight, before you sit down." },
-  { name: "Experts.", body: "Hire a specialist. It interviews you first, then works the way your business works." },
-  { name: "Agents.", body: "Work that starts where yesterday’s left off, with the same memory as you." },
-  {
-    name: "Governance.",
-    body: "Which model, whose keys, what each answer cost, who saw what. One screen. Swap the model next year and nothing is taught twice.",
-  },
-  { name: "Connections.", body: "Your CRM, your files, your forms, your payments. Plugged in once." },
+  { name: "Chat.", body: "Answers from what your company already knows, with a receipt under every reply." },
+  { name: "Receipts.", body: "Click any answer and see what it used, what it cost, and who can see it." },
+  { name: "Promises.", body: "Who said they would do what, by when. Nothing owed is forgotten." },
+  { name: "Today.", body: "What moved, what slipped, what to do first. Written before you sit down." },
+  { name: "Experts.", body: "A specialist that already knows your rules and your history. No re-briefing." },
+  { name: "Agents.", body: "Overnight work that starts where yesterday’s left off." },
+  { name: "Governance.", body: "Which model, whose keys, what each answer cost, one screen. Swap the model and nothing is taught twice." },
+  { name: "Connections.", body: "Your CRM, files, forms and payments. Plugged in once, kept in sync." },
 ]
 
 // Said as a buyer asks it. The "no" is the short answer; the sentence after it is the real one.
@@ -172,7 +166,7 @@ export default function Home() {
             One room. Everything your company knows about <em>itself</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Eight parts, one memory underneath all of them. Take the memory away and they&rsquo;re the same tools everyone
+            Eight parts, one record underneath all of them. Take the record away and they&rsquo;re the same tools everyone
             else sells. Keep it, and every one of them gets better each month, because the record does.
           </p>
         </div>
