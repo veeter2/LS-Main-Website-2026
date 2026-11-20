@@ -81,7 +81,7 @@ function CardIcon({ kind }: { kind: Icon }) {
 
 const DIFFERENT: { title: string; body: string; icon: Icon }[] = [
   { icon: "coin", title: "A smaller model bill", body: "The model sees only the slice that earns it. Cost doesn’t grow with what it knows." },
-  { icon: "receipt", title: "Fewer made-up answers", body: "Every answer traces to a record it can show you. When there isn’t one, it says so." },
+  { icon: "receipt", title: "Answers you can check", body: "Every answer traces to a record it can show you. When there isn’t one, it says so." },
   {
     icon: "pen",
     title: "Teach it once",
