@@ -25,7 +25,7 @@ export const COST_CAPTIONS: { at: number; to: number; text: string }[] = [
   { at: 12, to: 16, text: "The more you know, the more each answer costs." },
   { at: 16.4, to: 20.6, text: "LongStrider keeps the memory on your side." },
   { at: 20.6, to: 25, text: "Each question takes only what it needs." },
-  { at: 25, to: 28.6, text: "So answers come fast, and the bill stays small." },
+  { at: 25, to: 28.6, text: "So answers come fast, and the bill stays flat." },
   { at: 28.6, to: 32.2, text: "Use a smaller model. Same memory." },
 ]
 
