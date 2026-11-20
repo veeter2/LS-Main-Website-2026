@@ -6,7 +6,10 @@
     "studio": "remotion studio src/index.ts",
     "render:1080": "remotion render src/index.ts film ../public/video/hero-1080.mp4 --codec=h264 --video-bitrate=1150k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0}'",
     "render:720": "remotion render src/index.ts film720 ../public/video/hero-720.mp4 --codec=h264 --video-bitrate=680k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0,\"phone\":true}'",
-    "poster": "remotion still src/index.ts film ../public/video/hero-poster.jpg --frame=783 --image-format=jpeg --jpeg-quality=55 --props='{\"grain\":0}'"
+    "poster": "remotion still src/index.ts film ../public/video/hero-poster.jpg --frame=783 --image-format=jpeg --jpeg-quality=55 --props='{\"grain\":0}'",
+    "render:sovereign:1080": "remotion render src/index.ts sovereign out/sovereign-1080.mp4 --codec=h264 --video-bitrate=1050k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0.3}'",
+    "render:sovereign:720": "remotion render src/index.ts sovereign720 out/sovereign-720.mp4 --codec=h264 --video-bitrate=640k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0.3,\"phone\":true}'",
+    "poster:sovereign": "remotion still src/index.ts sovereign out/sovereign-poster.jpg --frame=1050 --image-format=jpeg --jpeg-quality=60 --props='{\"grain\":0}'"
   },
   "dependencies": {
     "@remotion/cli": "4.0.544",
