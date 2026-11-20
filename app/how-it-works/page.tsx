@@ -4,6 +4,7 @@ import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { FilmStill } from "../_components/film-still"
 import { SentenceJourney } from "./sentence-journey"
+import { ConnectFilm } from "../_components/connect-film"
 
 export const metadata: Metadata = pageMeta("/how-it-works", "How LongStrider works · The record, the order, the judgment", "Three layers: the record, the order, the judgment. Counted by the system, written by the model you choose. Scoped to the person in the database.")
 
@@ -96,6 +97,9 @@ export default function HowItWorksConcept() {
             <SentenceJourney />
             <p className="lx-illustrative">Real behavior, stage by stage. Fictional firm.</p>
           </div>
+        </div>
+        <div className="lx-wrap hw-film" data-rise="4">
+          <ConnectFilm />
         </div>
       </section>
 
