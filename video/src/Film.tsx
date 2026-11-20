@@ -1,5 +1,5 @@
-import { useLayoutEffect, useMemo, useRef } from "react"
-import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { AbsoluteFill, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig } from "remotion"
 import { loadFont } from "@remotion/google-fonts/Lora"
 import { C, FPS } from "./beats"
 import { gauss, k, ramp, rng, win } from "./util"
@@ -43,182 +43,108 @@ const nightAt = (t: number) => k(t, [[0, 1], [8, 1], [9.6, 0], [21.5, 0], [25, 1
 /** Warm light low in the sky: morning, dusk, dawn. */
 const glowAt = (t: number) => Math.max(win(t, 8, 12.5, 1.2), win(t, 21.2, 25.6, 1.6) * 0.9, k(t, [[27.5, 0], [30.5, 0.5], [32.2, 1], [34.1, 1], [35, 0]]))
 
-/* ---------- the land ---------- */
+/* ---------- the land: one painting, relit ---------- */
 
-const LAND: ((x: number) => number)[] = [
-  (x) => { const u = x / W; return 700 - 64 * gauss((u - 0.16) * 3) - 150 * gauss((u - 0.9) * 2.4) },
-  (x) => { const u = x / W; return 722 - 22 * gauss((u - 0.5) * 1.7) + 26 * (u - 0.5) },
-  (x) => { const u = x / W; return 800 + 96 * u - 170 * gauss((u - 0.02) * 2.4) },
-  (x) => { const u = x / W; return 972 - 250 * gauss((u - 1.02) * 2.1) - 16 * Math.sin(u * 6) },
-  (x) => { const u = x / W; return 1024 - 96 * gauss((u - 0.28) * 2.4) },
-]
-const GROUND = LAND[1](AX) + 4
-const slope = (f: (x: number) => number, x: number) => (f(x + 6) - f(x - 6)) / 12
+/** Where the sand lands on the road, and where the model sits above it. One axis. */
+const SX = 1040
+const LY = 912
 
-function tracePath(ctx: Ctx, f: (x: number) => number) {
-  ctx.beginPath()
-  ctx.moveTo(-20, H + 20)
-  for (let x = -20; x <= W + 20; x += 8) ctx.lineTo(x, f(x))
-  ctx.lineTo(W + 20, H + 20)
-  ctx.closePath()
+export type Plates = {
+  day: HTMLCanvasElement
+  grey: HTMLCanvasElement
+  gold: HTMLCanvasElement
+  goldGlow: HTMLCanvasElement
+  strider: HTMLCanvasElement
+  stars: [number, number, number][]
+  noise: HTMLCanvasElement
 }
 
-/** Paint the land once: fine stipple that builds tone. Light on the face turned to the sun, deep in the lee. */
-function paintLand(night: boolean): HTMLCanvasElement {
+const blank = (w: number, h: number) => {
   const cv = document.createElement("canvas")
-  cv.width = W
-  cv.height = H
-  const ctx = cv.getContext("2d")!
-  const r = rng(night ? 91 : 17)
-  LAND.forEach((f, li) => {
-    const depth = li / (LAND.length - 1)
-    const next = LAND[li + 1]
-    ctx.save()
-    tracePath(ctx, f)
-    ctx.clip()
-    ctx.fillStyle = night ? rgba(mix([44, 38, 70], [30, 26, 50], depth), 1) : rgba(mix([246, 242, 232], [243, 238, 226], depth), 1)
-    ctx.fillRect(0, 0, W, H)
-    const reach = 80 + 90 * depth
-    // tone first, smooth: the shape of the dune before its grain
-    for (let x = 0; x < W; x += 2) {
-      const y0 = f(x)
-      const lee = 1 / (1 + Math.exp(slope(f, x) * 26))
-      const k0 = (0.3 + 0.7 * lee) * (0.62 + 0.38 * depth) * (night ? 0.75 : 0.62)
-      const tg = ctx.createLinearGradient(0, y0, 0, y0 + reach * 3.2)
-      const tc = night ? "7,5,16" : "46,39,28"
-      tg.addColorStop(0, `rgba(${tc},0)`)
-      tg.addColorStop(0.3, `rgba(${tc},${(k0 * 0.6).toFixed(3)})`)
-      tg.addColorStop(1, `rgba(${tc},${k0.toFixed(3)})`)
-      ctx.fillStyle = tg
-      ctx.fillRect(x, y0, 2, H - y0)
-    }
-    for (let x = 0; x < W; x += 1) {
-      const y0 = f(x)
-      const yb = Math.min(H, (next ? Math.max(next(x), y0) : H) + 24)
-      const hb = yb - y0
-      if (hb <= 0) continue
-      const s = slope(f, x)
-      const lee = 1 / (1 + Math.exp(s * 26))
-      const cnt = hb * 1.7
-      for (let i = 0; i < cnt; i++) {
-        const y = y0 + r() * hb
-        const d = 1 - Math.exp(-(y - y0) / reach)
-        const rim = y - y0 < 5 ? 0.15 : 1
-        let p = (0.06 + 0.94 * d) * (0.3 + 0.7 * lee) * rim * (0.62 + 0.38 * depth)
-        const jx = x + r()
-        if (night) {
-          const lit = (1 - lee) * Math.exp(-(y - y0) / 60) * 0.5 + 0.02
-          const q = r()
-          if (q < lit) ctx.fillStyle = rgba([226, 214, 240], 0.2 + 0.45 * r())
-          else if (q < lit + p * 0.9) ctx.fillStyle = rgba([7, 5, 16], 0.4 + 0.45 * r())
-          else continue
-        } else {
-          if (r() > p) continue
-          ctx.fillStyle = rgba(INK, 0.55 + 0.45 * r())
-        }
-        ctx.beginPath()
-        ctx.arc(jx, y, 0.35 + r() * 0.5, 0, 6.2832)
-        ctx.fill()
-      }
-    }
-    ctx.restore()
-    ctx.beginPath()
-    for (let x = -20; x <= W + 20; x += 8) x === -20 ? ctx.moveTo(x, f(x) + 1) : ctx.lineTo(x, f(x) + 1)
-    ctx.strokeStyle = night ? "rgba(226,214,240,.3)" : "rgba(252,250,244,.95)"
-    ctx.lineWidth = 2.4
-    ctx.stroke()
-  })
-  // the near ground falls away into haze, so words can sit on it
-  const mist = ctx.createLinearGradient(0, 850, 0, H)
-  mist.addColorStop(0, night ? "rgba(22,19,38,0)" : "rgba(244,239,228,0)")
-  mist.addColorStop(0.7, night ? "rgba(22,19,38,.9)" : "rgba(244,239,228,.93)")
-  mist.addColorStop(1, night ? "rgba(22,19,38,.96)" : "rgba(244,239,228,.97)")
-  ctx.fillStyle = mist
-  ctx.fillRect(0, 850, W, H - 850)
+  cv.width = w
+  cv.height = h
   return cv
 }
 
-/** What the land gains as it grows: gold veins on the crests, posts, bodies. Painted once per light. */
-const POSTS: [number, number, number][] = [[250, 0, 96], [470, 1, 70], [1290, 2, 110], [1310, 1, 84], [1500, 0, 110], [1700, 3, 130], [330, 2, 78], [1160, 2, 64]]
-/** Smaller arches further off: x, land layer, radius. */
-const FAR_ARCHES: [number, number, number][] = [[1500, 0, 54], [330, 0, 40]]
-
-function veinPath(ctx: Ctx, f: (x: number) => number, a: number, b: number) {
-  ctx.beginPath()
-  for (let x = a; x <= b; x += 8) x === a ? ctx.moveTo(x, f(x) + 2) : ctx.lineTo(x, f(x) + 2)
-}
-
-function paintRich(ctx: Ctx, grow: number, night: number) {
-  if (grow <= 0) return
-  // veins
-  const veins: [number, number, number, number][] = [[0, 0, 1920, 0], [1, 0, 1920, 0.12], [2, 0, 1180, 0.3], [3, 760, 1920, 0.45]]
-  veins.forEach(([li, a, b, at]) => {
-    const p = ramp(grow, at, at + 0.4)
-    if (p <= 0) return
-    const f = LAND[li]
-    const mid = AX
-    const half = Math.max(b - mid, mid - a) * p
-    const x0 = Math.max(a, mid - half)
-    const x1 = Math.min(b, mid + half)
-    ctx.save()
-    ctx.lineCap = "round"
-    if (night > 0.02) {
-      veinPath(ctx, f, x0, x1)
-      ctx.strokeStyle = `rgba(232,205,150,${0.22 * night})`
-      ctx.lineWidth = 9
-      ctx.filter = "blur(6px)"
-      ctx.stroke()
-      ctx.filter = "none"
-    }
-    veinPath(ctx, f, x0, x1)
-    ctx.strokeStyle = rgba(mix(hex(C.gold), hex(C.goldLight), night), 0.95)
-    ctx.lineWidth = 2
-    ctx.stroke()
-    ctx.restore()
-  })
-  POSTS.forEach(([x, li, h], i) => {
-    const p = ramp(grow, 0.15 + i * 0.09, 0.4 + i * 0.09)
-    if (p <= 0) return
-    const y = LAND[li](x) + 6
-    ctx.strokeStyle = night > 0.5 ? `rgba(226,214,240,${0.55 * p})` : rgba(INK, 0.8 * p)
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    ctx.moveTo(x, y)
-    ctx.lineTo(x, y - h * p)
-    ctx.stroke()
-    if (night > 0.05) {
-      const hg = ctx.createRadialGradient(x, y - h * p, 0, x, y - h * p, 34)
-      hg.addColorStop(0, `rgba(232,205,150,${0.5 * night * p})`)
-      hg.addColorStop(1, "rgba(232,205,150,0)")
-      ctx.fillStyle = hg
-      ctx.fillRect(x - 40, y - h * p - 40, 80, 80)
-    }
-    orb(ctx, x, y - h * p, 7 + (i % 3) * 2, "gold", 300 + i, p)
-  })
-  FAR_ARCHES.forEach(([x, li, rad], i) => {
-    const p = ramp(grow, 0.28 + i * 0.18, 0.62 + i * 0.18)
-    if (p <= 0) return
-    smallArch(ctx, x, LAND[li](x) + 5, rad, p, night)
-  })
-}
-
-function smallArch(ctx: Ctx, cx: number, cy: number, R: number, built: number, night: number) {
-  const N = 7
-  const T = R * 0.36
-  for (let i = 0; i < N; i++) {
-    const order = Math.min(i, N - 1 - i)
-    const p = ramp(built, order / 4.6, order / 4.6 + 0.25)
-    if (p <= 0) continue
-    const a0 = Math.PI + (i * Math.PI) / N + 0.03
-    const a1 = Math.PI + ((i + 1) * Math.PI) / N - 0.03
-    ctx.beginPath()
-    ctx.arc(cx, cy, R, a0, a1)
-    ctx.arc(cx, cy, R + T, a1, a0, true)
-    ctx.closePath()
-    const day = hex(C.ramp[Math.min(5, Math.round((order / 3) * 5))])
-    ctx.fillStyle = rgba(mix(day, mix(day, [20, 16, 34], 0.55), night), p)
-    ctx.fill()
+/**
+ * Everything the film needs from the paintings, made once:
+ * the land by day, the same land before any gold reached it, the gold on its own (so it can glow at night),
+ * where the open sky is (for stars), and the strider lifted off his own painting.
+ */
+export function buildPlates(landImg: HTMLImageElement, striderImg: HTMLImageElement): Plates {
+  const day = blank(W, H)
+  const dctx = day.getContext("2d")!
+  dctx.imageSmoothingQuality = "high"
+  dctx.drawImage(landImg, 0, 0, W, H)
+  const src = dctx.getImageData(0, 0, W, H)
+  const grey = blank(W, H)
+  const gold = blank(W, H)
+  const gctx = grey.getContext("2d")!
+  const octx = gold.getContext("2d")!
+  const gd = gctx.createImageData(W, H)
+  const od = octx.createImageData(W, H)
+  for (let i = 0; i < src.data.length; i += 4) {
+    const r = src.data[i], g = src.data[i + 1], b = src.data[i + 2]
+    const a = Math.max(0, Math.min(1, (r - b - 44) / 30)) * (r > 110 ? 1 : 0)
+    const l = 0.3 * r + 0.59 * g + 0.11 * b
+    gd.data[i] = r + (l + 6 - r) * a
+    gd.data[i + 1] = g + (l + 3 - g) * a
+    gd.data[i + 2] = b + (l - 4 - b) * a
+    gd.data[i + 3] = 255
+    od.data[i] = Math.min(255, r * 1.12 + 14)
+    od.data[i + 1] = Math.min(255, g * 1.1 + 10)
+    od.data[i + 2] = Math.min(255, b * 1.02)
+    od.data[i + 3] = a * 255
   }
+  gctx.putImageData(gd, 0, 0)
+  octx.putImageData(od, 0, 0)
+  const goldGlow = blank(W, H)
+  const ggx = goldGlow.getContext("2d")!
+  ggx.filter = "blur(9px)"
+  ggx.drawImage(gold, 0, 0)
+  ggx.filter = "blur(26px)"
+  ggx.globalAlpha = 0.8
+  ggx.drawImage(gold, 0, 0)
+
+  // stars only where the painting is open sky
+  const r = rng(11)
+  const stars: [number, number, number][] = []
+  for (let i = 0; i < 2600 && stars.length < 520; i++) {
+    const x = Math.floor(r() * W), y = Math.floor(r() * 800), s = r()
+    let sky = true
+    for (const [ox, oy] of [[0, 0], [5, 0], [-5, 0], [0, 5], [0, -5]]) {
+      const j = (Math.min(H - 1, Math.max(0, y + oy)) * W + Math.min(W - 1, Math.max(0, x + ox))) * 4
+      if (src.data[j] < 238 || src.data[j] - src.data[j + 2] > 30) sky = false
+    }
+    if (sky) stars.push([x, y, s])
+  }
+
+  // the strider, lifted off the cream of his own painting
+  const CW = 520, CH = 520
+  const sp = blank(CW, CH)
+  const sx = sp.getContext("2d")!
+  sx.drawImage(striderImg, 900, 180, CW, CH, 0, 0, CW, CH)
+  const sd = sx.getImageData(0, 0, CW, CH)
+  const bg = [sd.data[(20 * CW + 20) * 4], sd.data[(20 * CW + 20) * 4 + 1], sd.data[(20 * CW + 20) * 4 + 2]]
+  for (let y = 0; y < CH; y++) {
+    for (let x = 0; x < CW; x++) {
+      const j = (y * CW + x) * 4
+      const cut = x < 300 ? 492 - (x / 300) * 22 : x < 350 ? 470 - ((x - 300) / 50) * 28 : 442 - ((x - 350) / 170) * 12
+      const dr = bg[0] - sd.data[j], dg = bg[1] - sd.data[j + 1], db = bg[2] - sd.data[j + 2]
+      const dist = Math.max(dr, dg, db)
+      let a = Math.max(0, Math.min(1, (dist - 26) / 46))
+      if (x > 404 || y < 70 || (x < 84 && y < 400) || (x < 215 && y < 330 && !(x > 158 && y > 78 && y < 118))) a = 0
+      a *= Math.max(0, Math.min(1, (cut - y) / 5))
+      if (a > 0.01) {
+        sd.data[j] = Math.max(0, Math.min(255, (sd.data[j] - (1 - a) * bg[0]) / a))
+        sd.data[j + 1] = Math.max(0, Math.min(255, (sd.data[j + 1] - (1 - a) * bg[1]) / a))
+        sd.data[j + 2] = Math.max(0, Math.min(255, (sd.data[j + 2] - (1 - a) * bg[2]) / a))
+      }
+      sd.data[j + 3] = a * 255
+    }
+  }
+  sx.putImageData(sd, 0, 0)
+  return { day, grey, gold, goldGlow, strider: sp, stars, noise: makeNoise() }
 }
 
 /* ---------- bodies ---------- */
@@ -300,7 +226,7 @@ function stream(ctx: Ctx, t: number, x0: number, yTop: number, yBot: number, wid
     // sand never falls evenly: it comes in pulses
     if (Math.sin(y * 0.038 - t * 13 + Math.floor(e * 3)) < -0.35 && e < 0.7) continue
     const stray = e > 0.9 ? 3.2 : 1
-    const x = x0 + b * width * stray * (0.5 + 0.5 * ph) + Math.sin(y * 0.021 + c * 6.28) * 1.4
+    const x = x0 + b * width * stray * (0.5 + 0.5 * ph) + Math.sin(y * 0.021 + c * 6.28) * 0.7
     const len = 3 + 30 * ph * Math.min(1, span / 500)
     const col = pal[Math.floor(c * pal.length)]
     const fadeTop = yTop < 0 ? Math.min(1, Math.max(0, y / 140)) : 1
@@ -387,130 +313,6 @@ function splash(ctx: Ctx, t: number, x: number, y: number, power: number, night:
   }
 }
 
-/* ---------- the arch ---------- */
-
-const ARCH_N = 11
-const ARCH_R = 168
-const ARCH_T = 56
-
-function stonePath(ctx: Ctx, i: number, lift = 0) {
-  const gap = 0.022
-  const a0 = Math.PI + (i * Math.PI) / ARCH_N + gap
-  const a1 = Math.PI + ((i + 1) * Math.PI) / ARCH_N - gap
-  const cy = GROUND - lift
-  const ro = ARCH_R + ARCH_T
-  ctx.beginPath()
-  ctx.arc(AX, cy, ARCH_R, a0, a1)
-  ctx.arc(AX, cy, ro, a1, a0, true)
-  ctx.closePath()
-}
-
-/** The arch, stone by stone from both feet up; the keystone goes in last. `built` is 0..1. */
-function arch(ctx: Ctx, built: number, night: number) {
-  if (built <= 0) return
-  const mid = (ARCH_N - 1) / 2
-  for (let i = 0; i < ARCH_N; i++) {
-    const order = i <= mid ? i : ARCH_N - 1 - i // 0 at the feet, 5 at the keystone
-    const at = order / (mid + 1.4)
-    const p = ramp(built, at, at + 0.2)
-    const tone = order / mid
-    const day = hex(C.ramp[Math.min(5, Math.round(tone * 5))])
-    const col = mix(day, mix(day, [20, 16, 34], 0.55), night)
-    if (p < 1) {
-      // not here yet: a dashed place for it
-      ctx.save()
-      stonePath(ctx, i)
-      ctx.setLineDash([7, 7])
-      ctx.strokeStyle = rgba(hex(C.gold), 0.75 * (1 - p) * Math.min(1, built * 8))
-      ctx.lineWidth = 1.6
-      ctx.stroke()
-      ctx.restore()
-    }
-    if (p <= 0) continue
-    ctx.save()
-    stonePath(ctx, i, 0)
-    ctx.globalAlpha = p
-    ctx.fillStyle = rgba(col, 1)
-    ctx.fill()
-    ctx.clip()
-    // the stone is made of the same grain
-    const r = rng(500 + i)
-    const a0 = Math.PI + (i * Math.PI) / ARCH_N
-    for (let j = 0; j < 900; j++) {
-      const a = a0 + (r() * Math.PI) / ARCH_N
-      const rad = ARCH_R + r() * ARCH_T
-      const x = AX + rad * Math.cos(a)
-      const y = GROUND + rad * Math.sin(a)
-      const outer = (rad - ARCH_R) / ARCH_T
-      const lit = Math.cos(a - (Math.PI * 1.72)) * 0.5 + 0.5
-      if (r() < 0.25 + 0.5 * lit * outer) ctx.fillStyle = rgba(night > 0.5 ? [226, 214, 240] : [255, 250, 236], (night > 0.5 ? 0.16 : 0.3) * r() + 0.06)
-      else ctx.fillStyle = rgba([20, 14, 6], 0.1 + 0.25 * r())
-      ctx.beginPath()
-      ctx.arc(x, y, 0.6 + r() * 0.9, 0, 6.2832)
-      ctx.fill()
-    }
-    ctx.restore()
-    if (p < 1) {
-      // grains gathering into the stone as it sets
-      const r2 = rng(700 + i)
-      const pal = night > 0.5 ? SAND_NIGHT : SAND_DAY
-      const am = Math.PI + ((i + 0.5) * Math.PI) / ARCH_N
-      const sx = AX + (ARCH_R + ARCH_T / 2) * Math.cos(am)
-      const sy = GROUND + (ARCH_R + ARCH_T / 2) * Math.sin(am)
-      for (let j = 0; j < 260; j++) {
-        const f = Math.pow(r2(), 0.6)
-        const spread = (1 - p) * 120 + 26
-        const x = sx + gz(r2) * spread * f + (AX - sx) * (1 - p) * f * 0.5
-        const y = sy + gz(r2) * spread * f + (GROUND - 30 - sy) * (1 - p) * f * 0.6
-        ctx.fillStyle = rgba(pal[Math.floor(r2() * pal.length)], 0.8)
-        ctx.beginPath()
-        ctx.arc(x, y, 0.8 + r2() * 1.2, 0, 6.2832)
-        ctx.fill()
-      }
-    }
-  }
-}
-
-/* ---------- the strider ---------- */
-
-function strider(ctx: Ctx, x: number, footY: number, h: number, alpha: number, shadow: number) {
-  if (alpha <= 0) return
-  const s = h / 330
-  ctx.save()
-  ctx.globalAlpha = alpha
-  // long dawn shadow, thrown toward the viewer and away from the sun
-  ctx.save()
-  ctx.translate(x, footY)
-  ctx.transform(1, 0, 1.9, -0.32, 0, 0)
-  ctx.scale(-s, s)
-  ctx.translate(-215, -604)
-  ctx.globalAlpha = alpha * shadow
-  ctx.fillStyle = "rgba(31,27,20,.5)"
-  ctx.filter = "blur(3px)"
-  figure(ctx)
-  ctx.restore()
-  ctx.translate(x, footY)
-  ctx.scale(-s, s) // mirrored: it walks toward the light
-  ctx.translate(-215, -604)
-  const g = ctx.createLinearGradient(60, 270, 380, 600)
-  g.addColorStop(0, "#3a342a")
-  g.addColorStop(1, "#0f0d09")
-  ctx.fillStyle = g
-  figure(ctx)
-  ctx.restore()
-}
-
-function figure(ctx: Ctx) {
-  ctx.beginPath()
-  ctx.arc(286, 272, 14.5, 0, 6.2832)
-  ctx.fill()
-  const p = (d: string) => ctx.fill(new Path2D(d))
-  p("M 262 297 C 276 288 293 293 293 314 L 290 398 L 246 398 C 239 368 240 328 262 297 Z") // torso
-  p("M 292 390 L 262 440 C 204 520 124 574 58 604 C 112 558 190 478 246 392 Z") // the long leg
-  p("M 262 436 L 291 388 C 332 448 362 520 373 590 C 346 530 306 472 262 440 Z") // the other leg
-  p("M 260 300 L 215 343 L 213 400 L 222 371 L 229 351 L 264 324 Z") // arm
-}
-
 /* ---------- film grain and finish ---------- */
 
 function makeNoise(): HTMLCanvasElement {
@@ -524,7 +326,7 @@ function makeNoise(): HTMLCanvasElement {
     const v = r()
     const on = v > 0.5
     img.data[i] = img.data[i + 1] = img.data[i + 2] = on ? 255 : 0
-    img.data[i + 3] = Math.abs(v - 0.5) * 2 * 22
+    img.data[i + 3] = Math.abs(v - 0.5) * 2 * 9
   }
   ctx.putImageData(img, 0, 0)
   return cv
@@ -532,7 +334,7 @@ function makeNoise(): HTMLCanvasElement {
 
 /* ---------- the painter ---------- */
 
-function paint(ctx: Ctx, t: number, land: { day: HTMLCanvasElement; night: HTMLCanvasElement; noise: HTMLCanvasElement }) {
+function paint(ctx: Ctx, t: number, land: Plates) {
   const n = nightAt(t)
   const glow = glowAt(t)
 
@@ -548,9 +350,9 @@ function paint(ctx: Ctx, t: number, land: { day: HTMLCanvasElement; night: HTMLC
   const first = 1 - landIn // the first world: the ball and the funnel
 
   // warm light low in the sky
-  if (glow > 0) {
-    const horizon = first > 0.5 ? 800 : 700
-    const sx = first > 0.5 ? 1700 : t > 27 ? AX : 420
+  if (glow > 0 && first > 0) {
+    const horizon = 800
+    const sx = 1700
     const g = ctx.createRadialGradient(sx, horizon, 0, sx, horizon, 1300)
     g.addColorStop(0, `rgba(232,196,128,${0.62 * glow})`)
     g.addColorStop(0.35, `rgba(214,160,110,${0.3 * glow})`)
@@ -560,7 +362,7 @@ function paint(ctx: Ctx, t: number, land: { day: HTMLCanvasElement; night: HTMLC
   }
 
   // stars
-  if (n > 0.3) {
+  if (n > 0.3 && first > 0) {
     const r = rng(11)
     for (let i = 0; i < 260; i++) {
       const x = r() * W, y = r() * 620, s = r(), tw = 0.6 + 0.4 * Math.sin(t * (1 + s * 2) + i)
@@ -895,160 +697,195 @@ function capHeap(ctx: Ctx, h: number, n: number) {
   }
 }
 
-/* The second world: the land, the arch, the model above it, the strider. */
-const MX = AX
-const MY = 366
+/* The second world: your land. One painting, relit. The sand lands on it and stays. */
+const MX = SX
+const MY = 318
 const MR = 37
 
-function sceneLand(ctx: Ctx, t: number, n: number, o: number, land: { day: HTMLCanvasElement; night: HTMLCanvasElement }) {
+function sceneLand(ctx: Ctx, t: number, n: number, o: number, land: Plates) {
   ctx.save()
   ctx.globalAlpha = o
 
-  const dawnSun = k(t, [[30.6, 0], [33.2, 1]])
-  // the sun comes up inside the arch
-  if (dawnSun > 0) {
-    const sy = GROUND + 60 - 150 * dawnSun
-    halo(ctx, AX, sy, 520, [246, 214, 150], 0.75 * dawnSun)
-    const sg = ctx.createRadialGradient(AX + 14, sy - 16, 4, AX, sy, 84)
-    sg.addColorStop(0, "#fff6dc")
-    sg.addColorStop(1, "#e3bf7a")
-    ctx.fillStyle = sg
-    ctx.beginPath()
-    ctx.arc(AX, sy, 84, 0, 6.2832)
-    ctx.fill()
-  }
-  // the day's sun going down at dusk
-  const dusk = win(t, 19.4, 25, 1.4)
-  if (dusk > 0) {
-    const f = ramp(t, 19.4, 24.6)
-    const sx = 430 - 130 * f, sy = 250 + 440 * f * f
-    halo(ctx, sx, sy, 420, [246, 206, 140], 0.6 * dusk)
-    const sg = ctx.createRadialGradient(sx + 10, sy - 12, 4, sx, sy, 62)
-    sg.addColorStop(0, "#fff3d6")
-    sg.addColorStop(1, "#dcae6a")
-    ctx.fillStyle = sg
-    ctx.globalAlpha = o * dusk
-    ctx.beginPath()
-    ctx.arc(sx, sy, 62, 0, 6.2832)
-    ctx.fill()
-    ctx.globalAlpha = o
+  // the land before the gold, then the gold spreading out from where the sand lands
+  const gild = ramp(t, 13.2, 19.4)
+  ctx.drawImage(gild >= 1 ? land.day : land.grey, 0, 0)
+  if (gild > 0 && gild < 1) {
+    const tmp = blank(W, H)
+    const tx = tmp.getContext("2d")!
+    tx.drawImage(land.day, 0, 0)
+    tx.globalCompositeOperation = "destination-in"
+    const rad = 60 + 2300 * gild * gild
+    const mg = tx.createRadialGradient(SX, LY, rad * 0.55, SX, LY, rad)
+    mg.addColorStop(0, "rgba(0,0,0,1)")
+    mg.addColorStop(1, "rgba(0,0,0,0)")
+    tx.fillStyle = mg
+    tx.fillRect(0, 0, W, H)
+    ctx.drawImage(tmp, 0, 0)
   }
 
-  // the land: painted once, never moved
-  ctx.globalAlpha = o
-  ctx.drawImage(land.day, 0, 0)
-  if (n > 0) {
-    ctx.globalAlpha = o * n
-    ctx.drawImage(land.night, 0, 0)
-    ctx.globalAlpha = o
-  }
-  // dusk and dawn warm the crests
+  // the light: night is the same painting under a deep sky
   const warm = glowAt(t)
-  if (warm > 0 && t > 12) {
+  if (n > 0) {
     ctx.save()
-    tracePath(ctx, LAND[0])
-    ctx.clip()
-    ctx.globalCompositeOperation = "soft-light"
-    const wg = ctx.createLinearGradient(0, 600, 0, H)
-    wg.addColorStop(0, `rgba(240,190,110,${0.7 * warm})`)
-    wg.addColorStop(1, `rgba(120,70,90,${0.5 * warm})`)
-    ctx.fillStyle = wg
-    ctx.fillRect(0, 560, W, H - 560)
+    ctx.globalCompositeOperation = "multiply"
+    ctx.globalAlpha = o * n
+    const ng = ctx.createLinearGradient(0, 0, 0, H)
+    ng.addColorStop(0, "rgb(30,26,60)")
+    ng.addColorStop(0.72, "rgb(74,62,112)")
+    ng.addColorStop(1, "rgb(40,34,72)")
+    ctx.fillStyle = ng
+    ctx.fillRect(0, 0, W, H)
     ctx.restore()
   }
-
-  const grow = ramp(t, 19, 24.4)
-  paintRich(ctx, grow, n)
-
-  // 12..19 the same sand falls again, lands, and stays
-  const pour = ramp(t, 12.2, 13) * (1 - ramp(t, 17.6, 18.3))
-  const heap = k(t, [[12.6, 0], [17.8, 1]]) * (1 - 0.35 * ramp(t, 18.2, 24))
-  const built = ramp(t, 13.6, 19)
-  const heapH = 104 * heap
-  pile(ctx, AX, GROUND + 4, heapH, n, 81)
-  if (pour > 0) {
-    stream(ctx, t, AX, -30, GROUND - heapH + 8, 15, 3400, n, 83, pour)
-    splash(ctx, t, AX, GROUND - heapH + 6, pour, n, 85)
+  if (warm > 0) {
+    // the sun sits low inside the gateway at dusk and at dawn
+    ctx.save()
+    ctx.globalCompositeOperation = "soft-light"
+    const wg = ctx.createRadialGradient(1600, 660, 0, 1600, 660, 1700)
+    wg.addColorStop(0, `rgba(255,176,96,${0.95 * warm})`)
+    wg.addColorStop(0.5, `rgba(240,150,110,${0.5 * warm})`)
+    wg.addColorStop(1, "rgba(200,120,120,0)")
+    ctx.fillStyle = wg
+    ctx.fillRect(0, 0, W, H)
+    ctx.globalCompositeOperation = "screen"
+    const sg = ctx.createRadialGradient(1600, 650, 0, 1600, 650, 620)
+    sg.addColorStop(0, `rgba(255,214,150,${0.6 * warm})`)
+    sg.addColorStop(1, "rgba(255,200,130,0)")
+    ctx.fillStyle = sg
+    ctx.fillRect(0, 0, W, H)
+    ctx.restore()
   }
-  arch(ctx, built, n)
+  if (n > 0) {
+    // the gold keeps its own light after dark
+    ctx.save()
+    ctx.globalAlpha = o * n
+    ctx.drawImage(land.gold, 0, 0)
+    ctx.globalCompositeOperation = "lighter"
+    ctx.globalAlpha = o * n * 0.85
+    ctx.drawImage(land.goldGlow, 0, 0)
+    ctx.restore()
+    for (const [x, y, s] of land.stars) {
+      const tw = 0.65 + 0.35 * Math.sin(t * (1 + s * 2) + x)
+      ctx.fillStyle = `rgba(241,236,223,${Math.max(0, (n - 0.35) / 0.65) * (0.15 + 0.7 * s * s) * tw * (1 - y / 900)})`
+      ctx.beginPath()
+      ctx.arc(x, y, 0.6 + s * 1.2, 0, 6.2832)
+      ctx.fill()
+    }
+  }
+
+  // haze at the foot of the frame while there are words on it
+  const words = win(t, 12.2, 31.2, 0.6)
+  if (words > 0) {
+    const mc = n > 0.5 ? "22,19,38" : "247,242,231"
+    const mist = ctx.createLinearGradient(0, 905, 0, H)
+    mist.addColorStop(0, `rgba(${mc},0)`)
+    mist.addColorStop(0.6, `rgba(${mc},${0.9 * words})`)
+    mist.addColorStop(1, `rgba(${mc},${0.96 * words})`)
+    ctx.fillStyle = mist
+    ctx.fillRect(0, 905, W, H - 905)
+  }
+
+  // 12..19 the same sand falls again, lands on the road, and stays
+  const pour = ramp(t, 12.2, 13) * (1 - ramp(t, 17.8, 18.5))
+  const heap = k(t, [[12.6, 0], [18, 1]])
+  const heapH = 74 * heap
+  // its shadow on the road
+  if (heapH > 2) {
+    ctx.save()
+    ctx.filter = "blur(8px)"
+    ctx.fillStyle = `rgba(31,27,20,${0.3 * (1 - n * 0.5)})`
+    ctx.beginPath()
+    ctx.ellipse(SX - heapH * 0.5, LY + 5, heapH * 1.9, heapH * 0.16, 0, 0, 6.2832)
+    ctx.fill()
+    ctx.restore()
+  }
+  if (n > 0.2 && heapH > 2) halo(ctx, SX, LY - heapH * 0.4, heapH * 3.2, [232, 205, 150], 0.3 * n)
+  pile(ctx, SX, LY + 4, heapH, n, 81)
+  if (pour > 0) {
+    stream(ctx, t, SX, -30, LY - heapH + 8, 13, 3600, n, 83, pour)
+    splash(ctx, t, SX, LY - heapH + 6, pour, n, 85)
+  }
 
   // 19.. the model: one small gold ball, and the thin thread it takes
-  const model = ramp(t, 18.6, 20)
-  const swap = ramp(t, 26.6, 29.2) // 0 gold in the seat, 1 the new one in the seat
+  const model = ramp(t, 18.8, 20.2)
   const out = k(t, [[26.5, 0], [29.0, 1]])
   const inn = k(t, [[26.9, 0], [29.8, 1]])
   if (model > 0) {
-    const top = GROUND - ARCH_R - ARCH_T
-    // the seat: a fine ring that stays where the model sits
-    ctx.strokeStyle = rgba(n > 0.5 ? [232, 205, 150] : hex(C.goldInk), 0.55 * model)
-    ctx.lineWidth = 1.3
+    const top = LY - heapH + 4
+    const lineC: RGB = n > 0.5 ? [232, 205, 150] : hex(C.goldInk)
+    ctx.strokeStyle = rgba(lineC, 0.6 * model)
+    ctx.lineWidth = 1.4
     ctx.setLineDash([2, 7])
     ctx.beginPath()
     ctx.arc(MX, MY, MR + 16, 0, 6.2832)
     ctx.stroke()
     ctx.setLineDash([])
-    // the thread: a few grains at a time, rising from the keystone
     const taking = model * (1 - win(t, 26.9, 29.4, 0.5) * 0.85)
     const r = rng(95)
     const pal = n > 0.5 ? SAND_NIGHT : SAND_DAY
     if (n > 0.2) {
+      ctx.save()
       const tg = ctx.createLinearGradient(0, MY + MR, 0, top)
-      tg.addColorStop(0, `rgba(232,205,150,${0.5 * n * taking})`)
-      tg.addColorStop(1, `rgba(232,205,150,${0.12 * n * taking})`)
+      tg.addColorStop(0, `rgba(232,205,150,${0.45 * n * taking})`)
+      tg.addColorStop(1, `rgba(232,205,150,${0.2 * n * taking})`)
       ctx.strokeStyle = tg
-      ctx.lineWidth = 5
-      ctx.filter = "blur(4px)"
+      ctx.lineWidth = 6
+      ctx.filter = "blur(5px)"
       ctx.beginPath()
       ctx.moveTo(MX, MY + MR + 16)
       ctx.lineTo(MX, top)
       ctx.stroke()
-      ctx.filter = "none"
+      ctx.restore()
     }
-    for (let i = 0; i < 150; i++) {
-      const a = r(), b = gz(r), c = r()
-      if (c > taking) continue
-      const ph = (a + t * 0.35) % 1
-      const y = top - (top - MY - MR - 16) * ph
-      ctx.fillStyle = rgba(pal[Math.floor(r() * pal.length)], 0.9)
-      ctx.beginPath()
-      ctx.arc(MX + b * 2.2, y, 0.9 + r() * 1.2, 0, 6.2832)
-      ctx.fill()
-    }
-    ctx.strokeStyle = rgba(n > 0.5 ? [232, 205, 150] : hex(C.goldInk), 0.5 * taking)
+    ctx.strokeStyle = rgba(lineC, 0.55 * taking)
     ctx.lineWidth = 1
     ctx.beginPath()
     ctx.moveTo(MX, MY + MR + 16)
     ctx.lineTo(MX, top)
     ctx.stroke()
+    for (let i = 0; i < 420; i++) {
+      const a = r(), b = gz(r), c = r(), e = r()
+      if (c > taking * (0.4 + 0.6 * n)) continue
+      const ph = (a + t * 0.3) % 1
+      const y = top - (top - MY - MR - 16) * ph
+      ctx.fillStyle = rgba(pal[Math.floor(e * pal.length)], 0.92)
+      ctx.beginPath()
+      ctx.arc(MX + b * 2.4, y, 0.9 + e * 1.3, 0, 6.2832)
+      ctx.fill()
+    }
 
     // the gold ball: in the seat, then lifted out up and to the right
-    const gx = MX + 560 * out * out
-    const gy = MY - 330 * Math.pow(out, 1.4)
-    const goldA = model * (1 - ramp(out, 0.82, 1))
+    const gx = MX + 420 * out * out
+    const gy = MY - 250 * Math.pow(out, 1.4)
+    const goldA = model * (1 - ramp(out, 0.84, 1))
     if (goldA > 0) {
-      if (out > 0.02) trail(ctx, MX, MY, gx, gy, [232, 205, 150], 0.5 * goldA * Math.min(1, out * 4))
+      if (out > 0.02) trail(ctx, MX, MY, gx, gy, [232, 205, 150], 0.55 * goldA * Math.min(1, out * 4))
       halo(ctx, gx, gy, MR * (3.4 + 2 * n), [232, 205, 150], (0.3 + 0.35 * n) * goldA)
-      orb(ctx, gx, gy, MR * (1 - 0.12 * out), "gold", 97, goldA)
+      orb(ctx, gx, gy, MR * (1 - 0.1 * out), "gold", 97, goldA)
     }
-    // the different ball: it comes down from the upper left into the same seat
+    // the different ball: down from the upper left into the same seat
     if (inn > 0) {
       const e = 1 - Math.pow(1 - inn, 2.2)
-      const px = MX - 520 * (1 - e) * (1 - e)
-      const py = MY - 300 * Math.pow(1 - e, 1.5)
+      const px = MX - 560 * (1 - e) * (1 - e)
+      const py = MY - 230 * Math.pow(1 - e, 1.5)
       const pa = ramp(inn, 0, 0.2)
-      if (inn < 0.98) trail(ctx, MX - 520, MY - 300, px, py, [214, 200, 240], 0.45 * pa * (1 - inn))
-      halo(ctx, px, py, MR * 4.6, [214, 200, 240], 0.42 * pa * Math.max(n, 0.4))
+      if (inn < 0.98) trail(ctx, MX - 560, MY - 230, px, py, [214, 200, 240], 0.5 * pa * (1 - inn))
+      halo(ctx, px, py, MR * 4.6, [214, 200, 240], 0.42 * pa * Math.max(n, 0.35))
       orb(ctx, px, py, MR * 1.06, "pearl", 99, pa)
     }
-    void swap
   }
 
   // 31.. the strider crosses the finished land toward the light
-  const walk = ramp(t, 30.8, 34.6)
-  const st = ramp(t, 30.8, 31.8)
+  const st = ramp(t, 30.9, 32)
   if (st > 0) {
-    const sx = 330 + 300 * walk
-    strider(ctx, sx, LAND[2](sx) + 10, 236, st, dawnSun)
+    const walk = ramp(t, 30.9, 34.8)
+    const s = 0.82
+    const fx = 470 + 150 * walk
+    const fy = 992 - 16 * walk
+    ctx.save()
+    ctx.globalAlpha = o * st
+    ctx.drawImage(land.strider, fx - 215 * s, fy - 478 * s, 520 * s, 520 * s)
+    ctx.restore()
   }
   ctx.restore()
 }
@@ -1069,8 +906,8 @@ function trail(ctx: Ctx, x0: number, y0: number, x1: number, y1: number, c: RGB,
 
 /* ---------- the film ---------- */
 
-const Big = ({ o, top, color, italic = false, children, size = 92 }: { o: number; top: number; color: string; italic?: boolean; children: string; size?: number }) => (
-  <div style={{ position: "absolute", left: 0, right: 0, top, textAlign: "center", fontFamily, fontWeight: 500, fontStyle: italic ? "italic" : "normal", fontSize: size, lineHeight: 1.1, letterSpacing: "-0.01em", color, opacity: o }}>
+const Big = ({ o, top, color, italic = false, children, size = 92, left }: { o: number; top: number; color: string; italic?: boolean; children: string; size?: number; left?: number }) => (
+  <div style={{ position: "absolute", left: left ?? 0, right: 0, top, textAlign: left === undefined ? "center" : "left", fontFamily, fontWeight: 500, fontStyle: italic ? "italic" : "normal", fontSize: size, lineHeight: 1.1, letterSpacing: "-0.01em", color, opacity: o }}>
     {children}
   </div>
 )
@@ -1080,16 +917,33 @@ export const Film = () => {
   const { width: vw } = useVideoConfig()
   const fit = vw / W
   const ref = useRef<HTMLCanvasElement>(null)
-  const land = useMemo(() => ({ day: paintLand(false), night: paintLand(true), noise: makeNoise() }), [])
+  const [land, setLand] = useState<Plates | null>(null)
+  const [handle] = useState(() => delayRender("paintings"))
+  const released = useRef(false)
+
+  useEffect(() => {
+    const load = (src: string) =>
+      new Promise<HTMLImageElement>((res, rej) => {
+        const im = new Image()
+        im.onload = () => res(im)
+        im.onerror = rej
+        im.src = src
+      })
+    Promise.all([load(staticFile("art/land.png")), load(staticFile("art/strider-src.png"))]).then(([a, b]) => setLand(buildPlates(a, b)))
+  }, [])
 
   useLayoutEffect(() => {
     const ctx = ref.current?.getContext("2d")
-    if (!ctx) return
+    if (!ctx || !land) return
     ctx.setTransform(1, 0, 0, 1, 0, 0)
     ctx.globalAlpha = 1
     ctx.clearRect(0, 0, W, H)
     paint(ctx, t, land)
-  }, [t, land])
+    if (!released.current) {
+      released.current = true
+      continueRender(handle)
+    }
+  }, [t, land, handle])
 
   const n = nightAt(t)
   const dark = n > 0.5
@@ -1121,9 +975,9 @@ export const Film = () => {
         })}
 
         {/* the close: the page headline, word for word */}
-        <Big o={win(t, 31.4, 34.5, 0.6)} top={84} color={C.ink}>The model changes.</Big>
-        <Big o={win(t, 32.2, 34.5, 0.6)} top={190} color={C.goldInk} italic>The memory is yours.</Big>
-        <div style={{ position: "absolute", left: 0, right: 0, bottom: "7%", textAlign: "center", fontFamily, fontWeight: 500, fontSize: 30, letterSpacing: "0.24em", color: C.ink, opacity: win(t, 32.8, 34.5, 0.6) * 0.85, textShadow: "0 0 14px rgba(250,247,240,1)" }}>LONGSTRIDER</div>
+        <Big o={win(t, 31.4, 34.5, 0.6)} top={140} left={140} color={C.ink} size={80}>The model changes.</Big>
+        <Big o={win(t, 32.2, 34.5, 0.6)} top={236} left={140} color={C.goldInk} italic size={80}>The memory is yours.</Big>
+        <div style={{ position: "absolute", left: 146, top: 368, fontFamily, fontWeight: 500, fontSize: 30, letterSpacing: "0.24em", color: C.ink, opacity: win(t, 32.8, 34.5, 0.6) * 0.85, textShadow: "0 0 14px rgba(250,247,240,1)" }}>LONGSTRIDER</div>
       </div>
     </AbsoluteFill>
   )
