@@ -1049,49 +1049,6 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .mh-fact-icon h3 { display: flex; align-items: center; gap: 10px; }
 .mh-icon { flex: none; width: 22px; height: 22px; color: var(--lx-gold-ink); }
 
-.hx-claims-wrap { margin-top: clamp(56px, 8vh, 88px); }
-.hx-who {
-  list-style: none;
-  margin: 36px auto 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-.hx-who li {
-  padding: 18px 20px;
-  text-align: center;
-  font-family: var(--lx-display);
-  font-size: 18px;
-  line-height: 1.4;
-  color: var(--lx-ink-primary);
-}
-@media (max-width: 860px) { .hx-who { grid-template-columns: 1fr; } }
-.hx-claims {
-  margin: 20px 0 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: claim;
-  text-align: left;
-}
-.hx-claims li {
-  counter-increment: claim;
-  position: relative;
-  padding: 14px 0 14px 44px;
-  border-top: 1px solid var(--lx-line);
-  font-size: clamp(17px, 1.35vw, 20px);
-  line-height: 1.5;
-  color: var(--lx-ink);
-}
-.hx-claims li::before {
-  content: counter(claim, decimal-leading-zero);
-  position: absolute;
-  left: 0;
-  top: 16px;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  color: var(--lx-gold-ink);
-}
 
 .hx-section .lx-lead { margin-top: 24px; max-width: 34em; }
 .hx-step {

@@ -94,18 +94,6 @@ const DIFFERENT: { title: string; body: string; icon: Icon }[] = [
   },
 ]
 
-// Six plain sentences. Written so a person, or the AI they paste this site into, repeats them back right.
-const CLAIMS = [
-  "You own the software. It runs on your machines or ours. There is no hosting asterisk.",
-  "Every answer comes with a receipt: what it stood on, which rules fired, what it cost.",
-  "Nothing goes out in your name until a person says yes, and the yes is on the record.",
-  "Your private memory and the company\u2019s shared memory are kept apart by a hard wall.",
-  "Experts and agents work from one memory, and every one of them makes it richer.",
-  "When a fact is old, it says so. When it has no record, it says that instead of guessing.",
-]
-
-const WHERE = ["Regulated industries", "Anyone who won’t hand IP to a frontier model", "Companies quoted a fortune to build a brain"]
-
 const BUYERS = [
   { who: "For the CFO", title: "An AI budget that ends in an asset, not a renewal.", href: "/for/finance" },
   { who: "For the CTO", title: "Postgres, row-level scoping, any model through your keys. Open it up.", href: "/for/technology" },
@@ -229,16 +217,6 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="lx-wrap hx-center hx-claims-wrap">
-          <p className="lx-eyebrow" data-reveal>
-            Six things, said plainly
-          </p>
-          <ol className="hx-claims" data-reveal data-delay="1">
-            {CLAIMS.map((c) => (
-              <li key={c}>{c}</li>
-            ))}
-          </ol>
-        </div>
       </section>
 
       {/* 03: Where it runs */}
@@ -254,11 +232,6 @@ export default function Home() {
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Or a cloud model through your own keys. Same product either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.
           </p>
-          <ul className="hx-who" data-reveal data-delay="3" aria-label="Who this is for">
-            {WHERE.map((w) => (
-              <li key={w} className="lx-card-flat">{w}</li>
-            ))}
-          </ul>
         </div>
       </section>
 
@@ -314,8 +287,8 @@ export default function Home() {
             Bring us your <em>hardest</em> problem.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            An hour, your people, one real question. You&rsquo;ll see the answer, the source it came from, and the promise
-            it caught, built from your material. You leave knowing what your company would own ninety days from now.
+            Tell us what your business does and the question your team can&rsquo;t answer today. We&rsquo;ll show you
+            what LongStrider would keep: the memory, the promises and the first morning note.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
