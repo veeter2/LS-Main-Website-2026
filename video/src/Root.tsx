@@ -10,6 +10,7 @@ export const Root = () => (
   <>
     <Composition id="hero" component={Hero} durationInFrames={frames} fps={FPS} width={1920} height={1080} />
     <Composition id="film" component={Film} durationInFrames={Math.round(FILM_SECONDS * FILM_FPS)} fps={FILM_FPS} width={1920} height={1080} />
+    <Composition id="film720" component={Film} defaultProps={{ phone: true }} durationInFrames={Math.round(FILM_SECONDS * FILM_FPS)} fps={FILM_FPS} width={1280} height={720} />
     <Composition id="hero720" component={Hero} durationInFrames={frames} fps={FPS} width={1280} height={720} />
   </>
 )

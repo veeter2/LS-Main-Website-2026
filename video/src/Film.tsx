@@ -22,9 +22,11 @@ const DISPLAY = { fontFamily, fontWeight: 400, letterSpacing: "-0.022em", lineHe
  */
 export const CAPTIONS: { at: number; to: number; text: string }[] = [
   { at: 3, to: 8, text: "Most AI keeps it with the model." },
-  { at: 8, to: 12, text: "A chat box forgets by morning." },
+  { at: 8, to: 12, text: "Change the model, and you start over." },
   { at: 12, to: 19, text: "LongStrider keeps it with you." },
-  { at: 19, to: 26, text: "It compounds. The model gets only what the question needs." },
+  // one line, said in two breaths, so each stays short enough to read on a phone
+  { at: 19, to: 22.2, text: "It compounds." },
+  { at: 22.2, to: 26, text: "The model gets only what the question needs." },
   { at: 26, to: 31, text: "Change the model. Keep everything." },
 ]
 
@@ -116,7 +118,8 @@ const Big = ({ o, top, color, children, size = 92 }: { o: number; top: number; c
   <div style={{ position: "absolute", left: 0, right: 0, top, textAlign: "center", ...DISPLAY, fontSize: size, color, opacity: o }}>{children}</div>
 )
 
-export const Film = () => {
+/** `phone` sets the captions larger: the phone file is shown about 360 pixels wide. */
+export const Film = ({ phone = false }: { phone?: boolean }) => {
   const t = useCurrentFrame() / FILM_FPS
   const { width: vw } = useVideoConfig()
   const fit = vw / W
@@ -181,7 +184,7 @@ export const Film = () => {
             <div
               key={c.at}
               style={{
-                position: "absolute", left: "8%", right: "8%", bottom: "6.5%", textAlign: "center", ...DISPLAY, fontSize: 54, letterSpacing: "-0.015em", lineHeight: 1.2,
+                position: "absolute", left: "4%", right: "4%", bottom: phone ? "5%" : "6.5%", textAlign: "center", ...DISPLAY, fontSize: phone ? 76 : 54, letterSpacing: "-0.015em", lineHeight: 1.2, whiteSpace: "nowrap",
                 color: wordC, opacity: o, transform: `translateY(${rise}px)`, padding: "14px 32px",
                 textShadow: `0 0 18px rgba(${padC},1), 0 0 6px rgba(${padC},.9)`,
               }}

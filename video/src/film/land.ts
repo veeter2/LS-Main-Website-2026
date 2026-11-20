@@ -292,7 +292,27 @@ export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) 
     ctx.restore()
     if (n > 0.2) halo(ctx, SX, LY - heapH * 0.4, heapH * 3.2, [232, 205, 150], 0.3 * n * (0.94 + 0.06 * Math.sin(t * 1.3)))
   }
-  pile(ctx, SX, LY + 4, heapH, n, 81, Math.max(0, Math.min(t, 26.6) - 13.35))
+  // at dawn the heap catches the first light: the richest gold in the film
+  const rich = ramp(t, 30.4, 32.6)
+  if (rich > 0) halo(ctx, SX, LY - heapH * 0.45, heapH * 3.4, [255, 214, 130], 0.34 * rich * (1 - n))
+  pile(ctx, SX, LY + 4, heapH, n, 81, Math.max(0, Math.min(t, 26.6) - 13.35), rich)
+  if (rich > 0) {
+    // glints on the sunward face
+    const gr = rng(211)
+    ctx.save()
+    ctx.globalCompositeOperation = "lighter"
+    const hw = heapH / Math.tan((33 * Math.PI) / 180)
+    for (let i = 0; i < 46; i++) {
+      const u = gr(), v = gr(), ph = gr() * 6.28, sp = 1.4 + gr() * 2.2
+      const gx = SX + u * hw * 0.9, gy = LY + 2 - heapH * (1 - u) * (0.15 + 0.8 * v)
+      const tw = Math.pow(Math.max(0, Math.sin(t * sp + ph)), 6)
+      ctx.fillStyle = `rgba(255,244,210,${0.9 * tw * rich})`
+      ctx.beginPath()
+      ctx.arc(gx, gy, 1 + 1.6 * tw, 0, 6.2832)
+      ctx.fill()
+    }
+    ctx.restore()
+  }
   if (head > 0 && tail < 1) stream(ctx, t, SX, -30, top + 4, 12, 6400, n, 83, 1, { head, tail, sway: 1.5 })
   splash(ctx, t, SX, top + 2, win(t, 13.35, 19.25, 0.25), n, 85)
   // "It grows": a finer fall keeps arriving on the wind while the model takes only a thread

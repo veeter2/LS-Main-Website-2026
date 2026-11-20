@@ -189,6 +189,19 @@ export function sceneOne(ctx: Ctx, t: number, n: number, o: number) {
     const dayBall = 1 - n
     orb(ctx, BX, BY, BR, "night", 21, 1)
     if (dayBall > 0) orb(ctx, BX, BY, BR, "ink", 22, dayBall)
+    // in the morning the model itself is changed for another: a new ball in the same place, and it knows nothing
+    const swap = ramp(t, 9.2, 10.3)
+    if (swap > 0) {
+      orb(ctx, BX, BY, BR, "pearl", 23, swap)
+      const f = (t - 9.5) / 1.1
+      if (f > 0 && f < 1) {
+        ctx.strokeStyle = `rgba(126,94,38,${0.55 * (1 - f) * (1 - f)})`
+        ctx.lineWidth = 1.8
+        ctx.beginPath()
+        ctx.arc(BX, BY, BR + 10 + 120 * (1 - (1 - f) * (1 - f)), 0, 6.2832)
+        ctx.stroke()
+      }
+    }
     if (strain > 0 || full > 0) {
       // the load glowing inside it, from the top down
       ctx.save()
