@@ -73,7 +73,7 @@ const BEATS = [
   { title: "Every door", body: "Chat, your connected systems (anything with an API or an MCP server), documents, dropped files, and what your teammates find. Not five silos. One memory." },
   { title: "Nothing lands raw", body: "Each thing that comes in is broken into dated, sourced facts, filed into the right topic on its own, linked to what agrees, flagged against what contradicts, and judged before it is trusted." },
   { title: "Two clocks", body: "By day, every door feeds the memory as you work, and each new fact is filed within minutes. By night, it reads what the day brought, links it to what it already knew, merges topics, finds what contradicts, and writes down what it learned about your business. You come in to a company that knows more than it did yesterday. Nobody taught it." },
-  { title: "It compounds", body: "Tomorrow\u2019s answer stands on today\u2019s facts. The expert\u2019s rules, the agent\u2019s findings, the morning letter, the promise due today all come from the same memory, and every one of them makes it richer. A chat box starts at zero every morning. This starts where it left off." },
+  { title: "It compounds", body: "Tomorrow\u2019s answer stands on today\u2019s facts. The expert\u2019s rules, the agent\u2019s findings, the morning letter, the promise due today all come from the same memory, and every one of them makes it richer. A chat box keeps its memory with the model, and it stays behind when you change the model. This starts where it left off." },
   { title: "Two books", body: "Yours and the company\u2019s. Your private connectors and drops feed your memory, and nobody else sees it. Shared sources feed the company\u2019s memory, which everyone works from. Same system, hard wall between them." },
   { title: "The model never holds it", body: "Swap the model. The memory does not move." },
 ]
@@ -369,7 +369,7 @@ export default function ProductConcept() {
           ))}
         </div>
         <p className="lx-wrap lx-display cx-close" data-reveal>
-          <span className="cx-dim">A chat box forgets by morning.</span>
+          <span className="cx-dim">Change the model, and a chat box starts over.</span>
           <span className="cx-lit">The memory remembers for the company.</span>
         </p>
       </section>
