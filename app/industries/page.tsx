@@ -97,7 +97,7 @@ const VERTICALS: Vertical[] = [
       },
     ],
     owns: "The method, as it\u2019s actually practiced. Every client\u2019s history, with the promises kept and the ones that weren\u2019t. A new hire\u2019s first week that starts where the last person\u2019s left off.",
-    signs: "The COO or head of delivery. The managing partner signs. In a 60-person firm that\u2019s often the same two people in one room, which is why the working session is an hour.",
+    signs: "The COO or head of delivery. The managing partner signs. In a 60-person firm that\u2019s often the same two people in one room, which is why the first call is short.",
   },
 ]
 
@@ -117,7 +117,7 @@ export default function IndustriesConcept() {
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book a working session <span className="lx-arrow" aria-hidden>→</span>
+                Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
             </div>
             <nav className="in-jump" data-rise="4" aria-label="Industries on this page">
@@ -186,16 +186,15 @@ export default function IndustriesConcept() {
             Bring the case that keeps you up at <em>night</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            A working session with your people and one real question from your business: a claim, a matter, an engagement.
-            You&rsquo;ll see what LongStrider would keep, and what your company would own, on a license you hold rather
-            than a seat you rent.
+            Tell us what you do and bring one real question: a claim, a matter, an engagement. You&rsquo;ll see what
+            LongStrider would keep, and what your company would own, on a license you hold rather than a seat you rent.
           </p>
           <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
             Your people will use AI either way. The question is whether it happens inside your walls, on your record, or in a chat box you don&rsquo;t control. This is the approved tool.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Where it runs, and who owns it

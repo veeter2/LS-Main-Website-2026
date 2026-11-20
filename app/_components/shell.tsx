@@ -69,8 +69,8 @@ export function ConceptShell({ children }: { children: ReactNode }) {
           </nav>
           <div className="lx-bar-cta">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              <span className="lx-long">Book a working session</span>
-              <span className="lx-short">Book a session</span>
+              <span className="lx-long">Talk to us</span>
+              <span className="lx-short">Talk to us</span>
               <span className="lx-arrow" aria-hidden>→</span>
             </Link>
           </div>

@@ -53,7 +53,7 @@ export function SiteFooter() {
             yours. No trackers on this site.
           </p>
           <Link className="lx-btn lx-btn-primary sf-cta" href="/book">
-            Book a working session <span className="lx-arrow" aria-hidden>&rarr;</span>
+            Talk to us <span className="lx-arrow" aria-hidden>&rarr;</span>
           </Link>
         </div>
         <div className="sf-cols">

@@ -15,7 +15,7 @@ const OPTIONS: Option[] = [
     id: "private",
     label: "Private cloud",
     status: "Private cloud, built with you.",
-    body: "The engine inside your VPC, on your servers, inside your perimeter. Scoped and priced in the working session.",
+    body: "The engine inside your VPC, on your servers, inside your perimeter. Scoped and priced with you, in writing.",
   },
   {
     id: "onprem",

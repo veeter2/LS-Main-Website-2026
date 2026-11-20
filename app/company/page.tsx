@@ -57,7 +57,7 @@ export default function CompanyConcept() {
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book a working session <span className="lx-arrow" aria-hidden>→</span>
+                Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <Link className="lx-btn lx-btn-ghost" href="/manifesto">
                 Read the manifesto
@@ -185,11 +185,11 @@ export default function CompanyConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
             We work closely with a small number of companies at a time. If you want to own what your company learns, start
-            with a working session.
+            with a call.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/manifesto">
               Read the manifesto

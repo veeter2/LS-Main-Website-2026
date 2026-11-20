@@ -37,7 +37,7 @@ export default function ForYourAI() {
               Copy a prompt <span className="lx-arrow" aria-hidden>→</span>
             </a>
             <Link className="lx-btn lx-btn-ghost" href="/book">
-              Or book a working session
+              Or talk to us
             </Link>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function ForYourAI() {
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/product">
               What it does

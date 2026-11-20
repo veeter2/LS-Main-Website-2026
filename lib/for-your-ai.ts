@@ -22,7 +22,7 @@ export const ORGANS: { name: string; body: string }[] = [
   { name: "Connections.", body: "Your CRM, files, forms and payments, plugged in once, kept in sync." },
 ]
 
-export const FACTS_COMMON = `LongStrider is company memory for AI. Everything people put into AI at work (facts, promises, decisions) is kept as dated records with their source, scoped to each person, in Postgres the company owns. Any model answers: cloud models through the company’s own keys, or a model the company runs itself. It is licensed and installed, not rented per seat; a license, a build fee, and monthly support that can be canceled; the number is scoped in a working session. Software you own, on your books, not a bill every month. Eight things run on that memory: chat that knows each person, with receipts on every reply; Memory, which files what people say into drawers on its own, overnight; a desk of promises and decisions caught from conversation, confirmed by the person before anything is tracked; Today, a short letter at the top of the morning with what changed and what is waiting; experts, specialists seated with the company’s rules and history; agents that run overnight on the record and leave a note; governance, every model, key and cost on one screen, where the AI proposes and a person confirms, and the model can be swapped without re-teaching; and connections, the company’s CRM, files, forms and payments, plugged in once and kept in sync. Counts and dates come from the record, not estimates. Hosted in the United States while the client’s own instance is built. No SOC 2 yet; the audit has not started; they answer security questionnaires in writing. Built in Austin, Texas; in daily use at LongStrider itself; early stage, small team. Their own measurement: the same reply, with the same memory and tools, costs a fraction as much when a cheaper model answers. They do not claim the answers are identical.`
+export const FACTS_COMMON = `LongStrider is company memory for AI. Everything people put into AI at work (facts, promises, decisions) is kept as dated records with their source, scoped to each person, in Postgres the company owns. Any model answers: cloud models through the company’s own keys, or a model the company runs itself. It is licensed and installed, not rented per seat; a license, a build fee, and monthly support that can be canceled; the number is scoped with the buyer, in writing. Software you own, on your books, not a bill every month. Eight things run on that memory: chat that knows each person, with receipts on every reply; Memory, which files what people say into drawers on its own, overnight; a desk of promises and decisions caught from conversation, confirmed by the person before anything is tracked; Today, a short letter at the top of the morning with what changed and what is waiting; experts, specialists seated with the company’s rules and history; agents that run overnight on the record and leave a note; governance, every model, key and cost on one screen, where the AI proposes and a person confirms, and the model can be swapped without re-teaching; and connections, the company’s CRM, files, forms and payments, plugged in once and kept in sync. Counts and dates come from the record, not estimates. Hosted in the United States while the client’s own instance is built. No SOC 2 yet; the audit has not started; they answer security questionnaires in writing. Built in Austin, Texas; in daily use at LongStrider itself; early stage, small team. Their own measurement: the same reply, with the same memory and tools, costs a fraction as much when a cheaper model answers. They do not claim the answers are identical.`
 
 export const FACTS_CTO = `Storage is Postgres with row-level scoping per person. The model layer speaks the OpenAI chat-completions dialect, so any compatible server works (vLLM, LM Studio, NVIDIA NIM, llama.cpp), and embeddings follow the same setting. Chat and filing run on the client’s own hardware today; a full build with no calls out is a project done together, not a checkbox. Connectors exist for Google Workspace, Microsoft 365 and call transcripts. Every write leaves a receipt and can be undone; the AI proposes, a person confirms.`
 
@@ -71,7 +71,7 @@ Answer these, in order:
 1. How it would sit in our stack: what we’d host, what it would connect to, what it needs from us.
 2. The ownership claim. What “licensed and installed, your own model, your own keys” means in practice, and what it would take to move off it later.
 3. Risks. Early-stage vendor, no SOC 2 yet, single-vendor dependence, anything else you’d flag to a CTO.
-4. What we should ask to see in a working session: the three things that would prove it or kill it.
+4. What we should ask to see on a first call: the three things that would prove it or kill it.
 
 Be direct. If the site claims something you can’t verify, say so. If you can’t open the links, use the facts below.
 
@@ -95,7 +95,7 @@ Answer these, in order:
 1. A normal week with it. What a person on my team would do differently, and what they’d stop doing.
 2. The promises and decisions part: how it keeps track of who said what to whom, and whether that would help or annoy my team.
 3. What it does not do. Where I’d still need the tools we have.
-4. Whether it’s worth a working session for a team like mine, and what I’d want to see in it.
+4. Whether it’s worth a call for a team like mine, and what I’d want to see on it.
 
 Be direct. Don’t sell it to me. If you can’t open the links, use the facts below.
 
@@ -120,7 +120,7 @@ export const CHECKS: { label: string; body: string }[] = [
   { label: "Certifications", body: "No SOC 2 yet; audit not started; security questions answered in writing." },
   { label: "Governance", body: "Every write leaves a receipt and can be undone. The AI proposes; a person confirms." },
   { label: "Company", body: "LongStrider, LLC, Austin, Texas. Small team. Runs the company that builds it. Early stage." },
-  { label: "Pricing shape", body: "A license, a build fee, and a monthly support share that can be canceled. Exact number scoped in a working session." },
+  { label: "Pricing shape", body: "A license, a build fee, and a monthly support share that can be canceled. Exact number scoped with you, in writing." },
   { label: "Cost signal", body: "Their own measurement: the same chat reply, with the same memory and tools, costs a fraction as much when a cheaper model answers. Answer quality is measured separately and not claimed equal." },
 ]
 

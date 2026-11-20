@@ -106,7 +106,7 @@ async function emailLead(lead: Lead): Promise<boolean> {
   if (!RESEND_KEY) return false
   const name = `${lead.first_name} ${lead.last_name}`
   const text = [
-    `${name} at ${lead.company} booked a working session.`,
+    `${name} at ${lead.company} wants to talk.`,
     ``,
     `Email: ${lead.email}`,
     `Company: ${lead.company}`,
@@ -115,7 +115,7 @@ async function emailLead(lead: Lead): Promise<boolean> {
     `Their question:`,
     lead.question || "(none given)",
   ].join("\n")
-  const html = `<p><b>${escapeHtml(name)}</b> at <b>${escapeHtml(lead.company)}</b> booked a working session.</p>
+  const html = `<p><b>${escapeHtml(name)}</b> at <b>${escapeHtml(lead.company)}</b> wants to talk.</p>
 <p>Email: <a href="mailto:${escapeHtml(lead.email)}">${escapeHtml(lead.email)}</a><br>Page: ${escapeHtml(lead.page || "unknown")}</p>
 <p><b>Their question</b></p>
 <p>${escapeHtml(lead.question || "(none given)").replace(/\n/g, "<br>")}</p>`
@@ -127,7 +127,7 @@ async function emailLead(lead: Lead): Promise<boolean> {
       from: LEAD_FROM,
       to: [LEAD_TO],
       reply_to: lead.email,
-      subject: `Working session: ${name}, ${lead.company}`,
+      subject: `New lead: ${name}, ${lead.company}`,
       text,
       html,
     }),

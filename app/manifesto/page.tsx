@@ -347,12 +347,12 @@ export default function ManifestoConcept() {
             Bring us your <em>hardest</em> problem.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            If you recognize your organization in these pages, start with a working session: your people, a real question,
+            If you recognize your organization in these pages, start with a call: what you do, a real question,
             and what you&rsquo;d own ninety days from now.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="3">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/product">
               See what it does

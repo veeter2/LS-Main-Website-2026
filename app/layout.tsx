@@ -17,7 +17,7 @@ const BASE_URL = "https://www.longstrider.ai"
 const OG_IMAGE = `${BASE_URL}/og-default.jpg`
 const TITLE = "LongStrider · The AI memory your company owns"
 const DESCRIPTION =
-  "Every fact, promise and decision your team puts into AI, kept with its source and owned by your company. Works with any model. Book a working session."
+  "Every fact, promise and decision your team puts into AI, kept with its source and owned by your company. Works with any model. Talk to us."
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -117,7 +117,7 @@ const JSONLD = {
         "Overnight pass that links repeats and flags conflicts",
         "Licensed and installed, not rented per seat",
       ],
-      offers: { "@type": "Offer", description: "Licensed software you own, plus a build and monthly support you can cancel. Scoped in a working session." },
+      offers: { "@type": "Offer", description: "Licensed software you own, plus a build and monthly support you can cancel. Scoped with you, in writing." },
     },
     {
       "@type": "WebSite",

@@ -86,7 +86,7 @@ export default function ForFinance() {
         questions: [
           {
             q: "How is it priced?",
-            a: "As software you own, not seats you rent. A license and a one-time build fee, which depend on where it runs and what we connect, then a monthly support share you can cancel any time. No per-seat meter. The model bill is yours, through your own keys or your own hardware, so you see it and you choose it. We scope all of it in the working session, and you’ll have a number before you leave.",
+            a: "As software you own, not seats you rent. A license and a one-time build fee, which depend on where it runs and what we connect, then a monthly support share you can cancel any time. No per-seat meter. The model bill is yours, through your own keys or your own hardware, so you see it and you choose it. We scope all of it with you, and you’ll have a number in writing before anything starts.",
           },
           {
             q: "Operating cost or capital?",

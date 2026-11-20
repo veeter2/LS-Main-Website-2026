@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMeta(
 
 /**
  * Pricing: the shape and the ranges, in writing, before anyone books a call.
- * Final numbers come out of the working session; nothing here is a quote.
+ * Final numbers come out of scoping; nothing here is a quote.
  */
 
 const TIERS = [
@@ -63,7 +63,7 @@ const INWRITING = [
 const QA = [
   {
     q: "Why a range and not a price?",
-    a: "Because the build is the variable. Where it runs, what we connect and how much history we bring in change the work. The ranges are honest; the number you leave the working session with is exact.",
+    a: "Because the build is the variable. Where it runs, what we connect and how much history we bring in change the work. The ranges are honest; the number we put in writing is exact.",
   },
   {
     q: "Is there a per-seat charge?",
@@ -104,11 +104,11 @@ export default function PricingPage() {
           <p className="lx-lead" data-rise="2">
             You license LongStrider once and install it where you say. There is no per-seat meter, support is a monthly
             share you can cancel, and the license goes with your company if it is sold. These are the ranges we quote
-            from today. The exact number comes out of a working session, in writing, before you leave.
+            from today. The exact number is scoped with you, in writing, before anything starts.
           </p>
           <div className="lx-cta-row" data-rise="3">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/for/finance">
               For the CFO
@@ -199,7 +199,7 @@ export default function PricingPage() {
           </h2>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="1">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Where it runs, and who owns it

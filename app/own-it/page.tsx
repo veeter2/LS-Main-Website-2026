@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMeta(
 )
 
 /**
- * The buyer's side of how it works: the path from working session to
+ * The buyer's side of how it works: the path from first call to
  * ownership, the five ways to run it (your keys first), and what "owning
  * it" means in practice. Every claim here matches what is true today; the
  * ladder states honestly which rungs are scoped with you.
@@ -21,8 +21,8 @@ export const metadata: Metadata = pageMeta(
 const PATH = [
   {
     step: "1",
-    title: "The working session.",
-    body: "One hour. Your hardest question and your people in the room. You see the record, the promises and the morning note built from your material, not a slide deck about ours. You keep what we build.",
+    title: "The first call.",
+    body: "You tell us what your business does and the question your team can’t answer today. We show you the real product on work like yours, not a slide deck about ours.",
     cost: "",
   },
   {
@@ -114,7 +114,7 @@ export default function OwnItPage() {
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book a working session <span className="lx-arrow" aria-hidden>→</span>
+                Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <Link className="lx-btn lx-btn-ghost" href="#ladder">
                 The five ways to run it
@@ -236,7 +236,7 @@ export default function OwnItPage() {
           </p>
           <div className="lx-cta-row" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Security and ownership

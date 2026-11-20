@@ -101,7 +101,7 @@ export default function ProductConcept() {
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book a working session <span className="lx-arrow" aria-hidden>→</span>
+                Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <a className="lx-btn lx-btn-ghost" href="#record">
                 See it answer
@@ -381,12 +381,12 @@ export default function ProductConcept() {
             See it on your <em>own</em> work.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            Bring a real account and the people who know it. In one working session you&rsquo;ll see the record, the
-            promises and the first morning note, built from your conversations, not ours.
+            Tell us what your business does and the question your team can&rsquo;t answer today. We&rsquo;ll show you
+            what LongStrider would keep: the record, the promises and the first morning note.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Where it runs, and who owns it

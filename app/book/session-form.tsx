@@ -48,7 +48,7 @@ export function SessionForm() {
         params.append("email", payload.email)
         params.append("company", payload.company)
         if (payload.question) params.append("message", `[SESSION] ${payload.question}`)
-        params.append("hs_context", JSON.stringify({ pageUri: window.location.href, pageName: "LongStrider · Book a working session" }))
+        params.append("hs_context", JSON.stringify({ pageUri: window.location.href, pageName: "LongStrider · Talk to us" }))
         const hs = await fetch(HS_FALLBACK, {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -79,8 +79,8 @@ export function SessionForm() {
   }
 
   return (
-    <form className="bk-card lx-card" onSubmit={onSubmit} aria-label="Book a working session">
-      <span className="lx-label">Book a working session</span>
+    <form className="bk-card lx-card" onSubmit={onSubmit} aria-label="Talk to us">
+      <span className="lx-label">Talk to us</span>
       <div className="bk-row">
         <label className="bk-field">
           <span>First name</span>
@@ -112,7 +112,7 @@ export function SessionForm() {
         />
       </label>
       <button className="lx-btn lx-btn-primary bk-submit" type="submit" disabled={status === "sending"}>
-        {status === "sending" ? "Sending…" : "Book a working session"} <span className="lx-arrow" aria-hidden>→</span>
+        {status === "sending" ? "Sending…" : "Send"} <span className="lx-arrow" aria-hidden>→</span>
       </button>
       <p className="bk-note" aria-live="polite">
         {status === "error" ? (

@@ -15,7 +15,7 @@ export type Buyer = {
   sections?: ReactNode
   questions: { q: string; a: string }[]
   next: { label: string; href: string }
-  /** Button label for both CTAs. Defaults to "Book a working session". */
+  /** Button label for both CTAs. Defaults to "Talk to us". */
   cta?: string
 }
 
@@ -24,7 +24,7 @@ export type Buyer = {
  * product, argued from what that person has to answer for.
  */
 export function BuyerPage({ b }: { b: Buyer }) {
-  const cta = b.cta ?? "Book a working session"
+  const cta = b.cta ?? "Talk to us"
   return (
     <main>
       <FaqJsonLd items={b.questions} />
