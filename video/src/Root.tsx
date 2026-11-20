@@ -1,12 +1,16 @@
 import { Composition } from "remotion"
+import { Cost, COST_SECONDS } from "./Cost"
 import { Film, FILM_FPS, FILM_SECONDS } from "./Film"
 
 const frames = Math.round(FILM_SECONDS * FILM_FPS)
+const costFrames = Math.round(COST_SECONDS * FILM_FPS)
 
-/** The home film at 1920x1080, and the same film at 1280x720 with larger captions for phones. */
+/** Each film at 1920x1080, and again at 1280x720 with larger captions for phones. */
 export const Root = () => (
   <>
     <Composition id="film" component={Film} durationInFrames={frames} fps={FILM_FPS} width={1920} height={1080} />
     <Composition id="film720" component={Film} defaultProps={{ phone: true }} durationInFrames={frames} fps={FILM_FPS} width={1280} height={720} />
+    <Composition id="cost" component={Cost} durationInFrames={costFrames} fps={FILM_FPS} width={1920} height={1080} />
+    <Composition id="cost720" component={Cost} defaultProps={{ phone: true }} durationInFrames={costFrames} fps={FILM_FPS} width={1280} height={720} />
   </>
 )

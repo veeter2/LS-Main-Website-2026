@@ -26,10 +26,22 @@ export const camAt = (t: number): Cam => ({
 })
 
 /** A lamp does not fade on. It catches, stutters, and holds. */
-const flick = (s: number) => (s < 0 ? 0 : s < 0.07 ? 0.85 : s < 0.13 ? 0.15 : s < 0.2 ? 1 : s < 0.25 ? 0.45 : 1)
+export const flick = (s: number) => (s < 0 ? 0 : s < 0.07 ? 0.85 : s < 0.13 ? 0.15 : s < 0.2 ? 1 : s < 0.25 ? 0.45 : 1)
 
 /** The painting for this moment, before the camera: gold, shadow, the hour of the day, lamps, stars. */
-function compose(P: Plates, t: number, n: number, warm: number) {
+/** Everything about the hour and the state of the land that a film decides for itself. */
+export type Light = {
+  t: number
+  n: number // 1 night, 0 day
+  warm: number // low sun: dusk and dawn
+  gold: number // how far the gold has run from the heap, 0 to 1.05
+  sunLow: number // 0 sun up in the gateway, 1 sun down behind the hill
+  reach: number // how far the low sun's light reaches, in pixels
+  lamp: (rank: number) => number // how lit a lamp is, by its place down the road
+}
+
+export function compose(P: Plates, L: Light) {
+  const { t, n, warm } = L
   const c = P.sceneCtx
   c.setTransform(1, 0, 0, 1, 0, 0)
   c.globalAlpha = 1
@@ -37,7 +49,7 @@ function compose(P: Plates, t: number, n: number, warm: number) {
   c.filter = "none"
 
   // the land before the gold, then the gold running out along the road from where the sand lands
-  const g = goldAt(t)
+  const g = L.gold
   const front = g * (P.maxDist + 130)
   if (g <= 0) c.drawImage(P.grey, 0, 0)
   else if (g >= 1.05) c.drawImage(P.day, 0, 0)
@@ -106,10 +118,9 @@ function compose(P: Plates, t: number, n: number, warm: number) {
 
   if (warm > 0) {
     // the sun sinks inside the gateway at dusk and rises there at dawn; its light reaches out across the land
-    const dusk = t < 28
-    const low = dusk ? lin(t, 21.2, 25.6) : 1 - lin(t, 30.3, 33.8)
+    const low = L.sunLow
     const sy = 612 + 112 * low
-    const reach = dusk ? 1700 : 700 + 1100 * ramp(t, 30.3, 33.8)
+    const reach = L.reach
     c.save()
     c.globalCompositeOperation = "soft-light"
     const wg = c.createRadialGradient(1600, sy, 0, 1600, sy, reach)
@@ -170,20 +181,18 @@ function compose(P: Plates, t: number, n: number, warm: number) {
     // the lamps come on one by one, down the road from the heap, and go out at dawn the way they came
     c.save()
     c.globalCompositeOperation = "lighter"
-    for (const L of P.lamps) {
-      const on = 21.9 + 2.7 * L.rank
-      const off = 30.5 + 1.1 * (1 - L.rank)
-      const I = flick(t - on) * lin(front - L.dist, 0, 40) * (1 - ramp(t, off, off + 0.6)) * (0.94 + 0.06 * Math.sin(t * 2.3 + L.rank * 9)) * (0.55 + 0.45 * L.gold)
+    for (const lp of P.lamps) {
+      const I = L.lamp(lp.rank) * lin(front - lp.dist, 0, 40) * (0.94 + 0.06 * Math.sin(t * 2.3 + lp.rank * 9)) * (0.55 + 0.45 * lp.gold)
       if (I <= 0) continue
-      halo(c, L.x, L.y, L.r * 9, [255, 206, 140], 0.5 * I)
+      halo(c, lp.x, lp.y, lp.r * 9, [255, 206, 140], 0.5 * I)
       c.save()
-      c.translate(L.x, L.base)
+      c.translate(lp.x, lp.base)
       c.scale(1, 0.22)
-      halo(c, 0, 0, L.r * 8, [255, 200, 130], 0.28 * I)
+      halo(c, 0, 0, lp.r * 8, [255, 200, 130], 0.28 * I)
       c.restore()
       c.fillStyle = `rgba(255,238,200,${0.85 * I})`
       c.beginPath()
-      c.arc(L.x, L.y, L.r * 0.96, 0, 6.2832)
+      c.arc(lp.x, lp.y, lp.r * 0.96, 0, 6.2832)
       c.fill()
     }
     c.restore()
@@ -238,7 +247,7 @@ function thread(ctx: Ctx, t: number, n: number, top: number, start: number, a: n
 
 /** The road the strider walks, in film pixels, from the near corner toward the heap. */
 const ROAD: [number, number][] = [[-140, 1052], [40, 1030], [300, 1000], [560, 968], [820, 936], [1000, 918]]
-const roadAt = (s: number): [number, number] => {
+export const roadAt = (s: number): [number, number] => {
   let left = s
   for (let i = 0; i < ROAD.length - 1; i++) {
     const [x0, y0] = ROAD[i], [x1, y1] = ROAD[i + 1]
@@ -251,7 +260,14 @@ const roadAt = (s: number): [number, number] => {
 
 export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) {
   const warm = glowAt(t)
-  compose(P, t, n, warm)
+  const dusk = t < 28
+  compose(P, {
+    t, n, warm,
+    gold: goldAt(t),
+    sunLow: dusk ? lin(t, 21.2, 25.6) : 1 - lin(t, 30.3, 33.8),
+    reach: dusk ? 1700 : 700 + 1100 * ramp(t, 30.3, 33.8),
+    lamp: (rank) => flick(t - 21.9 - 2.7 * rank) * (1 - ramp(t, 30.5 + 1.1 * (1 - rank), 31.1 + 1.1 * (1 - rank))),
+  })
   const cam = camAt(t)
   warp(P, cam, 1.2 * warm * (1 - 0.6 * n), t)
 

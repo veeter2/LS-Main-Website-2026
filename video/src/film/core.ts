@@ -150,7 +150,7 @@ export function stream(ctx: Ctx, t: number, x0: number, yTop: number, yBot: numb
 /** The heap at its richest: deep, warm gold for the dawn. */
 const SAND_RICH: RGB[] = [[146, 104, 34], [188, 140, 50], [216, 170, 74], [236, 198, 108], [250, 226, 156]]
 
-export function pile(ctx: Ctx, cx: number, base: number, h: number, night: number, seed: number, tt = 0, rich = 0) {
+export function pile(ctx: Ctx, cx: number, base: number, h: number, night: number, seed: number, tt = 0, rich = 0, over?: RGB[]) {
   if (h < 1) return
   const w = h / Math.tan((33 * Math.PI) / 180)
   const surf = (dx: number) => {
@@ -161,8 +161,9 @@ export function pile(ctx: Ctx, cx: number, base: number, h: number, night: numbe
     const foot = u > 0.86 ? Math.pow((1 - u) / 0.14, 1.6) * 0.14 : 1 - u
     return base - h * Math.min(tip, foot)
   }
-  const pal = rich > 0 ? palAt(night).map((c, i) => mix(c, SAND_RICH[i], rich)) : palAt(night)
-  const warm = (c: RGB, g: RGB) => rgba(mix(c, g, rich), 1)
+  // `over` swaps the sand's colours for another five tones, dark to light: ash, for one
+  const pal = over ?? (rich > 0 ? palAt(night).map((c, i) => mix(c, SAND_RICH[i], rich)) : palAt(night))
+  const warm = (c: RGB, g: RGB, k2 = 0) => (over ? rgba(over[k2], 1) : rgba(mix(c, g, rich), 1))
   ctx.save()
   ctx.beginPath()
   ctx.moveTo(cx - w, base + 2)
@@ -170,9 +171,9 @@ export function pile(ctx: Ctx, cx: number, base: number, h: number, night: numbe
   ctx.lineTo(cx + w, base + 2)
   ctx.closePath()
   const g = ctx.createLinearGradient(cx - w, 0, cx + w, 0)
-  g.addColorStop(0, warm(mix([107, 90, 56], [93, 76, 42], sm(night)), [150, 106, 34]))
-  g.addColorStop(0.5, warm(mix([176, 147, 90], [179, 149, 90], sm(night)), [214, 166, 70]))
-  g.addColorStop(1, warm(mix([220, 195, 138], [232, 205, 150], sm(night)), [250, 224, 150]))
+  g.addColorStop(0, warm(mix([107, 90, 56], [93, 76, 42], sm(night)), [150, 106, 34], 0))
+  g.addColorStop(0.5, warm(mix([176, 147, 90], [179, 149, 90], sm(night)), [214, 166, 70], 2))
+  g.addColorStop(1, warm(mix([220, 195, 138], [232, 205, 150], sm(night)), [250, 224, 150], 4))
   ctx.fillStyle = g
   ctx.fill()
   ctx.clip()
