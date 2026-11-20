@@ -192,7 +192,7 @@ export default function SecurityConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Set how it speaks, what it won&rsquo;t do, and when it must check with a person first. That&rsquo;s a setting,
-            not a prompt. Experts and agents work from the same record, and every one of them makes it richer, so
+            not a prompt. Experts and agents work from the same memory, and every one of them makes it richer, so
             a rule set once holds everywhere. Every correction your people make is kept, so the system&rsquo;s judgment can be audited rather
             than taken on trust.
           </p>
@@ -255,10 +255,10 @@ export default function SecurityConcept() {
             Walk through where it runs, who can see what, and which model it talks to, with your own people in the room.
           </p>
           <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
-            Your people will use AI either way. The question is whether it happens inside your walls, on your record, or in a chat box you don&rsquo;t control. This is the approved tool.
+            Your people will use AI either way. The question is whether it happens inside your walls, in your memory, or in a chat box you don&rsquo;t control. This is the approved tool.
           </p>
           <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
-            Methods built inside a chat box can stop being yours. Built here, they stay yours: your keys, your record, your license.
+            Methods built inside a chat box can stop being yours. Built here, they stay yours: your keys, your memory, your license.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">

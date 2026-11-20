@@ -17,7 +17,7 @@ import { useEffect, useRef, useState } from "react"
 
 const STAGES = [
   { model: "Frontier model", line: "A frontier model answers through your own key." },
-  { model: "Open model", line: "An open model answers. Same record, nothing re-taught." },
+  { model: "Open model", line: "An open model answers. Same memory, nothing re-taught." },
   { model: "Your own model", line: "Your own model, on your own machine, answers." },
   { model: "Your own model", line: "Now it runs in your rack. The memory did not move." },
 ]
@@ -63,7 +63,7 @@ export function MemoryStays() {
 
   return (
     <figure ref={ref} className="lx-wrap ms-figure" data-stage={stage} data-reduced={reduced ? "true" : undefined} data-reveal>
-      <svg viewBox="0 0 1400 640" role="img" aria-label="The record stays fixed at center while the model beside it swaps and the host around it changes." className="ms-svg">
+      <svg viewBox="0 0 1400 640" role="img" aria-label="The memory stays fixed at center while the model beside it swaps and the host around it changes." className="ms-svg">
         <defs>
           <radialGradient id="ms-glow">
             <stop offset="0" stopColor="var(--lx-gold)" stopOpacity="0.28" />
@@ -118,7 +118,7 @@ export function MemoryStays() {
           <circle cx="200" cy="160" r="230" fill="url(#ms-glow)" />
           <rect className="ms-record-box" x="0" y="0" width="400" height="320" rx="14" />
           <text className="ms-record-kicker" x="28" y="46">
-            The record
+            The memory
           </text>
           <text className="ms-record-title" x="28" y="96">
             Your company&rsquo;s memory

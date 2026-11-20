@@ -81,7 +81,7 @@ const VERTICALS: Vertical[] = [
         Your product is what your people <em>know</em>.
       </>
     ),
-    lead: "Every method, every relationship, every hard-won pattern lives in people. Firms now use AI on a growing share of projects, and most say it saves time. Few say it makes money. (SPI Research) Savings don\u2019t compound. A record does.",
+    lead: "Every method, every relationship, every hard-won pattern lives in people. Firms now use AI on a growing share of projects, and most say it saves time. Few say it makes money. (SPI Research) Savings don\u2019t compound. A memory does.",
     breaks: [
       {
         title: "The method lives in the partner.",
@@ -190,7 +190,7 @@ export default function IndustriesConcept() {
             LongStrider would keep, and what your company would own, on a license you hold rather than a seat you rent.
           </p>
           <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
-            Your people will use AI either way. The question is whether it happens inside your walls, on your record, or in a chat box you don&rsquo;t control. This is the approved tool.
+            Your people will use AI either way. The question is whether it happens inside your walls, in your memory, or in a chat box you don&rsquo;t control. This is the approved tool.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">

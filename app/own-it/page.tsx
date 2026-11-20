@@ -74,7 +74,7 @@ const OWN_FACTS = [
   },
   {
     title: "No training, ever.",
-    body: "LongStrider has no training code. It learns by filing what your people say into the record, which is why nothing has to be re-taught when you change models.",
+    body: "LongStrider has no training code. It learns by filing what your people say into the memory, which is why nothing has to be re-taught when you change models.",
   },
   {
     title: "Switch anything, lose nothing.",
@@ -89,8 +89,8 @@ const OWN_FACTS = [
     body: "Nothing goes out in your name until a person says yes, and the yes is on the record. The AI drafts and proposes; your people decide.",
   },
   {
-    title: "One record, not five AI tools.",
-    body: "Experts and agents work from the same record, and every one of them makes it richer. A correction in chat changes what the overnight pass believes.",
+    title: "One memory, not five AI tools.",
+    body: "Experts and agents work from the same memory, and every one of them makes it richer. A correction in chat changes what the overnight pass believes.",
   },
 ]
 
@@ -158,7 +158,7 @@ export default function OwnItPage() {
           </h2>
           <p className="lx-lead" data-reveal data-delay="2">
             Five ways to run it, in the order most companies take them. Every one runs the same
-            record. Moving between them never moves the memory.
+            memory. Moving between them never moves it.
           </p>
         </div>
         <div className="lx-wrap own-ladder" aria-label="Five ways to run it">
@@ -186,7 +186,7 @@ export default function OwnItPage() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Connect your CRM, your files, your forms and your call transcripts. Import years of
-              history. It is filed into the record in days and useful the week it lands: dated,
+              history. It is filed into the memory in days and useful the week it lands: dated,
               sourced, scoped to who it belongs to.
             </p>
           </div>
@@ -194,9 +194,9 @@ export default function OwnItPage() {
             <p className="own-modelbox-title">&ldquo;How long does it take to train?&rdquo;</p>
             <p>
               There is no training step. LongStrider learns by filing what your people say into a
-              record you own, so it is useful the week you import, and nothing has to be re-taught
+              memory you own, so it is useful the week you import, and nothing has to be re-taught
               when you change models. A trained model is a cost
-              you can't move. A record is an asset you can.
+              you can't move. A memory is an asset you can.
             </p>
           </div>
         </div>
@@ -232,7 +232,7 @@ export default function OwnItPage() {
             company would own, and which rung of the ladder it would start on.
           </p>
           <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
-            Methods built inside a chat box can stop being yours. Built here, they stay yours: your keys, your record, your license.
+            Methods built inside a chat box can stop being yours. Built here, they stay yours: your keys, your memory, your license.
           </p>
           <div className="lx-cta-row" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">

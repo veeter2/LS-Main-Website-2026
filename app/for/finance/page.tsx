@@ -31,7 +31,7 @@ export default function ForFinance() {
           },
           {
             title: "Ready for the price war.",
-            body: "Models get cheaper every quarter. Switch whenever it pays to. Nothing has to be re-taught, and no vendor gets to decide your price for you. Experts and agents work from the same record, and every one of them makes it richer: one memory, not five AI tools each billing you.",
+            body: "Models get cheaper every quarter. Switch whenever it pays to. Nothing has to be re-taught, and no vendor gets to decide your price for you. Experts and agents work from the same memory, and every one of them makes it richer. One memory, not five AI tools each billing you.",
           },
         ],
         proof: {

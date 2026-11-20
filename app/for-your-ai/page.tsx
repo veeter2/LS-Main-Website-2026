@@ -57,7 +57,7 @@ export default function ForYourAI() {
             record is scoped to the person it came from. Counts and dates in answers come from the record, not estimates.
             Every reply shows receipts: which conversation, which date.
           </p>
-          <p className="fy-lead" data-reveal data-delay="2">Eight things run on that record:</p>
+          <p className="fy-lead" data-reveal data-delay="2">Eight things run on that memory:</p>
           <ol className="mm-rows" data-reveal data-delay="3" aria-label="Eight things that run on the memory">
             {ORGANS.map((o, i) => (
               <li key={o.name} className="mm-row">

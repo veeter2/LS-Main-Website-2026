@@ -47,7 +47,7 @@ const FEATURES: { heading: string; items: string[] }[] = [
       "Chat, uploaded documents and files, pasted notes.",
       "Call transcripts from your call-tracking system. Text only; we never hold audio.",
       "Calendar and email by read-only connection, for dates and names. Email bodies are never copied in.",
-      "Agents read the record before they act and bring findings back. A person decides what is kept.",
+      "Agents read the memory before they act and bring findings back. A person decides what is kept.",
     ],
   },
   {
@@ -114,7 +114,7 @@ export default function ForTechnology() {
                   contradicts. The identity rules that decide who may see what, in the database, on every read. The
                   experts that interview you and hold your rules. The governance screen where every model, key and dollar
                   is set and every write gets a receipt. And the part that took longest: all of them read and write one
-                  record, so a correction in chat changes what the overnight pass believes and what an agent sees on
+                  memory, so a correction in chat changes what the overnight pass believes and what an agent sees on
                   Wednesday. That is the moat. Copy the schema and you have a table. The system is the part that fills
                   it, keeps it in order, and answers from it.
                 </p>
@@ -182,7 +182,7 @@ export default function ForTechnology() {
           },
           {
             q: "How do our agents use it?",
-            a: "They read the record before they act and bring back findings. A person decides what goes into memory. Today, nothing writes to memory without that click.",
+            a: "They read the memory before they act and bring back findings. A person decides what goes into it. Today, nothing writes to memory without that click.",
           },
           {
             q: "Can it run with no calls out?",

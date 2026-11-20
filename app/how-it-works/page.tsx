@@ -42,8 +42,8 @@ const ARCHITECT = [
     body: "Every job has its own model setting, on one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We did it in October. Nothing was re-taught.",
   },
   {
-    title: "Your teammates run on your record.",
-    body: "They read the record before they act and bring back findings. A person decides what enters memory.",
+    title: "Your teammates run on your memory.",
+    body: "They read the memory before they act and bring back findings. A person decides what enters it.",
   },
   {
     title: "Scoped by default.",

@@ -10,7 +10,7 @@ import { RecordDemo } from "../_components/record-demo"
 import { Desk } from "../_components/desk"
 import { ORGANS } from "@/lib/for-your-ai"
 
-export const metadata: Metadata = pageMeta("/product", "What it does · Facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced record your company owns. Counts, not guesses. Promises tracked only after you confirm.")
+export const metadata: Metadata = pageMeta("/product", "What it does · Facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced memory your company owns. Counts, not guesses. Promises tracked only after you confirm.")
 
 /**
  * What LongStrider does: the eight things that run on the memory. The hero
@@ -70,18 +70,18 @@ const GOVERNANCE = [
 ]
 
 const BEATS = [
-  { title: "Every door", body: "Chat, your connected systems (anything with an API or an MCP server), documents, dropped files, and what your teammates find. Not five silos. One record." },
+  { title: "Every door", body: "Chat, your connected systems (anything with an API or an MCP server), documents, dropped files, and what your teammates find. Not five silos. One memory." },
   { title: "Nothing lands raw", body: "Each thing that comes in is broken into dated, sourced facts, filed into the right topic on its own, linked to what agrees, flagged against what contradicts, and judged before it is trusted." },
-  { title: "Two clocks", body: "By day, every door feeds the record as you work, and each new fact is filed within minutes. By night, it reads what the day brought, links it to what it already knew, merges topics, finds what contradicts, and writes down what it learned about your business. You come in to a company that knows more than it did yesterday. Nobody taught it." },
-  { title: "It compounds", body: "Tomorrow\u2019s answer stands on today\u2019s facts. The expert\u2019s rules, the agent\u2019s findings, the morning letter, the promise due today all come from the same record, and every one of them makes it richer. A chat box starts at zero every morning. This starts where it left off." },
+  { title: "Two clocks", body: "By day, every door feeds the memory as you work, and each new fact is filed within minutes. By night, it reads what the day brought, links it to what it already knew, merges topics, finds what contradicts, and writes down what it learned about your business. You come in to a company that knows more than it did yesterday. Nobody taught it." },
+  { title: "It compounds", body: "Tomorrow\u2019s answer stands on today\u2019s facts. The expert\u2019s rules, the agent\u2019s findings, the morning letter, the promise due today all come from the same memory, and every one of them makes it richer. A chat box starts at zero every morning. This starts where it left off." },
   { title: "Two books", body: "Yours and the company\u2019s. Your private connectors and drops feed your memory, and nobody else sees it. Shared sources feed the company\u2019s memory, which everyone works from. Same system, hard wall between them." },
-  { title: "The model never holds it", body: "Swap the model. The record does not move." },
+  { title: "The model never holds it", body: "Swap the model. The memory does not move." },
 ]
 const MODELS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compatible server", "A local model on your hardware"]
 
 const RUNS = ["Monday\u2019s run:", "Tuesday\u2019s run:", "Wednesday\u2019s run:"]
 const ALONE = "starts from nothing"
-const OURS = ["starts from the record", "builds on Monday", "builds on both"]
+const OURS = ["starts from the memory", "builds on Monday", "builds on both"]
 
 export default function ProductConcept() {
   return (
@@ -96,7 +96,7 @@ export default function ProductConcept() {
             <p className="lx-lead" data-rise="2">
               LongStrider takes what your team already puts into AI, in chat, in documents, in uploaded files and call
               transcripts, and keeps the part that matters: the facts, the promises, what changed, and what keeps coming
-              up. Each with its source. Each yours. Eight things run on that record. Here they are, in the order
+              up. Each with its source. Each yours. Eight things run on that memory. Here they are, in the order
               you&rsquo;d meet them.
             </p>
             <div className="lx-cta-row" data-rise="3">
@@ -240,9 +240,9 @@ export default function ProductConcept() {
             <p className="lx-lead" data-reveal data-delay="2">
               A specialist is a built-in expert for one job: renewals, claims, a practice area, your call traffic. Before
               it does anything it asks how your company works. What counts as risk here. Who can agree to what. Which
-              accounts matter this quarter. Your answers go into the record, so it starts from your judgment, not a
+              accounts matter this quarter. Your answers go into the memory, so it starts from your judgment, not a
               generic playbook. Then it studies, and brings back findings you keep or drop. What it learns goes into
-              the same record your chat and your agents read, so every one of them gets richer.
+              the same memory your chat and your agents read, so every one of them gets richer.
             </p>
           </div>
           <div data-reveal data-delay="2">
@@ -266,14 +266,14 @@ export default function ProductConcept() {
               Your teammates start where <em>yesterday&rsquo;s</em> left off.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              The model is the voice. LongStrider is the memory and the judgment. Your teammates read the record before
+              The model is the voice. LongStrider is the memory and the judgment. Your teammates read the memory before
               they act, run overnight if you want them to, and bring their findings back as a note. You decide what goes
               into memory. So Wednesday&rsquo;s run starts from Monday&rsquo;s and Tuesday&rsquo;s, instead of from
               nothing. A new agent starts as an observer and earns trust run by run. You see how often its work was
               useful before you let it act.
             </p>
           </div>
-          <div className="ag" data-reveal data-delay="2" aria-label="Agent runs with and without a shared record">
+          <div className="ag" data-reveal data-delay="2" aria-label="Agent runs with and without a shared memory">
             <div className="ag-row">
               <span className="ag-label">On their own</span>
               <ol className="ag-runs">
@@ -353,10 +353,10 @@ export default function ProductConcept() {
             <span className="hx-step">08</span> Connections
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Every door feeds one <em>record</em>.
+            Every door feeds one <em>memory</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            ChatGPT is a box you talk to. LongStrider is a record everything feeds.
+            ChatGPT is a box you talk to. LongStrider is a memory everything feeds.
           </p>
         </div>
         <DoorsArch />
@@ -370,7 +370,7 @@ export default function ProductConcept() {
         </div>
         <p className="lx-wrap lx-display cx-close" data-reveal>
           <span className="cx-dim">A chat box forgets by morning.</span>
-          <span className="cx-lit">The record remembers for the company.</span>
+          <span className="cx-lit">The memory remembers for the company.</span>
         </p>
       </section>
 
@@ -382,7 +382,7 @@ export default function ProductConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
             Tell us what your business does and the question your team can&rsquo;t answer today. We&rsquo;ll show you
-            what LongStrider would keep: the record, the promises and the first morning note.
+            what LongStrider would keep: the memory, the promises and the first morning note.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">

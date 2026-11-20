@@ -42,7 +42,7 @@ const TIERS = [
 const ALSO = [
   {
     title: "Managed services, scoped per install.",
-    body: "Integrations, data enrichment, moving what you already have into the record, training your people. Priced as work, not as a percentage of anything, and written into the proposal before you sign.",
+    body: "Integrations, data enrichment, moving what you already have into the memory, training your people. Priced as work, not as a percentage of anything, and written into the proposal before you sign.",
   },
   {
     title: "Support, a monthly share of your license.",
@@ -71,7 +71,7 @@ const QA = [
   },
   {
     q: "What does the monthly support actually cover?",
-    a: "New versions, upgrades to the record and the overnight pass, and a person to call when something breaks. It is a fixed share of your license, agreed up front, and you can stop it any month. Your install keeps working without it.",
+    a: "New versions, upgrades to the memory and the overnight pass, and a person to call when something breaks. It is a fixed share of your license, agreed up front, and you can stop it any month. Your install keeps working without it.",
   },
   {
     q: "Operating cost or capital?",
@@ -83,7 +83,7 @@ const QA = [
   },
   {
     q: "Can we start small?",
-    a: "Yes. Most installs start with one team and one connector, prove the record is worth keeping, and grow from there. The license range you start in is the one you pay for.",
+    a: "Yes. Most installs start with one team and one connector, prove the memory is worth keeping, and grow from there. The license range you start in is the one you pay for.",
   },
 ]
 
