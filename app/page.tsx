@@ -198,7 +198,8 @@ export default function Home() {
             <em>calling</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            It runs our own company every day. Every nightly letter, every answer, on the record.
+            The record does the remembering. The model only supplies the words. That is why the bill is smaller, the
+            answers are backed, and nothing is taught twice.
           </p>
         </div>
         <div className="lx-wrap">
