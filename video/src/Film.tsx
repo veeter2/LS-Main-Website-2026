@@ -30,7 +30,7 @@ export const CAPTIONS: { at: number; to: number; text: string }[] = [
   { at: 26, to: 31, text: "Change the model. Keep everything." },
 ]
 
-function paint(ctx: Ctx, t: number, P: Plates) {
+function paint(ctx: Ctx, t: number, P: Plates, grain: number) {
   const n = nightAt(t)
 
   // sky
@@ -168,8 +168,8 @@ function paint(ctx: Ctx, t: number, P: Plates) {
   // film grain that lives: the same grain, sitting somewhere new every frame, heavier in the dark
   const fr = rng(Math.round(t * FILM_FPS) + 1)
   const ox = -Math.floor(fr() * W), oy = -Math.floor(fr() * H)
-  ctx.globalAlpha = 0.9
-  for (let pass = 0; pass < (n > 0.5 ? 2 : 1); pass++) {
+  ctx.globalAlpha = 0.9 * grain
+  for (let pass = 0; grain > 0 && pass < (n > 0.5 ? 2 : 1); pass++) {
     for (const dx of [-W, 0, W]) for (const dy of [0, H]) ctx.drawImage(P.noise, ox + dx + pass * 311, oy + dy)
   }
   ctx.globalAlpha = 1
@@ -182,7 +182,8 @@ const Big = ({ o, top, color, children, size = 92 }: { o: number; top: number; c
 )
 
 /** `phone` sets the captions larger: the phone file is shown about 360 pixels wide. */
-export const Film = ({ phone = false }: { phone?: boolean }) => {
+/** `grain` is how strong the moving film grain is: 1 for the full picture, less for a lighter file. */
+export const Film = ({ phone = false, grain = 1 }: { phone?: boolean; grain?: number }) => {
   const t = useCurrentFrame() / FILM_FPS
   const { width: vw } = useVideoConfig()
   const fit = vw / W
@@ -208,12 +209,12 @@ export const Film = ({ phone = false }: { phone?: boolean }) => {
     ctx.setTransform(1, 0, 0, 1, 0, 0)
     ctx.globalAlpha = 1
     ctx.clearRect(0, 0, W, H)
-    paint(ctx, t, land)
+    paint(ctx, t, land, grain)
     if (!released.current) {
       released.current = true
       continueRender(handle)
     }
-  }, [t, land, handle])
+  }, [t, land, handle, grain])
 
   // words go from ink to paper as the light goes, quickly, so they are never grey on grey
   const dk = Math.max(0, Math.min(1, (nightAt(t) - 0.38) / 0.24))

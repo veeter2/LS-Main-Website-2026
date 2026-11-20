@@ -1,12 +1,12 @@
 {
   "name": "longstrider-concept-video",
   "private": true,
-  "description": "The homepage concept video, rendered from code with Remotion. Not part of the Next.js build.",
+  "description": "The home page film, rendered from code with Remotion. Not part of the Next.js build.",
   "scripts": {
     "studio": "remotion studio src/index.ts",
-    "render:1080": "remotion render src/index.ts hero ../public/video/hero-1080.mp4 --codec=h264 --crf=36 --muted --concurrency=4",
-    "render:720": "remotion render src/index.ts hero720 ../public/video/hero-720.mp4 --codec=h264 --crf=33 --muted --concurrency=4",
-    "poster": "remotion still src/index.ts hero ../public/video/hero-poster.jpg --frame=66 --image-format=jpeg --jpeg-quality=85"
+    "render:1080": "remotion render src/index.ts film ../public/video/hero-1080.mp4 --codec=h264 --video-bitrate=1150k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0}'",
+    "render:720": "remotion render src/index.ts film720 ../public/video/hero-720.mp4 --codec=h264 --video-bitrate=680k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0,\"phone\":true}'",
+    "poster": "remotion still src/index.ts film ../public/video/hero-poster.jpg --frame=783 --image-format=jpeg --jpeg-quality=55 --props='{\"grain\":0}'"
   },
   "dependencies": {
     "@remotion/cli": "4.0.544",

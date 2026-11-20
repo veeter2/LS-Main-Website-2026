@@ -24,14 +24,3 @@ export function rng(seed: number) {
     return s / 4294967296
   }
 }
-
-export const gauss = (x: number) => Math.exp(-x * x)
-
-/** The dune's ridge line in world pixels (1920 x 1080). */
-export const ridge = (x: number) => {
-  const u = x / 1920
-  return 600 - 190 * gauss((u - 0.6) * 3) - 90 * gauss((u - 0.18) * 4.5)
-}
-
-/** The road's y at a given x: a gentle curve along the dune's foot. */
-export const road = (x: number) => 760 - 0.05 * x + 60 * Math.sin((x / 1920) * Math.PI)
