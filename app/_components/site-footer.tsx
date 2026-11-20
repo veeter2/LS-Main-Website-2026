@@ -6,16 +6,22 @@ const COLUMNS = [
     links: [
       { label: "What it does", href: "/product" },
       { label: "How it works", href: "/how-it-works" },
+      { label: "Own it", href: "/own-it" },
       { label: "Security", href: "/security" },
-      { label: "For finance", href: "/for/finance" },
-      { label: "For technology", href: "/for/technology" },
-      { label: "For your team", href: "/for/teams" },
+    ],
+  },
+  {
+    title: "For buyers",
+    links: [
+      { label: "Finance", href: "/for/finance" },
+      { label: "Technology", href: "/for/technology" },
+      { label: "Team leads", href: "/for/teams" },
       { label: "Ask your own AI", href: "/for-your-ai" },
       { label: "Questions buyers ask", href: "/for-your-ai#faq" },
     ],
   },
   {
-    title: "Who it’s for",
+    title: "Industries",
     links: [
       { label: "Insurance", href: "/industries#insurance" },
       { label: "Legal", href: "/industries#legal" },
@@ -28,7 +34,6 @@ const COLUMNS = [
     links: [
       { label: "About", href: "/company" },
       { label: "The manifesto", href: "/manifesto" },
-      { label: "Book a working session", href: "/book" },
       { label: "Contact", href: "mailto:hello@longstrider.ai" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
@@ -47,6 +52,9 @@ export function SiteFooter() {
             Software you license and install, not a seat you rent. Your own model, your own keys. Hosted while we build
             yours. No trackers on this site.
           </p>
+          <Link className="lx-btn lx-btn-primary sf-cta" href="/book">
+            Book a working session <span className="lx-arrow" aria-hidden>&rarr;</span>
+          </Link>
         </div>
         <div className="sf-cols">
           {COLUMNS.map((c) => (
@@ -64,7 +72,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="lx-wrap sf-legal">
-        &copy; 2026 LongStrider, LLC. Built in Austin, Texas. Used every day since spring 2026.
+        &copy; 2026 LongStrider, LLC. Built in Austin, Texas.
       </div>
     </footer>
   )

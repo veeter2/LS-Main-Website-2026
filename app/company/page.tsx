@@ -124,8 +124,8 @@ export default function CompanyConcept() {
             </p>
             <p>
               LongStrider started from one premise, that the memory has to be the customer&rsquo;s, and was built from the
-              ground up to deliver it. A small team, building lean on purpose. It has run our own business every day
-              since spring 2026. We&rsquo;d rather show you that than a logo wall.
+              ground up to deliver it. A small team, building lean on purpose. It runs our own business every day. We&rsquo;d
+              rather show you that than a logo wall.
             </p>
           </div>
         </div>

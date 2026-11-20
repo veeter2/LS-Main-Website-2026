@@ -226,7 +226,7 @@ html:has(#lx-root) { --lx-page-ground: #f1ecdf; }
   --lx-line: rgba(31, 27, 20, 0.14);
   --lx-line-subtle: rgba(31, 27, 20, 0.09);
   /* Header bar: frosted glass a step lighter than the paper, with a visible hairline so it reads as its own surface */
-  --lx-bar-ground: rgba(var(--lx-light-rgb), 0.95);
+  --lx-bar-ground: rgba(var(--lx-light-rgb), 0.985);
   --lx-bar-sheen: rgba(var(--lx-light-rgb), 0.9);
   --lx-bar-line: rgba(var(--lx-ink-rgb), 0.16);
   --lx-bar-shadow: 0 1px 0 rgba(var(--lx-light-rgb), 0.6) inset, 0 6px 24px rgba(var(--lx-ink-rgb), 0.06);
@@ -384,7 +384,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   box-shadow: var(--lx-bar-shadow);
   transition: box-shadow 0.3s var(--lx-ease);
 }
-.lx-bar[data-scrolled="true"] { box-shadow: 0 1px 0 var(--lx-bar-sheen) inset, 0 10px 32px rgba(var(--lx-ink-rgb), 0.1); }
+.lx-bar[data-scrolled="true"] { background: rgb(var(--lx-light-rgb)); box-shadow: 0 1px 0 var(--lx-bar-sheen) inset, 0 10px 32px rgba(var(--lx-ink-rgb), 0.1); }
 .lx-bar-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
 .lx-brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--lx-ink-primary); }
 /* Brand mark: two thirds of the bar, clear space on the left equal to the figure’s head */
@@ -2020,9 +2020,9 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 }
 .sf-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
-  gap: 48px;
-  padding-top: 56px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+  gap: 64px;
+  padding-top: 64px;
   padding-bottom: 40px;
 }
 .sf-line {
@@ -2032,7 +2032,9 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   margin: 0 0 12px;
 }
 .sf-sub { margin: 0; max-width: 42ch; line-height: 1.55; color: var(--lx-ink-muted); }
-.sf-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.sf-cta { margin-top: 20px; }
+.sf-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 860px) { .sf-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; } .sf-inner { grid-template-columns: 1fr; gap: 40px; } }
 .sf-col-title { display: block; color: var(--lx-ink-hint); margin-bottom: 12px; }
 .sf-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .sf-col a { color: var(--lx-ink-secondary); text-decoration: none; }

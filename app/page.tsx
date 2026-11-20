@@ -200,7 +200,7 @@ export default function Home() {
             <em>calling</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            It has run our own company every day since spring 2026. Every nightly letter, every answer, on the record.
+            It runs our own company every day. Every nightly letter, every answer, on the record.
           </p>
         </div>
         <div className="lx-wrap">
