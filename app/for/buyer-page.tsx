@@ -9,6 +9,8 @@ export type Buyer = {
   title: ReactNode
   lead: string
   points: { title: string; body: string }[]
+  /** Optional: a film under the headline, before the points. */
+  film?: ReactNode
   /** Optional: the single proof section (heading, body, one visual). */
   proof?: { heading: ReactNode; body: ReactNode; visual?: ReactNode; caption?: string }
   /** Optional extra sections, rendered between proof and the questions. */
@@ -45,6 +47,11 @@ export function BuyerPage({ b }: { b: Buyer }) {
             </Link>
           </div>
         </div>
+        {b.film && (
+          <div className="lx-wrap by-film" data-rise="4">
+            {b.film}
+          </div>
+        )}
         <div className={`lx-wrap mh-facts by-points${b.points.length === 4 ? " mh-facts-2" : ""}`}>
           {b.points.map((p, i) => (
             <div key={p.title} className="mh-fact" data-rise={String(i + 3)}>

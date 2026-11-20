@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import { BuyerPage } from "../buyer-page"
 import { MemoryCurve } from "../../_components/memory-curve"
+import { CostFilm } from "../../_components/cost-film"
 
 export const metadata: Metadata = pageMeta("/for/finance", "For the CFO · AI spend that ends in an asset", "Licensed and installed, not rented per seat. Your own model, your own bill. Answers you can audit. Spend that becomes something the company owns.")
 
@@ -16,6 +17,7 @@ export default function ForFinance() {
           </>
         ),
         lead: "Most AI spend buys access. Seats, renewals, a bill that resets every January, and when you change vendors, what your people taught it stays behind. Rent the whole thing and the vendor writes the rules you run under, and can rewrite them whenever it likes. LongStrider is the other kind of purchase. You license the software, install it on your infrastructure, run it under your own model, and own the result. You stop renting AI and start owning it. The spend ends as an asset on your books, not a bill every month.",
+        film: <CostFilm />,
         points: [
           {
             title: "Owned, not rented.",

@@ -43,3 +43,7 @@
   .fo-cost-row span:last-child { text-align: left; }
   .fo-demo { padding: 22px 18px 24px; }
 }
+
+/* Buyer pages: a film under the headline, before the points. */
+.by-film { margin-top: clamp(24px, 4vh, 40px); }
+.by-film .mh-film { margin-left: auto; margin-right: auto; }
