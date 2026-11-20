@@ -9,10 +9,10 @@ import { ReceiptCard } from "./_components/proof-cards"
 export const metadata: Metadata = {
   ...pageMeta(
     "",
-    "Stop teaching AI your business every morning",
+    "The AI memory your company owns",
     "Not a model, not a search box, not a wrapper. LongStrider is the software your company runs its AI on, and owns. It keeps what your people tell it.",
   ),
-  title: { absolute: "LongStrider · Stop teaching AI your business every morning" },
+  title: { absolute: "LongStrider · The AI memory your company owns" },
 }
 
 /**
@@ -129,7 +129,7 @@ export default function Home() {
             Company memory
           </p>
           <h1 className="lx-display lx-h1 mh-h1" data-rise="1">
-            Stop teaching AI your business every <em>morning</em>.
+            The AI memory your company <em>owns</em>.
           </h1>
           <p className="lx-lead hx-lead-center mh-nots" data-rise="2">
             Not a model. Not a search box. Not a wrapper around someone else&rsquo;s chat. LongStrider is the software
