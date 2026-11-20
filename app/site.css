@@ -2221,7 +2221,12 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   background: var(--lx-paper-deep);
 }
 .mh-film-pause { position: absolute; top: 12px; right: 12px; z-index: 1; background: rgba(var(--lx-paper-rgb), 0.85); }
-.mh-nots { font-size: clamp(20px, 2.2vw, 24px); color: var(--lx-ink-primary); }
+.mh-nots { font-size: clamp(20px, 2.2vw, 24px); line-height: 1.5; color: var(--lx-ink-primary); max-width: 36em; text-wrap: balance; }
+.lx-hero .lx-lead + .lx-lead { margin-top: 18px !important; }
+.lx-hero .lx-lead { text-wrap: balance; }
+.mh-sovereign { max-width: 36em; }
+.mh-sovereign a { color: inherit; text-decoration: none; }
+.mh-sovereign a:hover strong { text-decoration: underline; text-underline-offset: 4px; }
 .lx-assure.mh-center { justify-content: center; }
 
 /* ═══════════════════════════════════════════════════════════

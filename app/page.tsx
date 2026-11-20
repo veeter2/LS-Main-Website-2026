@@ -137,8 +137,12 @@ export default function Home() {
           </p>
           <p className="lx-lead hx-lead-center" data-rise="2">
             It sits between your business and any model, and keeps what your company knows intact when the model, the
-            platform or the person changes. <strong>Sovereign by design.</strong> Your box, your models,
-            your keys. <Link href="/own-it">See what owning it means</Link>.
+            platform or the person changes.
+          </p>
+          <p className="lx-lead hx-lead-center mh-sovereign" data-rise="2">
+            <Link href="/own-it">
+              <strong>Sovereign by design.</strong> Your box, your models, your keys.
+            </Link>
           </p>
           <div className="lx-cta-row hx-cta-center" data-rise="3">
             <Link className="lx-btn lx-btn-primary" href="/book">
