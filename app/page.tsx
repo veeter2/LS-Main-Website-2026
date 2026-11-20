@@ -105,22 +105,14 @@ export default function Home() {
   return (
     <main>
       {/* Hero */}
-      <section className="lx-hero">
+      <section className="lx-hero hx-home">
         <div className="lx-wrap hx-center">
-          <p className="lx-eyebrow" data-rise="0">
-            Company memory
-          </p>
           <h1 className="lx-display lx-h1 mh-h1" data-rise="1">
             The model changes. The memory is <em>yours</em>.
           </h1>
           <p className="lx-lead hx-lead-center mh-nots" data-rise="2">
             LongStrider is a system of intelligence your company owns. It takes what your people, your systems and your
             files already know, learns from it every day, and any model you choose answers from it.
-          </p>
-          <p className="lx-lead hx-lead-center mh-sovereign" data-rise="2">
-            <Link href="/own-it">
-              <strong>Sovereign by design.</strong> Your box, your models, your keys.
-            </Link>
           </p>
           <div className="lx-cta-row hx-cta-center" data-rise="3">
             <Link className="lx-btn lx-btn-primary" href="/book">
@@ -133,6 +125,11 @@ export default function Home() {
         </div>
         <div className="lx-wrap" data-rise="4">
           <HeroVideo />
+          <p className="lx-lead hx-lead-center mh-sovereign">
+            <Link href="/own-it">
+              <strong>Sovereign by design.</strong> Your box, your models, your keys.
+            </Link>
+          </p>
         </div>
         <div className="lx-wrap pf-wrap pf-wrap-home" data-rise="5">
           <ReceiptCard compact />
