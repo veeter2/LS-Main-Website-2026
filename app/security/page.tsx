@@ -138,7 +138,7 @@ export default function SecurityConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Bring the frontier model you trust through your own keys, point it at a model you already run in-house, or put
-              a local model on your own hardware for the filing lane, the background job that files new facts. LongStrider is
+              a model on your own hardware for chat and for filing, the background job that files new facts. LongStrider is
               not a service you log into with our
               model behind it. It is software you install, and the model is whatever you choose. When a better one arrives,
               you switch, and nothing has to be re-taught.

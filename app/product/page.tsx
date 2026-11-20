@@ -314,7 +314,7 @@ export default function ProductConcept() {
             Every model, every key, every dollar. <em>One</em> screen.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Seven jobs, seven model settings, changed in Settings, no engineer needed. Your keys, not ours. Spend by job and by model,
+            Every job has its own model setting, changed in Settings, no engineer needed. Your keys, not ours. Spend by job and by model,
             every day, so you know what last night cost, and most nights it&rsquo;s nothing. Set how it speaks, what it
             won&rsquo;t do, and when it must check with a person first.
           </p>

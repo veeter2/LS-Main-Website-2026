@@ -21,7 +21,7 @@ const OPTIONS: Option[] = [
     id: "onprem",
     label: "On-premises",
     status: "On-premises, built with you.",
-    body: "A private model inside your walls. Today the filing lane can run on your own hardware. A full build with no calls out is a project we take on together, not a checkbox.",
+    body: "A private model inside your walls. Today chat and filing can run on your own hardware. A full build with no calls out is a project we take on together, not a checkbox.",
   },
 ]
 

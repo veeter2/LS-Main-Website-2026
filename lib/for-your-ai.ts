@@ -116,7 +116,7 @@ export const NOT = [
 export const CHECKS: { label: string; body: string }[] = [
   { label: "Storage", body: "Postgres, row-level scoping per person. Your data sits in plain Postgres you can read with any tool." },
   { label: "Model", body: "Any. Changing model does not lose memory. The model layer speaks the OpenAI chat-completions dialect (vLLM, LM Studio, NVIDIA NIM, llama.cpp all work)." },
-  { label: "Hosting", body: "Hosted in the United States while the client’s instance is built; then the client’s own cloud or on-premises. The filing lane runs on the client’s hardware today; a full build with no calls out is a project done together." },
+  { label: "Hosting", body: "Hosted in the United States while the client’s instance is built; then the client’s own cloud or on-premises. Chat and filing run on the client’s hardware today; a full build with no calls out is a project done together." },
   { label: "Certifications", body: "No SOC 2 yet; audit not started; security questions answered in writing." },
   { label: "Governance", body: "Every write leaves a receipt and can be undone. The AI proposes; a person confirms." },
   { label: "Company", body: "LongStrider, LLC, Austin, Texas. Small team. Runs the company that builds it. Early stage." },

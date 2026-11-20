@@ -39,7 +39,7 @@ const WE_DO = [
 const ARCHITECT = [
   {
     title: "Any model, your keys.",
-    body: "Seven jobs, seven model settings, one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We did it in October. Nothing was re-taught.",
+    body: "Every job has its own model setting, on one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We did it in October. Nothing was re-taught.",
   },
   {
     title: "Your teammates run on your record.",
@@ -55,7 +55,7 @@ const ARCHITECT = [
   },
   {
     title: "Runs where you need it.",
-    body: "Licensed to you in every case. Hosted and isolated to you today; your cloud or your rack, scoped with you. The filing lane can already run on your own hardware.",
+    body: "Licensed to you in every case. Hosted and isolated to you today; your cloud or your rack, scoped with you. Chat and filing can already run on your own hardware.",
   },
   {
     title: "Never trains a model.",
@@ -142,7 +142,7 @@ export default function HowItWorksConcept() {
           <div className="ly-band">
             <span className="ly-label">The model, rented and replaceable.</span>
             <p className="ly-model">
-              Any frontier model through your keys, or a local model on your hardware for the filing lane, the background job
+              Any frontier model through your keys, or a model on your own hardware for chat and for filing, the background job
               that files new facts. It gets the facts it needs for this question and writes the answer. It never has to keep the memory.
             </p>
           </div>

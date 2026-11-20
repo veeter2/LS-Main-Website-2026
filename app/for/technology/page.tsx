@@ -18,8 +18,8 @@ const FEATURES: { heading: string; items: string[] }[] = [
   {
     heading: "The models",
     items: [
-      "Seven jobs, seven model settings, changed in Settings without a deploy. Chat, filing, mood, the overnight pass, the judge, pictures and embeddings.",
-      "Any frontier model through your keys, or open models such as GLM Flash and DeepSeek Flash through a gateway like Isoquant. Any model you already run in-house. A local model on your hardware for the filing lane.",
+      "Every job has its own model setting, changed in Settings without a deploy: chat, filing, mood, the overnight pass, the judge, pictures and embeddings.",
+      "Any frontier model through your keys, or open models such as GLM Flash and DeepSeek Flash through a gateway like Isoquant. Any model you already run in-house. A local model on your hardware for chat and for filing.",
       "The model layer speaks the OpenAI chat-completions dialect, so any compatible server works: vLLM, LM Studio, NVIDIA NIM, llama.cpp. Embeddings follow the same setting.",
       "Embeddings are the one switch that costs a re-index. We say so on the screen.",
       "Spend by job and by model, every day, on one screen.",
@@ -74,7 +74,7 @@ export default function ForTechnology() {
         points: [
           {
             title: "Any model, your keys.",
-            body: "Seven jobs, seven model settings. Swap one and the memory doesn’t change. Embeddings are a separate setting, and that’s the one switch that does cost a re-index.",
+            body: "Every job has its own model setting. Swap one and the memory doesn’t change. Embeddings are a separate setting, and that’s the one switch that does cost a re-index.",
           },
           {
             title: "Scoped by default.",
@@ -161,7 +161,7 @@ export default function ForTechnology() {
                   <div className="mh-fact" data-reveal data-delay="2">
                     <h3>On-premises.</h3>
                     <p>
-                      The filing lane runs on your hardware today. A full build with no calls out is a project, not a
+                      Chat and filing run on your hardware today. A full build with no calls out is a project, not a
                       checkbox, and we&rsquo;ll tell you where the calls out are before you sign anything.
                     </p>
                   </div>
@@ -186,7 +186,7 @@ export default function ForTechnology() {
           },
           {
             q: "Can it run with no calls out?",
-            a: "Not fully, yet. The filing lane can. Chat, overnight and the judge still call a model through your keys. That’s the honest answer and we’d rather you hear it here.",
+            a: "Not fully, yet. Chat and filing can run on a model you host. The overnight pass and the judge still call a model through your keys. That’s the honest answer and we’d rather you hear it here.",
           },
           {
             q: "What happens when we switch models?",
