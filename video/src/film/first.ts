@@ -61,6 +61,14 @@ export function sceneOne(ctx: Ctx, t: number, n: number, o: number) {
       ctx.beginPath()
       ctx.ellipse(BX, landY + 5, 20 + 220 * rp, (20 + 220 * rp) * 0.16, 0, 0, 6.2832)
       ctx.stroke()
+      // a second, wider ring runs out along the dark and finds the floor
+      const rp2 = ramp(t, 2.42, 3.6)
+      ctx.strokeStyle = `rgba(232,205,150,${0.4 * (1 - rp2) * one})`
+      ctx.lineWidth = 1
+      ctx.beginPath()
+      ctx.ellipse(BX, landY + 5, 30 + 760 * rp2, (30 + 760 * rp2) * 0.13, 0, 0, 6.2832)
+      ctx.stroke()
+      halo(ctx, BX, landY, 260 * (1 - rp), [255, 236, 190], 0.55 * (1 - rp) * one)
     }
     ctx.fillStyle = `rgba(255,244,214,${one})`
     ctx.beginPath()

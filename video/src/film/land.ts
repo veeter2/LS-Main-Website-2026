@@ -9,14 +9,19 @@ export const MX = SX
 export const MY = 318
 export const MR = 37
 
-/** When the gold starts to run from the heap, and when it has reached everything. */
-const G0 = 13.5
-const G1 = 19.3
+/**
+ * How far the gold has run from the heap, as a share of the whole land. It compounds: the first sand
+ * gilds the road by the heap, and each fall after it carries the gold further, to the gateway and beyond.
+ */
+const FALLS = [19.5, 21.1, 22.7] // when each later fall of sand starts; it lands 1.18 seconds after
+const LAND = 1.18
+const goldAt = (t: number) =>
+  0.2 * lin(t, 13.5, 18.6) + 0.1 * ramp(t, FALLS[0] + LAND, FALLS[0] + LAND + 1.3) + 0.16 * ramp(t, FALLS[1] + LAND, FALLS[1] + LAND + 1.3) + 0.6 * ramp(t, FALLS[2] + LAND, FALLS[2] + LAND + 1.7)
 
 /** A slow push in over the whole land, sinking to the heap, rising to the model at night, easing back at dawn. */
 export const camAt = (t: number): Cam => ({
-  z: spline(t, [[11.2, 0.04], [19, 0.1], [26, 0.14], [30.6, 0.16], [35, 0.08]]),
-  px: spline(t, [[11.2, -24], [19, 4], [26, 26], [30.6, 14], [35, -16]]),
+  z: spline(t, [[11.2, 0.15], [13.6, 0.05], [19, 0.1], [26, 0.14], [30.6, 0.16], [35, 0.08]]),
+  px: spline(t, [[11.2, 10], [13.6, -24], [19, 4], [26, 26], [30.6, 14], [35, -16]]),
   py: spline(t, [[11.2, -6], [19, 8], [26, 2], [30.6, -12], [35, -4]]),
 })
 
@@ -32,11 +37,11 @@ function compose(P: Plates, t: number, n: number, warm: number) {
   c.filter = "none"
 
   // the land before the gold, then the gold running out along the road from where the sand lands
-  const g = lin(t, G0, G1)
+  const g = goldAt(t)
+  const front = g * (P.maxDist + 130)
   if (g <= 0) c.drawImage(P.grey, 0, 0)
-  else if (g >= 1) c.drawImage(P.day, 0, 0)
+  else if (g >= 1.05) c.drawImage(P.day, 0, 0)
   else {
-    const front = g * (P.maxDist + 130)
     const gd = P.gildData.data, ed = P.edgeData.data, dd = P.dayData, gr = P.greyData
     const idx = P.goldIdx, dist = P.goldDist, ga = P.goldRGBA
     for (let j = 0; j < idx.length; j++) {
@@ -137,7 +142,7 @@ function compose(P: Plates, t: number, n: number, warm: number) {
 
   if (n > 0) {
     // the gold keeps its own light after dark, and the light runs out along the road from the heap
-    const ed = P.edgeData.data
+    const ed = P.glowData.data
     const idx = P.goldIdx, dist = P.goldDist, ga = P.goldRGBA, sun = P.goldSun
     for (let j = 0; j < idx.length; j++) {
       const i = idx[j] * 4
@@ -145,19 +150,21 @@ function compose(P: Plates, t: number, n: number, warm: number) {
       ed[i] = ga[j * 4] * m
       ed[i + 1] = ga[j * 4 + 1] * m
       ed[i + 2] = ga[j * 4 + 2] * m
-      ed[i + 3] = sun[j] ? ga[j * 4 + 3] * 0.25 : ga[j * 4 + 3]
+      // only gold the memory has reached can glow
+      const e = front - dist[j]
+      ed[i + 3] = e <= 0 ? 0 : (sun[j] ? ga[j * 4 + 3] * 0.25 : ga[j * 4 + 3]) * (e >= 14 ? 1 : e / 14)
     }
-    P.edgeCtx.putImageData(P.edgeData, 0, 0)
+    P.glowCtx.putImageData(P.glowData, 0, 0)
     c.save()
     c.globalAlpha = n
-    c.drawImage(P.edge, 0, 0)
+    c.drawImage(P.glow, 0, 0)
     c.globalCompositeOperation = "lighter"
     c.filter = "blur(9px)"
     c.globalAlpha = n * 0.85
-    c.drawImage(P.edge, 0, 0)
+    c.drawImage(P.glow, 0, 0)
     c.filter = "blur(26px)"
     c.globalAlpha = n * 0.66
-    c.drawImage(P.edge, 0, 0)
+    c.drawImage(P.glow, 0, 0)
     c.restore()
 
     // the lamps come on one by one, down the road from the heap, and go out at dawn the way they came
@@ -166,7 +173,7 @@ function compose(P: Plates, t: number, n: number, warm: number) {
     for (const L of P.lamps) {
       const on = 21.9 + 2.7 * L.rank
       const off = 30.5 + 1.1 * (1 - L.rank)
-      const I = flick(t - on) * (1 - ramp(t, off, off + 0.6)) * (0.94 + 0.06 * Math.sin(t * 2.3 + L.rank * 9)) * (0.55 + 0.45 * L.gold)
+      const I = flick(t - on) * lin(front - L.dist, 0, 40) * (1 - ramp(t, off, off + 0.6)) * (0.94 + 0.06 * Math.sin(t * 2.3 + L.rank * 9)) * (0.55 + 0.45 * L.gold)
       if (I <= 0) continue
       halo(c, L.x, L.y, L.r * 9, [255, 206, 140], 0.5 * I)
       c.save()
@@ -272,7 +279,7 @@ export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) 
   // 12..19 the same sand falls again, lands on the road, and stays. Then it keeps growing.
   const head = (t - 12.2) * 0.85
   const tail = (t - 18.0) * 0.85
-  const heapH = 74 * k(t, [[13.35, 0], [19.2, 1]]) + 16 * lin(t, 20.6, 26.4)
+  const heapH = 74 * k(t, [[13.35, 0], [19.2, 1]]) + FALLS.reduce((s, f) => s + 6 * ramp(t, f + LAND, f + LAND + 1.4), 0)
   const top = LY - heapH + 4
   if (heapH > 2) {
     // its shadow on the road
@@ -289,14 +296,16 @@ export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) 
   if (head > 0 && tail < 1) stream(ctx, t, SX, -30, top + 4, 12, 6400, n, 83, 1, { head, tail, sway: 1.5 })
   splash(ctx, t, SX, top + 2, win(t, 13.35, 19.25, 0.25), n, 85)
   // "It grows": a finer fall keeps arriving on the wind while the model takes only a thread
-  const vHead = (t - 19.4) * 0.85
-  const vTail = (t - 25.2) * 0.85
-  if (vHead > 0 && vTail < 1) stream(ctx, t, SX, -30, top + 4, 17, 6400, n, 87, 0.24, { head: vHead, tail: vTail, lean: 240, sway: 3 })
-  splash(ctx, t, SX, top + 2, 0.16 * win(t, 20.6, 26.4, 0.25), n, 89)
+  FALLS.forEach((f, i) => {
+    const vHead = (t - f) * 0.85
+    const vTail = (t - f - 1.0) * 0.85
+    if (vHead > 0 && vTail < 1) stream(ctx, t, SX, -30, top + 4, 15, 6400, n, 87 + i * 7, 0.42, { head: vHead, tail: vTail, lean: 240, sway: 3 })
+    splash(ctx, t, SX, top + 2, 0.3 * win(t, f + LAND, f + LAND + 1.1, 0.2), n, 89 + i * 7)
+  })
 
   // 19.. the model: a seat, one small gold ball that settles into it, and the thin thread it takes
-  const seat = ramp(t, 18.5, 19.3)
-  const arrive = k(t, [[18.9, 0], [20.4, 1]], "out")
+  const seat = ramp(t, 18.2, 18.9)
+  const arrive = k(t, [[18.6, 0], [19.8, 1]], "out")
   const out = k(t, [[26.5, 0], [29.0, 1]])
   const inn = k(t, [[26.9, 0], [29.8, 1]])
   if (seat > 0) {
@@ -310,7 +319,7 @@ export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) 
     ctx.stroke()
     ctx.setLineDash([])
     // a ring goes out from the seat each time a ball settles into it
-    for (const at of [20.35, 29.75]) {
+    for (const at of [19.75, 29.75]) {
       const f = lin(t, at, at + 1)
       if (f <= 0 || f >= 1) continue
       ctx.strokeStyle = rgba(lineC, 0.7 * (1 - f) * (1 - f))
@@ -320,18 +329,19 @@ export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) 
       ctx.stroke()
     }
 
-    thread(ctx, t, n, top, 20.5, 1 - ramp(t, 26.0, 26.7))
-    thread(ctx, t, n, top, 29.95, 1)
+    const lean = lin(t, FALLS[0] + LAND, FALLS[2] + LAND + 1.7) // 0 to 1 as the land fills in
+    thread(ctx, t, n, top, 19.9, (1 - 0.55 * lean) * (1 - ramp(t, 26.0, 26.7)))
+    thread(ctx, t, n, top, 29.95, 0.45)
 
     // the gold ball: down into the seat, then lifted out up and to the right
     const back = (1 - arrive) * (1 - arrive)
     const gx = out > 0 ? MX + 420 * out * out : MX + 380 * back
     const gy = out > 0 ? MY - 190 * Math.pow(out, 1.4) : MY - 230 * Math.pow(1 - arrive, 1.6)
-    const goldA = ramp(t, 18.9, 19.5) * (1 - ramp(out, 0.84, 1))
+    const goldA = ramp(t, 18.6, 19.2) * (1 - ramp(out, 0.84, 1))
     if (goldA > 0) {
       if (arrive < 0.98) trail(ctx, MX + 380, MY - 230, gx, gy, [232, 205, 150], 0.5 * goldA * (1 - arrive))
       if (out > 0.02) trail(ctx, MX, MY, gx, gy, [232, 205, 150], 0.55 * goldA * Math.min(1, out * 4))
-      halo(ctx, gx, gy, MR * (3.4 + 2 * n) * (1 + 0.04 * Math.sin(t * 1.7)), [232, 205, 150], (0.3 + 0.35 * n) * goldA)
+      halo(ctx, gx, gy, MR * (3.4 + 2 * n) * (1 + 0.45 * lean) * (1 + 0.04 * Math.sin(t * 1.7)), [232, 205, 150], (0.3 + 0.35 * n) * (1 + 0.3 * lean) * goldA)
       orb(ctx, gx, gy, MR * (1 - 0.1 * out), "gold", 97, goldA)
     }
     // the different ball: down from the upper left into the same seat

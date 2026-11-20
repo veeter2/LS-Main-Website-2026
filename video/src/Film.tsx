@@ -24,7 +24,7 @@ export const CAPTIONS: { at: number; to: number; text: string }[] = [
   { at: 3, to: 8, text: "Most AI keeps it with the model." },
   { at: 8, to: 12, text: "A chat box forgets by morning." },
   { at: 12, to: 19, text: "LongStrider keeps it with you." },
-  { at: 19, to: 26, text: "It grows. The model gets only what the question needs." },
+  { at: 19, to: 26, text: "It compounds. The model gets only what the question needs." },
   { at: 26, to: 31, text: "Change the model. Keep everything." },
 ]
 
@@ -64,7 +64,8 @@ function paint(ctx: Ctx, t: number, P: Plates) {
         const tw = 0.6 + 0.4 * Math.sin((t * 6.2832 * (4 + Math.floor(s * 14))) / FILM_SECONDS + i)
         ctx.fillStyle = `rgba(241,236,223,${((n - 0.3) / 0.7) * (0.12 + 0.5 * s * s) * tw * (1 - y / 760)})`
         ctx.beginPath()
-        ctx.arc(x, y - drift * (0.4 + s), 0.5 + s * 1.1, 0, 6.2832)
+        const push = 1 + (early ? 0.016 * t : 0) * (0.3 + s)
+        ctx.arc(960 + (x - 960) * push, 380 + (y - drift * (0.4 + s) - 380) * push, 0.5 + s * 1.1, 0, 6.2832)
         ctx.fill()
       }
     }
@@ -158,7 +159,18 @@ export const Film = () => {
         <canvas ref={ref} width={W} height={H} style={{ position: "absolute", inset: 0, width: W, height: H }} />
 
         {/* the question */}
-        <Big o={win(t, 0.3, 3.1, 0.5)} top={330 + (1 - ramp(t, 0.3, 1.1)) * 14} color={C.paper}>Where does the memory live?</Big>
+        {/* the question arrives a word at a time, and takes the light of the grain as it falls past */}
+        <div style={{ position: "absolute", left: 0, right: 0, top: 330, textAlign: "center", ...DISPLAY, fontSize: 92, color: C.paper, opacity: 1 - ramp(t, 2.6, 3.1), transform: `scale(${1 + 0.012 * t})` }}>
+          {"Where does the memory live?".split(" ").map((w, i) => {
+            const at = 0.25 + i * 0.16
+            const lit = Math.exp(-Math.pow((t - 1.62) / 0.3, 2))
+            return (
+              <span key={i} style={{ display: "inline-block", marginRight: "0.26em", opacity: ramp(t, at, at + 0.5), transform: `translateY(${(1 - ramp(t, at, at + 0.6)) * 18}px)`, textShadow: `0 0 ${10 + 36 * lit}px rgba(232,205,150,${0.85 * lit})` }}>
+                {w}
+              </span>
+            )
+          })}
+        </div>
 
         {/* the captions */}
         {CAPTIONS.map((c) => {

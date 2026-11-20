@@ -9,7 +9,7 @@ import { H, LY, SX, W, blank, makeNoise } from "./core"
  */
 const SC = W / 1672 // the painting is 1672 wide; the film is 1920
 
-export type Lamp = { x: number; y: number; r: number; base: number; gold: number; rank: number }
+export type Lamp = { x: number; y: number; r: number; base: number; gold: number; rank: number; dist: number }
 export type Plates = {
   day: HTMLCanvasElement
   grey: HTMLCanvasElement
@@ -38,6 +38,9 @@ export type Plates = {
   edge: HTMLCanvasElement
   edgeCtx: CanvasRenderingContext2D
   edgeData: ImageData
+  glow: HTMLCanvasElement
+  glowCtx: CanvasRenderingContext2D
+  glowData: ImageData
   tmp: HTMLCanvasElement
   small: HTMLCanvasElement
 }
@@ -221,7 +224,7 @@ export function buildPlates(landImg: HTMLImageElement): Plates {
   }
 
   /* ---- lamps, in the order the light reaches them from the heap ---- */
-  const lamps: Lamp[] = LAMP_SRC.map(([x, y, r, base, gold]) => ({ x: x * SC, y: y * SC, r: r * SC, base: base * SC, gold, rank: 0 }))
+  const lamps: Lamp[] = LAMP_SRC.map(([x, y, r, base, gold]) => ({ x: x * SC, y: y * SC, r: r * SC, base: base * SC, gold, rank: 0, dist: di[Math.round(y * SC) * W + Math.round(x * SC)] / 10 }))
   const byDist = lamps.map((l, i) => [di[Math.round(l.y) * W + Math.round(l.x)], i]).sort((a, b) => a[0] - b[0])
   byDist.forEach(([, i], rank) => (lamps[i].rank = rank / (lamps.length - 1)))
 
@@ -242,10 +245,11 @@ export function buildPlates(landImg: HTMLImageElement): Plates {
   const [out, outCtx] = work(W, H)
   const [gild, gildCtx] = work(W, H)
   const [edge, edgeCtx] = work(W, H)
+  const [glow, glowCtx] = work(W, H)
   const gildData = new ImageData(greyData.slice(), W, H)
   return {
     day, grey, dayData, greyData, goldIdx, goldDist, goldRGBA, goldSun, maxDist, depth, ground, cloud, lamps, stars, noise: makeNoise(),
-    scene, sceneCtx, out, outCtx, outData: outCtx.createImageData(W, H), gild, gildCtx, gildData, edge, edgeCtx, edgeData: edgeCtx.createImageData(W, H),
+    scene, sceneCtx, out, outCtx, outData: outCtx.createImageData(W, H), gild, gildCtx, gildData, edge, edgeCtx, edgeData: edgeCtx.createImageData(W, H), glow, glowCtx, glowData: glowCtx.createImageData(W, H),
     tmp: blank(W, H), small: blank(W / 4, H / 4),
   }
 }
