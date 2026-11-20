@@ -104,7 +104,7 @@ export default function OwnItPage() {
               Sovereign by design. Software you own.
             </p>
             <h1 className="lx-display lx-h1" data-rise="1">
-              Rent the model. Own <em>everything</em> else.
+              Your model. Your machine. Own <em>all</em> of it.
             </h1>
             <p className="lx-lead" data-rise="2">
               LongStrider is licensed software, not a subscription you rent. The money you’d have spent on
