@@ -2,7 +2,7 @@ import { k, ramp, rng, win } from "../util"
 import { type Ctx, H, type RGB, W, blank, gz, halo, lin, makeNoise, mix, orb, rgba, stream } from "./core"
 import { spark } from "./cost"
 import type { Plates } from "./plates"
-import { strider } from "./strider"
+import { type Pose, figure, glide, handOf, walkPose } from "./strider"
 
 /**
  * The two doors film: whose memory is it?
@@ -118,25 +118,76 @@ function cam(ctx: Ctx, t: number) {
   ctx.setTransform(z, 0, 0, z, W / 2 - c.x * z, H / 2 - c.y * z)
 }
 
-/* ---------- the strider's walk ---------- */
+/* ---------- the strider ---------- */
 
-/** One full stride of the strider at this height: stopping on a whole stride leaves the legs wide, mid-walk, never stiff. */
-const STRIDE = 186 * 0.66
-const STOP = 400
+const HH = 186
+const STRIDE = HH * 0.66
+const FD = 0.05 * HH, FR = 1.6 * FD
+/** Where they stop first, and where they stand after the pinch. */
+const P1 = 301, P2 = 380
+const IN_STEPS = 5
+const X0 = P1 - (IN_STEPS - 1) * STRIDE
+const IN0 = -0.5, IN1 = 3.5, BOW = 16.3, CAST = 19.05, OFF = 31
+/** Where the poured grain lands on the disc. */
+const SOW_X = 360
+const ss = (u: number) => u * u * (3 - 2 * u)
 /**
- * Where the feet are, how far they have walked, and how tall the strider stands. On from the left, slowly across
- * their own disc, and at dawn one more stride toward the road side of it. Never off their own ground.
+ * The walk is worked out on a straight flat line, then laid into the picture: the far stones are smaller and
+ * higher, so the strider gets smaller and climbs. A planted foot maps to one fixed point, so it never slides.
  */
-function walkAt(t: number): { x: number; y: number; walked: number; h: number; a: number } {
-  const first = 3 * STRIDE
-  let w = t < 3.3 ? 140 * lin(t, 0.5, 3.3) : 140 + (first - 140) * (1 - Math.pow(1 - lin(t, 3.3, 8), 1.7))
-  if (t > 31.2) {
-    const u = lin(t, 31.2, 33.6)
-    w = first + STRIDE * u * u * (3 - 2 * u)
+const sizeAt = (w: number) => (w < 520 ? 1 : (1 - 0.24 * ss(lin(w, 520, 700))) * (1 - 0.158 * ss(lin(w, 760, 1000))))
+const XT = (() => {
+  const a: number[] = []
+  let x = -400
+  for (let w = -400; w <= 1500; w += 4) { a.push(x); x += 4 * sizeAt(w + 2) }
+  return a
+})()
+const toX = (w: number) => {
+  const f = (w + 400) / 4, i = Math.max(0, Math.min(XT.length - 2, Math.floor(f)))
+  return XT[i] + (XT[i + 1] - XT[i]) * (f - i)
+}
+const footG = (w: number) => (w < 124 ? 470 + 7 * lin(w, 30, 124) : 477 - 52 * ss(lin(w, 540, 626)) - 55 * ss(lin(w, 880, 994)))
+const hipG = (w: number) => (w < 124 ? 470 + 7 * lin(w, 30, 124) : 477 - 52 * ss(lin(w, 564, 650)) - 55 * ss(lin(w, 932, 1018)))
+/** How far the arm is up for pouring, and how much grain is coming out of the hand. */
+const sowAt = (t: number) => Math.max(ss(lin(t, 3.7, 4.5)) * (1 - ss(lin(t, 7.6, 8.4))), ss(lin(t, 24.8, 25.6)) * (1 - ss(lin(t, 27.5, 28.3))))
+const pourAt = (t: number) => Math.max(win(t, 4.5, 7.6, 0.3), win(t, 25.6, 27.5, 0.3))
+
+/** The strider's pose on the flat line: walks on, pours, bows for a pinch and casts it, pours again, walks on at dawn. */
+function actor(t: number): Pose {
+  const breath = t * 1.9
+  let p: Pose
+  if (t < BOW) p = walkPose(X0, 0, HH, (IN_STEPS - 1) * STRIDE * glide(lin(t, IN0, IN1)), IN_STEPS, false, breath)
+  else if (t < 20.5) {
+    // one step forward, a deep bow to the heap, up with the pinch, an underarm cast, and the back foot comes up
+    const st = lin(t, BOW, BOW + 0.5), jn = lin(t, 19.9, 20.5)
+    const lean = k(t, [[BOW, 0.05], [16.8, 0.35], [17.3, 1.15], [17.9, 1.15], [18.5, 0.08], [18.85, -0.08], [19.15, 0.42], [19.8, 0.1], [20.5, 0.05]])
+    p = {
+      hx: k(t, [[BOW, P1], [16.9, 340], [17.3, 348], [18, 348], [18.5, 338], [18.85, 332], [19.15, 352], [19.8, 345], [20.5, P2]]),
+      hy: -HH * k(t, [[BOW, 0.598], [16.8, 0.5], [17.3, 0.31], [17.9, 0.31], [18.5, 0.52], [18.85, 0.5], [19.15, 0.51], [19.9, 0.52], [20.5, 0.598]]),
+      h: HH,
+      fa: [P1 + FR + (P2 + FD - P1 - FR) * ss(st), -HH * 0.04 * Math.sin(Math.PI * st)],
+      fb: [P1 - FR + (P2 - FD - P1 + FR) * ss(jn), -HH * 0.04 * Math.sin(Math.PI * jn)],
+      lean,
+      armN: k(t, [[BOW, -0.02], [16.9, 0.5], [17.3, 0.15], [17.9, 0.15], [18.5, 0.75], [18.85, -0.85], [19.15, 1.55], [19.6, 0.9], [20.4, -0.02]]),
+      armF: k(t, [[BOW, -0.07], [17.3, -0.55], [17.9, -0.55], [18.5, -0.1], [18.85, 0.4], [19.15, -0.6], [20.4, -0.07]]),
+      nod: lean * 0.9,
+    }
+  } else if (t < OFF) p = walkPose(P2, 0, HH, 0, 2, true, breath)
+  else {
+    const u = t - OFF, v = STRIDE / 0.78
+    p = walkPose(P2, 0, HH, u < 0.6 ? (v * u * u) / 1.2 : v * (u - 0.3), 99, true)
   }
-  const x = STOP - first + w
-  const y = x < 124 ? 470 + 7 * lin(x, 30, 124) : 477
-  return { x, y, walked: w, h: 186, a: ramp(t, 0.5, 1.1) }
+  const a = sowAt(t)
+  if (a > 0) {
+    p.armN += (1.2 + 0.1 * Math.sin(t * 1.4) - p.armN) * a
+    p.lean += 0.04 * a
+  }
+  return p
+}
+/** The pose laid into the picture. */
+function toPic(p: Pose): Pose {
+  const s = sizeAt(p.hx)
+  return { ...p, hx: toX(p.hx), hy: hipG(p.hx) + p.hy * s, h: HH * s, fa: [toX(p.fa[0]), footG(p.fa[0]) + p.fa[1] * sizeAt(p.fa[0])], fb: [toX(p.fb[0]), footG(p.fb[0]) + p.fb[1] * sizeAt(p.fb[0])] }
 }
 
 /* ---------- grain on a disc ---------- */
@@ -150,19 +201,20 @@ const DOTS: Dot[][] = DISCS.map((d, di) => {
   })
 })
 /**
- * A low heap of grain on a disc's face. `fill` is how much of it is there yet. `upTo` lets the first disc's
- * grain appear only behind the strider as it trickles from the hand. Nothing is ever drawn past the rim.
+ * A low heap of grain on a disc's face. `fill` is how much of it is there yet. `spread` lets the first disc's
+ * grain pile outward from where it pours out of the hand. Nothing is ever drawn past the rim.
  */
-function discGrain(ctx: Ctx, di: number, fill: number, dull: number, upTo = 1e9) {
+function discGrain(ctx: Ctx, di: number, fill: number, dull: number, spread = 1e9) {
   if (fill <= 0) return
   const d = DISCS[di]
   const high = d.ry * 0.55 * Math.min(1, fill * 1.2)
   for (const p of DOTS[di]) {
     if (p.order > fill) continue
     const x = d.x + p.dx * d.rx
-    if (x > upTo) continue
+    const far = Math.hypot(p.dx - (SOW_X - d.x) / d.rx, p.dy)
+    if (far > spread) continue
     const y = d.y + p.dy * d.ry - p.lift * high
-    const fresh = Math.min(1, (upTo - x) / 14)
+    const fresh = Math.min(1, (spread - far) / 0.1)
     const col = d.pal[Math.min(3, Math.floor(p.c * 4 + p.lift * 0.8))]
     ctx.fillStyle = rgba(mix(col, [150, 146, 138], dull * 0.45), (0.55 + 0.4 * p.c) * fresh)
     ctx.beginPath()
@@ -335,7 +387,6 @@ export function doorsScene(ctx: Ctx, t: number, S: Scene) {
 }
 
 function paint(ctx: Ctx, t: number, S: Scene) {
-  const wk = walkAt(t)
   const others = ramp(t, 8.8, 11.8)
   const grow = ramp(t, 24.6, 28)
   const roadAmt = ramp(t, 12.2, 15.4) + 0.6 * grow
@@ -369,7 +420,7 @@ function paint(ctx: Ctx, t: number, S: Scene) {
 
   // each disc's own grain, in its own shade, never past its rim
   const d1 = t < 8 ? 0.42 : 0.42 + 0.58 * grow
-  discGrain(ctx, 0, d1, asking, t < 8.4 ? wk.x - 6 : 1e9)
+  discGrain(ctx, 0, d1, asking, t < 8.6 ? lin(t, 4.7, 8.4) * 2 : 1e9)
   for (let i = 1; i < DISCS.length; i++) discGrain(ctx, i, others * (0.45 + 0.55 * grow) * lin(others, (i - 1) * 0.12, (i - 1) * 0.12 + 0.5), asking)
   for (let i = 0; i < DISCS.length; i++) rim(ctx, i, rims * (i === 4 ? 0.5 : 1))
 
@@ -406,76 +457,78 @@ function paint(ctx: Ctx, t: number, S: Scene) {
   if (b.kind === "pearl") halo(ctx, b.x, b.y, BALL_R * 4, [190, 180, 240], 0.5 * win(t, 30.5, 31.6, 0.4))
   asks(ctx, t)
 
-  // the strider: sand trickles from the hand onto the disc while crossing it
-  if (wk.a > 0) {
-    const trickle = win(t, 3.5, 8.1, 0.5)
-    if (trickle > 0) {
-      stream(ctx, t, wk.x - 10, wk.y - 86, wk.y - 2, 2.2, 260, 0, 61, trickle)
-      halo(ctx, wk.x - 10, wk.y - 3, 12, [236, 198, 108], 0.35 * trickle)
-    }
-    // the pinch: lifted from the disc to the hand, thrown over the rim, falling to the road, and turning road grey there
-    const reach = win(t, 17.0, 19.6, 0.5)
-    if (t > 16.9 && t < 22.4) {
-      const r = rng(77)
-      const hx = wk.x + 26, hy = wk.y - 58
-      const [, , rdx, rdy] = roadPt(0.33)
-      for (let j = 0; j < 46; j++) {
-        const lag = r() * 0.5, wob = gz(r), c = r(), along = gz(r) * 16, across = gz(r) * 4, pick = r()
-        // up from the heap at the feet into the hand
-        const upT = lin(t, 17.0 + lag * 0.6, 17.6 + lag * 0.6)
-        // then out of the hand: a short throw, and gravity does the rest
-        const t0 = 18.0 + lag
-        const fly = 0.62 + 0.1 * c
-        const ph = (t - t0) / fly
-        const lx = DROP[0] + rdx * along - rdy * across, ly = DROP[1] + rdy * along + rdx * across * 0.5
-        let x: number, y: number, grey = 0, a = 1
-        if (ph <= 0) {
-          if (upT <= 0) continue
-          const sx = wk.x + 6 + pick * 30, sy = wk.y - 2
-          const e = upT * upT * (3 - 2 * upT)
-          x = sx + (hx - sx) * e + wob * 2 * (1 - e)
-          y = sy + (hy - sy) * e
-          if (upT >= 1) { x = hx + wob * 2.5; y = hy + wob * 1.5 }
-        } else if (ph < 1) {
-          x = hx + (lx - hx) * ph + wob * 2
-          y = hy + (ly - hy) * ph - 4 * 34 * ph * (1 - ph) + (ly - hy) * 0.35 * (ph * ph - ph)
-        } else {
-          // landed: a small bounce, then it lies on the road, goes grey, and moves off with the road's own grain
-          const tl = t - t0 - fly
-          const hop = Math.max(0, Math.sin(Math.min(1, tl / 0.28) * Math.PI)) * 3.5 * (1 - c * 0.5)
-          const drift = Math.max(0, tl - 0.3) * 22
-          x = lx + rdx * drift
-          y = ly + rdy * drift - hop
-          grey = lin(tl, 0.05, 0.45)
-          a = 1 - lin(tl, 1.6, 2.6)
-        }
-        if (a <= 0) continue
-        ctx.fillStyle = rgba(mix(SHADES[0][1 + (j % 3)], GREYS[j % 3], grey), a)
-        ctx.beginPath()
-        ctx.arc(x, y, 1.3 + c * 1.5, 0, 6.2832)
-        ctx.fill()
-        if (grey < 1 && j % 3 === 0) halo(ctx, x, y, 9, [236, 190, 90], 0.3 * (1 - grey) * a)
-      }
-      // the road takes it: one grey ripple where it lands
-      const landed = lin(t, 18.7, 19.9)
-      if (landed > 0 && landed < 1) {
-        ctx.strokeStyle = rgba(GREYS[1], 0.8 * (1 - landed) * (1 - landed))
-        ctx.lineWidth = 1.1
-        ctx.beginPath()
-        ctx.ellipse(DROP[0], DROP[1], 6 + 38 * landed, (6 + 38 * landed) * 0.32, -0.2, 0, 6.2832)
-        ctx.stroke()
-      }
-    }
-    // a soft shadow under the feet, then the figure
-    ctx.fillStyle = rgba(INKC, 0.14 * wk.a)
+  // the strider, always on the ground: a soft shadow under each foot that is down, then the figure
+  const flat = actor(t)
+  const P = toPic(flat)
+  for (const [f, w] of [[P.fa, flat.fa], [P.fb, flat.fb]] as [[number, number], [number, number]][]) {
+    const a = Math.max(0, 1 + w[1] / 5)
+    if (a <= 0) continue
+    ctx.fillStyle = rgba(INKC, 0.13 * a)
     ctx.beginPath()
-    ctx.ellipse(wk.x - 4, wk.y + 1, wk.h * 0.2, wk.h * 0.022, 0, 0, 6.2832)
+    ctx.ellipse(f[0] + 2, f[1] + 1, P.h * 0.085, P.h * 0.014, 0, 0, 6.2832)
     ctx.fill()
-    ctx.save()
-    ctx.globalAlpha = wk.a
-    // when reaching for the pinch the stride settles: both feet down
-    strider(ctx, wk.x, wk.y, wk.h * (1 - 0.03 * reach), wk.walked, { body: "rgba(26,22,12,1)", far: "rgba(66,60,50,1)" })
-    ctx.restore()
+  }
+  const { hand } = figure(ctx, P, { body: "rgba(26,22,12,1)", far: "rgba(66,60,50,1)" })
+
+  // grain pours from the open hand, held out, and piles where it lands
+  const pour = pourAt(t)
+  if (pour > 0) {
+    stream(ctx, t, hand[0] + 1, hand[1] + 2, 474, 2, 240, 0, 61, pour)
+    halo(ctx, hand[0], hand[1], 9, [236, 198, 108], 0.4 * pour)
+    halo(ctx, hand[0] + 1, 473, 13, [236, 198, 108], 0.32 * pour)
+  }
+
+  // the pinch: gathered from the heap into the hand, carried up, cast over the rim, and turning road grey where it lands
+  if (t > 17.2 && t < 23) {
+    const r = rng(77)
+    const [, , rdx, rdy] = roadPt(0.33)
+    let held = 0
+    for (let j = 0; j < 46; j++) {
+      const lag = r(), wob = gz(r), c = r(), along = gz(r) * 16, across = gz(r) * 4, pick = r()
+      const upT = lin(t, 17.25 + lag * 0.3, 17.7 + lag * 0.3)
+      const t0 = CAST + lag * 0.13
+      const fly = 0.62 + 0.1 * c
+      const ph = (t - t0) / fly
+      const lx = DROP[0] + rdx * along - rdy * across, ly = DROP[1] + rdy * along + rdx * across * 0.5
+      let x: number, y: number, grey = 0, a = 1
+      if (ph <= 0) {
+        if (upT <= 0) continue
+        const sx = hand[0] - 16 + pick * 32, sy = 471
+        const e = ss(upT)
+        x = sx + (hand[0] + wob * 2.2 - sx) * e
+        y = sy + (hand[1] + (c - 0.5) * 4 - sy) * e
+        held = Math.max(held, e)
+      } else if (ph < 1) {
+        const [hx, hy] = handOf(toPic(actor(t0)))
+        x = hx + (lx - hx) * ph + wob * 2 * (1 - ph)
+        y = hy + (ly - hy) * ph - 4 * 34 * ph * (1 - ph) + (ly - hy) * 0.35 * (ph * ph - ph)
+      } else {
+        // landed: a small bounce, then it lies on the road, goes grey, and moves off with the road's own grain
+        const tl = t - t0 - fly
+        const hop = Math.max(0, Math.sin(Math.min(1, tl / 0.28) * Math.PI)) * 3.5 * (1 - c * 0.5)
+        const drift = Math.max(0, tl - 0.3) * 22
+        x = lx + rdx * drift
+        y = ly + rdy * drift - hop
+        grey = lin(tl, 0.05, 0.45)
+        a = 1 - lin(tl, 1.6, 2.6)
+      }
+      if (a <= 0) continue
+      ctx.fillStyle = rgba(mix(SHADES[0][1 + (j % 3)], GREYS[j % 3], grey), a)
+      ctx.beginPath()
+      ctx.arc(x, y, 1.3 + c * 1.5, 0, 6.2832)
+      ctx.fill()
+      if (grey < 1 && j % 3 === 0) halo(ctx, x, y, 9, [236, 190, 90], 0.3 * (1 - grey) * a)
+    }
+    if (held > 0 && t < CAST) halo(ctx, hand[0], hand[1], 16, [236, 198, 108], 0.5 * held)
+    // the road takes it: one grey ripple where it lands
+    const landed = lin(t, CAST + 0.66, CAST + 1.86)
+    if (landed > 0 && landed < 1) {
+      ctx.strokeStyle = rgba(GREYS[1], 0.8 * (1 - landed) * (1 - landed))
+      ctx.lineWidth = 1.1
+      ctx.beginPath()
+      ctx.ellipse(DROP[0], DROP[1], 6 + 38 * landed, (6 + 38 * landed) * 0.32, -0.2, 0, 6.2832)
+      ctx.stroke()
+    }
   }
 
   ctx.setTransform(1, 0, 0, 1, 0, 0)

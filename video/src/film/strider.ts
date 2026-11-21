@@ -104,6 +104,8 @@ export type Pose = {
   lean: number
   /** arm angles from straight down, positive forward */
   armN: number; armF: number
+  /** when set, the head follows the spine at this angle: for a deep bow */
+  nod?: number
 }
 
 /** Draws a pose. Gives back where the near hand and the head are. */
@@ -127,11 +129,18 @@ export function figure(ctx: Ctx, p: Pose, tone: { body: string; far: string }): 
   leg(ctx, hx, hy, p.fa[0], p.fa[1], L, h * 0.108)
   blade(ctx, shx, shy, hx, hy, h * 0.124, h * 0.106, 0.06)
   const hand = arm(p.armN, h * 0.038)
-  const head: [number, number] = [shx + h * 0.012 + Math.sin(p.lean) * h * 0.02, shy - h * 0.098]
+  const head: [number, number] = p.nod === undefined ? [shx + h * 0.012 + Math.sin(p.lean) * h * 0.02, shy - h * 0.098] : [shx + h * 0.012 + Math.sin(p.nod) * h * 0.09, shy - Math.cos(p.nod) * h * 0.098]
   ctx.beginPath()
   ctx.arc(head[0], head[1], h * 0.044, 0, 6.2832)
   ctx.fill()
   return { hand, head }
+}
+
+/** Where the near hand of a pose is, without drawing it. */
+export function handOf(p: Pose): [number, number] {
+  const T = p.h * 0.31
+  const ax = p.hx + Math.sin(p.lean) * T - p.h * 0.012, ay = p.hy - Math.cos(p.lean) * T + p.h * 0.03
+  return [ax + Math.sin(p.armN) * p.h * 0.31, ay + Math.cos(p.armN) * p.h * 0.31]
 }
 
 const sstep = (u: number) => u * u * (3 - 2 * u)
