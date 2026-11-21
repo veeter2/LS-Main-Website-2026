@@ -2,7 +2,7 @@ import { C } from "../beats"
 import { k, ramp, rng, win } from "../util"
 import { type Ctx, H, LY, type RGB, SX, W, glowAt, gz, halo, hex, lin, mix, orb, palAt, pile, rgba, sm, spline, splash, stream, trail } from "./core"
 import { type Cam, type Plates, camT, depthAt, warp } from "./plates"
-import { type Pose, figure, walkPose } from "./strider"
+import { type Pose, figure, glide, walkPose } from "./strider"
 
 /* The second world: your land. One painting, relit, with a camera moving through it. The sand lands on it and stays. */
 export const MX = SX
@@ -19,11 +19,17 @@ const goldAt = (t: number) =>
   0.2 * lin(t, 13.5, 18.6) + 0.1 * ramp(t, FALLS[0] + LAND, FALLS[0] + LAND + 1.3) + 0.16 * ramp(t, FALLS[1] + LAND, FALLS[1] + LAND + 1.3) + 0.6 * ramp(t, FALLS[2] + LAND, FALLS[2] + LAND + 1.7)
 
 /** A slow push in over the whole land, sinking to the heap, rising to the model at night, easing back at dawn. */
-export const camAt = (t: number): Cam => ({
-  z: spline(t, [[11.2, 0.24], [13.8, 0.045], [19, 0.12], [26, 0.2], [30.6, 0.22], [35, 0.31]]),
-  px: spline(t, [[11.2, 10], [13.6, -28], [19, 6], [26, 34], [30.6, 12], [35, 64]]),
-  py: spline(t, [[11.2, -6], [19, 8], [26, 2], [30.6, -10], [35, -2]]),
-})
+/** The camera follows the action: up to meet the sand, down with it to the road, up to the model, then on toward the gateway. */
+export const camAt = (t: number): Cam => {
+  const hit = t - 13.35
+  return {
+    z: spline(t, [[11.2, 0.24], [13.4, 0.1], [15, 0.09], [19, 0.15], [20.6, 0.12], [26, 0.2], [30.6, 0.22], [35, 0.31]]),
+    px: spline(t, [[11.2, 10], [13.6, -20], [19, 6], [26, 30], [30.6, 12], [35, 64]]),
+    py: spline(t, [[11.2, -10], [12.3, -90], [13.5, 4], [19, 6], [20.6, -40], [25, -34], [30.2, -30], [31.6, -8], [35, -2]]) + (hit > 0 && hit < 0.7 ? 6 * Math.exp(-hit * 8) * Math.sin(hit * 55) : 0),
+  }
+}
+/** How soft the far land is. The eye is on the heap by day; at dusk the gateway comes into focus; by dawn it is all clear. */
+const softAt = (t: number) => k(t, [[12, 1], [20.8, 1], [23.2, 0.3], [30.4, 0.3], [32.6, 0]])
 
 /** A lamp does not fade on. It catches, stutters, and holds. */
 export const flick = (s: number) => (s < 0 ? 0 : s < 0.07 ? 0.85 : s < 0.13 ? 0.15 : s < 0.2 ? 1 : s < 0.25 ? 0.45 : 1)
@@ -258,10 +264,30 @@ export const roadAt = (s: number): [number, number] => {
   return ROAD[0]
 }
 
-/** The strider's walk: worked out on a flat line, then laid along the road, a little smaller as it goes away. */
-const WALK_H = 310, WALK_X0 = -160, WALK_T0 = 28.54, WALK_V = (WALK_H * 0.66) / 1.05
+/**
+ * The strider. He walks in as the land appears, stands at the near corner and watches the sand come down on his land,
+ * and at dawn walks on toward it. Worked out on a flat line, then laid along the road, a little smaller as it goes away.
+ */
+const WALK_H = 310, WALK_S = WALK_H * 0.66
+const STAND_W = 460, IN_STEPS = 4, IN_X0 = STAND_W - (IN_STEPS - 1) * WALK_S
+const IN_T0 = 11.6, IN_T1 = 13.9, WALK_T0 = 31.0, WALK_V = WALK_S / 1.1
 const walkSize = (w: number) => 1 - 0.14 * Math.max(0, Math.min(1, w / 900))
 const walkLen = (w: number) => (w <= 0 ? w : w < 900 ? w - (0.07 * w * w) / 900 : 837 + 0.86 * (w - 900))
+/** He stands with his feet apart, the way the mark does, never like a post. */
+const REST = 3.2, FOOT = 0.05 * WALK_H * REST
+function striderAt(t: number): Pose {
+  if (t < WALK_T0) return walkPose(IN_X0, 0, WALK_H, (IN_STEPS - 1) * WALK_S * glide(lin(t, IN_T0, IN_T1)), IN_STEPS, false, t * 1.8, REST)
+  const u = t - WALK_T0
+  const s = u < 0.6 ? (WALK_V * u * u) / 1.2 : WALK_V * (u - 0.3)
+  const p = walkPose(STAND_W, 0, WALK_H, s, 99, true)
+  // his first two steps start from where his feet really were
+  const e = (v: number) => { const c = Math.max(0, Math.min(1, v)); return c * c * (3 - 2 * c) }
+  if (s < WALK_S / 2) {
+    p.fa[0] = STAND_W + FOOT + (STAND_W + WALK_S - STAND_W - FOOT) * e(s / (WALK_S / 2))
+    p.fb[0] = STAND_W - FOOT
+  } else if (s < WALK_S * 1.5) p.fb[0] = STAND_W - FOOT + (STAND_W + 2 * WALK_S - STAND_W + FOOT) * e((s - WALK_S / 2) / WALK_S)
+  return p
+}
 
 export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) {
   const warm = glowAt(t)
@@ -274,11 +300,17 @@ export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) 
     lamp: (rank) => flick(t - 21.9 - 2.7 * rank) * (1 - ramp(t, 30.5 + 1.1 * (1 - rank), 31.1 + 1.1 * (1 - rank))),
   })
   const cam = camAt(t)
-  warp(P, cam, 1.2 * warm * (1 - 0.6 * n), t)
+  const soft = softAt(t)
+  warp(P, cam, 1.2 * warm * (1 - 0.6 * n), t, soft)
 
   ctx.save()
   ctx.globalAlpha = o
-  ctx.drawImage(P.out, 0, 0)
+  if (soft > 0.02) {
+    ctx.filter = `blur(${(4.5 * soft).toFixed(2)}px)`
+    ctx.drawImage(P.out, 0, 0)
+    ctx.filter = "none"
+    ctx.drawImage(P.fg!, 0, 0)
+  } else ctx.drawImage(P.out, 0, 0)
 
   // haze at the foot of the frame while there are words on it
   const words = win(t, 12.2, 31.2, 0.6)
@@ -424,10 +456,9 @@ export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) 
     ctx.restore()
   }
 
-  // 30.. the strider walks the finished land toward the light: in from the near corner, on the road, with real steps
-  const went = WALK_V * (t - WALK_T0)
-  if (went > 0) {
-    const flat = walkPose(WALK_X0, 0, WALK_H, went, 99, true)
+  // the strider: there from the start, and at dawn he walks the finished land toward the light
+  if (t > IN_T0) {
+    const flat = striderAt(t)
     const size = walkSize(flat.hx)
     const at = (w: number, up: number): [number, number] => {
       const [x, y] = roadAt(walkLen(w))

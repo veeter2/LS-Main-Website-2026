@@ -151,7 +151,7 @@ const mixn = (a: number, b: number, f: number) => a + (b - a) * f
  * (steps - 1) strides. `s` is how far the hip has come. With `on` he does not stop: he keeps walking.
  * Every foot stays where it lands until it lifts, so nothing slides.
  */
-export function walkPose(x0: number, gy: number, h: number, s: number, steps: number, on = false, breath = 0): Pose {
+export function walkPose(x0: number, gy: number, h: number, s: number, steps: number, on = false, breath = 0, rest = 1.6): Pose {
   const S = h * 0.66
   const D = (steps - 1) * S
   const d = 0.05 * h // how far apart the feet rest when he stands
@@ -166,7 +166,7 @@ export function walkPose(x0: number, gy: number, h: number, s: number, steps: nu
   // where a foot is after step j: before his first step it rests beside the other one
   const land = (j: number, near: boolean) => {
     if (j < 0) return x0 + (near ? d : -d)
-    if (!on && j >= steps - 1) return x0 + D + (near ? 1.6 * d : -1.6 * d)
+    if (!on && j >= steps - 1) return x0 + D + (near ? rest * d : -rest * d)
     return x0 + S * (j + 1)
   }
   const from = land(kk - 2, nearSwings), to = land(kk, nearSwings)

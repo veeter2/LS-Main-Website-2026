@@ -30,6 +30,10 @@ export type Plates = {
   scene: HTMLCanvasElement
   sceneCtx: CanvasRenderingContext2D
   out: HTMLCanvasElement
+  /** the same picture with the far parts cut away, for a soft background behind a sharp foreground */
+  fg?: HTMLCanvasElement
+  fgCtx?: CanvasRenderingContext2D
+  fgData?: ImageData
   outCtx: CanvasRenderingContext2D
   outData: ImageData
   gild: HTMLCanvasElement
@@ -274,7 +278,17 @@ export const depthAt = (P: Plates, x: number, y: number) => P.depth[Math.min(H -
  * Look at the composed painting through the camera. For every screen pixel, find the painting pixel that
  * lands there, given how near it is. `shim` is heat shimmer in pixels around the low sun.
  */
-export function warp(P: Plates, cam: Cam, shim: number, t: number) {
+export function warp(P: Plates, cam: Cam, shim: number, t: number, soft = 0) {
+  let fgd: Uint8ClampedArray | null = null
+  if (soft > 0) {
+    if (!P.fg) {
+      const [c, cx] = work(W, H)
+      P.fg = c
+      P.fgCtx = cx
+      P.fgData = cx.createImageData(W, H)
+    }
+    fgd = P.fgData!.data
+  }
   const src = P.sceneCtx.getImageData(0, 0, W, H).data
   const dst = P.outData.data
   const D = P.depth
@@ -311,8 +325,16 @@ export function warp(P: Plates, cam: Cam, shim: number, t: number) {
       dst[o + 1] = src[i + 1] * w00 + src[i + 5] * w10 + src[j + 1] * w01 + src[j + 5] * w11
       dst[o + 2] = src[i + 2] * w00 + src[i + 6] * w10 + src[j + 2] * w01 + src[j + 6] * w11
       dst[o + 3] = 255
+      if (fgd) {
+        const q = (d - 0.1) / 0.3
+        fgd[o] = dst[o]
+        fgd[o + 1] = dst[o + 1]
+        fgd[o + 2] = dst[o + 2]
+        fgd[o + 3] = q <= 0 ? 0 : q >= 1 ? 255 : 255 * q * q * (3 - 2 * q)
+      }
       o += 4
     }
   }
   P.outCtx.putImageData(P.outData, 0, 0)
+  if (fgd) P.fgCtx!.putImageData(P.fgData!, 0, 0)
 }
