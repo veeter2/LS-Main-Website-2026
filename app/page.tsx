@@ -22,17 +22,6 @@ export const metadata: Metadata = {
  * /video); the section stills are gone. Names match the app's tabs.
  */
 
-const ROOM = [
-  { name: "Chat.", body: "Answers from what your company already knows, with a receipt under every reply." },
-  { name: "Receipts.", body: "Click any answer and see what it used, what it cost, and who can see it." },
-  { name: "Promises.", body: "Who said they would do what, by when. Nothing owed is forgotten." },
-  { name: "Today.", body: "What moved, what slipped, what to do first. Written before you sit down." },
-  { name: "Experts.", body: "A specialist that already knows your rules and your history. No re-briefing." },
-  { name: "Agents.", body: "Overnight work that starts where yesterday’s left off." },
-  { name: "Governance.", body: "Which model, whose keys, what each answer cost, one screen. Swap the model and nothing is taught twice." },
-  { name: "Connections.", body: "Your CRM, files, forms and payments. Plugged in once, kept in sync." },
-]
-
 // Said as a buyer asks it. The "no" is the short answer; the sentence after it is the real one.
 const NOT_THIS = [
   { no: "Not a chatbot.", yes: "A brain your company owns. Chat is one door into it." },
@@ -148,15 +137,6 @@ export default function Home() {
           </p>
         </div>
         <div className="lx-wrap">
-          <ol className="mm-rows" aria-label="The eight parts">
-            {ROOM.map((o, i) => (
-              <li key={o.name} className="mm-row" data-reveal data-delay={String((i % 3) + 1)}>
-                <span className="mm-n lx-num">{String(i + 1).padStart(2, "0")}</span>
-                <span className="mm-name">{o.name}</span>
-                <p className="mm-body">{o.body}</p>
-              </li>
-            ))}
-          </ol>
           <p className="mm-foot" data-reveal>
             All eight read one memory. That&rsquo;s what you license, and that&rsquo;s what you own.{" "}
             <Link href="/product">What it does →</Link>
