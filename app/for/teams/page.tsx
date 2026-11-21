@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import { BuyerPage } from "../buyer-page"
+import { DoorsFilm } from "../../_components/doors-film"
 
 export const metadata: Metadata = pageMeta("/for/teams", "For your team · Stop re-explaining your job", "It remembers what you told it, keeps your promises in view, and says when it doesn’t know. Licensed and installed, with your own model.")
 
@@ -15,6 +16,7 @@ export default function ForTeams() {
           </>
         ),
         lead: "LongStrider remembers what you’ve already told it, keeps track of what you promised, and tells you what changed overnight, so you start the day where you left off.",
+        film: <DoorsFilm />,
         points: [
           {
             title: "It remembers.",
