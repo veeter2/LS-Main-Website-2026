@@ -224,6 +224,11 @@ export default function Home() {
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Or a cloud model through your own keys. Same product either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.
           </p>
+          <div className="lx-cta-row hx-cta-center" data-reveal data-delay="3">
+            <Link className="lx-btn lx-btn-ghost" href="/own-it">
+              See how you own it <span className="lx-arrow" aria-hidden>→</span>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -250,10 +255,10 @@ export default function Home() {
       <section className="hx-section hx-deep" id="buyers">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            Who it&rsquo;s for
+            Your role
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Four people have to say <em>yes</em>.
+            See what it does for <em>your</em> job.
           </h2>
         </div>
         <div className="lx-wrap">
