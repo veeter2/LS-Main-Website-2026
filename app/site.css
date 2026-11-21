@@ -281,7 +281,7 @@ html:has(#lx-root) { --lx-page-ground: #f1ecdf; }
 }
 
 /* One scroller: the document scrolls; the shell (#lx-root) is the whole site. */
-html:has(#lx-root) { scroll-behavior: auto; background: var(--lx-page-ground); scroll-padding-top: 84px; }
+html:has(#lx-root) { scroll-behavior: auto; color-scheme: light; background: var(--lx-page-ground); scroll-padding-top: 84px; }
 body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body); }
 
 .lx ::selection { background: var(--lx-gold-wash); color: var(--lx-ink); }
