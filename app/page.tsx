@@ -32,6 +32,57 @@ const NOT_THIS = [
   { no: "Not one person\u2019s assistant.", yes: "Private memory for each person, shared memory for the company, both in one place." },
 ]
 
+type Icon = "coin" | "receipt" | "pen" | "clocks"
+function CardIcon({ kind }: { kind: Icon }) {
+  const d: Record<Icon, React.ReactNode> = {
+    coin: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M9.5 10.2c0-1 1-1.7 2.5-1.7s2.5.7 2.5 1.7-1 1.4-2.5 1.8-2.5.8-2.5 1.8 1 1.7 2.5 1.7 2.5-.7 2.5-1.7M12 7v10" />
+      </>
+    ),
+    receipt: (
+      <>
+        <path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5L6 21z" />
+        <path d="M9 8h6M9 11.5h6M9 15h4" />
+      </>
+    ),
+    pen: (
+      <>
+        <path d="M4 20l4-1 10.5-10.5a2.1 2.1 0 0 0-3-3L5 16z" />
+        <path d="M13 7l3 3M4 20h16" />
+      </>
+    ),
+    clocks: (
+      <>
+        <circle cx="8" cy="12" r="4.5" />
+        <path d="M8 9.5V12l1.8 1.2" />
+        <path d="M16.5 7.5a4.5 4.5 0 1 0 3.2 7.7 3.6 3.6 0 0 1-3.2-7.7z" />
+      </>
+    ),
+  }
+  return (
+    <svg className="mh-icon" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      {d[kind]}
+    </svg>
+  )
+}
+
+const DIFFERENT: { title: string; body: string; icon: Icon }[] = [
+  { icon: "coin", title: "A smaller model bill", body: "The model sees only the slice that earns it. Cost doesn’t grow with what it knows." },
+  { icon: "receipt", title: "Answers you can check", body: "Every answer traces to a record it can show you. When there isn’t one, it says so." },
+  {
+    icon: "pen",
+    title: "Teach it once",
+    body: "Rules, corrections and lessons carry forward. Month twelve knows what month one never could.",
+  },
+  {
+    icon: "clocks",
+    title: "Two speeds",
+    body: "In the moment it decides what matters. At night it reads everything, links what repeats, flags what contradicts, and writes you a letter.",
+  },
+]
+
 const BUYERS = [
   { who: "For the CFO", title: "An AI budget that ends in an asset, not a renewal.", href: "/for/finance" },
   { who: "For the CTO", title: "Postgres, row-level scoping, any model through your keys. Open it up.", href: "/for/technology" },
@@ -123,6 +174,17 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </div>
+        <div className="lx-wrap mh-facts mh-facts-2">
+          {DIFFERENT.map((f, i) => (
+            <div key={f.title} className="mh-fact mh-fact-icon" data-reveal data-delay={String(i + 1)}>
+              <h3>
+                <CardIcon kind={f.icon} />
+                {f.title}
+              </h3>
+              <p>{f.body}</p>
+            </div>
+          ))}
         </div>
         <div className="lx-wrap pf-wrap pf-wrap-home" data-reveal>
           <ReceiptCard compact />
