@@ -21,13 +21,13 @@ const INK = "rgba(31,27,20,.94)"
  */
 export const DOORS_TITLE = "Whose memory is it?"
 export const DOORS_CAPTIONS: { at: number; to: number; text: string; two?: [string, string] }[] = [
-  { at: 3.5, to: 8, text: "Yours is yours." },
-  { at: 8, to: 12, text: "Every person has their own ground." },
-  { at: 12, to: 16, text: "The company's is the road." },
-  { at: 16, to: 20.5, text: "You choose what crosses." },
-  { at: 20.5, to: 24.5, text: "The company sees the road. Never your ground.", two: ["The company sees the road.", "Never your ground."] },
-  { at: 24.5, to: 28, text: "Both grow. The line holds." },
-  { at: 28, to: 31, text: "Any model. Same line." },
+  { at: 3.5, to: 8, text: "What you work on stays with you." },
+  { at: 8, to: 12, text: "Everyone on the team gets their own." },
+  { at: 12, to: 16, text: "The company has its own too." },
+  { at: 16, to: 20.5, text: "You choose what you share." },
+  { at: 20.5, to: 24.5, text: "The company sees what you shared. Nothing else.", two: ["The company sees what you shared.", "Nothing else."] },
+  { at: 24.5, to: 28, text: "Yours grows. The company's grows." },
+  { at: 28, to: 31, text: "Change the model. Nothing moves." },
 ]
 
 /** `phone` sets the captions larger. `grain` is how strong the moving film grain is. */
