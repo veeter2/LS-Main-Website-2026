@@ -273,7 +273,7 @@ export default function Home() {
 
       {/* Close */}
       <section className="hx-close" id="company">
-        <FilmStill src="/art/film-strider.jpg" alt="The strider walks the road along the memory, the arch of the record behind." />
+        <FilmStill src="/art/steps.webp" alt="The strider steps from one lit stone to the next along the road." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Bring us your <em>hardest</em> problem.
