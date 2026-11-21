@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 const ROOM = [
   { name: "Chat.", body: "Answers from what your company already knows, with a receipt under every reply." },
   { name: "Receipts.", body: "Click any answer and see what it used, what it cost, and who can see it." },
-  { name: "Promises.", body: "Who said they would do what, by when. Nothing owed is forgotten." },
+  { name: "Promises.", body: "Every “I’ll get that to you” is written down, with a name and a date." },
   { name: "Today.", body: "What moved, what slipped, what to do first. Written before you sit down." },
   { name: "Experts.", body: "A specialist that already knows your rules and your history. No re-briefing." },
   { name: "Agents.", body: "Overnight work that starts where yesterday’s left off." },
