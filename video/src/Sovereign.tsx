@@ -25,8 +25,8 @@ export const SOV_CAPTIONS: { at: number; to: number; text: string; two?: [string
   { at: 12, to: 16.5, text: "The model comes to the memory. Not the other way.", two: ["The model comes to the memory.", "Not the other way."] },
   { at: 16.5, to: 21, text: "Your work stays on your side." },
   { at: 21, to: 25, text: "And it keeps every lesson." },
-  { at: 25, to: 29, text: "Change the model. The wall stays." },
-  { at: 29, to: 32.5, text: "Your box. Your models. Your keys." },
+  { at: 25, to: 30.6, text: "Change the model. The wall stays." },
+  { at: 30.6, to: 35.4, text: "Your box. Your models. Your keys." },
 ]
 
 /** `phone` sets the captions larger. `grain` is how strong the moving film grain is. */
@@ -87,12 +87,12 @@ export const Sovereign = ({ phone = false, grain = 1 }: { phone?: boolean; grain
         })}
 
         <div style={{ position: "absolute", left: 140, top: 150, ...DISPLAY, fontSize: 84, color: "rgba(31,27,20,.94)" }}>
-          <div style={{ opacity: win(t, 33.3, 36.1, 0.4), transform: `translateY(${(1 - ramp(t, 33.3, 34.1)) * 16}px)` }}>
+          <div style={{ opacity: win(t, 36.3, 39.2, 0.4), transform: `translateY(${(1 - ramp(t, 36.3, 37.1)) * 16}px)` }}>
             Nothing <em style={{ fontStyle: "italic", color: C.goldInk }}>leaves</em>
           </div>
-          <div style={{ opacity: win(t, 33.7, 36.1, 0.4), transform: `translateY(${(1 - ramp(t, 33.7, 34.5)) * 16}px)` }}>the building.</div>
+          <div style={{ opacity: win(t, 36.7, 39.2, 0.4), transform: `translateY(${(1 - ramp(t, 36.7, 37.5)) * 16}px)` }}>the building.</div>
         </div>
-        <div style={{ position: "absolute", left: 138, top: 372, display: "flex", alignItems: "center", gap: 20, opacity: win(t, 34, 36.1, 0.4) }}>
+        <div style={{ position: "absolute", left: 138, top: 372, display: "flex", alignItems: "center", gap: 20, opacity: win(t, 37, 39.2, 0.4) }}>
           <Img src={staticFile("art/mark.png")} style={{ height: 82, width: "auto" }} />
           <span style={{ fontFamily, fontWeight: 500, fontSize: 43, letterSpacing: "0.01em", lineHeight: 1, color: "rgba(31,27,20,.94)" }}>LongStrider</span>
         </div>

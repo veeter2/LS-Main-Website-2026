@@ -9,7 +9,7 @@
     "poster": "remotion still src/index.ts film ../public/video/hero-poster.jpg --frame=783 --image-format=jpeg --jpeg-quality=55 --props='{\"grain\":0}'",
     "render:sovereign:1080": "remotion render src/index.ts sovereign out/sovereign-1080.mp4 --codec=h264 --video-bitrate=1050k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0.3}'",
     "render:sovereign:720": "remotion render src/index.ts sovereign720 out/sovereign-720.mp4 --codec=h264 --video-bitrate=640k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0.3,\"phone\":true}'",
-    "poster:sovereign": "remotion still src/index.ts sovereign out/sovereign-poster.jpg --frame=1050 --image-format=jpeg --jpeg-quality=60 --props='{\"grain\":0}'",
+    "poster:sovereign": "remotion still src/index.ts sovereign out/sovereign-poster.jpg --frame=1140 --image-format=jpeg --jpeg-quality=60 --props='{\"grain\":0}'",
     "render:doors:1080": "remotion render src/index.ts doors out/doors-1080.mp4 --codec=h264 --video-bitrate=1050k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0.3}'",
     "render:doors:720": "remotion render src/index.ts doors720 out/doors-720.mp4 --codec=h264 --video-bitrate=640k --x264-preset=veryslow --muted --concurrency=6 --props='{\"grain\":0.3,\"phone\":true}'",
     "poster:doors": "remotion still src/index.ts doors out/doors-poster.png --frame=1005 --props='{\"grain\":0}' && python3 -c \"from PIL import Image; Image.open('out/doors-poster.png').convert('RGB').save('out/doors-poster.jpg', quality=29, optimize=True, progressive=True)\""

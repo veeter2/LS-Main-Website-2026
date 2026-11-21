@@ -1,37 +1,35 @@
 import { k, ramp, rng, win } from "../util"
-import { type Ctx, H, type RGB, SAND_DAY, W, blank, gz, halo, lin, makeNoise, mix, orb, rgba, spline } from "./core"
+import { type Ctx, H, type OrbKind, type RGB, SAND_DAY, W, blank, gz, halo, lin, makeNoise, mix, orb, rgba, spline } from "./core"
 import { spark } from "./cost"
 import type { Plates } from "./plates"
-import { strider } from "./strider"
+import { figure, glide, walkPose } from "./strider"
 
 /**
  * The sovereign film: nothing leaves the building.
- * It lives in the night painting: a dark sky, a field of pale grain, the gold line with the letter, the dated
- * arch and the gold nodes above. All of it is drawn fresh here, in the painting's own marks, so it can move.
- * The wall is a thin gold dome over the field. Work lifts toward a model outside and stops at the glass.
- * Then the model comes inside instead. Models come and go through the same gap. The wall stays.
+ * Night. One great heap of pale grain: the work. Its owner walks in and stands beside it.
+ * A model glows outside and the work lifts toward it. Then the wall lights, all the way round, and holds it.
+ * The owner opens a gate. The model comes inside, reads the work where it lies, and what is learned
+ * stays on the heap as gold. Models come and go through the same gate. The heap and the wall stay.
  */
-export const SOV_SECONDS = 37
+export const SOV_SECONDS = 40
 
-const SKY_TOP: RGB = [48, 44, 69]
+const SKY_TOP: RGB = [40, 36, 62]
 const SKY_MID: RGB = [55, 49, 79]
-const SKY_LOW: RGB = [65, 58, 92]
+const SKY_LOW: RGB = [72, 63, 100]
 const PAPER: RGB = [250, 247, 240]
 const GRAIN: RGB = [236, 230, 240]
 const GOLD: RGB = [232, 204, 154]
 const GOLD_DEEP: RGB = [200, 169, 110]
 const GOLD_HI: RGB = [255, 236, 190]
-const INKC: RGB = [31, 27, 20]
 
 /* ---------- the places ---------- */
 
-/** The wall: a dome over the field, its feet on the gold line. */
+/** The wall: a dome of glass over the heap, its feet on the gold line. */
 const DOME = { x: 960, y: 800, rx: 720, ry: 600 }
-/** The model's seat inside, and where it waits outside, up in the sky. */
-const SEAT: [number, number] = [1180, 400]
+/** The model's seat inside, and where the first one waits outside, up in the sky. */
+const SEAT: [number, number] = [1180, 392]
 const OUT: [number, number] = [1640, 130]
-const BALL_R = 46
-/** Where the straight path from outside to the seat crosses the wall: that is the gap. */
+const BALL_R = 52
 const inDome = (x: number, y: number) => ((x - DOME.x) / DOME.rx) ** 2 + ((y - DOME.y) / DOME.ry) ** 2 < 1
 function crossing(ax: number, ay: number, bx: number, by: number): number {
   // a is outside, b inside; find p where the segment meets the dome
@@ -42,21 +40,40 @@ function crossing(ax: number, ay: number, bx: number, by: number): number {
   }
   return (lo + hi) / 2
 }
+/** The gate: where the straight path from outside to the seat meets the wall. */
 const GAP_P = crossing(OUT[0], OUT[1], SEAT[0], SEAT[1])
 const GAP: [number, number] = [OUT[0] + (SEAT[0] - OUT[0]) * GAP_P, OUT[1] + (SEAT[1] - OUT[1]) * GAP_P]
 const GAP_A = Math.atan2((GAP[1] - DOME.y) / DOME.ry, (GAP[0] - DOME.x) / DOME.rx) + 2 * Math.PI
+const GAP_W = 0.105
 
-/** The top of the field of grain, a low hill, and the gold line below it. */
+/** The heap of grain, and the gold line it rests on. */
 const lineAt = (x: number) => 804 - 70 * Math.pow(Math.max(0, (x - 820) / 1100), 1.7)
-const F0 = 290, F1 = 1630
-const fieldTop = (x: number) => lineAt(x) - 290 * Math.pow(Math.sin(Math.PI * lin(x, F0, F1)), 1.15)
-const LETTER: [number, number] = [1070, 770]
+const F0 = 470, F1 = 1630
+const fieldTop = (x: number) => lineAt(x) - 300 * Math.pow(Math.sin(Math.PI * lin(x, F0, F1)), 1.15)
+/** Where what is learned settles: the crest, under the model. */
+const CAP_X = 1085
 
-/** The arch: its stones from the left foot round to the right, dark to light, and two ghost stones to come. */
-const ARCH = { x: 610, y: 712, ro: 300, ri: 236, a0: Math.PI + 0.22, a1: 2 * Math.PI - 0.18, n: 11 }
-/** The nodes above the field, and which are joined. */
-const NODES: [number, number, number][] = [[1010, 300, 15], [1425, 290, 17], [1300, 485, 19], [1475, 560, 21], [880, 525, 19], [720, 380, 12]]
-const JOINS: [number, number][] = [[5, 0], [0, 1], [0, 2], [1, 3], [2, 3], [4, 2], [5, 4], [1, 2]]
+/** The owner: where he stands, and how tall. */
+const ST_X = 345
+const ST_H = 186
+const ST_STEPS = 6
+const ST_D = (ST_STEPS - 1) * ST_H * 0.66
+
+/** The models, in the order they come. Each waits outside, comes in through the gate, and leaves by it. */
+type Model = { kind: OrbKind; c: RGB; wait: [number, number]; show: number; in0: number; in1: number; out0: number; out1: number }
+const EXIT: [number, number] = [1800, 340]
+const MODELS: Model[] = [
+  { kind: "gold", c: GOLD_HI, wait: OUT, show: 3.4, in0: 13.3, in1: 15.7, out0: 25.3, out1: 26.9 },
+  { kind: "pearl", c: [214, 204, 255], wait: [1450, 78], show: 24.4, in0: 26.5, in1: 28.1, out0: 31.3, out1: 32.7 },
+  { kind: "rose", c: [255, 196, 172], wait: [1450, 78], show: 30.6, in0: 32.3, in1: 33.9, out0: 99, out1: 100 },
+]
+/** The gate is open while a model passes, and shut at every other time. */
+const gateAt = (t: number) => Math.max(win(t, 13.0, 16.0, 0.5), win(t, 25.0, 28.4, 0.5), win(t, 31.0, 34.2, 0.5))
+/** The owner opens it: a spark goes from his hand to the gate first. */
+const KEYS = [12.4, 24.5, 30.5]
+/** A question: when, and where on the heap the model looks for the answer. */
+const ASKS: [number, number, number][] = [[16.8, 940, 600], [19.3, 1240, 590], [21.8, 800, 660], [28.5, 1060, 570]]
+const lessonsAt = (t: number) => ASKS.reduce((a, [at]) => a + ramp(t, at + 2.1, at + 3.0), 0)
 
 export type Scene = { P: Plates; buf: HTMLCanvasElement }
 export function buildScene(): Scene {
@@ -68,26 +85,35 @@ export function buildScene(): Scene {
 /* ---------- the clock ---------- */
 
 /** 1 is night, 0 is day. Night nearly all the way; dawn at the close; dark again to loop. */
-export const nightAt = (t: number) => k(t, [[0, 1], [32.3, 1], [34.2, 0], [35.9, 0], [36.6, 1]])
-/** How far the camera stands. It leans in while the work is held, and steps back to see the whole wall. */
+export const nightAt = (t: number) => k(t, [[0, 1], [35.2, 1], [37.2, 0], [40, 0]])
+/** The camera: it follows the work up to the wall, comes back for the gate, and steps away to see it whole. */
+const CAM: [number, number, number, number][] = [
+  [0, 960, 600, 1.0], [3.5, 960, 596, 1.03], [8.6, 1150, 512, 1.17], [11.6, 1165, 520, 1.2], [13.6, 1070, 530, 1.1], [16.5, 985, 575, 1.06], [21, 1010, 558, 1.11], [24.4, 1030, 545, 1.15],
+  [25.6, 1050, 530, 1.1], [27, 1110, 490, 1.08], [31, 1050, 520, 1.05], [35.2, 760, 606, 0.86], [40, 720, 610, 0.82],
+]
 const camAt = (t: number) => ({
-  z: spline(t, [[0, 1.04], [8, 1.1], [12, 1.12], [16.5, 1.06], [25, 1.04], [29, 1.03], [32.5, 0.9], [37, 0.9]]),
-  x: spline(t, [[0, 960], [8, 1060], [12, 1080], [16.5, 1000], [25, 960], [32.5, 960], [37, 960]]),
-  y: spline(t, [[0, 600], [8, 560], [12, 560], [16.5, 590], [25, 600], [32.5, 600], [37, 600]]),
+  x: spline(t, CAM.map((c) => [c[0], c[1]] as [number, number])),
+  y: spline(t, CAM.map((c) => [c[0], c[2]] as [number, number])),
+  z: spline(t, CAM.map((c) => [c[0], c[3]] as [number, number])),
 })
-function cam(ctx: Ctx, t: number, near = 0) {
+/** `depth` 1 is the heap; less is farther off and moves less; more is nearer the lens. */
+function cam(ctx: Ctx, t: number, depth = 1) {
   const c = camAt(t)
-  const z = c.z * (1 + near)
-  ctx.setTransform(z, 0, 0, z, W / 2 - c.x * z, H / 2 - c.y * z)
+  const z = 1 + (c.z - 1) * depth + (depth > 1 ? (depth - 1) * 0.4 : 0)
+  const x = 960 + (c.x - 960) * depth, y = 600 + (c.y - 600) * depth
+  ctx.setTransform(z, 0, 0, z, W / 2 - x * z, H / 2 - y * z)
 }
 
-/* ---------- the field ---------- */
+/* ---------- the heap ---------- */
 
-function field(ctx: Ctx, t: number, n: number, thick: number) {
-  // the body of the hill: a breath lighter than the sky, gone by the gold line
-  const body = ctx.createLinearGradient(0, 520, 0, 800)
-  body.addColorStop(0, rgba(mix([91, 83, 108], [214, 206, 190], 1 - n), 0.55))
-  body.addColorStop(1, rgba(mix(SKY_LOW, [226, 218, 204], 1 - n), 0))
+type Light = { x: number; y: number; c: RGB; a: number; r: number }
+
+function field(ctx: Ctx, t: number, n: number, lessons: number, lights: Light[], pulse: number) {
+  const day = 1 - n
+  // the body of the heap: a breath lighter than the sky, gone by the gold line
+  const body = ctx.createLinearGradient(0, 500, 0, 800)
+  body.addColorStop(0, rgba(mix([96, 87, 116], [208, 198, 178], day), 0.6))
+  body.addColorStop(1, rgba(mix(SKY_LOW, [226, 218, 204], day), 0))
   ctx.fillStyle = body
   ctx.beginPath()
   ctx.moveTo(F0, lineAt(F0))
@@ -97,22 +123,50 @@ function field(ctx: Ctx, t: number, n: number, thick: number) {
   ctx.fill()
   // the grain: thick along the top edge, thinning down to the line, a few strays above
   const r = rng(31)
-  const day = 1 - n
-  const total = Math.round(17000 * (1 + 0.5 * thick))
-  for (let i = 0; i < 26000; i++) {
-    const u = r(), v = Math.pow(r(), 2.2), s = r(), c = r()
-    if (i >= total) continue
+  const capW = 26 + 64 * lessons, capD = 0.05 + 0.04 * lessons
+  for (let i = 0; i < 19000; i++) {
+    const u = r(), v = Math.pow(r(), 2.2), s = r(), c = r(), q = r()
     const x = F0 + u * (F1 - F0)
     const top = fieldTop(x)
     const stray = s > 0.985
     const y = stray ? top - r() * 70 : top + v * (lineAt(x) - 6 - top)
-    const nightC = mix(GRAIN, GOLD_HI, c * 0.35)
+    const nightC = mix(GRAIN, GOLD_HI, c * 0.3)
     const dayC = SAND_DAY[Math.floor(c * SAND_DAY.length)]
-    const a = (stray ? 0.25 : 0.22 + 0.7 * (1 - v)) * (0.7 + 0.3 * c)
-    ctx.fillStyle = rgba(mix(nightC, dayC, day), a * (day > 0 ? 0.75 + 0.25 * n : 1))
+    let col = mix(nightC, dayC, day)
+    // the side toward the model's sky is a little brighter: the heap has a round back
+    let a = (stray ? 0.22 : 0.2 + 0.7 * (1 - v)) * (0.7 + 0.3 * c) * (0.8 + 0.28 * u) * (day > 0 ? 0.78 + 0.22 * n : 1)
+    let rad = 0.7 + s * 1.5
+    // what has been learned lies on the crest as gold, and stays
+    const inCap = lessons > 0 && !stray && Math.abs(x - CAP_X) < capW * (0.55 + 0.45 * q) && v < capD * (0.4 + 0.6 * c)
+    if (inCap) {
+      col = mix(mix(GOLD_DEEP, GOLD_HI, 0.25 + 0.75 * c * n), [176, 132, 52], day * 0.8)
+      a = Math.min(1, 0.75 + 0.25 * c + 0.3 * pulse)
+      rad = 1.1 + s * 1.7 + 0.5 * pulse
+    }
+    // light from the model falls on the grain where it lies
+    for (const l of lights) {
+      if (l.a <= 0) continue
+      const d2 = (x - l.x) * (x - l.x) + (y - l.y) * (y - l.y)
+      const w = l.a * Math.exp(-d2 / (l.r * l.r))
+      if (w < 0.02) continue
+      col = mix(col, l.c, Math.min(0.9, w))
+      a = Math.min(1, a + 0.45 * w)
+      rad += 0.6 * w
+    }
+    ctx.fillStyle = rgba(col, a)
     ctx.beginPath()
-    ctx.arc(x, y, 0.7 + s * 1.5, 0, 6.2832)
+    ctx.arc(x, y, rad, 0, 6.2832)
     ctx.fill()
+  }
+  // the gold on the crest glows a little of its own
+  if (lessons > 0) {
+    ctx.save()
+    ctx.globalCompositeOperation = "lighter"
+    for (let i = -3; i <= 3; i++) {
+      const x = CAP_X + (i / 3) * capW * 0.8
+      halo(ctx, x, fieldTop(x) + 6, 46 + 14 * lessons, GOLD, (0.05 + 0.02 * lessons + 0.12 * pulse) * (0.35 + 0.65 * n))
+    }
+    ctx.restore()
   }
 }
 
@@ -181,7 +235,7 @@ function liftedGrain(ctx: Ctx, t: number, n: number) {
     const [x, y, press] = now
     if (press < 0) {
       // settled: one of the field again
-      ctx.fillStyle = rgba(mix(GRAIN, GOLD_HI, g.c * 0.35), 0.6 + 0.3 * g.c)
+      ctx.fillStyle = rgba(mix(GRAIN, GOLD_HI, g.c * 0.35), (0.6 + 0.3 * g.c) * (1 - ramp(t, 14.6, 16.9)))
       ctx.beginPath()
       ctx.arc(x, y, 0.8 + g.s * 1.4, 0, 6.2832)
       ctx.fill()
@@ -202,29 +256,87 @@ function liftedGrain(ctx: Ctx, t: number, n: number) {
 
 /* ---------- the wall ---------- */
 
-function dome(ctx: Ctx, t: number, n: number, edge: number, press: number, gapOpen: number, round: number) {
-  const a = edge
-  if (a <= 0) return
+/** `up` is how far the light has run up the wall from its two feet, 0 to 1. `round` shows the whole ring. */
+function dome(ctx: Ctx, t: number, n: number, up: number, press: number, gate: number, round: number) {
+  if (up <= 0) return
   const { x, y, rx, ry } = DOME
-  const col = mix([176, 132, 52], mix(GOLD, GOLD_HI, 0.3), n)
-  // the arc, faint, and with a gap while something passes through it
-  const draw = (from: number, to: number, alpha: number, wdt: number, blur: number) => {
-    if (to <= from || alpha <= 0) return
-    ctx.strokeStyle = rgba(col, alpha)
+  const col = mix([170, 126, 48], mix(GOLD, GOLD_HI, 0.35), n)
+  const reach = (up * Math.PI) / 2
+  const g = GAP_W * gate
+  // the lit stretches: up from the left foot, up from the right foot, less the gate
+  const spans: [number, number][] = [[Math.PI, Math.PI + reach], [2 * Math.PI - reach, 2 * Math.PI]]
+  const cut = (a: number, b: number): [number, number][] => {
+    if (g <= 0 || GAP_A + g < a || GAP_A - g > b) return [[a, b]]
+    return [[a, GAP_A - g], [GAP_A + g, b]]
+  }
+  const draw = (alpha: number, wdt: number, blur: number, c: RGB = col) => {
+    if (alpha <= 0) return
+    ctx.strokeStyle = rgba(c, alpha)
     ctx.lineWidth = wdt
-    ctx.shadowColor = rgba(col, 0.9 * n)
+    ctx.shadowColor = rgba(c, 0.9 * (0.35 + 0.65 * n))
     ctx.shadowBlur = blur
-    ctx.beginPath()
-    ctx.ellipse(x, y, rx, ry, 0, from, to)
-    ctx.stroke()
+    for (const [a0, b0] of spans)
+      for (const [a, b] of cut(a0, b0)) {
+        if (b <= a) continue
+        ctx.beginPath()
+        ctx.ellipse(x, y, rx, ry, 0, a, b)
+        ctx.stroke()
+      }
     ctx.shadowBlur = 0
   }
-  const g = 0.085 * gapOpen
-  const base = (0.24 + 0.5 * round) * a
-  draw(Math.PI, GAP_A - g, base, 1.3 + 1.4 * round, 6 + 18 * round)
-  draw(GAP_A + g, 2 * Math.PI, base, 1.3 + 1.4 * round, 6 + 18 * round)
+  // glass has a body: a breath of gold just inside the rim, strongest low down
+  ctx.save()
+  ctx.beginPath()
+  ctx.rect(x - rx - 40, y - ry - 40, rx * 2 + 80, ry + 40 - 2)
+  ctx.clip()
+  ctx.beginPath()
+  ctx.ellipse(x, y, rx, ry, 0, 0, 6.2832)
+  ctx.clip()
+  ctx.save()
+  ctx.translate(x, y)
+  ctx.scale(1, ry / rx)
+  const gl = ctx.createRadialGradient(0, 0, rx * 0.8, 0, 0, rx)
+  gl.addColorStop(0, rgba(col, 0))
+  gl.addColorStop(0.8, rgba(col, (0.035 + 0.05 * round) * up))
+  gl.addColorStop(1, rgba(col, (0.13 + 0.12 * round + 0.1 * press) * up))
+  ctx.fillStyle = gl
+  ctx.fillRect(-rx, -rx, rx * 2, rx)
+  ctx.restore()
+  ctx.restore()
+  // the rim itself: a soft wide line under a fine bright one
+  draw(0.16 + 0.14 * round, 7, 22)
+  draw(0.62 + 0.25 * round, 1.6 + 0.8 * round, 10)
   // seen whole, the wall goes all the way round, under the ground too
-  draw(0, Math.PI, 0.45 * round * a, 1.3 + 1.2 * round, 6 + 14 * round)
+  if (round > 0) {
+    ctx.strokeStyle = rgba(col, 0.4 * round)
+    ctx.lineWidth = 1.4
+    ctx.beginPath()
+    ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI)
+    ctx.stroke()
+  }
+  // a slow shine slides along the glass
+  if (up >= 1) {
+    const sa = Math.PI + 0.62 + 0.1 * Math.sin(t * 0.35)
+    for (let i = 0; i < 14; i++) {
+      const f = i / 13
+      ctx.strokeStyle = rgba([255, 248, 226], 0.5 * Math.sin(Math.PI * f) * (0.4 + 0.6 * n))
+      ctx.lineWidth = 2.4
+      ctx.beginPath()
+      ctx.ellipse(x, y, rx - 5, ry - 5, 0, sa + f * 0.34, sa + (f + 1 / 13) * 0.34 + 0.002)
+      ctx.stroke()
+    }
+  }
+  // the light running up the wall has two bright heads until they meet at the top
+  if (up < 1) {
+    for (const ang of [Math.PI + reach, 2 * Math.PI - reach]) {
+      const px = x + rx * Math.cos(ang), py = y + ry * Math.sin(ang)
+      halo(ctx, px, py, 90, GOLD_HI, 0.55)
+      halo(ctx, px, py, 22, [255, 252, 240], 0.9)
+    }
+  } else {
+    const met = 1 - lin(t, WALL_T1, WALL_T1 + 0.9)
+    if (met > 0) halo(ctx, x, y - ry, 260 * (1.2 - met), GOLD_HI, 0.5 * met)
+  }
   // where the grain presses, the glass lights up along the arc
   if (press > 0) {
     ctx.save()
@@ -232,225 +344,214 @@ function dome(ctx: Ctx, t: number, n: number, edge: number, press: number, gapOp
     for (let s = 0; s < 1; s += 1 / 70) {
       const ang = Math.PI + s * Math.PI
       const px = x + rx * Math.cos(ang), py = y + ry * Math.sin(ang)
-      // how much grain is near this stretch of wall
       const d = Math.hypot(px - 1470, py - 360)
       const w = Math.exp(-(d * d) / (2 * 250 * 250)) * (0.85 + 0.15 * Math.sin(t * 3.1 + s * 40))
       if (w < 0.02) continue
-      halo(ctx, px, py, 60, GOLD_HI, 0.22 * press * w)
+      halo(ctx, px, py, 64, GOLD_HI, 0.22 * press * w)
     }
     ctx.restore()
-    draw(Math.PI, 2 * Math.PI, 0.3 * press, 1.8, 10)
-    draw(1.5 * Math.PI, 2 * Math.PI - 0.12, 0.55 * press, 2.6, 18)
   }
-  // the gap's bright ends
-  if (gapOpen > 0) {
+  // the gate: two bright posts, and the glass between them gone
+  if (gate > 0) {
     for (const s of [-1, 1]) {
       const ang = GAP_A + s * g
       const px = x + rx * Math.cos(ang), py = y + ry * Math.sin(ang)
-      halo(ctx, px, py, 34, GOLD_HI, 0.6 * gapOpen)
-      ctx.fillStyle = rgba(GOLD_HI, 0.9 * gapOpen)
+      halo(ctx, px, py, 46, GOLD_HI, 0.7 * gate)
+      ctx.fillStyle = rgba([255, 250, 232], gate)
       ctx.beginPath()
-      ctx.arc(px, py, 2.6, 0, 6.2832)
+      ctx.arc(px, py, 3.4, 0, 6.2832)
       ctx.fill()
     }
   }
-  // seen whole: a soft inner breath of gold against the sky
-  if (round > 0) {
-    ctx.save()
-    ctx.beginPath()
-    ctx.ellipse(x, y, rx, ry, 0, Math.PI, 2 * Math.PI)
-    ctx.closePath()
-    ctx.clip()
-    ctx.beginPath()
-    ctx.rect(x - rx, y - ry, rx * 2, ry - 70)
-    ctx.clip()
-    const gl = ctx.createRadialGradient(x, y, ry * 0.8, x, y, ry)
-    gl.addColorStop(0, rgba(col, 0))
-    gl.addColorStop(1, rgba(col, 0.14 * round))
-    ctx.fillStyle = gl
-    ctx.fillRect(x - rx, y - ry, rx * 2, ry)
-    ctx.restore()
-  }
 }
+const WALL_T0 = 6.9, WALL_T1 = 8.0
 
-/* ---------- the gold line, the letter, the arch, the nodes ---------- */
+/* ---------- the gold line ---------- */
 
-function goldLine(ctx: Ctx, t: number, n: number, lit: number) {
+function goldLine(ctx: Ctx, n: number, lit: number) {
   const col = mix(GOLD_DEEP, GOLD_HI, 0.3 * lit)
-  ctx.strokeStyle = rgba(col, 0.9)
-  ctx.lineWidth = 3.2
+  ctx.strokeStyle = rgba(col, 0.92)
+  ctx.lineWidth = 3
   ctx.shadowColor = rgba(GOLD_HI, 0.8 * lit)
   ctx.shadowBlur = 16 * lit
   ctx.beginPath()
-  for (let x = -400; x <= W + 400; x += 16) x === -400 ? ctx.moveTo(x, lineAt(x)) : ctx.lineTo(x, lineAt(x))
+  for (let x = -900; x <= W + 700; x += 16) x === -900 ? ctx.moveTo(x, lineAt(x)) : ctx.lineTo(x, lineAt(x))
   ctx.stroke()
   ctx.shadowBlur = 0
-  // the small ball on the line, and the letter beside it
-  const bx = 1000, by = lineAt(1000)
-  halo(ctx, bx, by, 20, GOLD_HI, 0.3 + 0.4 * lit)
-  ctx.fillStyle = rgba(col, 1)
-  ctx.beginPath()
-  ctx.arc(bx, by, 9, 0, 6.2832)
-  ctx.fill()
-  const [lx, ly] = LETTER
-  const lw = 60, lh = 38
-  halo(ctx, lx, ly - lh / 2, 70, GOLD_HI, 0.35 * lit)
-  ctx.fillStyle = rgba(mix([241, 235, 223], [255, 248, 230], lit), 1)
-  ctx.fillRect(lx - lw / 2, ly - lh, lw, lh)
-  ctx.strokeStyle = rgba(mix([196, 176, 130], GOLD_DEEP, lit), 0.9)
-  ctx.lineWidth = 1.4
-  ctx.beginPath()
-  ctx.moveTo(lx - lw / 2, ly - lh)
-  ctx.lineTo(lx, ly - lh * 0.42)
-  ctx.lineTo(lx + lw / 2, ly - lh)
-  ctx.stroke()
 }
 
-function arch(ctx: Ctx, t: number, n: number, built: number) {
-  const { x, y, ro, ri, a0, a1, n: N } = ARCH
-  const step = (a1 - a0) / (N + 2)
-  const gapA = 0.012
-  for (let i = 0; i < N + 2; i++) {
-    const p = lin(built, i / (N + 2), i / (N + 2) + 1.4 / (N + 2))
-    if (p <= 0) continue
-    const s0 = a0 + step * i + gapA, s1 = a0 + step * (i + 1) - gapA
-    const ghost = i >= N
-    const e = 1 - Math.pow(1 - p, 3)
-    // each stone rises into its place from a little below
-    const dy = (1 - e) * 60
-    const shade = mix([84, 70, 38], [206, 176, 116], i / (N - 1))
-    ctx.save()
-    ctx.translate(0, dy)
-    ctx.beginPath()
-    ctx.arc(x, y, ro, s0, s1)
-    ctx.arc(x, y, ri, s1, s0, true)
-    ctx.closePath()
-    if (ghost) {
-      ctx.strokeStyle = rgba(mix(GOLD_DEEP, INKC, 0.3 * (1 - n)), 0.7 * e)
-      ctx.lineWidth = 1.6
-      ctx.setLineDash([7, 6])
-      ctx.stroke()
-      ctx.setLineDash([])
-    } else {
-      ctx.fillStyle = rgba(mix(shade, mix(shade, PAPER, 0.1), 1 - n), e)
-      ctx.fill()
-      if (p < 1) halo(ctx, x + ((ro + ri) / 2) * Math.cos((s0 + s1) / 2), y + ((ro + ri) / 2) * Math.sin((s0 + s1) / 2), 50, GOLD_HI, 0.5 * Math.sin(Math.PI * p))
-    }
-    ctx.restore()
-  }
+/* ---------- the models ---------- */
+
+/** A curve from a to c that passes through b half way. */
+function through(a: [number, number], b: [number, number], c: [number, number], u: number): [number, number] {
+  const qx = 2 * b[0] - (a[0] + c[0]) / 2, qy = 2 * b[1] - (a[1] + c[1]) / 2
+  const v = 1 - u
+  return [v * v * a[0] + 2 * v * u * qx + u * u * c[0], v * v * a[1] + 2 * v * u * qy + u * u * c[1]]
+}
+type Ball = { m: Model; i: number; x: number; y: number; a: number; lit: number; seated: number }
+function ballsAt(t: number): Ball[] {
+  const out: Ball[] = []
+  MODELS.forEach((m, i) => {
+    const a = ramp(t, m.show, m.show + 0.9) * (1 - ramp(t, m.out1 - 0.5, m.out1 + 0.1))
+    if (a <= 0) return
+    const inn = k(t, [[m.in0, 0], [m.in1, 1]])
+    const go = k(t, [[m.out0, 0], [m.out1, 1]])
+    let [x, y] = through(m.wait, GAP, SEAT, inn)
+    if (go > 0) [x, y] = through(SEAT, GAP, EXIT, go)
+    // it hangs in the air: a slow drift while it waits, stillness in the seat
+    const seated = inn * (1 - go)
+    x += 5 * Math.sin(t * 0.7 + i * 2) * (1 - seated)
+    y += 7 * Math.sin(t * 0.9 + i) * (1 - seated)
+    const lit = ramp(t, m.in1 - 0.2, m.in1 + 0.9) * (1 - ramp(t, m.out0 - 0.3, m.out0 + 0.4))
+    out.push({ m, i, x, y, a, lit, seated })
+  })
+  return out
 }
 
-function nodes(ctx: Ctx, t: number, n: number, built: number, lit: number) {
-  // the joins, thin arcs bowed upward, drawn on in order
+/* ---------- sparks in the air ---------- */
+
+const arcPt = (a: [number, number], b: [number, number], lift: number, u: number): [number, number] => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u - lift * 4 * u * (1 - u)]
+/** A spark that flies from a to b in a low arc, with a thread of light fading behind it. */
+function fly(ctx: Ctx, a: [number, number], b: [number, number], lift: number, u: number, c: RGB, size = 5) {
+  if (u <= 0 || u >= 1) return
+  const e = u * u * (3 - 2 * u)
   ctx.lineCap = "round"
-  JOINS.forEach(([a, b], i) => {
-    const p = lin(built, 0.2 + (i / JOINS.length) * 0.8, 0.2 + (i / JOINS.length) * 0.8 + 0.18)
-    if (p <= 0) return
-    const [x0, y0] = NODES[a], [x1, y1] = NODES[b]
-    const mx = (x0 + x1) / 2, my = Math.min(y0, y1) - 90 - (i % 3) * 30
-    const e = 1 - Math.pow(1 - p, 2)
-    ctx.strokeStyle = rgba(mix(GOLD_DEEP, GOLD_HI, 0.4), 0.55 * (0.7 + 0.3 * lit))
-    ctx.lineWidth = 1.1
+  for (let i = 0; i < 16; i++) {
+    const f0 = Math.max(0, e - 0.34 * ((i + 1) / 16)), f1 = Math.max(0, e - 0.34 * (i / 16))
+    const p0 = arcPt(a, b, lift, f0), p1 = arcPt(a, b, lift, f1)
+    ctx.strokeStyle = rgba(c, 0.55 * (1 - i / 16))
+    ctx.lineWidth = 2.2 * (1 - i / 20)
     ctx.beginPath()
-    for (let s = 0; s <= 24; s++) {
-      const u = (e * s) / 24
-      const px = (1 - u) * (1 - u) * x0 + 2 * (1 - u) * u * mx + u * u * x1
-      const py = (1 - u) * (1 - u) * y0 + 2 * (1 - u) * u * my + u * u * y1
-      s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
-    }
+    ctx.moveTo(p0[0], p0[1])
+    ctx.lineTo(p1[0], p1[1])
     ctx.stroke()
-    if (p < 1) {
-      const u = e
-      halo(ctx, (1 - u) * (1 - u) * x0 + 2 * (1 - u) * u * mx + u * u * x1, (1 - u) * (1 - u) * y0 + 2 * (1 - u) * u * my + u * u * y1, 22, GOLD_HI, 0.8)
-    }
-  })
-  NODES.forEach(([x, y, r], i) => {
-    const p = lin(built, (i / NODES.length) * 0.35, (i / NODES.length) * 0.35 + 0.2)
-    if (p <= 0) return
-    const pop = 1 + 0.4 * Math.sin(Math.PI * p) * (p < 1 ? 1 : 0)
-    halo(ctx, x, y, r * 3.6, GOLD_HI, (0.28 + 0.2 * lit) * p * n + 0.06 * (1 - n))
-    orb(ctx, x, y, r * pop, "gold", 600 + i, p)
-  })
-}
-
-/* ---------- the model ---------- */
-
-/** Where the model ball is: outside, on its way in, seated, on its way out; then the second one. */
-function ballAt(t: number): { x: number; y: number; kind: "gold" | "pearl"; a: number; glow: number; dim: number } | null {
-  // the first model
-  if (t < 27.2) {
-    const inn = ramp(t, 13.0, 15.6)
-    const out = ramp(t, 25.0, 27.2)
-    const e = 1 - Math.pow(1 - inn, 2.2)
-    let x = OUT[0] + (SEAT[0] - OUT[0]) * e, y = OUT[1] + (SEAT[1] - OUT[1]) * e
-    if (out > 0) {
-      const eo = out * out
-      x = SEAT[0] + (OUT[0] - SEAT[0]) * eo
-      y = SEAT[1] + (OUT[1] - SEAT[1]) * eo
-    }
-    const glow = win(t, 3.5, 12.6, 1) * (0.7 + 0.3 * Math.sin(t * 2.4))
-    return { x, y, kind: "gold", a: ramp(t, 3.4, 4.4) * (1 - ramp(t, 26.6, 27.2)), glow, dim: ramp(t, 12, 13.2) * (1 - ramp(t, 15.4, 16.6)) }
   }
-  // the second one, a different ball through the same gap
-  const inn = ramp(t, 26.9, 28.9)
-  const e = 1 - Math.pow(1 - inn, 2.2)
-  return { x: OUT[0] + (SEAT[0] - OUT[0]) * e, y: OUT[1] + (SEAT[1] - OUT[1]) * e, kind: "pearl", a: ramp(t, 26.9, 27.5), glow: 0, dim: 0 }
+  const p = arcPt(a, b, lift, e), q = arcPt(a, b, lift, Math.max(0, e - 0.03))
+  halo(ctx, p[0], p[1], 34, c, 0.5)
+  spark(ctx, p[0], p[1], q[0], q[1], c, 1, size, [255, 250, 232])
 }
 
-/** When the model is passing through the wall, the gap is open. */
-const gapAt = (t: number) => Math.max(win(t, 13.2, 15.4, 0.6), win(t, 25.2, 28.6, 0.5))
+/* ---------- the owner ---------- */
 
-/* ---------- questions and answers ---------- */
+/** How far his arm is lifted: he opens the gate, and he asks. */
+const reachAt = (t: number) => Math.max(...KEYS.map((at) => win(t, at - 0.35, at + 0.75, 0.38)), ...ASKS.map(([at]) => win(t, at - 0.3, at + 0.85, 0.38)))
+const WALK_OFF = 36.3
 
-const ASKS: [number, number][] = [[16.6, 0], [17.7, 1], [18.9, 2], [20.1, 0], [21.6, 1], [29.6, 1], [30.9, 0]]
-const FROM: [number, number][] = [[900, 610], [1060, 585], [780, 650]]
+function owner(ctx: Ctx, t: number, n: number, lit: number): { hand: [number, number]; chest: [number, number] } {
+  const gy = lineAt(ST_X) - 1.5
+  const pose =
+    t < WALK_OFF
+      ? walkPose(ST_X - ST_D, gy, ST_H, ST_D * glide(lin(t, 0.15, 3.7), 0.14), ST_STEPS, false, t * 1.6)
+      : walkPose(ST_X, gy, ST_H, 150 * (Math.pow(lin(t, WALK_OFF, WALK_OFF + 1) , 2) * 0.5 + Math.max(0, t - WALK_OFF - 1)), 99, true)
+  const rc = reachAt(t)
+  if (rc > 0) {
+    pose.armN = pose.armN + (2.15 - pose.armN) * rc
+    pose.lean -= 0.07 * rc
+  }
+  // by night he is a pale figure like the grain; by day he is ink
+  const body = mix(mix([226, 219, 236], GOLD_HI, 0.35 * lit), [50, 46, 42], 1 - n)
+  const far = mix(mix([168, 160, 190], GOLD, 0.3 * lit), [92, 86, 78], 1 - n)
+  const day = 1 - n
+  if (day > 0.05) {
+    // his shadow, long behind him, because the sun is low ahead
+    ctx.save()
+    ctx.globalAlpha = 0.26 * day
+    ctx.translate(pose.hx, gy)
+    ctx.transform(1, 0, 1.25, -0.24, 0, 0)
+    ctx.translate(-pose.hx, -gy)
+    ctx.filter = "blur(3px)"
+    figure(ctx, pose, { body: "rgb(60,48,30)", far: "rgb(60,48,30)" })
+    ctx.restore()
+  } else {
+    // by night, a faint pool of light at his feet
+    halo(ctx, pose.hx, gy, 90, GOLD, 0.1 + 0.1 * lit)
+  }
+  const { hand } = figure(ctx, pose, { body: rgba(body, 1), far: rgba(far, 1) })
+  return { hand, chest: [pose.hx + 12, pose.hy - ST_H * 0.22] }
+}
 
-function asks(ctx: Ctx, t: number, n: number) {
-  const b = ballAt(t)
+/* ---------- questions and what they leave behind ---------- */
+
+function asks(ctx: Ctx, t: number, hand: [number, number], chest: [number, number], b: Ball | undefined) {
   if (!b) return
-  const [lx, ly] = LETTER
-  ASKS.forEach(([at, which], i) => {
-    // a spark runs in along the gold line to the letter
-    const run = lin(t, at, at + 0.7)
-    if (run > 0 && run < 1) {
-      const e = 1 - (1 - run) * (1 - run)
-      const x0 = -60, x1 = lx - 40
-      const sx = x0 + (x1 - x0) * e, px = x0 + (x1 - x0) * Math.max(0, e - 0.12)
-      spark(ctx, sx, lineAt(sx) - 4, px, lineAt(px) - 4, GOLD, 1, 5, [255, 250, 232])
-    }
-    // the letter lights, and a thin thread rises from the field to the model
-    const [fx, fy] = FROM[which]
-    const up = lin(t, at + 0.6, at + 1.3)
-    if (up > 0) {
-      const a = 1 - ramp(t, at + 2.4, at + 3.2)
-      ctx.strokeStyle = rgba(GOLD, 0.6 * a)
-      ctx.lineWidth = 1.2
+  ASKS.forEach(([at, lx, ly], i) => {
+    const d = t - at
+    if (d < 0 || d > 3.2) return
+    const eye: [number, number] = [b.x, b.y]
+    // he asks: a spark from his hand to the model
+    fly(ctx, hand, eye, 150, lin(d, 0.15, 0.95), GOLD_HI)
+    // the model wakes, and looks at the work where it lies
+    const fl = lin(d, 0.9, 1.5)
+    if (fl > 0 && fl < 1) halo(ctx, b.x, b.y, BALL_R * 3, b.m.c, 0.6 * Math.sin(Math.PI * fl))
+    const read = win(d, 0.95, 2.05, 0.3)
+    if (read > 0) {
+      const sx = lx + 46 * Math.sin((d - 1) * 2.4), sy = fieldTop(sx) + (ly - fieldTop(lx))
+      ctx.save()
+      ctx.globalCompositeOperation = "lighter"
+      const beam = ctx.createLinearGradient(b.x, b.y, sx, sy)
+      beam.addColorStop(0, rgba(b.m.c, 0.26 * read))
+      beam.addColorStop(1, rgba(b.m.c, 0.03 * read))
+      ctx.fillStyle = beam
       ctx.beginPath()
-      ctx.moveTo(fx, fy)
-      ctx.lineTo(fx + (b.x - fx) * up, fy + (b.y - fy) * up)
-      ctx.stroke()
-      // a pinch of grain goes up the thread
-      const r = rng(700 + i)
-      for (let j = 0; j < 12; j++) {
-        const lag = r() * 0.3, w = gz(r) * 2
-        const ph = Math.max(0, Math.min(1, (lin(t, at + 0.6, at + 1.5) - lag) / 0.7))
-        if (ph <= 0 || ph >= 1) continue
-        ctx.fillStyle = rgba(GOLD_HI, 0.95)
-        ctx.beginPath()
-        ctx.arc(fx + (b.x - fx) * ph + w, fy + (b.y - fy) * ph + w * 0.5, 1.4 + r() * 1.3, 0, 6.2832)
-        ctx.fill()
-      }
+      ctx.moveTo(b.x - 8, b.y)
+      ctx.lineTo(b.x + 8, b.y)
+      ctx.lineTo(sx + 120, sy)
+      ctx.lineTo(sx - 120, sy)
+      ctx.closePath()
+      ctx.fill()
+      ctx.restore()
     }
-    // the model flares, and the answer drops back to the line
-    const fl = lin(t, at + 1.4, at + 1.9)
-    if (fl > 0 && fl < 1) halo(ctx, b.x, b.y, BALL_R * 2.6, b.kind === "gold" ? GOLD_HI : [214, 204, 255], 0.55 * Math.sin(Math.PI * fl))
-    const dn = lin(t, at + 1.7, at + 2.4)
-    if (dn > 0 && dn < 1) {
-      const e = dn * dn, e0 = Math.max(0, dn - 0.18) ** 2
-      const tx = lx + 60, ty = lineAt(lx + 60) - 6
-      spark(ctx, b.x + (tx - b.x) * e, b.y + (ty - b.y) * e, b.x + (tx - b.x) * e0, b.y + (ty - b.y) * e0, GOLD, 1, 5, [255, 250, 232])
+    // the answer goes to him, not out
+    fly(ctx, eye, chest, 120, lin(d, 1.85, 2.6), b.m.c)
+    const got = lin(d, 2.5, 3.1)
+    if (got > 0 && got < 1) halo(ctx, chest[0], chest[1], 70, GOLD_HI, 0.5 * Math.sin(Math.PI * got))
+    // and what was learned falls to the crest and stays there
+    const r = rng(900 + i)
+    for (let j = 0; j < 22; j++) {
+      const lag = r() * 0.5, tx = CAP_X + gz(r) * (30 + 40 * i), sz = 1.3 + r() * 1.4
+      const ph = lin(d, 1.95 + lag, 2.75 + lag)
+      if (ph <= 0 || ph >= 1) continue
+      const e = ph * ph
+      const x = b.x + (tx - b.x) * ph + 6 * Math.sin(ph * 9 + j), y = b.y + BALL_R * 0.6 + (fieldTop(tx) - b.y - BALL_R * 0.6) * e
+      halo(ctx, x, y, 9, GOLD_HI, 0.5)
+      ctx.fillStyle = rgba(GOLD_HI, 0.95)
+      ctx.beginPath()
+      ctx.arc(x, y, sz, 0, 6.2832)
+      ctx.fill()
     }
   })
+}
+/** Where the model is looking now, as a light on the heap. */
+function lookLight(t: number, b: Ball | undefined): Light | null {
+  if (!b) return null
+  for (const [at, lx, ly] of ASKS) {
+    const d = t - at
+    const read = win(d, 0.95, 2.05, 0.3)
+    if (read <= 0) continue
+    const sx = lx + 46 * Math.sin((d - 1) * 2.4)
+    return { x: sx, y: fieldTop(sx) + (ly - fieldTop(lx)), c: mix(b.m.c, GOLD_HI, 0.3), a: 1.1 * read, r: 120 }
+  }
+  return null
+}
+
+/* ---------- far ground, for depth ---------- */
+
+function farDunes(ctx: Ctx, t: number, n: number) {
+  const day = 1 - n
+  const rows: [number, number, number, number, RGB, RGB][] = [
+    [0.35, 742, 46, 0.0021, [58, 51, 84], [236, 229, 214]],
+    [0.6, 772, 62, 0.0015, [63, 55, 90], [232, 223, 205]],
+  ]
+  for (const [depth, base, amp, f, nc, dc] of rows) {
+    cam(ctx, t, depth)
+    ctx.fillStyle = rgba(mix(nc, dc, day), 1)
+    ctx.beginPath()
+    ctx.moveTo(-1400, 1400)
+    for (let x = -1400; x <= W + 1400; x += 30) ctx.lineTo(x, base - amp * (0.5 + 0.5 * Math.sin(x * f + depth * 9)) * (0.6 + 0.4 * Math.sin(x * f * 2.7 + 1)))
+    ctx.lineTo(W + 1400, 1400)
+    ctx.closePath()
+    ctx.fill()
+  }
 }
 
 /* ---------- the whole scene ---------- */
@@ -458,7 +559,7 @@ function asks(ctx: Ctx, t: number, n: number) {
 /** The film, and at the very end a soft return to its own first frame, so the loop has no seam. */
 export function sovereignScene(ctx: Ctx, t: number, S: Scene) {
   paint(ctx, t)
-  const back = ramp(t, 36.3, SOV_SECONDS)
+  const back = ramp(t, SOV_SECONDS - 0.7, SOV_SECONDS)
   if (back > 0) {
     const bx = S.buf.getContext("2d")!
     paint(bx, 0)
@@ -472,14 +573,17 @@ export function sovereignScene(ctx: Ctx, t: number, S: Scene) {
 function paint(ctx: Ctx, t: number) {
   const n = nightAt(t)
   const day = 1 - n
-  const press = ramp(t, 7.6, 10.4) * (1 - ramp(t, 12, 13.2))
-  const built = lin(t, 21, 25)
-  const lineLit = Math.max(win(t, 16.6, 25.5, 1.2), ramp(t, 32.3, 34))
-  const round = ramp(t, 29, 31.5) * (1 - 0.45 * ramp(t, 33, 34.6))
-  const edge = ramp(t, 0.4, 2.4)
+  const up = lin(t, WALL_T0, WALL_T1)
+  const press = ramp(t, 7.9, 10.2) * (1 - ramp(t, 12, 13.2))
+  const round = ramp(t, 31.5, 34.8) * (1 - 0.35 * ramp(t, 35.6, 37.2))
+  const lessons = lessonsAt(t)
+  const pulse = Math.max(...ASKS.map(([at]) => win(t, at + 2.3, at + 3.3, 0.35)), 0.8 * win(t, 23.6, 25.2, 0.6))
+  const balls = ballsAt(t)
+  const inside = balls.find((b) => b.seated > 0.5)
 
   // the sky
   ctx.setTransform(1, 0, 0, 1, 0, 0)
+  ctx.globalCompositeOperation = "source-over"
   const sky = ctx.createLinearGradient(0, 0, 0, H)
   sky.addColorStop(0, rgba(mix(SKY_TOP, PAPER, day), 1))
   sky.addColorStop(0.5, rgba(mix(SKY_MID, [245, 240, 228], day), 1))
@@ -487,118 +591,142 @@ function paint(ctx: Ctx, t: number) {
   sky.addColorStop(1, rgba(mix(SKY_LOW, [230, 220, 200], day), 1))
   ctx.fillStyle = sky
   ctx.fillRect(0, 0, W, H)
-  // dawn: warm light low in the sky behind the field
-  if (day > 0) {
-    const g = ctx.createRadialGradient(1100, 760, 0, 1100, 760, 1200)
-    g.addColorStop(0, rgba([255, 226, 160], 0.5 * day))
-    g.addColorStop(0.5, rgba([255, 226, 160], 0.12 * day))
-    g.addColorStop(1, rgba([255, 226, 160], 0))
-    ctx.fillStyle = g
-    ctx.fillRect(0, 0, W, H)
-  }
   // stars, only by night
   if (n > 0.1) {
+    cam(ctx, t, 0.15)
     const r = rng(19)
-    for (let i = 0; i < 180; i++) {
-      const x = r() * W, y = r() * 520, s = r()
+    for (let i = 0; i < 260; i++) {
+      const x = r() * 2400 - 240, y = r() * 760 - 120, s = r()
       const tw = 0.6 + 0.4 * Math.sin(t * (1 + s * 3) + i)
-      ctx.fillStyle = rgba([236, 230, 240], (0.08 + 0.4 * s * s) * tw * n)
+      ctx.fillStyle = rgba([236, 230, 240], (0.08 + 0.45 * s * s) * tw * n * (1 - 0.5 * lin(y, 400, 640)))
       ctx.beginPath()
-      ctx.arc(x, y, 0.5 + s * 0.9, 0, 6.2832)
+      ctx.arc(x, y, 0.5 + s * 1.0, 0, 6.2832)
       ctx.fill()
     }
+    ctx.setTransform(1, 0, 0, 1, 0, 0)
   }
+  // a low glow where the sky meets the ground: cool by night, the sun's by day
+  cam(ctx, t, 0.5)
+  halo(ctx, 1150, 800, 1300, mix([120, 104, 170], [255, 226, 160], day), 0.22 + 0.35 * day)
+  farDunes(ctx, t, n)
 
   cam(ctx, t)
-  // the ground below the line is a shade lighter, like the painting
-  ctx.fillStyle = rgba(mix([68, 61, 95], [226, 216, 196], day), 0.6)
+  // the ground below the line
+  const gr = ctx.createLinearGradient(0, 800, 0, 1300)
+  gr.addColorStop(0, rgba(mix([74, 66, 104], [228, 218, 198], day), 1))
+  gr.addColorStop(1, rgba(mix([52, 46, 78], [222, 211, 190], day), 1))
+  ctx.fillStyle = gr
   ctx.beginPath()
-  ctx.moveTo(-400, 1500)
-  for (let x = -400; x <= W + 400; x += 24) ctx.lineTo(x, lineAt(x) + 2)
-  ctx.lineTo(W + 400, 1500)
+  ctx.moveTo(-900, 1700)
+  for (let x = -900; x <= W + 700; x += 24) ctx.lineTo(x, lineAt(x) + 1)
+  ctx.lineTo(W + 700, 1700)
   ctx.closePath()
   ctx.fill()
+  // the heap's own shadow and its light on the ground
+  ctx.save()
+  ctx.translate(1050, 812)
+  ctx.scale(1, 0.09)
+  halo(ctx, 0, 0, 760, mix([30, 26, 50], [150, 128, 90], day), 0.5)
+  ctx.restore()
 
-  field(ctx, t, n, built)
-  arch(ctx, t, n, built)
-  goldLine(ctx, t, n, lineLit)
-  nodes(ctx, t, n, built, lineLit)
+  // the light the models give
+  const lights: Light[] = []
+  for (const b of balls) {
+    // outside, the first one pulls: its glow reaches for the heap
+    if (b.i === 0 && t < 13) lights.push({ x: 1380, y: 520, c: GOLD_HI, a: 0.3 * win(t, 4, 12.6, 1.2), r: 300 })
+    if (b.lit > 0) lights.push({ x: b.x, y: b.y + 150, c: mix(b.m.c, GRAIN, 0.25), a: 0.5 * b.lit * b.a, r: 250 })
+  }
+  const look = lookLight(t, inside)
+  if (look) lights.push(look)
 
-  // the model outside: it glows, and the grain starts to lift toward it
-  const b = ballAt(t)
-  if (b && b.a > 0) {
-    const c: RGB = b.kind === "gold" ? GOLD_HI : [214, 204, 255]
-    halo(ctx, b.x, b.y, BALL_R * 4, c, (0.18 + 0.45 * b.glow + 0.2 * ramp(t, 15.6, 16.8)) * (1 - b.dim * 0.45) * b.a)
-    if (b.glow > 0) halo(ctx, b.x, b.y, BALL_R * 9, c, 0.12 * b.glow * (1 - b.dim))
+  field(ctx, t, n, lessons, lights, pulse)
+  goldLine(ctx, n, Math.max(0.25 * up, ramp(t, 35.2, 37)))
+
+  // halos behind the models
+  for (const b of balls) {
+    const pull = b.i === 0 ? win(t, 3.6, 12.4, 1) * (0.7 + 0.3 * Math.sin(t * 2.4)) : 0
+    const hush = b.i === 0 ? ramp(t, 11.8, 13) * (1 - ramp(t, 15.4, 16.4)) : 0
+    halo(ctx, b.x, b.y, BALL_R * 4.2, b.m.c, (0.16 + 0.42 * pull + 0.34 * b.lit) * (1 - 0.5 * hush) * b.a)
+    if (pull > 0) halo(ctx, b.x, b.y, BALL_R * 9, b.m.c, 0.12 * pull * (1 - hush))
+    if (b.lit > 0) halo(ctx, b.x, b.y, BALL_R * 8, b.m.c, 0.1 * b.lit * b.a * (0.4 + 0.6 * n))
   }
 
   liftedGrain(ctx, t, n)
-  dome(ctx, t, n, edge, press, gapAt(t), round)
+  dome(ctx, t, n, up, press, gateAt(t), round)
 
-  if (b && b.a > 0) {
-    // the seat, drawn only while the first model is away and the second not yet in
-    const empty = win(t, 25.4, 28.6, 0.3)
-    if (empty > 0) {
-      ctx.strokeStyle = rgba(GOLD, 0.6 * empty)
-      ctx.lineWidth = 1.2
-      ctx.setLineDash([3, 8])
-      ctx.lineDashOffset = -t * 5
+  // the seat: a ring that waits while no model is in it
+  const seat = ramp(t, 12.6, 13.4) * (1 - ramp(t, 35.4, 36.6))
+  const empty = seat * (1 - Math.max(0, ...balls.map((b) => (b.seated > 0.92 ? 1 : 0))))
+  if (seat > 0) {
+    ctx.strokeStyle = rgba(GOLD, (0.25 + 0.4 * empty) * seat)
+    ctx.lineWidth = 1.3
+    ctx.setLineDash([3, 8])
+    ctx.lineDashOffset = -t * 5
+    ctx.beginPath()
+    ctx.arc(SEAT[0], SEAT[1], BALL_R + 9, 0, 6.2832)
+    ctx.stroke()
+    ctx.setLineDash([])
+    // a ring goes out each time one settles
+    for (const m of MODELS) {
+      const f = lin(t, m.in1 - 0.05, m.in1 + 1.1)
+      if (f <= 0 || f >= 1) continue
+      ctx.strokeStyle = rgba(m.c, 0.7 * (1 - f) * (1 - f))
+      ctx.lineWidth = 1.8
       ctx.beginPath()
-      ctx.arc(SEAT[0], SEAT[1], BALL_R + 6, 0, 6.2832)
+      ctx.arc(SEAT[0], SEAT[1], BALL_R + 9 + 90 * (1 - (1 - f) * (1 - f)), 0, 6.2832)
       ctx.stroke()
-      ctx.setLineDash([])
     }
-    const dimmed = b.kind === "gold" ? b.dim * 0.22 : 0
-    orb(ctx, b.x, b.y, BALL_R, b.kind, 77, b.a)
-    if (dimmed > 0) {
-      ctx.fillStyle = rgba([30, 26, 48], dimmed * b.a)
+  }
+  for (const b of balls) {
+    orb(ctx, b.x, b.y, BALL_R * (0.9 + 0.1 * b.seated), b.m.kind, 77 + b.i, b.a)
+    // asleep until it is seated: a veil over it while it waits
+    const veil = 0.3 * (1 - b.lit) * (b.i === 0 && t < 12 ? 0 : 1)
+    if (veil > 0) {
+      ctx.fillStyle = rgba(mix([34, 30, 54], [240, 234, 220], day), veil * b.a)
       ctx.beginPath()
-      ctx.arc(b.x, b.y, BALL_R, 0, 6.2832)
+      ctx.arc(b.x, b.y, BALL_R * (0.9 + 0.1 * b.seated) + 0.5, 0, 6.2832)
       ctx.fill()
     }
-    // the second model wakes once it is seated
-    if (b.kind === "pearl") halo(ctx, b.x, b.y, BALL_R * 2.4, [214, 204, 255], 0.35 * ramp(t, 28.8, 29.6))
   }
-  asks(ctx, t, n)
 
-  // the strider walks the gold line at dawn
-  const st = ramp(t, 32.8, 33.6) * (1 - ramp(t, 35.8, 36.4))
-  if (st > 0) {
-    const walked = (t - 32.6) * 150
-    const fx = 330 + walked * 0.92
-    const fy = lineAt(fx) - 2
-    ctx.save()
-    ctx.globalAlpha = st
-    strider(ctx, fx, fy, 250, walked, { body: "rgba(50,46,42,1)", far: "rgba(86,80,74,1)" })
-    ctx.restore()
-  }
+  const who = owner(ctx, t, n, inside ? inside.lit : 0)
+  // he opens the gate: a spark from his hand to the wall
+  for (const at of KEYS) fly(ctx, who.hand, GAP, 210, lin(t, at, at + 0.75), GOLD_HI, 4)
+  asks(ctx, t, who.hand, who.chest, inside)
 
   // dust close to the lens, out of focus
-  cam(ctx, t, 0.4)
+  cam(ctx, t, 1.9)
   const dr = rng(321)
-  for (let i = 0; i < 22; i++) {
-    const x0 = dr() * 2400 - 200, y0 = dr() * 1300 - 100, s = dr(), ph = dr() * 6.28
+  for (let i = 0; i < 26; i++) {
+    const x0 = dr() * 2600 - 300, y0 = dr() * 1300 - 100, s = dr(), ph = dr() * 6.28
     const x = x0 - t * (5 + 10 * s), y = y0 + 12 * Math.sin(t * 0.4 + ph)
     halo(ctx, x, y, 16 + 40 * s, s > 0.6 ? GOLD : [200, 190, 230], (0.05 + 0.07 * s) * n)
   }
   ctx.setTransform(1, 0, 0, 1, 0, 0)
 
+  // the edges fall away
+  const vg = ctx.createRadialGradient(W / 2, H * 0.52, H * 0.42, W / 2, H * 0.52, H * 1.05)
+  vg.addColorStop(0, "rgba(0,0,0,0)")
+  vg.addColorStop(1, rgba(mix([14, 10, 30], [120, 96, 60], day), 0.5 * n + 0.14 * day))
+  ctx.fillStyle = vg
+  ctx.fillRect(0, 0, W, H)
+
   // room for the words
-  const words = win(t, 3.4, 32.6, 0.6)
+  const words = win(t, 3.4, 35.6, 0.6)
   if (words > 0) {
-    const mist = ctx.createLinearGradient(0, 860, 0, H)
-    const mc = mix(SKY_LOW, PAPER, day)
+    const mist = ctx.createLinearGradient(0, 850, 0, H)
+    const mc = mix([44, 38, 68], PAPER, day)
     mist.addColorStop(0, rgba(mc, 0))
-    mist.addColorStop(0.55, rgba(mc, 0.82 * words))
+    mist.addColorStop(0.55, rgba(mc, 0.8 * words))
     mist.addColorStop(1, rgba(mc, 0.95 * words))
     ctx.fillStyle = mist
-    ctx.fillRect(0, 860, W, H - 860)
+    ctx.fillRect(0, 850, W, H - 850)
   }
   // the close: the words sit on a quiet corner of the sky
-  const close = ramp(t, 32.8, 33.6)
+  const close = ramp(t, 36, 36.9)
   if (close > 0) {
-    const g = ctx.createRadialGradient(420, 280, 0, 420, 280, 760)
-    g.addColorStop(0, rgba(PAPER, 0.8 * close * day))
+    const g = ctx.createRadialGradient(400, 270, 0, 400, 270, 700)
+    g.addColorStop(0, rgba(PAPER, 0.85 * close * day))
     g.addColorStop(1, rgba(PAPER, 0))
     ctx.fillStyle = g
     ctx.fillRect(0, 0, W, H)

@@ -41,7 +41,7 @@ export const blank = (w: number, h: number) => {
 }
 /* ---------- bodies ---------- */
 
-export type OrbKind = "ink" | "night" | "gold" | "pearl" | "moonstone"
+export type OrbKind = "ink" | "night" | "gold" | "pearl" | "moonstone" | "rose"
 
 /** A stippled sphere, lit from the upper right. */
 export function orb(ctx: Ctx, x: number, y: number, r: number, kind: OrbKind, seed: number, alpha = 1) {
@@ -56,6 +56,7 @@ export function orb(ctx: Ctx, x: number, y: number, r: number, kind: OrbKind, se
     gold: ["#fbeccb", "#c8a96e", "#5b4a26"],
     pearl: ["#ffffff", "#d6d0e8", "#6d6690"],
     moonstone: ["#8f88ad", "#3d3660", "#17132a"],
+    rose: ["#fff0e6", "#dc957c", "#5c2a20"],
   }
   const [s0, s1, s2] = stops[kind]
   g.addColorStop(0, s0)
@@ -68,8 +69,8 @@ export function orb(ctx: Ctx, x: number, y: number, r: number, kind: OrbKind, se
   ctx.clip()
   const rr = rng(seed)
   const n = Math.min(26000, Math.round(r * r * 1.5))
-  const lightDot: RGB = kind === "gold" ? [255, 247, 224] : kind === "pearl" ? [255, 255, 255] : kind === "ink" ? [241, 236, 223] : [214, 200, 240]
-  const darkDot: RGB = kind === "gold" ? [70, 55, 24] : kind === "pearl" ? [60, 52, 92] : [0, 0, 0]
+  const lightDot: RGB = kind === "gold" ? [255, 247, 224] : kind === "rose" ? [255, 238, 226] : kind === "pearl" ? [255, 255, 255] : kind === "ink" ? [241, 236, 223] : [214, 200, 240]
+  const darkDot: RGB = kind === "gold" ? [70, 55, 24] : kind === "rose" ? [74, 30, 22] : kind === "pearl" ? [60, 52, 92] : [0, 0, 0]
   for (let i = 0; i < n; i++) {
     const d = Math.sqrt(rr()) * r
     const a = rr() * 6.2832
