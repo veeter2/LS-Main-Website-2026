@@ -214,7 +214,6 @@ export default function Home() {
 
       {/* 03: Where it runs */}
       <section className="hx-section hx-deep" id="where">
-        <FilmStill src="/art/film-sun.jpg" alt="The model as a sun over the memory: it lights the land, it does not own it." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">03</span> Where it runs
