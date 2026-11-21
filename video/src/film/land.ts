@@ -2,7 +2,7 @@ import { C } from "../beats"
 import { k, ramp, rng, win } from "../util"
 import { type Ctx, H, LY, type RGB, SX, W, glowAt, gz, halo, hex, lin, mix, orb, palAt, pile, rgba, sm, spline, splash, stream, trail } from "./core"
 import { type Cam, type Plates, camT, depthAt, warp } from "./plates"
-import { strider } from "./strider"
+import { type Pose, figure, walkPose } from "./strider"
 
 /* The second world: your land. One painting, relit, with a camera moving through it. The sand lands on it and stays. */
 export const MX = SX
@@ -20,9 +20,9 @@ const goldAt = (t: number) =>
 
 /** A slow push in over the whole land, sinking to the heap, rising to the model at night, easing back at dawn. */
 export const camAt = (t: number): Cam => ({
-  z: spline(t, [[11.2, 0.15], [13.6, 0.05], [19, 0.1], [26, 0.14], [30.6, 0.16], [35, 0.08]]),
-  px: spline(t, [[11.2, 10], [13.6, -24], [19, 4], [26, 26], [30.6, 14], [35, -16]]),
-  py: spline(t, [[11.2, -6], [19, 8], [26, 2], [30.6, -12], [35, -4]]),
+  z: spline(t, [[11.2, 0.24], [13.8, 0.045], [19, 0.12], [26, 0.2], [30.6, 0.22], [35, 0.31]]),
+  px: spline(t, [[11.2, 10], [13.6, -28], [19, 6], [26, 34], [30.6, 12], [35, 64]]),
+  py: spline(t, [[11.2, -6], [19, 8], [26, 2], [30.6, -10], [35, -2]]),
 })
 
 /** A lamp does not fade on. It catches, stutters, and holds. */
@@ -258,6 +258,11 @@ export const roadAt = (s: number): [number, number] => {
   return ROAD[0]
 }
 
+/** The strider's walk: worked out on a flat line, then laid along the road, a little smaller as it goes away. */
+const WALK_H = 310, WALK_X0 = -160, WALK_T0 = 28.54, WALK_V = (WALK_H * 0.66) / 1.05
+const walkSize = (w: number) => 1 - 0.14 * Math.max(0, Math.min(1, w / 900))
+const walkLen = (w: number) => (w <= 0 ? w : w < 900 ? w - (0.07 * w * w) / 900 : 837 + 0.86 * (w - 900))
+
 export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) {
   const warm = glowAt(t)
   const dusk = t < 28
@@ -393,28 +398,60 @@ export function sceneLand(ctx: Ctx, t: number, n: number, o: number, P: Plates) 
   }
   ctx.restore()
 
-  // 31.. the strider walks the finished land toward the light
-  const walked = (t - 30.3) * 185
-  const st = ramp(t, 30.7, 31.7)
-  if (walked > 0 && st > 0) {
-    const [fx, fy] = roadAt(walked)
-    const h = 310 * (1 - 0.14 * Math.min(1, walked / 900))
-    const [ss, sx, sy] = camT(cam, depthAt(P, fx, fy))
-    const body = mix([64, 60, 54], [20, 18, 32], sm(n))
-    const far = mix([92, 87, 79], [34, 30, 50], sm(n))
+  // dawn comes through the gateway in long soft shafts, and the strider walks into them
+  const rays = ramp(t, 31, 32.8) * (1 - n) * o
+  if (rays > 0) {
+    const [rs, rx, ry] = camT(cam, depthAt(P, 1600, 660))
+    const ox = 1600 * rs + rx, oy = 660 * rs + ry
+    ctx.save()
+    ctx.globalCompositeOperation = "lighter"
+    ctx.filter = "blur(16px)"
+    const rr = rng(47)
+    for (let i = 0; i < 9; i++) {
+      const a0 = Math.PI * (0.62 + 0.34 * rr()) + 0.03 * Math.sin(t * 0.5 + i)
+      const wd = 0.02 + 0.05 * rr(), len = 1500 + 600 * rr()
+      const g = ctx.createRadialGradient(ox, oy, 40, ox, oy, len)
+      g.addColorStop(0, `rgba(255,226,160,${0.17 * rays})`)
+      g.addColorStop(1, "rgba(255,226,160,0)")
+      ctx.fillStyle = g
+      ctx.beginPath()
+      ctx.moveTo(ox, oy)
+      ctx.lineTo(ox + Math.cos(a0 - wd) * len, oy + Math.sin(a0 - wd) * len)
+      ctx.lineTo(ox + Math.cos(a0 + wd) * len, oy + Math.sin(a0 + wd) * len)
+      ctx.closePath()
+      ctx.fill()
+    }
+    ctx.restore()
+  }
+
+  // 30.. the strider walks the finished land toward the light: in from the near corner, on the road, with real steps
+  const went = WALK_V * (t - WALK_T0)
+  if (went > 0) {
+    const flat = walkPose(WALK_X0, 0, WALK_H, went, 99, true)
+    const size = walkSize(flat.hx)
+    const at = (w: number, up: number): [number, number] => {
+      const [x, y] = roadAt(walkLen(w))
+      return [x, y + up * walkSize(w)]
+    }
+    const [hx, hy] = at(flat.hx, flat.hy)
+    const [gx, gy] = at(flat.hx, 0)
+    const p: Pose = { ...flat, hx, hy, h: WALK_H * size, fa: at(flat.fa[0], flat.fa[1]), fb: at(flat.fb[0], flat.fb[1]) }
+    const [ss, sx, sy] = camT(cam, depthAt(P, gx, gy))
+    const body = mix([30, 26, 20], [14, 12, 24], sm(n))
+    const far = mix([62, 56, 48], [26, 23, 40], sm(n))
     ctx.save()
     ctx.transform(ss, 0, 0, ss, sx, sy)
     // his shadow, long behind him, because the sun is ahead in the gateway
     ctx.save()
-    ctx.globalAlpha = o * st * 0.3 * (1 - n)
-    ctx.translate(fx, fy)
+    ctx.globalAlpha = o * 0.34 * (1 - n)
+    ctx.translate(gx, gy)
     ctx.transform(1, 0, 1.05, -0.36, 0, 0)
-    ctx.translate(-fx, -fy)
+    ctx.translate(-gx, -gy)
     ctx.filter = "blur(4px)"
-    strider(ctx, fx, fy, h, walked, { body: "rgb(40,34,24)", far: "rgb(40,34,24)" })
+    figure(ctx, p, { body: "rgb(40,34,24)", far: "rgb(40,34,24)" })
     ctx.restore()
-    ctx.globalAlpha = o * st
-    strider(ctx, fx, fy, h, walked, { body: rgba(body, 1), far: rgba(far, 1) })
+    ctx.globalAlpha = o
+    figure(ctx, p, { body: rgba(body, 1), far: rgba(far, 1) })
     ctx.restore()
   }
 
