@@ -3,6 +3,7 @@ import Link from "next/link"
 import { pageMeta } from "@/lib/page-meta"
 import { MemoryStays } from "../_components/memory-stays"
 import { FilmStill } from "../_components/film-still"
+import { SovereignFilm } from "../_components/sovereign-film"
 import "./own-it.css"
 
 export const metadata: Metadata = pageMeta(
@@ -121,6 +122,9 @@ export default function OwnItPage() {
               </Link>
             </div>
           </div>
+        </div>
+        <div className="lx-wrap hw-film" data-rise="4">
+          <SovereignFilm />
         </div>
       </section>
 
