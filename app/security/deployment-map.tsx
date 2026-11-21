@@ -9,7 +9,7 @@ const OPTIONS: Option[] = [
     id: "hosted",
     label: "Hosted",
     status: "Hosted, available now.",
-    body: "Your company\u2019s instance, isolated to you by per-person and per-team access rules, verified on every read. No shared memory between customers. The fastest way to start.",
+    body: "Your company\u2019s instance, walled off to your company, and every lookup checks who\u2019s asking. No shared memory between customers. The fastest way to start.",
   },
   {
     id: "private",

@@ -18,7 +18,7 @@ const SECTIONS: LegalSection[] = [
   },
   {
     title: 'Acceptable Use',
-    body: 'While we respect your operational autonomy, you agree not to use LongStrider to violate any applicable laws or regulations, infringe on intellectual property rights of others, harass, abuse, or harm others, distribute malware or malicious code, attempt unauthorized access to our systems, or interfere with or disrupt the service.',
+    body: 'It’s your system. We only ask that you don’t use it to violate any applicable laws or regulations, infringe on intellectual property rights of others, harass, abuse, or harm others, distribute malware or malicious code, attempt unauthorized access to our systems, or interfere with or disrupt the service.',
   },
   {
     title: 'Intellectual Property',
@@ -55,7 +55,7 @@ export default function TermsOfServicePage() {
     <LegalPage
       title="Terms of Service"
       updated="November 7, 2026"
-      intro="Clear, transparent terms that respect your autonomy and establish the responsibilities of both parties."
+      intro="Plain terms. What you’re responsible for, and what we are."
       sections={SECTIONS}
     />
   );

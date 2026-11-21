@@ -2,11 +2,11 @@ import { LegalPage, type LegalSection } from '../_components/legal';
 
 const SECTIONS: LegalSection[] = [
   {
-    title: 'The One-to-One Relationship',
+    title: 'Your copy is yours alone',
     body: 'Your copy of LongStrider runs for your company alone. Your instance exists solely for your organization, all data remains private to your deployment, and nothing is shared or pooled across customers. Your memory, owned by you, is completely isolated and secure.',
   },
   {
-    title: 'Zero Access Architecture',
+    title: 'We can’t see inside',
     lead: 'On an owned build we have no access to your data. On hosted, your data is isolated by row-level rules and deleted on request.',
     items: [
       { label: 'On-Premises Deployments', text: 'All data remains on your infrastructure. We have zero access to your conversations, institutional memory, or any information processed by your LongStrider instance.' },
@@ -45,7 +45,7 @@ export default function PrivacyPolicyPage() {
     <LegalPage
       title="Privacy Policy"
       updated="November 7, 2026"
-      intro="Your data belongs to you. That isn’t a policy statement. It’s the architectural premise of everything we build."
+      intro="Your data belongs to you. That isn’t a policy. It’s how the thing is built."
       strip={STRIP}
       sections={SECTIONS}
     />

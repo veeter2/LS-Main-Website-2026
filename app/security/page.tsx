@@ -100,7 +100,7 @@ export default function SecurityConcept() {
               <span className="hx-step">02</span> Who can see what
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Scoped to the person it <em>belongs</em> to. Checked on every read.
+              Yours stays <em>yours</em>. Checked every single time.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Every fact belongs to someone. What&rsquo;s yours stays yours. Team knowledge is visible to the team, and only
