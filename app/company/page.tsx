@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 
 export const metadata: Metadata = pageMeta("/company", "About LongStrider · Why we built it", "The industry built brilliant engines and gave them amnesia. We built the missing layer, and built it to belong to you. Here is why we built it.")
 
@@ -56,7 +57,7 @@ export default function CompanyConcept() {
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book a working session <span className="lx-arrow" aria-hidden>→</span>
+                Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <Link className="lx-btn lx-btn-ghost" href="/manifesto">
                 Read the manifesto
@@ -107,6 +108,7 @@ export default function CompanyConcept() {
 
       {/* 02: How we got here */}
       <section className="hx-section" id="story">
+        <FilmStill src="/art/film-topics.jpg" alt="Topics forming on the memory as the work settles." />
         <div className="lx-wrap mh-story">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">02</span> How we got here
@@ -122,8 +124,8 @@ export default function CompanyConcept() {
             </p>
             <p>
               LongStrider started from one premise, that the memory has to be the customer&rsquo;s, and was built from the
-              ground up to deliver it. A small team, building lean on purpose. It has run our own business every day
-              since spring 2026. We&rsquo;d rather show you that than a logo wall.
+              ground up to deliver it. A small team, building lean on purpose. It runs our own business every day. We&rsquo;d
+              rather show you that than a logo wall.
             </p>
           </div>
         </div>
@@ -176,17 +178,18 @@ export default function CompanyConcept() {
       </section>
 
       <section className="hx-close">
+        <FilmStill src="/art/film-strider.jpg" alt="The strider on the road along the memory." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Build it <em>with</em> us.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
             We work closely with a small number of companies at a time. If you want to own what your company learns, start
-            with a working session.
+            with a call.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/manifesto">
               Read the manifesto

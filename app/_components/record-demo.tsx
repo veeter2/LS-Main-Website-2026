@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { PauseButton, usePlayback } from "../_components/pause-button"
+import { PauseButton, usePlayback } from "./pause-button"
 
 type Exchange = {
   q: string

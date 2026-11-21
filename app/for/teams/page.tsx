@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import { BuyerPage } from "../buyer-page"
+import { DoorsFilm } from "../../_components/doors-film"
 
 export const metadata: Metadata = pageMeta("/for/teams", "For your team · Stop re-explaining your job", "It remembers what you told it, keeps your promises in view, and says when it doesn’t know. Licensed and installed, with your own model.")
 
@@ -15,6 +16,7 @@ export default function ForTeams() {
           </>
         ),
         lead: "LongStrider remembers what you’ve already told it, keeps track of what you promised, and tells you what changed overnight, so you start the day where you left off.",
+        film: <DoorsFilm />,
         points: [
           {
             title: "It remembers.",
@@ -26,7 +28,7 @@ export default function ForTeams() {
           },
           {
             title: "It says when it doesn’t know.",
-            body: "No confident guesses. If the record is thin, it tells you so, along with what it’s waiting for.",
+            body: "No confident guesses. If the record is thin, it tells you so, along with what it’s waiting for. Every reply shows where it came from: which conversation, which date.",
           },
         ],
         proof: {
@@ -43,7 +45,7 @@ export default function ForTeams() {
           ),
           visual: (
             <div className="lx-card fo-demo">
-              <span className="fo-demo-head">While you were away</span>
+              <span className="lx-label">While you were away</span>
               <p>Linked 3 notes about Thistlewood that say the same thing.</p>
               <p>Flagged a conflict: two dates for the Reyes closing.</p>
               <p>Caught a promise from your 4:50 chat: revised scope, due Friday. Track it?</p>
@@ -65,7 +67,7 @@ export default function ForTeams() {
           },
           {
             q: "What happens if the company changes AI vendors?",
-            a: "Nothing, for you. The model is a setting your company controls. What you taught it stays, with its sources, and nobody has to brief it again.",
+            a: "Nothing, for you. The model is a setting your company controls. What you taught it stays, with its sources, and nobody has to brief it again. Experts and agents work from the same memory, and every one of them makes it richer.",
           },
         ],
         next: { label: "What it does", href: "/product" },

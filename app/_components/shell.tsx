@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useRef, useState, type ReactNode } from "react"
-import { LongstriderLogo } from "@/components/longstrider-logo"
+import Image from "next/image"
 import { SiteFooter } from "./site-footer"
 
 const NAV = [
@@ -10,13 +10,13 @@ const NAV = [
   { label: "How it works", href: "/how-it-works" },
   { label: "Industries", href: "/industries" },
   { label: "Security", href: "/security" },
+  { label: "Own it", href: "/own-it" },
   { label: "Company", href: "/company" },
 ]
 
 /**
- * Daylight concept shell. The page scrolls the document itself; the site's
- * dark nav, footer and ambient layer are hidden for the site in
- * concepts.css (keyed on #lx-root), so there is only ever one scroller.
+ * Daylight site shell. The page scrolls the document itself; site.css keys
+ * the page ground on #lx-root, so there is only ever one scroller.
  */
 export function ConceptShell({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -57,7 +57,7 @@ export function ConceptShell({ children }: { children: ReactNode }) {
       <header className="lx-bar" data-scrolled={scrolled}>
         <div className="lx-wrap lx-bar-inner">
           <Link href="/" className="lx-brand" aria-label="LongStrider home">
-            <LongstriderLogo size={30} className="lx-brand-mark" />
+            <Image src="/longstrider-mark.png" alt="" width={56} height={68} priority className="lx-brand-mark" />
             <span className="lx-brand-word">LongStrider</span>
           </Link>
           <nav className="lx-links" aria-label="Primary">
@@ -69,8 +69,8 @@ export function ConceptShell({ children }: { children: ReactNode }) {
           </nav>
           <div className="lx-bar-cta">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              <span className="lx-long">Book a working session</span>
-              <span className="lx-short">Book a session</span>
+              <span className="lx-long">Talk to us</span>
+              <span className="lx-short">Talk to us</span>
               <span className="lx-arrow" aria-hidden>→</span>
             </Link>
           </div>

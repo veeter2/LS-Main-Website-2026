@@ -1,0 +1,23 @@
+{
+  "name": "longstrider-concept-video",
+  "private": true,
+  "description": "The homepage concept video, rendered from code with Remotion. Not part of the Next.js build.",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render:1080": "remotion render src/index.ts hero ../public/video/hero-1080.mp4 --codec=h264 --crf=36 --muted --concurrency=4",
+    "render:720": "remotion render src/index.ts hero720 ../public/video/hero-720.mp4 --codec=h264 --crf=33 --muted --concurrency=4",
+    "poster": "remotion still src/index.ts hero ../public/video/hero-poster.jpg --frame=66 --image-format=jpeg --jpeg-quality=85"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.544",
+    "@remotion/google-fonts": "4.0.544",
+    "react": "^19",
+    "react-dom": "^19",
+    "remotion": "4.0.544"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}

@@ -2,6 +2,7 @@ import "./industries.css"
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import { IndustryAsk } from "./industry-ask"
 
 export const metadata: Metadata = pageMeta("/industries", "For insurance, legal and professional services", "Where what people know is the business. Keep adjuster judgment, partner knowledge and client history when the people leave.")
@@ -43,7 +44,7 @@ const VERTICALS: Vertical[] = [
       },
     ],
     owns: "Every exception, and how it was resolved. The reasoning behind each reserve and settlement. What each retiring adjuster knew, confirmed by them while they were still here.",
-    signs: "The chief claims officer owns the pain. The CIO owns the budget. Compliance has the final word, and the NAIC AI bulletin, now adopted in many states, asks them to document exactly how an AI system is governed. Every write in LongStrider leaves a receipt and can be undone. That\u2019s the audit trail.",
+    signs: "The chief claims officer owns the pain. The CIO owns the budget. Compliance has the final word, and the NAIC AI bulletin, now adopted in many states, asks them to document exactly how an AI system is governed. Every write in LongStrider leaves a receipt and can be undone. Nothing goes out in your name until a person says yes, and the yes is on the record. That\u2019s the audit trail.",
   },
   {
     id: "legal",
@@ -80,7 +81,7 @@ const VERTICALS: Vertical[] = [
         Your product is what your people <em>know</em>.
       </>
     ),
-    lead: "Every method, every relationship, every hard-won pattern lives in people. Firms now use AI on a growing share of projects, and most say it saves time. Few say it makes money. (SPI Research) Savings don\u2019t compound. A record does.",
+    lead: "Every method, every relationship, every hard-won pattern lives in people. Firms now use AI on a growing share of projects, and most say it saves time. Few say it makes money. (SPI Research) Savings don\u2019t compound. A memory does.",
     breaks: [
       {
         title: "The method lives in the partner.",
@@ -96,7 +97,7 @@ const VERTICALS: Vertical[] = [
       },
     ],
     owns: "The method, as it\u2019s actually practiced. Every client\u2019s history, with the promises kept and the ones that weren\u2019t. A new hire\u2019s first week that starts where the last person\u2019s left off.",
-    signs: "The COO or head of delivery. The managing partner signs. In a 60-person firm that\u2019s often the same two people in one room, which is why the working session is an hour.",
+    signs: "The COO or head of delivery. The managing partner signs. In a 60-person firm that\u2019s often the same two people in one room, which is why the first call is short.",
   },
 ]
 
@@ -116,7 +117,7 @@ export default function IndustriesConcept() {
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book a working session <span className="lx-arrow" aria-hidden>→</span>
+                Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
             </div>
             <nav className="in-jump" data-rise="4" aria-label="Industries on this page">
@@ -179,18 +180,21 @@ export default function IndustriesConcept() {
       ))}
 
       <section className="hx-close">
+        <FilmStill src="/art/film-dawn.jpg" alt="Dawn over the memory: the road into the day, the letter waiting." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Bring the case that keeps you up at <em>night</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            A working session with your people and one real question from your business: a claim, a matter, an engagement.
-            You&rsquo;ll see what LongStrider would keep, and what your company would own, on a license you hold rather
-            than a seat you rent.
+            Tell us what you do and bring one real question: a claim, a matter, an engagement. You&rsquo;ll see what
+            LongStrider would keep, and what your company would own, on a license you hold rather than a seat you rent.
+          </p>
+          <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
+            Your people will use AI either way. The question is whether it happens inside your walls, in your memory, or in a chat box you don&rsquo;t control. This is the approved tool.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Where it runs, and who owns it

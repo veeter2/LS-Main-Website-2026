@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import "./partners.css"
 
 export const metadata: Metadata = pageMeta("/partners", "Partners · Your client’s memory, your method", "For consultancies and service firms: deploy it, build on it, or lead the work. The engine is ours. The vertical knowledge is yours.")
@@ -223,6 +224,7 @@ export default function PartnersConcept() {
       </section>
 
       <section className="hx-close">
+        <FilmStill src="/art/film-sun.jpg" alt="The model as a sun over the memory: it lights the land, it does not own it." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Build the memory practice in your <em>vertical</em>.

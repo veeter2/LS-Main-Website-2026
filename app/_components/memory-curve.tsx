@@ -52,13 +52,13 @@ export function MemoryCurve() {
     <figure className="gx-figure lx-card">
       <figcaption className="gx-legend">
         <span className="gx-key gx-key-kept">LongStrider: kept, linked, tidied every night</span>
-        <span className="gx-key gx-key-forget">A tool that forgets: every session starts from zero</span>
+        <span className="gx-key gx-key-forget">Memory kept with the model: change the model, back to zero</span>
       </figcaption>
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Illustration: a tool that forgets keeps returning to zero, while LongStrider’s knowledge of your business keeps rising over twelve months.">
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Illustration: memory kept with the model drops back to zero each time the model changes, while LongStrider’s knowledge of your business keeps rising over twelve months.">
         <defs>
           <linearGradient id="gx-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#c8a96e" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="#c8a96e" stopOpacity="0" />
+            <stop offset="0%" style={{ stopColor: "var(--lx-gold)" }} stopOpacity="0.22" />
+            <stop offset="100%" style={{ stopColor: "var(--lx-gold)" }} stopOpacity="0" />
           </linearGradient>
         </defs>
 

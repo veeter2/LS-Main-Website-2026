@@ -1,96 +1,122 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
-import Image from "next/image"
+import { FilmStill } from "./_components/film-still"
 import { AskYourAI } from "./_components/ask-your-ai"
+import { HeroVideo } from "./_components/hero-video"
+import { ReceiptCard } from "./_components/proof-cards"
 
 export const metadata: Metadata = {
   ...pageMeta(
     "",
-    "Stop teaching AI your business every morning",
-    "Not a model, not a search box, not a wrapper. LongStrider is the software your company runs its AI on, and owns. It keeps what your people tell it, works on it overnight, and hands it to whichever model you run this year.",
+    "The model changes. The memory is yours.",
+    "A system of intelligence your company owns. It takes what your people, systems and files already know, learns every day, and any model you choose answers from it.",
   ),
-  title: { absolute: "LongStrider · Stop teaching AI your business every morning" },
+  title: { absolute: "LongStrider · The model changes. The memory is yours." },
 }
 
 /**
  * Homepage v2 (Concept A, 2026-11-11): the enemy in the headline, the three
  * "not a" lines as the subhead, then the whole room. No stats anywhere; the
- * figures live in the briefs. Screens are the demo account (Dana Thistlewood,
- * COO of a fictional dealer group). Names match the app's tabs.
+ * figures live in the briefs. The hero is the concept film (rendered from
+ * /video); the section stills are gone. Names match the app's tabs.
  */
 
 const ROOM = [
-  { name: "Chat.", body: "It answers from the record first and calls the model only for the words." },
-  {
-    name: "Memory.",
-    body: "Everything your company has said to it, dated and sourced. It files itself, checks itself, and works on it overnight.",
-  },
-  { name: "Promises.", body: "Who said they would do what, by when. It brings them back on the day." },
-  { name: "Today.", body: "What moved, what slipped, what to do first. Written overnight, before you sit down." },
-  { name: "Experts.", body: "Hire a specialist. It interviews you first, then works the way your business works." },
-  { name: "Agents.", body: "Work that starts where yesterday’s left off, with the same memory as you." },
-  {
-    name: "Governance.",
-    body: "Which model, whose keys, what each answer cost, who saw what. One screen. Swap the model next year and nothing is taught twice.",
-  },
-  { name: "Connections.", body: "Your CRM, your files, your forms, your payments. Plugged in once." },
+  { name: "Chat.", body: "Answers from what your company already knows, with a receipt under every reply." },
+  { name: "Receipts.", body: "Click any answer and see what it used, what it cost, and who can see it." },
+  { name: "Promises.", body: "Every “I’ll get that to you” is written down, with a name and a date." },
+  { name: "Today.", body: "What moved, what slipped, what to do first. Written before you sit down." },
+  { name: "Experts.", body: "A specialist that already knows your rules and your history. No re-briefing." },
+  { name: "Agents.", body: "Overnight work that starts where yesterday’s left off." },
+  { name: "Governance.", body: "Which model, whose keys, what each answer cost, one screen. Swap the model and nothing is taught twice." },
+  { name: "Connections.", body: "Your CRM, files, forms and payments. Plugged in once, kept in sync." },
 ]
 
-const DIFFERENT = [
-  { title: "Fewer tokens", body: "The model sees only the slice that earns it. Cost doesn’t grow with what it knows." },
-  { title: "Fewer made-up answers", body: "Every answer traces to a record it can show you. When there isn’t one, it says so." },
+// Said as a buyer asks it. The "no" is the short answer; the sentence after it is the real one.
+const NOT_THIS = [
+  { no: "Not a chatbot.", yes: "A brain your company owns. Chat is one door into it." },
+  { no: "Not a harness.", yes: "The memory and the judgment live here. The model is only the voice." },
+  { no: "Not a wrapper around one model.", yes: "Any model, through your own keys. Swap it and nothing is re-taught." },
+  { no: "Not rented.", yes: "Software you own, on your machines or ours. A cost you capitalize, not a bill forever." },
+  { no: "Not a search box.", yes: "A memory that counts, dates and sources every fact, and says when it is unsure." },
+  { no: "Not one person\u2019s assistant.", yes: "Private memory for each person, shared memory for the company, both in one place." },
+]
+
+type Icon = "coin" | "receipt" | "pen" | "clocks"
+function CardIcon({ kind }: { kind: Icon }) {
+  const d: Record<Icon, React.ReactNode> = {
+    coin: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M9.5 10.2c0-1 1-1.7 2.5-1.7s2.5.7 2.5 1.7-1 1.4-2.5 1.8-2.5.8-2.5 1.8 1 1.7 2.5 1.7 2.5-.7 2.5-1.7M12 7v10" />
+      </>
+    ),
+    receipt: (
+      <>
+        <path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5L6 21z" />
+        <path d="M9 8h6M9 11.5h6M9 15h4" />
+      </>
+    ),
+    pen: (
+      <>
+        <path d="M4 20l4-1 10.5-10.5a2.1 2.1 0 0 0-3-3L5 16z" />
+        <path d="M13 7l3 3M4 20h16" />
+      </>
+    ),
+    clocks: (
+      <>
+        <circle cx="8" cy="12" r="4.5" />
+        <path d="M8 9.5V12l1.8 1.2" />
+        <path d="M16.5 7.5a4.5 4.5 0 1 0 3.2 7.7 3.6 3.6 0 0 1-3.2-7.7z" />
+      </>
+    ),
+  }
+  return (
+    <svg className="mh-icon" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      {d[kind]}
+    </svg>
+  )
+}
+
+const DIFFERENT: { title: string; body: string; icon: Icon }[] = [
+  { icon: "coin", title: "A smaller model bill", body: "The model sees only the slice that earns it. Cost doesn’t grow with what it knows." },
+  { icon: "receipt", title: "Answers you can check", body: "Every answer traces to a record it can show you. When there isn’t one, it says so." },
   {
+    icon: "pen",
     title: "Teach it once",
     body: "Rules, corrections and lessons carry forward. Month twelve knows what month one never could.",
   },
   {
+    icon: "clocks",
     title: "Two speeds",
     body: "In the moment it decides what matters. At night it reads everything, links what repeats, flags what contradicts, and writes you a letter.",
   },
 ]
 
-const WHERE = ["Regulated industries", "Anyone who won’t hand IP to a frontier model", "Companies quoted seven figures to build a brain"]
-
 const BUYERS = [
   { who: "For the CFO", title: "An AI budget that ends in an asset, not a renewal.", href: "/for/finance" },
   { who: "For the CTO", title: "Postgres, row-level scoping, any model through your keys. Open it up.", href: "/for/technology" },
-  { who: "For compliance", title: "Every read checked against who’s asking. Every write leaves a receipt.", href: "/security" },
+  { who: "For compliance", title: "Every read checked against who’s asking. Every write leaves a receipt: what changed, who, when.", href: "/security" },
   { who: "For your team", title: "Stop explaining your job to a chat window every morning.", href: "/for/teams" },
 ]
-
-function Shot({ src, alt, caption }: { src: string; alt: string; caption: string }) {
-  return (
-    <figure className="mh-screen">
-      <Image src={src} alt={alt} width={800} height={537} sizes="(max-width: 900px) 100vw, 900px" />
-      <figcaption className="lx-illustrative">{caption}</figcaption>
-    </figure>
-  )
-}
 
 export default function Home() {
   return (
     <main>
       {/* Hero */}
-      <section className="lx-hero">
+      <section className="lx-hero hx-home">
         <div className="lx-wrap hx-center">
-          <p className="lx-eyebrow" data-rise="0">
-            Company memory
-          </p>
           <h1 className="lx-display lx-h1 mh-h1" data-rise="1">
-            Stop teaching AI your business every <em>morning</em>.
+            The model changes. The memory is <em>yours</em>.
           </h1>
           <p className="lx-lead hx-lead-center mh-nots" data-rise="2">
-            Not a model. Not a search box. Not a wrapper around someone else&rsquo;s chat. LongStrider is the software
-            your company runs its AI on, and owns.
-          </p>
-          <p className="lx-lead hx-lead-center" data-rise="2">
-            It keeps what your people tell it, works on it overnight, and hands it to whichever model you run this year.
-            Switch models and nothing is taught twice.
+            LongStrider is a system of intelligence your company owns. It takes what your people, your systems and your
+            files already know, learns from it every day, and any model you choose answers from it.
           </p>
           <div className="lx-cta-row hx-cta-center" data-rise="3">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/product">
               See what it does
@@ -98,26 +124,27 @@ export default function Home() {
           </div>
         </div>
         <div className="lx-wrap" data-rise="4">
-          <Shot
-            src="/shots/chat.jpg"
-            alt="LongStrider chat. Dana asks how to handle a repeat problem; the reply shows she solved the same one in September."
-            caption="Dana asks how to handle a repeat problem. It shows her she solved the same one in September."
-          />
+          <HeroVideo />
+          <p className="lx-lead hx-lead-center mh-sovereign">
+            <Link href="/own-it">
+              <strong>Sovereign by design.</strong> Your box, your models, your keys.
+            </Link>
+          </p>
         </div>
       </section>
 
-      {/* 01: One record */}
+      {/* 01: One memory */}
       <section className="hx-section hx-deep" id="room">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">01</span> One record
+            <span className="hx-step">01</span> One memory
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             One room. Everything your company knows about <em>itself</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Eight parts, one memory underneath all of them. Take the memory away and they&rsquo;re the same tools everyone
-            else sells. Keep it, and every one of them gets better each month, because the record does.
+            else sells. Keep it, and every one of them gets better each month, because the memory does.
           </p>
         </div>
         <div className="lx-wrap">
@@ -131,12 +158,9 @@ export default function Home() {
             ))}
           </ol>
           <p className="mm-foot" data-reveal>
-            All eight read one record. That&rsquo;s what you license, and that&rsquo;s what you own.{" "}
+            All eight read one memory. That&rsquo;s what you license, and that&rsquo;s what you own.{" "}
             <Link href="/product">What it does →</Link>
           </p>
-        </div>
-        <div className="lx-wrap" data-reveal data-delay="2">
-          <Shot src="/shots/memory.jpg" alt="LongStrider Memory page, nine months of a company's record." caption="Memory, nine months in." />
         </div>
       </section>
 
@@ -151,19 +175,40 @@ export default function Home() {
             <em>calling</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            It has run our own company every day since spring 2026. Every nightly letter, every answer, on the record.
+            The memory does the remembering. The model only supplies the words. That is why the bill is smaller, the
+            answers are backed, and nothing is taught twice.
           </p>
+        </div>
+        <div className="lx-wrap">
+          <ul className="hx-not" data-reveal>
+            {NOT_THIS.map((n) => (
+              <li key={n.no}>
+                <span className="hx-not-no">
+                  <svg viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M7 7l10 10M17 7L7 17" /></svg>
+                  {n.no}
+                </span>
+                <span className="hx-not-yes">
+                  <svg viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                  {n.yes}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="lx-wrap mh-facts mh-facts-2">
           {DIFFERENT.map((f, i) => (
-            <div key={f.title} className="mh-fact" data-reveal data-delay={String(i + 1)}>
-              <h3>{f.title}</h3>
+            <div key={f.title} className="mh-fact mh-fact-icon" data-reveal data-delay={String(i + 1)}>
+              <h3>
+                <CardIcon kind={f.icon} />
+                {f.title}
+              </h3>
               <p>{f.body}</p>
             </div>
           ))}
         </div>
-        <div className="lx-wrap" data-reveal data-delay="2">
-          <Shot src="/shots/today.jpg" alt="LongStrider Today page, the morning summary." caption="Today. The morning page, written overnight." />
+        <div className="lx-wrap pf-wrap pf-wrap-home" data-reveal>
+          <ReceiptCard compact />
+          <p className="lx-illustrative">Every answer comes with its receipt. Click any line and it opens.</p>
         </div>
       </section>
 
@@ -177,16 +222,13 @@ export default function Home() {
             Your box, your models, your keys. Nothing leaves the <em>building</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Or a frontier model through a gateway you control. Same product either way. Fire us and keep everything.
+            Or a cloud model through your own keys. Same product either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.
           </p>
-          <ul className="lx-assure mh-center" data-reveal data-delay="3" aria-label="Who this is for">
-            {WHERE.map((w) => (
-              <li key={w}>{w}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="lx-wrap" data-reveal data-delay="2">
-          <Shot src="/shots/experts.jpg" alt="LongStrider Experts page. Hire a role; it interviews you first." caption="Experts. Hire a role, it interviews you first." />
+          <div className="lx-cta-row hx-cta-center" data-reveal data-delay="3">
+            <Link className="lx-btn lx-btn-ghost" href="/own-it">
+              See how you own it <span className="lx-arrow" aria-hidden>→</span>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -213,10 +255,10 @@ export default function Home() {
       <section className="hx-section hx-deep" id="buyers">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            Who it&rsquo;s for
+            Your role
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Four people have to say <em>yes</em>.
+            See what it does for <em>your</em> job.
           </h2>
         </div>
         <div className="lx-wrap">
@@ -236,20 +278,21 @@ export default function Home() {
 
       {/* Close */}
       <section className="hx-close" id="company">
+        <FilmStill src="/art/steps.webp" alt="The strider steps from one lit stone to the next along the road." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Bring us your <em>hardest</em> problem.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            An hour, your people, one real question. You&rsquo;ll see the answer, the source it came from, and the promise
-            it caught, built from your material. You leave knowing what your company would own ninety days from now.
+            Tell us what your business does and the question your team can&rsquo;t answer today. We&rsquo;ll show you
+            what LongStrider would keep: the memory, the promises and the first morning note.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
-            <Link className="lx-btn lx-btn-ghost" href="/manifesto">
-              Read the manifesto
+            <Link className="lx-btn lx-btn-ghost" href="/own-it">
+              Not SaaS? See how you own it
             </Link>
           </div>
         </div>
