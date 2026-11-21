@@ -131,10 +131,6 @@ export default function Home() {
             </Link>
           </p>
         </div>
-        <div className="lx-wrap pf-wrap pf-wrap-home" data-rise="5">
-          <ReceiptCard compact />
-          <p className="lx-illustrative">Every answer comes with its receipt. Click any line and it opens.</p>
-        </div>
       </section>
 
       {/* 01: One memory */}
@@ -209,6 +205,10 @@ export default function Home() {
               <p>{f.body}</p>
             </div>
           ))}
+        </div>
+        <div className="lx-wrap pf-wrap pf-wrap-home" data-reveal>
+          <ReceiptCard compact />
+          <p className="lx-illustrative">Every answer comes with its receipt. Click any line and it opens.</p>
         </div>
       </section>
 
