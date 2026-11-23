@@ -79,7 +79,7 @@ const OWN_FACTS = [
   },
   {
     title: "Switch anything, lose nothing.",
-    body: "Change the model, the host or the hardware. The memory stays exactly where you left it. We moved every job to a different model in October; the memory didn't notice.",
+    body: "Change the model, the host or the hardware. The memory stays exactly where you left it. We've moved every job to a different model ourselves; the memory didn't notice.",
   },
   {
     title: "Fire us and keep everything.",

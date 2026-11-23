@@ -40,7 +40,7 @@ const WE_DO = [
 const ARCHITECT = [
   {
     title: "Any model, your keys.",
-    body: "Every job has its own model setting, on one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We did it in October. Nothing was re-taught.",
+    body: "Every job has its own model setting, on one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We\u2019ve done it ourselves. Nothing was re-taught.",
   },
   {
     title: "Your teammates run on your memory.",
@@ -144,7 +144,7 @@ export default function HowItWorksConcept() {
             <span />
           </div>
           <div className="ly-band">
-            <span className="ly-label">The model, rented and replaceable.</span>
+            <span className="ly-label">The model changes. The memory stays.</span>
             <p className="ly-model">
               Any frontier model through your keys, or a model on your own hardware for chat and for filing, the background job
               that files new facts. It gets the facts it needs for this question and writes the answer. It never has to keep the memory.

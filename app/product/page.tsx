@@ -329,10 +329,10 @@ export default function ProductConcept() {
         </div>
         <div className="lx-wrap hx-center">
           <p className="lx-lead hx-lead-center" data-reveal>
-            The model is rented and replaceable. The memory is yours and stays put. One is a bill every month. The other
+            The model changes. The memory stays. One is a bill every month. The other
             is something your company owns. Run a frontier model through your
-            own keys, a model you already host, or a local one on your hardware. We moved every job to a different
-            model in October. Nothing was re-taught.
+            own keys, a model you already host, or a local one on your hardware. We\u2019ve moved every job to a different
+            model ourselves. Nothing was re-taught.
           </p>
           <ul className="cp-parts hx-cta-center" data-reveal data-delay="1" aria-label="Models LongStrider runs with">
             {MODELS.map((m) => (
