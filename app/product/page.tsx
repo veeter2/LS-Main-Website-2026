@@ -207,13 +207,29 @@ export default function ProductConcept() {
       </section>
 
       {/* 04: Today */}
-      {/* 04: Experts */}
-      <section className="hx-section" id="experts">
+      <section className="hx-section" id="today">
         <Still src="/art/film-sun.jpg" alt="Morning over the memory: the sun on the arch, a short letter on the road." />
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">04</span> Today
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            A short letter at the top of your <em>morning</em>.
+          </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            At night it reads the week and writes down what moved, what slipped, and what to do first. A promise due
+            today. A fact that changed since you last looked. Two notes that disagree. It is written before you sit
+            down, and on a quiet night it says so in one line and stops.
+          </p>
+        </div>
+      </section>
+
+      {/* 05: Experts */}
+      <section className="hx-section" id="experts">
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">04</span> Experts
+              <span className="hx-step">05</span> Experts
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Hire a specialist. It <em>interviews</em> you first.
@@ -236,12 +252,12 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 05: Agents */}
+      {/* 06: Agents */}
       <section className="hx-section hx-deep" id="agents">
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">05</span> Agents
+              <span className="hx-step">06</span> Agents
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Your teammates start where <em>yesterday&rsquo;s</em> left off.
@@ -284,12 +300,12 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 06: Governance, which includes any model */}
+      {/* 07: Governance, which includes any model */}
       <section className="hx-section" id="governance">
         <Still src="/art/film-arch.jpg" alt="The record as an arch of stones, one per month, brightening toward now, with the company's topics in orbit." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">06</span> Governance
+            <span className="hx-step">07</span> Governance
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Every model, every key, every dollar. <em>One</em> screen.
@@ -327,11 +343,11 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 07: Connections */}
+      {/* 08: Connections */}
       <section className="hx-section hx-deep" id="connections">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">07</span> Connections
+            <span className="hx-step">08</span> Connections
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Every door feeds one <em>memory</em>.
