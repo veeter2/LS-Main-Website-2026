@@ -2181,7 +2181,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .mh-nots { font-size: clamp(20px, 2.2vw, 24px); line-height: 1.5; color: var(--lx-ink-primary); max-width: 36em; text-wrap: balance; }
 .lx-hero .lx-lead + .lx-lead { margin-top: 18px !important; }
 .lx-hero .lx-lead { text-wrap: balance; }
-.mh-sovereign { max-width: 36em; }
+.mh-sovereign { max-width: 36em; text-align: center; }
 /* Home hero: no eyebrow, tighter stack, so the film starts above the fold on a laptop. */
 .lx-hero.hx-home { padding-top: clamp(32px, 5vh, 56px); }
 .hx-home .mh-h1 { margin-top: 0; }
