@@ -9,7 +9,7 @@ import "./own-it.css"
 export const metadata: Metadata = pageMeta(
   "/own-it",
   "Sovereign by design · Your keys, your machine",
-  "Not SaaS. Sovereign software you own: your own key from day one, your own model on your own machine, hosted by us or in your rack. The memory never moves.",
+  "Not SaaS. Sovereign software you own: your own key from day one, your own model on your own machine, in your cloud or in your rack. The memory never moves.",
 )
 
 /**
@@ -50,11 +50,6 @@ const LADDER = [
     rung: "Your own model on your own machine.",
     status: "Available now",
     body: "Ollama, vLLM, LM Studio, Qwen. Chat and filing both run on hardware you own. Nothing has to be re-taught when you switch.",
-  },
-  {
-    rung: "The app hosted by us, isolated to you.",
-    status: "Available now",
-    body: "We run the software in an instance that is yours alone. We never hold a model you pay us for.",
   },
   {
     rung: "Your cloud or your rack.",
@@ -102,7 +97,7 @@ export default function OwnItPage() {
             <p className="lx-lead" data-rise="2">
               LongStrider is licensed software, not a subscription you rent. The money you’d have spent on
               seats buys something your company owns, on your books, not a bill every month. Your own key
-              from day one, your own model on your own machine, hosted by us or in your rack. The memory
+              from day one, your own model on your own machine, in your cloud or in your rack. The memory
               never moves, so nothing is ever re-taught.
             </p>
             <div className="lx-cta-row" data-rise="3">

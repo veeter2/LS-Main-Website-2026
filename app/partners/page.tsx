@@ -213,7 +213,7 @@ export default function PartnersConcept() {
               <span>Direct.</span>You work with the founding team from day one.
             </li>
             <li>
-              <span>Where they need it.</span>Hosted now. Private cloud and on-premises built with you. Your keys either way.
+              <span>Where they need it.</span>You choose where it runs: your cloud, your private cloud or your rack. Your keys either way.
             </li>
           </ul>
         </div>

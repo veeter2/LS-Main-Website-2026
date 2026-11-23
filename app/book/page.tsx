@@ -49,7 +49,7 @@ export default function BookConcept() {
         <p className="lx-wrap mh-question" data-reveal>
           Rather see it first? A short walk through the product, no sales call.{" "}
           <Link href="/product">See it answer</Link>{" "}
-          Or see what owning it means: <Link href="/own-it">hosted today, inside your walls when you&rsquo;re ready</Link>.
+          Or see what owning it means: <Link href="/own-it">your cloud today, inside your walls when you&rsquo;re ready</Link>.
         </p>
       </section>
     </main>

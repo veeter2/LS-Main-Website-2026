@@ -103,7 +103,6 @@ const LANDSCAPE = [
 ]
 
 const TIERS = [
-  { name: "Hosted", body: "A dedicated instance we run, isolated to you. You own the knowledge; we run the engine." },
   { name: "Private cloud", body: "Containerized inside your VPC: your servers, your perimeter, full data residency. No source code shipped." },
   { name: "Owned build", body: "Built for you, on your servers, alongside your team. When it’s done, every part belongs to you." },
   { name: "Partner program", body: "Run it under your brand for your clients. You bring the relationships and the vertical knowledge; the engine is yours to operate." },

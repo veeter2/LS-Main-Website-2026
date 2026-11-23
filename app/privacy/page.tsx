@@ -3,10 +3,10 @@ import { LegalPage, type LegalSection } from '../_components/legal';
 const SECTIONS: LegalSection[] = [
   {
     title: 'We can’t see inside',
-    lead: 'On an owned build we have no access to your data. On hosted, your data is isolated by row-level rules and deleted on request.',
+    lead: 'On an owned build we have no access to your data. In your cloud, your data is isolated by row-level rules and deleted on request.',
     items: [
       { label: 'On-Premises Deployments', text: 'All data remains on your infrastructure. We have zero access to your conversations, institutional memory, or any information processed by your LongStrider instance.' },
-      { label: 'Hosted by us', text: 'Your data is stored in isolated, dedicated instances. Our infrastructure team cannot access the contents of your data.' },
+      { label: 'In your cloud', text: 'LongStrider runs in your own cloud account. We have no standing access to the contents of your data.' },
       { label: 'Owned Build', text: 'You maintain complete ownership of your data, the software and the memory. Nothing about usage is sent to us.' },
     ],
   },

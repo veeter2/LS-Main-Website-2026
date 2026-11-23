@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react"
  *
  * The record sits fixed at center. As the reader scrolls the figure through
  * the screen, the model slot swaps (frontier, open, your own) while answers
- * keep flowing into the record, then the host frame slides from our cloud
+ * keep flowing into the record, then the host frame slides from your cloud
  * to your rack. The record does not flinch.
  *
  * Scroll-driven through one data-stage attribute (0 to 3); CSS transitions do
@@ -71,14 +71,14 @@ export function MemoryStays() {
           </radialGradient>
         </defs>
 
-        {/* the host frame: our cloud, then your rack */}
+        {/* the host frame: your cloud, then your rack */}
         <g className="ms-host">
           <rect className="ms-host-box" x="120" y="70" width="1160" height="500" rx="16" />
           <text className="ms-host-label ms-host-us" x="160" y="112">
-            Hosted by us, isolated to you
+            Your cloud, isolated to you
           </text>
           <text className="ms-host-label ms-host-you" x="160" y="112">
-            Your cloud, or your rack
+            Your rack
           </text>
           {/* the building: appears when the host becomes yours */}
           <g className="ms-building">
@@ -98,7 +98,7 @@ export function MemoryStays() {
             </text>
           ))}
           <text className="ms-slot-note" x="24" y="146">
-            swappable, rented or yours
+            frontier, open or your own
           </text>
           {/* a small hardware mark when the model is your own */}
           <g className="ms-chip">

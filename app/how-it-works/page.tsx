@@ -48,7 +48,7 @@ const ARCHITECT = [
   },
   {
     title: "Runs where you need it.",
-    body: "Licensed to you in every case. Hosted now. Private cloud and on-premises built with you. Your keys either way.",
+    body: "Licensed to you in every case. You choose where it runs: your cloud, your private cloud or your rack. Your keys either way.",
   },
   {
     title: "Never trains a model.",
