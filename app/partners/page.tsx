@@ -213,7 +213,7 @@ export default function PartnersConcept() {
               <span>Direct.</span>You work with the founding team from day one.
             </li>
             <li>
-              <span>Where they need it.</span>Hosted now; private cloud and on-premises built together.
+              <span>Where they need it.</span>Hosted now. Private cloud and on-premises built with you. Your keys either way.
             </li>
             <li>
               <span>Theirs to keep.</span>The client holds the license, the keys and the rows. When a model gets

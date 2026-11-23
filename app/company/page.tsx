@@ -47,7 +47,7 @@ export default function CompanyConcept() {
               not to the vendor that sold it the chat window.
             </p>
             <p className="lx-lead" data-rise="2">
-              The personal computer gave one person their own machine. LongStrider gives one company its own mind:
+              The personal computer gave one person their own machine. LongStrider gives a company a memory it actually owns:
               software that keeps what your people tell it, works on it overnight, and hands it to whichever model you
               choose. Switch models and nothing is taught twice.
             </p>

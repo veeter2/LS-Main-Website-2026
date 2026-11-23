@@ -268,7 +268,7 @@ export default function ManifestoConcept() {
             </h2>
             <div className="mf-prose" data-reveal data-delay="2">
               <p>
-                LongStrider sits between your organization and whichever model you choose. It doesn&rsquo;t replace the
+                LongStrider sits beside your stack, not on top of it. It doesn&rsquo;t replace the
                 model. It makes the model aware of your business in a way no model provider can.
               </p>
             </div>

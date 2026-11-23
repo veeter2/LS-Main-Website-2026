@@ -212,6 +212,9 @@ export default function SecurityConcept() {
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             As much of it inside your walls as <em>you</em>{" "}need. Here&rsquo;s what&rsquo;s true today.
           </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            Hosted now. Private cloud and on-premises built with you. Your keys either way.
+          </p>
         </div>
         <div className="lx-wrap">
           <div className="sec-map" data-reveal data-delay="2">
