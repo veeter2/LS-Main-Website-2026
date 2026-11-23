@@ -19,7 +19,7 @@ const OWNERSHIP = [
   },
   {
     title: "It outlives every vendor.",
-    body: "Change models and nothing has to be re-taught. We moved every job to a different model in October. The memory didn\u2019t notice.",
+    body: "Change models and nothing has to be re-taught. We\u2019ve switched models ourselves. The memory didn\u2019t notice.",
   },
   {
     title: "It isn\u2019t on a vendor\u2019s terms.",
@@ -41,7 +41,7 @@ const ANSWERS = [
   { title: "Trackers.", body: "None on this site. None in the product." },
   { title: "Data residency.", body: "Hosted instances run in the United States. Private cloud runs wherever you put it." },
   { title: "Access.", body: "Row-level rules on every memory table, verified in production. Every reply logs what it read." },
-  { title: "Deletion.", body: "Ask, and the rows are gone. Receipts show what was removed." },
+  { title: "Deletion.", body: "Ask, and we delete it and show you what went." },
   { title: "Security contact.", body: "security@longstrider.ai" },
 ]
 
@@ -104,7 +104,7 @@ export default function SecurityConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Every fact belongs to someone. What&rsquo;s yours stays yours. Team knowledge is visible to the team, and only
-              the team. The check happens in the database, on every read, not in the instructions to the model. Every reply writes a receipt of
+              the team. Every time it reads, it checks who&rsquo;s asking. The model never gets to decide that. Every reply writes a receipt of
               what it opened, so you can always see how it learned what it knows.
             </p>
             <p className="sec-stat" data-reveal data-delay="3">
@@ -134,11 +134,11 @@ export default function SecurityConcept() {
               <span className="hx-step">03</span> Your model, your keys
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              The model is rented. The memory <em>stays</em> put.
+              Change the model. <em>Keep</em> the memory.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Bring the frontier model you trust through your own keys, point it at a model you already run in-house, or put
-              a model on your own hardware for chat and for filing, the background job that files new facts. LongStrider is
+              a model on your own hardware for filing new facts. LongStrider is
               not a service you log into with our
               model behind it. It is software you install, and the model is whatever you choose. When a better one arrives,
               you switch, and nothing has to be re-taught.
@@ -198,8 +198,7 @@ export default function SecurityConcept() {
           </p>
           <p className="sec-rules-note" data-reveal data-delay="3">
             Deloitte&rsquo;s four levels of AI autonomy are informs, recommends, executes within limits, and acts.
-            LongStrider sits at &ldquo;recommends,&rdquo; on purpose. It proposes; a person confirms; every write leaves a
-            receipt and can be undone. Many companies already let AI act with no one approving. We&rsquo;d rather be among
+            LongStrider sits at &ldquo;recommends,&rdquo; on purpose. It proposes; a person confirms; you can see what it did, and undo it. Many companies already let AI act with no one approving. We&rsquo;d rather be among
             the few that don&rsquo;t. (Deloitte)
           </p>
         </div>
@@ -253,12 +252,6 @@ export default function SecurityConcept() {
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
             Walk through where it runs, who can see what, and which model it talks to, with your own people in the room.
-          </p>
-          <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
-            Your people will use AI either way. The question is whether it happens inside your walls, in your memory, or in a chat box you don&rsquo;t control. This is the approved tool.
-          </p>
-          <p className="lx-lead hx-lead-center pf-buyer" data-reveal data-delay="1">
-            Methods built inside a chat box can stop being yours. Built here, they stay yours: your keys, your memory, your license.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
