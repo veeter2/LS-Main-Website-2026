@@ -2455,3 +2455,13 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 /* How it works: the connectors film under the hero grid. */
 .hw-film { margin-top: clamp(32px, 5vh, 56px); }
 .hw-film .mh-film { margin-left: auto; margin-right: auto; }
+
+/* Home receipt card, played once: question types, answer lands, receipt waits for a click. */
+.pf-live .pf-q p { font-size: 16px; }
+.pf-live .rx-reading { height: 18px; margin-top: -6px; }
+.pf-live-a { opacity: 0; transform: translateY(6px); transition: opacity 0.6s var(--lx-ease), transform 0.6s var(--lx-ease); }
+.pf-live-a[data-on="true"] { opacity: 1; transform: none; }
+.pf-live-cta { display: flex; justify-content: center; opacity: 0; transition: opacity 0.5s var(--lx-ease) 0.4s; }
+.pf-live-cta[data-on="true"] { opacity: 1; }
+.pf-live .pf-lines { animation: pf-unfold 0.6s var(--lx-ease); }
+@keyframes pf-unfold { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }

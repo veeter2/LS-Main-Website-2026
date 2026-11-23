@@ -11,46 +11,61 @@ const STOOD_ON = [
   { what: "Their office manager said the renewal is on the owner’s desk. Second time.", kind: "Call", when: "October" },
 ]
 
+export const RECEIPT_Q = "Can we send Pellworth next year\u2019s price list this week?"
+
+export function ReceiptAnswer() {
+  return (
+    <p>Not yet. Hailey&rsquo;s price hold runs through December, and she wants the signed renewal back first. Their office manager has said it&rsquo;s on the owner&rsquo;s desk twice.</p>
+  )
+}
+
+/** The lower half of the receipt: what the answer stood on. */
+export function ReceiptLines({ style }: { style?: React.CSSProperties }) {
+  return (
+    <dl className="pf-lines" style={style}>
+      <div className="pf-line">
+        <dt>Memory used</dt>
+        <dd>
+          <ul className="pf-stood">
+            {STOOD_ON.map((s) => (
+              <li key={s.what}>
+                <span>{s.what}</span>
+                <span className="pf-src">
+                  {s.kind} <b>{s.when}</b>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+      <div className="pf-line">
+        <dt>Rules fired</dt>
+        <dd>Nothing goes to a customer while a condition is still open. The price list waits for Hailey&rsquo;s yes.</dd>
+      </div>
+      <div className="pf-line">
+        <dt>Cost</dt>
+        <dd>a fraction of a cent, Claude through your own key</dd>
+      </div>
+      <div className="pf-line">
+        <dt>Who can see this</dt>
+        <dd>You and the deal team. Nobody else.</dd>
+      </div>
+    </dl>
+  )
+}
+
 export function ReceiptCard({ compact = false }: { compact?: boolean }) {
   return (
     <article className={`pf-receipt lx-card${compact ? " pf-receipt-compact" : ""}`} aria-label="Example: an answer with its receipt">
       <div className="pf-q">
         <span className="pf-who">You</span>
-        <p>Can we send Pellworth next year&rsquo;s price list this week?</p>
+        <p>{RECEIPT_Q}</p>
       </div>
       <div className="pf-a">
         <span className="pf-who pf-who-ls">LongStrider</span>
-        <p>Not yet. Hailey&rsquo;s price hold runs through December, and she wants the signed renewal back first. Their office manager has said it&rsquo;s on the owner&rsquo;s desk twice.</p>
+        <ReceiptAnswer />
       </div>
-      <dl className="pf-lines">
-        <div className="pf-line">
-          <dt>Memory used</dt>
-          <dd>
-            <ul className="pf-stood">
-              {STOOD_ON.map((s) => (
-                <li key={s.what}>
-                  <span>{s.what}</span>
-                  <span className="pf-src">
-                    {s.kind} <b>{s.when}</b>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </dd>
-        </div>
-        <div className="pf-line">
-          <dt>Rules fired</dt>
-          <dd>Nothing goes to a customer while a condition is still open. The price list waits for Hailey&rsquo;s yes.</dd>
-        </div>
-        <div className="pf-line">
-          <dt>Cost</dt>
-          <dd>a fraction of a cent, Claude through your own key</dd>
-        </div>
-                <div className="pf-line">
-          <dt>Who can see this</dt>
-          <dd>You and the deal team. Nobody else.</dd>
-        </div>
-      </dl>
+      <ReceiptLines />
     </article>
   )
 }

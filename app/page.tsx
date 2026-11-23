@@ -4,7 +4,7 @@ import Link from "next/link"
 import { FilmStill } from "./_components/film-still"
 import { AskYourAI } from "./_components/ask-your-ai"
 import { HeroVideo } from "./_components/hero-video"
-import { ReceiptCard } from "./_components/proof-cards"
+import { ReceiptLive } from "./_components/receipt-live"
 
 export const metadata: Metadata = {
   ...pageMeta(
@@ -208,7 +208,7 @@ export default function Home() {
         </div>
         <div className="lx-wrap pf-wrap pf-wrap-home" data-reveal>
           <p className="lx-eyebrow">Every answer shows its work</p>
-          <ReceiptCard compact />
+          <ReceiptLive />
           <p className="lx-illustrative">Every answer comes with its receipt. Click any line and it opens.</p>
         </div>
       </section>
