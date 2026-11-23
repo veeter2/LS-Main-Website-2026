@@ -38,7 +38,7 @@ const NOT_THIS = [
   { no: "Not a chatbot.", yes: "A brain your company owns. Chat is one door into it." },
   { no: "Not a harness.", yes: "The memory and the judgment live here. The model is only the voice." },
   { no: "Not a wrapper around one model.", yes: "Any model, through your own keys. Swap it and nothing is re-taught." },
-  { no: "Not rented.", yes: "Software you own, on your machines or ours. A cost you capitalize, not a bill forever." },
+  { no: "Not rented.", yes: "Software you own, on machines you choose. A cost you capitalize, not a bill forever." },
   { no: "Not a search box.", yes: "A memory that counts, dates and sources every fact, and says when it is unsure." },
   { no: "Not one person\u2019s assistant.", yes: "Private memory for each person, shared memory for the company, both in one place." },
 ]
@@ -220,7 +220,7 @@ export default function Home() {
             <span className="hx-step">03</span> Where it runs
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Your box, your models, your keys. Nothing leaves the <em>building</em>.
+            Your box, your models, your keys. Wherever you <em>run it</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             You choose where it runs: your cloud, your private cloud or your rack. Your keys either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.

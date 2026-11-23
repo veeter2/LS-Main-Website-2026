@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMeta(
 
 /**
  * The buyer's side of how it works: the path from first call to
- * ownership, the five ways to run it (your keys first), and what "owning
+ * ownership, the four ways to run it (your keys first), and what "owning
  * it" means in practice. Every claim here matches what is true today; the
  * ladder states honestly which rungs are scoped with you.
  */
@@ -105,7 +105,7 @@ export default function OwnItPage() {
                 Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <Link className="lx-btn lx-btn-ghost" href="#ladder">
-                The five ways to run it
+                The four ways to run it
               </Link>
             </div>
           </div>
@@ -148,11 +148,11 @@ export default function OwnItPage() {
             Your keys. Your model. Your <em>machine</em>.
           </h2>
           <p className="lx-lead" data-reveal data-delay="2">
-            Five ways to run it, in the order most companies take them. Every one runs the same
+            Four ways to run it, in the order most companies take them. Every one runs the same
             memory. Moving between them never moves it.
           </p>
         </div>
-        <div className="lx-wrap own-ladder" aria-label="Five ways to run it">
+        <div className="lx-wrap own-ladder" aria-label="Four ways to run it">
           {LADDER.map((r, i) => (
             <div key={r.rung} className="lx-card-flat own-rung" data-reveal data-delay={String((i % 3) + 1)}>
               <div className="own-rung-head">

@@ -104,7 +104,7 @@ export default function PartnersConcept() {
                 Start the conversation <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <a className="lx-btn lx-btn-ghost" href="#ways">
-                Three ways to partner
+                Four ways to partner
               </a>
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function PartnersConcept() {
       <section className="hx-section" id="ways">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">02</span> Three ways to partner
+            <span className="hx-step">02</span> Four ways to partner
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Deploy it, build on it, or lead the <em>work</em>.

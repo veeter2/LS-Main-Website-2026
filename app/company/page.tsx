@@ -133,7 +133,7 @@ export default function CompanyConcept() {
             <span className="hx-step">03</span> How we work
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Four things we won&rsquo;t <em>trade</em>.
+            Three things we won&rsquo;t <em>trade</em>.
           </h2>
         </div>
         <div className="lx-wrap gx-points cp-principles">

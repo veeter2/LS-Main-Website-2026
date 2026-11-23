@@ -308,7 +308,7 @@ export default function ManifestoConcept() {
               <span className="hx-step">08</span> What&rsquo;s next
             </p>
             <h2 className="lx-display mf-h2" data-reveal data-delay="1">
-              Four ways in. One <em>decision</em>.
+              Three ways in. One <em>decision</em>.
             </h2>
             <div className="mf-prose" data-reveal data-delay="2">
               <p>
