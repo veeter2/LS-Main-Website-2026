@@ -220,7 +220,7 @@ export default function Home() {
             <span className="hx-step">03</span> Where it runs
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Your box, your models, your <em>keys</em>.
+            Your box, your models, your keys. Nothing leaves the <em>building</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             Hosted now. Private cloud and on-premises built with you. Your keys either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.

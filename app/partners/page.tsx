@@ -215,10 +215,6 @@ export default function PartnersConcept() {
             <li>
               <span>Where they need it.</span>Hosted now. Private cloud and on-premises built with you. Your keys either way.
             </li>
-            <li>
-              <span>Theirs to keep.</span>The client holds the license, the keys and the rows. When a model gets
-              pricier, they switch it in Settings and the memory stays put.
-            </li>
           </ul>
         </div>
       </section>

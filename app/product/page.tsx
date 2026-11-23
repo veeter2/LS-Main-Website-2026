@@ -72,10 +72,7 @@ const GOVERNANCE = [
 const BEATS = [
   { title: "Every door", body: "Chat, your connected systems (anything with an API or an MCP server), documents, dropped files, and what your teammates find. Not five silos. One memory." },
   { title: "Nothing lands raw", body: "Everything that comes in gets a date and a source, goes in the right drawer, and is checked against what’s already there before it’s trusted." },
-  { title: "Two clocks", body: "By day, every door feeds the memory as you work, and each new fact is filed within minutes. By night, it reads what the day brought, links it to what it already knew, merges topics, finds what contradicts, and writes down what it learned about your business. You come in to a company that knows more than it did yesterday. Nobody taught it." },
-  { title: "It compounds", body: "Tomorrow\u2019s answer stands on today\u2019s facts. The expert\u2019s rules, the agent\u2019s findings, the morning letter, the promise due today all come from the same memory, and every one of them makes it richer. A chat box keeps its memory with the model, and it stays behind when you change the model. This starts where it left off." },
   { title: "Two books", body: "Yours and the company\u2019s. Your private connectors and drops feed your memory, and nobody else sees it. Shared sources feed the company\u2019s memory, which everyone works from. Same system, hard wall between them." },
-  { title: "The model never holds it", body: "Swap the model. The memory does not move." },
 ]
 const MODELS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compatible server", "A local model on your hardware"]
 
@@ -210,29 +207,13 @@ export default function ProductConcept() {
       </section>
 
       {/* 04: Today */}
-      <section className="hx-section" id="today">
-        <Still src="/art/film-sun.jpg" alt="Morning over the memory: the sun on the arch, a short letter on the road." />
-        <div className="lx-wrap hx-center">
-          <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">04</span> Today
-          </p>
-          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            A short letter at the top of your <em>morning</em>.
-          </h2>
-          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            At night it reads the week and writes down what moved, what slipped, and what to do first. A promise due
-            today. A fact that changed since you last looked. Two notes that disagree. It is written before you sit
-            down, and on a quiet night it says so in one line and stops.
-          </p>
-        </div>
-      </section>
-
-      {/* 05: Experts */}
+      {/* 04: Experts */}
       <section className="hx-section" id="experts">
+        <Still src="/art/film-sun.jpg" alt="Morning over the memory: the sun on the arch, a short letter on the road." />
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">05</span> Experts
+              <span className="hx-step">04</span> Experts
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Hire a specialist. It <em>interviews</em> you first.
@@ -255,12 +236,12 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 06: Agents */}
+      {/* 05: Agents */}
       <section className="hx-section hx-deep" id="agents">
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">06</span> Agents
+              <span className="hx-step">05</span> Agents
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Your teammates start where <em>yesterday&rsquo;s</em> left off.
@@ -303,12 +284,12 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 07: Governance, which includes any model */}
+      {/* 06: Governance, which includes any model */}
       <section className="hx-section" id="governance">
         <Still src="/art/film-arch.jpg" alt="The record as an arch of stones, one per month, brightening toward now, with the company's topics in orbit." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">07</span> Governance
+            <span className="hx-step">06</span> Governance
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Every model, every key, every dollar. <em>One</em> screen.
@@ -346,11 +327,11 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 08: Connections */}
+      {/* 07: Connections */}
       <section className="hx-section hx-deep" id="connections">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">08</span> Connections
+            <span className="hx-step">07</span> Connections
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Every door feeds one <em>memory</em>.

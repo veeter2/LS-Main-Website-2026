@@ -24,13 +24,8 @@ const PRINCIPLES = [
     title: "The record over the guess.",
     body: "When the evidence is thin, the honest answer is “I don’t know yet.” The system is built to say that, and so are we.",
   },
-  {
-    title: "Built with you, owned by you.",
-    body: "We don’t sell seats. We build it alongside your team, and what gets built stays with the company that built it.",
-  },
 ]
 
-const PARTS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compatible local server", "Postgres", "Next.js"]
 
 export default function CompanyConcept() {
   return (
@@ -149,31 +144,6 @@ export default function CompanyConcept() {
               <p>{p.body}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* 04: Replaceable parts */}
-      <section className="hx-section" id="parts">
-        <div className="lx-wrap lx-hero-grid">
-          <div>
-            <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">04</span> Replaceable parts
-            </p>
-            <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Every part is <em>replaceable</em>. That&rsquo;s the design.
-            </h2>
-            <p className="lx-lead" data-reveal data-delay="2">
-              Run on a frontier model today and a local one tomorrow. The memory stays exactly where you left it, because the only
-              part that has to be ours is the engine, and even that can move inside your walls. When a vendor gets
-              worse, you lose an afternoon in Settings, not your business.
-            </p>
-          </div>
-          <ul className="cp-parts" data-reveal data-delay="2" aria-label="Components LongStrider runs with">
-            {PARTS.map((p) => (
-              <li key={p}>{p}</li>
-            ))}
-            <li className="cp-parts-ours">Your memory: the one part that stays.</li>
-          </ul>
         </div>
       </section>
 

@@ -39,20 +39,12 @@ const WE_DO = [
 
 const ARCHITECT = [
   {
-    title: "Any model, your keys.",
-    body: "Every job has its own model setting, on one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We\u2019ve done it ourselves. Nothing was re-taught.",
-  },
-  {
     title: "Your teammates run on your memory.",
     body: "They read the memory before they act and bring back findings. A person decides what enters it.",
   },
   {
     title: "Scoped by default.",
     body: "Every fact belongs to a person, a team or the company, and every read is checked against who\u2019s asking, in the database, not in the prompt.",
-  },
-  {
-    title: "Traceable.",
-    body: "Every reply writes a receipt: which drawers it opened (one page per person, company or project), which facts it was shown, how long each step took.",
   },
   {
     title: "Runs where you need it.",
@@ -250,27 +242,6 @@ export default function HowItWorksConcept() {
 
       <section className="hx-section">
         <BrandArt name="orbit" />
-      </section>
-
-      <section className="hx-section hx-deep" id="clocks">
-        <div className="lx-wrap hx-center">
-          <p className="lx-eyebrow" data-reveal>
-            Two clocks
-          </p>
-          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            By day it <em>files</em>. By night it <em>learns</em>.
-          </h2>
-        </div>
-        <div className="lx-wrap mh-facts mh-facts-2">
-          <div className="mh-fact" data-reveal data-delay="1">
-            <h3>By day</h3>
-            <p>Every door feeds the record as you work, and each new fact is filed within minutes.</p>
-          </div>
-          <div className="mh-fact" data-reveal data-delay="2">
-            <h3>By night</h3>
-            <p>It reads what the day brought, links it to what it already knew, merges topics, finds what contradicts, and writes down what it learned about your business. You come in to a company that knows more than it did yesterday. Nobody taught it.</p>
-          </div>
-        </div>
       </section>
 
       <section className="hx-close">

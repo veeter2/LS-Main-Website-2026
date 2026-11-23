@@ -74,14 +74,6 @@ const OWN_FACTS = [
     body: "Your data sits in plain Postgres you can read with any tool you already own.",
   },
   {
-    title: "No training, ever.",
-    body: "LongStrider has no training code. It learns by filing what your people say into the memory, which is why nothing has to be re-taught when you change models.",
-  },
-  {
-    title: "Switch anything, lose nothing.",
-    body: "Change the model, the host or the hardware. The memory stays exactly where you left it. We've moved every job to a different model ourselves; the memory didn't notice.",
-  },
-  {
     title: "Fire us and keep everything.",
     body: "Cancel support and the system keeps working. The license doesn't expire, the keys are yours, and the rows are yours.",
   },
