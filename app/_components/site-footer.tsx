@@ -49,8 +49,7 @@ export function SiteFooter() {
         <div className="sf-brand">
           <p className="sf-line">The AI memory your company owns.</p>
           <p className="sf-sub">
-            Software you license and install, not a seat you rent. Your own model, your own keys. Hosted while we build
-            yours. No trackers on this site.
+            Software you license and install, not a seat you rent. Your own model, your own keys. Runs where you choose: your cloud or your rack. No trackers on this site.
           </p>
           <Link className="lx-btn lx-btn-primary sf-cta" href="/book">
             Talk to us <span className="lx-arrow" aria-hidden>&rarr;</span>

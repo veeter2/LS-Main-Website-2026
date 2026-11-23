@@ -39,7 +39,7 @@ const ANSWERS = [
     body: "No SOC 2 yet. We\u2019re a small team and we haven\u2019t started the audit. Ask us anything the audit would ask; we\u2019ll answer in writing, and the controls are the kind you can read yourself: Postgres row scoping, your own keys, receipts on every reply.",
   },
   { title: "Trackers.", body: "None on this site. None in the product." },
-  { title: "Data residency.", body: "Hosted instances run in the United States. Private cloud runs wherever you put it." },
+  { title: "Data residency.", body: "It runs wherever you put it: your cloud region, your private cloud or your rack." },
   { title: "Access.", body: "Row-level rules on every memory table, verified in production. Every reply logs what it read." },
   { title: "Deletion.", body: "Ask, and we delete it and show you what went." },
   { title: "Security contact.", body: "security@longstrider.ai" },
@@ -158,7 +158,7 @@ export default function SecurityConcept() {
             As much of it inside your walls as <em>you</em>{" "}need. Here&rsquo;s what&rsquo;s true today.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Hosted now. Private cloud and on-premises built with you. Your keys either way.
+            You choose where it runs: your cloud, your private cloud or your rack. Your keys either way.
           </p>
         </div>
         <div className="lx-wrap">

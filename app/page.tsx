@@ -223,7 +223,7 @@ export default function Home() {
             Your box, your models, your keys. Nothing leaves the <em>building</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Hosted now. Private cloud and on-premises built with you. Your keys either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.
+            You choose where it runs: your cloud, your private cloud or your rack. Your keys either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="3">
             <Link className="lx-btn lx-btn-ghost" href="/own-it">

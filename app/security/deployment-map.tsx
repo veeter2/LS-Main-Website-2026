@@ -6,16 +6,10 @@ type Option = { id: string; label: string; status: string; body: string }
 
 const OPTIONS: Option[] = [
   {
-    id: "hosted",
-    label: "Hosted",
-    status: "Hosted, available now.",
-    body: "Your company\u2019s instance, walled off to your company, and every lookup checks who\u2019s asking. No shared memory between customers. The fastest way to start.",
-  },
-  {
     id: "private",
-    label: "Private cloud",
-    status: "Private cloud, built with you.",
-    body: "The engine inside your VPC, on your servers, inside your perimeter. Scoped and priced with you, in writing.",
+    label: "Your cloud",
+    status: "Your cloud, available now.",
+    body: "The engine in your own cloud account, walled off to your company, and every lookup checks who\u2019s asking. The fastest way to start.",
   },
   {
     id: "onprem",

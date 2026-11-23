@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import { BuyerPage } from "../buyer-page"
 
-export const metadata: Metadata = pageMeta("/for/technology", "For the CTO · A memory layer you can open up", "Plain Postgres, scoped to each person, a receipt on every answer, any model through your keys. Hosted today, inside your walls when you need it.")
+export const metadata: Metadata = pageMeta("/for/technology", "For the CTO · A memory layer you can open up", "Plain Postgres, scoped to each person, a receipt on every answer, any model through your keys. Your cloud today, inside your walls when you need it.")
 
 export default function ForTechnology() {
   return (
@@ -14,7 +14,7 @@ export default function ForTechnology() {
             A memory layer your architects can <em>open</em> up.
           </>
         ),
-        lead: "Model-agnostic, scoped to each person, a receipt on every answer, and deployable from hosted to inside your walls. LongStrider sits beside your stack and never puts a vendor between you and your own model.",
+        lead: "Model-agnostic, scoped to each person, a receipt on every answer, and deployable from your cloud to inside your walls. LongStrider sits beside your stack and never puts a vendor between you and your own model.",
         cta: "Talk to us",
         points: [
           {
@@ -59,12 +59,8 @@ export default function ForTechnology() {
                 </h2>
                 <div className="mh-facts fo-tiers">
                   <div className="mh-fact" data-reveal>
-                    <h3>Hosted.</h3>
-                    <p>Yours alone. Every lookup checks who&rsquo;s asking. Available now, and you hold the license either way.</p>
-                  </div>
-                  <div className="mh-fact" data-reveal data-delay="1">
                     <h3>Your cloud.</h3>
-                    <p>The engine in your own cloud account. Built with you.</p>
+                    <p>The engine in your own cloud account, yours alone. Every lookup checks who&rsquo;s asking. Available now, and you hold the license either way.</p>
                   </div>
                   <div className="mh-fact" data-reveal data-delay="2">
                     <h3>Inside your walls.</h3>
