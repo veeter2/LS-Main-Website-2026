@@ -266,12 +266,6 @@ export default function ManifestoConcept() {
             <h2 className="lx-display mf-h2" data-reveal data-delay="1">
               Five things no other system does <em>together</em>.
             </h2>
-            <div className="mf-prose" data-reveal data-delay="2">
-              <p>
-                LongStrider sits between your organization and whichever model you choose. It doesn&rsquo;t replace the
-                model. It makes the model aware of your business in a way no model provider can.
-              </p>
-            </div>
             <ol className="mf-caps">
               {CAPABILITIES.map((c, i) => (
                 <li key={c.title} data-reveal>
@@ -331,9 +325,6 @@ export default function ManifestoConcept() {
                 </div>
               ))}
             </div>
-            <p className="mf-coda" data-reveal>
-              We don&rsquo;t sell seat licenses. We build it with you, and what gets built belongs to you.
-            </p>
           </section>
         </article>
       </div>

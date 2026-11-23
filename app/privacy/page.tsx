@@ -2,10 +2,6 @@ import { LegalPage, type LegalSection } from '../_components/legal';
 
 const SECTIONS: LegalSection[] = [
   {
-    title: 'Your copy is yours alone',
-    body: 'Your copy of LongStrider runs for your company alone. Your instance exists solely for your organization, all data remains private to your deployment, and nothing is shared or pooled across customers. Your memory, owned by you, is completely isolated and secure.',
-  },
-  {
     title: 'We can’t see inside',
     lead: 'On an owned build we have no access to your data. On hosted, your data is isolated by row-level rules and deleted on request.',
     items: [

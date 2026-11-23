@@ -9,12 +9,9 @@ const SECTIONS: LegalSection[] = [
     title: 'User Responsibility and Liability',
     lead: 'You are solely responsible for how you use your LongStrider deployment and the content you create or process with it.',
     items: [
-      { label: 'We are not responsible', text: 'for any content, decisions, actions, or outcomes resulting from your use of LongStrider.' },
-      { label: 'You bear full responsibility', text: 'for ensuring your use complies with all applicable laws and regulations.' },
-      { label: 'You are accountable', text: 'for any harm, damage, or legal issues arising from your use of the service.' },
-      { label: 'You must verify', text: 'all information and outputs from your LongStrider before relying on them for important decisions.' },
+      { label: 'You are responsible', text: 'for the content, decisions, actions and outcomes that come from your use of LongStrider, and for keeping that use within the law.' },
+      { label: 'You must verify', text: 'its outputs before relying on them. It is an AI system and can be wrong or incomplete.' },
     ],
-    note: 'LongStrider is an AI system that may produce inaccurate or incomplete content. Exercise judgment and verify all outputs before use.',
   },
   {
     title: 'Acceptable Use',

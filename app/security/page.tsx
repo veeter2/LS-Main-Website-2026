@@ -45,7 +45,6 @@ const ANSWERS = [
   { title: "Security contact.", body: "security@longstrider.ai" },
 ]
 
-const VOICES = ["Claude", "GPT", "DeepSeek", "Local model"]
 
 export default function SecurityConcept() {
   return (
@@ -127,65 +126,11 @@ export default function SecurityConcept() {
         </div>
       </section>
 
-      <section className="hx-section hx-deep" id="model">
-        <div className="lx-wrap lx-hero-grid">
-          <div>
-            <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">03</span> Your model, your keys
-            </p>
-            <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Change the model. <em>Keep</em> the memory.
-            </h2>
-            <p className="lx-lead" data-reveal data-delay="2">
-              Bring the frontier model you trust through your own keys, point it at a model you already run in-house, or put
-              a model on your own hardware for filing new facts. LongStrider is
-              not a service you log into with our
-              model behind it. It is software you install, and the model is whatever you choose. When a better one arrives,
-              you switch, and nothing has to be re-taught.
-            </p>
-          </div>
-          <div data-reveal data-delay="2">
-            <div className="ox-stack" aria-label="Example: the model can change while the memory stays the same">
-              <div className="ox-layer ox-voice lx-card">
-                <div className="ox-layer-head">
-                  <span className="ox-layer-label">The voice</span>
-                </div>
-                <div className="sec-models">
-                  {VOICES.map((v) => (
-                    <span key={v} className="sec-model">{v}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="sec-bridge" aria-hidden>
-                <span />
-              </div>
-              <div className="ox-layer ox-memory">
-                <div className="ox-layer-head">
-                  <span className="ox-layer-label">The memory</span>
-                </div>
-                <ul className="ox-rows">
-                  <li>
-                    <span className="ox-text">
-                      Thistlewood: scope revision promised twice (14 Oct, 29 Oct). Owner: Dev. Due Friday. Source: chat,
-                      call transcript.
-                    </span>
-                  </li>
-                </ul>
-                <div className="ox-foot">
-                  <span className="ox-check" aria-hidden>✓</span>
-                  Same facts. Same sources. Nothing re-taught.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="hx-section" id="rules">
         <FilmStill src="/art/film-arch.jpg" alt="The record as an arch of stones, each month in its place, nothing erased." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">04</span> It follows your rules
+            <span className="hx-step">03</span> It follows your rules
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             You write the rules. It keeps the <em>record</em>.
@@ -207,11 +152,14 @@ export default function SecurityConcept() {
       <section className="hx-section hx-deep" id="ways">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">05</span> Where it runs
+            <span className="hx-step">04</span> Where it runs
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             As much of it inside your walls as <em>you</em>{" "}need. Here&rsquo;s what&rsquo;s true today.
           </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            Hosted now. Private cloud and on-premises built with you. Your keys either way.
+          </p>
         </div>
         <div className="lx-wrap">
           <div className="sec-map" data-reveal data-delay="2">
@@ -229,7 +177,7 @@ export default function SecurityConcept() {
       <section className="hx-section" id="answers">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">06</span> What a security team will ask
+            <span className="hx-step">05</span> What a security team will ask
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Straight <em>answers</em>.
