@@ -207,6 +207,7 @@ export default function Home() {
           ))}
         </div>
         <div className="lx-wrap pf-wrap pf-wrap-home" data-reveal>
+          <p className="lx-eyebrow">Every answer shows its work</p>
           <ReceiptCard compact />
           <p className="lx-illustrative">Every answer comes with its receipt. Click any line and it opens.</p>
         </div>
