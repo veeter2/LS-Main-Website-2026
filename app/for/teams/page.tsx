@@ -24,7 +24,7 @@ export default function ForTeams() {
           },
           {
             title: "It keeps your promises in view.",
-            body: "What you said you’d do, for whom and by when, on your desk until you close it. It never closes anything for you.",
+            body: "What you said you’d do and by when, on your desk until you close it.",
           },
           {
             title: "It says when it doesn’t know.",
@@ -55,7 +55,7 @@ export default function ForTeams() {
         questions: [
           {
             q: "Who can see what I tell it?",
-            a: "What’s yours stays yours. Team knowledge is visible to the team, and only the team. The check is in the database, not in the prompt.",
+            a: "What’s yours stays yours. Team knowledge is visible to the team, and only the team. The model never gets to decide that.",
           },
           {
             q: "Will it track things I didn’t agree to?",
@@ -63,11 +63,11 @@ export default function ForTeams() {
           },
           {
             q: "What if it gets something wrong?",
-            a: "Correct it once. It keeps the fix, with your name and the date, and marks the old fact as replaced.",
+            a: "Correct it once. It keeps the fix and marks the old fact as replaced.",
           },
           {
             q: "What happens if the company changes AI vendors?",
-            a: "Nothing, for you. The model is a setting your company controls. What you taught it stays, with its sources, and nobody has to brief it again. Experts and agents work from the same memory, and every one of them makes it richer.",
+            a: "Nothing, for you. The model is a setting your company controls. What you taught it stays, with its sources, and nobody has to brief it again.",
           },
         ],
         next: { label: "What it does", href: "/product" },
