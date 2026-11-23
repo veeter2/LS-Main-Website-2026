@@ -2,9 +2,11 @@ import type { Metadata } from "next"
 import { BrandArt } from "../_components/brand-art"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import { SentenceJourney } from "./sentence-journey"
+import { ConnectFilm } from "../_components/connect-film"
 
-export const metadata: Metadata = pageMeta("/how-it-works", "How LongStrider works · The memory layer", "Three layers: the record, the order, the judgment. Counted by the system, written by the model you choose. Scoped to the person in the database.")
+export const metadata: Metadata = pageMeta("/how-it-works", "How LongStrider works · The record, the order, the judgment", "Three layers: the record, the order, the judgment. Counted by the system, written by the model you choose. Scoped to the person in the database.")
 
 /**
  * How LongStrider works, for the technical buyer: one sentence followed
@@ -38,11 +40,11 @@ const WE_DO = [
 const ARCHITECT = [
   {
     title: "Any model, your keys.",
-    body: "Seven jobs, seven model settings, one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We did it in October. Nothing was re-taught.",
+    body: "Every job has its own model setting, on one screen. Change the chat model on Tuesday and Wednesday\u2019s memory is identical. We did it in October. Nothing was re-taught.",
   },
   {
-    title: "Your teammates run on your record.",
-    body: "They read the record before they act and bring back findings. A person decides what enters memory.",
+    title: "Your teammates run on your memory.",
+    body: "They read the memory before they act and bring back findings. A person decides what enters it.",
   },
   {
     title: "Scoped by default.",
@@ -50,11 +52,11 @@ const ARCHITECT = [
   },
   {
     title: "Traceable.",
-    body: "Every reply writes a receipt: which drawers it opened, which facts it was shown, how long each step took.",
+    body: "Every reply writes a receipt: which drawers it opened (one page per person, company or project), which facts it was shown, how long each step took.",
   },
   {
     title: "Runs where you need it.",
-    body: "Hosted and isolated to you today. Private cloud and an on-premises build, scoped with you. The filing lane can already run on your own hardware.",
+    body: "Licensed to you in every case. Hosted and isolated to you today; your cloud or your rack, scoped with you. Chat and filing can already run on your own hardware.",
   },
   {
     title: "Never trains a model.",
@@ -79,7 +81,7 @@ export default function HowItWorksConcept() {
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book a working session <span className="lx-arrow" aria-hidden>→</span>
+                Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <a className="lx-btn lx-btn-ghost" href="#layers">
                 See the three layers
@@ -95,6 +97,9 @@ export default function HowItWorksConcept() {
             <SentenceJourney />
             <p className="lx-illustrative">Real behavior, stage by stage. Fictional firm.</p>
           </div>
+        </div>
+        <div className="lx-wrap hw-film" data-rise="4">
+          <ConnectFilm />
         </div>
       </section>
 
@@ -141,7 +146,7 @@ export default function HowItWorksConcept() {
           <div className="ly-band">
             <span className="ly-label">The model, rented and replaceable.</span>
             <p className="ly-model">
-              Any frontier model through your keys, or a local model on your hardware for the filing lane, the background job
+              Any frontier model through your keys, or a model on your own hardware for chat and for filing, the background job
               that files new facts. It gets the facts it needs for this question and writes the answer. It never has to keep the memory.
             </p>
           </div>
@@ -208,7 +213,7 @@ export default function HowItWorksConcept() {
                 19 November <span className="lx-num">(Kayla, 6 Nov)</span>
               </p>
               <div className="cr-why">
-                <span className="cr-why-label">Why it changed</span>
+                <span className="lx-label">Why it changed</span>
                 <span>&ldquo;Legal pushed it.&rdquo; Kayla, 7 Nov.</span>
               </div>
               <div className="mh-note-sources">
@@ -247,7 +252,29 @@ export default function HowItWorksConcept() {
         <BrandArt name="orbit" />
       </section>
 
+      <section className="hx-section hx-deep" id="clocks">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            Two clocks
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            By day it <em>files</em>. By night it <em>learns</em>.
+          </h2>
+        </div>
+        <div className="lx-wrap mh-facts mh-facts-2">
+          <div className="mh-fact" data-reveal data-delay="1">
+            <h3>By day</h3>
+            <p>Every door feeds the record as you work, and each new fact is filed within minutes.</p>
+          </div>
+          <div className="mh-fact" data-reveal data-delay="2">
+            <h3>By night</h3>
+            <p>It reads what the day brought, links it to what it already knew, merges topics, finds what contradicts, and writes down what it learned about your business. You come in to a company that knows more than it did yesterday. Nobody taught it.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="hx-close">
+        <FilmStill src="/art/film-topics.jpg" alt="Topics form themselves on the memory as the day's work settles." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             Bring your <em>architect</em>.
@@ -258,7 +285,7 @@ export default function HowItWorksConcept() {
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Security and ownership

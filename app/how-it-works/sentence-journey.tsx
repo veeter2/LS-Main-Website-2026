@@ -86,7 +86,7 @@ const STAGES: Stage[] = [
         </p>
         <div className="sj-meta">
           <span>Chat, 3 Nov · Chat, 6 Nov</span>
-          <span className="sj-stamp">History kept</span>
+          <span className="lx-label">History kept</span>
         </div>
       </>
     ),

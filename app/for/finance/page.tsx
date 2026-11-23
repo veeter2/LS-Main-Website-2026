@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import { BuyerPage } from "../buyer-page"
-import { MemoryCurve } from "../../learning-gap/memory-curve"
+import { MemoryCurve } from "../../_components/memory-curve"
+import { CostFilm } from "../../_components/cost-film"
 
 export const metadata: Metadata = pageMeta("/for/finance", "For the CFO · AI spend that ends in an asset", "Licensed and installed, not rented per seat. Your own model, your own bill. Answers you can audit. Spend that becomes something the company owns.")
 
@@ -15,11 +16,12 @@ export default function ForFinance() {
             An AI budget that ends in an <em>asset</em>, not a renewal.
           </>
         ),
-        lead: "Most AI spend buys access. Seats, renewals, a bill that resets every January, and when you change vendors, what your people taught it stays behind. Rent the whole stack and the vendor writes the rules you run under, and can rewrite them whenever it likes. LongStrider is the other kind of purchase. You license the software, install it on your infrastructure, run it under your own model, and own the result. Spend that was operating cost becomes something the company holds.",
+        lead: "Most AI spend buys access. Seats, renewals, a bill that resets every January, and what your people taught it stays behind when you leave. LongStrider is the other kind of purchase: license it, point it at the models you already pay for through your own keys, and own the result.",
+        film: <CostFilm />,
         points: [
           {
             title: "Owned, not rented.",
-            body: "You license the software and the memory belongs to the company. Neither resets when you switch models or when people leave.",
+            body: "You license the software and the memory belongs to the company. Neither resets when you switch models or when people leave. What’s yours stays yours. What’s shared is shared.",
           },
           {
             title: "Capital, not subscription.",
@@ -27,7 +29,7 @@ export default function ForFinance() {
           },
           {
             title: "Answers you can audit.",
-            body: "Counts and dates come from the record with the source attached. Finance can check the work.",
+            body: "Counts and dates come from the record with the source attached. Finance can check the work. Nothing goes out in your name until a person says yes, and the yes is on the record.",
           },
           {
             title: "Ready for the price war.",
@@ -44,7 +46,7 @@ export default function ForFinance() {
             <>
               <p className="lx-lead">
                 Most companies plan to spend more on AI next year. Few say it has changed how they operate, and the
-                research says why: most AI systems do not keep feedback, adapt to context, or improve over time.
+                reason is simple: most AI tools don&rsquo;t get better with use.
               </p>
               <p className="lx-lead">
                 A system that keeps what it learns gets more valuable the longer you run it. One that doesn&rsquo;t is a
@@ -67,8 +69,8 @@ export default function ForFinance() {
               </h2>
               <p className="lx-lead" data-reveal data-delay="1">
                 Most companies can see their total AI bill. Far fewer can see what one piece of work costs. LongStrider
-                shows spend by job and by model, every day, on one screen. You&rsquo;ll know what the overnight pass
-                cost last night, and most nights the answer is nothing.
+                shows spend by job and by model, on one screen. You&rsquo;ll know what the overnight pass
+                cost last night, and many nights the answer is nothing.
               </p>
               <p className="lx-lead" data-reveal data-delay="2">
                 Here is what that screen told us about our own instance. The same reply to a person&rsquo;s message,
@@ -86,7 +88,7 @@ export default function ForFinance() {
         questions: [
           {
             q: "How is it priced?",
-            a: "As software you own, not seats you rent. A license and a one-time build fee, which depend on where it runs and what we connect, then a monthly support share you can cancel any time. No per-seat meter. The model bill is yours, through your own keys or your own hardware, so you see it and you choose it. We scope all of it in the working session, and you’ll have a number before you leave.",
+            a: "As software you own, not seats you rent. A license and a one-time build fee, which depend on where it runs and what we connect, then a monthly support share you can cancel any time. No per-seat meter. The model bill is yours, through your own keys or your own hardware, so you see it and you choose it. We scope all of it with you, and you’ll have a number in writing before anything starts.",
           },
           {
             q: "Operating cost or capital?",

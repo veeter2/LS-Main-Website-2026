@@ -1,6 +1,11 @@
 import type { Metadata } from "next"
 
 const BASE_URL = "https://www.longstrider.ai"
+
+/** The paper color behind every page: the one place it is typed outside the
+ *  `--lx-paper` token in app/site.css. Next reads viewport meta from a plain
+ *  export, so it cannot read the CSS variable. Keep the two in step. */
+export const PAPER = "#f1ecdf"
 const OG_IMAGE = `${BASE_URL}/og-default.jpg`
 
 /**

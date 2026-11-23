@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import type { ReactNode } from "react"
 import "./for.css"
 import { FaqJsonLd } from "../_components/faq-jsonld"
@@ -8,13 +9,15 @@ export type Buyer = {
   title: ReactNode
   lead: string
   points: { title: string; body: string }[]
+  /** Optional: a film under the headline, before the points. */
+  film?: ReactNode
   /** Optional: the single proof section (heading, body, one visual). */
   proof?: { heading: ReactNode; body: ReactNode; visual?: ReactNode; caption?: string }
   /** Optional extra sections, rendered between proof and the questions. */
   sections?: ReactNode
   questions: { q: string; a: string }[]
   next: { label: string; href: string }
-  /** Button label for both CTAs. Defaults to "Book a working session". */
+  /** Button label for both CTAs. Defaults to "Talk to us". */
   cta?: string
 }
 
@@ -23,7 +26,7 @@ export type Buyer = {
  * product, argued from what that person has to answer for.
  */
 export function BuyerPage({ b }: { b: Buyer }) {
-  const cta = b.cta ?? "Book a working session"
+  const cta = b.cta ?? "Talk to us"
   return (
     <main>
       <FaqJsonLd items={b.questions} />
@@ -44,6 +47,11 @@ export function BuyerPage({ b }: { b: Buyer }) {
             </Link>
           </div>
         </div>
+        {b.film && (
+          <div className="lx-wrap by-film" data-rise="4">
+            {b.film}
+          </div>
+        )}
         <div className={`lx-wrap mh-facts by-points${b.points.length === 4 ? " mh-facts-2" : ""}`}>
           {b.points.map((p, i) => (
             <div key={p.title} className="mh-fact" data-rise={String(i + 3)}>
@@ -78,6 +86,7 @@ export function BuyerPage({ b }: { b: Buyer }) {
       {b.sections}
 
       <section className="hx-section">
+        <FilmStill src="/art/film-topics.jpg" alt="Topics forming on the memory as the work settles." />
         <div className="lx-wrap by-faq">
           <p className="lx-eyebrow" data-reveal>
             What you&rsquo;ll want to know

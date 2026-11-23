@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill } from "../_components/film-still"
 import { DeploymentMap } from "./deployment-map"
 import "./security.css"
 import { FaqJsonLd } from "../_components/faq-jsonld"
@@ -10,7 +11,7 @@ export const metadata: Metadata = pageMeta("/security", "Security and ownership 
 const OWNERSHIP = [
   {
     title: "It belongs to you.",
-    body: "The facts, the links between them and every correction are your company\u2019s asset. Your data sits in plain Postgres you can read with any tool.",
+    body: "The facts, the links between them and every correction are your company\u2019s asset, on your books, not a bill every month. Your data sits in plain Postgres you can read with any tool.",
   },
   {
     title: "It trains no one\u2019s model.",
@@ -18,11 +19,11 @@ const OWNERSHIP = [
   },
   {
     title: "It outlives every vendor.",
-    body: "Change models and nothing has to be re-taught. We moved every job to a different model in October. The memory didn\u2019t notice.",
+    body: "Change models and nothing has to be re-taught. We\u2019ve switched models ourselves. The memory didn\u2019t notice.",
   },
   {
     title: "It isn\u2019t on a vendor\u2019s terms.",
-    body: "A rented stack comes with someone else\u2019s rules, and those rules can move. Here the license is yours, the keys are yours, the rows are yours. The model is a setting.",
+    body: "A rented system comes with someone else\u2019s rules, and those rules can move. Here the license is yours, the keys are yours, the rows are yours. The model is a setting.",
   },
 ]
 
@@ -40,7 +41,7 @@ const ANSWERS = [
   { title: "Trackers.", body: "None on this site. None in the product." },
   { title: "Data residency.", body: "Hosted instances run in the United States. Private cloud runs wherever you put it." },
   { title: "Access.", body: "Row-level rules on every memory table, verified in production. Every reply logs what it read." },
-  { title: "Deletion.", body: "Ask, and the rows are gone. Receipts show what was removed." },
+  { title: "Deletion.", body: "Ask, and we delete it and show you what went." },
   { title: "Security contact.", body: "security@longstrider.ai" },
 ]
 
@@ -63,7 +64,7 @@ export default function SecurityConcept() {
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book a working session <span className="lx-arrow" aria-hidden>→</span>
+                Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <Link className="lx-btn lx-btn-ghost" href="#ways">
                 What&rsquo;s true today
@@ -99,11 +100,11 @@ export default function SecurityConcept() {
               <span className="hx-step">02</span> Who can see what
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Scoped to the person it <em>belongs</em> to. Checked on every read.
+              Yours stays <em>yours</em>. Checked every single time.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Every fact belongs to someone. What&rsquo;s yours stays yours. Team knowledge is visible to the team, and only
-              the team. The check happens in the database, on every read, not in the prompt. Every reply writes a receipt of
+              the team. Every time it reads, it checks who&rsquo;s asking. The model never gets to decide that. Every reply writes a receipt of
               what it opened, so you can always see how it learned what it knows.
             </p>
             <p className="sec-stat" data-reveal data-delay="3">
@@ -133,11 +134,11 @@ export default function SecurityConcept() {
               <span className="hx-step">03</span> Your model, your keys
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              The model is rented. The memory <em>stays</em> put.
+              Change the model. <em>Keep</em> the memory.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Bring the frontier model you trust through your own keys, point it at a model you already run in-house, or put
-              a local model on your own hardware for the filing lane, the background job that files new facts. LongStrider is
+              a model on your own hardware for filing new facts. LongStrider is
               not a service you log into with our
               model behind it. It is software you install, and the model is whatever you choose. When a better one arrives,
               you switch, and nothing has to be re-taught.
@@ -181,6 +182,7 @@ export default function SecurityConcept() {
       </section>
 
       <section className="hx-section" id="rules">
+        <FilmStill src="/art/film-arch.jpg" alt="The record as an arch of stones, each month in its place, nothing erased." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">04</span> It follows your rules
@@ -189,15 +191,15 @@ export default function SecurityConcept() {
             You write the rules. It keeps the <em>record</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Set how it speaks, what it won&rsquo;t do, and when it must check with a person first. That&rsquo;s configuration,
-            not prompting. Every correction your people make is kept, so the system&rsquo;s judgment can be audited rather
+            Set how it speaks, what it won&rsquo;t do, and when it must check with a person first. That&rsquo;s a setting,
+            not a prompt. Experts and agents work from the same memory, and every one of them makes it richer, so
+            a rule set once holds everywhere. Every correction your people make is kept, so the system&rsquo;s judgment can be audited rather
             than taken on trust.
           </p>
           <p className="sec-rules-note" data-reveal data-delay="3">
             Deloitte&rsquo;s four levels of AI autonomy are informs, recommends, executes within limits, and acts.
-            LongStrider sits at &ldquo;recommends,&rdquo; on purpose. It proposes; a person confirms; every write leaves a
-            receipt and can be undone. Many companies already let AI act without approval, and few call their agent
-            workflows fully governed. We&rsquo;d rather be among the few. (Deloitte)
+            LongStrider sits at &ldquo;recommends,&rdquo; on purpose. It proposes; a person confirms; you can see what it did, and undo it. Many companies already let AI act with no one approving. We&rsquo;d rather be among
+            the few that don&rsquo;t. (Deloitte)
           </p>
         </div>
       </section>
@@ -253,7 +255,7 @@ export default function SecurityConcept() {
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/">
               Back to the homepage

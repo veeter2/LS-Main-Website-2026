@@ -2,12 +2,14 @@ import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { AskYourAI } from "../_components/ask-your-ai"
-import { CHECKS, NOT, ORGANS } from "@/lib/for-your-ai"
+import { FilmStill } from "../_components/film-still"
+import { CHECKS, FAQ, NOT, ORGANS } from "@/lib/for-your-ai"
+import { FaqJsonLd } from "../_components/faq-jsonld"
 
 export const metadata: Metadata = pageMeta(
   "/for-your-ai",
   "Ask your own AI about LongStrider",
-  "The plain facts about LongStrider, written for the AI you already use, and three prompts to paste into ChatGPT, Claude, Gemini, Perplexity or Copilot for an honest read.",
+  "The plain facts about LongStrider, written for the AI you already use, with three prompts to paste into ChatGPT, Claude, Gemini or Copilot for an honest read.",
 )
 
 /**
@@ -25,17 +27,17 @@ export default function ForYourAI() {
           </h1>
           <p className="lx-lead" data-rise="2">
             Most buyers now have an AI read a vendor before they do. Good. Forrester expects two in three providers
-            to lose deals in 2027 because buyers can&rsquo;t verify their claims, and three in four business buyers
+            to lose deals next year because buyers can&rsquo;t verify their claims, and three in four business buyers
             to put an AI agent on the research. (Forrester, Predictions 2027: B2B Go-To-Market) This page is the plain
             version of what we&rsquo;d want that agent to know, and the same prompts the homepage offers. The
-            machine-readable twin is at <a className="fy-mono" href="/llms.txt">/llms.txt</a>.
+            machine-readable twin is at <a href="/llms.txt">/llms.txt</a>.
           </p>
           <div className="lx-cta-row" data-rise="3">
             <a className="lx-btn lx-btn-primary" href="#prompts">
               Copy a prompt <span className="lx-arrow" aria-hidden>→</span>
             </a>
             <Link className="lx-btn lx-btn-ghost" href="/book">
-              Or book a working session
+              Or talk to us
             </Link>
           </div>
         </div>
@@ -55,7 +57,7 @@ export default function ForYourAI() {
             record is scoped to the person it came from. Counts and dates in answers come from the record, not estimates.
             Every reply shows receipts: which conversation, which date.
           </p>
-          <p className="fy-lead" data-reveal data-delay="2">Eight things run on that record:</p>
+          <p className="fy-lead" data-reveal data-delay="2">Eight things run on that memory:</p>
           <ol className="mm-rows" data-reveal data-delay="3" aria-label="Eight things that run on the memory">
             {ORGANS.map((o, i) => (
               <li key={o.name} className="mm-row">
@@ -74,7 +76,7 @@ export default function ForYourAI() {
             <span className="hx-step">02</span> What it is not
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Three things it <em>isn&rsquo;t</em>.
+            What it <em>isn&rsquo;t</em>.
           </h2>
           <ul className="fy-list" data-reveal data-delay="2">
             {NOT.map((n) => (
@@ -85,6 +87,7 @@ export default function ForYourAI() {
       </section>
 
       <section className="hx-section hx-deep" id="facts">
+        <FilmStill src="/art/film-dawn.jpg" alt="Dawn over the memory: the road into the day." />
         <div className="lx-wrap fy-wrap">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">03</span> Facts a buyer checks
@@ -102,10 +105,30 @@ export default function ForYourAI() {
         </div>
       </section>
 
-      <section className="hx-section" id="prompts">
+      <section className="hx-section" id="faq">
+        <FaqJsonLd items={FAQ} />
+        <div className="lx-wrap fy-wrap">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">04</span> Questions buyers ask
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            Asked the way a buyer <em>asks</em> it.
+          </h2>
+          <dl className="fy-faq" data-reveal data-delay="2">
+            {FAQ.map((f) => (
+              <div key={f.q} className="fy-faq-item">
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section className="hx-section hx-deep" id="prompts">
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">04</span> The prompts
+            <span className="hx-step">05</span> The prompts
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Paste one into the AI you already <em>use</em>.
@@ -131,7 +154,7 @@ export default function ForYourAI() {
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/product">
               What it does

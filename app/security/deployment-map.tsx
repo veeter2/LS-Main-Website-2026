@@ -9,19 +9,19 @@ const OPTIONS: Option[] = [
     id: "hosted",
     label: "Hosted",
     status: "Hosted, available now.",
-    body: "Your company\u2019s instance, isolated to you by per-person and per-team access rules, verified on every read. No shared memory between customers. The fastest way to start.",
+    body: "Your company\u2019s instance, walled off to your company, and every lookup checks who\u2019s asking. No shared memory between customers. The fastest way to start.",
   },
   {
     id: "private",
     label: "Private cloud",
     status: "Private cloud, built with you.",
-    body: "The engine inside your VPC, on your servers, inside your perimeter. Scoped and priced in the working session.",
+    body: "The engine inside your VPC, on your servers, inside your perimeter. Scoped and priced with you, in writing.",
   },
   {
     id: "onprem",
     label: "On-premises",
     status: "On-premises, built with you.",
-    body: "A private model inside your walls. Today the filing lane can run on your own hardware. A full build with no calls out is a project we take on together, not a checkbox.",
+    body: "A private model inside your walls. Today chat and filing can run on your own hardware. A full build with no calls out is a project we take on together, not a checkbox.",
   },
 ]
 

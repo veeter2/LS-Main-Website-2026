@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { FilmStill } from "./_components/film-still"
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -25,10 +26,11 @@ export default function NotFound() {
               See the product <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
           </div>
         </div>
+        <FilmStill src="/art/film-dawn.jpg" alt="Dawn over the memory: the road into the day." />
       </section>
     </main>
   )

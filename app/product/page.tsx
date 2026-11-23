@@ -1,19 +1,22 @@
 import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
+import { FilmStill as Still } from "../_components/film-still"
+import { DoorsArch } from "../_components/doors-arch"
+import { HeldJobCard, ReceiptCard, TeachCard, TeamCard } from "../_components/proof-cards"
 import { CallSplit } from "./call-split"
 import { ExpertInterview } from "./expert-interview"
-import { RecordDemo } from "../record/record-demo"
-import { Desk } from "../commitments/desk"
+import { RecordDemo } from "../_components/record-demo"
+import { Desk } from "../_components/desk"
 import { ORGANS } from "@/lib/for-your-ai"
 
-export const metadata: Metadata = pageMeta("/product", "What it does: facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced record your company owns. Counts, not guesses. Promises tracked only after you confirm.")
+export const metadata: Metadata = pageMeta("/product", "What it does · Facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced memory your company owns. Counts, not guesses. Promises tracked only after you confirm.")
 
 /**
  * What LongStrider does: the eight things that run on the memory. The hero
  * chips read the names from lib/for-your-ai (ORGANS), the same list the
- * homepage ROOM and /llms.txt use. The sections below walk through the ones
- * a buyer meets first; Today and Connections have no section of their own yet.
+ * homepage ROOM and /llms.txt use. The eight sections below match that list,
+ * in the order a buyer meets them. Any model lives inside Governance.
  */
 
 const RECORD_POINTS = [
@@ -33,8 +36,13 @@ const RECORD_POINTS = [
 
 const NIGHT = [
   {
+    time: "Last spring",
+    body: "Ashgrove took its business to another supplier after two late deliveries.",
+    old: "last confirmed in March",
+  },
+  {
     time: "11:04 pm",
-    body: "A partner mentions, in passing, that Pellworth has been talking to another carrier.",
+    body: "A rep mentions, in passing, that Pellworth has been talking to another supplier.",
   },
   {
     time: "Overnight",
@@ -57,15 +65,23 @@ const GOVERNANCE = [
   },
   {
     title: "Every write has a receipt.",
-    body: "What changed, who did it, when, and the run it came from, so it can be found and undone.",
+    body: "What changed, who did it, when, and the run it came from, so it can be found and undone. Anything that happened without asking you is in one log, every day.",
   },
 ]
 
+const BEATS = [
+  { title: "Every door", body: "Chat, your connected systems (anything with an API or an MCP server), documents, dropped files, and what your teammates find. Not five silos. One memory." },
+  { title: "Nothing lands raw", body: "Everything that comes in gets a date and a source, goes in the right drawer, and is checked against what’s already there before it’s trusted." },
+  { title: "Two clocks", body: "By day, every door feeds the memory as you work, and each new fact is filed within minutes. By night, it reads what the day brought, links it to what it already knew, merges topics, finds what contradicts, and writes down what it learned about your business. You come in to a company that knows more than it did yesterday. Nobody taught it." },
+  { title: "It compounds", body: "Tomorrow\u2019s answer stands on today\u2019s facts. The expert\u2019s rules, the agent\u2019s findings, the morning letter, the promise due today all come from the same memory, and every one of them makes it richer. A chat box keeps its memory with the model, and it stays behind when you change the model. This starts where it left off." },
+  { title: "Two books", body: "Yours and the company\u2019s. Your private connectors and drops feed your memory, and nobody else sees it. Shared sources feed the company\u2019s memory, which everyone works from. Same system, hard wall between them." },
+  { title: "The model never holds it", body: "Swap the model. The memory does not move." },
+]
 const MODELS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compatible server", "A local model on your hardware"]
 
 const RUNS = ["Monday\u2019s run:", "Tuesday\u2019s run:", "Wednesday\u2019s run:"]
 const ALONE = "starts from nothing"
-const OURS = ["starts from the record", "builds on Monday", "builds on both"]
+const OURS = ["starts from the memory", "builds on Monday", "builds on both"]
 
 export default function ProductConcept() {
   return (
@@ -80,12 +96,12 @@ export default function ProductConcept() {
             <p className="lx-lead" data-rise="2">
               LongStrider takes what your team already puts into AI, in chat, in documents, in uploaded files and call
               transcripts, and keeps the part that matters: the facts, the promises, what changed, and what keeps coming
-              up. Each with its source. Each yours. Eight things run on that record. Here are the ones you&rsquo;d meet
-              first.
+              up. Each with its source. Each yours. Eight things run on that memory. Here they are, in the order
+              you&rsquo;d meet them.
             </p>
             <div className="lx-cta-row" data-rise="3">
               <Link className="lx-btn lx-btn-primary" href="/book">
-                Book a working session <span className="lx-arrow" aria-hidden>→</span>
+                Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <a className="lx-btn lx-btn-ghost" href="#record">
                 See it answer
@@ -116,12 +132,17 @@ export default function ProductConcept() {
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
               Every fact is dated. Every change is kept, with what it replaced. Every answer points back to the message
-              it came from, and you can open it. Every reply comes with its receipts.
+              it came from, and you can open it. Every reply comes with its receipt: what it stood on, which rules fired, and
+              what it cost.
             </p>
           </div>
           <div data-reveal data-delay="2">
             <RecordDemo />
           </div>
+        </div>
+        <div className="lx-wrap pf-wrap" data-reveal>
+          <ReceiptCard />
+          <p className="lx-illustrative">Every answer comes with its receipt. Click any line and it opens.</p>
         </div>
         <div className="lx-wrap mh-facts">
           {RECORD_POINTS.map((f, i) => (
@@ -135,6 +156,7 @@ export default function ProductConcept() {
 
       {/* 02: Memory */}
       <section className="hx-section" id="living-memory">
+        <Still src="/art/film-night.jpg" alt="Night over the memory: gold threads link what the day wrote, and a letter waits on the road for morning." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">02</span> Memory
@@ -147,16 +169,18 @@ export default function ProductConcept() {
             aren&rsquo;t paying for a model to re-read what it already knows. If something did, it reads what the day
             wrote and files it into the right drawers on its own: a person, an account, a matter. It links the notes
             that say the same thing and flags the ones that contradict. Then it leaves a short note at the top of your
-            morning. Nobody tags anything.
+            morning. Nobody tags anything. When a fact has not been confirmed in a while, it says so. And when it
+            doesn&rsquo;t have something, it says that too, instead of guessing.
           </p>
         </div>
         <ol className="lx-wrap nt-line">
           {NIGHT.map((n, i) => (
-            <li key={n.time} className="nt-step" data-reveal data-delay={String(i + 1)}>
+            <li key={n.time} className="nt-step" data-reveal data-delay={String(i + 1)} data-old={"old" in n || undefined}>
               <span className="nt-time lx-num">
                 <b>{n.time}</b>
               </span>
               <p>{n.body}</p>
+              {"old" in n && <span className="pf-old">{n.old}</span>}
             </li>
           ))}
         </ol>
@@ -185,12 +209,30 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 04: Experts */}
+      {/* 04: Today */}
+      <section className="hx-section" id="today">
+        <Still src="/art/film-sun.jpg" alt="Morning over the memory: the sun on the arch, a short letter on the road." />
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">04</span> Today
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            A short letter at the top of your <em>morning</em>.
+          </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            At night it reads the week and writes down what moved, what slipped, and what to do first. A promise due
+            today. A fact that changed since you last looked. Two notes that disagree. It is written before you sit
+            down, and on a quiet night it says so in one line and stops.
+          </p>
+        </div>
+      </section>
+
+      {/* 05: Experts */}
       <section className="hx-section" id="experts">
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">04</span> Experts
+              <span className="hx-step">05</span> Experts
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Hire a specialist. It <em>interviews</em> you first.
@@ -198,8 +240,9 @@ export default function ProductConcept() {
             <p className="lx-lead" data-reveal data-delay="2">
               A specialist is a built-in expert for one job: renewals, claims, a practice area, your call traffic. Before
               it does anything it asks how your company works. What counts as risk here. Who can agree to what. Which
-              accounts matter this quarter. Your answers go into the record, so it starts from your judgment, not a
-              generic playbook. Then it studies, and brings back findings you keep or bin.
+              accounts matter this quarter. Your answers go into the memory, so it starts from your judgment, not a
+              generic playbook. Then it studies, and brings back findings you keep or drop. What it learns goes into
+              the same memory your chat and your agents read, so every one of them gets richer.
             </p>
           </div>
           <div data-reveal data-delay="2">
@@ -207,26 +250,30 @@ export default function ProductConcept() {
             <p className="lx-illustrative">Real flow. Fictional answers.</p>
           </div>
         </div>
+        <div className="lx-wrap pf-wrap" data-reveal>
+          <TeachCard />
+        </div>
       </section>
 
-      {/* 05: Agents */}
+      {/* 06: Agents */}
       <section className="hx-section hx-deep" id="agents">
         <div className="lx-wrap lx-hero-grid">
           <div>
             <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">05</span> Agents
+              <span className="hx-step">06</span> Agents
             </p>
             <h2 className="lx-display hx-h2" data-reveal data-delay="1">
               Your teammates start where <em>yesterday&rsquo;s</em> left off.
             </h2>
             <p className="lx-lead" data-reveal data-delay="2">
-              The model is the voice. LongStrider is the memory and the judgment. Your teammates read the record before
+              The model is the voice. LongStrider is the memory and the judgment. Your teammates read the memory before
               they act, run overnight if you want them to, and bring their findings back as a note. You decide what goes
               into memory. So Wednesday&rsquo;s run starts from Monday&rsquo;s and Tuesday&rsquo;s, instead of from
-              nothing.
+              nothing. A new agent starts as an observer and earns trust run by run. You see how often its work was
+              useful before you let it act.
             </p>
           </div>
-          <div className="ag" data-reveal data-delay="2" aria-label="Agent runs with and without a shared record">
+          <div className="ag" data-reveal data-delay="2" aria-label="Agent runs with and without a shared memory">
             <div className="ag-row">
               <span className="ag-label">On their own</span>
               <ol className="ag-runs">
@@ -251,19 +298,23 @@ export default function ProductConcept() {
             </div>
           </div>
         </div>
+        <div className="lx-wrap pf-wrap" data-reveal>
+          <TeamCard />
+        </div>
       </section>
 
-      {/* 06: Governance */}
+      {/* 07: Governance, which includes any model */}
       <section className="hx-section" id="governance">
+        <Still src="/art/film-arch.jpg" alt="The record as an arch of stones, one per month, brightening toward now, with the company's topics in orbit." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">06</span> Governance
+            <span className="hx-step">07</span> Governance
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Every model, every key, every dollar. <em>One</em> screen.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Seven jobs, seven model settings, changed without a deploy. Your keys, not ours. Spend by job and by model,
+            Every job has its own model setting, changed in Settings, no engineer needed. Your keys, not ours. Spend by job and by model,
             every day, so you know what last night cost, and most nights it&rsquo;s nothing. Set how it speaks, what it
             won&rsquo;t do, and when it must check with a person first.
           </p>
@@ -276,45 +327,66 @@ export default function ProductConcept() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* 07: Any model */}
-      <section className="hx-section hx-deep" id="any-model">
-        <div className="lx-wrap lx-hero-grid">
-          <div>
-            <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">07</span> Any model
-            </p>
-            <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Swap it next year. Nothing is taught <em>twice</em>.
-            </h2>
-            <p className="lx-lead" data-reveal data-delay="2">
-              The model is rented and replaceable. The memory is yours and stays put. Run a frontier model through your
-              own keys, a model you already host, or a local one on your hardware for the filing lane. We moved every job
-              to a different model in October. Nothing was re-taught.
-            </p>
-          </div>
-          <ul className="cp-parts" data-reveal data-delay="2" aria-label="Models LongStrider runs with">
+        <div className="lx-wrap hx-center">
+          <p className="lx-lead hx-lead-center" data-reveal>
+            The model is rented and replaceable. The memory is yours and stays put. One is a bill every month. The other
+            is something your company owns. Run a frontier model through your
+            own keys, a model you already host, or a local one on your hardware. We moved every job to a different
+            model in October. Nothing was re-taught.
+          </p>
+          <ul className="cp-parts hx-cta-center" data-reveal data-delay="1" aria-label="Models LongStrider runs with">
             {MODELS.map((m) => (
               <li key={m}>{m}</li>
             ))}
             <li className="cp-parts-ours">Your memory: the one part that stays.</li>
           </ul>
         </div>
+        <div className="lx-wrap pf-wrap" data-reveal>
+          <HeldJobCard />
+        </div>
+      </section>
+
+      {/* 08: Connections */}
+      <section className="hx-section hx-deep" id="connections">
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">08</span> Connections
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            Every door feeds one <em>memory</em>.
+          </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            ChatGPT is a box you talk to. LongStrider is a memory everything feeds.
+          </p>
+        </div>
+        <DoorsArch />
+        <div className="lx-wrap mh-facts cx-beats">
+          {BEATS.map((b, i) => (
+            <div key={b.title} className="mh-fact" data-reveal data-delay={String((i % 3) + 1)}>
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </div>
+          ))}
+        </div>
+        <p className="lx-wrap lx-display cx-close" data-reveal>
+          <span className="cx-dim">Change the model, and a chat box starts over.</span>
+          <span className="cx-lit">The memory remembers for the company.</span>
+        </p>
       </section>
 
       <section className="hx-close">
+        <Still src="/art/film-dune.jpg" alt="A dune of memory with a gold road along its foot." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             See it on your <em>own</em> work.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="1">
-            Bring a real account and the people who know it. In one working session you&rsquo;ll see the record, the
-            promises and the first morning note, built from your conversations, not ours.
+            Tell us what your business does and the question your team can&rsquo;t answer today. We&rsquo;ll show you
+            what LongStrider would keep: the memory, the promises and the first morning note.
           </p>
           <div className="lx-cta-row hx-cta-center" data-reveal data-delay="2">
             <Link className="lx-btn lx-btn-primary" href="/book">
-              Book a working session <span className="lx-arrow" aria-hidden>→</span>
+              Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/security">
               Where it runs, and who owns it
