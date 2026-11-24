@@ -4,7 +4,7 @@ import Link from "next/link"
 import { FilmStill } from "../_components/film-still"
 import { ChapterRail, type Chapter } from "./chapter-rail"
 
-export const metadata: Metadata = pageMeta("/manifesto", "The Manifesto", "The memory that knows your business, and never forgets. Why the money spent on AI should build something your company owns.")
+export const metadata: Metadata = pageMeta("/manifesto", "What we believe", "The memory that knows your business, and never forgets. Why the money spent on AI should build something your company owns.")
 
 /**
  * The Manifesto in daylight. Matt’s argument and words, set as a long read.
@@ -28,8 +28,8 @@ const SCENARIOS = [
   {
     title: "The closing date",
     paragraphs: [
-      "Kayla is a partner at Hartigan & Doyle. In one email thread the Reyes closing date is the 12th. In another, weeks later, it is the 19th. Nobody notices, because the threads belong to different people.",
-      "Overnight, the system reads both and flags the conflict. In the morning Kayla sees the two dates side by side, each with its source.",
+      "Kayla is a partner at Hartigan & Doyle. In one email thread, the Reyes closing date is the 12th. In another, weeks later, it is the 19th. Nobody notices, because the threads belong to different people.",
+      "Overnight, the system reads both and flags the conflict. In the morning, Kayla sees the two dates side by side, each with its source.",
       "She confirms the 19th. The 12th is kept, marked as replaced, with the reason.",
     ],
     turn: "Not a lost date. A decision with its history.",
@@ -113,7 +113,7 @@ export default function ManifestoConcept() {
     <main>
       <section className="lx-hero mf-hero">
         <div className="lx-wrap mf-hero-inner">
-          <p className="lx-eyebrow" data-rise="0">The Manifesto</p>
+          <p className="lx-eyebrow" data-rise="0">What we believe</p>
           <h1 className="lx-display lx-h1 mf-h1" data-rise="1">
             The memory that knows your business, and never <em>forgets</em>.
           </h1>

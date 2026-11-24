@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   ...pageMeta(
     "",
     "The model changes. The memory is yours.",
-    "A system of intelligence your company owns. It takes what your people, systems and files already know, learns every day, and any model you choose answers from it.",
+    "A system of intelligence your company owns. It takes what your people, systems and files already know, learns from it every day, and answers from any model you choose.",
   ),
   title: { absolute: "LongStrider · The model changes. The memory is yours." },
 }
@@ -111,8 +111,8 @@ export default function Home() {
             The model changes. The memory is <em>yours</em>.
           </h1>
           <p className="lx-lead hx-lead-center mh-nots" data-rise="2">
-            LongStrider is a system of intelligence your company owns. It takes what your people, your systems and your
-            files already know, learns from it every day, and any model you choose answers from it.
+            LongStrider is a system of intelligence your company owns. It takes what your people, systems and files
+            already know, learns from it every day, and answers from any model you choose.
           </p>
           <div className="lx-cta-row hx-cta-center" data-rise="3">
             <Link className="lx-btn lx-btn-primary" href="/book">
@@ -143,8 +143,8 @@ export default function Home() {
             One room. Everything your company knows about <em>itself</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
-            Eight parts, one memory underneath all of them. Take the memory away and they&rsquo;re the same tools everyone
-            else sells. Keep it, and every one of them gets better each month, because the memory does.
+            Eight parts, one memory underneath all of them. Take the memory away, and they&rsquo;re the same tools everyone
+            else sells. Keep it, and every one of them gets better each month, because the memory grows.
           </p>
         </div>
         <div className="lx-wrap">
@@ -172,7 +172,7 @@ export default function Home() {
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Other systems feed memory to the model. This one owns the memory and decides when the model is worth{" "}
-            <em>calling</em>.
+            <em>asking</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             The memory does the remembering. The model only supplies the words. That is why the bill is smaller, the
@@ -220,7 +220,7 @@ export default function Home() {
             <span className="hx-step">03</span> Where it runs
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-            Your box, your models, your keys. Wherever you <em>run it</em>.
+            Your box, your models, your keys, wherever you <em>run it</em>.
           </h2>
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             You choose where it runs: your cloud, your private cloud or your rack. Your keys either way. You stop renting AI and start owning it: an asset on your books, not a bill every month. Fire us and keep everything.

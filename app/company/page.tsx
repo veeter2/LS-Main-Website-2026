@@ -55,7 +55,7 @@ export default function CompanyConcept() {
                 Talk to us <span className="lx-arrow" aria-hidden>→</span>
               </Link>
               <Link className="lx-btn lx-btn-ghost" href="/manifesto">
-                Read the manifesto
+                What we believe
               </Link>
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function CompanyConcept() {
           </h2>
           <div className="mh-story-body" data-reveal data-delay="2">
             <p>
-              For thirty years enterprise software ran the same play: charge for access, keep the intelligence, make leaving
+              For 30 years, enterprise software ran the same play: charge for access, keep the intelligence, make leaving
               painful. Your data lives on their servers. Your workflows depend on their APIs. Your knowledge compounds, for
               them.
             </p>
@@ -162,7 +162,7 @@ export default function CompanyConcept() {
               Talk to us <span className="lx-arrow" aria-hidden>→</span>
             </Link>
             <Link className="lx-btn lx-btn-ghost" href="/manifesto">
-              Read the manifesto
+              What we believe
             </Link>
           </div>
         </div>
