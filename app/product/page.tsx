@@ -114,6 +114,9 @@ export default function ProductConcept() {
             <p className="lx-illustrative">Real behavior. Fictional account.</p>
           </div>
         </div>
+        <div className="lx-wrap hw-film" data-rise="4">
+          <ConnectFilm />
+        </div>
       </section>
 
       {/* 01: Chat that knows each person */}
@@ -320,9 +323,6 @@ export default function ProductConcept() {
           <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
             ChatGPT is a box you talk to. LongStrider is a memory everything feeds.
           </p>
-        </div>
-        <div className="lx-wrap hw-film" data-reveal>
-          <ConnectFilm />
         </div>
         <div className="lx-wrap mh-facts cx-beats">
           {BEATS.map((b, i) => (

@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { BrandArt } from "../_components/brand-art"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { SessionForm } from "./session-form"
@@ -26,26 +25,25 @@ export default function BookConcept() {
               A call with the people who built LongStrider. You bring what your business does and one real question. You
               leave knowing whether it&rsquo;s worth building, and what you&rsquo;d own if it is.
             </p>
-            <ol className="bk-steps" data-rise="3">
-              {STEPS.map((s, i) => (
-                <li key={s.title}>
-                  <span className="bk-n lx-num">{i + 1}</span>
-                  <div>
-                    <h2>{s.title}</h2>
-                    <p>{s.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
           </div>
           <div data-rise="2">
             <SessionForm />
           </div>
         </div>
+        <ol className="lx-wrap bk-steps bk-steps-row" data-rise="3">
+          {STEPS.map((s, i) => (
+            <li key={s.title}>
+              <span className="bk-n lx-num">{i + 1}</span>
+              <div>
+                <h2>{s.title}</h2>
+                <p>{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section className="hx-section hx-deep">
-        <BrandArt name="arch" />
         <p className="lx-wrap mh-question" data-reveal>
           Rather see it first? A short walk through the product, no sales call.{" "}
           <Link href="/product">See it answer</Link>{" "}

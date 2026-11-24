@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { BrandArt } from "../_components/brand-art"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { FilmStill } from "../_components/film-still"
@@ -238,10 +237,6 @@ export default function HowItWorksConcept() {
             </div>
           ))}
         </div>
-      </section>
-
-      <section className="hx-section">
-        <BrandArt name="orbit" />
       </section>
 
       <section className="hx-close">
