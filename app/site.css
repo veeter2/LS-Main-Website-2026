@@ -305,7 +305,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .lx-label,
 .rx-who, .rx-stamp, .gx-tick, .gx-marks-when, .ox-layer-sub, .ox-kind, .dx-count, .dx-who, .dx-tag,
 .dx-night-label, .mh-note-label, .mh-compare-label, .mh-cell-name, .dm-zone-label, .sc-ring-label,
-.cs-who, .cs-kept-label, .cs-kind, .ei-step, .nt-time, .ag-label, .sj-title, .sj-kind,
+.cs-who, .cs-kept-label, .cs-kind, .ei-step, .nt-time, .sj-title, .sj-kind,
 .ly-label, .dl-head, .cr-label, .ch-label, .in-label, .pt-who, .pt-terms span,
 .sf-col-title, .lg-strip-label, .dm-pause {
   font-family: var(--lx-body);
@@ -428,7 +428,7 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
    .lx-card-flat is the same box with no shadow and no sheen, for chips, rows and
    frames; the page clones listed here extend it. */
 .lx-card, .lx-card-flat,
-.rx-source, .mh-compare, .ag-row, .ly-band, .ly-chips li, .dl-col, .cp-parts li, .pt-layer, .mh-screen img, .mh-film video {
+.rx-source, .mh-compare, .ly-band, .ly-chips li, .dl-col, .cp-parts li, .pt-layer, .mh-screen img, .mh-film video {
   position: relative;
   background: var(--lx-surface);
   border: 1px solid var(--lx-line);
@@ -1374,55 +1374,6 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   .nt-step:last-child::before { display: none; }
 }
 
-/* Agents: runs that start over vs runs that build */
-.ag { display: grid; gap: 16px; }
-.ag-row { padding: 16px 18px 18px; background: rgba(var(--lx-ink-rgb), 0.02); }
-.ag-row-ours {
-  background: linear-gradient(180deg, var(--lx-cream), var(--lx-gold-paper));
-  border-color: var(--lx-gold-line);
-  box-shadow: var(--lx-shadow-halo);
-}
-.ag-label { display: block; color: var(--lx-ink-secondary); margin-bottom: 12px; }
-.ag-row-ours .ag-label { color: var(--lx-gold-ink); }
-.ag-runs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.ag-run {
-  display: grid;
-  gap: 4px;
-  padding: 12px;
-  border-radius: var(--lx-radius);
-  background: var(--lx-surface);
-  border: 1px solid var(--lx-gold-line);
-}
-.ag-run-alone { border-color: var(--lx-line); border-style: dashed; background: transparent; }
-.ag-run-name { font-size: 13.5px; font-weight: 500; color: var(--lx-ink-primary); }
-.ag-run-alone .ag-run-name { color: var(--lx-ink-secondary); }
-.ag-run-note { font-size: 12.5px; line-height: 1.4; color: var(--lx-ink-secondary); }
-.ag-run:not(.ag-run-alone) .ag-run-note { color: var(--lx-gold-ink); }
-.ag-record {
-  position: relative;
-  margin-top: 14px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border-radius: var(--lx-radius);
-  font-size: 12.5px;
-  color: var(--lx-ink-primary);
-  background: linear-gradient(90deg, rgba(var(--lx-gold-rgb), 0.12), rgba(var(--lx-gold-rgb), 0.32));
-  overflow: hidden;
-}
-.ag-record::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(var(--lx-light-rgb), 0.55), transparent);
-  transform: translateX(-100%);
-  animation: ag-fill 3.6s var(--lx-ease) infinite;
-}
-.ag-record span { position: relative; z-index: 1; }
-@keyframes ag-fill { to { transform: translateX(100%); } }
-@media (max-width: 560px) {
-  .ag-runs { grid-template-columns: 1fr; }
-}
 
 /* ═══════════════════════════════════════════════════════════
    HOW IT WORKS
@@ -2204,8 +2155,6 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .lx-card,
 .mh-fact,
 .nt-step,
-.ag-row,
-.ag-run,
 .cp-parts li,
 .lx-assure,
 .mm-rows,
@@ -2244,7 +2193,6 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .lx-card:hover,
 .mh-fact:hover,
 .nt-step:hover,
-.ag-row-ours:hover,
 .cp-parts li:hover {
   background: var(--lx-glass-ground-lift);
   box-shadow: 0 1px 0 var(--lx-glass-sheen) inset, var(--lx-shadow-lift);
@@ -2293,10 +2241,6 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 .nt-step { padding: 22px 24px 24px; }
 .nt-step::before { display: none; }
 .nt-time { margin-bottom: 8px; color: var(--lx-gold-ink); }
-.ag-row { padding: 20px 22px 22px; }
-.ag-row-ours { border-color: var(--lx-gold-line); }
-.ag-run { background: rgba(var(--lx-light-rgb), 0.45); }
-.ag-run-alone { border-style: dashed; background: rgba(var(--lx-light-rgb), 0.25); }
 .cp-parts li { border-style: solid; }
 .cp-parts .cp-parts-ours { border-color: var(--lx-gold-line); background: var(--lx-glass-ground-lift); }
 .lx-assure { padding: 14px 20px; gap: 10px 24px; }
@@ -2359,24 +2303,11 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
   .lx-still { margin-bottom: 48px; }
   .lx-still img { max-height: 240px; }
   .mh-fact, .nt-step { padding: 18px 18px 20px; }
-  .ag-row { padding: 16px; }
   .lx-hero::before, .lx-hero::after, .hx-section::before, .hx-section::after { width: 70vw; }
 }
 
-/* ── /product 08: every door feeds one record ───────────── */
-.cx-dia { margin: clamp(40px, 6vh, 64px) auto 0; padding: clamp(16px, 2.5vw, 32px); }
-.cx-dia,
+/* ── /product 08: every door feeds one memory ───────────── */
 .cx-beats .mh-fact { position: relative; }
-.cx-dia {
-  background: var(--lx-glass-ground);
-  -webkit-backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2);
-  backdrop-filter: blur(var(--lx-glass-blur)) saturate(1.2);
-  border: 1px solid var(--lx-line);
-  border-radius: var(--lx-radius);
-  box-shadow: 0 1px 0 var(--lx-glass-sheen) inset, var(--lx-shadow-rest);
-}
-.cx-svg { display: block; width: 100%; height: auto; font-family: var(--lx-body); }
-.cx-svg-tall { display: none; }
 .cx-beats { margin-top: clamp(40px, 6vh, 64px); }
 .cx-close {
   margin: clamp(56px, 8vh, 96px) auto 0;
@@ -2388,11 +2319,6 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 }
 .cx-dim { color: var(--lx-ink-hint); }
 .cx-lit { color: var(--lx-gold-ink); }
-@media (max-width: 860px) {
-  .cx-svg-wide { display: none; }
-  .cx-svg-tall { display: block; }
-  .cx-dia { padding: 14px; }
-}
 
 /* ── Proof cards: receipt, held job, taught rule, the team ── */
 .pf-wrap { margin-top: clamp(40px, 6vh, 64px); display: grid; gap: 14px; justify-items: center; }
