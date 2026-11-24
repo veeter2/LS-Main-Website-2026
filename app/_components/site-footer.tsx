@@ -33,7 +33,7 @@ const COLUMNS = [
     title: "Company",
     links: [
       { label: "About", href: "/company" },
-      { label: "The manifesto", href: "/manifesto" },
+      { label: "What we believe", href: "/manifesto" },
       { label: "Contact", href: "mailto:hello@longstrider.ai" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
