@@ -2,22 +2,24 @@ import type { Metadata } from "next"
 import { pageMeta } from "@/lib/page-meta"
 import Link from "next/link"
 import { FilmStill as Still } from "../_components/film-still"
-import { DoorsArch } from "../_components/doors-arch"
-import { HeldJobCard, ReceiptCard, TeachCard, TeamCard } from "../_components/proof-cards"
+import { ConnectFilm } from "../_components/connect-film"
+import { ReceiptCard, TeamCard } from "../_components/proof-cards"
 import { CallSplit } from "./call-split"
 import { ExpertInterview } from "./expert-interview"
 import { RecordDemo } from "../_components/record-demo"
 import { Desk } from "../_components/desk"
-import { ORGANS } from "@/lib/for-your-ai"
 
 export const metadata: Metadata = pageMeta("/product", "What it does · Facts, promises, decisions", "LongStrider turns your team’s conversations into a dated, sourced memory your company owns. Counts, not guesses. Promises tracked only after you confirm.")
 
 /**
- * What LongStrider does: the eight things that run on the memory. The hero
- * chips read the names from lib/for-your-ai (ORGANS), the same list the
- * homepage ROOM and /llms.txt use. The eight sections below match that list,
- * in the order a buyer meets them. Any model lives inside Governance.
+ * What LongStrider does: the eight things that run on the memory, one
+ * section each, in the order a buyer meets them. The hero chips are the
+ * section names, so a reader can count along. Receipts live inside 01;
+ * any model lives inside 07. One picture per section, and only where it
+ * shows something the words do not.
  */
+
+const SECTIONS = ["Chat", "Memory", "Promises", "Today", "Experts", "Agents", "Governance", "Connections"]
 
 const RECORD_POINTS = [
   {
@@ -76,9 +78,6 @@ const BEATS = [
 ]
 const MODELS = ["Anthropic", "OpenAI", "DeepSeek", "Ollama, or any OpenAI-compatible server", "A local model on your hardware"]
 
-const RUNS = ["Monday\u2019s run:", "Tuesday\u2019s run:", "Wednesday\u2019s run:"]
-const ALONE = "starts from nothing"
-const OURS = ["starts from the memory", "builds on Monday", "builds on both"]
 
 export default function ProductConcept() {
   return (
@@ -105,8 +104,8 @@ export default function ProductConcept() {
               </a>
             </div>
             <div className="lx-assure" data-rise="4">
-              {ORGANS.map((o) => (
-                <span key={o.name}>{o.name.replace(/\.$/, "")}</span>
+              {SECTIONS.map((name) => (
+                <span key={name}>{name}</span>
               ))}
             </div>
           </div>
@@ -208,7 +207,6 @@ export default function ProductConcept() {
 
       {/* 04: Today */}
       <section className="hx-section" id="today">
-        <Still src="/art/film-sun.jpg" alt="Morning over the memory: the sun on the arch, a short letter on the road." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">04</span> Today
@@ -247,53 +245,24 @@ export default function ProductConcept() {
             <p className="lx-illustrative">Real flow. Fictional answers.</p>
           </div>
         </div>
-        <div className="lx-wrap pf-wrap" data-reveal>
-          <TeachCard />
-        </div>
       </section>
 
       {/* 06: Agents */}
       <section className="hx-section hx-deep" id="agents">
-        <div className="lx-wrap lx-hero-grid">
-          <div>
-            <p className="lx-eyebrow" data-reveal>
-              <span className="hx-step">06</span> Agents
-            </p>
-            <h2 className="lx-display hx-h2" data-reveal data-delay="1">
-              Your teammates start where <em>yesterday&rsquo;s</em> left off.
-            </h2>
-            <p className="lx-lead" data-reveal data-delay="2">
-              The model is the voice. LongStrider is the memory and the judgment. Your teammates read the memory before
-              they act, run overnight if you want them to, and bring their findings back as a note. You decide what goes
-              into memory. So Wednesday&rsquo;s run starts from Monday&rsquo;s and Tuesday&rsquo;s, instead of from
-              nothing. A new agent starts as an observer and earns trust run by run. You see how often its work was
-              useful before you let it act.
-            </p>
-          </div>
-          <div className="ag" data-reveal data-delay="2" aria-label="Agent runs with and without a shared memory">
-            <div className="ag-row">
-              <span className="ag-label">On their own</span>
-              <ol className="ag-runs">
-                {RUNS.map((r) => (
-                  <li key={r} className="ag-run ag-run-alone">
-                    <span className="ag-run-name">{r}</span>
-                    <span className="ag-run-note">{ALONE}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <div className="ag-row ag-row-ours">
-              <span className="ag-label">On LongStrider</span>
-              <ol className="ag-runs">
-                {RUNS.map((r, i) => (
-                  <li key={r} className="ag-run">
-                    <span className="ag-run-name">{r}</span>
-                    <span className="ag-run-note">{OURS[i]}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
+        <div className="lx-wrap hx-center">
+          <p className="lx-eyebrow" data-reveal>
+            <span className="hx-step">06</span> Agents
+          </p>
+          <h2 className="lx-display hx-h2" data-reveal data-delay="1">
+            Your teammates start where <em>yesterday&rsquo;s</em> left off.
+          </h2>
+          <p className="lx-lead hx-lead-center" data-reveal data-delay="2">
+            The model is the voice. LongStrider is the memory and the judgment. Your teammates read the memory before
+            they act, run overnight if you want them to, and bring their findings back as a note. You decide what goes
+            into memory. So Wednesday&rsquo;s run starts from Monday&rsquo;s and Tuesday&rsquo;s, instead of from
+            nothing. A new agent starts as an observer and earns trust run by run. You see how often its work was
+            useful before you let it act.
+          </p>
         </div>
         <div className="lx-wrap pf-wrap" data-reveal>
           <TeamCard />
@@ -302,7 +271,6 @@ export default function ProductConcept() {
 
       {/* 07: Governance, which includes any model */}
       <section className="hx-section" id="governance">
-        <Still src="/art/film-arch.jpg" alt="The record as an arch of stones, one per month, brightening toward now, with the company's topics in orbit." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
             <span className="hx-step">07</span> Governance
@@ -328,7 +296,7 @@ export default function ProductConcept() {
           <p className="lx-lead hx-lead-center" data-reveal>
             The model changes. The memory stays. One is a bill every month. The other
             is something your company owns. Run a frontier model through your
-            own keys, a model you already host, or a local one on your hardware. We\u2019ve moved every job to a different
+            own keys, a model you already host, or a local one on your hardware. We&rsquo;ve moved every job to a different
             model ourselves. Nothing was re-taught.
           </p>
           <ul className="cp-parts hx-cta-center" data-reveal data-delay="1" aria-label="Models LongStrider runs with">
@@ -337,9 +305,6 @@ export default function ProductConcept() {
             ))}
             <li className="cp-parts-ours">Your memory: the one part that stays.</li>
           </ul>
-        </div>
-        <div className="lx-wrap pf-wrap" data-reveal>
-          <HeldJobCard />
         </div>
       </section>
 
@@ -356,7 +321,9 @@ export default function ProductConcept() {
             ChatGPT is a box you talk to. LongStrider is a memory everything feeds.
           </p>
         </div>
-        <DoorsArch />
+        <div className="lx-wrap hw-film" data-reveal>
+          <ConnectFilm />
+        </div>
         <div className="lx-wrap mh-facts cx-beats">
           {BEATS.map((b, i) => (
             <div key={b.title} className="mh-fact" data-reveal data-delay={String((i % 3) + 1)}>
@@ -372,7 +339,6 @@ export default function ProductConcept() {
       </section>
 
       <section className="hx-close">
-        <Still src="/art/film-dune.jpg" alt="A dune of memory with a gold road along its foot." />
         <div className="lx-wrap hx-center">
           <h2 className="lx-display hx-h2" data-reveal>
             See it on your <em>own</em> work.
