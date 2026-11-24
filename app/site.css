@@ -1839,6 +1839,10 @@ body:has(#lx-root) { background: var(--lx-page-ground); color: var(--lx-ink-body
 }
 .bk-steps h2 { font-size: 19px; margin: 2px 0 4px; letter-spacing: 0; }
 .bk-steps p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--lx-ink-secondary); }
+.bk-steps-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; margin: 48px auto 0; }
+@media (max-width: 1024px) {
+  .bk-steps-row { grid-template-columns: 1fr; gap: 4px; margin: 36px auto 0; }
+}
 
 .bk-card { display: grid; gap: 14px; padding: 26px 26px 20px; }
 .bk-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
