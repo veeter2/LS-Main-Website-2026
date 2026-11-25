@@ -19,7 +19,7 @@ export const metadata: Metadata = pageMeta("/product", "What it does · Facts, p
  * shows something the words do not.
  */
 
-const SECTIONS = ["Chat", "Memory", "Promises", "Today", "Experts", "Agents", "Governance", "Connections"]
+const SECTIONS = ["Chat", "Receipts", "Promises", "Today", "Experts", "Agents", "Governance", "Connections"]
 
 const RECORD_POINTS = [
   {
@@ -153,12 +153,12 @@ export default function ProductConcept() {
         </div>
       </section>
 
-      {/* 02: Memory */}
+      {/* 02: Receipts */}
       <section className="hx-section" id="living-memory">
         <Still src="/art/film-night.jpg" alt="Night over the memory: gold threads link what the day wrote, and a letter waits on the road for morning." />
         <div className="lx-wrap hx-center">
           <p className="lx-eyebrow" data-reveal>
-            <span className="hx-step">02</span> Memory
+            <span className="hx-step">02</span> Receipts
           </p>
           <h2 className="lx-display hx-h2" data-reveal data-delay="1">
             Most nights it does <em>nothing</em>. That&rsquo;s the point.
