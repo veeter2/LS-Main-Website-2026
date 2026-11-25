@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState, type ReactNode } from "react"
 import Image from "next/image"
 import { SiteFooter } from "./site-footer"
@@ -21,6 +22,21 @@ const NAV = [
 export function ConceptShell({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null)
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  // The phone menu closes when the page changes or Escape is pressed.
+  useEffect(() => setMenuOpen(false), [pathname])
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false)
+    window.addEventListener("keydown", onKey)
+    document.body.style.overflow = "hidden"
+    return () => {
+      window.removeEventListener("keydown", onKey)
+      document.body.style.overflow = ""
+    }
+  }, [menuOpen])
 
   useEffect(() => {
     const root = rootRef.current
@@ -73,8 +89,29 @@ export function ConceptShell({ children }: { children: ReactNode }) {
               <span className="lx-short">Talk to us</span>
               <span className="lx-arrow" aria-hidden>→</span>
             </Link>
+            <button
+              type="button"
+              className="lx-menu-btn"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="lx-menu"
+              onClick={() => setMenuOpen((v) => !v)}
+            >
+              <span aria-hidden />
+              <span aria-hidden />
+            </button>
           </div>
         </div>
+        <nav id="lx-menu" className="lx-menu" aria-label="Pages" hidden={!menuOpen}>
+          {NAV.map((n) => (
+            <Link key={n.label} href={n.href} onClick={() => setMenuOpen(false)}>
+              {n.label}
+            </Link>
+          ))}
+          <Link className="lx-btn lx-btn-primary" href="/book" onClick={() => setMenuOpen(false)}>
+            Talk to us <span className="lx-arrow" aria-hidden>→</span>
+          </Link>
+        </nav>
       </header>
       {children}
       <SiteFooter />
